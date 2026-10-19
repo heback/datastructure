@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12주차 실습 코드 2부 · bisect 대조와 구간 개수 (학생용)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16233b;--paper:#f7f8fa;--panel:#ffffff;--py-blue:#3572a5;--line:#dfe3ea;--dim:#5b6b85;--code-bg:#101828;--code-fg:#e6edf7;--ok:#1d7a4f;--warn:#8a6d1f;--bad:#b3401f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+code,pre{font-family:"JetBrains Mono","D2Coding",Consolas,monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:24px}
+.prompt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--py-blue);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.lead{color:var(--dim);margin-top:8px;max-width:760px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 20px;font-family:"JetBrains Mono",monospace;font-size:12px}
+nav a{color:var(--py-blue);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+section>h2{font-size:18px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+section>h2 small{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--py-blue);margin-left:8px;font-weight:500}
+h3{font-size:15px;margin:14px 0 6px}
+p{margin:6px 0}
+ul,ol{margin:6px 0 6px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--code-bg);color:var(--code-fg);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;text-align:left;padding:8px}
+td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--py-blue);white-space:nowrap}
+table.fill td{border:1px solid var(--line);height:34px}
+table.fill td.lab{background:#f0f2f6;font-weight:600;height:auto}
+pre{background:var(--code-bg);color:var(--code-fg);padding:12px 14px;border-radius:6px;font-size:12.5px;overflow-x:auto;margin:8px 0;line-height:1.55}
+code.i{background:#eef1f6;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;color:var(--py-blue)}
+.note{background:#eef4fa;border:1px solid #d6e5f2;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.warn{background:#fbf3e4;border:1px solid #ecd9ae;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.concept{background:#f4f7fc;border:1px solid #c9d6ea;border-left:4px solid var(--py-blue);border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0;break-inside:avoid;page-break-inside:avoid}
+.concept b.h{color:var(--py-blue)}
+.concept table{margin:6px 0;font-size:12.5px}
+.concept ul{margin:4px 0 4px 18px}
+.ans{background:#eef8f2;border:1px solid #bfe0cf;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c,var(--py-blue));border-radius:6px;padding:10px 14px;background:#fff}
+.card b.h{color:var(--c)}
+.blank{border:1px dashed #9aa7bd;border-radius:6px;min-height:64px;margin:6px 0;padding:6px 10px;color:var(--dim);font-size:12px}
+.blank.l{min-height:110px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.diagram{background:#f0f2f6;border-radius:6px;padding:10px 14px;font-size:12.5px;overflow-x:auto;color:var(--ink);line-height:1.4}
+.codewrap{position:relative}
+.copy{position:absolute;top:14px;right:8px;font:500 11px "JetBrains Mono",monospace;background:#27364f;color:#e6edf7;border:1px solid #3d506e;border-radius:4px;padding:2px 8px;cursor:pointer}
+.role{display:inline-block;font:700 10.5px "JetBrains Mono",monospace;padding:1px 7px;border-radius:3px;background:#e4ecf6;color:var(--py-blue);margin-right:6px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.links a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:6px;margin:6px 0;color:var(--py-blue);text-decoration:none;font-weight:600}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{
+  body{background:#fff;font-size:11.5pt}.wrap{max-width:none;padding:0}
+  nav,.copy,.noprint{display:none!important}
+  section{border:none;padding:0;margin:0 0 8mm;break-inside:auto}
+  section.sheet{page-break-after:always;break-after:page}
+  section.sheet:last-of-type{page-break-after:auto}
+  header{padding:0 0 8px;margin-bottom:10px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f3f4f7;color:#111;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,.card,.blank{break-inside:avoid}
+}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.gate{border:1px dashed #b3401f;border-radius:8px;padding:6px 12px;background:#fff8f5}
+</style>
+<style id="week12-submit-style">
+/* week12 제출 바·입력란 공통 스타일 (8개 학생용 파일 동일) */
+#savebar{position:sticky;top:0;z-index:50;background:#16233b;color:#f7f8fa;padding:8px 20px;border-bottom:3px solid #3572a5;font-size:13px}
+#savebar .sb-in{max-width:1000px;margin:0 auto}
+#savebar .sb-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+#savebar label{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+#savebar input[type=text]{width:9.5em;padding:5px 8px;border:2px solid #9aa7bd;border-radius:4px;background:#fff;color:#16233b;font:inherit;font-weight:500}
+#savebar input[type=text].invalid{border-color:#ff9b7a;background:#fff3ee}
+#savebar button{font:600 13px "IBM Plex Sans KR",sans-serif;padding:6px 14px;border-radius:4px;border:2px solid #fff;background:#fff;color:#16233b;cursor:pointer}
+#savebar button.sec{background:transparent;color:#fff;border-color:#9aa7bd}
+#savebar button:disabled{opacity:.6;cursor:default}
+#savebar button:focus-visible,#savebar input:focus-visible{outline:3px solid #ffd166;outline-offset:2px}
+#savebar .sb-msg{min-height:1.4em;margin-top:4px;font-size:12.5px}
+#savebar .sb-msg.err{color:#ffd0c0;font-weight:700}
+#savebar .sb-msg.ok{color:#bff0d4}
+#savebar .sb-auto{font-size:11.5px;color:#c9d3e6;margin-left:auto}
+#savebar .sb-confirm{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px;padding:6px 10px;border:1px solid #ffd166;border-radius:4px;font-size:12.5px}
+#savebar .sb-confirm[hidden]{display:none}
+.in{width:100%;display:block;font:inherit;font-size:13.5px;line-height:1.5;color:#16233b;background:#fff;border:1px solid #6b7a94;border-radius:4px;padding:5px 8px}
+textarea.in{resize:vertical;min-height:2.4em;overflow:hidden}
+textarea.in.l{min-height:7em}
+textarea.in.code{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre;overflow:auto;tab-size:4;min-height:12em;background:#fbfcfe}
+textarea.in.draw{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;white-space:pre;overflow:auto;min-height:9em}
+.in:focus-visible,.ck input:focus-visible,.rg input:focus-visible{outline:3px solid #3572a5;outline-offset:1px}
+.in.invalid{border:2px solid #b3401f}
+input.in.s{display:inline-block;width:3.2em;padding:1px 4px;text-align:center}
+table.fill td.in-cell{padding:3px;height:auto}
+.ans-row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.ans-row>.n{padding-top:6px;font-weight:700;color:#3572a5}
+.mycode{margin:8px 0 12px}
+.mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
+.hint{font-size:12px;color:#5b6b85;margin:2px 0}
+.ck{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
+.ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
+.rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
+.rg label{display:inline-flex;align-items:center;gap:5px}
+@media (max-width:640px){#savebar{padding:8px 14px}#savebar .sb-auto{margin-left:0}}
+#printid{display:none}
+@media print{
+  #printid{display:block;font:600 12pt "IBM Plex Sans KR",sans-serif;margin:0 0 8px;padding-bottom:4px;border-bottom:1px solid #999;white-space:pre-wrap}
+  #savebar,.hint.noprint{display:none!important}
+  .in{border:none;border-bottom:1px solid #9aa7bd;border-radius:0;background:transparent;padding:2px 2px;-webkit-appearance:none;appearance:none;resize:none}
+  textarea.in{overflow:visible}
+  textarea.in.code,textarea.in.draw{border:1px solid #ccd;white-space:pre-wrap}
+  select.in{background-image:none}
+  .ans-row,.mycode{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="prompt">&gt;&gt;&gt; lab.week(12)  # 학생용 · 실습 코드 2부(A8·A9)</div>
+  <h1>12주차 실습 코드 2부 — 모듈 bisect와 구간 개수</h1>
+  <p class="lead">A8 시작(A7 완료 후)에 사용한다. A7에서 만든 <code class="i">lower_bound</code>, <code class="i">upper_bound</code>를 같은 파일 위쪽에 두고 이어서 쓴다. 정답과 결과 값은 이 파일에 없다. 값은 직접 실행해 활동지 2부에 적는다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+</header>
+<nav><a href="#A8">#A8</a><a href="#A9">#A9</a><a href="#note">#과제</a><a href="index.html">목록</a></nav>
+<section id="A8" class="sheet">
+<h2>A8 · bisect_left와 bisect_right를 예측하고 실행하기<small>12분 · 짝</small></h2>
+<p>이번에는 파이썬 표준 모듈 <code class="i">bisect</code>를 쓴다. 아래 코드를 실행하기 전에 활동지 2부 A8 표의 <b>예측 칸</b>을 먼저 채운다. 실행한 값은 <b>실제 칸</b>에 쓰고, <b>right&minus;left</b> 칸은 직접 계산해 쓴다.</p>
+<h3>예측 후 실행</h3>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A8-1">from bisect import bisect_left, bisect_right
+
+DUP = [1, 3, 3, 3, 5, 7, 7, 9, 12, 12, 12, 12, 15]
+xs = [3, 7, 12, 4, 0, 20]
+
+# 예측을 활동지 표에 먼저 적은 뒤 실행한다. right - left 열은 직접 계산해 활동지에 쓴다.
+for x in xs:
+    print("x =", x, " bisect_left:", bisect_left(DUP, x), " bisect_right:", bisect_right(DUP, x))</code></pre></div><div class="mycode"><label>내 코드 · A8 (bisect 호출 실험 메모 또는 추가 실험)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.mycode" data-label="A8 (bisect 호출 실험 메모 또는 추가 실험) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+<h3>A7 대조</h3>
+<p>A7에서 완성한 두 함수를 이 코드보다 <b>위</b>에 붙여 넣고 아래 대조를 실행한다. 위쪽 <code class="i">from bisect import ...</code>도 파일 맨 위에 한 번만 있으면 된다.</p>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-2"># A7에서 만든 두 함수가 bisect와 같은 값을 내는지 대조한다. (A7 코드가 같은 파일 위쪽에 있어야 한다)
+for x in range(-2, 20):
+    assert lower_bound(DUP, x) == bisect_left(DUP, x), "x=%d: lower_bound와 bisect_left가 다르다" % x
+    assert upper_bound(DUP, x) == bisect_right(DUP, x), "x=%d: upper_bound와 bisect_right가 다르다" % x
+print("A8 대조 통과")</code></pre></div>
+<p>대조가 실패하면 오류 메시지의 <code class="i">x</code> 값으로 A7 함수를 손으로 따라가 본다. 값이 다른 이유를 알아내면 활동지 A8의 첫 질문 칸에 쓴다.</p>
+</section>
+<section id="A9" class="sheet">
+<h2>A9 · 개수 세는 함수 만들기<small>12분 · 짝</small></h2>
+<p>구간 [lo, hi]는 양끝을 포함하는 닫힌 구간이다. 두 함수의 골격을 완성한다. <b>⑪은 처음에는 <code class="i">pass</code>로 두고</b> 먼저 예측-실행을 한 뒤, [7, 3]의 결과를 보고 채운다.</p>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A9-1">from bisect import bisect_left, bisect_right
+
+def count_equal(a, x):
+    return ____8____                    # ⑧ x와 같은 원소의 개수
+
+def count_in_range(a, lo, hi):          # 닫힌 구간 [lo, hi]의 원소 개수
+    ____11____                          # ⑪ lo &gt; hi일 때의 처리 (A9 후반에 채운다. 처음에는 pass로 둔다)
+    return ____9____                    # ⑨ 닫힌 구간 [lo, hi]의 원소 개수를 구하는 식 전체</code></pre></div><div class="mycode"><label>내 코드 · A9 (count_equal, count_in_range 작성)</label><textarea class="in code" rows="14" data-type="code" data-key="A9.mycode" data-label="A9 (count_equal, count_in_range 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+<h3>1단계 예측 후 실행</h3>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A9-2">DUP = [1, 3, 3, 3, 5, 7, 7, 9, 12, 12, 12, 12, 15]
+# 예측을 활동지에 먼저 적은 뒤 실행한다.
+for lo, hi in ((4, 12), (3, 7), (8, 11), (0, 100), (13, 14)):
+    print("[%d, %d]" % (lo, hi), count_in_range(DUP, lo, hi))</code></pre></div>
+<h3>2단계 lo &gt; hi 관찰</h3>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A9-3"># lo &gt; hi인 구간을 실행해 본다. 값을 보고 ⑪을 채운 뒤 다시 실행한다.
+print("[7, 3]", count_in_range(DUP, 7, 3))</code></pre></div>
+<h3>3단계 점검</h3>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A9-4"># A9 점검: 정의대로 하나씩 세는 느린 방법과 내 결과를 비교한다.
+def slow_equal(a, x):
+    return sum(1 for v in a if v == x)
+
+def slow_range(a, lo, hi):
+    return sum(1 for v in a if lo &lt;= v &lt;= hi)
+
+for a in (DUP, [], [5], [2, 2, 2]):
+    for x in range(-2, 20):
+        assert count_equal(a, x) == slow_equal(a, x), "count_equal(%r, %d)가 하나씩 센 값과 다르다" % (a, x)
+    for lo in range(-2, 20, 3):
+        for hi in range(-2, 20, 2):
+            assert count_in_range(a, lo, hi) == slow_range(a, lo, hi), "count_in_range(%r, %d, %d)가 하나씩 센 값과 다르다" % (a, lo, hi)
+print("A9 점검 통과")</code></pre></div>
+<h3>틀린 식의 반례 찾기</h3>
+<p>활동지 2부 A9에 적힌 &ldquo;왼쪽 경계 두 개로 만든 식&rdquo;을 아래 칸에 <b>직접</b> 코드로 써서 위 구간들에 적용해 본다. 어느 구간에서 값이 달라지는지 찾아 활동지에 쓴다. 이 칸의 코드는 제출하지 않아도 되지만, 쓰면 JSON에 함께 저장된다.</p>
+<div class="mycode"><label>내 코드 · A9 (틀린 식으로 값 구해 보기)</label><textarea class="in code" rows="8" data-type="code" data-key="A9.badcode" data-label="A9 (틀린 식으로 값 구해 보기) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+</section>
+<section id="note" class="sheet">
+<h2>실습 과제와의 연결<small>A9 이어짐</small></h2>
+<p>A9의 <code class="i">count_equal</code>, <code class="i">count_in_range</code>는 실습 과제의 앞의 두 함수와 이름·입출력이 같다. 점검을 통과한 코드를 과제 파일에 옮겨 둔다. <code class="i">closest_value</code>는 A14에서 이어 쓴다. AI 활용은 student_code_lab의 3단계 표를 따른다.</p>
+</section>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
+</script>
+<script id="week12-submit">
+/* week12 학생 입력 저장 (8개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week12-student-v1 */
+(function(){
+"use strict";
+var FILE_KEY="code_lab_part2";
+var FILES={workbook:"student_workbook.html",code_lab:"student_code_lab.html",workbook_part2:"student_workbook_part2.html",code_lab_part2:"student_code_lab_part2.html",code_lab_part3:"student_code_lab_part3.html",workbook_part3:"student_workbook_part3.html",code_lab_part4:"student_code_lab_part4.html",formative:"formative_check.html"};
+var FILE=FILES[FILE_KEY], STORE="week12:"+FILE, SCHEMA="week12-student-v1";
+var bar,idIn,nameIn,msg,autoEl,saveBtn,clearBtn,confirmBox,busy=false,timer=null;
+var draftBtn,loadBtn,fileIn,yesBtn,confirmTxt,pending=null,baseline="";
+
+function q(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
+function kind(el){
+  var t=el.getAttribute("data-type");
+  if(t)return t;
+  var tag=el.tagName.toLowerCase();
+  if(tag==="textarea")return "textarea";
+  if(tag==="select")return "select";
+  if(tag==="input")return el.type==="checkbox"?"checkbox":"text";
+  return "text";
+}
+function labelOf(el){
+  var l=el.getAttribute("data-label");
+  if(l)return l;
+  if(el.labels&&el.labels.length)return el.labels[0].textContent.replace(/\s+/g," ").trim();
+  return el.getAttribute("aria-label")||"";
+}
+function readValue(el,k){
+  if(k==="checkbox")return !!el.checked;
+  if(k==="radio"){var r=el.querySelector("input[type=radio]:checked");return r?r.value:null;}
+  return el.value;
+}
+function collect(){
+  return q("[data-key]").map(function(el){
+    var k=kind(el);
+    return {key:el.getAttribute("data-key"),label:labelOf(el),type:k,value:readValue(el,k)};
+  });
+}
+function studentInfo(){return {id:idIn.value.trim(),name:nameIn.value.trim()};}
+function buildJSON(status){
+  return {schema:SCHEMA,week:12,file:FILE,status:status||"final",student:studentInfo(),savedAt:new Date().toISOString(),answers:collect()};
+}
+function safe(s){return String(s).replace(/[\\\/:*?"<>|\s\u0000-\u001f]+/g,"_").replace(/^\.+/,"_");}
+function fileName(st,draft){return "week12_"+FILE_KEY+"_"+safe(st.id||"학번미입력")+"_"+safe(st.name||"이름미입력")+(draft?"_임시저장":"")+".json";}
+function validate(){
+  var miss=[];
+  [[idIn,"학번"],[nameIn,"이름"]].forEach(function(p){
+    var bad=!p[0].value.trim();
+    p[0].classList.toggle("invalid",bad);
+    p[0].setAttribute("aria-invalid",bad?"true":"false");
+    if(bad)miss.push(p);
+  });
+  return miss;
+}
+function updatePrintId(){
+  var p=document.getElementById("printid");
+  if(!p)return;
+  var s=studentInfo();
+  p.textContent="학번: "+(s.id||"          ")+"   이름: "+(s.name||"          ");
+}
+function say(text,cls){msg.textContent=text;msg.className="sb-msg"+(cls?" "+cls:"");}
+
+function download(draft){
+  var obj=buildJSON(draft?"draft":"final"),name=fileName(obj.student,draft);
+  var blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"});
+  var url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;a.style.display="none";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1500);
+  return name;
+}
+function onSave(){
+  if(busy)return;
+  var miss=validate();
+  if(miss.length){
+    say("학번과 이름을 입력해야 저장할 수 있다. 표시된 칸을 채운 뒤 다시 누른다.","err");
+    miss[0][0].focus();return;
+  }
+  busy=true;saveBtn.disabled=true;
+  try{
+    var n=download();
+    say("저장했다: "+n+" (내려받은 JSON 파일 한 개를 제출한다.)","ok");
+  }catch(e){say("저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;saveBtn.disabled=false;},1200);
+}
+
+/* 이어 쓰기: 임시 저장 파일 내려받기 / 저장한 파일 불러오기 */
+function snap(){return JSON.stringify(collect().map(function(a){return a.value;}));}
+function isDirty(){return snap()!==baseline;}
+function ask(text,fn){
+  confirmTxt.textContent=text;pending=fn;confirmBox.hidden=false;
+  clearBtn.disabled=true;loadBtn.disabled=true;
+}
+function closeAsk(){
+  pending=null;confirmBox.hidden=true;clearBtn.disabled=false;loadBtn.disabled=false;
+}
+function onDraft(){
+  if(busy)return;
+  busy=true;draftBtn.disabled=true;
+  try{
+    var n=download(true),s=studentInfo();
+    say("임시 저장했다: "+n+" (제출 파일이 아니다. 이어 쓸 때 [불러오기]로 이 파일을 고른다."+((s.id&&s.name)?"":" 학번과 이름을 쓰면 파일 이름에 들어간다.")+")","ok");
+  }catch(e){say("임시 저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;draftBtn.disabled=false;},1200);
+}
+function applyLoaded(j){
+  if(!j||typeof j!=="object"||Array.isArray(j))return {err:"저장 파일 형식이 아니다."};
+  if(j.schema!==SCHEMA)return {err:"이 워크북의 저장 파일이 아니다(schema 불일치). 이 활동지에서 저장한 JSON 파일을 고른다."};
+  if(j.file!==FILE)return {err:"이 파일은 '"+String(j.file)+"'에서 저장한 것이다. 지금 열린 '"+FILE+"'에서 저장한 파일만 불러올 수 있다."};
+  if(!Array.isArray(j.answers))return {err:"저장 파일에 answers가 없거나 형식이 틀리다."};
+  var vals={};
+  j.answers.forEach(function(a){if(a&&typeof a.key==="string")vals[a.key]=a.value;});
+  var n=0;
+  q("[data-key]").forEach(function(el){
+    var key=el.getAttribute("data-key");
+    if(!Object.prototype.hasOwnProperty.call(vals,key))return;
+    var v=vals[key],t=typeof v;
+    if(v!==null&&t!=="string"&&t!=="boolean")return;
+    setValue(el,v);n++;
+  });
+  if(j.student&&typeof j.student==="object"){
+    idIn.value=typeof j.student.id==="string"?j.student.id:"";
+    nameIn.value=typeof j.student.name==="string"?j.student.name:"";
+    [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  }
+  autosizeAll();updatePrintId();stash();
+  return {n:n,draft:j.status==="draft",at:j.savedAt};
+}
+function onLoadClick(){
+  if(isDirty()||idIn.value.trim()||nameIn.value.trim()){
+    ask("지금 입력한 내용이 불러온 파일의 내용으로 바뀐다. 계속하려면 [불러오기 진행]을 누르고 파일을 고른다.",function(){closeAsk();fileIn.click();});
+    yesBtn.textContent="불러오기 진행";
+  }else{fileIn.click();}
+}
+function onFileChosen(){
+  var f=fileIn.files&&fileIn.files[0];
+  if(!f)return;
+  if(f.size>3*1024*1024){say("파일이 너무 크다(3MB 초과). 이 활동지에서 저장한 JSON 파일이 맞는지 확인한다.","err");fileIn.value="";return;}
+  var r=new FileReader();
+  r.onerror=function(){say("파일을 읽지 못했다. 다시 시도한다.","err");fileIn.value="";};
+  r.onload=function(){
+    var res;
+    try{res=applyLoaded(JSON.parse(String(r.result)));}
+    catch(e){res={err:"JSON 파일을 읽지 못했다. 이 활동지에서 저장한 파일이 맞는지 확인한다."};}
+    if(res.err){say(res.err+" (입력란은 바뀌지 않았다.)","err");}
+    else{say("불러왔다: "+f.name+" ("+res.n+"칸"+(res.at?", 저장 시각 "+res.at.slice(0,16).replace("T"," "):"")+"). 이어서 쓴다."+(res.draft?"":" (제출용 파일을 불러왔다.)"),"ok");}
+    fileIn.value="";
+  };
+  r.readAsText(f,"utf-8");
+}
+
+/* 임시 보관 (localStorage, 모두 try/catch) */
+function stash(){
+  try{
+    var vals={};collect().forEach(function(a){vals[a.key]=a.value;});
+    localStorage.setItem(STORE,JSON.stringify({student:studentInfo(),values:vals,at:Date.now()}));
+    var d=new Date();
+    autoEl.textContent="임시 저장됨 "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
+  }catch(e){autoEl.textContent="임시 저장 사용 불가(저장(JSON)은 가능)";}
+}
+function schedule(){clearTimeout(timer);timer=setTimeout(stash,300);}
+function setValue(el,v){
+  var k=kind(el);
+  if(k==="checkbox"){el.checked=(v===true);}
+  else if(k==="radio"){q("input[type=radio]",el).forEach(function(r){r.checked=(v!==null&&v!==undefined&&r.value===v);});}
+  else{el.value=(v===null||v===undefined)?"":String(v);}
+}
+function restore(){
+  try{
+    var raw=localStorage.getItem(STORE);if(!raw)return;
+    var s=JSON.parse(raw);if(!s)return;
+    if(s.student){idIn.value=s.student.id||"";nameIn.value=s.student.name||"";}
+    var any=false;
+    q("[data-key]").forEach(function(el){var key=el.getAttribute("data-key");if(s.values&&Object.prototype.hasOwnProperty.call(s.values,key)){setValue(el,s.values[key]);any=true;}});
+    autosizeAll();
+    if(any||(s.student&&(s.student.id||s.student.name)))autoEl.textContent="이전 임시 저장을 불러왔다";
+  }catch(e){}
+}
+function resetAll(){
+  q("[data-key]").forEach(function(el){setValue(el,kind(el)==="checkbox"?false:(kind(el)==="radio"?null:""));});
+  idIn.value="";nameIn.value="";
+  [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  autosizeAll();
+}
+function doClear(){
+  try{localStorage.removeItem(STORE);}catch(e){}
+  resetAll();
+  closeAsk();
+  autoEl.textContent="";
+  say("이 브라우저의 자동 보관을 지우고 입력란을 비웠다. (내려받은 임시 저장 파일은 그대로다.)","ok");
+}
+
+/* 입력란 보조 */
+function autosize(t){if(t.classList.contains("code")||t.classList.contains("draw"))return;t.style.height="auto";if(t.scrollHeight>0)t.style.height=(t.scrollHeight+2)+"px";}
+function autosizeAll(){q("textarea.in").forEach(autosize);}
+function codeKeys(e){
+  var t=e.target;
+  if(!t||!t.classList||!t.classList.contains("code"))return;
+  if(e.key==="Escape"){t._esc=true;return;}
+  if(e.key==="Tab"&&!e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey){
+    if(t._esc){t._esc=false;return;}
+    e.preventDefault();
+    var s=t.selectionStart,en=t.selectionEnd;
+    t.setRangeText("    ",s,en,"end");
+    t.dispatchEvent(new Event("input",{bubbles:true}));
+  }else if(e.key!=="Shift"){t._esc=false;}
+}
+function labelControls(){
+  q("[data-key]").forEach(function(el){
+    var l=el.getAttribute("data-label");
+    var isGroup=el.getAttribute("data-type")==="radio";
+    if(isGroup){el.setAttribute("role","radiogroup");if(l)el.setAttribute("aria-label",l);return;}
+    var has=el.labels&&el.labels.length;
+    if(!has&&l&&!el.getAttribute("aria-label"))el.setAttribute("aria-label",l);
+  });
+}
+function buildBar(){
+  bar=document.createElement("div");bar.id="savebar";bar.setAttribute("role","region");bar.setAttribute("aria-label","제출 저장 바");
+  bar.innerHTML='<div class="sb-in"><div class="sb-row">'
+   +'<label for="sb-id">학번 <input type="text" id="sb-id" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<label for="sb-name">이름 <input type="text" id="sb-name" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<button type="button" id="sb-save">저장(JSON)</button>'
+   +'<button type="button" id="sb-draft" class="sec" title="다 못 쓴 내용을 파일로 보관한다. 제출 파일이 아니다.">임시 저장</button>'
+   +'<button type="button" id="sb-load" class="sec" title="임시 저장한 파일을 불러와 이어 쓴다.">불러오기</button>'
+   +'<input type="file" id="sb-file" accept=".json,application/json" hidden aria-label="저장한 JSON 파일 선택">'
+   +'<button type="button" id="sb-clear" class="sec">자동 보관 지우기</button>'
+   +'<span class="sb-auto" id="sb-auto"></span></div>'
+   +'<div class="sb-confirm" id="sb-confirm" hidden><span id="sb-ctext"></span>'
+   +'<button type="button" id="sb-yes">확인</button><button type="button" id="sb-no" class="sec">취소</button></div>'
+   +'<div class="sb-msg" id="sb-msg" role="status" aria-live="polite">다 쓰면 학번과 이름을 쓰고 [저장(JSON)]을 눌러 제출 파일 한 개를 만든다. 시간이 모자라면 [임시 저장]으로 파일을 보관하고, 다음에 [불러오기]로 이어 쓴다.</div></div>';
+  document.body.insertBefore(bar,document.body.firstChild);
+  var pid=document.createElement("div");pid.id="printid";pid.setAttribute("aria-hidden","true");
+  document.body.insertBefore(pid,bar.nextSibling);
+  idIn=bar.querySelector("#sb-id");nameIn=bar.querySelector("#sb-name");msg=bar.querySelector("#sb-msg");
+  autoEl=bar.querySelector("#sb-auto");saveBtn=bar.querySelector("#sb-save");clearBtn=bar.querySelector("#sb-clear");confirmBox=bar.querySelector("#sb-confirm");
+  draftBtn=bar.querySelector("#sb-draft");loadBtn=bar.querySelector("#sb-load");fileIn=bar.querySelector("#sb-file");yesBtn=bar.querySelector("#sb-yes");confirmTxt=bar.querySelector("#sb-ctext");
+  saveBtn.addEventListener("click",onSave);
+  draftBtn.addEventListener("click",onDraft);
+  loadBtn.addEventListener("click",onLoadClick);
+  fileIn.addEventListener("change",onFileChosen);
+  clearBtn.addEventListener("click",function(){yesBtn.textContent="지우기";ask("이 브라우저의 자동 보관을 지우고 입력란을 모두 비운다. 임시 저장 파일이나 JSON으로 저장하지 않은 내용은 되찾을 수 없다.",doClear);bar.querySelector("#sb-no").focus();});
+  bar.querySelector("#sb-no").addEventListener("click",function(){closeAsk();loadBtn.focus();});
+  yesBtn.addEventListener("click",function(){var f=pending;if(f)f();});
+}
+function init(){
+  buildBar();labelControls();baseline=snap();restore();autosizeAll();
+  document.addEventListener("input",function(e){
+    var t=e.target;
+    if(t.tagName==="TEXTAREA")autosize(t);
+    if(t===idIn||t===nameIn){if(t.value.trim()){t.classList.remove("invalid");t.setAttribute("aria-invalid","false");}}
+    if(t===idIn||t===nameIn)updatePrintId();
+    schedule();
+  });
+  document.addEventListener("change",schedule);
+  document.addEventListener("keydown",codeKeys);
+  window.addEventListener("beforeprint",function(){autosizeAll();updatePrintId();});
+  updatePrintId();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(autosizeAll);
+  window.addEventListener("resize",autosizeAll);
+  window.Week12Submit={buildJSON:buildJSON,collect:collect,validate:validate,fileName:fileName,FILE_KEY:FILE_KEY,applyLoaded:applyLoaded};
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+</body>
+</html>

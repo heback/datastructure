@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>13주차 형성평가 · 반례로 증명하기 (학생용)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16233b;--paper:#f7f8fa;--panel:#ffffff;--py-blue:#3572a5;--line:#dfe3ea;--dim:#5b6b85;--code-bg:#101828;--code-fg:#e6edf7;--ok:#1d7a4f;--warn:#8a6d1f;--bad:#b3401f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+code,pre{font-family:"JetBrains Mono","D2Coding",Consolas,monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:24px}
+.prompt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--py-blue);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.lead{color:var(--dim);margin-top:8px;max-width:760px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 20px;font-family:"JetBrains Mono",monospace;font-size:12px}
+nav a{color:var(--py-blue);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+section>h2{font-size:18px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+section>h2 small{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--py-blue);margin-left:8px;font-weight:500}
+h3{font-size:15px;margin:14px 0 6px}
+p{margin:6px 0}
+ul,ol{margin:6px 0 6px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--code-bg);color:var(--code-fg);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;text-align:left;padding:8px}
+td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--py-blue);white-space:nowrap}
+table.fill td{border:1px solid var(--line);height:34px}
+table.fill td.lab{background:#f0f2f6;font-weight:600;height:auto}
+pre{background:var(--code-bg);color:var(--code-fg);padding:12px 14px;border-radius:6px;font-size:12.5px;overflow-x:auto;margin:8px 0;line-height:1.55}
+code.i{background:#eef1f6;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;color:var(--py-blue)}
+.note{background:#eef4fa;border:1px solid #d6e5f2;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.warn{background:#fbf3e4;border:1px solid #ecd9ae;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.concept{background:#f4f7fc;border:1px solid #c9d6ea;border-left:4px solid var(--py-blue);border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0;break-inside:avoid;page-break-inside:avoid}
+.concept b.h{color:var(--py-blue)}
+.concept table{margin:6px 0;font-size:12.5px}
+.concept ul{margin:4px 0 4px 18px}
+.ans{background:#eef8f2;border:1px solid #bfe0cf;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c,var(--py-blue));border-radius:6px;padding:10px 14px;background:#fff}
+.card b.h{color:var(--c)}
+.blank{border:1px dashed #9aa7bd;border-radius:6px;min-height:64px;margin:6px 0;padding:6px 10px;color:var(--dim);font-size:12px}
+.blank.l{min-height:110px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.diagram{background:#f0f2f6;border-radius:6px;padding:10px 14px;font-size:12.5px;overflow-x:auto;color:var(--ink);line-height:1.4}
+.codewrap{position:relative}
+.copy{position:absolute;top:14px;right:8px;font:500 11px "JetBrains Mono",monospace;background:#27364f;color:#e6edf7;border:1px solid #3d506e;border-radius:4px;padding:2px 8px;cursor:pointer}
+.role{display:inline-block;font:700 10.5px "JetBrains Mono",monospace;padding:1px 7px;border-radius:3px;background:#e4ecf6;color:var(--py-blue);margin-right:6px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.links a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:6px;margin:6px 0;color:var(--py-blue);text-decoration:none;font-weight:600}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{
+  body{background:#fff;font-size:11.5pt}.wrap{max-width:none;padding:0}
+  nav,.copy,.noprint{display:none!important}
+  section{border:none;padding:0;margin:0 0 8mm;break-inside:auto}
+  section.sheet{page-break-after:always;break-after:page}
+  section.sheet:last-of-type{page-break-after:auto}
+  header{padding:0 0 8px;margin-bottom:10px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f3f4f7;color:#111;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,.card,.blank{break-inside:avoid}
+}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.gate{border:1px dashed #b3401f;border-radius:8px;padding:6px 12px;background:#fff8f5}
+</style>
+<style id="week13-submit-style">
+/* week13 제출 바·입력란 공통 스타일 (8개 학생용 파일 동일) */
+#savebar{position:sticky;top:0;z-index:50;background:#16233b;color:#f7f8fa;padding:8px 20px;border-bottom:3px solid #3572a5;font-size:13px}
+#savebar .sb-in{max-width:1000px;margin:0 auto}
+#savebar .sb-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+#savebar label{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+#savebar input[type=text]{width:9.5em;padding:5px 8px;border:2px solid #9aa7bd;border-radius:4px;background:#fff;color:#16233b;font:inherit;font-weight:500}
+#savebar input[type=text].invalid{border-color:#ff9b7a;background:#fff3ee}
+#savebar button{font:600 13px "IBM Plex Sans KR",sans-serif;padding:6px 14px;border-radius:4px;border:2px solid #fff;background:#fff;color:#16233b;cursor:pointer}
+#savebar button.sec{background:transparent;color:#fff;border-color:#9aa7bd}
+#savebar button:disabled{opacity:.6;cursor:default}
+#savebar button:focus-visible,#savebar input:focus-visible{outline:3px solid #ffd166;outline-offset:2px}
+#savebar .sb-msg{min-height:1.4em;margin-top:4px;font-size:12.5px}
+#savebar .sb-msg.err{color:#ffd0c0;font-weight:700}
+#savebar .sb-msg.ok{color:#bff0d4}
+#savebar .sb-auto{font-size:11.5px;color:#c9d3e6;margin-left:auto}
+#savebar .sb-confirm{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px;padding:6px 10px;border:1px solid #ffd166;border-radius:4px;font-size:12.5px}
+#savebar .sb-confirm[hidden]{display:none}
+.in{width:100%;display:block;font:inherit;font-size:13.5px;line-height:1.5;color:#16233b;background:#fff;border:1px solid #6b7a94;border-radius:4px;padding:5px 8px}
+textarea.in{resize:vertical;min-height:2.4em;overflow:hidden}
+textarea.in.l{min-height:7em}
+textarea.in.code{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre;overflow:auto;tab-size:4;min-height:12em;background:#fbfcfe}
+textarea.in.draw{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;white-space:pre;overflow:auto;min-height:9em}
+.in:focus-visible,.ck input:focus-visible,.rg input:focus-visible{outline:3px solid #3572a5;outline-offset:1px}
+.in.invalid{border:2px solid #b3401f}
+input.in.s{display:inline-block;width:3.2em;padding:1px 4px;text-align:center}
+table.fill td.in-cell{padding:3px;height:auto}
+.ans-row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.ans-row>.n{padding-top:6px;font-weight:700;color:#3572a5}
+.mycode{margin:8px 0 12px}
+.mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
+.hint{font-size:12px;color:#5b6b85;margin:2px 0}
+.ck{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
+.ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
+.rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
+.rg label{display:inline-flex;align-items:center;gap:5px}
+@media (max-width:640px){#savebar{padding:8px 14px}#savebar .sb-auto{margin-left:0}}
+#printid{display:none}
+@media print{
+  #printid{display:block;font:600 12pt "IBM Plex Sans KR",sans-serif;margin:0 0 8px;padding-bottom:4px;border-bottom:1px solid #999;white-space:pre-wrap}
+  #savebar,.hint.noprint{display:none!important}
+  .in{border:none;border-bottom:1px solid #9aa7bd;border-radius:0;background:transparent;padding:2px 2px;-webkit-appearance:none;appearance:none;resize:none}
+  textarea.in{overflow:visible}
+  textarea.in.code,textarea.in.draw{border:1px solid #ccd;white-space:pre-wrap}
+  select.in{background-image:none}
+  .ans-row,.mycode{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="prompt">&gt;&gt;&gt; formative.week(13)  # 학생용 · 형성평가(A15)</div>
+  <h1>13주차 형성평가 — Greedy와 DP의 차이를 반례로 증명하기</h1>
+  <p class="lead">성취기준 [12자구04-03]. 평가 의도: 코인 교환 문제에서 Greedy와 DP의 차이를 반례로 증명할 수 있는가? 이 평가는 개별로 풀며, 시험 상황이므로 AI를 사용하지 않는다(수업 운영 규칙이며 계획서의 위반 처리는 이 평가에 적용하지 않는다). 필수는 Q1~Q3이고 Q4는 선택이다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+</header>
+<nav><a href="#Q1">Q1</a><a href="#Q2">Q2</a><a href="#Q3">Q3</a><a href="#Q4">Q4</a><a href="index.html">목록</a></nav>
+<section id="Q1">
+<h2>Q1 · 패러다임 판단<small></small></h2>
+<p class="meta"><span>시험 상황 · 개인 · AI 비사용 · 8분(필수 Q1~Q3)</span></p>
+<p>코드 없이 표와 문장으로 푼다. 정답 개수만이 아니라 <b>반례의 금액과 조합</b>을 쓴다.</p>
+<h3>Q1 · 어떤 방식이 어울리는가</h3><p>아래 네 상황마다 어울리는 방식을 하나 고르고, 부분 문제가 겹치는지 또는 선택을 되돌릴 일이 없는지에 근거해 한 문장으로 쓴다.</p>
+<p>(a) 재귀로 풀면 같은 인자의 호출이 수천 번 되풀이되는 점화식</p><div class="ans-row"><span class="rg" data-key="Q1.a.pick" data-type="radio" data-label="Q1 (a) 어울리는 방식"><label><input type="radio" name="r_Q1_a_pick" value="메모이제이션·DP"> 메모이제이션·DP</label><label><input type="radio" name="r_Q1_a_pick" value="Greedy 가능"> Greedy 가능</label><label><input type="radio" name="r_Q1_a_pick" value="Greedy 불가(DP 필요)"> Greedy 불가(DP 필요)</label><label><input type="radio" name="r_Q1_a_pick" value="기억해도 이득 없음"> 기억해도 이득 없음</label></span></div>
+<div class="ans-row"><span class="n">근거</span><textarea class="in" rows="2" data-key="Q1.a.why" data-label="Q1 (a) 근거 한 문장"></textarea></div>
+<p>(b) 끝나는 시각이 서로 다른 강의를 겹치지 않게 최대한 많이 고르기</p><div class="ans-row"><span class="rg" data-key="Q1.b.pick" data-type="radio" data-label="Q1 (b) 어울리는 방식"><label><input type="radio" name="r_Q1_b_pick" value="메모이제이션·DP"> 메모이제이션·DP</label><label><input type="radio" name="r_Q1_b_pick" value="Greedy 가능"> Greedy 가능</label><label><input type="radio" name="r_Q1_b_pick" value="Greedy 불가(DP 필요)"> Greedy 불가(DP 필요)</label><label><input type="radio" name="r_Q1_b_pick" value="기억해도 이득 없음"> 기억해도 이득 없음</label></span></div>
+<div class="ans-row"><span class="n">근거</span><textarea class="in" rows="2" data-key="Q1.b.why" data-label="Q1 (b) 근거 한 문장"></textarea></div>
+<p>(c) 동전 [1, 6, 10]으로 거스름돈 최소 개수 구하기</p><div class="ans-row"><span class="rg" data-key="Q1.c.pick" data-type="radio" data-label="Q1 (c) 어울리는 방식"><label><input type="radio" name="r_Q1_c_pick" value="메모이제이션·DP"> 메모이제이션·DP</label><label><input type="radio" name="r_Q1_c_pick" value="Greedy 가능"> Greedy 가능</label><label><input type="radio" name="r_Q1_c_pick" value="Greedy 불가(DP 필요)"> Greedy 불가(DP 필요)</label><label><input type="radio" name="r_Q1_c_pick" value="기억해도 이득 없음"> 기억해도 이득 없음</label></span></div>
+<div class="ans-row"><span class="n">근거</span><textarea class="in" rows="2" data-key="Q1.c.why" data-label="Q1 (c) 근거 한 문장"></textarea></div>
+<p>(d) 정렬된 배열을 반으로 쪼개 각각 독립적으로 정렬한 뒤 합치기(병합 정렬)</p><div class="ans-row"><span class="rg" data-key="Q1.d.pick" data-type="radio" data-label="Q1 (d) 어울리는 방식"><label><input type="radio" name="r_Q1_d_pick" value="메모이제이션·DP"> 메모이제이션·DP</label><label><input type="radio" name="r_Q1_d_pick" value="Greedy 가능"> Greedy 가능</label><label><input type="radio" name="r_Q1_d_pick" value="Greedy 불가(DP 필요)"> Greedy 불가(DP 필요)</label><label><input type="radio" name="r_Q1_d_pick" value="기억해도 이득 없음"> 기억해도 이득 없음</label></span></div>
+<div class="ans-row"><span class="n">근거</span><textarea class="in" rows="2" data-key="Q1.d.why" data-label="Q1 (d) 근거 한 문장"></textarea></div>
+</section>
+<section id="Q2">
+<h2>Q2 · 반례로 증명하기<small></small></h2>
+<p>동전 체계 F = [1, 6, 10]으로 12원을 만든다.</p>
+<h3>(i) 큰 동전부터 쓰는 방식</h3><div class="ans-row"><span>조합 </span><input type="text" class="in" data-key="Q2.i.combo" data-label="Q2 (i) 큰 동전부터 쓰는 조합" autocomplete="off" style="width:12em;display:inline-block"><span> 개수 </span><input type="text" class="in" data-key="Q2.i.n" data-label="Q2 (i) 개수" autocomplete="off" style="width:4em;display:inline-block"></div>
+<h3>(ii) 최적</h3><div class="ans-row"><span>조합 </span><input type="text" class="in" data-key="Q2.ii.combo" data-label="Q2 (ii) 최적 조합" autocomplete="off" style="width:12em;display:inline-block"><span> 개수 </span><input type="text" class="in" data-key="Q2.ii.n" data-label="Q2 (ii) 개수" autocomplete="off" style="width:4em;display:inline-block"></div>
+<h3>(iii) dp 표 채우기</h3><p>dp[a]는 a원을 만드는 최소 동전 개수이다. 빈 칸 dp[6], dp[11], dp[12]를 채운다.</p>
+<div class="scroll"><table class="fill"><tr><th>a</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr><tr><td class="lab">dp[a]</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td class="in-cell"><input type="text" class="in" data-key="Q2.iii.dp6" data-label="Q2 (iii) dp[6]" autocomplete="off"></td><td>2</td><td>3</td><td>4</td><td>1</td><td class="in-cell"><input type="text" class="in" data-key="Q2.iii.dp11" data-label="Q2 (iii) dp[11]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q2.iii.dp12" data-label="Q2 (iii) dp[12]" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">dp[12]</span><textarea class="in" rows="2" data-key="Q2.iii.src" data-label="Q2 (iii) dp[12]는 어느 칸에서 왔는가"></textarea></div><p>위 칸에는 dp[12]가 어느 칸의 값에서 왔는지, 어떤 동전을 쓴 경우인지 쓴다.</p>
+<h3>(iv) 반례 증명 문장</h3><p>F에서 큰 동전부터 쓰는 방식이 최적이 아님을 금액, 두 조합, 개수 비교를 써서 반례로 증명한다.</p><div class="ans-row"><textarea class="in" rows="4" data-key="Q2.iv.proof" data-label="Q2 (iv) 반례 증명 문장"></textarea></div>
+<h3>후속 질문</h3><p>동전 G = [1, 2, 5, 10]에 대해 1~20원 모두 큰 동전부터 쓰는 방식이 최적이었다. 이것으로 G에서 이 방식이 항상 최적임이 증명되었는가?</p>
+<div class="ans-row"><span class="rg" data-key="Q2.g.pick" data-type="radio" data-label="Q2 후속 증명되었는가"><label><input type="radio" name="r_Q2_g_pick" value="증명되었다"> 증명되었다</label><label><input type="radio" name="r_Q2_g_pick" value="증명되지 않았다"> 증명되지 않았다</label></span></div>
+<div class="ans-row"><span class="n">근거</span><textarea class="in" rows="3" data-key="Q2.g.why" data-label="Q2 후속 근거"></textarea></div>
+</section>
+<section id="Q3">
+<h2>Q3 · 점화식 설계<small></small></h2>
+<p>계단을 한 번에 1칸, 2칸, 3칸 중 마음대로 오를 수 있다. 6칸을 오르는 방법의 수를 DP로 구한다.</p>
+<div class="ans-row"><span class="n">상태 정의</span><textarea class="in" rows="2" data-key="Q3.state" data-label="Q3 상태 정의"></textarea></div><div class="ans-row"><span class="n">전이</span><textarea class="in" rows="2" data-key="Q3.trans" data-label="Q3 전이"></textarea></div><div class="ans-row"><span class="n">초기값</span><textarea class="in" rows="2" data-key="Q3.init" data-label="Q3 초기값"></textarea></div><div class="ans-row"><span class="n">계산 순서</span><textarea class="in" rows="2" data-key="Q3.order" data-label="Q3 계산 순서"></textarea></div>
+<div class="scroll"><table class="fill"><tr><th style="width:60px">n</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr><tr><td class="lab">dp[n]</td><td class="in-cell"><input type="text" class="in" data-key="Q3.dp.r1.c1" data-label="Q3 dp 표 dp[n] 0" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q3.dp.r1.c2" data-label="Q3 dp 표 dp[n] 1" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q3.dp.r1.c3" data-label="Q3 dp 표 dp[n] 2" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q3.dp.r1.c4" data-label="Q3 dp 표 dp[n] 3" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q3.dp.r1.c5" data-label="Q3 dp 표 dp[n] 4" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q3.dp.r1.c6" data-label="Q3 dp 표 dp[n] 5" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q3.dp.r1.c7" data-label="Q3 dp 표 dp[n] 6" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span>6칸을 오르는 방법의 수 </span><input type="text" class="in" data-key="Q3.answer" data-label="Q3 6칸을 오르는 방법의 수" autocomplete="off" style="width:6em;display:inline-block"></div>
+</section>
+<section id="Q4">
+<h2>Q4 · 적용 (선택)<small></small></h2>
+<p class="meta"><span>선택 · 수업 시간 밖 또는 주간 과제</span></p>
+<p>회의 FM = [(0, 10), (1, 3), (4, 6), (7, 9)] ([시작, 끝) 반열린). 한 회의실에서 겹치지 않게 가장 많이 고른다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:180px">규칙</th><th>선택된 회의</th><th style="width:100px">개수</th></tr><tr><td class="lab">끝나는 시각이 빠른 순</td><td class="in-cell"><input type="text" class="in" data-key="Q4.rule.r1.c1" data-label="Q4 두 규칙 끝나는 시각이 빠른 순 선택된 회의" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q4.rule.r1.c2" data-label="Q4 두 규칙 끝나는 시각이 빠른 순 개수" autocomplete="off"></td></tr><tr><td class="lab">시작 시각이 빠른 순</td><td class="in-cell"><input type="text" class="in" data-key="Q4.rule.r2.c1" data-label="Q4 두 규칙 시작 시각이 빠른 순 선택된 회의" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q4.rule.r2.c2" data-label="Q4 두 규칙 시작 시각이 빠른 순 개수" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span>틀린 규칙의 반례가 되는 회의 </span><input type="text" class="in" data-key="Q4.counter" data-label="Q4 반례가 되는 회의" autocomplete="off" style="width:10em;display:inline-block"></div>
+<div class="ans-row"><textarea class="in" rows="3" data-key="Q4.why" data-label="Q4 틀린 규칙이 틀린 이유"></textarea></div>
+</section>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
+</script>
+<script id="week13-submit">
+/* week13 학생 입력 저장 (8개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week13-student-v1 */
+(function(){
+"use strict";
+var FILE_KEY="formative";
+var FILES={workbook:"student_workbook.html",code_lab:"student_code_lab.html",workbook_part2:"student_workbook_part2.html",code_lab_part2:"student_code_lab_part2.html",code_lab_part3:"student_code_lab_part3.html",workbook_part3:"student_workbook_part3.html",code_lab_part4:"student_code_lab_part4.html",formative:"formative_check.html"};
+var FILE=FILES[FILE_KEY], STORE="week13:"+FILE, SCHEMA="week13-student-v1";
+var bar,idIn,nameIn,msg,autoEl,saveBtn,clearBtn,confirmBox,busy=false,timer=null;
+var draftBtn,loadBtn,fileIn,yesBtn,confirmTxt,pending=null,baseline="";
+
+function q(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
+function kind(el){
+  var t=el.getAttribute("data-type");
+  if(t)return t;
+  var tag=el.tagName.toLowerCase();
+  if(tag==="textarea")return "textarea";
+  if(tag==="select")return "select";
+  if(tag==="input")return el.type==="checkbox"?"checkbox":"text";
+  return "text";
+}
+function labelOf(el){
+  var l=el.getAttribute("data-label");
+  if(l)return l;
+  if(el.labels&&el.labels.length)return el.labels[0].textContent.replace(/\s+/g," ").trim();
+  return el.getAttribute("aria-label")||"";
+}
+function readValue(el,k){
+  if(k==="checkbox")return !!el.checked;
+  if(k==="radio"){var r=el.querySelector("input[type=radio]:checked");return r?r.value:null;}
+  return el.value;
+}
+function collect(){
+  return q("[data-key]").map(function(el){
+    var k=kind(el);
+    return {key:el.getAttribute("data-key"),label:labelOf(el),type:k,value:readValue(el,k)};
+  });
+}
+function studentInfo(){return {id:idIn.value.trim(),name:nameIn.value.trim()};}
+function buildJSON(status){
+  return {schema:SCHEMA,week:13,file:FILE,status:status||"final",student:studentInfo(),savedAt:new Date().toISOString(),answers:collect()};
+}
+function safe(s){return String(s).replace(/[\\\/:*?"<>|\s\u0000-\u001f]+/g,"_").replace(/^\.+/,"_");}
+function fileName(st,draft){return "week13_"+FILE_KEY+"_"+safe(st.id||"학번미입력")+"_"+safe(st.name||"이름미입력")+(draft?"_임시저장":"")+".json";}
+function validate(){
+  var miss=[];
+  [[idIn,"학번"],[nameIn,"이름"]].forEach(function(p){
+    var bad=!p[0].value.trim();
+    p[0].classList.toggle("invalid",bad);
+    p[0].setAttribute("aria-invalid",bad?"true":"false");
+    if(bad)miss.push(p);
+  });
+  return miss;
+}
+function updatePrintId(){
+  var p=document.getElementById("printid");
+  if(!p)return;
+  var s=studentInfo();
+  p.textContent="학번: "+(s.id||"          ")+"   이름: "+(s.name||"          ");
+}
+function say(text,cls){msg.textContent=text;msg.className="sb-msg"+(cls?" "+cls:"");}
+
+function download(draft){
+  var obj=buildJSON(draft?"draft":"final"),name=fileName(obj.student,draft);
+  var blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"});
+  var url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;a.style.display="none";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1500);
+  return name;
+}
+function onSave(){
+  if(busy)return;
+  var miss=validate();
+  if(miss.length){
+    say("학번과 이름을 입력해야 저장할 수 있다. 표시된 칸을 채운 뒤 다시 누른다.","err");
+    miss[0][0].focus();return;
+  }
+  busy=true;saveBtn.disabled=true;
+  try{
+    var n=download();
+    say("저장했다: "+n+" (내려받은 JSON 파일 한 개를 제출한다.)","ok");
+  }catch(e){say("저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;saveBtn.disabled=false;},1200);
+}
+
+/* 이어 쓰기: 임시 저장 파일 내려받기 / 저장한 파일 불러오기 */
+function snap(){return JSON.stringify(collect().map(function(a){return a.value;}));}
+function isDirty(){return snap()!==baseline;}
+function ask(text,fn){
+  confirmTxt.textContent=text;pending=fn;confirmBox.hidden=false;
+  clearBtn.disabled=true;loadBtn.disabled=true;
+}
+function closeAsk(){
+  pending=null;confirmBox.hidden=true;clearBtn.disabled=false;loadBtn.disabled=false;
+}
+function onDraft(){
+  if(busy)return;
+  busy=true;draftBtn.disabled=true;
+  try{
+    var n=download(true),s=studentInfo();
+    say("임시 저장했다: "+n+" (제출 파일이 아니다. 이어 쓸 때 [불러오기]로 이 파일을 고른다."+((s.id&&s.name)?"":" 학번과 이름을 쓰면 파일 이름에 들어간다.")+")","ok");
+  }catch(e){say("임시 저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;draftBtn.disabled=false;},1200);
+}
+function applyLoaded(j){
+  if(!j||typeof j!=="object"||Array.isArray(j))return {err:"저장 파일 형식이 아니다."};
+  if(j.schema!==SCHEMA)return {err:"이 워크북의 저장 파일이 아니다(schema 불일치). 이 활동지에서 저장한 JSON 파일을 고른다."};
+  if(j.file!==FILE)return {err:"이 파일은 '"+String(j.file)+"'에서 저장한 것이다. 지금 열린 '"+FILE+"'에서 저장한 파일만 불러올 수 있다."};
+  if(!Array.isArray(j.answers))return {err:"저장 파일에 answers가 없거나 형식이 틀리다."};
+  var vals={};
+  j.answers.forEach(function(a){if(a&&typeof a.key==="string")vals[a.key]=a.value;});
+  var n=0;
+  q("[data-key]").forEach(function(el){
+    var key=el.getAttribute("data-key");
+    if(!Object.prototype.hasOwnProperty.call(vals,key))return;
+    var v=vals[key],t=typeof v;
+    if(v!==null&&t!=="string"&&t!=="boolean")return;
+    setValue(el,v);n++;
+  });
+  if(j.student&&typeof j.student==="object"){
+    idIn.value=typeof j.student.id==="string"?j.student.id:"";
+    nameIn.value=typeof j.student.name==="string"?j.student.name:"";
+    [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  }
+  autosizeAll();updatePrintId();stash();
+  return {n:n,draft:j.status==="draft",at:j.savedAt};
+}
+function onLoadClick(){
+  if(isDirty()||idIn.value.trim()||nameIn.value.trim()){
+    ask("지금 입력한 내용이 불러온 파일의 내용으로 바뀐다. 계속하려면 [불러오기 진행]을 누르고 파일을 고른다.",function(){closeAsk();fileIn.click();});
+    yesBtn.textContent="불러오기 진행";
+  }else{fileIn.click();}
+}
+function onFileChosen(){
+  var f=fileIn.files&&fileIn.files[0];
+  if(!f)return;
+  if(f.size>3*1024*1024){say("파일이 너무 크다(3MB 초과). 이 활동지에서 저장한 JSON 파일이 맞는지 확인한다.","err");fileIn.value="";return;}
+  var r=new FileReader();
+  r.onerror=function(){say("파일을 읽지 못했다. 다시 시도한다.","err");fileIn.value="";};
+  r.onload=function(){
+    var res;
+    try{res=applyLoaded(JSON.parse(String(r.result)));}
+    catch(e){res={err:"JSON 파일을 읽지 못했다. 이 활동지에서 저장한 파일이 맞는지 확인한다."};}
+    if(res.err){say(res.err+" (입력란은 바뀌지 않았다.)","err");}
+    else{say("불러왔다: "+f.name+" ("+res.n+"칸"+(res.at?", 저장 시각 "+res.at.slice(0,16).replace("T"," "):"")+"). 이어서 쓴다."+(res.draft?"":" (제출용 파일을 불러왔다.)"),"ok");}
+    fileIn.value="";
+  };
+  r.readAsText(f,"utf-8");
+}
+
+/* 임시 보관 (localStorage, 모두 try/catch) */
+function stash(){
+  try{
+    var vals={};collect().forEach(function(a){vals[a.key]=a.value;});
+    localStorage.setItem(STORE,JSON.stringify({student:studentInfo(),values:vals,at:Date.now()}));
+    var d=new Date();
+    autoEl.textContent="임시 저장됨 "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
+  }catch(e){autoEl.textContent="임시 저장 사용 불가(저장(JSON)은 가능)";}
+}
+function schedule(){clearTimeout(timer);timer=setTimeout(stash,300);}
+function setValue(el,v){
+  var k=kind(el);
+  if(k==="checkbox"){el.checked=(v===true);}
+  else if(k==="radio"){q("input[type=radio]",el).forEach(function(r){r.checked=(v!==null&&v!==undefined&&r.value===v);});}
+  else{el.value=(v===null||v===undefined)?"":String(v);}
+}
+function restore(){
+  try{
+    var raw=localStorage.getItem(STORE);if(!raw)return;
+    var s=JSON.parse(raw);if(!s)return;
+    if(s.student){idIn.value=s.student.id||"";nameIn.value=s.student.name||"";}
+    var any=false;
+    q("[data-key]").forEach(function(el){var key=el.getAttribute("data-key");if(s.values&&Object.prototype.hasOwnProperty.call(s.values,key)){setValue(el,s.values[key]);any=true;}});
+    autosizeAll();
+    if(any||(s.student&&(s.student.id||s.student.name)))autoEl.textContent="이전 임시 저장을 불러왔다";
+  }catch(e){}
+}
+function resetAll(){
+  q("[data-key]").forEach(function(el){setValue(el,kind(el)==="checkbox"?false:(kind(el)==="radio"?null:""));});
+  idIn.value="";nameIn.value="";
+  [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  autosizeAll();
+}
+function doClear(){
+  try{localStorage.removeItem(STORE);}catch(e){}
+  resetAll();
+  closeAsk();
+  autoEl.textContent="";
+  say("이 브라우저의 자동 보관을 지우고 입력란을 비웠다. (내려받은 임시 저장 파일은 그대로다.)","ok");
+}
+
+/* 입력란 보조 */
+function autosize(t){if(t.classList.contains("code")||t.classList.contains("draw"))return;t.style.height="auto";if(t.scrollHeight>0)t.style.height=(t.scrollHeight+2)+"px";}
+function autosizeAll(){q("textarea.in").forEach(autosize);}
+function codeKeys(e){
+  var t=e.target;
+  if(!t||!t.classList||!t.classList.contains("code"))return;
+  if(e.key==="Escape"){t._esc=true;return;}
+  if(e.key==="Tab"&&!e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey){
+    if(t._esc){t._esc=false;return;}
+    e.preventDefault();
+    var s=t.selectionStart,en=t.selectionEnd;
+    t.setRangeText("    ",s,en,"end");
+    t.dispatchEvent(new Event("input",{bubbles:true}));
+  }else if(e.key!=="Shift"){t._esc=false;}
+}
+function labelControls(){
+  q("[data-key]").forEach(function(el){
+    var l=el.getAttribute("data-label");
+    var isGroup=el.getAttribute("data-type")==="radio";
+    if(isGroup){el.setAttribute("role","radiogroup");if(l)el.setAttribute("aria-label",l);return;}
+    var has=el.labels&&el.labels.length;
+    if(!has&&l&&!el.getAttribute("aria-label"))el.setAttribute("aria-label",l);
+  });
+}
+function buildBar(){
+  bar=document.createElement("div");bar.id="savebar";bar.setAttribute("role","region");bar.setAttribute("aria-label","제출 저장 바");
+  bar.innerHTML='<div class="sb-in"><div class="sb-row">'
+   +'<label for="sb-id">학번 <input type="text" id="sb-id" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<label for="sb-name">이름 <input type="text" id="sb-name" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<button type="button" id="sb-save">저장(JSON)</button>'
+   +'<button type="button" id="sb-draft" class="sec" title="다 못 쓴 내용을 파일로 보관한다. 제출 파일이 아니다.">임시 저장</button>'
+   +'<button type="button" id="sb-load" class="sec" title="임시 저장한 파일을 불러와 이어 쓴다.">불러오기</button>'
+   +'<input type="file" id="sb-file" accept=".json,application/json" hidden aria-label="저장한 JSON 파일 선택">'
+   +'<button type="button" id="sb-clear" class="sec">자동 보관 지우기</button>'
+   +'<span class="sb-auto" id="sb-auto"></span></div>'
+   +'<div class="sb-confirm" id="sb-confirm" hidden><span id="sb-ctext"></span>'
+   +'<button type="button" id="sb-yes">확인</button><button type="button" id="sb-no" class="sec">취소</button></div>'
+   +'<div class="sb-msg" id="sb-msg" role="status" aria-live="polite">다 쓰면 학번과 이름을 쓰고 [저장(JSON)]을 눌러 제출 파일 한 개를 만든다. 시간이 모자라면 [임시 저장]으로 파일을 보관하고, 다음에 [불러오기]로 이어 쓴다.</div></div>';
+  document.body.insertBefore(bar,document.body.firstChild);
+  var pid=document.createElement("div");pid.id="printid";pid.setAttribute("aria-hidden","true");
+  document.body.insertBefore(pid,bar.nextSibling);
+  idIn=bar.querySelector("#sb-id");nameIn=bar.querySelector("#sb-name");msg=bar.querySelector("#sb-msg");
+  autoEl=bar.querySelector("#sb-auto");saveBtn=bar.querySelector("#sb-save");clearBtn=bar.querySelector("#sb-clear");confirmBox=bar.querySelector("#sb-confirm");
+  draftBtn=bar.querySelector("#sb-draft");loadBtn=bar.querySelector("#sb-load");fileIn=bar.querySelector("#sb-file");yesBtn=bar.querySelector("#sb-yes");confirmTxt=bar.querySelector("#sb-ctext");
+  saveBtn.addEventListener("click",onSave);
+  draftBtn.addEventListener("click",onDraft);
+  loadBtn.addEventListener("click",onLoadClick);
+  fileIn.addEventListener("change",onFileChosen);
+  clearBtn.addEventListener("click",function(){yesBtn.textContent="지우기";ask("이 브라우저의 자동 보관을 지우고 입력란을 모두 비운다. 임시 저장 파일이나 JSON으로 저장하지 않은 내용은 되찾을 수 없다.",doClear);bar.querySelector("#sb-no").focus();});
+  bar.querySelector("#sb-no").addEventListener("click",function(){closeAsk();loadBtn.focus();});
+  yesBtn.addEventListener("click",function(){var f=pending;if(f)f();});
+}
+function init(){
+  buildBar();labelControls();baseline=snap();restore();autosizeAll();
+  document.addEventListener("input",function(e){
+    var t=e.target;
+    if(t.tagName==="TEXTAREA")autosize(t);
+    if(t===idIn||t===nameIn){if(t.value.trim()){t.classList.remove("invalid");t.setAttribute("aria-invalid","false");}}
+    if(t===idIn||t===nameIn)updatePrintId();
+    schedule();
+  });
+  document.addEventListener("change",schedule);
+  document.addEventListener("keydown",codeKeys);
+  window.addEventListener("beforeprint",function(){autosizeAll();updatePrintId();});
+  updatePrintId();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(autosizeAll);
+  window.addEventListener("resize",autosizeAll);
+  window.Week13Submit={buildJSON:buildJSON,collect:collect,validate:validate,fileName:fileName,FILE_KEY:FILE_KEY,applyLoaded:applyLoaded};
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+</body>
+</html>

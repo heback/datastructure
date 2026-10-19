@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10주차 실습 코드 1부 · 인접 행렬과 일반 dict (학생용)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16233b;--paper:#f7f8fa;--panel:#ffffff;--py-blue:#3572a5;--line:#dfe3ea;--dim:#5b6b85;--code-bg:#101828;--code-fg:#e6edf7;--ok:#1d7a4f;--warn:#8a6d1f;--bad:#b3401f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+code,pre{font-family:"JetBrains Mono","D2Coding",Consolas,monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:24px}
+.prompt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--py-blue);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.lead{color:var(--dim);margin-top:8px;max-width:760px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 20px;font-family:"JetBrains Mono",monospace;font-size:12px}
+nav a{color:var(--py-blue);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+section>h2{font-size:18px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+section>h2 small{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--py-blue);margin-left:8px;font-weight:500}
+h3{font-size:15px;margin:14px 0 6px}
+p{margin:6px 0}
+ul,ol{margin:6px 0 6px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--code-bg);color:var(--code-fg);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;text-align:left;padding:8px}
+td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--py-blue);white-space:nowrap}
+table.fill td{border:1px solid var(--line);height:34px}
+table.fill td.lab{background:#f0f2f6;font-weight:600;height:auto}
+pre{background:var(--code-bg);color:var(--code-fg);padding:12px 14px;border-radius:6px;font-size:12.5px;overflow-x:auto;margin:8px 0;line-height:1.55}
+code.i{background:#eef1f6;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;color:var(--py-blue)}
+.note{background:#eef4fa;border:1px solid #d6e5f2;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.warn{background:#fbf3e4;border:1px solid #ecd9ae;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.concept{background:#f4f7fc;border:1px solid #c9d6ea;border-left:4px solid var(--py-blue);border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0;break-inside:avoid;page-break-inside:avoid}
+.concept b.h{color:var(--py-blue)}
+.concept table{margin:6px 0;font-size:12.5px}
+.concept ul{margin:4px 0 4px 18px}
+.ans{background:#eef8f2;border:1px solid #bfe0cf;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c,var(--py-blue));border-radius:6px;padding:10px 14px;background:#fff}
+.card b.h{color:var(--c)}
+.blank{border:1px dashed #9aa7bd;border-radius:6px;min-height:64px;margin:6px 0;padding:6px 10px;color:var(--dim);font-size:12px}
+.blank.l{min-height:110px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.diagram{background:#f0f2f6;border-radius:6px;padding:10px 14px;font-size:12.5px;overflow-x:auto;color:var(--ink);line-height:1.4}
+.codewrap{position:relative}
+.copy{position:absolute;top:14px;right:8px;font:500 11px "JetBrains Mono",monospace;background:#27364f;color:#e6edf7;border:1px solid #3d506e;border-radius:4px;padding:2px 8px;cursor:pointer}
+.role{display:inline-block;font:700 10.5px "JetBrains Mono",monospace;padding:1px 7px;border-radius:3px;background:#e4ecf6;color:var(--py-blue);margin-right:6px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.links a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:6px;margin:6px 0;color:var(--py-blue);text-decoration:none;font-weight:600}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{
+  body{background:#fff;font-size:11.5pt}.wrap{max-width:none;padding:0}
+  nav,.copy,.noprint{display:none!important}
+  section{border:none;padding:0;margin:0 0 8mm;break-inside:auto}
+  section.sheet{page-break-after:always;break-after:page}
+  section.sheet:last-of-type{page-break-after:auto}
+  header{padding:0 0 8px;margin-bottom:10px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f3f4f7;color:#111;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,.card,.blank{break-inside:avoid}
+}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.gate{border:1px dashed #b3401f;border-radius:8px;padding:6px 12px;background:#fff8f5}
+</style>
+<style id="week10-submit-style">
+/* week10 제출 바·입력란 공통 스타일 (7개 학생용 파일 동일) */
+#savebar{position:sticky;top:0;z-index:50;background:#16233b;color:#f7f8fa;padding:8px 20px;border-bottom:3px solid #3572a5;font-size:13px}
+#savebar .sb-in{max-width:1000px;margin:0 auto}
+#savebar .sb-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+#savebar label{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+#savebar input[type=text]{width:9.5em;padding:5px 8px;border:2px solid #9aa7bd;border-radius:4px;background:#fff;color:#16233b;font:inherit;font-weight:500}
+#savebar input[type=text].invalid{border-color:#ff9b7a;background:#fff3ee}
+#savebar button{font:600 13px "IBM Plex Sans KR",sans-serif;padding:6px 14px;border-radius:4px;border:2px solid #fff;background:#fff;color:#16233b;cursor:pointer}
+#savebar button.sec{background:transparent;color:#fff;border-color:#9aa7bd}
+#savebar button:disabled{opacity:.6;cursor:default}
+#savebar button:focus-visible,#savebar input:focus-visible{outline:3px solid #ffd166;outline-offset:2px}
+#savebar .sb-msg{min-height:1.4em;margin-top:4px;font-size:12.5px}
+#savebar .sb-msg.err{color:#ffd0c0;font-weight:700}
+#savebar .sb-msg.ok{color:#bff0d4}
+#savebar .sb-auto{font-size:11.5px;color:#c9d3e6;margin-left:auto}
+#savebar .sb-confirm{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px;padding:6px 10px;border:1px solid #ffd166;border-radius:4px;font-size:12.5px}
+#savebar .sb-confirm[hidden]{display:none}
+.in{width:100%;display:block;font:inherit;font-size:13.5px;line-height:1.5;color:#16233b;background:#fff;border:1px solid #6b7a94;border-radius:4px;padding:5px 8px}
+textarea.in{resize:vertical;min-height:2.4em;overflow:hidden}
+textarea.in.l{min-height:7em}
+textarea.in.code{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre;overflow:auto;tab-size:4;min-height:12em;background:#fbfcfe}
+textarea.in.draw{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;white-space:pre;overflow:auto;min-height:9em}
+.in:focus-visible,.ck input:focus-visible,.rg input:focus-visible{outline:3px solid #3572a5;outline-offset:1px}
+.in.invalid{border:2px solid #b3401f}
+input.in.s{display:inline-block;width:3.2em;padding:1px 4px;text-align:center}
+table.fill td.in-cell{padding:3px;height:auto}
+.ans-row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.ans-row>.n{padding-top:6px;font-weight:700;color:#3572a5}
+.mycode{margin:8px 0 12px}
+.mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
+.hint{font-size:12px;color:#5b6b85;margin:2px 0}
+.ck{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
+.ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
+.rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
+.rg label{display:inline-flex;align-items:center;gap:5px}
+@media (max-width:640px){#savebar{padding:8px 14px}#savebar .sb-auto{margin-left:0}}
+#printid{display:none}
+@media print{
+  #printid{display:block;font:600 12pt "IBM Plex Sans KR",sans-serif;margin:0 0 8px;padding-bottom:4px;border-bottom:1px solid #999;white-space:pre-wrap}
+  #savebar,.hint.noprint{display:none!important}
+  .in{border:none;border-bottom:1px solid #9aa7bd;border-radius:0;background:transparent;padding:2px 2px;-webkit-appearance:none;appearance:none;resize:none}
+  textarea.in{overflow:visible}
+  textarea.in.code,textarea.in.draw{border:1px solid #ccd;white-space:pre-wrap}
+  select.in{background-image:none}
+  .ans-row,.mycode{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="prompt">&gt;&gt;&gt; lab.week(10)  # 학생용 · 실습 코드 1부와 실습 과제 안내</div>
+  <h1>10주차 실습 코드 1부 — 그래프 구축 시작</h1>
+  <p class="lead">성취기준 [12자구03-03] 중 이 주차의 범위: 그래프를 모델링해 코드로 구축한다. 이 파일의 <code class="i">TODO</code>를 채우고 각 테스트가 통과할 때까지 고친다. 2차시(A6~A7)에 사용한다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+</header>
+<nav><a href="#how">#사용법</a><a href="#A6">#A6</a><a href="#A7">#A7</a><a href="#assign">#실습과제</a><a href="#ai">#AI활용</a><a href="index.html">목록</a></nav>
+
+<section id="how">
+<h2>사용법<small>#how</small></h2>
+<ol>
+<li>코드 블록의 <b>복사</b> 단추로 코드를 복사해 한 파일(예: <code class="i">week10.py</code>)에 위에서 아래 순서로 이어 붙인다. 같은 활동 번호(A6 등)의 블록은 이어서 실행한다.</li>
+<li>실행은 <code class="i">python3 week10.py</code>이다. 테스트가 실패하면 <code class="i">AssertionError</code>가 나오고, 아직 채우지 않은 곳은 <code class="i">NotImplementedError</code>로 알려 준다. 이는 아직 채울 곳이 남아 있다는 뜻이다.</li>
+<li>이 파일은 2차시 시작(A6~A7)에 사용한다. 정답은 이 파일에 없다. 테스트는 정답 값을 알려 주지 않고 <b>간선 목록에서 계산한 참조 결과와 내 결과를 비교</b>한다.</li>
+<li>코드를 칸에 붙여 넣어 두면 [저장(JSON)] 때 함께 제출된다.</li>
+</ol>
+</section>
+<section id="A6" class="sheet">
+<h2>A6 · 인접 행렬 코드로 만들기<small>13분 · 개인(옆 학생과 대조)</small></h2>
+<p>A2에서 손으로 만든 6&times;6 표를 코드로 만든다. 행렬은 칸 번호가 정수여야 하므로 노드 A~F를 0~5로 바꾸는 번호표(<code class="i">MAP</code>)를 쓴다. <code class="i">make_matrix</code>(빈칸 ①)와 <code class="i">add_edge</code>(빈칸 ②)를 완성하고, 만든 행렬을 활동지 <a href="student_workbook_part2.html#A6">2부 A6</a>의 손 표와 대조한다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A6-1"># A2에서 쓴 친구 관계 G1(무방향). 노드는 A~F이고 F는 간선이 없다.
+G1_EDGES = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "D"), ("D", "E")]
+# 행렬의 칸 번호는 정수여야 하므로, 교사가 정해 준 번호표를 쓴다.
+MAP = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5}</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A6-2">def make_matrix(n):
+    # TODO(A6) ①: n x n 영행렬(모든 칸이 0)을 만들어 돌려준다. (슬라이드 빈칸 ①: return 뒤에 들어갈 식)
+    raise NotImplementedError("make_matrix를 작성하시오")
+
+def add_edge(m, u, v):
+    # TODO(A6) ②: 무방향 간선 (u, v)를 행렬 m에 기록한다. u, v는 0~n-1 번호이다. (슬라이드 빈칸 ②: 함수 본문)
+    raise NotImplementedError("add_edge를 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A6 (make_matrix, add_edge 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A6.mycode" data-label="A6 (make_matrix, add_edge 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>자체 테스트 (G1)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A6-3">N = len(MAP)
+m = make_matrix(N)
+for a, b in G1_EDGES:
+    add_edge(m, MAP[a], MAP[b])
+
+# 참조 행렬: 간선 목록에서 직접 계산한다(A2에서 손으로 만든 표와 비교하는 용도).
+pairs = {(MAP[a], MAP[b]) for a, b in G1_EDGES} | {(MAP[b], MAP[a]) for a, b in G1_EDGES}
+ref = [[1 if (i, j) in pairs else 0 for j in range(N)] for i in range(N)]
+
+fails = []
+if len(m) != N or any(len(row) != N for row in m):
+    fails.append("행렬의 크기가 N x N이 아니다")
+if m != ref:
+    fails.append("행렬이 간선 목록에서 계산한 참조 행렬과 다르다")
+if any(m[i][j] != m[j][i] for i in range(N) for j in range(N)):
+    fails.append("행렬이 대칭이 아니다")
+t = make_matrix(3)
+t[0][1] = 1
+if sum(sum(row) for row in t) != 1:
+    fails.append("한 칸만 바꿨는데 다른 칸도 바뀌었다")
+for f in fails:
+    print("FAIL", f)
+assert not fails, "A6 테스트 실패: %s" % fails
+print("A6 테스트 통과")</code></pre></div><div class="note">행렬 전체가 대칭인지 코드로 확인하는 방법을 생각해 본다. 노드 이름이 <code class="i">"A"</code>일 때 칸 번호를 어떻게 아는지도 활동지에 쓴다.</div>
+</section>
+<section id="A7" class="sheet">
+<h2>A7 · 인접 리스트 만들기: 일반 dict 시도<small>14분 · 짝</small></h2>
+<p>이번에는 노드마다 이웃 목록을 두는 인접 리스트를 일반 dict로 만들어 본다. 아래 코드를 <b>실행하기 전에</b> 어떻게 될지 생각하고, 실행한 뒤 어느 줄에서 무슨 오류가 났는지 활동지 <a href="student_workbook_part2.html#A7">2부 A7</a>에 쓴다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A7-0"># A7 준비: 친구 관계 G1(무방향)과 웹페이지 링크 W(방향, 노드 0~3, 간선 5개)
+G1_EDGES = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "D"), ("D", "E")]
+W_EDGES = [(0, 1), (0, 2), (1, 2), (2, 0), (3, 2)]</code></pre></div><h3>시도 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="A7-1"># A7: 일반 dict로 인접 리스트를 만들어 본다.
+# 실행하면 오류가 난다. 어느 줄에서, 왜 나는지 찾아 활동지 A7에 쓴다.
+edges = G1_EDGES
+g = {}
+for u, v in edges:
+    g[u].append(v)
+    g[v].append(u)
+print(g)</code></pre></div><p>오류를 해결할 아이디어를 모둠에서 모은다. 교사가 쓸 도구를 확인해 주면, 그 도구로 G1과 W를 다시 만든다. 변수 이름은 G1은 <code class="i">g</code>, W는 <code class="i">gw</code>로 한다. 아래 칸에는 먼저 내 해결 시도를 적고, 교사가 확인한 뒤에는 다시 만든 코드를 적는다.</p><div class="mycode"><label>내 코드 · A7 내 해결 시도</label><textarea class="in code" rows="8" data-type="code" data-key="A7.attempt.mycode" data-label="A7 내 해결 시도 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><div class="mycode"><label>내 코드 · A7 G1·W 다시 만들기(g, gw)</label><textarea class="in code" rows="12" data-type="code" data-key="A7.rebuild.mycode" data-label="A7 G1·W 다시 만들기(g, gw) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>자체 테스트 (G1과 W)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A7-3"># A7 확인: 위에서 만든 g(G1, 무방향)와 gw(W, 방향)가 손 목록과 같은지 계산식으로 비교한다.
+assert "g" in globals() and "gw" in globals(), "먼저 g(G1)와 gw(W)를 만든다"
+def ref_undirected(edges):
+    nodes = {a for a, b in edges} | {b for a, b in edges}
+    return {n: [b if a == n else a for a, b in edges if n in (a, b)] for n in nodes}
+
+def ref_directed(edges):
+    return {n: [b for a, b in edges if a == n] for n in {a for a, b in edges}}
+
+assert dict(g) == ref_undirected(G1_EDGES), "G1 목록이 간선 목록에서 계산한 참조 목록과 다르다"
+assert dict(gw) == ref_directed(W_EDGES), "W 목록이 간선 목록에서 계산한 참조 목록과 다르다"
+print("A7 확인 통과")</code></pre></div><div class="note">G1을 간선 목록으로 만들면 고립 노드 F가 어떻게 되는지 관찰해 활동지에 쓴다. 노드 이름이 리스트이면 어떻게 되는지, 튜플은 어떤지도 직접 시험해 본다.</div>
+</section>
+<section id="assign" class="sheet">
+<h2>실습 과제 안내 · 그래프 초기화와 이웃 순회<small>A7 착수 · A10 · A13 마무리 · 잔여는 주간 과제</small></h2>
+<div class="grid">
+<div class="card"><b class="h">과제</b><ul>
+<li><code class="i">build_graph(edges, directed=False)</code>를 구현한다. <code class="i">edges</code>는 <code class="i">(u, v)</code> 쌍의 리스트이다. <code class="i">directed=False</code>이면 무방향(양쪽 노드의 이웃 목록에 모두 넣는다), <code class="i">True</code>이면 u&rarr;v 방향만 넣는다. 반환값은 계획서의 과제 문구대로 <code class="i">defaultdict(list)</code>이고, <code class="i">g[u]</code>가 u의 이웃 목록이다. 이웃은 간선이 입력된 순서로 쌓는다.</li>
+<li><code class="i">neighbors(g, u)</code>를 구현한다. 노드 u의 이웃을 돌려주는 함수이다. 반환 방식과 추가 조건은 3차시 A10 시작 때 배포하는 <b>student_code_lab_part3</b>에서 안내한다.</li>
+<li>노드 이름은 문자열이나 숫자이다. 중복 간선과 자기 자신으로의 간선(u, u)은 입력으로 다루지 않는다. 간선이 없는 고립 노드는 간선 목록만으로 만들 수 없는 것이 정상이다.</li>
+<li>A7에서 착수하고, A10(3차시)에서 <code class="i">neighbors</code>를 탐구하며, A13은 이 과제의 <b>마무리 점검</b>이다. A13의 지하철 노선도 전이 연습은 과제 제출물이 아니며 채점하지 않는다. 미완 부분은 주간 과제로 이어진다.</li>
+</ul></div>
+<div class="card"><b class="h">제출물</b><ul>
+<li>파이썬 코드(<code class="i">.py</code>) + 성찰일지(AI 활용 내역 포함)</li>
+<li>코드 앞에 <b>구현 계획 한 줄</b>(어떤 구조를 어떻게 쓸지)을 주석으로 쓴다.</li>
+<li>구현한 두 함수의 시간·공간 복잡도와 그 근거를 직접 서술한다(서술 칸은 student_code_lab_part3에 있다).</li>
+</ul></div>
+<div class="card"><b class="h">평가 (100점)</b><ul>
+<li>요구사항 구현 정확성 50</li>
+<li>복잡도 분석 타당성 30</li>
+<li>코드 품질 20</li>
+<li>4단계 채점기준은 <a href="rubric.html">rubric.html</a>에서 확인한다(A13에서 공개).</li>
+</ul></div>
+</div>
+</section>
+<section id="ai" class="sheet">
+<h2>AI 활용 3단계 · 이 과제에 맞춘 예<small>허용 · 조건부 허용 · 금지</small></h2>
+<p>기준은 &ldquo;AI에게 무엇을 시켰는가&rdquo;이다. 개념·문법·오류 원인을 묻는 것은 허용이고, 과제 요구사항이나 완성된 구현 자체를 입력해 결과물(코드·글)을 받아 제출하는 것은 금지이다.</p>
+<div class="grid">
+<div class="card" style="--c:#1d7a4f"><b class="h">허용 — 성찰일지에 간단히 기록</b><ul><li>이 과제에서 쓰는 자료구조가 무엇이고 어떤 때 쓰는지 묻는 개념·문법 질의</li><li>&ldquo;KeyError: &lsquo;A&rsquo;가 왜 나와?&rdquo; 같은 오류 메시지 해설</li><li>인접 행렬과 인접 리스트가 보통 어디에 쓰이는지 용어와 설계 배경을 묻는 설명</li><li>내 코드의 결과가 점검 케이스와 다를 때, 원인에 대한 <b>힌트</b>만 요청(코드는 요청하지 않음)</li></ul></div>
+<div class="card" style="--c:#8a6d1f"><b class="h">조건부 허용 — 출처와 반영 여부를 성찰일지에 반드시 기록</b><ul><li>내가 완성한 구현의 엣지 케이스 브레인스토밍(빈 간선 목록, 고립 노드, 중복 간선, 방향/무방향, 없는 노드 질의)</li><li>내가 쓴 함수의 동작을 검토해 달라는 요청(수정은 직접 한다)</li><li>내 코드의 개선 아이디어 제안 요청(제안만 참고하고 코드는 직접 다시 작성)</li><li>기록 예: &ldquo;AI가 고립 노드 처리를 제안 &rarr; 채택/미채택, 이유&rdquo;</li></ul></div>
+<div class="card" style="--c:#b3401f"><b class="h">금지 — 적발 시 계획서의 위반 처리방안 적용</b><ul><li>과제 문장을 그대로 입력해 전체 코드 생성</li><li>AI가 쓴 <code class="i">build_graph</code>, <code class="i">neighbors</code>를 그대로, 또는 변수명만 바꿔 제출</li><li>두 표현 중 무엇을 쓸지, 어떻게 만들지 등 설계 판단을 AI가 대신 내림</li><li>성찰일지 AI 대필</li></ul></div>
+</div>
+<div class="note"><b>수업 운영 규칙</b>(금지 목록과 별개) 수업 중 A6~A10·A13~A14는 AI 도움 없이 수행한다. A14 형성평가는 AI를 쓰지 않는 시험 상황으로 운영하며, 위 위반 처리(감점 등)는 형성평가에 적용하지 않는다. 주간 과제를 제출할 때 위 3단계가 적용된다. A15에서 성찰일지에 AI 활용 내역을 쓰는 방법을 다시 안내한다.</div>
+</section>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
+</script>
+<script id="week10-submit">
+/* week10 학생 입력 저장 (7개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week10-student-v1 */
+(function(){
+"use strict";
+var FILE_KEY="code_lab";
+var FILES={workbook:"student_workbook.html",code_lab:"student_code_lab.html",workbook_part2:"student_workbook_part2.html",code_lab_part2:"student_code_lab_part2.html",code_lab_part3:"student_code_lab_part3.html",workbook_part3:"student_workbook_part3.html",formative:"formative_check.html"};
+var FILE=FILES[FILE_KEY], STORE="week10:"+FILE, SCHEMA="week10-student-v1";
+var bar,idIn,nameIn,msg,autoEl,saveBtn,clearBtn,confirmBox,busy=false,timer=null;
+var draftBtn,loadBtn,fileIn,yesBtn,confirmTxt,pending=null,baseline="";
+
+function q(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
+function kind(el){
+  var t=el.getAttribute("data-type");
+  if(t)return t;
+  var tag=el.tagName.toLowerCase();
+  if(tag==="textarea")return "textarea";
+  if(tag==="select")return "select";
+  if(tag==="input")return el.type==="checkbox"?"checkbox":"text";
+  return "text";
+}
+function labelOf(el){
+  var l=el.getAttribute("data-label");
+  if(l)return l;
+  if(el.labels&&el.labels.length)return el.labels[0].textContent.replace(/\s+/g," ").trim();
+  return el.getAttribute("aria-label")||"";
+}
+function readValue(el,k){
+  if(k==="checkbox")return !!el.checked;
+  if(k==="radio"){var r=el.querySelector("input[type=radio]:checked");return r?r.value:null;}
+  return el.value;
+}
+function collect(){
+  return q("[data-key]").map(function(el){
+    var k=kind(el);
+    return {key:el.getAttribute("data-key"),label:labelOf(el),type:k,value:readValue(el,k)};
+  });
+}
+function studentInfo(){return {id:idIn.value.trim(),name:nameIn.value.trim()};}
+function buildJSON(status){
+  return {schema:SCHEMA,week:10,file:FILE,status:status||"final",student:studentInfo(),savedAt:new Date().toISOString(),answers:collect()};
+}
+function safe(s){return String(s).replace(/[\\\/:*?"<>|\s\u0000-\u001f]+/g,"_").replace(/^\.+/,"_");}
+function fileName(st,draft){return "week10_"+FILE_KEY+"_"+safe(st.id||"학번미입력")+"_"+safe(st.name||"이름미입력")+(draft?"_임시저장":"")+".json";}
+function validate(){
+  var miss=[];
+  [[idIn,"학번"],[nameIn,"이름"]].forEach(function(p){
+    var bad=!p[0].value.trim();
+    p[0].classList.toggle("invalid",bad);
+    p[0].setAttribute("aria-invalid",bad?"true":"false");
+    if(bad)miss.push(p);
+  });
+  return miss;
+}
+function updatePrintId(){
+  var p=document.getElementById("printid");
+  if(!p)return;
+  var s=studentInfo();
+  p.textContent="학번: "+(s.id||"          ")+"   이름: "+(s.name||"          ");
+}
+function say(text,cls){msg.textContent=text;msg.className="sb-msg"+(cls?" "+cls:"");}
+
+function download(draft){
+  var obj=buildJSON(draft?"draft":"final"),name=fileName(obj.student,draft);
+  var blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"});
+  var url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;a.style.display="none";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1500);
+  return name;
+}
+function onSave(){
+  if(busy)return;
+  var miss=validate();
+  if(miss.length){
+    say("학번과 이름을 입력해야 저장할 수 있다. 표시된 칸을 채운 뒤 다시 누른다.","err");
+    miss[0][0].focus();return;
+  }
+  busy=true;saveBtn.disabled=true;
+  try{
+    var n=download();
+    say("저장했다: "+n+" (내려받은 JSON 파일 한 개를 제출한다.)","ok");
+  }catch(e){say("저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;saveBtn.disabled=false;},1200);
+}
+
+/* 이어 쓰기: 임시 저장 파일 내려받기 / 저장한 파일 불러오기 */
+function snap(){return JSON.stringify(collect().map(function(a){return a.value;}));}
+function isDirty(){return snap()!==baseline;}
+function ask(text,fn){
+  confirmTxt.textContent=text;pending=fn;confirmBox.hidden=false;
+  clearBtn.disabled=true;loadBtn.disabled=true;
+}
+function closeAsk(){
+  pending=null;confirmBox.hidden=true;clearBtn.disabled=false;loadBtn.disabled=false;
+}
+function onDraft(){
+  if(busy)return;
+  busy=true;draftBtn.disabled=true;
+  try{
+    var n=download(true),s=studentInfo();
+    say("임시 저장했다: "+n+" (제출 파일이 아니다. 이어 쓸 때 [불러오기]로 이 파일을 고른다."+((s.id&&s.name)?"":" 학번과 이름을 쓰면 파일 이름에 들어간다.")+")","ok");
+  }catch(e){say("임시 저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;draftBtn.disabled=false;},1200);
+}
+function applyLoaded(j){
+  if(!j||typeof j!=="object"||Array.isArray(j))return {err:"저장 파일 형식이 아니다."};
+  if(j.schema!==SCHEMA)return {err:"이 워크북의 저장 파일이 아니다(schema 불일치). 이 활동지에서 저장한 JSON 파일을 고른다."};
+  if(j.file!==FILE)return {err:"이 파일은 '"+String(j.file)+"'에서 저장한 것이다. 지금 열린 '"+FILE+"'에서 저장한 파일만 불러올 수 있다."};
+  if(!Array.isArray(j.answers))return {err:"저장 파일에 answers가 없거나 형식이 틀리다."};
+  var vals={};
+  j.answers.forEach(function(a){if(a&&typeof a.key==="string")vals[a.key]=a.value;});
+  var n=0;
+  q("[data-key]").forEach(function(el){
+    var key=el.getAttribute("data-key");
+    if(!Object.prototype.hasOwnProperty.call(vals,key))return;
+    var v=vals[key],t=typeof v;
+    if(v!==null&&t!=="string"&&t!=="boolean")return;
+    setValue(el,v);n++;
+  });
+  if(j.student&&typeof j.student==="object"){
+    idIn.value=typeof j.student.id==="string"?j.student.id:"";
+    nameIn.value=typeof j.student.name==="string"?j.student.name:"";
+    [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  }
+  autosizeAll();updatePrintId();stash();
+  return {n:n,draft:j.status==="draft",at:j.savedAt};
+}
+function onLoadClick(){
+  if(isDirty()||idIn.value.trim()||nameIn.value.trim()){
+    ask("지금 입력한 내용이 불러온 파일의 내용으로 바뀐다. 계속하려면 [불러오기 진행]을 누르고 파일을 고른다.",function(){closeAsk();fileIn.click();});
+    yesBtn.textContent="불러오기 진행";
+  }else{fileIn.click();}
+}
+function onFileChosen(){
+  var f=fileIn.files&&fileIn.files[0];
+  if(!f)return;
+  if(f.size>3*1024*1024){say("파일이 너무 크다(3MB 초과). 이 활동지에서 저장한 JSON 파일이 맞는지 확인한다.","err");fileIn.value="";return;}
+  var r=new FileReader();
+  r.onerror=function(){say("파일을 읽지 못했다. 다시 시도한다.","err");fileIn.value="";};
+  r.onload=function(){
+    var res;
+    try{res=applyLoaded(JSON.parse(String(r.result)));}
+    catch(e){res={err:"JSON 파일을 읽지 못했다. 이 활동지에서 저장한 파일이 맞는지 확인한다."};}
+    if(res.err){say(res.err+" (입력란은 바뀌지 않았다.)","err");}
+    else{say("불러왔다: "+f.name+" ("+res.n+"칸"+(res.at?", 저장 시각 "+res.at.slice(0,16).replace("T"," "):"")+"). 이어서 쓴다."+(res.draft?"":" (제출용 파일을 불러왔다.)"),"ok");}
+    fileIn.value="";
+  };
+  r.readAsText(f,"utf-8");
+}
+
+/* 임시 보관 (localStorage, 모두 try/catch) */
+function stash(){
+  try{
+    var vals={};collect().forEach(function(a){vals[a.key]=a.value;});
+    localStorage.setItem(STORE,JSON.stringify({student:studentInfo(),values:vals,at:Date.now()}));
+    var d=new Date();
+    autoEl.textContent="임시 저장됨 "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
+  }catch(e){autoEl.textContent="임시 저장 사용 불가(저장(JSON)은 가능)";}
+}
+function schedule(){clearTimeout(timer);timer=setTimeout(stash,300);}
+function setValue(el,v){
+  var k=kind(el);
+  if(k==="checkbox"){el.checked=(v===true);}
+  else if(k==="radio"){q("input[type=radio]",el).forEach(function(r){r.checked=(v!==null&&v!==undefined&&r.value===v);});}
+  else{el.value=(v===null||v===undefined)?"":String(v);}
+}
+function restore(){
+  try{
+    var raw=localStorage.getItem(STORE);if(!raw)return;
+    var s=JSON.parse(raw);if(!s)return;
+    if(s.student){idIn.value=s.student.id||"";nameIn.value=s.student.name||"";}
+    var any=false;
+    q("[data-key]").forEach(function(el){var key=el.getAttribute("data-key");if(s.values&&Object.prototype.hasOwnProperty.call(s.values,key)){setValue(el,s.values[key]);any=true;}});
+    autosizeAll();
+    if(any||(s.student&&(s.student.id||s.student.name)))autoEl.textContent="이전 임시 저장을 불러왔다";
+  }catch(e){}
+}
+function resetAll(){
+  q("[data-key]").forEach(function(el){setValue(el,kind(el)==="checkbox"?false:(kind(el)==="radio"?null:""));});
+  idIn.value="";nameIn.value="";
+  [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  autosizeAll();
+}
+function doClear(){
+  try{localStorage.removeItem(STORE);}catch(e){}
+  resetAll();
+  closeAsk();
+  autoEl.textContent="";
+  say("이 브라우저의 자동 보관을 지우고 입력란을 비웠다. (내려받은 임시 저장 파일은 그대로다.)","ok");
+}
+
+/* 입력란 보조 */
+function autosize(t){if(t.classList.contains("code")||t.classList.contains("draw"))return;t.style.height="auto";if(t.scrollHeight>0)t.style.height=(t.scrollHeight+2)+"px";}
+function autosizeAll(){q("textarea.in").forEach(autosize);}
+function codeKeys(e){
+  var t=e.target;
+  if(!t||!t.classList||!t.classList.contains("code"))return;
+  if(e.key==="Escape"){t._esc=true;return;}
+  if(e.key==="Tab"&&!e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey){
+    if(t._esc){t._esc=false;return;}
+    e.preventDefault();
+    var s=t.selectionStart,en=t.selectionEnd;
+    t.setRangeText("    ",s,en,"end");
+    t.dispatchEvent(new Event("input",{bubbles:true}));
+  }else if(e.key!=="Shift"){t._esc=false;}
+}
+function labelControls(){
+  q("[data-key]").forEach(function(el){
+    var l=el.getAttribute("data-label");
+    var isGroup=el.getAttribute("data-type")==="radio";
+    if(isGroup){el.setAttribute("role","radiogroup");if(l)el.setAttribute("aria-label",l);return;}
+    var has=el.labels&&el.labels.length;
+    if(!has&&l&&!el.getAttribute("aria-label"))el.setAttribute("aria-label",l);
+  });
+}
+function buildBar(){
+  bar=document.createElement("div");bar.id="savebar";bar.setAttribute("role","region");bar.setAttribute("aria-label","제출 저장 바");
+  bar.innerHTML='<div class="sb-in"><div class="sb-row">'
+   +'<label for="sb-id">학번 <input type="text" id="sb-id" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<label for="sb-name">이름 <input type="text" id="sb-name" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<button type="button" id="sb-save">저장(JSON)</button>'
+   +'<button type="button" id="sb-draft" class="sec" title="다 못 쓴 내용을 파일로 보관한다. 제출 파일이 아니다.">임시 저장</button>'
+   +'<button type="button" id="sb-load" class="sec" title="임시 저장한 파일을 불러와 이어 쓴다.">불러오기</button>'
+   +'<input type="file" id="sb-file" accept=".json,application/json" hidden aria-label="저장한 JSON 파일 선택">'
+   +'<button type="button" id="sb-clear" class="sec">자동 보관 지우기</button>'
+   +'<span class="sb-auto" id="sb-auto"></span></div>'
+   +'<div class="sb-confirm" id="sb-confirm" hidden><span id="sb-ctext"></span>'
+   +'<button type="button" id="sb-yes">확인</button><button type="button" id="sb-no" class="sec">취소</button></div>'
+   +'<div class="sb-msg" id="sb-msg" role="status" aria-live="polite">다 쓰면 학번과 이름을 쓰고 [저장(JSON)]을 눌러 제출 파일 한 개를 만든다. 시간이 모자라면 [임시 저장]으로 파일을 보관하고, 다음에 [불러오기]로 이어 쓴다.</div></div>';
+  document.body.insertBefore(bar,document.body.firstChild);
+  var pid=document.createElement("div");pid.id="printid";pid.setAttribute("aria-hidden","true");
+  document.body.insertBefore(pid,bar.nextSibling);
+  idIn=bar.querySelector("#sb-id");nameIn=bar.querySelector("#sb-name");msg=bar.querySelector("#sb-msg");
+  autoEl=bar.querySelector("#sb-auto");saveBtn=bar.querySelector("#sb-save");clearBtn=bar.querySelector("#sb-clear");confirmBox=bar.querySelector("#sb-confirm");
+  draftBtn=bar.querySelector("#sb-draft");loadBtn=bar.querySelector("#sb-load");fileIn=bar.querySelector("#sb-file");yesBtn=bar.querySelector("#sb-yes");confirmTxt=bar.querySelector("#sb-ctext");
+  saveBtn.addEventListener("click",onSave);
+  draftBtn.addEventListener("click",onDraft);
+  loadBtn.addEventListener("click",onLoadClick);
+  fileIn.addEventListener("change",onFileChosen);
+  clearBtn.addEventListener("click",function(){yesBtn.textContent="지우기";ask("이 브라우저의 자동 보관을 지우고 입력란을 모두 비운다. 임시 저장 파일이나 JSON으로 저장하지 않은 내용은 되찾을 수 없다.",doClear);bar.querySelector("#sb-no").focus();});
+  bar.querySelector("#sb-no").addEventListener("click",function(){closeAsk();loadBtn.focus();});
+  yesBtn.addEventListener("click",function(){var f=pending;if(f)f();});
+}
+function init(){
+  buildBar();labelControls();baseline=snap();restore();autosizeAll();
+  document.addEventListener("input",function(e){
+    var t=e.target;
+    if(t.tagName==="TEXTAREA")autosize(t);
+    if(t===idIn||t===nameIn){if(t.value.trim()){t.classList.remove("invalid");t.setAttribute("aria-invalid","false");}}
+    if(t===idIn||t===nameIn)updatePrintId();
+    schedule();
+  });
+  document.addEventListener("change",schedule);
+  document.addEventListener("keydown",codeKeys);
+  window.addEventListener("beforeprint",function(){autosizeAll();updatePrintId();});
+  updatePrintId();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(autosizeAll);
+  window.addEventListener("resize",autosizeAll);
+  window.Week10Submit={buildJSON:buildJSON,collect:collect,validate:validate,fileName:fileName,FILE_KEY:FILE_KEY,applyLoaded:applyLoaded};
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+</body>
+</html>

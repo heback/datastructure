@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8주차 실습 과제 루브릭 · 순회 재귀 구현</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16233b;--paper:#f7f8fa;--panel:#ffffff;--py-blue:#3572a5;--line:#dfe3ea;--dim:#5b6b85;--code-bg:#101828;--code-fg:#e6edf7;--ok:#1d7a4f;--warn:#8a6d1f;--bad:#b3401f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+code,pre{font-family:"JetBrains Mono","D2Coding",Consolas,monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:24px}
+.prompt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--py-blue);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.lead{color:var(--dim);margin-top:8px;max-width:760px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 20px;font-family:"JetBrains Mono",monospace;font-size:12px}
+nav a{color:var(--py-blue);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+section>h2{font-size:18px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+section>h2 small{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--py-blue);margin-left:8px;font-weight:500}
+h3{font-size:15px;margin:14px 0 6px}
+p{margin:6px 0}
+ul,ol{margin:6px 0 6px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--code-bg);color:var(--code-fg);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;text-align:left;padding:8px}
+td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--py-blue);white-space:nowrap}
+table.fill td{border:1px solid var(--line);height:34px}
+table.fill td.lab{background:#f0f2f6;font-weight:600;height:auto}
+pre{background:var(--code-bg);color:var(--code-fg);padding:12px 14px;border-radius:6px;font-size:12.5px;overflow-x:auto;margin:8px 0;line-height:1.55}
+code.i{background:#eef1f6;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;color:var(--py-blue)}
+.note{background:#eef4fa;border:1px solid #d6e5f2;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.warn{background:#fbf3e4;border:1px solid #ecd9ae;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.ans{background:#eef8f2;border:1px solid #bfe0cf;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c,var(--py-blue));border-radius:6px;padding:10px 14px;background:#fff}
+.card b.h{color:var(--c)}
+.blank{border:1px dashed #9aa7bd;border-radius:6px;min-height:64px;margin:6px 0;padding:6px 10px;color:var(--dim);font-size:12px}
+.blank.l{min-height:110px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.diagram{background:#f0f2f6;border-radius:6px;padding:10px 14px;font-size:12.5px;overflow-x:auto;color:var(--ink);line-height:1.4}
+.codewrap{position:relative}
+.copy{position:absolute;top:14px;right:8px;font:500 11px "JetBrains Mono",monospace;background:#27364f;color:#e6edf7;border:1px solid #3d506e;border-radius:4px;padding:2px 8px;cursor:pointer}
+.role{display:inline-block;font:700 10.5px "JetBrains Mono",monospace;padding:1px 7px;border-radius:3px;background:#e4ecf6;color:var(--py-blue);margin-right:6px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.links a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:6px;margin:6px 0;color:var(--py-blue);text-decoration:none;font-weight:600}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{
+  body{background:#fff;font-size:11.5pt}.wrap{max-width:none;padding:0}
+  nav,.copy,.noprint{display:none!important}
+  section{border:none;padding:0;margin:0 0 8mm;break-inside:auto}
+  section.sheet{page-break-after:always;break-after:page}
+  section.sheet:last-of-type{page-break-after:auto}
+  header{padding:0 0 8px;margin-bottom:10px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f3f4f7;color:#111;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,.card,.blank{break-inside:avoid}
+  details>*{display:block}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="prompt">&gt;&gt;&gt; rubric.week(8)  # 교사·학생 공통 · 실습 과제 채점기준</div>
+  <h1>8주차 실습 과제 루브릭 — 전/중/후위 순회 재귀 함수 구현</h1>
+  <p class="lead">구조와 배점은 계획서 Ⅰ(실습 과제 평가 운영 지침)의 평가요소·4단계 채점기준을 그대로 따른다(구현 정확성 50, 복잡도 분석 타당성 30, 코드 품질 20, 합계 100점). 오른쪽 열은 이 과제에서 관찰하는 모습의 예이며 기준 자체를 바꾸지 않는다.</p>
+</header>
+<nav><a href="#r1">#구현정확성</a><a href="#r2">#복잡도</a><a href="#r3">#코드품질</a><a href="#levels">#성취수준</a><a href="#viol">#위반처리</a><a href="#sheet">#채점표</a><a href="index.html">목록</a></nav>
+
+<section id="r1">
+<h2>요구사항 구현 정확성 · 50점<small>#r1</small></h2>
+<table>
+<tr><th style="width:90px">단계</th><th style="width:36%">계획서 기준</th><th>8주차 과제에서 관찰하는 모습</th></tr>
+<tr><td class="id" style="color:#3572a5">상 · 50</td><td>요구된 자료구조·연산을 모두 정확히 구현하여 모든 테스트 케이스(경계값·예외 상황 포함)에서 의도한 대로 동작한다.</td><td>세 순회가 T1·T3·T6(및 T4·T5)의 기대 결과와 일치한다. 빈 트리, 자식이 하나뿐인 노드, 편향 트리(T5)에서도 동작한다. 같은 함수를 반복 호출하거나 다른 트리로 호출해도 결과가 섞이지 않는다. 새 트리에서 코드 수정 없이 통과한다.</td></tr>
+<tr><td class="id" style="color:#3572a5">중상 · 40</td><td>핵심 연산은 정상 동작하나, 일부 경계값이나 예외 상황에서 오류가 발생한다.</td><td>세 순회가 일반 트리에서는 맞지만 빈 트리 또는 한쪽 자식 노드에서 오류가 난다. 또는 결과 누적을 위해 호출 사이에 값이 남는 경우가 있다.</td></tr>
+<tr><td class="id" style="color:#3572a5">중하 · 30</td><td>기본 동작은 하지만 요구된 연산의 일부가 누락되었거나 잘못 구현되었다.</td><td>세 순회 중 하나가 빠졌거나, 중위·후위의 출력 위치가 틀려 결과 순서가 다르다. 기저 조건이 누락되어 리프에서 오류가 난다.</td></tr>
+<tr><td class="id" style="color:#3572a5">하 · 20</td><td>프로그램이 정상적으로 실행되지 않거나, 요구사항의 상당 부분이 구현되지 않았다.</td><td>구문 오류로 실행되지 않는다. 재귀 없이 반복문만 시도했거나 TODO가 대부분 남아 있다.</td></tr>
+</table>
+</section>
+
+<section id="r2">
+<h2>복잡도 분석 타당성 · 30점<small>#r2</small></h2>
+<table>
+<tr><th style="width:90px">단계</th><th style="width:36%">계획서 기준</th><th>8주차 과제에서 관찰하는 모습</th></tr>
+<tr><td class="id" style="color:#1d7a4f">상 · 30</td><td>구현한 자료구조·알고리즘의 시간·공간 복잡도를 정확히 산출하고, 그 근거(반복문 구조, 자료구조 특성 등)를 논리적으로 서술하며 더 효율적인 대안까지 검토한다.</td><td>순회의 시간 복잡도를 노드를 한 번씩 방문하므로 O(N)이라고 근거와 함께 쓴다. 공간은 재귀 호출 깊이(트리 높이)에 비례함을 쓰고, 균형일 때와 편향일 때를 구분한다. 결과 리스트를 모으는 방식의 대안(인자, 내부 함수, 제너레이터 등)을 비교한다.</td></tr>
+<tr><td class="id" style="color:#1d7a4f">중상 · 24</td><td>복잡도를 대체로 정확히 산출하나 근거 서술이 다소 피상적이다.</td><td>O(N)은 쓰지만 &ldquo;한 번씩 방문&rdquo;과 같은 근거가 짧고, 공간 복잡도(호출 스택)를 빠뜨리거나 균형·편향 구분이 없다.</td></tr>
+<tr><td class="id" style="color:#1d7a4f">중하 · 18</td><td>복잡도 표기는 시도했으나 산출 값이 부정확하거나 근거를 제시하지 못한다.</td><td>O(log N)이나 O(N²) 등 값이 틀리거나 이유 없이 결과만 쓴다.</td></tr>
+<tr><td class="id" style="color:#1d7a4f">하 · 12</td><td>복잡도를 전혀 분석하지 못했거나 개념을 혼동하고 있다.</td><td>복잡도 서술이 없거나, BST 탐색의 복잡도와 순회의 복잡도를 혼동한다.</td></tr>
+</table>
+<p class="note">구현 계획(결과 누적 방식 선택, 목표 복잡도)과 복잡도 분석은 학생이 직접 세워야 한다. AI가 대신 세운 것은 금지이며 위반 처리 대상이다.</p>
+</section>
+
+<section id="r3">
+<h2>코드 품질 · 20점<small>#r3</small></h2>
+<table>
+<tr><th style="width:90px">단계</th><th style="width:36%">계획서 기준</th><th>8주차 과제에서 관찰하는 모습</th></tr>
+<tr><td class="id" style="color:#7a5cc8">상 · 20</td><td>변수·함수명이 역할을 명확히 드러내고, 중복 없이 간결하며, 엣지 케이스 처리가 코드 전반에 일관되게 반영되어 있다.</td><td><code class="i">node</code>, <code class="i">out</code> 같은 이름이 역할을 드러낸다. 기저 조건이 세 함수에서 일관되며, 가변 기본 인자를 쓰지 않거나 <code class="i">None</code> 센티널로 안전하게 처리한다. 불필요한 중복이 없다.</td></tr>
+<tr><td class="id" style="color:#7a5cc8">중상 · 16</td><td>전반적으로 가독성이 양호하나 일부 네이밍이 불명확하거나 사소한 중복 코드가 존재한다.</td><td>이름이 일부 모호하거나(<code class="i">a</code>, <code class="i">x</code>) 세 함수의 겹치는 부분이 정리되지 않았다.</td></tr>
+<tr><td class="id" style="color:#7a5cc8">중하 · 12</td><td>동작은 하지만 네이밍 규칙이 일관되지 않고 중복 코드가 다수 존재해 가독성이 떨어진다.</td><td>함수마다 이름 규칙이 다르고, 같은 코드가 반복되며 주석·계획이 없다.</td></tr>
+<tr><td class="id" style="color:#7a5cc8">하 · 8</td><td>코드 구조를 파악하기 어려울 정도로 가독성이 낮고 엣지 케이스 처리가 전무하다.</td><td>구조를 읽기 어렵고, 빈 트리·한쪽 자식 처리가 전혀 없다.</td></tr>
+</table>
+</section>
+
+<section id="levels">
+<h2>성취수준 A~E 관찰 지표<small>#levels · 단원3 진술의 8주차 번역</small></h2>
+<table>
+<tr><th style="width:36px">수준</th><th style="width:30%">계획서 진술(8주차 해당 부분)</th><th>관찰 지표(8주차 활동에서 보이는 행동)</th></tr>
+<tr><td class="id" style="color:#1d7a4f">A</td><td>트리 순회와 힙 연산의 시간 복잡도를 정확히 분석한다.</td><td>A9·A14에서 BST 탐색을 균형일 때 O(log N), 편향일 때 O(N)으로 설명하고, 순회가 O(N)임을 근거와 함께 설명한다. 가변 기본 인자 외 대안 설계(D2)를 비교해 선택 이유를 제시한다. 새 트리(T6)에서 코드 수정 없이 통과한다.</td></tr>
+<tr><td class="id" style="color:#3572a5">B</td><td>트리 순회를 재귀로 정확히 구현한다.</td><td>A6·A14에서 세 순회가 T1·T3·T6의 기대 결과와 일치한다. 기저 조건 누락이 없다. 버그를 안내(힌트 1회) 후 수정하고, 형성평가 Q1·Q3이 정답이다.</td></tr>
+<tr><td class="id" style="color:#8a6d1f">C</td><td>트리 순회 구현에 오류가 잦고, 가변 기본 인자 버그를 스스로 발견하지 못한다.</td><td>순회 순서(전/중/후)를 혼동하거나 기저 조건 누락·출력 위치 오류가 반복된다. A11에서 두 번째 호출의 이상 출력을 보고도 원인을 짚지 못하나(Q2 오답), 교사 설명 후 수정은 가능하다.</td></tr>
+<tr><td class="id" style="color:#c07a1f">D</td><td>트리의 개념적 차이를 부분적으로만 이해하며, 재귀 함수 작성에 어려움을 겪는다.</td><td>A2에서 용어는 구분하나 A3 호출 추적을 끝까지 하지 못한다. 재귀 호출 없이 반복문으로만 시도하거나 골격 없이 작성하지 못한다.</td></tr>
+<tr><td class="id" style="color:#b3401f">E</td><td>비선형 자료구조의 구조적 특징을 이해하지 못하며, 단순한 탐색조차 적절한 자료구조 없이 접근한다.</td><td>A1·A2에서 계층을 리스트 한 줄로만 표현하고 부모–자식 관계를 표시하지 못한다. A7 BST 삽입 규칙을 적용하지 못하고 A9에서 탐색을 전체 순회로만 수행한다.</td></tr>
+</table>
+<p class="note">관찰 수집: 교사 체크리스트(A3 추적표, A6 코드, A12 원인 문장, A15 답안). 개별 피드백은 A14~A16 순회 시간과 주간 과제 채점 때 한다.</p>
+</section>
+
+<section id="viol">
+<h2>AI 활용 위반 처리(계획서 요약)<small>#viol</small></h2>
+<table>
+<tr><th style="width:170px">구분</th><th>처리</th></tr>
+<tr><td class="id">판별</td><td>제출 코드와 성찰일지의 서술 수준 불일치, 복잡도·누적 방식 선택 근거를 설명하지 못함, 급격한 코드 스타일 변화, AI 문체 특징 등을 근거로 담당 교사가 1차 확인한다. 필요 시 간단한 구술 확인을 한다.</td></tr>
+<tr><td class="id">1차 위반</td><td>해당 과제 재작성 지시 및 해당 과제 점수 50% 감점. 학생과 개별 면담으로 허용 범위를 재안내한다.</td></tr>
+<tr><td class="id">2차 위반 또는 명백한 전체 대필</td><td>해당 과제 0점 처리. 학교 학업성실성(생활지도) 규정에 따른 별도 조치를 병행하며 보호자에게 통지한다.</td></tr>
+<tr><td class="id">자진 신고 감경</td><td>제출 전 스스로 금지 범위 활용 사실을 신고하면, 해당 부분을 본인이 다시 작성하는 조건으로 감점 폭을 완화한다(0점 대신 재작성 + 감점).</td></tr>
+</table>
+</section>
+
+<section id="sheet">
+<h2>채점표<small>#sheet · 교사용 기록</small></h2>
+<table class="fill"><tr><th style="width:100px">학생</th><th>구현 정확성 (50/40/30/20)</th><th>복잡도 분석 (30/24/18/12)</th><th>코드 품질 (20/16/12/8)</th><th style="width:70px">합계</th><th>AI 활용 기록 확인</th></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr></table>
+</section>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
+</script>
+</body>
+</html>

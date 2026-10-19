@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12주차 탐구 활동지 1부 · 가운데부터 절반씩 줄이기와 정렬 손 추적 (학생용)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16233b;--paper:#f7f8fa;--panel:#ffffff;--py-blue:#3572a5;--line:#dfe3ea;--dim:#5b6b85;--code-bg:#101828;--code-fg:#e6edf7;--ok:#1d7a4f;--warn:#8a6d1f;--bad:#b3401f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+code,pre{font-family:"JetBrains Mono","D2Coding",Consolas,monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:24px}
+.prompt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--py-blue);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.lead{color:var(--dim);margin-top:8px;max-width:760px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 20px;font-family:"JetBrains Mono",monospace;font-size:12px}
+nav a{color:var(--py-blue);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+section>h2{font-size:18px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+section>h2 small{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--py-blue);margin-left:8px;font-weight:500}
+h3{font-size:15px;margin:14px 0 6px}
+p{margin:6px 0}
+ul,ol{margin:6px 0 6px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--code-bg);color:var(--code-fg);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;text-align:left;padding:8px}
+td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--py-blue);white-space:nowrap}
+table.fill td{border:1px solid var(--line);height:34px}
+table.fill td.lab{background:#f0f2f6;font-weight:600;height:auto}
+pre{background:var(--code-bg);color:var(--code-fg);padding:12px 14px;border-radius:6px;font-size:12.5px;overflow-x:auto;margin:8px 0;line-height:1.55}
+code.i{background:#eef1f6;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;color:var(--py-blue)}
+.note{background:#eef4fa;border:1px solid #d6e5f2;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.warn{background:#fbf3e4;border:1px solid #ecd9ae;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.concept{background:#f4f7fc;border:1px solid #c9d6ea;border-left:4px solid var(--py-blue);border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0;break-inside:avoid;page-break-inside:avoid}
+.concept b.h{color:var(--py-blue)}
+.concept table{margin:6px 0;font-size:12.5px}
+.concept ul{margin:4px 0 4px 18px}
+.ans{background:#eef8f2;border:1px solid #bfe0cf;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c,var(--py-blue));border-radius:6px;padding:10px 14px;background:#fff}
+.card b.h{color:var(--c)}
+.blank{border:1px dashed #9aa7bd;border-radius:6px;min-height:64px;margin:6px 0;padding:6px 10px;color:var(--dim);font-size:12px}
+.blank.l{min-height:110px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.diagram{background:#f0f2f6;border-radius:6px;padding:10px 14px;font-size:12.5px;overflow-x:auto;color:var(--ink);line-height:1.4}
+.codewrap{position:relative}
+.copy{position:absolute;top:14px;right:8px;font:500 11px "JetBrains Mono",monospace;background:#27364f;color:#e6edf7;border:1px solid #3d506e;border-radius:4px;padding:2px 8px;cursor:pointer}
+.role{display:inline-block;font:700 10.5px "JetBrains Mono",monospace;padding:1px 7px;border-radius:3px;background:#e4ecf6;color:var(--py-blue);margin-right:6px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.links a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:6px;margin:6px 0;color:var(--py-blue);text-decoration:none;font-weight:600}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{
+  body{background:#fff;font-size:11.5pt}.wrap{max-width:none;padding:0}
+  nav,.copy,.noprint{display:none!important}
+  section{border:none;padding:0;margin:0 0 8mm;break-inside:auto}
+  section.sheet{page-break-after:always;break-after:page}
+  section.sheet:last-of-type{page-break-after:auto}
+  header{padding:0 0 8px;margin-bottom:10px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f3f4f7;color:#111;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,.card,.blank{break-inside:avoid}
+}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.gate{border:1px dashed #b3401f;border-radius:8px;padding:6px 12px;background:#fff8f5}
+</style>
+<style id="week12-submit-style">
+/* week12 제출 바·입력란 공통 스타일 (8개 학생용 파일 동일) */
+#savebar{position:sticky;top:0;z-index:50;background:#16233b;color:#f7f8fa;padding:8px 20px;border-bottom:3px solid #3572a5;font-size:13px}
+#savebar .sb-in{max-width:1000px;margin:0 auto}
+#savebar .sb-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+#savebar label{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+#savebar input[type=text]{width:9.5em;padding:5px 8px;border:2px solid #9aa7bd;border-radius:4px;background:#fff;color:#16233b;font:inherit;font-weight:500}
+#savebar input[type=text].invalid{border-color:#ff9b7a;background:#fff3ee}
+#savebar button{font:600 13px "IBM Plex Sans KR",sans-serif;padding:6px 14px;border-radius:4px;border:2px solid #fff;background:#fff;color:#16233b;cursor:pointer}
+#savebar button.sec{background:transparent;color:#fff;border-color:#9aa7bd}
+#savebar button:disabled{opacity:.6;cursor:default}
+#savebar button:focus-visible,#savebar input:focus-visible{outline:3px solid #ffd166;outline-offset:2px}
+#savebar .sb-msg{min-height:1.4em;margin-top:4px;font-size:12.5px}
+#savebar .sb-msg.err{color:#ffd0c0;font-weight:700}
+#savebar .sb-msg.ok{color:#bff0d4}
+#savebar .sb-auto{font-size:11.5px;color:#c9d3e6;margin-left:auto}
+#savebar .sb-confirm{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px;padding:6px 10px;border:1px solid #ffd166;border-radius:4px;font-size:12.5px}
+#savebar .sb-confirm[hidden]{display:none}
+.in{width:100%;display:block;font:inherit;font-size:13.5px;line-height:1.5;color:#16233b;background:#fff;border:1px solid #6b7a94;border-radius:4px;padding:5px 8px}
+textarea.in{resize:vertical;min-height:2.4em;overflow:hidden}
+textarea.in.l{min-height:7em}
+textarea.in.code{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre;overflow:auto;tab-size:4;min-height:12em;background:#fbfcfe}
+textarea.in.draw{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;white-space:pre;overflow:auto;min-height:9em}
+.in:focus-visible,.ck input:focus-visible,.rg input:focus-visible{outline:3px solid #3572a5;outline-offset:1px}
+.in.invalid{border:2px solid #b3401f}
+input.in.s{display:inline-block;width:3.2em;padding:1px 4px;text-align:center}
+table.fill td.in-cell{padding:3px;height:auto}
+.ans-row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.ans-row>.n{padding-top:6px;font-weight:700;color:#3572a5}
+.mycode{margin:8px 0 12px}
+.mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
+.hint{font-size:12px;color:#5b6b85;margin:2px 0}
+.ck{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
+.ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
+.rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
+.rg label{display:inline-flex;align-items:center;gap:5px}
+@media (max-width:640px){#savebar{padding:8px 14px}#savebar .sb-auto{margin-left:0}}
+#printid{display:none}
+@media print{
+  #printid{display:block;font:600 12pt "IBM Plex Sans KR",sans-serif;margin:0 0 8px;padding-bottom:4px;border-bottom:1px solid #999;white-space:pre-wrap}
+  #savebar,.hint.noprint{display:none!important}
+  .in{border:none;border-bottom:1px solid #9aa7bd;border-radius:0;background:transparent;padding:2px 2px;-webkit-appearance:none;appearance:none;resize:none}
+  textarea.in{overflow:visible}
+  textarea.in.code,textarea.in.draw{border:1px solid #ccd;white-space:pre-wrap}
+  select.in{background-image:none}
+  .ans-row,.mycode{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="prompt">&gt;&gt;&gt; workbook.week(12)  # 학생용 · 탐구 활동지 A1~A6</div>
+  <h1>12주차 탐구 활동지 1부 — 몇 번 만에 찾을까, 그리고 어떻게 줄 세울까 (A1~A6)</h1>
+  <p class="lead">핵심질문: 10억 개의 정렬된 데이터 속에서 내가 원하는 특정 값이나 구간을 어떻게 단번에(O(log N)) 찾아낼까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 정답은 이 활동지에 없다. 빈칸은 스스로 채운다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><label class="ck">모둠 <input type="text" class="in" data-key="meta.group" data-label="모둠" autocomplete="off" style="width:8em;display:inline-block"></label></p>
+</header>
+<nav><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="#A6">A6</a><a href="index.html">목록</a></nav>
+<section id="A1" class="sheet">
+<h2>A1 · 몇 번 만에 찾을까<small>1차시 · 7분 · 개인→짝</small></h2>
+<p class="meta"><span>산출물: 나만의 규칙 메모와 최악의 횟수 추정</span></p>
+<p>지난주 BFS는 &ldquo;가까운 곳부터 한 겹씩&rdquo; 살폈다. 이번 주는 &ldquo;가운데부터 절반씩&rdquo; 줄여 가는 방법을 살펴본다. 아래 세 사례에서 원하는 것을 가장 적은 횟수로 찾는 규칙을 생각해 본다.</p>
+<div class="grid">
+<div class="card"><b class="h">사례 가 · 국어사전</b><p>국어사전에서 &lsquo;탐구&rsquo;라는 단어를 찾는다. 단어는 가나다 순으로 실려 있다.</p></div>
+<div class="card"><b class="h">사례 나 · 숫자 맞히기</b><p>친구가 1~100 사이의 수 하나를 정한다. 나는 수를 말하고, 친구는 &ldquo;높다&rdquo; 또는 &ldquo;낮다&rdquo;만 답해 준다.</p></div>
+<div class="card"><b class="h">사례 다 · 10억 개의 학번</b><p>값이 작은 것부터 큰 것 순서로 놓인 학번 10억 개가 있다. 이 가운데 한 학번이 있는 자리를 찾는다.</p></div>
+</div>
+<div class="note"><b>오늘의 질문</b> 10억 개의 정렬된 데이터 속에서 내가 원하는 특정 값이나 구간을 어떻게 단번에(O(log N)) 찾아낼까?</div>
+<h3>관찰·정리</h3>
+<p>사전에서 &lsquo;탐구&rsquo;를 찾을 때 첫 쪽부터 한 쪽씩 넘기는가, 가운데쯤을 펴 보는가? 펼친 쪽이 목표보다 뒤쪽이었다면 다음에는 어디를 펴는가?</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A1.dict" data-label="A1 사전에서 찾는 방법과 펼친 쪽이 목표보다 뒤였을 때"></textarea></div>
+<p>숫자 맞히기에서 가장 운이 나쁜 경우에도 반드시 맞히려면 최대 몇 번이면 될까? 내 말하는 방법도 함께 쓴다.</p>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A1.guess" data-label="A1 숫자 맞히기 최악의 횟수와 말하는 방법"></textarea></div>
+<p>학번 10억 개를 맨 앞에서 하나씩 보면 최대 몇 번 보아야 하는가? 후보를 절반씩 버려 가면 몇 번쯤이면 될까? 어림한 값을 쓴다.</p>
+<div class="ans-row"><span class="n">3</span><span>하나씩 보면 최대 </span><input type="text" class="in" data-key="A1.billion.lin" data-label="A1 10억 개 하나씩 볼 때 최대 횟수 어림" autocomplete="off" style="width:9em;display:inline-block"><span>번, 절반씩 버리면 </span><input type="text" class="in" data-key="A1.billion.half" data-label="A1 10억 개 절반씩 버릴 때 횟수 어림" autocomplete="off" style="width:6em;display:inline-block"><span>번쯤</span></div>
+<p>세 사례를 모두 풀 수 있는 &ldquo;찾는 규칙&rdquo; 1가지를 내 말로 쓴다. 그리고 그 규칙이 통하지 않을 것 같은 경우를 하나 쓴다.</p>
+<div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A1.rule" data-label="A1 내 찾는 규칙 1가지"></textarea></div><div class="ans-row"><span class="n">5</span><textarea class="in" rows="2" data-key="A1.weak" data-label="A1 내 규칙이 통하지 않을 것 같은 경우"></textarea></div>
+</section>
+<section id="A2" class="sheet">
+<h2>A2 · 후보 범위를 가운데에서 줄이기<small>1차시 · 11분 · 짝</small></h2>
+<p class="meta"><span>산출물: TRACE 표 두 개, 비교 횟수</span></p>
+<div class="concept"><b class="h">약속 · 손으로 찾는 규칙</b>
+<p>후보 범위는 아직 답이 있을 수 있는 인덱스 구간이다. 이 활동에서는 양끝을 포함하는 닫힌 구간 <b>[lo, hi]</b>로 쓴다. 한 번 견주는 것이 <b>비교 1회</b>이다.</p>
+<ol>
+<li>후보 범위 [lo, hi]를 전체(lo = 0, hi = 마지막 인덱스)로 시작한다.</li>
+<li>가운데 mid = (lo + hi) // 2 의 원소 a[mid]와 목표를 견준다(비교 1회).</li>
+<li>같으면 끝(그 인덱스). 목표가 더 크면 lo = mid + 1, 더 작으면 hi = mid &minus; 1 로 한다.</li>
+<li>lo &gt; hi가 되면 &ldquo;없음&rdquo;으로 끝낸다.</li>
+</ol></div>
+<pre class="diagram">SORTED = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]
+인덱스      0  1  2   3   4   5   6   7   8   9</pre>
+<p>SORTED에서 목표 <b>23</b>과 <b>40</b>을 위 규칙으로 찾는다. 한 줄에 한 단계씩, 비교한 뒤의 판정을 적는다(칸이 남으면 비운다).</p>
+<h3>목표 23</h3>
+<div class="scroll"><table class="fill"><tr><th style="width:52px">단계</th><th style="width:12%">lo</th><th style="width:12%">hi</th><th style="width:12%">mid</th><th style="width:14%">a[mid]</th><th>판정(같음 / lo 이동 / hi 이동 / 끝)</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r1.c1" data-label="A2 목표 23 1단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r1.c2" data-label="A2 목표 23 1단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r1.c3" data-label="A2 목표 23 1단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r1.c4" data-label="A2 목표 23 1단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r1.c5" data-label="A2 목표 23 1단계 판정" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r2.c1" data-label="A2 목표 23 2단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r2.c2" data-label="A2 목표 23 2단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r2.c3" data-label="A2 목표 23 2단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r2.c4" data-label="A2 목표 23 2단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r2.c5" data-label="A2 목표 23 2단계 판정" autocomplete="off"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r3.c1" data-label="A2 목표 23 3단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r3.c2" data-label="A2 목표 23 3단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r3.c3" data-label="A2 목표 23 3단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r3.c4" data-label="A2 목표 23 3단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r3.c5" data-label="A2 목표 23 3단계 판정" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r4.c1" data-label="A2 목표 23 4단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r4.c2" data-label="A2 목표 23 4단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r4.c3" data-label="A2 목표 23 4단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r4.c4" data-label="A2 목표 23 4단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r4.c5" data-label="A2 목표 23 4단계 판정" autocomplete="off"></td></tr><tr><td class="lab">5</td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r5.c1" data-label="A2 목표 23 5단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r5.c2" data-label="A2 목표 23 5단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r5.c3" data-label="A2 목표 23 5단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r5.c4" data-label="A2 목표 23 5단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t23.r5.c5" data-label="A2 목표 23 5단계 판정" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">결과</span><input type="text" class="in" data-key="A2.t23.result" data-label="A2 목표 23 결과(인덱스 또는 없음)" autocomplete="off"></div>
+<h3>목표 40</h3>
+<div class="scroll"><table class="fill"><tr><th style="width:52px">단계</th><th style="width:12%">lo</th><th style="width:12%">hi</th><th style="width:12%">mid</th><th style="width:14%">a[mid]</th><th>판정(같음 / lo 이동 / hi 이동 / 끝)</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r1.c1" data-label="A2 목표 40 1단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r1.c2" data-label="A2 목표 40 1단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r1.c3" data-label="A2 목표 40 1단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r1.c4" data-label="A2 목표 40 1단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r1.c5" data-label="A2 목표 40 1단계 판정" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r2.c1" data-label="A2 목표 40 2단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r2.c2" data-label="A2 목표 40 2단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r2.c3" data-label="A2 목표 40 2단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r2.c4" data-label="A2 목표 40 2단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r2.c5" data-label="A2 목표 40 2단계 판정" autocomplete="off"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r3.c1" data-label="A2 목표 40 3단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r3.c2" data-label="A2 목표 40 3단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r3.c3" data-label="A2 목표 40 3단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r3.c4" data-label="A2 목표 40 3단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r3.c5" data-label="A2 목표 40 3단계 판정" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r4.c1" data-label="A2 목표 40 4단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r4.c2" data-label="A2 목표 40 4단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r4.c3" data-label="A2 목표 40 4단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r4.c4" data-label="A2 목표 40 4단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r4.c5" data-label="A2 목표 40 4단계 판정" autocomplete="off"></td></tr><tr><td class="lab">5</td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r5.c1" data-label="A2 목표 40 5단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r5.c2" data-label="A2 목표 40 5단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r5.c3" data-label="A2 목표 40 5단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r5.c4" data-label="A2 목표 40 5단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.t40.r5.c5" data-label="A2 목표 40 5단계 판정" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">결과</span><input type="text" class="in" data-key="A2.t40.result" data-label="A2 목표 40 결과(인덱스 또는 없음)" autocomplete="off"></div>
+<h3>비교 횟수 세기</h3>
+<p>규칙대로 찾을 때의 비교 횟수와, 맨 앞부터 하나씩 견줄 때(찾으면 멈춤, 없으면 끝까지)의 비교 횟수를 센다.</p>
+<div class="scroll"><table class="fill"><tr><th>목표</th><th>규칙대로(비교 횟수)</th><th>맨 앞부터 하나씩(비교 횟수)</th></tr><tr><td class="lab">23</td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.bin23" data-label="A2 23 규칙대로 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.lin23" data-label="A2 23 하나씩 비교 횟수" autocomplete="off"></td></tr><tr><td class="lab">40</td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.bin40" data-label="A2 40 규칙대로 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.lin40" data-label="A2 40 하나씩 비교 횟수" autocomplete="off"></td></tr></table></div>
+<h3>관찰·정리</h3>
+<p>a[mid]가 23보다 작았을 때 mid 왼쪽의 원소들은 왜 더 볼 필요가 없다고 했는가?</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A2.q1" data-label="A2 a[mid]가 23보다 작았을 때 mid 왼쪽 원소를 더 볼 필요가 없는 이유"></textarea></div>
+<p>40이 없다는 것은 언제 알게 되는가?</p>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A2.q2" data-label="A2 40이 없다는 것은 언제 알게 되는가"></textarea></div>
+<p>원소가 10배로 늘면 규칙대로 찾는 횟수와 하나씩 견주는 횟수는 각각 몇 번쯤 늘 것 같은가? 짐작과 까닭을 쓴다.</p>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A2.q3" data-label="A2 원소가 10배 늘면 두 방법의 비교 횟수는 각각 몇 번쯤 늘 것 같은가"></textarea></div>
+</section>
+<section id="A3" class="sheet">
+<h2>A3 · 같은 규칙을 다른 배열에 적용하기<small>1차시 · 7분 · 짝</small></h2>
+<p class="meta"><span>산출물: UNS 추적표, 찾은 목표와 놓친 목표, 원인 후보 2개</span></p>
+<p>A2의 규칙 ①~④를 그대로 쓴다. 이번에는 아래 배열 UNS에서 목표 <b>23</b>, <b>5</b>, <b>56</b>을 찾는다. 규칙대로 한 뒤, UNS를 눈으로 처음부터 훑어 실제 위치(인덱스)를 확인하고 비교한다.</p>
+<pre class="diagram">UNS = [38, 5, 72, 16, 91, 2, 23, 56, 12, 8]
+인덱스     0  1   2   3   4  5   6   7   8  9</pre><h3>목표 23</h3><div class="scroll"><table class="fill"><tr><th style="width:52px">단계</th><th style="width:12%">lo</th><th style="width:12%">hi</th><th style="width:12%">mid</th><th style="width:14%">a[mid]</th><th>판정(같음 / lo 이동 / hi 이동 / 끝)</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r1.c1" data-label="A3 목표 23 1단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r1.c2" data-label="A3 목표 23 1단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r1.c3" data-label="A3 목표 23 1단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r1.c4" data-label="A3 목표 23 1단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r1.c5" data-label="A3 목표 23 1단계 판정" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r2.c1" data-label="A3 목표 23 2단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r2.c2" data-label="A3 목표 23 2단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r2.c3" data-label="A3 목표 23 2단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r2.c4" data-label="A3 목표 23 2단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r2.c5" data-label="A3 목표 23 2단계 판정" autocomplete="off"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r3.c1" data-label="A3 목표 23 3단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r3.c2" data-label="A3 목표 23 3단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r3.c3" data-label="A3 목표 23 3단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r3.c4" data-label="A3 목표 23 3단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r3.c5" data-label="A3 목표 23 3단계 판정" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r4.c1" data-label="A3 목표 23 4단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r4.c2" data-label="A3 목표 23 4단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r4.c3" data-label="A3 목표 23 4단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r4.c4" data-label="A3 목표 23 4단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t23.r4.c5" data-label="A3 목표 23 4단계 판정" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">규칙대로</span><input type="text" class="in" data-key="A3.t23.result" data-label="A3 목표 23 규칙대로 결과" autocomplete="off"><span class="n">실제 위치</span><input type="text" class="in" data-key="A3.t23.actual" data-label="A3 목표 23 UNS를 훑어 본 실제 위치" autocomplete="off"><span class="n">판정</span><span class="rg" data-key="A3.t23.verdict" data-type="radio" data-label="A3 목표 23 찾았는가"><label><input type="radio" name="r_A3_t23_verdict" value="제대로 찾았다"> 제대로 찾았다</label><label><input type="radio" name="r_A3_t23_verdict" value="놓쳤다"> 놓쳤다</label></span></div><h3>목표 5</h3><div class="scroll"><table class="fill"><tr><th style="width:52px">단계</th><th style="width:12%">lo</th><th style="width:12%">hi</th><th style="width:12%">mid</th><th style="width:14%">a[mid]</th><th>판정(같음 / lo 이동 / hi 이동 / 끝)</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r1.c1" data-label="A3 목표 5 1단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r1.c2" data-label="A3 목표 5 1단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r1.c3" data-label="A3 목표 5 1단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r1.c4" data-label="A3 목표 5 1단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r1.c5" data-label="A3 목표 5 1단계 판정" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r2.c1" data-label="A3 목표 5 2단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r2.c2" data-label="A3 목표 5 2단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r2.c3" data-label="A3 목표 5 2단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r2.c4" data-label="A3 목표 5 2단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r2.c5" data-label="A3 목표 5 2단계 판정" autocomplete="off"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r3.c1" data-label="A3 목표 5 3단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r3.c2" data-label="A3 목표 5 3단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r3.c3" data-label="A3 목표 5 3단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r3.c4" data-label="A3 목표 5 3단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r3.c5" data-label="A3 목표 5 3단계 판정" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r4.c1" data-label="A3 목표 5 4단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r4.c2" data-label="A3 목표 5 4단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r4.c3" data-label="A3 목표 5 4단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r4.c4" data-label="A3 목표 5 4단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t5.r4.c5" data-label="A3 목표 5 4단계 판정" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">규칙대로</span><input type="text" class="in" data-key="A3.t5.result" data-label="A3 목표 5 규칙대로 결과" autocomplete="off"><span class="n">실제 위치</span><input type="text" class="in" data-key="A3.t5.actual" data-label="A3 목표 5 UNS를 훑어 본 실제 위치" autocomplete="off"><span class="n">판정</span><span class="rg" data-key="A3.t5.verdict" data-type="radio" data-label="A3 목표 5 찾았는가"><label><input type="radio" name="r_A3_t5_verdict" value="제대로 찾았다"> 제대로 찾았다</label><label><input type="radio" name="r_A3_t5_verdict" value="놓쳤다"> 놓쳤다</label></span></div><h3>목표 56</h3><div class="scroll"><table class="fill"><tr><th style="width:52px">단계</th><th style="width:12%">lo</th><th style="width:12%">hi</th><th style="width:12%">mid</th><th style="width:14%">a[mid]</th><th>판정(같음 / lo 이동 / hi 이동 / 끝)</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r1.c1" data-label="A3 목표 56 1단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r1.c2" data-label="A3 목표 56 1단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r1.c3" data-label="A3 목표 56 1단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r1.c4" data-label="A3 목표 56 1단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r1.c5" data-label="A3 목표 56 1단계 판정" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r2.c1" data-label="A3 목표 56 2단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r2.c2" data-label="A3 목표 56 2단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r2.c3" data-label="A3 목표 56 2단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r2.c4" data-label="A3 목표 56 2단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r2.c5" data-label="A3 목표 56 2단계 판정" autocomplete="off"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r3.c1" data-label="A3 목표 56 3단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r3.c2" data-label="A3 목표 56 3단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r3.c3" data-label="A3 목표 56 3단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r3.c4" data-label="A3 목표 56 3단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r3.c5" data-label="A3 목표 56 3단계 판정" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r4.c1" data-label="A3 목표 56 4단계 lo" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r4.c2" data-label="A3 목표 56 4단계 hi" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r4.c3" data-label="A3 목표 56 4단계 mid" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r4.c4" data-label="A3 목표 56 4단계 a[mid]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.t56.r4.c5" data-label="A3 목표 56 4단계 판정" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">규칙대로</span><input type="text" class="in" data-key="A3.t56.result" data-label="A3 목표 56 규칙대로 결과" autocomplete="off"><span class="n">실제 위치</span><input type="text" class="in" data-key="A3.t56.actual" data-label="A3 목표 56 UNS를 훑어 본 실제 위치" autocomplete="off"><span class="n">판정</span><span class="rg" data-key="A3.t56.verdict" data-type="radio" data-label="A3 목표 56 찾았는가"><label><input type="radio" name="r_A3_t56_verdict" value="제대로 찾았다"> 제대로 찾았다</label><label><input type="radio" name="r_A3_t56_verdict" value="놓쳤다"> 놓쳤다</label></span></div>
+<h3>관찰·정리</h3>
+<p>23은 분명 UNS에 있는데 규칙대로는 왜 &ldquo;없음&rdquo;이 되었는가? 어느 단계에서부터 어긋났는가?</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A3.q1" data-label="A3 23은 있는데 왜 없음이라 했는가"></textarea></div>
+<p>5는 왜 맞게 찾았는가? 맞는 경우가 있다는 것이 &ldquo;안심해도 된다&rdquo;는 뜻일까?</p>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A3.q2" data-label="A3 5는 왜 맞게 찾았는가 맞는 경우가 있다는 것이 안심해도 된다는 뜻인가"></textarea></div>
+<p>규칙 ③의 &ldquo;목표가 더 크면 오른쪽만 본다&rdquo;는 말은 무엇을 믿고 하는 말인가?</p>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A3.q3" data-label="A3 규칙 3의 목표가 더 크면 오른쪽만 본다는 말은 무엇을 믿고 하는 말인가"></textarea></div>
+<p>모둠 대화에서 나온 <b>원인 후보</b>를 2가지 쓴다(결론이 아니라 후보이다).</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A3.cause1" data-label="A3 원인 후보 1"></textarea></div><div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A3.cause2" data-label="A3 원인 후보 2"></textarea></div>
+</section>
+<section id="A4" class="sheet">
+<h2>A4 · 8개를 두 가지 방식으로 줄 세우기<small>1차시 · 12분 · 짝(역할 분담 후 교환)</small></h2>
+<p class="meta"><span>산출물: 합치기 기록, 분할 기록, 두 비교 횟수</span></p>
+<pre class="diagram">ARR8 = [38, 27, 43, 3, 9, 82, 10, 15]    # 오름차순으로 줄 세운다</pre>
+<div class="concept"><b class="h">약속 · 두 방식</b>
+<ul>
+<li><b>방식 가 (쪼개 합치기)</b>: 리스트를 mid = len(a)//2에서 반으로 쪼갠다. 길이 1이 될 때까지 쪼갠 뒤, 이미 줄 선 두 리스트 l, r를 합친다. 합칠 때는 두 리스트의 맨 앞끼리 견주고(<b>l[i] &lt;= r[j]</b> 검사 1회 = 비교 1회), 작은 쪽을 먼저 꺼낸다. 한쪽이 바닥나면 남은 것을 그대로 붙인다(비교 없음).</li>
+<li><b>방식 나 (피벗으로 가르기)</b>: 첫 원소를 피벗으로 정한다. 나머지 원소를 피벗과 견주어 <b>x &lt; 피벗이면 작은 쪽, 아니면 큰 쪽</b>(같은 값은 큰 쪽)으로 가른다. 비교 횟수는 가를 대상의 길이 &minus; 1이다. 작은 쪽과 큰 쪽에 같은 일을 되풀이한다(길이 0 또는 1이면 끝).</li>
+</ul></div>
+<p>한 사람은 방식 가, 한 사람은 방식 나를 맡아 기록하고 서로 검토한다. 칸이 남으면 비운다. 시간이 부족하면 교환 검토를 생략한다.</p>
+<h3>방식 가: 합치기 기록 (왼쪽부터 합치는 순서로)</h3>
+<div class="scroll"><table class="fill"><tr><th style="width:52px">번호</th><th style="width:20%">왼쪽</th><th style="width:20%">오른쪽</th><th style="width:28%">합친 결과</th><th>이 합치기의 비교 횟수</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r1.c1" data-label="A4 병합 기록 1번째 합치기 왼쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r1.c2" data-label="A4 병합 기록 1번째 합치기 오른쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r1.c3" data-label="A4 병합 기록 1번째 합치기 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r1.c4" data-label="A4 병합 기록 1번째 합치기 비교 횟수" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r2.c1" data-label="A4 병합 기록 2번째 합치기 왼쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r2.c2" data-label="A4 병합 기록 2번째 합치기 오른쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r2.c3" data-label="A4 병합 기록 2번째 합치기 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r2.c4" data-label="A4 병합 기록 2번째 합치기 비교 횟수" autocomplete="off"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r3.c1" data-label="A4 병합 기록 3번째 합치기 왼쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r3.c2" data-label="A4 병합 기록 3번째 합치기 오른쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r3.c3" data-label="A4 병합 기록 3번째 합치기 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r3.c4" data-label="A4 병합 기록 3번째 합치기 비교 횟수" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r4.c1" data-label="A4 병합 기록 4번째 합치기 왼쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r4.c2" data-label="A4 병합 기록 4번째 합치기 오른쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r4.c3" data-label="A4 병합 기록 4번째 합치기 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r4.c4" data-label="A4 병합 기록 4번째 합치기 비교 횟수" autocomplete="off"></td></tr><tr><td class="lab">5</td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r5.c1" data-label="A4 병합 기록 5번째 합치기 왼쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r5.c2" data-label="A4 병합 기록 5번째 합치기 오른쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r5.c3" data-label="A4 병합 기록 5번째 합치기 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r5.c4" data-label="A4 병합 기록 5번째 합치기 비교 횟수" autocomplete="off"></td></tr><tr><td class="lab">6</td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r6.c1" data-label="A4 병합 기록 6번째 합치기 왼쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r6.c2" data-label="A4 병합 기록 6번째 합치기 오른쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r6.c3" data-label="A4 병합 기록 6번째 합치기 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r6.c4" data-label="A4 병합 기록 6번째 합치기 비교 횟수" autocomplete="off"></td></tr><tr><td class="lab">7</td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r7.c1" data-label="A4 병합 기록 7번째 합치기 왼쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r7.c2" data-label="A4 병합 기록 7번째 합치기 오른쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r7.c3" data-label="A4 병합 기록 7번째 합치기 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.merge.r7.c4" data-label="A4 병합 기록 7번째 합치기 비교 횟수" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">합계</span><input type="text" class="in" data-key="A4.merge.total" data-label="A4 병합 비교 횟수 합계" autocomplete="off" style="width:8em"></div>
+<h3>방식 나: 분할 기록 (먼저 가른 것부터)</h3>
+<div class="scroll"><table class="fill"><tr><th style="width:52px">번호</th><th style="width:24%">가를 대상</th><th style="width:10%">피벗</th><th style="width:20%">작은 쪽</th><th style="width:16%">큰 쪽</th><th>비교 횟수</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r1.c1" data-label="A4 분할 기록 1번째 분할 대상" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r1.c2" data-label="A4 분할 기록 1번째 분할 피벗" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r1.c3" data-label="A4 분할 기록 1번째 분할 작은 쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r1.c4" data-label="A4 분할 기록 1번째 분할 큰 쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r1.c5" data-label="A4 분할 기록 1번째 분할 비교 횟수" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r2.c1" data-label="A4 분할 기록 2번째 분할 대상" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r2.c2" data-label="A4 분할 기록 2번째 분할 피벗" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r2.c3" data-label="A4 분할 기록 2번째 분할 작은 쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r2.c4" data-label="A4 분할 기록 2번째 분할 큰 쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r2.c5" data-label="A4 분할 기록 2번째 분할 비교 횟수" autocomplete="off"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r3.c1" data-label="A4 분할 기록 3번째 분할 대상" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r3.c2" data-label="A4 분할 기록 3번째 분할 피벗" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r3.c3" data-label="A4 분할 기록 3번째 분할 작은 쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r3.c4" data-label="A4 분할 기록 3번째 분할 큰 쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r3.c5" data-label="A4 분할 기록 3번째 분할 비교 횟수" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r4.c1" data-label="A4 분할 기록 4번째 분할 대상" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r4.c2" data-label="A4 분할 기록 4번째 분할 피벗" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r4.c3" data-label="A4 분할 기록 4번째 분할 작은 쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r4.c4" data-label="A4 분할 기록 4번째 분할 큰 쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r4.c5" data-label="A4 분할 기록 4번째 분할 비교 횟수" autocomplete="off"></td></tr><tr><td class="lab">5</td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r5.c1" data-label="A4 분할 기록 5번째 분할 대상" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r5.c2" data-label="A4 분할 기록 5번째 분할 피벗" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r5.c3" data-label="A4 분할 기록 5번째 분할 작은 쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r5.c4" data-label="A4 분할 기록 5번째 분할 큰 쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r5.c5" data-label="A4 분할 기록 5번째 분할 비교 횟수" autocomplete="off"></td></tr><tr><td class="lab">6</td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r6.c1" data-label="A4 분할 기록 6번째 분할 대상" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r6.c2" data-label="A4 분할 기록 6번째 분할 피벗" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r6.c3" data-label="A4 분할 기록 6번째 분할 작은 쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r6.c4" data-label="A4 분할 기록 6번째 분할 큰 쪽" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.quick.r6.c5" data-label="A4 분할 기록 6번째 분할 비교 횟수" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">합계</span><input type="text" class="in" data-key="A4.quick.total" data-label="A4 퀵 비교 횟수 합계" autocomplete="off" style="width:8em"></div>
+<h3>관찰·정리</h3>
+<p>방식 가는 쪼갤 때와 합칠 때 중 어디서 비교를 쓰는가?</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A4.q1" data-label="A4 방식 가는 쪼갤 때와 합칠 때 중 어디서 비교를 쓰는가"></textarea></div>
+<p>방식 나는 피벗을 고른 뒤 무엇을 한 번에 결정하는가?</p>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A4.q2" data-label="A4 방식 나는 피벗을 고른 뒤 무엇을 한 번에 결정하는가"></textarea></div>
+<p>두 방식의 중간 결과는 어떻게 다른가? 마지막에는 같은 결과가 나오는 이유는 무엇인가?</p>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A4.q3" data-label="A4 두 방식의 중간 결과는 어떻게 다른가 마지막에 같은 결과가 나오는 이유"></textarea></div>
+</section>
+<section id="A5" class="sheet">
+<h2>A5 · 입력이 이미 줄 서 있다면<small>1차시 · 11분 · 모둠</small></h2>
+<p class="meta"><span>산출물: 비교표, 가설 메모</span></p>
+<pre class="diagram">SORT8 = [1, 2, 3, 4, 5, 6, 7, 8]    # 이미 오름차순
+ARR8  = [38, 27, 43, 3, 9, 82, 10, 15]</pre>
+<div class="concept"><b class="h">약속 · 가운데 피벗과 깊이</b>
+<ul>
+<li><b>방식 나(가운데 피벗)</b>: 피벗을 a[len(a)//2]로 한다. 나머지 원소(피벗 제외)를 같은 기준(x &lt; 피벗이면 작은 쪽, 아니면 큰 쪽)으로 가르고, 비교 횟수는 가를 대상 길이 &minus; 1이다.</li>
+<li><b>분할 깊이</b>: 재귀 호출이 겹쳐 들어간 가장 깊은 단계의 수이다. 길이 0 또는 1에서 멈추는 호출도 한 단계로 센다(처음 호출 = 1단계). 방식 가는 합치는 층의 수를 쓴다.</li>
+</ul></div>
+<p>SORT8에서 세 방식의 비교 횟수와 깊이를 손으로 구해 표를 채운다. 이어서 ARR8에서 방식 나(가운데 피벗)도 구해 본다(방식 나 첫 원소 피벗의 ARR8 값은 A4에서 구했다).</p>
+<div class="scroll"><table class="fill"><tr><th style="width:48%">입력과 방식</th><th style="width:24%">비교 횟수</th><th>깊이(또는 합치는 층 수)</th></tr><tr><td class="lab">SORT8 · 방식 나(첫 원소 피벗)</td><td class="in-cell"><input type="text" class="in" data-key="A5.sort8.first.cnt" data-label="A5 SORT8 첫 피벗 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.sort8.first.depth" data-label="A5 SORT8 첫 피벗 깊이" autocomplete="off"></td></tr><tr><td class="lab">SORT8 · 방식 나(가운데 피벗)</td><td class="in-cell"><input type="text" class="in" data-key="A5.sort8.mid.cnt" data-label="A5 SORT8 가운데 피벗 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.sort8.mid.depth" data-label="A5 SORT8 가운데 피벗 깊이" autocomplete="off"></td></tr><tr><td class="lab">SORT8 · 방식 가(쪼개 합치기)</td><td class="in-cell"><input type="text" class="in" data-key="A5.sort8.merge.cnt" data-label="A5 SORT8 병합 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.sort8.merge.depth" data-label="A5 SORT8 병합 합치는 층 수" autocomplete="off"></td></tr><tr><td class="lab">ARR8 · 방식 나(첫 원소 피벗)</td><td class="in-cell"><input type="text" class="in" data-key="A5.arr8.first.cnt" data-label="A5 ARR8 첫 피벗 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.arr8.first.depth" data-label="A5 ARR8 첫 피벗 깊이" autocomplete="off"></td></tr><tr><td class="lab">ARR8 · 방식 나(가운데 피벗)</td><td class="in-cell"><input type="text" class="in" data-key="A5.arr8.mid.cnt" data-label="A5 ARR8 가운데 피벗 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.arr8.mid.depth" data-label="A5 ARR8 가운데 피벗 깊이" autocomplete="off"></td></tr></table></div>
+<h3>가설 메모 (3줄)</h3>
+<p>&ldquo;가운데 피벗이 항상 좋은가?&rdquo;를 표의 값을 근거로 3줄로 쓴다.</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A5.hyp1" data-label="A5 가설 1"></textarea></div><div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A5.hyp2" data-label="A5 가설 2"></textarea></div><div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A5.hyp3" data-label="A5 가설 3"></textarea></div>
+<p>표를 보고, <b>입력의 순서에 따라 값이 달라지는 방식</b>과 <b>달라지지 않는 방식</b>을 가려 쓴다. 근거가 된 표의 값도 함께 쓴다.</p>
+<div class="ans-row"><span class="n">?</span><textarea class="in" rows="3" data-key="A5.order" data-label="A5 입력 순서에 좌우되는 것과 아닌 것"></textarea></div>
+<p>만약 8개가 아니라 8만 개라면 어떻게 될 것 같은가? 짐작을 쓴다.</p>
+<div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A5.big" data-label="A5 8만 개라면"></textarea></div>
+</section>
+<section id="A6" class="sheet">
+<h2>A6 · 1차시 정리와 exit ticket<small>1차시 · 2분 · 개인</small></h2>
+<p class="meta"><span>산출물: exit ticket</span></p>
+<div class="concept"><b class="h">이름 붙이기</b><p>오늘부터 A2의 규칙(가운데와 견주어 후보 범위를 절반으로 줄이는 탐색)을 <b>이진 탐색(binary search)</b>, 방식 가(쪼개 합치는 정렬)를 <b>병합 정렬(merge sort)</b>, 방식 나(피벗으로 가르는 정렬)를 <b>퀵 정렬(quick sort)</b>이라고 부른다. 이름만 붙인 것이며 어느 쪽이 더 좋다는 뜻은 아니다.</p></div>
+<p><b>exit ticket</b> SORTED에서 56을 찾을 때 A2 규칙 ①~④의 <b>첫 번째 mid 값</b>(a[mid]의 값)은 얼마인가? <input type="text" class="in" data-key="A6.ticket" data-label="A6 exit ticket 56을 찾을 때 첫 mid의 값" autocomplete="off" style="width:6em;display:inline-block"></p>
+<p>이번 시간에 한 일을 점검한다.</p>
+<p><label class="ck"><input type="checkbox" data-key="A6.chk1" data-label="A6 점검: SORTED에서 규칙대로 두 목표를 찾았다"> SORTED에서 규칙대로 두 목표를 찾았다</label><label class="ck"><input type="checkbox" data-key="A6.chk2" data-label="A6 점검: UNS에서 같은 규칙을 적용했다"> UNS에서 같은 규칙을 적용했다</label><label class="ck"><input type="checkbox" data-key="A6.chk3" data-label="A6 점검: ARR8을 두 방식으로 손으로 정렬했다"> ARR8을 두 방식으로 손으로 정렬했다</label><label class="ck"><input type="checkbox" data-key="A6.chk4" data-label="A6 점검: SORT8 비교표를 채웠다"> SORT8 비교표를 채웠다</label></p>
+<div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A6.muddy" data-label="A6 가장 헷갈린 점"></textarea></div>
+</section>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
+</script>
+<script id="week12-submit">
+/* week12 학생 입력 저장 (8개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week12-student-v1 */
+(function(){
+"use strict";
+var FILE_KEY="workbook";
+var FILES={workbook:"student_workbook.html",code_lab:"student_code_lab.html",workbook_part2:"student_workbook_part2.html",code_lab_part2:"student_code_lab_part2.html",code_lab_part3:"student_code_lab_part3.html",workbook_part3:"student_workbook_part3.html",code_lab_part4:"student_code_lab_part4.html",formative:"formative_check.html"};
+var FILE=FILES[FILE_KEY], STORE="week12:"+FILE, SCHEMA="week12-student-v1";
+var bar,idIn,nameIn,msg,autoEl,saveBtn,clearBtn,confirmBox,busy=false,timer=null;
+var draftBtn,loadBtn,fileIn,yesBtn,confirmTxt,pending=null,baseline="";
+
+function q(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
+function kind(el){
+  var t=el.getAttribute("data-type");
+  if(t)return t;
+  var tag=el.tagName.toLowerCase();
+  if(tag==="textarea")return "textarea";
+  if(tag==="select")return "select";
+  if(tag==="input")return el.type==="checkbox"?"checkbox":"text";
+  return "text";
+}
+function labelOf(el){
+  var l=el.getAttribute("data-label");
+  if(l)return l;
+  if(el.labels&&el.labels.length)return el.labels[0].textContent.replace(/\s+/g," ").trim();
+  return el.getAttribute("aria-label")||"";
+}
+function readValue(el,k){
+  if(k==="checkbox")return !!el.checked;
+  if(k==="radio"){var r=el.querySelector("input[type=radio]:checked");return r?r.value:null;}
+  return el.value;
+}
+function collect(){
+  return q("[data-key]").map(function(el){
+    var k=kind(el);
+    return {key:el.getAttribute("data-key"),label:labelOf(el),type:k,value:readValue(el,k)};
+  });
+}
+function studentInfo(){return {id:idIn.value.trim(),name:nameIn.value.trim()};}
+function buildJSON(status){
+  return {schema:SCHEMA,week:12,file:FILE,status:status||"final",student:studentInfo(),savedAt:new Date().toISOString(),answers:collect()};
+}
+function safe(s){return String(s).replace(/[\\\/:*?"<>|\s\u0000-\u001f]+/g,"_").replace(/^\.+/,"_");}
+function fileName(st,draft){return "week12_"+FILE_KEY+"_"+safe(st.id||"학번미입력")+"_"+safe(st.name||"이름미입력")+(draft?"_임시저장":"")+".json";}
+function validate(){
+  var miss=[];
+  [[idIn,"학번"],[nameIn,"이름"]].forEach(function(p){
+    var bad=!p[0].value.trim();
+    p[0].classList.toggle("invalid",bad);
+    p[0].setAttribute("aria-invalid",bad?"true":"false");
+    if(bad)miss.push(p);
+  });
+  return miss;
+}
+function updatePrintId(){
+  var p=document.getElementById("printid");
+  if(!p)return;
+  var s=studentInfo();
+  p.textContent="학번: "+(s.id||"          ")+"   이름: "+(s.name||"          ");
+}
+function say(text,cls){msg.textContent=text;msg.className="sb-msg"+(cls?" "+cls:"");}
+
+function download(draft){
+  var obj=buildJSON(draft?"draft":"final"),name=fileName(obj.student,draft);
+  var blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"});
+  var url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;a.style.display="none";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1500);
+  return name;
+}
+function onSave(){
+  if(busy)return;
+  var miss=validate();
+  if(miss.length){
+    say("학번과 이름을 입력해야 저장할 수 있다. 표시된 칸을 채운 뒤 다시 누른다.","err");
+    miss[0][0].focus();return;
+  }
+  busy=true;saveBtn.disabled=true;
+  try{
+    var n=download();
+    say("저장했다: "+n+" (내려받은 JSON 파일 한 개를 제출한다.)","ok");
+  }catch(e){say("저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;saveBtn.disabled=false;},1200);
+}
+
+/* 이어 쓰기: 임시 저장 파일 내려받기 / 저장한 파일 불러오기 */
+function snap(){return JSON.stringify(collect().map(function(a){return a.value;}));}
+function isDirty(){return snap()!==baseline;}
+function ask(text,fn){
+  confirmTxt.textContent=text;pending=fn;confirmBox.hidden=false;
+  clearBtn.disabled=true;loadBtn.disabled=true;
+}
+function closeAsk(){
+  pending=null;confirmBox.hidden=true;clearBtn.disabled=false;loadBtn.disabled=false;
+}
+function onDraft(){
+  if(busy)return;
+  busy=true;draftBtn.disabled=true;
+  try{
+    var n=download(true),s=studentInfo();
+    say("임시 저장했다: "+n+" (제출 파일이 아니다. 이어 쓸 때 [불러오기]로 이 파일을 고른다."+((s.id&&s.name)?"":" 학번과 이름을 쓰면 파일 이름에 들어간다.")+")","ok");
+  }catch(e){say("임시 저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;draftBtn.disabled=false;},1200);
+}
+function applyLoaded(j){
+  if(!j||typeof j!=="object"||Array.isArray(j))return {err:"저장 파일 형식이 아니다."};
+  if(j.schema!==SCHEMA)return {err:"이 워크북의 저장 파일이 아니다(schema 불일치). 이 활동지에서 저장한 JSON 파일을 고른다."};
+  if(j.file!==FILE)return {err:"이 파일은 '"+String(j.file)+"'에서 저장한 것이다. 지금 열린 '"+FILE+"'에서 저장한 파일만 불러올 수 있다."};
+  if(!Array.isArray(j.answers))return {err:"저장 파일에 answers가 없거나 형식이 틀리다."};
+  var vals={};
+  j.answers.forEach(function(a){if(a&&typeof a.key==="string")vals[a.key]=a.value;});
+  var n=0;
+  q("[data-key]").forEach(function(el){
+    var key=el.getAttribute("data-key");
+    if(!Object.prototype.hasOwnProperty.call(vals,key))return;
+    var v=vals[key],t=typeof v;
+    if(v!==null&&t!=="string"&&t!=="boolean")return;
+    setValue(el,v);n++;
+  });
+  if(j.student&&typeof j.student==="object"){
+    idIn.value=typeof j.student.id==="string"?j.student.id:"";
+    nameIn.value=typeof j.student.name==="string"?j.student.name:"";
+    [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  }
+  autosizeAll();updatePrintId();stash();
+  return {n:n,draft:j.status==="draft",at:j.savedAt};
+}
+function onLoadClick(){
+  if(isDirty()||idIn.value.trim()||nameIn.value.trim()){
+    ask("지금 입력한 내용이 불러온 파일의 내용으로 바뀐다. 계속하려면 [불러오기 진행]을 누르고 파일을 고른다.",function(){closeAsk();fileIn.click();});
+    yesBtn.textContent="불러오기 진행";
+  }else{fileIn.click();}
+}
+function onFileChosen(){
+  var f=fileIn.files&&fileIn.files[0];
+  if(!f)return;
+  if(f.size>3*1024*1024){say("파일이 너무 크다(3MB 초과). 이 활동지에서 저장한 JSON 파일이 맞는지 확인한다.","err");fileIn.value="";return;}
+  var r=new FileReader();
+  r.onerror=function(){say("파일을 읽지 못했다. 다시 시도한다.","err");fileIn.value="";};
+  r.onload=function(){
+    var res;
+    try{res=applyLoaded(JSON.parse(String(r.result)));}
+    catch(e){res={err:"JSON 파일을 읽지 못했다. 이 활동지에서 저장한 파일이 맞는지 확인한다."};}
+    if(res.err){say(res.err+" (입력란은 바뀌지 않았다.)","err");}
+    else{say("불러왔다: "+f.name+" ("+res.n+"칸"+(res.at?", 저장 시각 "+res.at.slice(0,16).replace("T"," "):"")+"). 이어서 쓴다."+(res.draft?"":" (제출용 파일을 불러왔다.)"),"ok");}
+    fileIn.value="";
+  };
+  r.readAsText(f,"utf-8");
+}
+
+/* 임시 보관 (localStorage, 모두 try/catch) */
+function stash(){
+  try{
+    var vals={};collect().forEach(function(a){vals[a.key]=a.value;});
+    localStorage.setItem(STORE,JSON.stringify({student:studentInfo(),values:vals,at:Date.now()}));
+    var d=new Date();
+    autoEl.textContent="임시 저장됨 "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
+  }catch(e){autoEl.textContent="임시 저장 사용 불가(저장(JSON)은 가능)";}
+}
+function schedule(){clearTimeout(timer);timer=setTimeout(stash,300);}
+function setValue(el,v){
+  var k=kind(el);
+  if(k==="checkbox"){el.checked=(v===true);}
+  else if(k==="radio"){q("input[type=radio]",el).forEach(function(r){r.checked=(v!==null&&v!==undefined&&r.value===v);});}
+  else{el.value=(v===null||v===undefined)?"":String(v);}
+}
+function restore(){
+  try{
+    var raw=localStorage.getItem(STORE);if(!raw)return;
+    var s=JSON.parse(raw);if(!s)return;
+    if(s.student){idIn.value=s.student.id||"";nameIn.value=s.student.name||"";}
+    var any=false;
+    q("[data-key]").forEach(function(el){var key=el.getAttribute("data-key");if(s.values&&Object.prototype.hasOwnProperty.call(s.values,key)){setValue(el,s.values[key]);any=true;}});
+    autosizeAll();
+    if(any||(s.student&&(s.student.id||s.student.name)))autoEl.textContent="이전 임시 저장을 불러왔다";
+  }catch(e){}
+}
+function resetAll(){
+  q("[data-key]").forEach(function(el){setValue(el,kind(el)==="checkbox"?false:(kind(el)==="radio"?null:""));});
+  idIn.value="";nameIn.value="";
+  [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  autosizeAll();
+}
+function doClear(){
+  try{localStorage.removeItem(STORE);}catch(e){}
+  resetAll();
+  closeAsk();
+  autoEl.textContent="";
+  say("이 브라우저의 자동 보관을 지우고 입력란을 비웠다. (내려받은 임시 저장 파일은 그대로다.)","ok");
+}
+
+/* 입력란 보조 */
+function autosize(t){if(t.classList.contains("code")||t.classList.contains("draw"))return;t.style.height="auto";if(t.scrollHeight>0)t.style.height=(t.scrollHeight+2)+"px";}
+function autosizeAll(){q("textarea.in").forEach(autosize);}
+function codeKeys(e){
+  var t=e.target;
+  if(!t||!t.classList||!t.classList.contains("code"))return;
+  if(e.key==="Escape"){t._esc=true;return;}
+  if(e.key==="Tab"&&!e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey){
+    if(t._esc){t._esc=false;return;}
+    e.preventDefault();
+    var s=t.selectionStart,en=t.selectionEnd;
+    t.setRangeText("    ",s,en,"end");
+    t.dispatchEvent(new Event("input",{bubbles:true}));
+  }else if(e.key!=="Shift"){t._esc=false;}
+}
+function labelControls(){
+  q("[data-key]").forEach(function(el){
+    var l=el.getAttribute("data-label");
+    var isGroup=el.getAttribute("data-type")==="radio";
+    if(isGroup){el.setAttribute("role","radiogroup");if(l)el.setAttribute("aria-label",l);return;}
+    var has=el.labels&&el.labels.length;
+    if(!has&&l&&!el.getAttribute("aria-label"))el.setAttribute("aria-label",l);
+  });
+}
+function buildBar(){
+  bar=document.createElement("div");bar.id="savebar";bar.setAttribute("role","region");bar.setAttribute("aria-label","제출 저장 바");
+  bar.innerHTML='<div class="sb-in"><div class="sb-row">'
+   +'<label for="sb-id">학번 <input type="text" id="sb-id" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<label for="sb-name">이름 <input type="text" id="sb-name" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<button type="button" id="sb-save">저장(JSON)</button>'
+   +'<button type="button" id="sb-draft" class="sec" title="다 못 쓴 내용을 파일로 보관한다. 제출 파일이 아니다.">임시 저장</button>'
+   +'<button type="button" id="sb-load" class="sec" title="임시 저장한 파일을 불러와 이어 쓴다.">불러오기</button>'
+   +'<input type="file" id="sb-file" accept=".json,application/json" hidden aria-label="저장한 JSON 파일 선택">'
+   +'<button type="button" id="sb-clear" class="sec">자동 보관 지우기</button>'
+   +'<span class="sb-auto" id="sb-auto"></span></div>'
+   +'<div class="sb-confirm" id="sb-confirm" hidden><span id="sb-ctext"></span>'
+   +'<button type="button" id="sb-yes">확인</button><button type="button" id="sb-no" class="sec">취소</button></div>'
+   +'<div class="sb-msg" id="sb-msg" role="status" aria-live="polite">다 쓰면 학번과 이름을 쓰고 [저장(JSON)]을 눌러 제출 파일 한 개를 만든다. 시간이 모자라면 [임시 저장]으로 파일을 보관하고, 다음에 [불러오기]로 이어 쓴다.</div></div>';
+  document.body.insertBefore(bar,document.body.firstChild);
+  var pid=document.createElement("div");pid.id="printid";pid.setAttribute("aria-hidden","true");
+  document.body.insertBefore(pid,bar.nextSibling);
+  idIn=bar.querySelector("#sb-id");nameIn=bar.querySelector("#sb-name");msg=bar.querySelector("#sb-msg");
+  autoEl=bar.querySelector("#sb-auto");saveBtn=bar.querySelector("#sb-save");clearBtn=bar.querySelector("#sb-clear");confirmBox=bar.querySelector("#sb-confirm");
+  draftBtn=bar.querySelector("#sb-draft");loadBtn=bar.querySelector("#sb-load");fileIn=bar.querySelector("#sb-file");yesBtn=bar.querySelector("#sb-yes");confirmTxt=bar.querySelector("#sb-ctext");
+  saveBtn.addEventListener("click",onSave);
+  draftBtn.addEventListener("click",onDraft);
+  loadBtn.addEventListener("click",onLoadClick);
+  fileIn.addEventListener("change",onFileChosen);
+  clearBtn.addEventListener("click",function(){yesBtn.textContent="지우기";ask("이 브라우저의 자동 보관을 지우고 입력란을 모두 비운다. 임시 저장 파일이나 JSON으로 저장하지 않은 내용은 되찾을 수 없다.",doClear);bar.querySelector("#sb-no").focus();});
+  bar.querySelector("#sb-no").addEventListener("click",function(){closeAsk();loadBtn.focus();});
+  yesBtn.addEventListener("click",function(){var f=pending;if(f)f();});
+}
+function init(){
+  buildBar();labelControls();baseline=snap();restore();autosizeAll();
+  document.addEventListener("input",function(e){
+    var t=e.target;
+    if(t.tagName==="TEXTAREA")autosize(t);
+    if(t===idIn||t===nameIn){if(t.value.trim()){t.classList.remove("invalid");t.setAttribute("aria-invalid","false");}}
+    if(t===idIn||t===nameIn)updatePrintId();
+    schedule();
+  });
+  document.addEventListener("change",schedule);
+  document.addEventListener("keydown",codeKeys);
+  window.addEventListener("beforeprint",function(){autosizeAll();updatePrintId();});
+  updatePrintId();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(autosizeAll);
+  window.addEventListener("resize",autosizeAll);
+  window.Week12Submit={buildJSON:buildJSON,collect:collect,validate:validate,fileName:fileName,FILE_KEY:FILE_KEY,applyLoaded:applyLoaded};
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+</body>
+</html>

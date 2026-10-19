@@ -1,0 +1,9 @@
+.venv/
+.DS_Store
+.claude/
+_workspace/
+_workspace_prev/
+slides/
+materials/*/teacher_*.html
+CLAUDE.md
+/index.html

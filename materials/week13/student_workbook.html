@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>13주차 탐구 활동지 1부 · 같은 계산과 가장 큰 동전 (학생용)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16233b;--paper:#f7f8fa;--panel:#ffffff;--py-blue:#3572a5;--line:#dfe3ea;--dim:#5b6b85;--code-bg:#101828;--code-fg:#e6edf7;--ok:#1d7a4f;--warn:#8a6d1f;--bad:#b3401f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+code,pre{font-family:"JetBrains Mono","D2Coding",Consolas,monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:24px}
+.prompt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--py-blue);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.lead{color:var(--dim);margin-top:8px;max-width:760px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 20px;font-family:"JetBrains Mono",monospace;font-size:12px}
+nav a{color:var(--py-blue);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+section>h2{font-size:18px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+section>h2 small{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--py-blue);margin-left:8px;font-weight:500}
+h3{font-size:15px;margin:14px 0 6px}
+p{margin:6px 0}
+ul,ol{margin:6px 0 6px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--code-bg);color:var(--code-fg);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;text-align:left;padding:8px}
+td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--py-blue);white-space:nowrap}
+table.fill td{border:1px solid var(--line);height:34px}
+table.fill td.lab{background:#f0f2f6;font-weight:600;height:auto}
+pre{background:var(--code-bg);color:var(--code-fg);padding:12px 14px;border-radius:6px;font-size:12.5px;overflow-x:auto;margin:8px 0;line-height:1.55}
+code.i{background:#eef1f6;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;color:var(--py-blue)}
+.note{background:#eef4fa;border:1px solid #d6e5f2;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.warn{background:#fbf3e4;border:1px solid #ecd9ae;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.concept{background:#f4f7fc;border:1px solid #c9d6ea;border-left:4px solid var(--py-blue);border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0;break-inside:avoid;page-break-inside:avoid}
+.concept b.h{color:var(--py-blue)}
+.concept table{margin:6px 0;font-size:12.5px}
+.concept ul{margin:4px 0 4px 18px}
+.ans{background:#eef8f2;border:1px solid #bfe0cf;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c,var(--py-blue));border-radius:6px;padding:10px 14px;background:#fff}
+.card b.h{color:var(--c)}
+.blank{border:1px dashed #9aa7bd;border-radius:6px;min-height:64px;margin:6px 0;padding:6px 10px;color:var(--dim);font-size:12px}
+.blank.l{min-height:110px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.diagram{background:#f0f2f6;border-radius:6px;padding:10px 14px;font-size:12.5px;overflow-x:auto;color:var(--ink);line-height:1.4}
+.codewrap{position:relative}
+.copy{position:absolute;top:14px;right:8px;font:500 11px "JetBrains Mono",monospace;background:#27364f;color:#e6edf7;border:1px solid #3d506e;border-radius:4px;padding:2px 8px;cursor:pointer}
+.role{display:inline-block;font:700 10.5px "JetBrains Mono",monospace;padding:1px 7px;border-radius:3px;background:#e4ecf6;color:var(--py-blue);margin-right:6px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.links a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:6px;margin:6px 0;color:var(--py-blue);text-decoration:none;font-weight:600}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{
+  body{background:#fff;font-size:11.5pt}.wrap{max-width:none;padding:0}
+  nav,.copy,.noprint{display:none!important}
+  section{border:none;padding:0;margin:0 0 8mm;break-inside:auto}
+  section.sheet{page-break-after:always;break-after:page}
+  section.sheet:last-of-type{page-break-after:auto}
+  header{padding:0 0 8px;margin-bottom:10px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f3f4f7;color:#111;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,.card,.blank{break-inside:avoid}
+}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.gate{border:1px dashed #b3401f;border-radius:8px;padding:6px 12px;background:#fff8f5}
+</style>
+<style id="week13-submit-style">
+/* week13 제출 바·입력란 공통 스타일 (8개 학생용 파일 동일) */
+#savebar{position:sticky;top:0;z-index:50;background:#16233b;color:#f7f8fa;padding:8px 20px;border-bottom:3px solid #3572a5;font-size:13px}
+#savebar .sb-in{max-width:1000px;margin:0 auto}
+#savebar .sb-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+#savebar label{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+#savebar input[type=text]{width:9.5em;padding:5px 8px;border:2px solid #9aa7bd;border-radius:4px;background:#fff;color:#16233b;font:inherit;font-weight:500}
+#savebar input[type=text].invalid{border-color:#ff9b7a;background:#fff3ee}
+#savebar button{font:600 13px "IBM Plex Sans KR",sans-serif;padding:6px 14px;border-radius:4px;border:2px solid #fff;background:#fff;color:#16233b;cursor:pointer}
+#savebar button.sec{background:transparent;color:#fff;border-color:#9aa7bd}
+#savebar button:disabled{opacity:.6;cursor:default}
+#savebar button:focus-visible,#savebar input:focus-visible{outline:3px solid #ffd166;outline-offset:2px}
+#savebar .sb-msg{min-height:1.4em;margin-top:4px;font-size:12.5px}
+#savebar .sb-msg.err{color:#ffd0c0;font-weight:700}
+#savebar .sb-msg.ok{color:#bff0d4}
+#savebar .sb-auto{font-size:11.5px;color:#c9d3e6;margin-left:auto}
+#savebar .sb-confirm{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px;padding:6px 10px;border:1px solid #ffd166;border-radius:4px;font-size:12.5px}
+#savebar .sb-confirm[hidden]{display:none}
+.in{width:100%;display:block;font:inherit;font-size:13.5px;line-height:1.5;color:#16233b;background:#fff;border:1px solid #6b7a94;border-radius:4px;padding:5px 8px}
+textarea.in{resize:vertical;min-height:2.4em;overflow:hidden}
+textarea.in.l{min-height:7em}
+textarea.in.code{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre;overflow:auto;tab-size:4;min-height:12em;background:#fbfcfe}
+textarea.in.draw{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;white-space:pre;overflow:auto;min-height:9em}
+.in:focus-visible,.ck input:focus-visible,.rg input:focus-visible{outline:3px solid #3572a5;outline-offset:1px}
+.in.invalid{border:2px solid #b3401f}
+input.in.s{display:inline-block;width:3.2em;padding:1px 4px;text-align:center}
+table.fill td.in-cell{padding:3px;height:auto}
+.ans-row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.ans-row>.n{padding-top:6px;font-weight:700;color:#3572a5}
+.mycode{margin:8px 0 12px}
+.mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
+.hint{font-size:12px;color:#5b6b85;margin:2px 0}
+.ck{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
+.ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
+.rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
+.rg label{display:inline-flex;align-items:center;gap:5px}
+@media (max-width:640px){#savebar{padding:8px 14px}#savebar .sb-auto{margin-left:0}}
+#printid{display:none}
+@media print{
+  #printid{display:block;font:600 12pt "IBM Plex Sans KR",sans-serif;margin:0 0 8px;padding-bottom:4px;border-bottom:1px solid #999;white-space:pre-wrap}
+  #savebar,.hint.noprint{display:none!important}
+  .in{border:none;border-bottom:1px solid #9aa7bd;border-radius:0;background:transparent;padding:2px 2px;-webkit-appearance:none;appearance:none;resize:none}
+  textarea.in{overflow:visible}
+  textarea.in.code,textarea.in.draw{border:1px solid #ccd;white-space:pre-wrap}
+  select.in{background-image:none}
+  .ans-row,.mycode{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="prompt">&gt;&gt;&gt; workbook.week(13)  # 학생용 · 탐구 활동지 A1~A6</div>
+  <h1>13주차 탐구 활동지 1부 — 같은 계산을 몇 번 하나, 가장 큰 동전부터 고르면 늘 최선인가 (A1~A6)</h1>
+  <p class="lead">핵심질문: 같은 연산을 수만 번 반복하지 않고 과거의 계산 결과를 기억해두면(메모이제이션) 성능이 얼마나 비약적으로 오를까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 정답은 이 활동지에 없다. 빈칸은 스스로 채운다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><label class="ck">모둠 <input type="text" class="in" data-key="meta.group" data-label="모둠" autocomplete="off" style="width:8em;display:inline-block"></label></p>
+</header>
+<nav><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="#A6">A6</a><a href="index.html">목록</a></nav>
+<section id="A1" class="sheet">
+<h2>A1 · 몇 번 계산할까, 어떻게 고를까<small>1차시 · 6분 · 개인→짝</small></h2>
+<p class="meta"><span>산출물: 호출 횟수 어림(자릿수)과 이유, 거스름돈 직원의 규칙 메모</span></p>
+<p>지난주(12주차) 정렬·이진 탐색, 그 전주(11주차) BFS의 &ldquo;이미 본 칸은 다시 보지 않는다(visited)&rdquo;를 떠올리며 아래 세 사례를 읽는다.</p>
+<div class="grid"><div class="card"><b class="h">사례 가 · 편의점 거스름돈</b><p>계산대 직원이 거스름돈을 동전으로 내준다. 직원은 어떤 순서로 동전을 고르는가?</p></div><div class="card"><b class="h">사례 나 · 계단 8칸</b><p>계단을 한 번에 1칸 또는 2칸씩 올라 8칸을 오르는 방법은 모두 몇 가지일까? 내 방식을 메모한다.</p></div><div class="card"><b class="h">사례 다 · fib(30)</b><p>피보나치 수 <code class="i">fib(n) = fib(n&minus;1) + fib(n&minus;2)</code>를 정의 그대로 재귀로 계산한다. <code class="i">fib(30)</code>을 구하려면 함수가 몇 번 불릴까?</p></div></div>
+<div class="note"><b>오늘의 질문</b> 같은 연산을 수만 번 반복하지 않고 과거의 계산 결과를 기억해두면(메모이제이션) 성능이 얼마나 비약적으로 오를까?</div>
+<h3>관찰·정리</h3>
+<p>사례 가: 직원이 동전을 고르는 규칙을 내 말로 쓴다.</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A1.change.rule" data-label="A1 거스름돈 직원이 동전을 고르는 규칙"></textarea></div>
+<p>사례 나: 계단 8칸을 오르는 방법을 세는 내 방식 1가지를 쓴다(답을 구하지 못해도 된다).</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A1.stairs.way" data-label="A1 계단 8칸을 세는 내 방식"></textarea></div>
+<p>사례 다: <code class="i">fib(30)</code>의 호출 횟수는 어느 자릿수일 것 같은가? 하나를 고르고 이유를 쓴다.</p>
+<div class="ans-row"><span class="n">1</span><span>어림</span><span class="rg" data-key="A1.fib.guess" data-type="radio" data-label="A1 fib(30) 호출 횟수 어림 자릿수"><label><input type="radio" name="r_A1_fib_guess" value="십"> 십</label><label><input type="radio" name="r_A1_fib_guess" value="백"> 백</label><label><input type="radio" name="r_A1_fib_guess" value="천"> 천</label><label><input type="radio" name="r_A1_fib_guess" value="만"> 만</label><label><input type="radio" name="r_A1_fib_guess" value="백만"> 백만</label><label><input type="radio" name="r_A1_fib_guess" value="억"> 억</label></span></div>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A1.fib.why" data-label="A1 호출 횟수를 그렇게 어림한 이유"></textarea></div>
+<p>fib(5)를 손으로 풀 때 fib(3)을 몇 번 계산하게 될까? 11주차 BFS에서 visited가 없었다면 어떻게 되었을까? 이번 계산에도 같은 장치를 쓸 수 있을까?</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A1.fib3" data-label="A1 fib(5)에서 fib(3)을 몇 번 계산하는가"></textarea></div><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A1.visited" data-label="A1 visited와 이번 계산의 연결"></textarea></div>
+</section>
+<section id="A2" class="sheet">
+<h2>A2 · fib(6) 호출 트리 그리기<small>1차시 · 10분 · 짝</small></h2>
+<p class="meta"><span>산출물: 호출 트리, n별 호출 횟수 표, 전체 호출 수와 서로 다른 입력의 수</span></p>
+<div class="concept"><b class="h">약속 · 계산 규칙</b>
+<p><code class="i">fib(n) = fib(n&minus;1) + fib(n&minus;2)</code>, 기저 <code class="i">fib(0) = 0</code>, <code class="i">fib(1) = 1</code>. 호출 순서는 <code class="i">fib(n&minus;1)</code>을 먼저 부르는 왼쪽 가지 우선이다. 한 번 불리면 <b>호출 1회</b>로 센다. 짝이 되어 한 명은 왼쪽 가지(<code class="i">fib(5)</code>), 다른 한 명은 오른쪽 가지(<code class="i">fib(4)</code>)를 그린 뒤 합산한다.</p></div>
+<h3>fib(6) 호출 트리</h3><p>아래 칸에 <code class="i">fib(6)</code>의 호출 트리를 그린다(줄과 들여쓰기로 그려도 된다). 불린 모든 호출을 한 개씩 쓴다.</p>
+<div class="ans-row"><textarea class="in draw" rows="14" data-key="A2.tree" data-label="A2 fib(6) 호출 트리"></textarea></div>
+<h3>n별 호출 횟수 표</h3><p>트리에서 <code class="i">fib(n)</code>이 몇 번 불렸는지 센다. 값 칸에는 <code class="i">fib(n)</code>의 값을 쓴다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:150px"></th><th>n = 0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>합계</th></tr><tr><td class="lab">fib(n)이 불린 횟수</td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r1.c1" data-label="A2 n별 횟수 fib(n)이 불린 횟수 n = 0" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r1.c2" data-label="A2 n별 횟수 fib(n)이 불린 횟수 1" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r1.c3" data-label="A2 n별 횟수 fib(n)이 불린 횟수 2" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r1.c4" data-label="A2 n별 횟수 fib(n)이 불린 횟수 3" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r1.c5" data-label="A2 n별 횟수 fib(n)이 불린 횟수 4" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r1.c6" data-label="A2 n별 횟수 fib(n)이 불린 횟수 5" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r1.c7" data-label="A2 n별 횟수 fib(n)이 불린 횟수 6" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r1.c8" data-label="A2 n별 횟수 fib(n)이 불린 횟수 합계" autocomplete="off"></td></tr><tr><td class="lab">fib(n)의 값</td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r2.c1" data-label="A2 n별 횟수 fib(n)의 값 n = 0" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r2.c2" data-label="A2 n별 횟수 fib(n)의 값 1" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r2.c3" data-label="A2 n별 횟수 fib(n)의 값 2" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r2.c4" data-label="A2 n별 횟수 fib(n)의 값 3" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r2.c5" data-label="A2 n별 횟수 fib(n)의 값 4" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r2.c6" data-label="A2 n별 횟수 fib(n)의 값 5" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r2.c7" data-label="A2 n별 횟수 fib(n)의 값 6" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.cnt.r2.c8" data-label="A2 n별 횟수 fib(n)의 값 합계" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">세기</span><span>서로 다른 입력은 모두 </span><input type="text" class="in" data-key="A2.distinct" data-label="A2 서로 다른 입력의 수" autocomplete="off" style="width:5em;display:inline-block"><span>개, 호출은 모두 </span><input type="text" class="in" data-key="A2.total" data-label="A2 전체 호출 수" autocomplete="off" style="width:5em;display:inline-block"><span>번</span></div>
+<h3>관찰·정리</h3>
+<p>fib(2)가 몇 군데에서 나타났는가? 나타날 때마다 값은 같았는가?</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A2.q1" data-label="A2 fib(2)가 몇 군데에서 나타났는가? 나타날 때마다 값은 같았는가?"></textarea></div>
+<p>서로 다른 입력은 몇 개인데 호출은 몇 번인가? n이 하나 늘면 호출은 어떻게 변하는가?</p><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A2.q2" data-label="A2 서로 다른 입력은 몇 개인데 호출은 몇 번인가? n이 하나 늘면 호출은 어떻게 변하는가?"></textarea></div>
+<p>fib(30)이면 서로 다른 입력과 호출의 비율은 어떨 것 같은가? 어림한 값과 까닭을 쓴다.</p><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A2.q3" data-label="A2 fib(30)이면 서로 다른 입력과 호출의 비율은 어떨 것 같은가? 어림한 값과 까닭을 쓴다."></textarea></div>
+<p>한 번 구한 fib(2)를 어딘가 적어 두고 싶었는가? 어디에, 어떻게 적어 두면 되겠는가?</p><div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A2.q4" data-label="A2 한 번 구한 fib(2)를 어딘가 적어 두고 싶었는가? 어디에, 어떻게 적어 두면 되겠는가?"></textarea></div>
+<h3>선택 · fib(7)</h3><p>fib(7)의 n별 호출 횟수(n = 0~7)와 전체 호출 수를 센다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:90px"></th><th>n=0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>합계</th></tr><tr><td class="lab">호출 횟수</td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c1" data-label="A2 선택 fib(7) 호출 횟수 n=0" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c2" data-label="A2 선택 fib(7) 호출 횟수 1" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c3" data-label="A2 선택 fib(7) 호출 횟수 2" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c4" data-label="A2 선택 fib(7) 호출 횟수 3" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c5" data-label="A2 선택 fib(7) 호출 횟수 4" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c6" data-label="A2 선택 fib(7) 호출 횟수 5" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c7" data-label="A2 선택 fib(7) 호출 횟수 6" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c8" data-label="A2 선택 fib(7) 호출 횟수 7" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c9" data-label="A2 선택 fib(7) 호출 횟수 합계" autocomplete="off"></td></tr></table></div>
+</section>
+<section id="A3" class="sheet">
+<h2>A3 · 계산한 값을 적어 두면<small>1차시 · 7분 · 짝</small></h2>
+<p class="meta"><span>산출물: 메모 규칙 호출 순서표(C/H 표시), 호출 수와 계산 수</span></p>
+<div class="concept"><b class="h">약속 · 메모 규칙</b>
+<p>A2와 같은 <code class="i">fib(6)</code>을 다시 호출한다. 다만 <b>계산한 값은 메모에 적고, 이미 메모에 있으면 계산하지 않고 바로 쓴다</b>. 호출 순서는 왼쪽 가지 우선이다. 호출이 불릴 때마다 한 줄에 한 호출씩 적고, 실제로 계산했으면 <b>C</b>, 메모에서 바로 답했으면 <b>H</b>를 고른다. 호출이 끝난 가지 아래는 더 부르지 않는다. 칸이 남으면 비운다.</p></div>
+<div class="scroll"><table class="fill"><tr><th style="width:60px">순서</th><th style="width:45%">불린 호출(예: fib(6))</th><th>C(계산) / H(메모로 바로)</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r1.c1" data-label="A3 메모 호출 순서 1 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r1.c2" data-type="radio" data-label="A3 메모 호출 순서 1 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r1_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r1_c2" value="H"> H</label></span></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r2.c1" data-label="A3 메모 호출 순서 2 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r2.c2" data-type="radio" data-label="A3 메모 호출 순서 2 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r2_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r2_c2" value="H"> H</label></span></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r3.c1" data-label="A3 메모 호출 순서 3 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r3.c2" data-type="radio" data-label="A3 메모 호출 순서 3 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r3_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r3_c2" value="H"> H</label></span></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r4.c1" data-label="A3 메모 호출 순서 4 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r4.c2" data-type="radio" data-label="A3 메모 호출 순서 4 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r4_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r4_c2" value="H"> H</label></span></td></tr><tr><td class="lab">5</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r5.c1" data-label="A3 메모 호출 순서 5 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r5.c2" data-type="radio" data-label="A3 메모 호출 순서 5 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r5_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r5_c2" value="H"> H</label></span></td></tr><tr><td class="lab">6</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r6.c1" data-label="A3 메모 호출 순서 6 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r6.c2" data-type="radio" data-label="A3 메모 호출 순서 6 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r6_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r6_c2" value="H"> H</label></span></td></tr><tr><td class="lab">7</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r7.c1" data-label="A3 메모 호출 순서 7 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r7.c2" data-type="radio" data-label="A3 메모 호출 순서 7 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r7_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r7_c2" value="H"> H</label></span></td></tr><tr><td class="lab">8</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r8.c1" data-label="A3 메모 호출 순서 8 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r8.c2" data-type="radio" data-label="A3 메모 호출 순서 8 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r8_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r8_c2" value="H"> H</label></span></td></tr><tr><td class="lab">9</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r9.c1" data-label="A3 메모 호출 순서 9 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r9.c2" data-type="radio" data-label="A3 메모 호출 순서 9 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r9_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r9_c2" value="H"> H</label></span></td></tr><tr><td class="lab">10</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r10.c1" data-label="A3 메모 호출 순서 10 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r10.c2" data-type="radio" data-label="A3 메모 호출 순서 10 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r10_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r10_c2" value="H"> H</label></span></td></tr><tr><td class="lab">11</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r11.c1" data-label="A3 메모 호출 순서 11 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r11.c2" data-type="radio" data-label="A3 메모 호출 순서 11 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r11_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r11_c2" value="H"> H</label></span></td></tr><tr><td class="lab">12</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r12.c1" data-label="A3 메모 호출 순서 12 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r12.c2" data-type="radio" data-label="A3 메모 호출 순서 12 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r12_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r12_c2" value="H"> H</label></span></td></tr><tr><td class="lab">13</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r13.c1" data-label="A3 메모 호출 순서 13 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r13.c2" data-type="radio" data-label="A3 메모 호출 순서 13 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r13_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r13_c2" value="H"> H</label></span></td></tr><tr><td class="lab">14</td><td class="in-cell"><input type="text" class="in" data-key="A3.seq.r14.c1" data-label="A3 메모 호출 순서 14 불린 호출(예: fib(6))" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A3.seq.r14.c2" data-type="radio" data-label="A3 메모 호출 순서 14 C(계산) / H(메모로 바로)"><label><input type="radio" name="r_A3_seq_r14_c2" value="C"> C</label><label><input type="radio" name="r_A3_seq_r14_c2" value="H"> H</label></span></td></tr></table></div>
+<div class="ans-row"><span class="n">세기</span><span>호출은 모두 </span><input type="text" class="in" data-key="A3.calls" data-label="A3 메모 규칙의 호출 수" autocomplete="off" style="width:5em;display:inline-block"><span>번, 실제 계산(C)은 </span><input type="text" class="in" data-key="A3.comp" data-label="A3 실제 계산 수" autocomplete="off" style="width:5em;display:inline-block"><span>번, 메모로 바로 답한 호출(H)은 </span><input type="text" class="in" data-key="A3.hit" data-label="A3 메모로 바로 답한 호출 수" autocomplete="off" style="width:5em;display:inline-block"><span>번</span></div>
+<h3>관찰·정리</h3>
+<p>어떤 호출이 메모 덕에 바로 끝났는가? 그 호출 아래에 있던 가지는 어떻게 되었는가?</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A3.q1" data-label="A3 어떤 호출이 메모 덕에 바로 끝났는가? 그 호출 아래에 있던 가지는 어떻게 되었는가?"></textarea></div>
+<p>A2의 호출 수와 비교하면 어떻게 달라졌는가?</p><div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A3.q2" data-label="A3 A2의 호출 수와 비교하면 어떻게 달라졌는가?"></textarea></div>
+<p><b>판단 질문(결론은 나중에 정한다).</b> 12주차 병합 정렬의 호출 트리에서 같은 구간이 두 번 나타났는가? 그렇다면(아니라면) 이 메모 규칙은 도움이 될 것 같은가? 짝과 의논한 판단과 까닭을 쓴다.</p>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A3.merge" data-label="A3 병합 정렬 트리에서 같은 구간이 두 번 나타나는가와 메모의 도움"></textarea></div>
+</section>
+<section id="A4" class="sheet">
+<h2>A4 · 가장 큰 동전부터 내면 늘 가장 적을까<small>1차시 · 9분 · 짝</small></h2>
+<p class="meta"><span>산출물: [1, 3, 4] Greedy 개수 표(1~8), 6원의 더 나은 조합, 한국 동전 1260원 결과, 원인 후보 2개</span></p>
+<div class="concept"><b class="h">약속 · Greedy 규칙</b>
+<p>남은 금액 이하인 <b>가장 큰 동전</b>을 계속 낸다. 남은 금액이 0이 되면 멈춘다. 동전은 얼마든지 쓸 수 있다. 개수는 낸 동전의 수이다.</p></div>
+<h3>동전 [1, 3, 4]</h3><p>1~8원을 위 규칙으로 만들고, 각 금액마다 <b>더 적은 개수의 조합이 있는지</b> 손으로 따져 본다(찾으면 그 조합을 쓰고, 없으면 &ldquo;없다&rdquo;를 고른다).</p>
+<div class="scroll"><table class="fill"><tr><th style="width:60px">금액</th><th style="width:26%">Greedy 조합(예: 4+1)</th><th style="width:90px">Greedy 개수</th><th style="width:150px">더 적은 개수의 조합</th><th>그 조합과 개수</th></tr><tr><td class="lab">1원</td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r1.c1" data-label="A4 [1, 3, 4] Greedy 1원 Greedy 조합(예: 4+1)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r1.c2" data-label="A4 [1, 3, 4] Greedy 1원 Greedy 개수" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A4.g.r1.c3" data-type="radio" data-label="A4 [1, 3, 4] Greedy 1원 더 적은 개수의 조합"><label><input type="radio" name="r_A4_g_r1_c3" value="있다"> 있다</label><label><input type="radio" name="r_A4_g_r1_c3" value="없다"> 없다</label></span></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r1.c4" data-label="A4 [1, 3, 4] Greedy 1원 그 조합과 개수" autocomplete="off"></td></tr><tr><td class="lab">2원</td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r2.c1" data-label="A4 [1, 3, 4] Greedy 2원 Greedy 조합(예: 4+1)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r2.c2" data-label="A4 [1, 3, 4] Greedy 2원 Greedy 개수" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A4.g.r2.c3" data-type="radio" data-label="A4 [1, 3, 4] Greedy 2원 더 적은 개수의 조합"><label><input type="radio" name="r_A4_g_r2_c3" value="있다"> 있다</label><label><input type="radio" name="r_A4_g_r2_c3" value="없다"> 없다</label></span></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r2.c4" data-label="A4 [1, 3, 4] Greedy 2원 그 조합과 개수" autocomplete="off"></td></tr><tr><td class="lab">3원</td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r3.c1" data-label="A4 [1, 3, 4] Greedy 3원 Greedy 조합(예: 4+1)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r3.c2" data-label="A4 [1, 3, 4] Greedy 3원 Greedy 개수" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A4.g.r3.c3" data-type="radio" data-label="A4 [1, 3, 4] Greedy 3원 더 적은 개수의 조합"><label><input type="radio" name="r_A4_g_r3_c3" value="있다"> 있다</label><label><input type="radio" name="r_A4_g_r3_c3" value="없다"> 없다</label></span></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r3.c4" data-label="A4 [1, 3, 4] Greedy 3원 그 조합과 개수" autocomplete="off"></td></tr><tr><td class="lab">4원</td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r4.c1" data-label="A4 [1, 3, 4] Greedy 4원 Greedy 조합(예: 4+1)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r4.c2" data-label="A4 [1, 3, 4] Greedy 4원 Greedy 개수" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A4.g.r4.c3" data-type="radio" data-label="A4 [1, 3, 4] Greedy 4원 더 적은 개수의 조합"><label><input type="radio" name="r_A4_g_r4_c3" value="있다"> 있다</label><label><input type="radio" name="r_A4_g_r4_c3" value="없다"> 없다</label></span></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r4.c4" data-label="A4 [1, 3, 4] Greedy 4원 그 조합과 개수" autocomplete="off"></td></tr><tr><td class="lab">5원</td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r5.c1" data-label="A4 [1, 3, 4] Greedy 5원 Greedy 조합(예: 4+1)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r5.c2" data-label="A4 [1, 3, 4] Greedy 5원 Greedy 개수" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A4.g.r5.c3" data-type="radio" data-label="A4 [1, 3, 4] Greedy 5원 더 적은 개수의 조합"><label><input type="radio" name="r_A4_g_r5_c3" value="있다"> 있다</label><label><input type="radio" name="r_A4_g_r5_c3" value="없다"> 없다</label></span></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r5.c4" data-label="A4 [1, 3, 4] Greedy 5원 그 조합과 개수" autocomplete="off"></td></tr><tr><td class="lab">6원</td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r6.c1" data-label="A4 [1, 3, 4] Greedy 6원 Greedy 조합(예: 4+1)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r6.c2" data-label="A4 [1, 3, 4] Greedy 6원 Greedy 개수" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A4.g.r6.c3" data-type="radio" data-label="A4 [1, 3, 4] Greedy 6원 더 적은 개수의 조합"><label><input type="radio" name="r_A4_g_r6_c3" value="있다"> 있다</label><label><input type="radio" name="r_A4_g_r6_c3" value="없다"> 없다</label></span></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r6.c4" data-label="A4 [1, 3, 4] Greedy 6원 그 조합과 개수" autocomplete="off"></td></tr><tr><td class="lab">7원</td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r7.c1" data-label="A4 [1, 3, 4] Greedy 7원 Greedy 조합(예: 4+1)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r7.c2" data-label="A4 [1, 3, 4] Greedy 7원 Greedy 개수" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A4.g.r7.c3" data-type="radio" data-label="A4 [1, 3, 4] Greedy 7원 더 적은 개수의 조합"><label><input type="radio" name="r_A4_g_r7_c3" value="있다"> 있다</label><label><input type="radio" name="r_A4_g_r7_c3" value="없다"> 없다</label></span></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r7.c4" data-label="A4 [1, 3, 4] Greedy 7원 그 조합과 개수" autocomplete="off"></td></tr><tr><td class="lab">8원</td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r8.c1" data-label="A4 [1, 3, 4] Greedy 8원 Greedy 조합(예: 4+1)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r8.c2" data-label="A4 [1, 3, 4] Greedy 8원 Greedy 개수" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A4.g.r8.c3" data-type="radio" data-label="A4 [1, 3, 4] Greedy 8원 더 적은 개수의 조합"><label><input type="radio" name="r_A4_g_r8_c3" value="있다"> 있다</label><label><input type="radio" name="r_A4_g_r8_c3" value="없다"> 없다</label></span></td><td class="in-cell"><input type="text" class="in" data-key="A4.g.r8.c4" data-label="A4 [1, 3, 4] Greedy 8원 그 조합과 개수" autocomplete="off"></td></tr></table></div>
+<p>6원에서 Greedy는 처음에 어떤 동전을 냈는가? 그 선택은 어디서 돌이킬 수 없게 되었는가?</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A4.q6" data-label="A4 6원에서 처음 낸 동전과 돌이킬 수 없게 된 지점"></textarea></div>
+<h3>한국 동전 [1, 10, 50, 100, 500] · 1260원</h3>
+<div class="ans-row"><span class="n">결과</span><span>Greedy 조합 </span><input type="text" class="in" data-key="A4.kr.combo" data-label="A4 한국 동전 1260원 Greedy 조합" autocomplete="off" style="width:16em;display:inline-block"><span> 개수 </span><input type="text" class="in" data-key="A4.kr.count" data-label="A4 한국 동전 1260원 Greedy 개수" autocomplete="off" style="width:4em;display:inline-block"><span> 더 좋은 방법을 </span><span class="rg" data-key="A4.kr.found" data-type="radio" data-label="A4 한국 동전 1260원에서 더 좋은 방법을 찾았는가"><label><input type="radio" name="r_A4_kr_found" value="찾았다"> 찾았다</label><label><input type="radio" name="r_A4_kr_found" value="못 찾았다"> 못 찾았다</label></span></div>
+<p>더 좋은 방법을 못 찾았다는 것은 &ldquo;없다&rdquo;는 뜻인가? 내 생각과 까닭을 쓴다.</p><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A4.kr.q" data-label="A4 못 찾았다는 것은 없다는 뜻인가"></textarea></div>
+<h3>원인 후보</h3><p>[1, 3, 4]에서는 더 좋은 방법이 나오고 한국 동전에서는 못 찾았다. 그 차이의 <b>원인 후보</b>를 2가지 쓴다(결론이 아니라 후보이다).</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A4.cause1" data-label="A4 원인 후보 1"></textarea></div><div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A4.cause2" data-label="A4 원인 후보 2"></textarea></div>
+<p>동전 체계가 달라지면 같은 규칙의 결과가 달라질 수 있다고 생각하는가? 까닭과 함께 쓴다.</p><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A4.q.sys" data-label="A4 동전 체계가 달라지면 같은 규칙의 결과가 달라지는가"></textarea></div>
+</section>
+<section id="A5" class="sheet">
+<h2>A5 · 작은 금액부터 표 채우기<small>1차시 · 10분 · 개인→짝 대조</small></h2>
+<p class="meta"><span>산출물: dp 표(0~8)와 선택 동전, Greedy 표와의 차이 칸, (선택) [5, 7] 표</span></p>
+<div class="concept"><b class="h">약속 · DP 규칙</b>
+<p><code class="i">dp[a]</code> = a원을 만드는 <b>최소 동전 개수</b>. <code class="i">dp[0] = 0</code>. <code class="i">dp[a]</code>는 a 이하의 모든 동전 c에 대해 &ldquo;(a&minus;c)원의 최소 개수 + 1&rdquo;을 구해 그중 <b>가장 작은 값</b>으로 정한다. 표는 0원부터 위에서 아래로 채운다. 동전은 [1, 3, 4]이다.</p></div>
+<p>각 금액에서 동전 c를 하나 쓴 경우의 후보값(<code class="i">dp[a&minus;c] + 1</code>)을 쓰고(c가 a보다 크면 &ldquo;-&rdquo;), 가장 작은 값을 dp[a]에 쓴다. 그 값을 준 동전을 &ldquo;선택 동전&rdquo;에 쓴다(동률이면 모두).</p>
+<div class="scroll"><table class="fill"><tr><th style="width:70px">금액 a</th><th>c = 1 후보</th><th>c = 3 후보</th><th>c = 4 후보</th><th style="width:90px">dp[a]</th><th style="width:110px">선택 동전</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r1.c1" data-label="A5 [1, 3, 4] dp 표 1 c = 1 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r1.c2" data-label="A5 [1, 3, 4] dp 표 1 c = 3 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r1.c3" data-label="A5 [1, 3, 4] dp 표 1 c = 4 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r1.c4" data-label="A5 [1, 3, 4] dp 표 1 dp[a]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r1.c5" data-label="A5 [1, 3, 4] dp 표 1 선택 동전" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r2.c1" data-label="A5 [1, 3, 4] dp 표 2 c = 1 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r2.c2" data-label="A5 [1, 3, 4] dp 표 2 c = 3 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r2.c3" data-label="A5 [1, 3, 4] dp 표 2 c = 4 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r2.c4" data-label="A5 [1, 3, 4] dp 표 2 dp[a]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r2.c5" data-label="A5 [1, 3, 4] dp 표 2 선택 동전" autocomplete="off"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r3.c1" data-label="A5 [1, 3, 4] dp 표 3 c = 1 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r3.c2" data-label="A5 [1, 3, 4] dp 표 3 c = 3 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r3.c3" data-label="A5 [1, 3, 4] dp 표 3 c = 4 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r3.c4" data-label="A5 [1, 3, 4] dp 표 3 dp[a]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r3.c5" data-label="A5 [1, 3, 4] dp 표 3 선택 동전" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r4.c1" data-label="A5 [1, 3, 4] dp 표 4 c = 1 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r4.c2" data-label="A5 [1, 3, 4] dp 표 4 c = 3 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r4.c3" data-label="A5 [1, 3, 4] dp 표 4 c = 4 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r4.c4" data-label="A5 [1, 3, 4] dp 표 4 dp[a]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r4.c5" data-label="A5 [1, 3, 4] dp 표 4 선택 동전" autocomplete="off"></td></tr><tr><td class="lab">5</td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r5.c1" data-label="A5 [1, 3, 4] dp 표 5 c = 1 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r5.c2" data-label="A5 [1, 3, 4] dp 표 5 c = 3 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r5.c3" data-label="A5 [1, 3, 4] dp 표 5 c = 4 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r5.c4" data-label="A5 [1, 3, 4] dp 표 5 dp[a]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r5.c5" data-label="A5 [1, 3, 4] dp 표 5 선택 동전" autocomplete="off"></td></tr><tr><td class="lab">6</td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r6.c1" data-label="A5 [1, 3, 4] dp 표 6 c = 1 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r6.c2" data-label="A5 [1, 3, 4] dp 표 6 c = 3 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r6.c3" data-label="A5 [1, 3, 4] dp 표 6 c = 4 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r6.c4" data-label="A5 [1, 3, 4] dp 표 6 dp[a]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r6.c5" data-label="A5 [1, 3, 4] dp 표 6 선택 동전" autocomplete="off"></td></tr><tr><td class="lab">7</td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r7.c1" data-label="A5 [1, 3, 4] dp 표 7 c = 1 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r7.c2" data-label="A5 [1, 3, 4] dp 표 7 c = 3 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r7.c3" data-label="A5 [1, 3, 4] dp 표 7 c = 4 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r7.c4" data-label="A5 [1, 3, 4] dp 표 7 dp[a]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r7.c5" data-label="A5 [1, 3, 4] dp 표 7 선택 동전" autocomplete="off"></td></tr><tr><td class="lab">8</td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r8.c1" data-label="A5 [1, 3, 4] dp 표 8 c = 1 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r8.c2" data-label="A5 [1, 3, 4] dp 표 8 c = 3 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r8.c3" data-label="A5 [1, 3, 4] dp 표 8 c = 4 후보" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r8.c4" data-label="A5 [1, 3, 4] dp 표 8 dp[a]" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.dp.r8.c5" data-label="A5 [1, 3, 4] dp 표 8 선택 동전" autocomplete="off"></td></tr></table></div>
+<h3>Greedy 개수와 비교</h3><p>A4의 Greedy 개수를 옮겨 쓰고, dp[a]와 <b>다른 금액에 표시</b>한다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:70px">금액 a</th><th>Greedy 개수(A4에서 옮김)</th><th>dp[a]</th><th style="width:110px">다르다(표시)</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r1.c1" data-label="A5 Greedy와 dp 비교 1 Greedy 개수(A4에서 옮김)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r1.c2" data-label="A5 Greedy와 dp 비교 1 dp[a]" autocomplete="off"></td><td class="in-cell"><label class="ck"><input type="checkbox" data-key="A5.cmp.r1.c3" data-label="A5 Greedy와 dp 비교 1 다르다(표시)"> 표시</label></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r2.c1" data-label="A5 Greedy와 dp 비교 2 Greedy 개수(A4에서 옮김)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r2.c2" data-label="A5 Greedy와 dp 비교 2 dp[a]" autocomplete="off"></td><td class="in-cell"><label class="ck"><input type="checkbox" data-key="A5.cmp.r2.c3" data-label="A5 Greedy와 dp 비교 2 다르다(표시)"> 표시</label></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r3.c1" data-label="A5 Greedy와 dp 비교 3 Greedy 개수(A4에서 옮김)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r3.c2" data-label="A5 Greedy와 dp 비교 3 dp[a]" autocomplete="off"></td><td class="in-cell"><label class="ck"><input type="checkbox" data-key="A5.cmp.r3.c3" data-label="A5 Greedy와 dp 비교 3 다르다(표시)"> 표시</label></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r4.c1" data-label="A5 Greedy와 dp 비교 4 Greedy 개수(A4에서 옮김)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r4.c2" data-label="A5 Greedy와 dp 비교 4 dp[a]" autocomplete="off"></td><td class="in-cell"><label class="ck"><input type="checkbox" data-key="A5.cmp.r4.c3" data-label="A5 Greedy와 dp 비교 4 다르다(표시)"> 표시</label></td></tr><tr><td class="lab">5</td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r5.c1" data-label="A5 Greedy와 dp 비교 5 Greedy 개수(A4에서 옮김)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r5.c2" data-label="A5 Greedy와 dp 비교 5 dp[a]" autocomplete="off"></td><td class="in-cell"><label class="ck"><input type="checkbox" data-key="A5.cmp.r5.c3" data-label="A5 Greedy와 dp 비교 5 다르다(표시)"> 표시</label></td></tr><tr><td class="lab">6</td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r6.c1" data-label="A5 Greedy와 dp 비교 6 Greedy 개수(A4에서 옮김)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r6.c2" data-label="A5 Greedy와 dp 비교 6 dp[a]" autocomplete="off"></td><td class="in-cell"><label class="ck"><input type="checkbox" data-key="A5.cmp.r6.c3" data-label="A5 Greedy와 dp 비교 6 다르다(표시)"> 표시</label></td></tr><tr><td class="lab">7</td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r7.c1" data-label="A5 Greedy와 dp 비교 7 Greedy 개수(A4에서 옮김)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r7.c2" data-label="A5 Greedy와 dp 비교 7 dp[a]" autocomplete="off"></td><td class="in-cell"><label class="ck"><input type="checkbox" data-key="A5.cmp.r7.c3" data-label="A5 Greedy와 dp 비교 7 다르다(표시)"> 표시</label></td></tr><tr><td class="lab">8</td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r8.c1" data-label="A5 Greedy와 dp 비교 8 Greedy 개수(A4에서 옮김)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.cmp.r8.c2" data-label="A5 Greedy와 dp 비교 8 dp[a]" autocomplete="off"></td><td class="in-cell"><label class="ck"><input type="checkbox" data-key="A5.cmp.r8.c3" data-label="A5 Greedy와 dp 비교 8 다르다(표시)"> 표시</label></td></tr></table></div>
+<h3>관찰·정리</h3>
+<p>dp[6]은 어느 칸에서 왔는가? 그 칸의 값 + 1이 Greedy와 다른 이유를 쓴다.</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A5.q1" data-label="A5 dp[6]은 어느 칸에서 왔는가? 그 칸의 값 + 1이 Greedy와 다른 이유를 쓴다."></textarea></div>
+<p>표를 왜 0원부터 순서대로 채워야 하는가? 순서를 바꾸면 무엇이 비는가?</p><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A5.q2" data-label="A5 표를 왜 0원부터 순서대로 채워야 하는가? 순서를 바꾸면 무엇이 비는가?"></textarea></div>
+<h3>선택 · 동전 [5, 7]</h3><p>같은 규칙으로 0~12원을 채운다. 만들 수 없는 금액은 &ldquo;INF&rdquo;(무한대)로 쓴다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:60px">a</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr><tr><td class="lab">dp[a]</td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c1" data-label="A5 선택 [5, 7] dp dp[a] 0" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c2" data-label="A5 선택 [5, 7] dp dp[a] 1" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c3" data-label="A5 선택 [5, 7] dp dp[a] 2" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c4" data-label="A5 선택 [5, 7] dp dp[a] 3" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c5" data-label="A5 선택 [5, 7] dp dp[a] 4" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c6" data-label="A5 선택 [5, 7] dp dp[a] 5" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c7" data-label="A5 선택 [5, 7] dp dp[a] 6" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c8" data-label="A5 선택 [5, 7] dp dp[a] 7" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c9" data-label="A5 선택 [5, 7] dp dp[a] 8" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c10" data-label="A5 선택 [5, 7] dp dp[a] 9" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c11" data-label="A5 선택 [5, 7] dp dp[a] 10" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c12" data-label="A5 선택 [5, 7] dp dp[a] 11" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A5.opt.r1.c13" data-label="A5 선택 [5, 7] dp dp[a] 12" autocomplete="off"></td></tr></table></div>
+<p>dp[5]가 INF인 동전 체계에서 dp[12]는 어떻게 구하는가?</p><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A5.opt.q" data-label="A5 선택: dp[12]를 구하는 방법"></textarea></div>
+</section>
+<section id="A6" class="sheet">
+<h2>A6 · 사실 정리와 이름 붙이기<small>1차시 · 8분 · 전체→개인</small></h2>
+<p class="meta"><span>산출물: 사실 정리표, 용어 연결, exit ticket</span></p>
+<h3>① 사실 정리(교사가 값을 되짚는 동안 내 표에서 찾아 쓴다)</h3>
+<div class="scroll"><table class="fill"><tr><th style="width:60%">항목</th><th>값</th></tr><tr><td class="lab">fib(6) 순수 재귀 호출 수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r1.c1" data-label="A6 사실 정리 fib(6) 순수 재귀 호출 수 값" autocomplete="off"></td></tr><tr><td class="lab">fib(6)에서 서로 다른 입력의 수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r2.c1" data-label="A6 사실 정리 fib(6)에서 서로 다른 입력의 수 값" autocomplete="off"></td></tr><tr><td class="lab">메모 규칙의 호출 수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r3.c1" data-label="A6 사실 정리 메모 규칙의 호출 수 값" autocomplete="off"></td></tr><tr><td class="lab">메모 규칙의 실제 계산 수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r4.c1" data-label="A6 사실 정리 메모 규칙의 실제 계산 수 값" autocomplete="off"></td></tr><tr><td class="lab">[1, 3, 4] 6원의 Greedy 개수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r5.c1" data-label="A6 사실 정리 [1, 3, 4] 6원의 Greedy 개수 값" autocomplete="off"></td></tr><tr><td class="lab">[1, 3, 4] 6원의 최소 개수(dp)</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r6.c1" data-label="A6 사실 정리 [1, 3, 4] 6원의 최소 개수(dp) 값" autocomplete="off"></td></tr></table></div>
+<h3>② 이름 붙이기</h3><p>교사가 다섯 가지 이름을 알려 준다. 오늘 한 활동 중 어느 것에 어떤 이름이 붙는지 내 말로 연결해 쓴다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:150px">이름</th><th>오늘 활동 중 연결되는 것(내 말)</th></tr><tr><td class="lab">메모이제이션</td><td class="in-cell"><textarea class="in" rows="2" data-key="A6.terms.r1.c1" data-label="A6 이름 붙이기 메모이제이션 오늘 활동 중 연결되는 것(내 말)"></textarea></td></tr><tr><td class="lab">타뷸레이션</td><td class="in-cell"><textarea class="in" rows="2" data-key="A6.terms.r2.c1" data-label="A6 이름 붙이기 타뷸레이션 오늘 활동 중 연결되는 것(내 말)"></textarea></td></tr><tr><td class="lab">동적 계획법</td><td class="in-cell"><textarea class="in" rows="2" data-key="A6.terms.r3.c1" data-label="A6 이름 붙이기 동적 계획법 오늘 활동 중 연결되는 것(내 말)"></textarea></td></tr><tr><td class="lab">탐욕 알고리즘</td><td class="in-cell"><textarea class="in" rows="2" data-key="A6.terms.r4.c1" data-label="A6 이름 붙이기 탐욕 알고리즘 오늘 활동 중 연결되는 것(내 말)"></textarea></td></tr><tr><td class="lab">반례</td><td class="in-cell"><textarea class="in" rows="2" data-key="A6.terms.r5.c1" data-label="A6 이름 붙이기 반례 오늘 활동 중 연결되는 것(내 말)"></textarea></td></tr></table></div>
+<p>방금 한 일 중 &lsquo;기억&rsquo;이 들어간 것은 무엇인가? &lsquo;한 번 고르면 돌아보지 않는다&rsquo;가 들어간 것은 무엇인가?</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A6.q" data-label="A6 기억이 들어간 것과 돌아보지 않는 것"></textarea></div>
+<h3>③ exit ticket</h3>
+<div class="ans-row"><span class="n">1</span><span>fib(7)을 &ldquo;계산한 값은 메모에 적는&rdquo; 규칙으로 구할 때 호출 </span><input type="text" class="in" data-key="A6.x1.calls" data-label="A6 exit1 fib(7) 메모 호출 횟수" autocomplete="off" style="width:4em;display:inline-block"><span>번, 실제 계산 </span><input type="text" class="in" data-key="A6.x1.comp" data-label="A6 exit1 fib(7) 메모 계산 횟수" autocomplete="off" style="width:4em;display:inline-block"><span>번</span></div>
+<div class="ans-row"><span class="n">2</span><span>[1, 3, 4]에서 9원의 Greedy 개수 </span><input type="text" class="in" data-key="A6.x2.greedy" data-label="A6 exit2 9원 Greedy 개수" autocomplete="off" style="width:4em;display:inline-block"><span>, dp[9] </span><input type="text" class="in" data-key="A6.x2.dp" data-label="A6 exit2 dp[9]" autocomplete="off" style="width:4em;display:inline-block"></div>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A6.x3" data-label="A6 exit3 오늘 헷갈린 말 1개와 이유"></textarea></div>
+</section>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
+</script>
+<script id="week13-submit">
+/* week13 학생 입력 저장 (8개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week13-student-v1 */
+(function(){
+"use strict";
+var FILE_KEY="workbook";
+var FILES={workbook:"student_workbook.html",code_lab:"student_code_lab.html",workbook_part2:"student_workbook_part2.html",code_lab_part2:"student_code_lab_part2.html",code_lab_part3:"student_code_lab_part3.html",workbook_part3:"student_workbook_part3.html",code_lab_part4:"student_code_lab_part4.html",formative:"formative_check.html"};
+var FILE=FILES[FILE_KEY], STORE="week13:"+FILE, SCHEMA="week13-student-v1";
+var bar,idIn,nameIn,msg,autoEl,saveBtn,clearBtn,confirmBox,busy=false,timer=null;
+var draftBtn,loadBtn,fileIn,yesBtn,confirmTxt,pending=null,baseline="";
+
+function q(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
+function kind(el){
+  var t=el.getAttribute("data-type");
+  if(t)return t;
+  var tag=el.tagName.toLowerCase();
+  if(tag==="textarea")return "textarea";
+  if(tag==="select")return "select";
+  if(tag==="input")return el.type==="checkbox"?"checkbox":"text";
+  return "text";
+}
+function labelOf(el){
+  var l=el.getAttribute("data-label");
+  if(l)return l;
+  if(el.labels&&el.labels.length)return el.labels[0].textContent.replace(/\s+/g," ").trim();
+  return el.getAttribute("aria-label")||"";
+}
+function readValue(el,k){
+  if(k==="checkbox")return !!el.checked;
+  if(k==="radio"){var r=el.querySelector("input[type=radio]:checked");return r?r.value:null;}
+  return el.value;
+}
+function collect(){
+  return q("[data-key]").map(function(el){
+    var k=kind(el);
+    return {key:el.getAttribute("data-key"),label:labelOf(el),type:k,value:readValue(el,k)};
+  });
+}
+function studentInfo(){return {id:idIn.value.trim(),name:nameIn.value.trim()};}
+function buildJSON(status){
+  return {schema:SCHEMA,week:13,file:FILE,status:status||"final",student:studentInfo(),savedAt:new Date().toISOString(),answers:collect()};
+}
+function safe(s){return String(s).replace(/[\\\/:*?"<>|\s\u0000-\u001f]+/g,"_").replace(/^\.+/,"_");}
+function fileName(st,draft){return "week13_"+FILE_KEY+"_"+safe(st.id||"학번미입력")+"_"+safe(st.name||"이름미입력")+(draft?"_임시저장":"")+".json";}
+function validate(){
+  var miss=[];
+  [[idIn,"학번"],[nameIn,"이름"]].forEach(function(p){
+    var bad=!p[0].value.trim();
+    p[0].classList.toggle("invalid",bad);
+    p[0].setAttribute("aria-invalid",bad?"true":"false");
+    if(bad)miss.push(p);
+  });
+  return miss;
+}
+function updatePrintId(){
+  var p=document.getElementById("printid");
+  if(!p)return;
+  var s=studentInfo();
+  p.textContent="학번: "+(s.id||"          ")+"   이름: "+(s.name||"          ");
+}
+function say(text,cls){msg.textContent=text;msg.className="sb-msg"+(cls?" "+cls:"");}
+
+function download(draft){
+  var obj=buildJSON(draft?"draft":"final"),name=fileName(obj.student,draft);
+  var blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"});
+  var url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;a.style.display="none";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1500);
+  return name;
+}
+function onSave(){
+  if(busy)return;
+  var miss=validate();
+  if(miss.length){
+    say("학번과 이름을 입력해야 저장할 수 있다. 표시된 칸을 채운 뒤 다시 누른다.","err");
+    miss[0][0].focus();return;
+  }
+  busy=true;saveBtn.disabled=true;
+  try{
+    var n=download();
+    say("저장했다: "+n+" (내려받은 JSON 파일 한 개를 제출한다.)","ok");
+  }catch(e){say("저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;saveBtn.disabled=false;},1200);
+}
+
+/* 이어 쓰기: 임시 저장 파일 내려받기 / 저장한 파일 불러오기 */
+function snap(){return JSON.stringify(collect().map(function(a){return a.value;}));}
+function isDirty(){return snap()!==baseline;}
+function ask(text,fn){
+  confirmTxt.textContent=text;pending=fn;confirmBox.hidden=false;
+  clearBtn.disabled=true;loadBtn.disabled=true;
+}
+function closeAsk(){
+  pending=null;confirmBox.hidden=true;clearBtn.disabled=false;loadBtn.disabled=false;
+}
+function onDraft(){
+  if(busy)return;
+  busy=true;draftBtn.disabled=true;
+  try{
+    var n=download(true),s=studentInfo();
+    say("임시 저장했다: "+n+" (제출 파일이 아니다. 이어 쓸 때 [불러오기]로 이 파일을 고른다."+((s.id&&s.name)?"":" 학번과 이름을 쓰면 파일 이름에 들어간다.")+")","ok");
+  }catch(e){say("임시 저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;draftBtn.disabled=false;},1200);
+}
+function applyLoaded(j){
+  if(!j||typeof j!=="object"||Array.isArray(j))return {err:"저장 파일 형식이 아니다."};
+  if(j.schema!==SCHEMA)return {err:"이 워크북의 저장 파일이 아니다(schema 불일치). 이 활동지에서 저장한 JSON 파일을 고른다."};
+  if(j.file!==FILE)return {err:"이 파일은 '"+String(j.file)+"'에서 저장한 것이다. 지금 열린 '"+FILE+"'에서 저장한 파일만 불러올 수 있다."};
+  if(!Array.isArray(j.answers))return {err:"저장 파일에 answers가 없거나 형식이 틀리다."};
+  var vals={};
+  j.answers.forEach(function(a){if(a&&typeof a.key==="string")vals[a.key]=a.value;});
+  var n=0;
+  q("[data-key]").forEach(function(el){
+    var key=el.getAttribute("data-key");
+    if(!Object.prototype.hasOwnProperty.call(vals,key))return;
+    var v=vals[key],t=typeof v;
+    if(v!==null&&t!=="string"&&t!=="boolean")return;
+    setValue(el,v);n++;
+  });
+  if(j.student&&typeof j.student==="object"){
+    idIn.value=typeof j.student.id==="string"?j.student.id:"";
+    nameIn.value=typeof j.student.name==="string"?j.student.name:"";
+    [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  }
+  autosizeAll();updatePrintId();stash();
+  return {n:n,draft:j.status==="draft",at:j.savedAt};
+}
+function onLoadClick(){
+  if(isDirty()||idIn.value.trim()||nameIn.value.trim()){
+    ask("지금 입력한 내용이 불러온 파일의 내용으로 바뀐다. 계속하려면 [불러오기 진행]을 누르고 파일을 고른다.",function(){closeAsk();fileIn.click();});
+    yesBtn.textContent="불러오기 진행";
+  }else{fileIn.click();}
+}
+function onFileChosen(){
+  var f=fileIn.files&&fileIn.files[0];
+  if(!f)return;
+  if(f.size>3*1024*1024){say("파일이 너무 크다(3MB 초과). 이 활동지에서 저장한 JSON 파일이 맞는지 확인한다.","err");fileIn.value="";return;}
+  var r=new FileReader();
+  r.onerror=function(){say("파일을 읽지 못했다. 다시 시도한다.","err");fileIn.value="";};
+  r.onload=function(){
+    var res;
+    try{res=applyLoaded(JSON.parse(String(r.result)));}
+    catch(e){res={err:"JSON 파일을 읽지 못했다. 이 활동지에서 저장한 파일이 맞는지 확인한다."};}
+    if(res.err){say(res.err+" (입력란은 바뀌지 않았다.)","err");}
+    else{say("불러왔다: "+f.name+" ("+res.n+"칸"+(res.at?", 저장 시각 "+res.at.slice(0,16).replace("T"," "):"")+"). 이어서 쓴다."+(res.draft?"":" (제출용 파일을 불러왔다.)"),"ok");}
+    fileIn.value="";
+  };
+  r.readAsText(f,"utf-8");
+}
+
+/* 임시 보관 (localStorage, 모두 try/catch) */
+function stash(){
+  try{
+    var vals={};collect().forEach(function(a){vals[a.key]=a.value;});
+    localStorage.setItem(STORE,JSON.stringify({student:studentInfo(),values:vals,at:Date.now()}));
+    var d=new Date();
+    autoEl.textContent="임시 저장됨 "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
+  }catch(e){autoEl.textContent="임시 저장 사용 불가(저장(JSON)은 가능)";}
+}
+function schedule(){clearTimeout(timer);timer=setTimeout(stash,300);}
+function setValue(el,v){
+  var k=kind(el);
+  if(k==="checkbox"){el.checked=(v===true);}
+  else if(k==="radio"){q("input[type=radio]",el).forEach(function(r){r.checked=(v!==null&&v!==undefined&&r.value===v);});}
+  else{el.value=(v===null||v===undefined)?"":String(v);}
+}
+function restore(){
+  try{
+    var raw=localStorage.getItem(STORE);if(!raw)return;
+    var s=JSON.parse(raw);if(!s)return;
+    if(s.student){idIn.value=s.student.id||"";nameIn.value=s.student.name||"";}
+    var any=false;
+    q("[data-key]").forEach(function(el){var key=el.getAttribute("data-key");if(s.values&&Object.prototype.hasOwnProperty.call(s.values,key)){setValue(el,s.values[key]);any=true;}});
+    autosizeAll();
+    if(any||(s.student&&(s.student.id||s.student.name)))autoEl.textContent="이전 임시 저장을 불러왔다";
+  }catch(e){}
+}
+function resetAll(){
+  q("[data-key]").forEach(function(el){setValue(el,kind(el)==="checkbox"?false:(kind(el)==="radio"?null:""));});
+  idIn.value="";nameIn.value="";
+  [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  autosizeAll();
+}
+function doClear(){
+  try{localStorage.removeItem(STORE);}catch(e){}
+  resetAll();
+  closeAsk();
+  autoEl.textContent="";
+  say("이 브라우저의 자동 보관을 지우고 입력란을 비웠다. (내려받은 임시 저장 파일은 그대로다.)","ok");
+}
+
+/* 입력란 보조 */
+function autosize(t){if(t.classList.contains("code")||t.classList.contains("draw"))return;t.style.height="auto";if(t.scrollHeight>0)t.style.height=(t.scrollHeight+2)+"px";}
+function autosizeAll(){q("textarea.in").forEach(autosize);}
+function codeKeys(e){
+  var t=e.target;
+  if(!t||!t.classList||!t.classList.contains("code"))return;
+  if(e.key==="Escape"){t._esc=true;return;}
+  if(e.key==="Tab"&&!e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey){
+    if(t._esc){t._esc=false;return;}
+    e.preventDefault();
+    var s=t.selectionStart,en=t.selectionEnd;
+    t.setRangeText("    ",s,en,"end");
+    t.dispatchEvent(new Event("input",{bubbles:true}));
+  }else if(e.key!=="Shift"){t._esc=false;}
+}
+function labelControls(){
+  q("[data-key]").forEach(function(el){
+    var l=el.getAttribute("data-label");
+    var isGroup=el.getAttribute("data-type")==="radio";
+    if(isGroup){el.setAttribute("role","radiogroup");if(l)el.setAttribute("aria-label",l);return;}
+    var has=el.labels&&el.labels.length;
+    if(!has&&l&&!el.getAttribute("aria-label"))el.setAttribute("aria-label",l);
+  });
+}
+function buildBar(){
+  bar=document.createElement("div");bar.id="savebar";bar.setAttribute("role","region");bar.setAttribute("aria-label","제출 저장 바");
+  bar.innerHTML='<div class="sb-in"><div class="sb-row">'
+   +'<label for="sb-id">학번 <input type="text" id="sb-id" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<label for="sb-name">이름 <input type="text" id="sb-name" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<button type="button" id="sb-save">저장(JSON)</button>'
+   +'<button type="button" id="sb-draft" class="sec" title="다 못 쓴 내용을 파일로 보관한다. 제출 파일이 아니다.">임시 저장</button>'
+   +'<button type="button" id="sb-load" class="sec" title="임시 저장한 파일을 불러와 이어 쓴다.">불러오기</button>'
+   +'<input type="file" id="sb-file" accept=".json,application/json" hidden aria-label="저장한 JSON 파일 선택">'
+   +'<button type="button" id="sb-clear" class="sec">자동 보관 지우기</button>'
+   +'<span class="sb-auto" id="sb-auto"></span></div>'
+   +'<div class="sb-confirm" id="sb-confirm" hidden><span id="sb-ctext"></span>'
+   +'<button type="button" id="sb-yes">확인</button><button type="button" id="sb-no" class="sec">취소</button></div>'
+   +'<div class="sb-msg" id="sb-msg" role="status" aria-live="polite">다 쓰면 학번과 이름을 쓰고 [저장(JSON)]을 눌러 제출 파일 한 개를 만든다. 시간이 모자라면 [임시 저장]으로 파일을 보관하고, 다음에 [불러오기]로 이어 쓴다.</div></div>';
+  document.body.insertBefore(bar,document.body.firstChild);
+  var pid=document.createElement("div");pid.id="printid";pid.setAttribute("aria-hidden","true");
+  document.body.insertBefore(pid,bar.nextSibling);
+  idIn=bar.querySelector("#sb-id");nameIn=bar.querySelector("#sb-name");msg=bar.querySelector("#sb-msg");
+  autoEl=bar.querySelector("#sb-auto");saveBtn=bar.querySelector("#sb-save");clearBtn=bar.querySelector("#sb-clear");confirmBox=bar.querySelector("#sb-confirm");
+  draftBtn=bar.querySelector("#sb-draft");loadBtn=bar.querySelector("#sb-load");fileIn=bar.querySelector("#sb-file");yesBtn=bar.querySelector("#sb-yes");confirmTxt=bar.querySelector("#sb-ctext");
+  saveBtn.addEventListener("click",onSave);
+  draftBtn.addEventListener("click",onDraft);
+  loadBtn.addEventListener("click",onLoadClick);
+  fileIn.addEventListener("change",onFileChosen);
+  clearBtn.addEventListener("click",function(){yesBtn.textContent="지우기";ask("이 브라우저의 자동 보관을 지우고 입력란을 모두 비운다. 임시 저장 파일이나 JSON으로 저장하지 않은 내용은 되찾을 수 없다.",doClear);bar.querySelector("#sb-no").focus();});
+  bar.querySelector("#sb-no").addEventListener("click",function(){closeAsk();loadBtn.focus();});
+  yesBtn.addEventListener("click",function(){var f=pending;if(f)f();});
+}
+function init(){
+  buildBar();labelControls();baseline=snap();restore();autosizeAll();
+  document.addEventListener("input",function(e){
+    var t=e.target;
+    if(t.tagName==="TEXTAREA")autosize(t);
+    if(t===idIn||t===nameIn){if(t.value.trim()){t.classList.remove("invalid");t.setAttribute("aria-invalid","false");}}
+    if(t===idIn||t===nameIn)updatePrintId();
+    schedule();
+  });
+  document.addEventListener("change",schedule);
+  document.addEventListener("keydown",codeKeys);
+  window.addEventListener("beforeprint",function(){autosizeAll();updatePrintId();});
+  updatePrintId();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(autosizeAll);
+  window.addEventListener("resize",autosizeAll);
+  window.Week13Submit={buildJSON:buildJSON,collect:collect,validate:validate,fileName:fileName,FILE_KEY:FILE_KEY,applyLoaded:applyLoaded};
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+</body>
+</html>

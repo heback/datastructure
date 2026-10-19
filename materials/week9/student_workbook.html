@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9주차 탐구 활동지 1~2차시 · 힙과 우선순위 큐 (학생용)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16233b;--paper:#f7f8fa;--panel:#ffffff;--py-blue:#3572a5;--line:#dfe3ea;--dim:#5b6b85;--code-bg:#101828;--code-fg:#e6edf7;--ok:#1d7a4f;--warn:#8a6d1f;--bad:#b3401f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+code,pre{font-family:"JetBrains Mono","D2Coding",Consolas,monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:24px}
+.prompt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--py-blue);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.lead{color:var(--dim);margin-top:8px;max-width:760px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 20px;font-family:"JetBrains Mono",monospace;font-size:12px}
+nav a{color:var(--py-blue);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+section>h2{font-size:18px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+section>h2 small{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--py-blue);margin-left:8px;font-weight:500}
+h3{font-size:15px;margin:14px 0 6px}
+p{margin:6px 0}
+ul,ol{margin:6px 0 6px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--code-bg);color:var(--code-fg);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;text-align:left;padding:8px}
+td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--py-blue);white-space:nowrap}
+table.fill td{border:1px solid var(--line);height:34px}
+table.fill td.lab{background:#f0f2f6;font-weight:600;height:auto}
+pre{background:var(--code-bg);color:var(--code-fg);padding:12px 14px;border-radius:6px;font-size:12.5px;overflow-x:auto;margin:8px 0;line-height:1.55}
+code.i{background:#eef1f6;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;color:var(--py-blue)}
+.note{background:#eef4fa;border:1px solid #d6e5f2;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.warn{background:#fbf3e4;border:1px solid #ecd9ae;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.concept{background:#f4f7fc;border:1px solid #c9d6ea;border-left:4px solid var(--py-blue);border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0;break-inside:avoid;page-break-inside:avoid}
+.concept b.h{color:var(--py-blue)}
+.concept table{margin:6px 0;font-size:12.5px}
+.concept ul{margin:4px 0 4px 18px}
+.ans{background:#eef8f2;border:1px solid #bfe0cf;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c,var(--py-blue));border-radius:6px;padding:10px 14px;background:#fff}
+.card b.h{color:var(--c)}
+.blank{border:1px dashed #9aa7bd;border-radius:6px;min-height:64px;margin:6px 0;padding:6px 10px;color:var(--dim);font-size:12px}
+.blank.l{min-height:110px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.diagram{background:#f0f2f6;border-radius:6px;padding:10px 14px;font-size:12.5px;overflow-x:auto;color:var(--ink);line-height:1.4}
+.codewrap{position:relative}
+.copy{position:absolute;top:14px;right:8px;font:500 11px "JetBrains Mono",monospace;background:#27364f;color:#e6edf7;border:1px solid #3d506e;border-radius:4px;padding:2px 8px;cursor:pointer}
+.role{display:inline-block;font:700 10.5px "JetBrains Mono",monospace;padding:1px 7px;border-radius:3px;background:#e4ecf6;color:var(--py-blue);margin-right:6px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.links a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:6px;margin:6px 0;color:var(--py-blue);text-decoration:none;font-weight:600}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{
+  body{background:#fff;font-size:11.5pt}.wrap{max-width:none;padding:0}
+  nav,.copy,.noprint{display:none!important}
+  section{border:none;padding:0;margin:0 0 8mm;break-inside:auto}
+  section.sheet{page-break-after:always;break-after:page}
+  section.sheet:last-of-type{page-break-after:auto}
+  header{padding:0 0 8px;margin-bottom:10px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f3f4f7;color:#111;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,.card,.blank{break-inside:avoid}
+}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.gate{border:1px dashed #b3401f;border-radius:8px;padding:6px 12px;background:#fff8f5}
+</style>
+<style id="week9-submit-style">
+/* week9 제출 바·입력란 공통 스타일 (5개 학생용 파일 동일) */
+#savebar{position:sticky;top:0;z-index:50;background:#16233b;color:#f7f8fa;padding:8px 20px;border-bottom:3px solid #3572a5;font-size:13px}
+#savebar .sb-in{max-width:1000px;margin:0 auto}
+#savebar .sb-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+#savebar label{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+#savebar input[type=text]{width:9.5em;padding:5px 8px;border:2px solid #9aa7bd;border-radius:4px;background:#fff;color:#16233b;font:inherit;font-weight:500}
+#savebar input[type=text].invalid{border-color:#ff9b7a;background:#fff3ee}
+#savebar button{font:600 13px "IBM Plex Sans KR",sans-serif;padding:6px 14px;border-radius:4px;border:2px solid #fff;background:#fff;color:#16233b;cursor:pointer}
+#savebar button.sec{background:transparent;color:#fff;border-color:#9aa7bd}
+#savebar button:disabled{opacity:.6;cursor:default}
+#savebar button:focus-visible,#savebar input:focus-visible{outline:3px solid #ffd166;outline-offset:2px}
+#savebar .sb-msg{min-height:1.4em;margin-top:4px;font-size:12.5px}
+#savebar .sb-msg.err{color:#ffd0c0;font-weight:700}
+#savebar .sb-msg.ok{color:#bff0d4}
+#savebar .sb-auto{font-size:11.5px;color:#c9d3e6;margin-left:auto}
+#savebar .sb-confirm{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px;padding:6px 10px;border:1px solid #ffd166;border-radius:4px;font-size:12.5px}
+#savebar .sb-confirm[hidden]{display:none}
+.in{width:100%;display:block;font:inherit;font-size:13.5px;line-height:1.5;color:#16233b;background:#fff;border:1px solid #6b7a94;border-radius:4px;padding:5px 8px}
+textarea.in{resize:vertical;min-height:2.4em;overflow:hidden}
+textarea.in.l{min-height:7em}
+textarea.in.code{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre;overflow:auto;tab-size:4;min-height:12em;background:#fbfcfe}
+textarea.in.draw{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;white-space:pre;overflow:auto;min-height:9em}
+.in:focus-visible,.ck input:focus-visible,.rg input:focus-visible{outline:3px solid #3572a5;outline-offset:1px}
+.in.invalid{border:2px solid #b3401f}
+input.in.s{display:inline-block;width:3.2em;padding:1px 4px;text-align:center}
+table.fill td.in-cell{padding:3px;height:auto}
+.ans-row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.ans-row>.n{padding-top:6px;font-weight:700;color:#3572a5}
+.mycode{margin:8px 0 12px}
+.mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
+.hint{font-size:12px;color:#5b6b85;margin:2px 0}
+.ck{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
+.ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
+.rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
+.rg label{display:inline-flex;align-items:center;gap:5px}
+@media (max-width:640px){#savebar{padding:8px 14px}#savebar .sb-auto{margin-left:0}}
+#printid{display:none}
+@media print{
+  #printid{display:block;font:600 12pt "IBM Plex Sans KR",sans-serif;margin:0 0 8px;padding-bottom:4px;border-bottom:1px solid #999;white-space:pre-wrap}
+  #savebar,.hint.noprint{display:none!important}
+  .in{border:none;border-bottom:1px solid #9aa7bd;border-radius:0;background:transparent;padding:2px 2px;-webkit-appearance:none;appearance:none;resize:none}
+  textarea.in{overflow:visible}
+  textarea.in.code,textarea.in.draw{border:1px solid #ccd;white-space:pre-wrap}
+  select.in{background-image:none}
+  .ans-row,.mycode{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="prompt">&gt;&gt;&gt; workbook.week(9)  # 학생용 · 탐구 활동지 A1~A10</div>
+  <h1>9주차 탐구 활동지 — 힙(Heap)과 우선순위 큐</h1>
+  <p class="lead">핵심질문: 들어온 순서와 무관하게, 우선순위가 가장 높은 데이터를 즉시(O(1)) 뽑아내려면 어떻게 해야 할까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 정답은 이 활동지에 없다. 빈칸은 스스로 채운다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><label class="ck">모둠 <input type="text" class="in" style="width:8em;display:inline-block" data-key="meta.group" data-label="모둠" autocomplete="off"></label></p>
+</header>
+<nav><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="#A6">A6</a><a href="#A7">A7</a><a href="#A8">A8</a><a href="#A9">A9</a><a href="#A10">A10</a><a href="index.html">목록</a></nav>
+
+<section id="A1" class="sheet">
+<h2>A1 · 가장 급한 사람 먼저<small>1차시 · 8분 · 개인→짝</small></h2>
+<p class="meta"><span>산출물: 자기 방식 1가지와 약점 메모</span></p>
+<p>병원 응급실과 게임 서버, 프린터에는 공통점이 있다. <b>도착한 순서</b>와 <b>먼저 처리해야 하는 순서</b>가 다르다는 점이다.</p>
+<div class="grid">
+<div class="card"><b class="h">사례 ① 응급실 접수</b><p>환자는 도착 순서대로 접수하지만, 의사는 가장 급한 환자부터 부른다.</p></div>
+<div class="card"><b class="h">사례 ② 게임 이벤트 큐</b><p>서버에는 이벤트가 계속 들어오지만, 시간이 가장 임박한 이벤트부터 실행해야 한다.</p></div>
+<div class="card"><b class="h">사례 ③ 프린터 대기열</b><p>문서가 쌓이지만, 쪽 수가 적은 문서나 교사 문서를 먼저 뽑아야 할 때가 있다.</p></div>
+</div>
+<div class="note"><b>오늘의 질문</b> 들어온 순서와 무관하게, 우선순위가 가장 높은 데이터를 즉시(O(1)) 뽑아내려면 어떻게 해야 할까?</div>
+<h3>관찰·정리</h3>
+<p>응급실에 아래 순서로 환자가 도착했다. 숫자는 급한 정도이며 <b>작을수록 더 급하다</b>.</p>
+<p><code class="i">도착 순서: (김, 3) (이, 1) (박, 4) (최, 2) (정, 5)</code></p>
+<table class="fill"><tr><th style="width:70px">순서</th><th style="width:24%">이름</th><th>이 사람을 고른 방법(어떻게 가장 급한 사람을 찾았는가)</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A1.call.r1.c1" data-label="A1 부르는 순서 1 · 이름" autocomplete="off"></td><td class="in-cell"><textarea class="in" rows="1" data-key="A1.call.r1.c2" data-label="A1 부르는 순서 1 · 이 사람을 고른 방법(어떻게 가장 급한 사람을 찾았는가)"></textarea></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A1.call.r2.c1" data-label="A1 부르는 순서 2 · 이름" autocomplete="off"></td><td class="in-cell"><textarea class="in" rows="1" data-key="A1.call.r2.c2" data-label="A1 부르는 순서 2 · 이 사람을 고른 방법(어떻게 가장 급한 사람을 찾았는가)"></textarea></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A1.call.r3.c1" data-label="A1 부르는 순서 3 · 이름" autocomplete="off"></td><td class="in-cell"><textarea class="in" rows="1" data-key="A1.call.r3.c2" data-label="A1 부르는 순서 3 · 이 사람을 고른 방법(어떻게 가장 급한 사람을 찾았는가)"></textarea></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A1.call.r4.c1" data-label="A1 부르는 순서 4 · 이름" autocomplete="off"></td><td class="in-cell"><textarea class="in" rows="1" data-key="A1.call.r4.c2" data-label="A1 부르는 순서 4 · 이 사람을 고른 방법(어떻게 가장 급한 사람을 찾았는가)"></textarea></td></tr><tr><td class="lab">5</td><td class="in-cell"><input type="text" class="in" data-key="A1.call.r5.c1" data-label="A1 부르는 순서 5 · 이름" autocomplete="off"></td><td class="in-cell"><textarea class="in" rows="1" data-key="A1.call.r5.c2" data-label="A1 부르는 순서 5 · 이 사람을 고른 방법(어떻게 가장 급한 사람을 찾았는가)"></textarea></td></tr></table><h3>리스트로 처리하는 나의 방법</h3><p>이 환자들이 <b>파이썬 리스트</b>에 들어 있다면, 다음 환자를 부를 때마다 무엇을 하겠는가?</p><textarea class="in" rows="3" data-key="A1.method" data-label="A1 내가 쓸 방법 한 가지"></textarea><p>그 방법의 약점은 무엇인가?</p><textarea class="in" rows="3" data-key="A1.weak" data-label="A1 내 방법의 약점"></textarea><p><b>생각해 볼 질문</b> 1만 명이 줄 서 있고 계속 새로 오면 어떻게 되는가? 짝과 이야기한 뒤 적는다.</p><textarea class="in" rows="3" data-key="A1.pair" data-label="A1 1만 명이 줄 서 있고 계속 새로 올 때"></textarea>
+</section>
+<section id="A2" class="sheet">
+<h2>A2 · 두 가지 리스트 방식의 비용 세기 (P1)<small>1차시 · 12분 · 짝</small></h2>
+<p class="meta"><span>산출물: 비용 표(넣기·꺼내기)</span></p>
+<p>값 7개 <code class="i">[7, 2, 9, 4, 11, 5, 8]</code>(P1)이 차례로 들어온다. 작은 값이 더 급하다. 두 방식의 비용을 <b>손으로 직접 세어</b> 비교한다.</p>
+<div class="cols">
+<div class="card"><b class="h">(가) 미정렬 방식</b><p>들어오는 대로 리스트 맨 뒤에 붙인다. 꺼낼 때는 처음부터 끝까지 훑어 가장 작은 값을 찾아 뺀다.</p></div>
+<div class="card"><b class="h">(나) 정렬 유지 방식</b><p>넣을 때마다 오름차순(작은 값이 앞)이 유지되도록 알맞은 자리에 끼워 넣는다. 꺼낼 때는 맨 앞을 꺼낸다.</p></div>
+</div>
+<h3>(가) 7개를 모두 넣은 뒤 첫 번째로 꺼낼 때</h3>
+<table class="fill"><tr><th style="width:55%">세는 것</th><th>횟수 / 값</th></tr><tr><td class="lab">값을 넣는 데 쓴 비교 횟수(1개당)</td><td class="in-cell"><input type="text" class="in" data-key="A2.a.r1.c1" data-label="A2 (가) 첫 꺼내기 값을 넣는 데 쓴 비교 횟수(1개당) · 횟수 / 값" autocomplete="off"></td></tr><tr><td class="lab">가장 작은 값을 찾는 데 쓴 비교 횟수</td><td class="in-cell"><input type="text" class="in" data-key="A2.a.r2.c1" data-label="A2 (가) 첫 꺼내기 가장 작은 값을 찾는 데 쓴 비교 횟수 · 횟수 / 값" autocomplete="off"></td></tr><tr><td class="lab">꺼낸 값</td><td class="in-cell"><input type="text" class="in" data-key="A2.a.r3.c1" data-label="A2 (가) 첫 꺼내기 꺼낸 값 · 횟수 / 값" autocomplete="off"></td></tr></table><h3>(나) 7개를 차례로 넣을 때</h3><p>뒤에서부터 비교하며 알맞은 자리를 찾고, 자기보다 큰 값은 한 칸씩 뒤로 민다. 비교 횟수와 뒤로 민 원소 수를 센다.</p><table class="fill"><tr><th style="width:80px">넣는 값</th><th>넣은 직후 리스트</th><th style="width:16%">비교 횟수</th><th style="width:18%">뒤로 민 원소 수</th></tr><tr><td class="lab">7</td><td class="in-cell"><textarea class="in" rows="1" data-key="A2.b.r1.c1" data-label="A2 (나) 정렬 유지 7 · 넣은 직후 리스트"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r1.c2" data-label="A2 (나) 정렬 유지 7 · 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r1.c3" data-label="A2 (나) 정렬 유지 7 · 뒤로 민 원소 수" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A2.b.r2.c1" data-label="A2 (나) 정렬 유지 2 · 넣은 직후 리스트"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r2.c2" data-label="A2 (나) 정렬 유지 2 · 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r2.c3" data-label="A2 (나) 정렬 유지 2 · 뒤로 민 원소 수" autocomplete="off"></td></tr><tr><td class="lab">9</td><td class="in-cell"><textarea class="in" rows="1" data-key="A2.b.r3.c1" data-label="A2 (나) 정렬 유지 9 · 넣은 직후 리스트"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r3.c2" data-label="A2 (나) 정렬 유지 9 · 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r3.c3" data-label="A2 (나) 정렬 유지 9 · 뒤로 민 원소 수" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><textarea class="in" rows="1" data-key="A2.b.r4.c1" data-label="A2 (나) 정렬 유지 4 · 넣은 직후 리스트"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r4.c2" data-label="A2 (나) 정렬 유지 4 · 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r4.c3" data-label="A2 (나) 정렬 유지 4 · 뒤로 민 원소 수" autocomplete="off"></td></tr><tr><td class="lab">11</td><td class="in-cell"><textarea class="in" rows="1" data-key="A2.b.r5.c1" data-label="A2 (나) 정렬 유지 11 · 넣은 직후 리스트"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r5.c2" data-label="A2 (나) 정렬 유지 11 · 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r5.c3" data-label="A2 (나) 정렬 유지 11 · 뒤로 민 원소 수" autocomplete="off"></td></tr><tr><td class="lab">5</td><td class="in-cell"><textarea class="in" rows="1" data-key="A2.b.r6.c1" data-label="A2 (나) 정렬 유지 5 · 넣은 직후 리스트"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r6.c2" data-label="A2 (나) 정렬 유지 5 · 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r6.c3" data-label="A2 (나) 정렬 유지 5 · 뒤로 민 원소 수" autocomplete="off"></td></tr><tr><td class="lab">8</td><td class="in-cell"><textarea class="in" rows="1" data-key="A2.b.r7.c1" data-label="A2 (나) 정렬 유지 8 · 넣은 직후 리스트"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r7.c2" data-label="A2 (나) 정렬 유지 8 · 비교 횟수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.b.r7.c3" data-label="A2 (나) 정렬 유지 8 · 뒤로 민 원소 수" autocomplete="off"></td></tr></table><p>(나)에서 맨 앞을 한 번 꺼낼 때 남은 원소를 앞으로 당기느라 몇 개를 옮기는가? <input type="text" class="in s" data-key="A2.b.pop" data-label="A2 (나) 첫 꺼내기에서 옮긴 원소 수" autocomplete="off"> 개</p><h3>비용 표</h3><p>원소가 N개일 때 한 번의 연산이 대략 어떻게 늘어나는지 고른다.</p><table class="fill"><tr><th style="width:35%">방식</th><th>넣기 1회</th><th>꺼내기 1회</th></tr><tr><td class="lab">(가) 미정렬</td><td class="in-cell"><select class="in" data-key="A2.cost.r1.c1" data-label="A2 비용 표 (가) 미정렬 · 넣기 1회"><option value=""></option><option value="상수(N과 무관)">상수(N과 무관)</option><option value="N에 비례">N에 비례</option><option value="잘 모르겠다">잘 모르겠다</option></select></td><td class="in-cell"><select class="in" data-key="A2.cost.r1.c2" data-label="A2 비용 표 (가) 미정렬 · 꺼내기 1회"><option value=""></option><option value="상수(N과 무관)">상수(N과 무관)</option><option value="N에 비례">N에 비례</option><option value="잘 모르겠다">잘 모르겠다</option></select></td></tr><tr><td class="lab">(나) 정렬 유지</td><td class="in-cell"><select class="in" data-key="A2.cost.r2.c1" data-label="A2 비용 표 (나) 정렬 유지 · 넣기 1회"><option value=""></option><option value="상수(N과 무관)">상수(N과 무관)</option><option value="N에 비례">N에 비례</option><option value="잘 모르겠다">잘 모르겠다</option></select></td><td class="in-cell"><select class="in" data-key="A2.cost.r2.c2" data-label="A2 비용 표 (나) 정렬 유지 · 꺼내기 1회"><option value=""></option><option value="상수(N과 무관)">상수(N과 무관)</option><option value="N에 비례">N에 비례</option><option value="잘 모르겠다">잘 모르겠다</option></select></td></tr></table><p><b>생각해 볼 질문</b> 두 방식에서 각각 느린 연산은 무엇인가? 둘 다 빠르게 만들 수는 없을까? 오늘 질문의 &ldquo;즉시(O(1))&rdquo;는 어디까지 가능할까?</p><textarea class="in" rows="2" data-key="A2.slow" data-label="A2 두 방식에서 느린 연산"></textarea><textarea class="in" rows="3" data-key="A2.both" data-label="A2 둘 다 빠르게 할 수 있을까"></textarea>
+</section>
+<section id="A3" class="sheet">
+<h2>A3 · 배열과 트리 짝지어 보기 (H1)<small>1차시 · 14분 · 짝</small></h2>
+<p class="meta"><span>산출물: 부모·자식 칸 번호 표 + 발견한 규칙 식</span></p>
+<div class="concept"><b class="h">약속 · 완전 이진 트리</b>
+<p><b>완전 이진 트리</b>란 위에서 아래로, 같은 층에서는 왼쪽에서 오른쪽으로 <b>빈틈없이 채워진</b> 이진 트리이다. (용어 루트·리프·높이는 8주차와 같다. 높이는 노드 수 기준이다.)</p></div>
+<p>아래 트리는 완전 이진 트리이며, 그 값을 위에서 아래·왼쪽에서 오른쪽 순서로 배열에 담은 것이 <code class="i">H1</code>이다.</p>
+<div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">            3
+         /       \
+    5               8
+   /   \           /   \
+9       7       10      12</div><p><code class="i">H1 = [3, 5, 8, 9, 7, 10, 12]</code> (칸 번호는 0부터)</p><h3>부모·자식 칸 번호 표</h3><p>트리 그림과 배열을 짝지어 놓고, 각 칸의 부모와 자식이 몇 번 칸인지 표를 채운다. 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p><table class="fill"><tr><th style="width:90px">칸 번호 i</th><th style="width:70px">값</th><th>부모 칸</th><th>왼쪽 자식 칸</th><th>오른쪽 자식 칸</th></tr><tr><td class="lab">0</td><td>3</td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r1.c2" data-label="A3 부모·자식 칸 번호 표 0 · 부모 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r1.c3" data-label="A3 부모·자식 칸 번호 표 0 · 왼쪽 자식 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r1.c4" data-label="A3 부모·자식 칸 번호 표 0 · 오른쪽 자식 칸" autocomplete="off"></td></tr><tr><td class="lab">1</td><td>5</td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r2.c2" data-label="A3 부모·자식 칸 번호 표 1 · 부모 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r2.c3" data-label="A3 부모·자식 칸 번호 표 1 · 왼쪽 자식 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r2.c4" data-label="A3 부모·자식 칸 번호 표 1 · 오른쪽 자식 칸" autocomplete="off"></td></tr><tr><td class="lab">2</td><td>8</td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r3.c2" data-label="A3 부모·자식 칸 번호 표 2 · 부모 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r3.c3" data-label="A3 부모·자식 칸 번호 표 2 · 왼쪽 자식 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r3.c4" data-label="A3 부모·자식 칸 번호 표 2 · 오른쪽 자식 칸" autocomplete="off"></td></tr><tr><td class="lab">3</td><td>9</td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r4.c2" data-label="A3 부모·자식 칸 번호 표 3 · 부모 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r4.c3" data-label="A3 부모·자식 칸 번호 표 3 · 왼쪽 자식 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r4.c4" data-label="A3 부모·자식 칸 번호 표 3 · 오른쪽 자식 칸" autocomplete="off"></td></tr><tr><td class="lab">4</td><td>7</td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r5.c2" data-label="A3 부모·자식 칸 번호 표 4 · 부모 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r5.c3" data-label="A3 부모·자식 칸 번호 표 4 · 왼쪽 자식 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r5.c4" data-label="A3 부모·자식 칸 번호 표 4 · 오른쪽 자식 칸" autocomplete="off"></td></tr><tr><td class="lab">5</td><td>10</td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r6.c2" data-label="A3 부모·자식 칸 번호 표 5 · 부모 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r6.c3" data-label="A3 부모·자식 칸 번호 표 5 · 왼쪽 자식 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r6.c4" data-label="A3 부모·자식 칸 번호 표 5 · 오른쪽 자식 칸" autocomplete="off"></td></tr><tr><td class="lab">6</td><td>12</td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r7.c2" data-label="A3 부모·자식 칸 번호 표 6 · 부모 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r7.c3" data-label="A3 부모·자식 칸 번호 표 6 · 왼쪽 자식 칸" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.idx.r7.c4" data-label="A3 부모·자식 칸 번호 표 6 · 오른쪽 자식 칸" autocomplete="off"></td></tr></table><h3>발견한 규칙</h3><p>표를 보고 규칙을 식으로 쓴다. (i는 칸 번호)</p><table class="fill"><tr><td class="lab" style="width:150px">부모 칸 번호</td><td class="in-cell"><input type="text" class="in" data-key="A3.rule.parent" data-label="A3 규칙 부모 칸 번호" autocomplete="off"></td></tr><tr><td class="lab">왼쪽 자식 칸 번호</td><td class="in-cell"><input type="text" class="in" data-key="A3.rule.left" data-label="A3 규칙 왼쪽 자식 칸 번호" autocomplete="off"></td></tr><tr><td class="lab">오른쪽 자식 칸 번호</td><td class="in-cell"><input type="text" class="in" data-key="A3.rule.right" data-label="A3 규칙 오른쪽 자식 칸 번호" autocomplete="off"></td></tr></table><p><b>확인 질문</b> 칸 3과 칸 4의 부모가 같다는 것을 숫자로 말하면? <input type="text" class="in" data-key="A3.same" data-label="A3 칸 3과 4의 부모가 같다는 것을 숫자로" autocomplete="off"></p><p>이 규칙을 이용해 칸 번호 9의 부모와 자식을 구해 본다(칸이 더 있다고 가정). <input type="text" class="in" data-key="A3.try9" data-label="A3 칸 9의 부모와 자식" autocomplete="off"></p><h3>일반 이진 트리는 어떨까 (8주차 T1)</h3><p>8주차의 T1(<code class="i">A(B(D, E), C(없음, F))</code>)을 같은 방식(루트는 0번 칸, 위에서 아래·왼쪽에서 오른쪽 자리)으로 배열에 넣어 본다. 노드가 없는 자리는 비워 둔다.</p><div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">        A
+       / \
+      B   C
+     / \   \
+    D   E   F</div><table class="fill"><tr><th style="width:90px">칸 번호</th><th>T1의 값(없으면 비움)</th></tr><tr><td class="lab">0</td><td class="in-cell"><input type="text" class="in" data-key="A3.t1.r1.c1" data-label="A3 T1 배열 0 · T1의 값(없으면 비움)" autocomplete="off"></td></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A3.t1.r2.c1" data-label="A3 T1 배열 1 · T1의 값(없으면 비움)" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A3.t1.r3.c1" data-label="A3 T1 배열 2 · T1의 값(없으면 비움)" autocomplete="off"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A3.t1.r4.c1" data-label="A3 T1 배열 3 · T1의 값(없으면 비움)" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A3.t1.r5.c1" data-label="A3 T1 배열 4 · T1의 값(없으면 비움)" autocomplete="off"></td></tr><tr><td class="lab">5</td><td class="in-cell"><input type="text" class="in" data-key="A3.t1.r6.c1" data-label="A3 T1 배열 5 · T1의 값(없으면 비움)" autocomplete="off"></td></tr><tr><td class="lab">6</td><td class="in-cell"><input type="text" class="in" data-key="A3.t1.r7.c1" data-label="A3 T1 배열 6 · T1의 값(없으면 비움)" autocomplete="off"></td></tr></table><p><b>생각해 볼 질문</b> T1에서 빈 곳은 어디에 생겼는가? 왜 생겼는가? 그리고 H1에는 왜 빈 곳이 없는가?</p><textarea class="in" rows="4" data-key="A3.hole" data-label="A3 T1의 빈 곳과 이유"></textarea>
+</section>
+<section id="A4" class="sheet">
+<h2>A4 · 판정 카드와 BST 비교<small>1차시 · 14분 · 모둠</small></h2>
+<p class="meta"><span>산출물: 판정 카드 + BST vs 힙 비교표</span></p>
+<div class="concept"><b class="h">약속 · 최소 힙</b>
+<p><b>최소 힙</b>(min-heap)은 완전 이진 트리의 모든 부모가 자식보다 크지 않은(부모 &le; 자식) 것이다. 같은 부모의 두 자식(형제) 사이에는 크기 조건이 없다.</p></div>
+<p>카드 4장은 모두 완전 이진 트리를 배열로 나타낸 것이다. 위 약속에 따라 최소 힙인지 판정하고, 이유를 쓴다. 아니라면 어느 부모와 자식이 걸리는지 쓴다.</p>
+<div class="card" style="margin:8px 0"><b class="h">카드 J1</b> <code class="i">[3, 5, 8, 9, 7, 10, 12]</code><div class="cols"><div><div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">            3
+         /       \
+    5               8
+   /   \           /   \
+9       7       10      12</div></div><div><p><b>판정</b> <span class="rg" data-key="A4.J1.verdict" data-type="radio" data-label="A4 카드 J1 최소 힙인가"><label><input type="radio" name="r_A4_J1_verdict" value="최소 힙이다"> 최소 힙이다</label><label><input type="radio" name="r_A4_J1_verdict" value="최소 힙이 아니다"> 최소 힙이 아니다</label></span></p><textarea class="in" rows="2" data-key="A4.J1.reason" data-label="A4 카드 J1 이유"></textarea></div></div></div><div class="card" style="margin:8px 0"><b class="h">카드 J2</b> <code class="i">[2, 8, 3, 9, 10, 4, 5]</code><div class="cols"><div><div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">            2
+         /       \
+    8               3
+   /   \           /   \
+9       10      4       5</div></div><div><p><b>판정</b> <span class="rg" data-key="A4.J2.verdict" data-type="radio" data-label="A4 카드 J2 최소 힙인가"><label><input type="radio" name="r_A4_J2_verdict" value="최소 힙이다"> 최소 힙이다</label><label><input type="radio" name="r_A4_J2_verdict" value="최소 힙이 아니다"> 최소 힙이 아니다</label></span></p><textarea class="in" rows="2" data-key="A4.J2.reason" data-label="A4 카드 J2 이유"></textarea></div></div></div><div class="card" style="margin:8px 0"><b class="h">카드 J3</b> <code class="i">[3, 5, 8, 4, 7, 10, 12]</code><div class="cols"><div><div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">            3
+         /       \
+    5               8
+   /   \           /   \
+4       7       10      12</div></div><div><p><b>판정</b> <span class="rg" data-key="A4.J3.verdict" data-type="radio" data-label="A4 카드 J3 최소 힙인가"><label><input type="radio" name="r_A4_J3_verdict" value="최소 힙이다"> 최소 힙이다</label><label><input type="radio" name="r_A4_J3_verdict" value="최소 힙이 아니다"> 최소 힙이 아니다</label></span></p><textarea class="in" rows="2" data-key="A4.J3.reason" data-label="A4 카드 J3 이유"></textarea></div></div></div><div class="card" style="margin:8px 0"><b class="h">카드 J4</b> <code class="i">[1, 2, 3, 4, 5, 6, 7]</code><div class="cols"><div><div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">            1
+         /       \
+    2               3
+   /   \           /   \
+4       5       6       7</div></div><div><p><b>판정</b> <span class="rg" data-key="A4.J4.verdict" data-type="radio" data-label="A4 카드 J4 최소 힙인가"><label><input type="radio" name="r_A4_J4_verdict" value="최소 힙이다"> 최소 힙이다</label><label><input type="radio" name="r_A4_J4_verdict" value="최소 힙이 아니다"> 최소 힙이 아니다</label></span></p><textarea class="in" rows="2" data-key="A4.J4.reason" data-label="A4 카드 J4 이유"></textarea></div></div></div><h3>BST(8주차)와 힙(오늘) 비교표</h3><p>8주차 BST 불변식과 오늘의 힙 불변식을 비교한다. 앞에서 한 판정과 8주차 경험으로 채운다.</p><table class="fill"><tr><th style="width:32%">비교 항목</th><th>BST (8주차)</th><th>최소 힙 (오늘)</th></tr><tr><td class="lab">관계 조건(부모·자식 사이)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A4.cmp.r1.c1" data-label="A4 BST와 힙 비교표 관계 조건(부모·자식 사이) · BST (8주차)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A4.cmp.r1.c2" data-label="A4 BST와 힙 비교표 관계 조건(부모·자식 사이) · 최소 힙 (오늘)"></textarea></td></tr><tr><td class="lab">최솟값은 어디에 있는가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A4.cmp.r2.c1" data-label="A4 BST와 힙 비교표 최솟값은 어디에 있는가 · BST (8주차)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A4.cmp.r2.c2" data-label="A4 BST와 힙 비교표 최솟값은 어디에 있는가 · 최소 힙 (오늘)"></textarea></td></tr><tr><td class="lab">정렬된 순서로 출력하려면</td><td class="in-cell"><textarea class="in" rows="1" data-key="A4.cmp.r3.c1" data-label="A4 BST와 힙 비교표 정렬된 순서로 출력하려면 · BST (8주차)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A4.cmp.r3.c2" data-label="A4 BST와 힙 비교표 정렬된 순서로 출력하려면 · 최소 힙 (오늘)"></textarea></td></tr><tr><td class="lab">입력이 1, 2, 3, ... 처럼 정렬되어 있을 때 높이(노드 7개)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A4.cmp.r4.c1" data-label="A4 BST와 힙 비교표 입력이 1, 2, 3, ... 처럼 정렬되어 있을 때 높이(노드 7개) · BST (8주차)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A4.cmp.r4.c2" data-label="A4 BST와 힙 비교표 입력이 1, 2, 3, ... 처럼 정렬되어 있을 때 높이(노드 7개) · 최소 힙 (오늘)"></textarea></td></tr></table><p><b>생각해 볼 질문</b> 형제(5와 8)끼리는 크기 관계가 있는가? BST에서 최솟값은 어디 있었는가, 힙에서는 어디 있는가?</p><textarea class="in" rows="3" data-key="A4.sib" data-label="A4 형제 관계와 최솟값 위치"></textarea><p>J4는 정렬된 배열이고 J2는 정렬되지 않은 배열이다. 두 카드의 판정 결과를 비교해 알게 된 것을 쓴다.</p><textarea class="in" rows="3" data-key="A4.j4" data-label="A4 J4와 J2를 비교해 알게 된 것"></textarea>
+</section>
+<section id="A5" class="sheet">
+<h2>A5 · Exit ticket<small>1차시 · 2분 · 개인</small></h2>
+
+<p><b>배열의 i번 칸에서 자식의 칸 번호를 구하는 방법을 한 줄로 쓴다.</b></p><textarea class="in" rows="2" data-key="A5.exit" data-label="A5 Exit ticket 답"></textarea><p>오늘 가장 헷갈린 부분을 한 가지 쓴다.</p><textarea class="in" rows="2" data-key="A5.confuse" data-label="A5 가장 헷갈린 부분"></textarea>
+</section>
+<section id="A6" class="sheet">
+<h2>A6 · 삽입 추적과 sift_up<small>2차시 · 14분 · 짝</small></h2>
+<p class="meta"><span>산출물: 단계별 배열 기록표, 동작하는 sift_up</span></p>
+<p><code class="i">H1 = [3, 5, 8, 9, 7, 10, 12]</code>에 새 값을 <b>맨 끝에 붙인 뒤</b>, 부모와 비교해 필요하면 자리를 바꾸며 위로 올라간다. 배열의 모습을 단계마다 기록한다. 추적은 <b>손으로 먼저</b> 하고, 코드로 확인한다.</p>
+<h3>값 2를 삽입</h3>
+<table class="fill"><tr><th style="width:120px">단계</th><th>배열 (스냅샷)</th><th style="width:30%">이번에 바꾼 두 값(어느 값과 어느 값)</th></tr><tr><td class="lab">맨 끝에 붙인 직후</td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p2.r1.c1" data-label="A6 값 2 삽입 추적 맨 끝에 붙인 직후 · 배열 (스냅샷)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p2.r1.c2" data-label="A6 값 2 삽입 추적 맨 끝에 붙인 직후 · 이번에 바꾼 두 값(어느 값과 어느 값)"></textarea></td></tr><tr><td class="lab">자리바꿈 1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p2.r2.c1" data-label="A6 값 2 삽입 추적 자리바꿈 1 · 배열 (스냅샷)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p2.r2.c2" data-label="A6 값 2 삽입 추적 자리바꿈 1 · 이번에 바꾼 두 값(어느 값과 어느 값)"></textarea></td></tr><tr><td class="lab">자리바꿈 2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p2.r3.c1" data-label="A6 값 2 삽입 추적 자리바꿈 2 · 배열 (스냅샷)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p2.r3.c2" data-label="A6 값 2 삽입 추적 자리바꿈 2 · 이번에 바꾼 두 값(어느 값과 어느 값)"></textarea></td></tr><tr><td class="lab">자리바꿈 3</td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p2.r4.c1" data-label="A6 값 2 삽입 추적 자리바꿈 3 · 배열 (스냅샷)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p2.r4.c2" data-label="A6 값 2 삽입 추적 자리바꿈 3 · 이번에 바꾼 두 값(어느 값과 어느 값)"></textarea></td></tr></table><p>자리바꿈 횟수: <input type="text" class="in s" data-key="A6.p2.count" data-label="A6 값 2 삽입 자리바꿈 횟수" autocomplete="off"> 번 &nbsp; 마지막 배열: <input type="text" class="in" style="display:inline-block;width:60%" data-key="A6.p2.final" data-label="A6 값 2 삽입 최종 배열" autocomplete="off"></p><h3>값 11을 삽입 (H1에 대해 다시 시작)</h3><table class="fill"><tr><th style="width:120px">단계</th><th>배열 (스냅샷)</th><th style="width:30%">이번에 바꾼 두 값(어느 값과 어느 값)</th></tr><tr><td class="lab">맨 끝에 붙인 직후</td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p11.r1.c1" data-label="A6 값 11 삽입 추적 맨 끝에 붙인 직후 · 배열 (스냅샷)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p11.r1.c2" data-label="A6 값 11 삽입 추적 맨 끝에 붙인 직후 · 이번에 바꾼 두 값(어느 값과 어느 값)"></textarea></td></tr><tr><td class="lab">자리바꿈 1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p11.r2.c1" data-label="A6 값 11 삽입 추적 자리바꿈 1 · 배열 (스냅샷)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p11.r2.c2" data-label="A6 값 11 삽입 추적 자리바꿈 1 · 이번에 바꾼 두 값(어느 값과 어느 값)"></textarea></td></tr><tr><td class="lab">자리바꿈 2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p11.r3.c1" data-label="A6 값 11 삽입 추적 자리바꿈 2 · 배열 (스냅샷)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p11.r3.c2" data-label="A6 값 11 삽입 추적 자리바꿈 2 · 이번에 바꾼 두 값(어느 값과 어느 값)"></textarea></td></tr><tr><td class="lab">자리바꿈 3</td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p11.r4.c1" data-label="A6 값 11 삽입 추적 자리바꿈 3 · 배열 (스냅샷)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A6.p11.r4.c2" data-label="A6 값 11 삽입 추적 자리바꿈 3 · 이번에 바꾼 두 값(어느 값과 어느 값)"></textarea></td></tr></table><p>자리바꿈 횟수: <input type="text" class="in s" data-key="A6.p11.count" data-label="A6 값 11 삽입 자리바꿈 횟수" autocomplete="off"> 번 &nbsp; 마지막 배열: <input type="text" class="in" style="display:inline-block;width:60%" data-key="A6.p11.final" data-label="A6 값 11 삽입 최종 배열" autocomplete="off"></p><h3>코드로 확인</h3><p><a href="student_code_lab.html#A6">코드 실습 A6</a>의 <code class="i">sift_up</code> 골격을 완성해 테스트를 돌린다.</p><p>테스트 결과: <span class="rg" data-key="A6.test" data-type="radio" data-label="A6 sift_up 테스트 결과"><label><input type="radio" name="r_A6_test" value="통과"> 통과</label><label><input type="radio" name="r_A6_test" value="아직 실패"> 아직 실패</label><label><input type="radio" name="r_A6_test" value="실행해 보지 못함"> 실행해 보지 못함</label></span></p><p><b>생각해 볼 질문</b></p><ul><li>2는 왜 3번 칸에서 멈추지 않는가?</li><li>11은 왜 한 번도 올라가지 않는가?</li><li>가장 많이 올라가는 경우는 몇 번까지 올라가는가? 무엇이 그 횟수를 결정하는가?</li></ul><textarea class="in" rows="2" data-key="A6.why2" data-label="A6 2는 왜 3번 칸에서 멈추지 않는가"></textarea><textarea class="in" rows="2" data-key="A6.why11" data-label="A6 11은 왜 한 번도 올라가지 않는가"></textarea><textarea class="in" rows="3" data-key="A6.worst" data-label="A6 가장 많이 올라가는 경우와 그 횟수를 정하는 것"></textarea>
+</section>
+<section id="A7" class="sheet">
+<h2>A7 · 루트 꺼내기 추적과 반례<small>2차시 · 12분 · 짝</small></h2>
+<p class="meta"><span>산출물: 단계별 배열 기록표, 반례 1개</span></p>
+<p>A6에서 값 2를 삽입해 얻은 배열에서 <b>가장 작은 값(루트)</b>을 꺼낸다. 루트 칸이 비면 구멍이 생기므로 채워야 한다. 규칙: ① 배열의 <b>마지막 원소</b>를 루트 자리로 옮긴다. ② 두 자식 중 <b>더 작은 쪽</b>과 비교해 부모가 더 크면 바꾼다. ③ 더 내려갈 수 없을 때까지 반복한다.</p>
+<p>A6에서 얻은 배열을 그대로 옮겨 적는다: <input type="text" class="in" style="display:inline-block;width:60%" data-key="A7.start" data-label="A7 A6에서 얻은 시작 배열" autocomplete="off"></p><table class="fill"><tr><th style="width:210px">단계</th><th>배열 (스냅샷)</th><th style="width:28%">이번에 바꾼 두 값</th></tr><tr><td class="lab">꺼낸 값</td><td class="in-cell"><input type="text" class="in" data-key="A7.pop.r1.c1" data-label="A7 루트 꺼내기 추적 꺼낸 값 · 배열 (스냅샷)" autocomplete="off"></td><td></td></tr><tr><td class="lab">① 마지막 원소를 루트로 옮긴 직후</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.pop.r2.c1" data-label="A7 루트 꺼내기 추적 ① 마지막 원소를 루트로 옮긴 직후 · 배열 (스냅샷)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.pop.r2.c2" data-label="A7 루트 꺼내기 추적 ① 마지막 원소를 루트로 옮긴 직후 · 이번에 바꾼 두 값"></textarea></td></tr><tr><td class="lab">② 교환 1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.pop.r3.c1" data-label="A7 루트 꺼내기 추적 ② 교환 1 · 배열 (스냅샷)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.pop.r3.c2" data-label="A7 루트 꺼내기 추적 ② 교환 1 · 이번에 바꾼 두 값"></textarea></td></tr><tr><td class="lab">② 교환 2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.pop.r4.c1" data-label="A7 루트 꺼내기 추적 ② 교환 2 · 배열 (스냅샷)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.pop.r4.c2" data-label="A7 루트 꺼내기 추적 ② 교환 2 · 이번에 바꾼 두 값"></textarea></td></tr><tr><td class="lab">② 교환 3</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.pop.r5.c1" data-label="A7 루트 꺼내기 추적 ② 교환 3 · 배열 (스냅샷)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.pop.r5.c2" data-label="A7 루트 꺼내기 추적 ② 교환 3 · 이번에 바꾼 두 값"></textarea></td></tr></table><p>교환 횟수: <input type="text" class="in s" data-key="A7.count" data-label="A7 교환 횟수" autocomplete="off"> 번 &nbsp; 마지막 배열은 어떤 배열과 같은가? <input type="text" class="in" style="display:inline-block;width:35%" data-key="A7.final" data-label="A7 마지막 배열은 어떤 배열과 같은가" autocomplete="off"></p><h3>반례 만들기</h3><p>② 단계에서 두 자식 중 <b>큰 쪽</b>과 바꾸면 어떻게 되는지 직접 해 본다.</p><table class="fill"><tr><th style="width:38%">항목</th><th>내용</th></tr><tr><td class="lab">큰 쪽과 바꾼 직후의 배열</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.bad.r1.c1" data-label="A7 반례 큰 쪽과 바꾼 직후의 배열 · 내용"></textarea></td></tr><tr><td class="lab">어느 부모와 어느 자식이 약속(부모 &le; 자식)을 어기는가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.bad.r2.c1" data-label="A7 반례 어느 부모와 어느 자식이 약속(부모 &amp;le; 자식)을 어기는가 · 내용"></textarea></td></tr></table><p><b>생각해 볼 질문</b> 왜 빈 루트를 아무 원소로나 채우면 안 되는가? 왜 하필 마지막 원소를 옮기는가?</p><textarea class="in" rows="3" data-key="A7.why_last" data-label="A7 마지막 원소를 옮기는 이유"></textarea><p>왜 두 자식 중 더 작은 쪽과 바꾸는가? 반례를 근거로 쓴다.</p><textarea class="in" rows="3" data-key="A7.why_small" data-label="A7 더 작은 자식과 바꾸는 이유"></textarea>
+</section>
+<section id="A8" class="sheet">
+<h2>A8 · 무질서 배열을 힙으로 만들기 (Heapify)<small>2차시 · 8분 · 짝</small></h2>
+<p class="meta"><span>산출물: 단계 기록표(마지막 부모 칸 번호 포함)</span></p>
+<p>무질서한 배열 <code class="i">H0 = [9, 4, 7, 1, 8, 2, 6, 3, 5]</code>(N=9)를 힙으로 만든다. 두 가지 방법을 모두 손으로 해 보고 비교한다.</p><div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">                    9
+                 /       \
+            4               7
+         /     \           /   \
+    1           8       2       6
+   /   \
+3       5</div><h3>(가) 한 개씩 차례로 넣기(push)</h3><p>빈 리스트에서 시작해 H0의 값을 앞에서부터 하나씩 A6의 방법으로 넣는다. 값을 넣을 때마다 배열과 자리바꿈 횟수를 적는다.</p><textarea class="in draw" rows="10" data-key="A8.push.log" data-label="A8 (가) 하나씩 push 기록" spellcheck="false"></textarea><p>최종 배열: <input type="text" class="in" style="display:inline-block;width:50%" data-key="A8.push.final" data-label="A8 (가) 최종 배열" autocomplete="off"> &nbsp; 자리바꿈 합계: <input type="text" class="in s" data-key="A8.push.total" data-label="A8 (가) 자리바꿈 합계" autocomplete="off"> 번</p><h3>(나) 마지막 부모부터 거꾸로 아래로 내리기</h3><p>배열의 <b>마지막 부모</b>(자식을 가진 마지막 칸)부터 0번 칸까지 거꾸로, 각 칸의 값을 A7의 방법으로 아래로 내린다(sift-down).</p><p>마지막 부모의 칸 번호는 <input type="text" class="in s" data-key="A8.lastparent" data-label="A8 마지막 부모의 칸 번호" autocomplete="off"> 번이다. 그 이유: <input type="text" class="in" style="display:inline-block;width:55%" data-key="A8.lastparent_why" data-label="A8 마지막 부모 칸 번호의 이유" autocomplete="off"></p><table class="fill"><tr><th style="width:60px">순서</th><th style="width:15%">시작 칸 번호</th><th>내려간 경로(어느 값과 바꿨는가)</th><th style="width:34%">그 뒤의 배열</th><th style="width:14%">자리바꿈 횟수</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A8.down.r1.c1" data-label="A8 (나) sift-down 기록 1 · 시작 칸 번호" autocomplete="off"></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.down.r1.c2" data-label="A8 (나) sift-down 기록 1 · 내려간 경로(어느 값과 바꿨는가)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.down.r1.c3" data-label="A8 (나) sift-down 기록 1 · 그 뒤의 배열"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A8.down.r1.c4" data-label="A8 (나) sift-down 기록 1 · 자리바꿈 횟수" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A8.down.r2.c1" data-label="A8 (나) sift-down 기록 2 · 시작 칸 번호" autocomplete="off"></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.down.r2.c2" data-label="A8 (나) sift-down 기록 2 · 내려간 경로(어느 값과 바꿨는가)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.down.r2.c3" data-label="A8 (나) sift-down 기록 2 · 그 뒤의 배열"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A8.down.r2.c4" data-label="A8 (나) sift-down 기록 2 · 자리바꿈 횟수" autocomplete="off"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A8.down.r3.c1" data-label="A8 (나) sift-down 기록 3 · 시작 칸 번호" autocomplete="off"></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.down.r3.c2" data-label="A8 (나) sift-down 기록 3 · 내려간 경로(어느 값과 바꿨는가)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.down.r3.c3" data-label="A8 (나) sift-down 기록 3 · 그 뒤의 배열"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A8.down.r3.c4" data-label="A8 (나) sift-down 기록 3 · 자리바꿈 횟수" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A8.down.r4.c1" data-label="A8 (나) sift-down 기록 4 · 시작 칸 번호" autocomplete="off"></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.down.r4.c2" data-label="A8 (나) sift-down 기록 4 · 내려간 경로(어느 값과 바꿨는가)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.down.r4.c3" data-label="A8 (나) sift-down 기록 4 · 그 뒤의 배열"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A8.down.r4.c4" data-label="A8 (나) sift-down 기록 4 · 자리바꿈 횟수" autocomplete="off"></td></tr><tr><td class="lab">5</td><td class="in-cell"><input type="text" class="in" data-key="A8.down.r5.c1" data-label="A8 (나) sift-down 기록 5 · 시작 칸 번호" autocomplete="off"></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.down.r5.c2" data-label="A8 (나) sift-down 기록 5 · 내려간 경로(어느 값과 바꿨는가)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.down.r5.c3" data-label="A8 (나) sift-down 기록 5 · 그 뒤의 배열"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A8.down.r5.c4" data-label="A8 (나) sift-down 기록 5 · 자리바꿈 횟수" autocomplete="off"></td></tr></table><p>최종 배열: <input type="text" class="in" style="display:inline-block;width:50%" data-key="A8.down.final" data-label="A8 (나) 최종 배열" autocomplete="off"> &nbsp; 자리바꿈 합계: <input type="text" class="in s" data-key="A8.down.total" data-label="A8 (나) 자리바꿈 합계" autocomplete="off"> 번</p><h3>비교</h3><table class="fill"><tr><th style="width:34%">비교 항목</th><th>(가) 하나씩 push</th><th>(나) 아래로 내리기</th></tr><tr><td class="lab">최종 배열이 같은가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.cmp.r1.c1" data-label="A8 두 방법 비교 최종 배열이 같은가 · (가) 하나씩 push"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.cmp.r1.c2" data-label="A8 두 방법 비교 최종 배열이 같은가 · (나) 아래로 내리기"></textarea></td></tr><tr><td class="lab">작업 방향(위로 올리기 / 아래로 내리기)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.cmp.r2.c1" data-label="A8 두 방법 비교 작업 방향(위로 올리기 / 아래로 내리기) · (가) 하나씩 push"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.cmp.r2.c2" data-label="A8 두 방법 비교 작업 방향(위로 올리기 / 아래로 내리기) · (나) 아래로 내리기"></textarea></td></tr><tr><td class="lab">아무 작업도 하지 않은 칸들</td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.cmp.r3.c1" data-label="A8 두 방법 비교 아무 작업도 하지 않은 칸들 · (가) 하나씩 push"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.cmp.r3.c2" data-label="A8 두 방법 비교 아무 작업도 하지 않은 칸들 · (나) 아래로 내리기"></textarea></td></tr></table><p>코드로 확인: <a href="student_code_lab.html#A8">코드 실습 A8</a>의 확인용 코드를 실행해 두 결과를 비교하고 적는다. <input type="text" class="in" style="display:inline-block;width:45%" data-key="A8.codecheck" data-label="A8 코드로 확인한 결과와 내 손 결과의 일치 여부" autocomplete="off"></p><p><b>생각해 볼 질문</b> 왜 4번 칸부터 시작하지 않고 마지막 부모부터 시작하는가? 맨 아래 칸(리프)에 sift-down을 해도 되는가? 리프에 대해 알게 된 것을 쓴다.</p><textarea class="in" rows="3" data-key="A8.leaf" data-label="A8 리프에 대해 알게 된 것"></textarea>
+</section>
+<section id="A9" class="sheet">
+<h2>A9 · heapq로 힙 다루기<small>2차시 · 12분 · 짝</small></h2>
+<p class="meta"><span>산출물: 관찰 기록(heap 리스트 출력, pop 순서), B3 원인 한 줄</span></p>
+<p><a href="student_code_lab.html#A9">코드 실습 A9</a>의 <code class="i">heappush</code>, <code class="i">heappop</code>, <code class="i">heapify</code>, <code class="i">h[0]</code>을 쓰는 코드를 실행하기 <b>전에 예측</b>을 먼저 쓰고, 실행한 뒤 실제 값을 쓴다.</p>
+<p>코드는 <code class="i">h = [9, 4, 7, 1, 8, 2, 6, 3, 5]</code>를 <code class="i">heapify</code>한 뒤 다음 순서로 출력한다. ① <code class="i">print(h)</code> ② <code class="i">print(h[0])</code> ③ <code class="i">print(h[-1])</code> ④ <code class="i">print(h == sorted(h))</code> ⑤ 모두 <code class="i">heappop</code>해 나온 순서의 리스트.</p>
+<table class="fill"><tr><th style="width:34%">항목</th><th>예측 (실행 전)</th><th>실제 (실행 후)</th></tr><tr><td class="lab">① 리스트 h를 그대로 출력</td><td class="in-cell"><input type="text" class="in" data-key="A9.obs.r1.c1" data-label="A9 heapq 관찰 ① 리스트 h를 그대로 출력 · 예측 (실행 전)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.obs.r1.c2" data-label="A9 heapq 관찰 ① 리스트 h를 그대로 출력 · 실제 (실행 후)" autocomplete="off"></td></tr><tr><td class="lab">② h[0]</td><td class="in-cell"><input type="text" class="in" data-key="A9.obs.r2.c1" data-label="A9 heapq 관찰 ② h[0] · 예측 (실행 전)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.obs.r2.c2" data-label="A9 heapq 관찰 ② h[0] · 실제 (실행 후)" autocomplete="off"></td></tr><tr><td class="lab">③ h[-1]</td><td class="in-cell"><input type="text" class="in" data-key="A9.obs.r3.c1" data-label="A9 heapq 관찰 ③ h[-1] · 예측 (실행 전)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.obs.r3.c2" data-label="A9 heapq 관찰 ③ h[-1] · 실제 (실행 후)" autocomplete="off"></td></tr><tr><td class="lab">④ h == sorted(h)</td><td class="in-cell"><input type="text" class="in" data-key="A9.obs.r4.c1" data-label="A9 heapq 관찰 ④ h == sorted(h) · 예측 (실행 전)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.obs.r4.c2" data-label="A9 heapq 관찰 ④ h == sorted(h) · 실제 (실행 후)" autocomplete="off"></td></tr><tr><td class="lab">⑤ 모두 pop한 순서</td><td class="in-cell"><input type="text" class="in" data-key="A9.obs.r5.c1" data-label="A9 heapq 관찰 ⑤ 모두 pop한 순서 · 예측 (실행 전)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.obs.r5.c2" data-label="A9 heapq 관찰 ⑤ 모두 pop한 순서 · 실제 (실행 후)" autocomplete="off"></td></tr></table><h3>생각해 볼 질문</h3><ol><li>heap[0]을 보는 것과 heappop은 비용이 같은가?<br><textarea class="in" rows="3" data-key="A9.q1" data-label="A9 heap[0]을 보는 것과 heappop은 비용이 같은가?"></textarea></li><li>리스트 h는 정렬되어 있는가? 그런데 pop한 순서는 정렬되어 있다. 왜 그럴까?<br><textarea class="in" rows="3" data-key="A9.q2" data-label="A9 리스트 h는 정렬되어 있는가?"></textarea></li><li>h[-1]은 최댓값인가? 최댓값은 어디에 있는가?<br><textarea class="in" rows="3" data-key="A9.q3" data-label="A9 h[-1]은 최댓값인가?"></textarea></li><li>(가설만) 최대 힙이 필요하다면 heapq로 어떻게 할 수 있을까?<br><textarea class="in" rows="3" data-key="A9.q4" data-label="A9 (가설만) 최대 힙이 필요하다면 heapq로 어떻게 할 수 있을까?"></textarea></li></ol><h3>오개념 코드 B3</h3><p>코드 실습 A9의 B3 코드를 실행하고 결과를 관찰한다.</p><table class="fill"><tr><th style="width:34%">항목</th><th>내용</th></tr><tr><td class="lab">출력된 결과</td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.b3.r1.c1" data-label="A9 B3 관찰 출력된 결과 · 내용"></textarea></td></tr><tr><td class="lab">y가 그런 값이 된 원인 한 줄</td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.b3.r2.c1" data-label="A9 B3 관찰 y가 그런 값이 된 원인 한 줄 · 내용"></textarea></td></tr></table>
+</section>
+<section id="A10" class="sheet">
+<h2>A10 · 일반화 초안 카드<small>2차시 · 4분 · 개인</small></h2>
+<p class="meta"><span>산출물: 일반화 초안 카드</span></p>
+<p>오늘까지의 발견을 <b>&ldquo;개념 + 개념 + 관계&rdquo;</b> 형태의 문장으로 쓴다. 이 칸은 <b>개인 메모</b>이며 교사가 문장을 공개하지 않는다. 오늘 쓴 숫자(H1, H0 등)가 아니라 <b>다른 데이터에도 통하는 말</b>로 쓴다.</p>
+<p>문장에 쓸 수 있는 개념의 예: 완전 이진 트리, 배열, 칸 번호, 부모와 자식, 불변식, 정렬, 높이, 비용(횟수)</p>
+<h3>문장 1</h3><textarea class="in l" rows="3" data-key="A10.draft1" data-label="A10 일반화 초안 문장 1"></textarea><p>근거로 삼은 활동: <input type="text" class="in" style="display:inline-block;width:40%" data-key="A10.basis1" data-label="A10 문장 1 근거 활동" autocomplete="off"></p><h3>문장 2</h3><textarea class="in l" rows="3" data-key="A10.draft2" data-label="A10 일반화 초안 문장 2"></textarea><p>근거로 삼은 활동: <input type="text" class="in" style="display:inline-block;width:40%" data-key="A10.basis2" data-label="A10 문장 2 근거 활동" autocomplete="off"></p><p>스스로 점검</p><p><label class="ck"><input type="checkbox" data-key="A10.chk1" data-label="A10 점검: 개념 두 가지 이상 포함"> 개념어가 두 개 이상 들어 있다</label><label class="ck"><input type="checkbox" data-key="A10.chk2" data-label="A10 점검: 숫자 사례에 한정되지 않음"> &amp;ldquo;H1에서만&amp;rdquo;처럼 한정하지 않았다</label><label class="ck"><input type="checkbox" data-key="A10.chk3" data-label="A10 점검: 다른 데이터에도 통함"> 다른 데이터에도 통하는지 생각해 보았다</label></p><p>이 문장에서 가장 자신 없는 부분은 어디인가?</p><textarea class="in" rows="2" data-key="A10.unsure" data-label="A10 가장 자신 없는 부분"></textarea>
+</section>
+
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
+</script>
+<script id="week9-submit">
+/* week9 학생 입력 저장 (5개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week9-student-v1 */
+(function(){
+"use strict";
+var FILE_KEY="workbook";
+var FILES={workbook:"student_workbook.html",workbook_part2:"student_workbook_part2.html",code_lab:"student_code_lab.html",code_lab_part2:"student_code_lab_part2.html",formative:"formative_check.html"};
+var FILE=FILES[FILE_KEY], STORE="week9:"+FILE, SCHEMA="week9-student-v1";
+var bar,idIn,nameIn,msg,autoEl,saveBtn,clearBtn,confirmBox,busy=false,timer=null;
+var draftBtn,loadBtn,fileIn,yesBtn,confirmTxt,pending=null,baseline="";
+
+function q(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
+function kind(el){
+  var t=el.getAttribute("data-type");
+  if(t)return t;
+  var tag=el.tagName.toLowerCase();
+  if(tag==="textarea")return "textarea";
+  if(tag==="select")return "select";
+  if(tag==="input")return el.type==="checkbox"?"checkbox":"text";
+  return "text";
+}
+function labelOf(el){
+  var l=el.getAttribute("data-label");
+  if(l)return l;
+  if(el.labels&&el.labels.length)return el.labels[0].textContent.replace(/\s+/g," ").trim();
+  return el.getAttribute("aria-label")||"";
+}
+function readValue(el,k){
+  if(k==="checkbox")return !!el.checked;
+  if(k==="radio"){var r=el.querySelector("input[type=radio]:checked");return r?r.value:null;}
+  return el.value;
+}
+function collect(){
+  return q("[data-key]").map(function(el){
+    var k=kind(el);
+    return {key:el.getAttribute("data-key"),label:labelOf(el),type:k,value:readValue(el,k)};
+  });
+}
+function studentInfo(){return {id:idIn.value.trim(),name:nameIn.value.trim()};}
+function buildJSON(status){
+  return {schema:SCHEMA,week:9,file:FILE,status:status||"final",student:studentInfo(),savedAt:new Date().toISOString(),answers:collect()};
+}
+function safe(s){return String(s).replace(/[\\\/:*?"<>|\s\u0000-\u001f]+/g,"_").replace(/^\.+/,"_");}
+function fileName(st,draft){return "week9_"+FILE_KEY+"_"+safe(st.id||"학번미입력")+"_"+safe(st.name||"이름미입력")+(draft?"_임시저장":"")+".json";}
+function validate(){
+  var miss=[];
+  [[idIn,"학번"],[nameIn,"이름"]].forEach(function(p){
+    var bad=!p[0].value.trim();
+    p[0].classList.toggle("invalid",bad);
+    p[0].setAttribute("aria-invalid",bad?"true":"false");
+    if(bad)miss.push(p);
+  });
+  return miss;
+}
+function updatePrintId(){
+  var p=document.getElementById("printid");
+  if(!p)return;
+  var s=studentInfo();
+  p.textContent="학번: "+(s.id||"          ")+"   이름: "+(s.name||"          ");
+}
+function say(text,cls){msg.textContent=text;msg.className="sb-msg"+(cls?" "+cls:"");}
+
+function download(draft){
+  var obj=buildJSON(draft?"draft":"final"),name=fileName(obj.student,draft);
+  var blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"});
+  var url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;a.style.display="none";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1500);
+  return name;
+}
+function onSave(){
+  if(busy)return;
+  var miss=validate();
+  if(miss.length){
+    say("학번과 이름을 입력해야 저장할 수 있다. 표시된 칸을 채운 뒤 다시 누른다.","err");
+    miss[0][0].focus();return;
+  }
+  busy=true;saveBtn.disabled=true;
+  try{
+    var n=download();
+    say("저장했다: "+n+" (내려받은 JSON 파일 한 개를 제출한다.)","ok");
+  }catch(e){say("저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;saveBtn.disabled=false;},1200);
+}
+
+/* 이어 쓰기: 임시 저장 파일 내려받기 / 저장한 파일 불러오기 */
+function snap(){return JSON.stringify(collect().map(function(a){return a.value;}));}
+function isDirty(){return snap()!==baseline;}
+function ask(text,fn){
+  confirmTxt.textContent=text;pending=fn;confirmBox.hidden=false;
+  clearBtn.disabled=true;loadBtn.disabled=true;
+}
+function closeAsk(){
+  pending=null;confirmBox.hidden=true;clearBtn.disabled=false;loadBtn.disabled=false;
+}
+function onDraft(){
+  if(busy)return;
+  busy=true;draftBtn.disabled=true;
+  try{
+    var n=download(true),s=studentInfo();
+    say("임시 저장했다: "+n+" (제출 파일이 아니다. 이어 쓸 때 [불러오기]로 이 파일을 고른다."+((s.id&&s.name)?"":" 학번과 이름을 쓰면 파일 이름에 들어간다.")+")","ok");
+  }catch(e){say("임시 저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;draftBtn.disabled=false;},1200);
+}
+function applyLoaded(j){
+  if(!j||typeof j!=="object"||Array.isArray(j))return {err:"저장 파일 형식이 아니다."};
+  if(j.schema!==SCHEMA)return {err:"이 워크북의 저장 파일이 아니다(schema 불일치). 이 활동지에서 저장한 JSON 파일을 고른다."};
+  if(j.file!==FILE)return {err:"이 파일은 '"+String(j.file)+"'에서 저장한 것이다. 지금 열린 '"+FILE+"'에서 저장한 파일만 불러올 수 있다."};
+  if(!Array.isArray(j.answers))return {err:"저장 파일에 answers가 없거나 형식이 틀리다."};
+  var vals={};
+  j.answers.forEach(function(a){if(a&&typeof a.key==="string")vals[a.key]=a.value;});
+  var n=0;
+  q("[data-key]").forEach(function(el){
+    var key=el.getAttribute("data-key");
+    if(!Object.prototype.hasOwnProperty.call(vals,key))return;
+    var v=vals[key],t=typeof v;
+    if(v!==null&&t!=="string"&&t!=="boolean")return;
+    setValue(el,v);n++;
+  });
+  if(j.student&&typeof j.student==="object"){
+    idIn.value=typeof j.student.id==="string"?j.student.id:"";
+    nameIn.value=typeof j.student.name==="string"?j.student.name:"";
+    [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  }
+  autosizeAll();updatePrintId();stash();
+  return {n:n,draft:j.status==="draft",at:j.savedAt};
+}
+function onLoadClick(){
+  if(isDirty()||idIn.value.trim()||nameIn.value.trim()){
+    ask("지금 입력한 내용이 불러온 파일의 내용으로 바뀐다. 계속하려면 [불러오기 진행]을 누르고 파일을 고른다.",function(){closeAsk();fileIn.click();});
+    yesBtn.textContent="불러오기 진행";
+  }else{fileIn.click();}
+}
+function onFileChosen(){
+  var f=fileIn.files&&fileIn.files[0];
+  if(!f)return;
+  if(f.size>3*1024*1024){say("파일이 너무 크다(3MB 초과). 이 활동지에서 저장한 JSON 파일이 맞는지 확인한다.","err");fileIn.value="";return;}
+  var r=new FileReader();
+  r.onerror=function(){say("파일을 읽지 못했다. 다시 시도한다.","err");fileIn.value="";};
+  r.onload=function(){
+    var res;
+    try{res=applyLoaded(JSON.parse(String(r.result)));}
+    catch(e){res={err:"JSON 파일을 읽지 못했다. 이 활동지에서 저장한 파일이 맞는지 확인한다."};}
+    if(res.err){say(res.err+" (입력란은 바뀌지 않았다.)","err");}
+    else{say("불러왔다: "+f.name+" ("+res.n+"칸"+(res.at?", 저장 시각 "+res.at.slice(0,16).replace("T"," "):"")+"). 이어서 쓴다."+(res.draft?"":" (제출용 파일을 불러왔다.)"),"ok");}
+    fileIn.value="";
+  };
+  r.readAsText(f,"utf-8");
+}
+
+/* 임시 보관 (localStorage, 모두 try/catch) */
+function stash(){
+  try{
+    var vals={};collect().forEach(function(a){vals[a.key]=a.value;});
+    localStorage.setItem(STORE,JSON.stringify({student:studentInfo(),values:vals,at:Date.now()}));
+    var d=new Date();
+    autoEl.textContent="임시 저장됨 "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
+  }catch(e){autoEl.textContent="임시 저장 사용 불가(저장(JSON)은 가능)";}
+}
+function schedule(){clearTimeout(timer);timer=setTimeout(stash,300);}
+function setValue(el,v){
+  var k=kind(el);
+  if(k==="checkbox"){el.checked=(v===true);}
+  else if(k==="radio"){q("input[type=radio]",el).forEach(function(r){r.checked=(v!==null&&v!==undefined&&r.value===v);});}
+  else{el.value=(v===null||v===undefined)?"":String(v);}
+}
+function restore(){
+  try{
+    var raw=localStorage.getItem(STORE);if(!raw)return;
+    var s=JSON.parse(raw);if(!s)return;
+    if(s.student){idIn.value=s.student.id||"";nameIn.value=s.student.name||"";}
+    var any=false;
+    q("[data-key]").forEach(function(el){var key=el.getAttribute("data-key");if(s.values&&Object.prototype.hasOwnProperty.call(s.values,key)){setValue(el,s.values[key]);any=true;}});
+    autosizeAll();
+    if(any||(s.student&&(s.student.id||s.student.name)))autoEl.textContent="이전 임시 저장을 불러왔다";
+  }catch(e){}
+}
+function resetAll(){
+  q("[data-key]").forEach(function(el){setValue(el,kind(el)==="checkbox"?false:(kind(el)==="radio"?null:""));});
+  idIn.value="";nameIn.value="";
+  [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  autosizeAll();
+}
+function doClear(){
+  try{localStorage.removeItem(STORE);}catch(e){}
+  resetAll();
+  closeAsk();
+  autoEl.textContent="";
+  say("이 브라우저의 자동 보관을 지우고 입력란을 비웠다. (내려받은 임시 저장 파일은 그대로다.)","ok");
+}
+
+/* 입력란 보조 */
+function autosize(t){if(t.classList.contains("code")||t.classList.contains("draw"))return;t.style.height="auto";if(t.scrollHeight>0)t.style.height=(t.scrollHeight+2)+"px";}
+function autosizeAll(){q("textarea.in").forEach(autosize);}
+function codeKeys(e){
+  var t=e.target;
+  if(!t||!t.classList||!t.classList.contains("code"))return;
+  if(e.key==="Escape"){t._esc=true;return;}
+  if(e.key==="Tab"&&!e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey){
+    if(t._esc){t._esc=false;return;}
+    e.preventDefault();
+    var s=t.selectionStart,en=t.selectionEnd;
+    t.setRangeText("    ",s,en,"end");
+    t.dispatchEvent(new Event("input",{bubbles:true}));
+  }else if(e.key!=="Shift"){t._esc=false;}
+}
+function labelControls(){
+  q("[data-key]").forEach(function(el){
+    var l=el.getAttribute("data-label");
+    var isGroup=el.getAttribute("data-type")==="radio";
+    if(isGroup){el.setAttribute("role","radiogroup");if(l)el.setAttribute("aria-label",l);return;}
+    var has=el.labels&&el.labels.length;
+    if(!has&&l&&!el.getAttribute("aria-label"))el.setAttribute("aria-label",l);
+  });
+}
+function buildBar(){
+  bar=document.createElement("div");bar.id="savebar";bar.setAttribute("role","region");bar.setAttribute("aria-label","제출 저장 바");
+  bar.innerHTML='<div class="sb-in"><div class="sb-row">'
+   +'<label for="sb-id">학번 <input type="text" id="sb-id" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<label for="sb-name">이름 <input type="text" id="sb-name" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<button type="button" id="sb-save">저장(JSON)</button>'
+   +'<button type="button" id="sb-draft" class="sec" title="다 못 쓴 내용을 파일로 보관한다. 제출 파일이 아니다.">임시 저장</button>'
+   +'<button type="button" id="sb-load" class="sec" title="임시 저장한 파일을 불러와 이어 쓴다.">불러오기</button>'
+   +'<input type="file" id="sb-file" accept=".json,application/json" hidden aria-label="저장한 JSON 파일 선택">'
+   +'<button type="button" id="sb-clear" class="sec">자동 보관 지우기</button>'
+   +'<span class="sb-auto" id="sb-auto"></span></div>'
+   +'<div class="sb-confirm" id="sb-confirm" hidden><span id="sb-ctext"></span>'
+   +'<button type="button" id="sb-yes">확인</button><button type="button" id="sb-no" class="sec">취소</button></div>'
+   +'<div class="sb-msg" id="sb-msg" role="status" aria-live="polite">다 쓰면 학번과 이름을 쓰고 [저장(JSON)]을 눌러 제출 파일 한 개를 만든다. 시간이 모자라면 [임시 저장]으로 파일을 보관하고, 다음에 [불러오기]로 이어 쓴다.</div></div>';
+  document.body.insertBefore(bar,document.body.firstChild);
+  var pid=document.createElement("div");pid.id="printid";pid.setAttribute("aria-hidden","true");
+  document.body.insertBefore(pid,bar.nextSibling);
+  idIn=bar.querySelector("#sb-id");nameIn=bar.querySelector("#sb-name");msg=bar.querySelector("#sb-msg");
+  autoEl=bar.querySelector("#sb-auto");saveBtn=bar.querySelector("#sb-save");clearBtn=bar.querySelector("#sb-clear");confirmBox=bar.querySelector("#sb-confirm");
+  draftBtn=bar.querySelector("#sb-draft");loadBtn=bar.querySelector("#sb-load");fileIn=bar.querySelector("#sb-file");yesBtn=bar.querySelector("#sb-yes");confirmTxt=bar.querySelector("#sb-ctext");
+  saveBtn.addEventListener("click",onSave);
+  draftBtn.addEventListener("click",onDraft);
+  loadBtn.addEventListener("click",onLoadClick);
+  fileIn.addEventListener("change",onFileChosen);
+  clearBtn.addEventListener("click",function(){yesBtn.textContent="지우기";ask("이 브라우저의 자동 보관을 지우고 입력란을 모두 비운다. 임시 저장 파일이나 JSON으로 저장하지 않은 내용은 되찾을 수 없다.",doClear);bar.querySelector("#sb-no").focus();});
+  bar.querySelector("#sb-no").addEventListener("click",function(){closeAsk();loadBtn.focus();});
+  yesBtn.addEventListener("click",function(){var f=pending;if(f)f();});
+}
+function init(){
+  buildBar();labelControls();baseline=snap();restore();autosizeAll();
+  document.addEventListener("input",function(e){
+    var t=e.target;
+    if(t.tagName==="TEXTAREA")autosize(t);
+    if(t===idIn||t===nameIn){if(t.value.trim()){t.classList.remove("invalid");t.setAttribute("aria-invalid","false");}}
+    if(t===idIn||t===nameIn)updatePrintId();
+    schedule();
+  });
+  document.addEventListener("change",schedule);
+  document.addEventListener("keydown",codeKeys);
+  window.addEventListener("beforeprint",function(){autosizeAll();updatePrintId();});
+  updatePrintId();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(autosizeAll);
+  window.addEventListener("resize",autosizeAll);
+  window.Week9Submit={buildJSON:buildJSON,collect:collect,validate:validate,fileName:fileName,FILE_KEY:FILE_KEY,applyLoaded:applyLoaded};
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+</body>
+</html>

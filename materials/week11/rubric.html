@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11주차 실습 과제 루브릭 · 격자 미로 탐색과 섬의 개수</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16233b;--paper:#f7f8fa;--panel:#ffffff;--py-blue:#3572a5;--line:#dfe3ea;--dim:#5b6b85;--code-bg:#101828;--code-fg:#e6edf7;--ok:#1d7a4f;--warn:#8a6d1f;--bad:#b3401f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+code,pre{font-family:"JetBrains Mono","D2Coding",Consolas,monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:24px}
+.prompt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--py-blue);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.lead{color:var(--dim);margin-top:8px;max-width:760px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 20px;font-family:"JetBrains Mono",monospace;font-size:12px}
+nav a{color:var(--py-blue);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+section>h2{font-size:18px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+section>h2 small{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--py-blue);margin-left:8px;font-weight:500}
+h3{font-size:15px;margin:14px 0 6px}
+p{margin:6px 0}
+ul,ol{margin:6px 0 6px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--code-bg);color:var(--code-fg);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;text-align:left;padding:8px}
+td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--py-blue);white-space:nowrap}
+table.fill td{border:1px solid var(--line);height:34px}
+table.fill td.lab{background:#f0f2f6;font-weight:600;height:auto}
+pre{background:var(--code-bg);color:var(--code-fg);padding:12px 14px;border-radius:6px;font-size:12.5px;overflow-x:auto;margin:8px 0;line-height:1.55}
+code.i{background:#eef1f6;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;color:var(--py-blue)}
+.note{background:#eef4fa;border:1px solid #d6e5f2;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.warn{background:#fbf3e4;border:1px solid #ecd9ae;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.concept{background:#f4f7fc;border:1px solid #c9d6ea;border-left:4px solid var(--py-blue);border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0;break-inside:avoid;page-break-inside:avoid}
+.concept b.h{color:var(--py-blue)}
+.concept table{margin:6px 0;font-size:12.5px}
+.concept ul{margin:4px 0 4px 18px}
+.ans{background:#eef8f2;border:1px solid #bfe0cf;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c,var(--py-blue));border-radius:6px;padding:10px 14px;background:#fff}
+.card b.h{color:var(--c)}
+.blank{border:1px dashed #9aa7bd;border-radius:6px;min-height:64px;margin:6px 0;padding:6px 10px;color:var(--dim);font-size:12px}
+.blank.l{min-height:110px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.diagram{background:#f0f2f6;border-radius:6px;padding:10px 14px;font-size:12.5px;overflow-x:auto;color:var(--ink);line-height:1.4}
+.codewrap{position:relative}
+.copy{position:absolute;top:14px;right:8px;font:500 11px "JetBrains Mono",monospace;background:#27364f;color:#e6edf7;border:1px solid #3d506e;border-radius:4px;padding:2px 8px;cursor:pointer}
+.role{display:inline-block;font:700 10.5px "JetBrains Mono",monospace;padding:1px 7px;border-radius:3px;background:#e4ecf6;color:var(--py-blue);margin-right:6px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.links a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:6px;margin:6px 0;color:var(--py-blue);text-decoration:none;font-weight:600}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{
+  body{background:#fff;font-size:11.5pt}.wrap{max-width:none;padding:0}
+  nav,.copy,.noprint{display:none!important}
+  section{border:none;padding:0;margin:0 0 8mm;break-inside:auto}
+  section.sheet{page-break-after:always;break-after:page}
+  section.sheet:last-of-type{page-break-after:auto}
+  header{padding:0 0 8px;margin-bottom:10px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f3f4f7;color:#111;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,.card,.blank{break-inside:avoid}
+}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.gate{border:1px dashed #b3401f;border-radius:8px;padding:6px 12px;background:#fff8f5}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="prompt">&gt;&gt;&gt; rubric.week(11)  # 교사·학생 공통 · 실습 과제 채점기준</div>
+  <h1>11주차 실습 과제 루브릭 — 격자 미로 탐색(BFS)과 섬의 개수</h1>
+  <p class="lead">구조와 배점은 계획서 Ⅰ(실습 과제 평가 운영 지침)의 평가요소·4단계 채점기준을 그대로 따른다(구현 정확성 50, 복잡도 분석 타당성 30, 코드 품질 20, 합계 100점). 오른쪽 열은 이 과제(<code class="i">grid_neighbors</code>, <code class="i">shortest_path_len</code>, <code class="i">count_islands</code>)에서 관찰하는 모습의 예이며 기준 자체를 바꾸지 않는다. 이 파일은 A13에서 과제 안내와 함께 공개한다.</p>
+</header>
+<nav><a href="#r1">#구현정확성</a><a href="#r2">#복잡도</a><a href="#r3">#코드품질</a><a href="#levels">#성취수준</a><a href="#viol">#위반처리</a><a href="#sheet">#채점표</a><a href="index.html">목록</a></nav>
+
+<section id="r1">
+<h2>요구사항 구현 정확성 · 50점<small>#r1</small></h2>
+<table>
+<tr><th style="width:90px">단계</th><th style="width:36%">계획서 기준</th><th>11주차 과제에서 관찰하는 모습</th></tr><tr><td class="id" style="color:#3572a5">상 · 50</td><td>요구된 자료구조·연산을 모두 정확히 구현하여 모든 테스트 케이스(경계값·예외 상황 포함)에서 의도한 대로 동작한다.</td><td><code class="i">grid_neighbors</code>는 yield를 쓰는 제네레이터이고 우·하·좌·상 순서로 격자 안의 통과 가능한 칸만 내준다. <code class="i">shortest_path_len</code>은 큐(BFS) 기반으로 최단 거리를 돌려주고 도달할 수 없으면 -1, 시작과 도착이 같으면 0이다. <code class="i">count_islands</code>는 빈 격자·모두 바다·모두 땅·대각선만 이어진 칸 같은 경계 입력에서도 맞고, 입력 격자를 바꾸지 않으며 두 번 호출해도 같은 값을 돌려준다. 1&times;1500 같은 긴 입력에서도 RecursionError 없이 끝난다.</td></tr><tr><td class="id" style="color:#3572a5">중상 · 40</td><td>핵심 연산은 정상 동작하나, 일부 경계값이나 예외 상황에서 오류가 발생한다.</td><td>일반 입력(미로 거리, 섬 개수)은 맞지만 시작=도착, 빈 격자, 도달 불가 중 한 곳에서 틀린다. 또는 재귀로 섬을 세어 긴 입력에서 RecursionError가 난다. 가장자리 칸의 경계 검사를 한 방향만 빠뜨린다.</td></tr><tr><td class="id" style="color:#3572a5">중하 · 30</td><td>기본 동작은 하지만 요구된 연산의 일부가 누락되었거나 잘못 구현되었다.</td><td><code class="i">grid_neighbors</code>가 리스트를 반환한다(제네레이터 요건 위반). <code class="i">shortest_path_len</code>이 DFS가 처음 찾은 길의 길이를 돌려주어 최단 거리가 아니거나, 도달 불가에서 -1이 아닌 값을 돌려준다. 방향 순서가 요구와 다르다. <code class="i">count_islands</code>가 대각선까지 이웃으로 센다.</td></tr><tr><td class="id" style="color:#3572a5">하 · 20</td><td>프로그램이 정상적으로 실행되지 않거나, 요구사항의 상당 부분이 구현되지 않았다.</td><td>구문 오류로 실행되지 않거나 골격의 빈칸이 대부분 남아 있다. visited(dist, seen)가 없어 끝나지 않거나 같은 칸을 반복해 센다.</td></tr></table>
+</section>
+<section id="r2">
+<h2>복잡도 분석 타당성 · 30점<small>#r2</small></h2>
+<table>
+<tr><th style="width:90px">단계</th><th style="width:36%">계획서 기준</th><th>11주차 과제에서 관찰하는 모습</th></tr><tr><td class="id" style="color:#1d7a4f">상 · 30</td><td>구현한 자료구조·알고리즘의 시간·공간 복잡도를 정확히 산출하고, 그 근거(반복문 구조, 자료구조 특성 등)를 논리적으로 서술하며 더 효율적인 대안까지 검토한다.</td><td><code class="i">shortest_path_len</code>과 <code class="i">count_islands</code>가 칸 수(행 &times; 열)에 비례하는 시간(각 칸을 한 번만 큐에 넣거나 seen에 기록하고, 칸마다 이웃 검사는 상수 번)임을 근거와 함께 쓴다. 공간도 dist 또는 seen과 큐가 칸 수에 비례함을 쓴다. 큐를 <code class="i">list.pop(0)</code>으로 쓰면 시간이 늘어나는 까닭과 <code class="i">deque</code>를 고른 이유, 재귀 DFS가 호출 깊이 한계에 걸리는 까닭과 명시적 스택·큐라는 대안(그 대가)을 서술한다.</td></tr><tr><td class="id" style="color:#1d7a4f">중상 · 24</td><td>복잡도를 대체로 정확히 산출하나 근거 서술이 다소 피상적이다.</td><td>칸 수에 비례한다고 쓰지만 &ldquo;각 칸을 한 번만 본다&rdquo;는 근거가 짧고, 공간 복잡도나 deque 선택 이유를 빠뜨린다.</td></tr><tr><td class="id" style="color:#1d7a4f">중하 · 18</td><td>복잡도 표기는 시도했으나 산출 값이 부정확하거나 근거를 제시하지 못한다.</td><td>큐 연산 때문에 칸 수의 제곱이라고 쓰거나, 섬마다 격자 전체를 다시 훑으므로 느리다고 잘못 쓰는 등 값이 틀리고 이유가 없다.</td></tr><tr><td class="id" style="color:#1d7a4f">하 · 12</td><td>복잡도를 전혀 분석하지 못했거나 개념을 혼동하고 있다.</td><td>복잡도 서술이 없거나, 최단 거리를 구하는 일과 연결 요소를 세는 일의 비용을 혼동한다.</td></tr></table><p class="note">구현 계획(어떤 탐색을 어떻게 쓸지)과 복잡도 분석은 학생이 직접 세워야 한다. AI가 대신 세운 것은 금지이며 위반 처리 대상이다. 복잡도 식은 이론 값으로 채점한다(실행 시간을 재서 채점하지 않는다).</p>
+</section>
+<section id="r3">
+<h2>코드 품질 · 20점<small>#r3</small></h2>
+<table>
+<tr><th style="width:90px">단계</th><th style="width:36%">계획서 기준</th><th>11주차 과제에서 관찰하는 모습</th></tr><tr><td class="id" style="color:#7a5cc8">상 · 20</td><td>변수·함수명이 역할을 명확히 드러내고, 중복 없이 간결하며, 엣지 케이스 처리가 코드 전반에 일관되게 반영되어 있다.</td><td><code class="i">dist</code>, <code class="i">seen</code>, <code class="i">todo</code>, <code class="i">cell</code>처럼 역할이 드러나는 이름을 쓴다. 구현 계획 주석이 있고, 시작=도착·도달 불가·빈 격자 처리 방침을 주석으로 밝힌다. 이웃 계산을 <code class="i">grid_neighbors</code> 한 곳으로 모아 두 탐색에서 다시 쓰며 불필요한 중복이 없다.</td></tr><tr><td class="id" style="color:#7a5cc8">중상 · 16</td><td>전반적으로 가독성이 양호하나 일부 네이밍이 불명확하거나 사소한 중복 코드가 존재한다.</td><td>이름이 일부 모호하거나(<code class="i">a</code>, <code class="i">x2</code>) 네 방향 검사를 두 함수에 따로 써서 중복이 있다.</td></tr><tr><td class="id" style="color:#7a5cc8">중하 · 12</td><td>동작은 하지만 네이밍 규칙이 일관되지 않고 중복 코드가 다수 존재해 가독성이 떨어진다.</td><td>함수 안에서 이름 규칙이 섞이고, 같은 코드가 반복되며 주석·계획이 없다.</td></tr><tr><td class="id" style="color:#7a5cc8">하 · 8</td><td>코드 구조를 파악하기 어려울 정도로 가독성이 낮고 엣지 케이스 처리가 전무하다.</td><td>구조를 읽기 어렵고, 경계 입력에 대한 고려가 전혀 없다.</td></tr></table>
+</section>
+<section id="levels">
+<h2>성취수준 A~E 관찰 지표<small>#levels · 단원4 진술의 11주차 번역</small></h2>
+<table>
+<tr><th style="width:36px">수준</th><th style="width:30%">계획서 진술(11주차 해당 부분)</th><th>관찰 지표(11주차 활동에서 보이는 행동)</th></tr>
+<tr><td class="id" style="color:#1d7a4f">A</td><td>문제 상황을 정확히 분석해 BFS/DFS 중 최적의 탐색 전략을 스스로 선택하고 구현한다.</td><td>A9에서 DIRS 순서를 바꿔 가며 BFS 값은 변하지 않고 DFS 값은 변한다는 점을 스스로 설명한다. A14 Q1의 네 상황을 모두 맞게 구별하고 조건(최단 거리 보장이 필요한가, 연결 여부만 필요한가)을 근거로 제시한다(연결 요소만 세는 상황은 &ldquo;둘 다 가능, 순서가 답을 바꾸지 않으므로&rdquo;). Q2에서 두 값의 차이를 이웃 순서 의존성으로 설명한다. A8 T1·T3을 예측해 맞히고, A13에서 입력 불변·큰 입력 요건을 스스로 충족한다. D1·D2에서 문제 정의(이웃 규칙)와 알고리즘 선택을 구분해 논한다.</td></tr><tr><td class="id" style="color:#3572a5">B</td><td>BFS와 DFS의 차이를 이해하여 안내에 따라 적절히 적용한다.</td><td>A6·A7 코드가 점검 결과와 일치한다. A10의 개수 예측과 꺼내는 쪽을 바꾼 결과를 맞히고 &ldquo;순서가 달라도 개수는 같다&rdquo;고 말한다. A14 Q1에서 최단 거리 상황은 BFS로 고르되 근거는 한 가지만 제시하고, Q2의 큐 방문 순서는 정답이다. 힌트 1회 후 <code class="i">count_islands</code>를 완성한다.</td></tr><tr><td class="id" style="color:#8a6d1f">C</td><td>BFS·DFS 코드는 작성하나 문제 상황에 맞는 선택에는 어려움을 겪는다.</td><td>A6·A7 코드는 완성하나 A9에서 &ldquo;DFS가 먼저 찾았으니 최단&rdquo;이라고 결론짓는다. Q1에서 근거 없이 한 알고리즘만 고정한다(&ldquo;DFS가 빠르니까&rdquo;). visited 표시 시점 오류(A8 T1의 중복)나 재귀 깊이(T3)를 스스로 발견하지 못하고 교사 설명 뒤에 고친다. 대각선 이웃이나 경계 검사 누락을 힌트 뒤에 고친다.</td></tr><tr><td class="id" style="color:#c07a1f">D</td><td>그래프 탐색 알고리즘의 기본 구조만 모방할 수 있다.</td><td>A2·A3의 손 추적에서 컨테이너 상태를 적지 못하거나 스택과 큐의 꺼내는 쪽을 혼동한다. 골격은 따라 쓰지만 visited를 빠뜨려 끝나지 않거나 중복이 생겨도 원인을 설명하지 못한다. 시작 노드에서 닿지 않는 노드(F)가 방문되지 않는 까닭을 모른다.</td></tr><tr><td class="id" style="color:#b3401f">E</td><td>상태 공간 탐색의 개념 자체를 이해하지 못하며, 무차별 대입 외의 접근을 시도하지 못한다.</td><td>A1·A2에서 &ldquo;이웃으로 계속 나아간다&rdquo;는 규칙을 적지 못하고 미로를 그림 설명으로만 반복한다. A7에서 격자 칸의 이웃을 네 방향으로 열거하지 못하고 모든 경로를 하나씩 나열하려 한다.</td></tr></table><p class="note">관찰 수집: 교사 체크리스트(A2 두 순서·컨테이너 상태, A3 Call Stack 그림, A4 H 표와 순서 바꾼 재실험, A6 손 추적과 코드의 일치, A7 MAZE 값, A8 예측-실제 표, A9 DIRS 표, A10 예측 표와 교체 실험, A13 점검 통과, A14 답안). 개별 피드백은 A6·A7 순회, A10 순회, A13 순회, 주간 과제 채점 때 한다. 실습 과제 채점은 계획서 Ⅰ의 평가요소·4단계 채점기준에 따른다. 성취수준 진술은 계획서 단원4(11~13주차 공통)의 문구이며, 이 표는 11주차 근거만 번역했다.</p>
+</section>
+<section id="viol">
+<h2>AI 활용 위반 처리(계획서 요약)<small>#viol</small></h2>
+<table>
+<tr><th style="width:170px">구분</th><th>처리</th></tr>
+<tr><td class="id">판별</td><td><b>11주차 과제에 맞춘 예시(계획서 원문의 풀어 쓴 요약이다. 판정은 계획서 Ⅰ을 따른다).</b> 제출 코드와 성찰일지의 서술 수준 불일치, 최단 거리에 큐를 쓴 이유와 방문 기록을 어느 시점에 했는지 설명하지 못함, 급격한 코드 스타일 변화, AI 문체 특징 등을 근거로 담당 교사가 1차 확인한다. 필요 시 간단한 구술 확인을 한다.<br><b>계획서 원문</b>: 제출 코드와 성찰일지의 서술 수준 불일치, 질의응답 시 복잡도 선택 근거를 설명하지 못하는 경우, 급격한 코드 스타일 변화, AI 문체 특징 등을 근거로 담당 교사가 1차 확인한다. 필요 시 간단한 구술 확인(복잡도 선택 이유 질문)을 진행한다.</td></tr>
+<tr><td class="id">1차 위반</td><td>해당 과제 재작성 지시 및 해당 과제 점수 50% 감점. 학생과 개별 면담으로 허용 범위를 재안내한다.</td></tr>
+<tr><td class="id">2차 위반 또는 명백한 전체 대필</td><td>해당 과제 0점 처리. 학교 학업성실성(생활지도) 규정에 따른 별도 조치를 병행하며 보호자에게 통지한다.</td></tr>
+<tr><td class="id">자진 신고 감경</td><td>제출 전 스스로 금지 범위 활용 사실을 신고하면, 해당 부분을 본인이 다시 작성하는 조건으로 감점 폭을 완화한다(0점 대신 재작성 + 감점).</td></tr>
+</table>
+<p class="note">형성평가(A14)는 AI를 쓰지 않는 수업 운영 규칙으로 진행하며, 위 위반 처리를 형성평가에 적용하지 않는다.</p>
+</section>
+<section id="sheet">
+<h2>채점표<small>#sheet · 교사용 기록</small></h2>
+<table class="fill"><tr><th style="width:100px">학생</th><th>구현 정확성 (50/40/30/20)</th><th>복잡도 분석 (30/24/18/12)</th><th>코드 품질 (20/16/12/8)</th><th style="width:70px">합계</th><th>AI 활용 기록 확인</th></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr></table>
+</section>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
+</script>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11주차 탐구 활동지 2부 · A6~A9 기록 (학생용)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16233b;--paper:#f7f8fa;--panel:#ffffff;--py-blue:#3572a5;--line:#dfe3ea;--dim:#5b6b85;--code-bg:#101828;--code-fg:#e6edf7;--ok:#1d7a4f;--warn:#8a6d1f;--bad:#b3401f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+code,pre{font-family:"JetBrains Mono","D2Coding",Consolas,monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:24px}
+.prompt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--py-blue);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.lead{color:var(--dim);margin-top:8px;max-width:760px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 20px;font-family:"JetBrains Mono",monospace;font-size:12px}
+nav a{color:var(--py-blue);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+section>h2{font-size:18px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+section>h2 small{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--py-blue);margin-left:8px;font-weight:500}
+h3{font-size:15px;margin:14px 0 6px}
+p{margin:6px 0}
+ul,ol{margin:6px 0 6px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--code-bg);color:var(--code-fg);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;text-align:left;padding:8px}
+td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--py-blue);white-space:nowrap}
+table.fill td{border:1px solid var(--line);height:34px}
+table.fill td.lab{background:#f0f2f6;font-weight:600;height:auto}
+pre{background:var(--code-bg);color:var(--code-fg);padding:12px 14px;border-radius:6px;font-size:12.5px;overflow-x:auto;margin:8px 0;line-height:1.55}
+code.i{background:#eef1f6;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;color:var(--py-blue)}
+.note{background:#eef4fa;border:1px solid #d6e5f2;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.warn{background:#fbf3e4;border:1px solid #ecd9ae;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.concept{background:#f4f7fc;border:1px solid #c9d6ea;border-left:4px solid var(--py-blue);border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0;break-inside:avoid;page-break-inside:avoid}
+.concept b.h{color:var(--py-blue)}
+.concept table{margin:6px 0;font-size:12.5px}
+.concept ul{margin:4px 0 4px 18px}
+.ans{background:#eef8f2;border:1px solid #bfe0cf;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c,var(--py-blue));border-radius:6px;padding:10px 14px;background:#fff}
+.card b.h{color:var(--c)}
+.blank{border:1px dashed #9aa7bd;border-radius:6px;min-height:64px;margin:6px 0;padding:6px 10px;color:var(--dim);font-size:12px}
+.blank.l{min-height:110px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.diagram{background:#f0f2f6;border-radius:6px;padding:10px 14px;font-size:12.5px;overflow-x:auto;color:var(--ink);line-height:1.4}
+.codewrap{position:relative}
+.copy{position:absolute;top:14px;right:8px;font:500 11px "JetBrains Mono",monospace;background:#27364f;color:#e6edf7;border:1px solid #3d506e;border-radius:4px;padding:2px 8px;cursor:pointer}
+.role{display:inline-block;font:700 10.5px "JetBrains Mono",monospace;padding:1px 7px;border-radius:3px;background:#e4ecf6;color:var(--py-blue);margin-right:6px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.links a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:6px;margin:6px 0;color:var(--py-blue);text-decoration:none;font-weight:600}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{
+  body{background:#fff;font-size:11.5pt}.wrap{max-width:none;padding:0}
+  nav,.copy,.noprint{display:none!important}
+  section{border:none;padding:0;margin:0 0 8mm;break-inside:auto}
+  section.sheet{page-break-after:always;break-after:page}
+  section.sheet:last-of-type{page-break-after:auto}
+  header{padding:0 0 8px;margin-bottom:10px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f3f4f7;color:#111;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,.card,.blank{break-inside:avoid}
+}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.gate{border:1px dashed #b3401f;border-radius:8px;padding:6px 12px;background:#fff8f5}
+</style>
+<style id="week11-submit-style">
+/* week11 제출 바·입력란 공통 스타일 (7개 학생용 파일 동일) */
+#savebar{position:sticky;top:0;z-index:50;background:#16233b;color:#f7f8fa;padding:8px 20px;border-bottom:3px solid #3572a5;font-size:13px}
+#savebar .sb-in{max-width:1000px;margin:0 auto}
+#savebar .sb-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+#savebar label{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+#savebar input[type=text]{width:9.5em;padding:5px 8px;border:2px solid #9aa7bd;border-radius:4px;background:#fff;color:#16233b;font:inherit;font-weight:500}
+#savebar input[type=text].invalid{border-color:#ff9b7a;background:#fff3ee}
+#savebar button{font:600 13px "IBM Plex Sans KR",sans-serif;padding:6px 14px;border-radius:4px;border:2px solid #fff;background:#fff;color:#16233b;cursor:pointer}
+#savebar button.sec{background:transparent;color:#fff;border-color:#9aa7bd}
+#savebar button:disabled{opacity:.6;cursor:default}
+#savebar button:focus-visible,#savebar input:focus-visible{outline:3px solid #ffd166;outline-offset:2px}
+#savebar .sb-msg{min-height:1.4em;margin-top:4px;font-size:12.5px}
+#savebar .sb-msg.err{color:#ffd0c0;font-weight:700}
+#savebar .sb-msg.ok{color:#bff0d4}
+#savebar .sb-auto{font-size:11.5px;color:#c9d3e6;margin-left:auto}
+#savebar .sb-confirm{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px;padding:6px 10px;border:1px solid #ffd166;border-radius:4px;font-size:12.5px}
+#savebar .sb-confirm[hidden]{display:none}
+.in{width:100%;display:block;font:inherit;font-size:13.5px;line-height:1.5;color:#16233b;background:#fff;border:1px solid #6b7a94;border-radius:4px;padding:5px 8px}
+textarea.in{resize:vertical;min-height:2.4em;overflow:hidden}
+textarea.in.l{min-height:7em}
+textarea.in.code{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre;overflow:auto;tab-size:4;min-height:12em;background:#fbfcfe}
+textarea.in.draw{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;white-space:pre;overflow:auto;min-height:9em}
+.in:focus-visible,.ck input:focus-visible,.rg input:focus-visible{outline:3px solid #3572a5;outline-offset:1px}
+.in.invalid{border:2px solid #b3401f}
+input.in.s{display:inline-block;width:3.2em;padding:1px 4px;text-align:center}
+table.fill td.in-cell{padding:3px;height:auto}
+.ans-row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.ans-row>.n{padding-top:6px;font-weight:700;color:#3572a5}
+.mycode{margin:8px 0 12px}
+.mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
+.hint{font-size:12px;color:#5b6b85;margin:2px 0}
+.ck{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
+.ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
+.rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
+.rg label{display:inline-flex;align-items:center;gap:5px}
+@media (max-width:640px){#savebar{padding:8px 14px}#savebar .sb-auto{margin-left:0}}
+#printid{display:none}
+@media print{
+  #printid{display:block;font:600 12pt "IBM Plex Sans KR",sans-serif;margin:0 0 8px;padding-bottom:4px;border-bottom:1px solid #999;white-space:pre-wrap}
+  #savebar,.hint.noprint{display:none!important}
+  .in{border:none;border-bottom:1px solid #9aa7bd;border-radius:0;background:transparent;padding:2px 2px;-webkit-appearance:none;appearance:none;resize:none}
+  textarea.in{overflow:visible}
+  textarea.in.code,textarea.in.draw{border:1px solid #ccd;white-space:pre-wrap}
+  select.in{background-image:none}
+  .ans-row,.mycode{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="prompt">&gt;&gt;&gt; workbook.week(11)  # 학생용 · 탐구 활동지 2부 A6~A9</div>
+  <h1>11주차 탐구 활동지 2부 — 코드 실습 기록 (A6~A9)</h1>
+  <p class="lead">2차시에 사용한다. 코드로 만들고 실행한 결과를 기록하는 활동지이다. 예측 칸은 실행하기 전에 먼저 쓴다. 이 활동지에는 정답과 실행 결과 값이 없다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><label class="ck">모둠 <input type="text" class="in" data-key="meta.group" data-label="모둠" autocomplete="off" style="width:8em;display:inline-block"></label></p>
+</header>
+<nav><a href="#A6">A6</a><a href="#A7">A7</a><a href="#A8">A8</a><a href="#A9">A9</a><a href="index.html">목록</a></nav>
+
+<section id="A6" class="sheet">
+<h2>A6 · 손 추적과 코드 출력 대조<small>2차시 · 13분 · 개인(옆 학생과 대조)</small></h2>
+<p class="meta"><span>산출물: 손 추적과의 일치 확인, 시작 노드 F 예측-실제</span></p>
+<p>실습 코드 1부(<a href="student_code_lab.html#A6">A6</a>)의 <code class="i">bfs_order</code>, <code class="i">dfs_order</code>를 G1, 시작 A에서 실행해 1차시의 손 추적(A2, A3)과 비교한다.</p><div class="scroll"><table class="fill"><tr><th style="width:18%">함수</th><th>코드가 낸 방문 순서</th><th style="width:34%">손 추적과 같은가</th></tr><tr><td class="lab">bfs_order</td><td class="in-cell"><input type="text" class="in" data-key="A6.bfs.out" data-label="A6 bfs_order 출력" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A6.bfs.same" data-type="radio" data-label="A6 bfs_order는 손 추적과 같은가"><label><input type="radio" name="r_A6_bfs_same" value="같다"> 같다</label><label><input type="radio" name="r_A6_bfs_same" value="다르다"> 다르다</label><label><input type="radio" name="r_A6_bfs_same" value="아직 완성하지 못했다"> 아직 완성하지 못했다</label></span></td></tr><tr><td class="lab">dfs_order</td><td class="in-cell"><input type="text" class="in" data-key="A6.dfs.out" data-label="A6 dfs_order 출력" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A6.dfs.same" data-type="radio" data-label="A6 dfs_order는 손 추적과 같은가"><label><input type="radio" name="r_A6_dfs_same" value="같다"> 같다</label><label><input type="radio" name="r_A6_dfs_same" value="다르다"> 다르다</label><label><input type="radio" name="r_A6_dfs_same" value="아직 완성하지 못했다"> 아직 완성하지 못했다</label></span></td></tr></table></div>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A6.diff" data-label="A6 다르다면 어디가 다른가"></textarea></div>
+<h3>시작 노드를 F로 바꾸면</h3>
+<p>두 함수의 시작 노드를 F로 바꾸어 실행한다. <b>실행하기 전에</b> 예측을 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:34%">함수</th><th>예측(실행 전)</th><th>실제(실행 결과)</th></tr><tr><td class="lab">bfs_order(g, "F")</td><td class="in-cell"><input type="text" class="in" data-key="A6.f.bfs.pred" data-label="A6 시작 F bfs 예측" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A6.f.bfs.real" data-label="A6 시작 F bfs 실제" autocomplete="off"></td></tr><tr><td class="lab">dfs_order(g, "F", set(), [])</td><td class="in-cell"><input type="text" class="in" data-key="A6.f.dfs.pred" data-label="A6 시작 F dfs 예측" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A6.f.dfs.real" data-label="A6 시작 F dfs 실제" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A6.f.why" data-label="A6 F에서 시작하면 어떤 노드가 방문되는가 왜 그런가"></textarea></div>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A6.mark" data-label="A6 내 코드에서 visited에 시작 노드를 언제 기록했는가"></textarea></div>
+<div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A6.default" data-label="A6 dfs_order의 visited를 기본 인자로 두면 8주차에서 본 어떤 문제가 생길까"></textarea></div>
+</section>
+<section id="A7" class="sheet">
+<h2>A7 · 미로 MAZE 결과 기록<small>2차시 · 14분 · 짝</small></h2>
+<p class="meta"><span>산출물: MAZE 거리, 도달 불가 미로 결과, 질문 답</span></p>
+<p>실습 코드 1부(<a href="student_code_lab.html#A7">A7</a>)의 함수를 실행해 얻은 값을 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:40%">실행</th><th>내 코드의 값</th></tr><tr><td class="lab">MAZE에서 S&rarr;E 거리</td><td class="in-cell"><input type="text" class="in" data-key="A7.maze" data-label="A7 MAZE S에서 E 거리" autocomplete="off"></td></tr><tr><td class="lab"><code class="i">["S#E"]</code>에서 S&rarr;E</td><td class="in-cell"><input type="text" class="in" data-key="A7.blocked" data-label="A7 도달 불가 미로 결과" autocomplete="off"></td></tr><tr><td class="lab">MAZE에서 S&rarr;S(시작=도착)</td><td class="in-cell"><input type="text" class="in" data-key="A7.same" data-label="A7 시작=도착 결과" autocomplete="off"></td></tr><tr><td class="lab">(0,0)의 이웃 목록</td><td class="in-cell"><input type="text" class="in" data-key="A7.nb00" data-label="A7 (0,0)의 이웃 목록" autocomplete="off"></td></tr><tr><td class="lab">(2,2)의 이웃 목록</td><td class="in-cell"><input type="text" class="in" data-key="A7.nb22" data-label="A7 (2,2)의 이웃 목록" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A7.q1" data-label="A7 dist에 이미 있는 칸은 왜 다시 넣지 않는가 dist는 어떤 역할을 두 개 하는가"></textarea></div>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A7.q2" data-label="A7 격자 가장자리 칸은 이웃이 몇 개인가 경계 검사를 빼면"></textarea></div>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A7.q3" data-label="A7 S와 E가 같은 칸이면 코드는 어떻게 동작하는가"></textarea></div>
+<div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A7.q4" data-label="A7 A2의 큐 규칙과 shortest_path_len에서 같은 곳"></textarea></div>
+<div class="ans-row"><span class="n">5</span><textarea class="in" rows="2" data-key="A7.q5" data-label="A7 10주차 neighbors와 grid_neighbors에서 같은 모양"></textarea></div>
+</section>
+<section id="A8" class="sheet">
+<h2>A8 · 함정 코드 예측-실제 표<small>2차시 · 14분 · 짝</small></h2>
+<p class="meta"><span>산출물: 예측-실제 표, 함정별 원인 한 줄</span></p>
+<p>실습 코드 2부의 T1~T3(선택 T4)를 <b>실행하기 전에 예측 칸을 먼저</b> 채운다. T1-a는 출력된 순서, T1-b는 두 모드의 (넣은 횟수, 최대 큐 길이), T2는 n이 10배가 될 때의 시간 배수, T3는 두 너비의 결과, T4는 세 줄의 출력을 쓴다. 실행한 뒤 실제 칸을 쓰고, 예측과 달랐다면 원인을 한 줄로 쓴다. 마지막 칸에는 &ldquo;이런 일을 실제 코드 어디에서 만날 수 있는지&rdquo; 한 줄을 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:70px">코드</th><th style="width:23%">예측(실행 전)</th><th style="width:23%">실제(실행 결과)</th><th style="width:23%">원인 한 줄</th><th>어디서 흔히 만나는가</th></tr><tr><td class="lab">T1-a</td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r1.c1" data-label="A8 T1-a · 예측(실행 전)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r1.c2" data-label="A8 T1-a · 실제(실행 결과)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r1.c3" data-label="A8 T1-a · 원인 한 줄"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r1.c4" data-label="A8 T1-a · 어디서 흔히 만나는가"></textarea></td></tr><tr><td class="lab">T1-b</td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r2.c1" data-label="A8 T1-b · 예측(실행 전)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r2.c2" data-label="A8 T1-b · 실제(실행 결과)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r2.c3" data-label="A8 T1-b · 원인 한 줄"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r2.c4" data-label="A8 T1-b · 어디서 흔히 만나는가"></textarea></td></tr><tr><td class="lab">T2</td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r3.c1" data-label="A8 T2 · 예측(실행 전)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r3.c2" data-label="A8 T2 · 실제(실행 결과)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r3.c3" data-label="A8 T2 · 원인 한 줄"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r3.c4" data-label="A8 T2 · 어디서 흔히 만나는가"></textarea></td></tr><tr><td class="lab">T3</td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r4.c1" data-label="A8 T3 · 예측(실행 전)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r4.c2" data-label="A8 T3 · 실제(실행 결과)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r4.c3" data-label="A8 T3 · 원인 한 줄"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r4.c4" data-label="A8 T3 · 어디서 흔히 만나는가"></textarea></td></tr><tr><td class="lab">T4(선택)</td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r5.c1" data-label="A8 T4(선택) · 예측(실행 전)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r5.c2" data-label="A8 T4(선택) · 실제(실행 결과)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r5.c3" data-label="A8 T4(선택) · 원인 한 줄"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r5.c4" data-label="A8 T4(선택) · 어디서 흔히 만나는가"></textarea></td></tr></table></div>
+<h3>정리 질문</h3>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A8.q1" data-label="A8 A2에서 큐에 D가 두 번 들어간 장면과 T1-a는 같은 문제인가"></textarea></div>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A8.q2" data-label="A8 큐에 넣을 때 표시하면 한 번만 들어가는 이유"></textarea></div>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A8.q3" data-label="A8 n이 10배가 되면 pop(0) 시간과 deque 시간은 각각 몇 배인가"></textarea></div>
+<div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A8.q4" data-label="A8 1x1500 입력은 정상 입력인데 왜 실패하는가 어떻게 피할까"></textarea></div>
+</section>
+<section id="A9" class="sheet">
+<h2>A9 · DIRS 순서를 바꿔 DFS와 BFS 비교<small>2차시 · 9분 · 짝</small></h2>
+<p class="meta"><span>산출물: DIRS별 DFS/BFS 길이 표, 가설 확인 메모</span></p>
+<p>실습 코드 2부 A9의 실행 틀에서 <code class="i">my_dirs</code>의 순서를 2가지 이상 바꿔 실행한다(첫 줄은 처음 순서 우, 하, 좌, 상). 방향 순서는 <code class="i">(0,1)=우 (1,0)=하 (0,-1)=좌 (-1,0)=상</code>처럼 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:52px">번호</th><th style="width:44%">DIRS 순서</th><th>DFS 길이</th><th>BFS 길이</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r1.c1" data-label="A9 DIRS 실험 1 · 내가 정한 방향 순서" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r1.c2" data-label="A9 DIRS 실험 1 · DFS가 처음 찾은 길의 간선 수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r1.c3" data-label="A9 DIRS 실험 1 · BFS 최단 거리" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r2.c1" data-label="A9 DIRS 실험 2 · 내가 정한 방향 순서" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r2.c2" data-label="A9 DIRS 실험 2 · DFS가 처음 찾은 길의 간선 수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r2.c3" data-label="A9 DIRS 실험 2 · BFS 최단 거리" autocomplete="off"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r3.c1" data-label="A9 DIRS 실험 3 · 내가 정한 방향 순서" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r3.c2" data-label="A9 DIRS 실험 3 · DFS가 처음 찾은 길의 간선 수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r3.c3" data-label="A9 DIRS 실험 3 · BFS 최단 거리" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r4.c1" data-label="A9 DIRS 실험 4 · 내가 정한 방향 순서" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r4.c2" data-label="A9 DIRS 실험 4 · DFS가 처음 찾은 길의 간선 수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r4.c3" data-label="A9 DIRS 실험 4 · BFS 최단 거리" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A9.q1" data-label="A9 DFS가 먼저 찾은 길이 BFS보다 길었는가 순서를 바꾸니"></textarea></div>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A9.q2" data-label="A9 BFS 값은 DIRS를 바꿔도 변했는가"></textarea></div>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A9.q3" data-label="A9 A4에서 세운 가설은 이 표로 확인되었는가"></textarea></div>
+</section>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
+</script>
+<script id="week11-submit">
+/* week11 학생 입력 저장 (7개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week11-student-v1 */
+(function(){
+"use strict";
+var FILE_KEY="workbook_part2";
+var FILES={workbook:"student_workbook.html",code_lab:"student_code_lab.html",workbook_part2:"student_workbook_part2.html",code_lab_part2:"student_code_lab_part2.html",code_lab_part3:"student_code_lab_part3.html",workbook_part3:"student_workbook_part3.html",formative:"formative_check.html"};
+var FILE=FILES[FILE_KEY], STORE="week11:"+FILE, SCHEMA="week11-student-v1";
+var bar,idIn,nameIn,msg,autoEl,saveBtn,clearBtn,confirmBox,busy=false,timer=null;
+var draftBtn,loadBtn,fileIn,yesBtn,confirmTxt,pending=null,baseline="";
+
+function q(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
+function kind(el){
+  var t=el.getAttribute("data-type");
+  if(t)return t;
+  var tag=el.tagName.toLowerCase();
+  if(tag==="textarea")return "textarea";
+  if(tag==="select")return "select";
+  if(tag==="input")return el.type==="checkbox"?"checkbox":"text";
+  return "text";
+}
+function labelOf(el){
+  var l=el.getAttribute("data-label");
+  if(l)return l;
+  if(el.labels&&el.labels.length)return el.labels[0].textContent.replace(/\s+/g," ").trim();
+  return el.getAttribute("aria-label")||"";
+}
+function readValue(el,k){
+  if(k==="checkbox")return !!el.checked;
+  if(k==="radio"){var r=el.querySelector("input[type=radio]:checked");return r?r.value:null;}
+  return el.value;
+}
+function collect(){
+  return q("[data-key]").map(function(el){
+    var k=kind(el);
+    return {key:el.getAttribute("data-key"),label:labelOf(el),type:k,value:readValue(el,k)};
+  });
+}
+function studentInfo(){return {id:idIn.value.trim(),name:nameIn.value.trim()};}
+function buildJSON(status){
+  return {schema:SCHEMA,week:11,file:FILE,status:status||"final",student:studentInfo(),savedAt:new Date().toISOString(),answers:collect()};
+}
+function safe(s){return String(s).replace(/[\\\/:*?"<>|\s\u0000-\u001f]+/g,"_").replace(/^\.+/,"_");}
+function fileName(st,draft){return "week11_"+FILE_KEY+"_"+safe(st.id||"학번미입력")+"_"+safe(st.name||"이름미입력")+(draft?"_임시저장":"")+".json";}
+function validate(){
+  var miss=[];
+  [[idIn,"학번"],[nameIn,"이름"]].forEach(function(p){
+    var bad=!p[0].value.trim();
+    p[0].classList.toggle("invalid",bad);
+    p[0].setAttribute("aria-invalid",bad?"true":"false");
+    if(bad)miss.push(p);
+  });
+  return miss;
+}
+function updatePrintId(){
+  var p=document.getElementById("printid");
+  if(!p)return;
+  var s=studentInfo();
+  p.textContent="학번: "+(s.id||"          ")+"   이름: "+(s.name||"          ");
+}
+function say(text,cls){msg.textContent=text;msg.className="sb-msg"+(cls?" "+cls:"");}
+
+function download(draft){
+  var obj=buildJSON(draft?"draft":"final"),name=fileName(obj.student,draft);
+  var blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"});
+  var url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;a.style.display="none";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1500);
+  return name;
+}
+function onSave(){
+  if(busy)return;
+  var miss=validate();
+  if(miss.length){
+    say("학번과 이름을 입력해야 저장할 수 있다. 표시된 칸을 채운 뒤 다시 누른다.","err");
+    miss[0][0].focus();return;
+  }
+  busy=true;saveBtn.disabled=true;
+  try{
+    var n=download();
+    say("저장했다: "+n+" (내려받은 JSON 파일 한 개를 제출한다.)","ok");
+  }catch(e){say("저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;saveBtn.disabled=false;},1200);
+}
+
+/* 이어 쓰기: 임시 저장 파일 내려받기 / 저장한 파일 불러오기 */
+function snap(){return JSON.stringify(collect().map(function(a){return a.value;}));}
+function isDirty(){return snap()!==baseline;}
+function ask(text,fn){
+  confirmTxt.textContent=text;pending=fn;confirmBox.hidden=false;
+  clearBtn.disabled=true;loadBtn.disabled=true;
+}
+function closeAsk(){
+  pending=null;confirmBox.hidden=true;clearBtn.disabled=false;loadBtn.disabled=false;
+}
+function onDraft(){
+  if(busy)return;
+  busy=true;draftBtn.disabled=true;
+  try{
+    var n=download(true),s=studentInfo();
+    say("임시 저장했다: "+n+" (제출 파일이 아니다. 이어 쓸 때 [불러오기]로 이 파일을 고른다."+((s.id&&s.name)?"":" 학번과 이름을 쓰면 파일 이름에 들어간다.")+")","ok");
+  }catch(e){say("임시 저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;draftBtn.disabled=false;},1200);
+}
+function applyLoaded(j){
+  if(!j||typeof j!=="object"||Array.isArray(j))return {err:"저장 파일 형식이 아니다."};
+  if(j.schema!==SCHEMA)return {err:"이 워크북의 저장 파일이 아니다(schema 불일치). 이 활동지에서 저장한 JSON 파일을 고른다."};
+  if(j.file!==FILE)return {err:"이 파일은 '"+String(j.file)+"'에서 저장한 것이다. 지금 열린 '"+FILE+"'에서 저장한 파일만 불러올 수 있다."};
+  if(!Array.isArray(j.answers))return {err:"저장 파일에 answers가 없거나 형식이 틀리다."};
+  var vals={};
+  j.answers.forEach(function(a){if(a&&typeof a.key==="string")vals[a.key]=a.value;});
+  var n=0;
+  q("[data-key]").forEach(function(el){
+    var key=el.getAttribute("data-key");
+    if(!Object.prototype.hasOwnProperty.call(vals,key))return;
+    var v=vals[key],t=typeof v;
+    if(v!==null&&t!=="string"&&t!=="boolean")return;
+    setValue(el,v);n++;
+  });
+  if(j.student&&typeof j.student==="object"){
+    idIn.value=typeof j.student.id==="string"?j.student.id:"";
+    nameIn.value=typeof j.student.name==="string"?j.student.name:"";
+    [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  }
+  autosizeAll();updatePrintId();stash();
+  return {n:n,draft:j.status==="draft",at:j.savedAt};
+}
+function onLoadClick(){
+  if(isDirty()||idIn.value.trim()||nameIn.value.trim()){
+    ask("지금 입력한 내용이 불러온 파일의 내용으로 바뀐다. 계속하려면 [불러오기 진행]을 누르고 파일을 고른다.",function(){closeAsk();fileIn.click();});
+    yesBtn.textContent="불러오기 진행";
+  }else{fileIn.click();}
+}
+function onFileChosen(){
+  var f=fileIn.files&&fileIn.files[0];
+  if(!f)return;
+  if(f.size>3*1024*1024){say("파일이 너무 크다(3MB 초과). 이 활동지에서 저장한 JSON 파일이 맞는지 확인한다.","err");fileIn.value="";return;}
+  var r=new FileReader();
+  r.onerror=function(){say("파일을 읽지 못했다. 다시 시도한다.","err");fileIn.value="";};
+  r.onload=function(){
+    var res;
+    try{res=applyLoaded(JSON.parse(String(r.result)));}
+    catch(e){res={err:"JSON 파일을 읽지 못했다. 이 활동지에서 저장한 파일이 맞는지 확인한다."};}
+    if(res.err){say(res.err+" (입력란은 바뀌지 않았다.)","err");}
+    else{say("불러왔다: "+f.name+" ("+res.n+"칸"+(res.at?", 저장 시각 "+res.at.slice(0,16).replace("T"," "):"")+"). 이어서 쓴다."+(res.draft?"":" (제출용 파일을 불러왔다.)"),"ok");}
+    fileIn.value="";
+  };
+  r.readAsText(f,"utf-8");
+}
+
+/* 임시 보관 (localStorage, 모두 try/catch) */
+function stash(){
+  try{
+    var vals={};collect().forEach(function(a){vals[a.key]=a.value;});
+    localStorage.setItem(STORE,JSON.stringify({student:studentInfo(),values:vals,at:Date.now()}));
+    var d=new Date();
+    autoEl.textContent="임시 저장됨 "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
+  }catch(e){autoEl.textContent="임시 저장 사용 불가(저장(JSON)은 가능)";}
+}
+function schedule(){clearTimeout(timer);timer=setTimeout(stash,300);}
+function setValue(el,v){
+  var k=kind(el);
+  if(k==="checkbox"){el.checked=(v===true);}
+  else if(k==="radio"){q("input[type=radio]",el).forEach(function(r){r.checked=(v!==null&&v!==undefined&&r.value===v);});}
+  else{el.value=(v===null||v===undefined)?"":String(v);}
+}
+function restore(){
+  try{
+    var raw=localStorage.getItem(STORE);if(!raw)return;
+    var s=JSON.parse(raw);if(!s)return;
+    if(s.student){idIn.value=s.student.id||"";nameIn.value=s.student.name||"";}
+    var any=false;
+    q("[data-key]").forEach(function(el){var key=el.getAttribute("data-key");if(s.values&&Object.prototype.hasOwnProperty.call(s.values,key)){setValue(el,s.values[key]);any=true;}});
+    autosizeAll();
+    if(any||(s.student&&(s.student.id||s.student.name)))autoEl.textContent="이전 임시 저장을 불러왔다";
+  }catch(e){}
+}
+function resetAll(){
+  q("[data-key]").forEach(function(el){setValue(el,kind(el)==="checkbox"?false:(kind(el)==="radio"?null:""));});
+  idIn.value="";nameIn.value="";
+  [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  autosizeAll();
+}
+function doClear(){
+  try{localStorage.removeItem(STORE);}catch(e){}
+  resetAll();
+  closeAsk();
+  autoEl.textContent="";
+  say("이 브라우저의 자동 보관을 지우고 입력란을 비웠다. (내려받은 임시 저장 파일은 그대로다.)","ok");
+}
+
+/* 입력란 보조 */
+function autosize(t){if(t.classList.contains("code")||t.classList.contains("draw"))return;t.style.height="auto";if(t.scrollHeight>0)t.style.height=(t.scrollHeight+2)+"px";}
+function autosizeAll(){q("textarea.in").forEach(autosize);}
+function codeKeys(e){
+  var t=e.target;
+  if(!t||!t.classList||!t.classList.contains("code"))return;
+  if(e.key==="Escape"){t._esc=true;return;}
+  if(e.key==="Tab"&&!e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey){
+    if(t._esc){t._esc=false;return;}
+    e.preventDefault();
+    var s=t.selectionStart,en=t.selectionEnd;
+    t.setRangeText("    ",s,en,"end");
+    t.dispatchEvent(new Event("input",{bubbles:true}));
+  }else if(e.key!=="Shift"){t._esc=false;}
+}
+function labelControls(){
+  q("[data-key]").forEach(function(el){
+    var l=el.getAttribute("data-label");
+    var isGroup=el.getAttribute("data-type")==="radio";
+    if(isGroup){el.setAttribute("role","radiogroup");if(l)el.setAttribute("aria-label",l);return;}
+    var has=el.labels&&el.labels.length;
+    if(!has&&l&&!el.getAttribute("aria-label"))el.setAttribute("aria-label",l);
+  });
+}
+function buildBar(){
+  bar=document.createElement("div");bar.id="savebar";bar.setAttribute("role","region");bar.setAttribute("aria-label","제출 저장 바");
+  bar.innerHTML='<div class="sb-in"><div class="sb-row">'
+   +'<label for="sb-id">학번 <input type="text" id="sb-id" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<label for="sb-name">이름 <input type="text" id="sb-name" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<button type="button" id="sb-save">저장(JSON)</button>'
+   +'<button type="button" id="sb-draft" class="sec" title="다 못 쓴 내용을 파일로 보관한다. 제출 파일이 아니다.">임시 저장</button>'
+   +'<button type="button" id="sb-load" class="sec" title="임시 저장한 파일을 불러와 이어 쓴다.">불러오기</button>'
+   +'<input type="file" id="sb-file" accept=".json,application/json" hidden aria-label="저장한 JSON 파일 선택">'
+   +'<button type="button" id="sb-clear" class="sec">자동 보관 지우기</button>'
+   +'<span class="sb-auto" id="sb-auto"></span></div>'
+   +'<div class="sb-confirm" id="sb-confirm" hidden><span id="sb-ctext"></span>'
+   +'<button type="button" id="sb-yes">확인</button><button type="button" id="sb-no" class="sec">취소</button></div>'
+   +'<div class="sb-msg" id="sb-msg" role="status" aria-live="polite">다 쓰면 학번과 이름을 쓰고 [저장(JSON)]을 눌러 제출 파일 한 개를 만든다. 시간이 모자라면 [임시 저장]으로 파일을 보관하고, 다음에 [불러오기]로 이어 쓴다.</div></div>';
+  document.body.insertBefore(bar,document.body.firstChild);
+  var pid=document.createElement("div");pid.id="printid";pid.setAttribute("aria-hidden","true");
+  document.body.insertBefore(pid,bar.nextSibling);
+  idIn=bar.querySelector("#sb-id");nameIn=bar.querySelector("#sb-name");msg=bar.querySelector("#sb-msg");
+  autoEl=bar.querySelector("#sb-auto");saveBtn=bar.querySelector("#sb-save");clearBtn=bar.querySelector("#sb-clear");confirmBox=bar.querySelector("#sb-confirm");
+  draftBtn=bar.querySelector("#sb-draft");loadBtn=bar.querySelector("#sb-load");fileIn=bar.querySelector("#sb-file");yesBtn=bar.querySelector("#sb-yes");confirmTxt=bar.querySelector("#sb-ctext");
+  saveBtn.addEventListener("click",onSave);
+  draftBtn.addEventListener("click",onDraft);
+  loadBtn.addEventListener("click",onLoadClick);
+  fileIn.addEventListener("change",onFileChosen);
+  clearBtn.addEventListener("click",function(){yesBtn.textContent="지우기";ask("이 브라우저의 자동 보관을 지우고 입력란을 모두 비운다. 임시 저장 파일이나 JSON으로 저장하지 않은 내용은 되찾을 수 없다.",doClear);bar.querySelector("#sb-no").focus();});
+  bar.querySelector("#sb-no").addEventListener("click",function(){closeAsk();loadBtn.focus();});
+  yesBtn.addEventListener("click",function(){var f=pending;if(f)f();});
+}
+function init(){
+  buildBar();labelControls();baseline=snap();restore();autosizeAll();
+  document.addEventListener("input",function(e){
+    var t=e.target;
+    if(t.tagName==="TEXTAREA")autosize(t);
+    if(t===idIn||t===nameIn){if(t.value.trim()){t.classList.remove("invalid");t.setAttribute("aria-invalid","false");}}
+    if(t===idIn||t===nameIn)updatePrintId();
+    schedule();
+  });
+  document.addEventListener("change",schedule);
+  document.addEventListener("keydown",codeKeys);
+  window.addEventListener("beforeprint",function(){autosizeAll();updatePrintId();});
+  updatePrintId();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(autosizeAll);
+  window.addEventListener("resize",autosizeAll);
+  window.Week11Submit={buildJSON:buildJSON,collect:collect,validate:validate,fileName:fileName,FILE_KEY:FILE_KEY,applyLoaded:applyLoaded};
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+</body>
+</html>

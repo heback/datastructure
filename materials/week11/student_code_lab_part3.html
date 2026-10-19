@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11주차 실습 코드 3부 · 섬의 개수와 과제 점검 (학생용)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16233b;--paper:#f7f8fa;--panel:#ffffff;--py-blue:#3572a5;--line:#dfe3ea;--dim:#5b6b85;--code-bg:#101828;--code-fg:#e6edf7;--ok:#1d7a4f;--warn:#8a6d1f;--bad:#b3401f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+code,pre{font-family:"JetBrains Mono","D2Coding",Consolas,monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:24px}
+.prompt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--py-blue);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.lead{color:var(--dim);margin-top:8px;max-width:760px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 20px;font-family:"JetBrains Mono",monospace;font-size:12px}
+nav a{color:var(--py-blue);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+section>h2{font-size:18px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+section>h2 small{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--py-blue);margin-left:8px;font-weight:500}
+h3{font-size:15px;margin:14px 0 6px}
+p{margin:6px 0}
+ul,ol{margin:6px 0 6px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--code-bg);color:var(--code-fg);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;text-align:left;padding:8px}
+td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--py-blue);white-space:nowrap}
+table.fill td{border:1px solid var(--line);height:34px}
+table.fill td.lab{background:#f0f2f6;font-weight:600;height:auto}
+pre{background:var(--code-bg);color:var(--code-fg);padding:12px 14px;border-radius:6px;font-size:12.5px;overflow-x:auto;margin:8px 0;line-height:1.55}
+code.i{background:#eef1f6;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;color:var(--py-blue)}
+.note{background:#eef4fa;border:1px solid #d6e5f2;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.warn{background:#fbf3e4;border:1px solid #ecd9ae;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.concept{background:#f4f7fc;border:1px solid #c9d6ea;border-left:4px solid var(--py-blue);border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0;break-inside:avoid;page-break-inside:avoid}
+.concept b.h{color:var(--py-blue)}
+.concept table{margin:6px 0;font-size:12.5px}
+.concept ul{margin:4px 0 4px 18px}
+.ans{background:#eef8f2;border:1px solid #bfe0cf;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c,var(--py-blue));border-radius:6px;padding:10px 14px;background:#fff}
+.card b.h{color:var(--c)}
+.blank{border:1px dashed #9aa7bd;border-radius:6px;min-height:64px;margin:6px 0;padding:6px 10px;color:var(--dim);font-size:12px}
+.blank.l{min-height:110px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.diagram{background:#f0f2f6;border-radius:6px;padding:10px 14px;font-size:12.5px;overflow-x:auto;color:var(--ink);line-height:1.4}
+.codewrap{position:relative}
+.copy{position:absolute;top:14px;right:8px;font:500 11px "JetBrains Mono",monospace;background:#27364f;color:#e6edf7;border:1px solid #3d506e;border-radius:4px;padding:2px 8px;cursor:pointer}
+.role{display:inline-block;font:700 10.5px "JetBrains Mono",monospace;padding:1px 7px;border-radius:3px;background:#e4ecf6;color:var(--py-blue);margin-right:6px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.links a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:6px;margin:6px 0;color:var(--py-blue);text-decoration:none;font-weight:600}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{
+  body{background:#fff;font-size:11.5pt}.wrap{max-width:none;padding:0}
+  nav,.copy,.noprint{display:none!important}
+  section{border:none;padding:0;margin:0 0 8mm;break-inside:auto}
+  section.sheet{page-break-after:always;break-after:page}
+  section.sheet:last-of-type{page-break-after:auto}
+  header{padding:0 0 8px;margin-bottom:10px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f3f4f7;color:#111;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,.card,.blank{break-inside:avoid}
+}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.gate{border:1px dashed #b3401f;border-radius:8px;padding:6px 12px;background:#fff8f5}
+</style>
+<style id="week11-submit-style">
+/* week11 제출 바·입력란 공통 스타일 (7개 학생용 파일 동일) */
+#savebar{position:sticky;top:0;z-index:50;background:#16233b;color:#f7f8fa;padding:8px 20px;border-bottom:3px solid #3572a5;font-size:13px}
+#savebar .sb-in{max-width:1000px;margin:0 auto}
+#savebar .sb-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+#savebar label{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+#savebar input[type=text]{width:9.5em;padding:5px 8px;border:2px solid #9aa7bd;border-radius:4px;background:#fff;color:#16233b;font:inherit;font-weight:500}
+#savebar input[type=text].invalid{border-color:#ff9b7a;background:#fff3ee}
+#savebar button{font:600 13px "IBM Plex Sans KR",sans-serif;padding:6px 14px;border-radius:4px;border:2px solid #fff;background:#fff;color:#16233b;cursor:pointer}
+#savebar button.sec{background:transparent;color:#fff;border-color:#9aa7bd}
+#savebar button:disabled{opacity:.6;cursor:default}
+#savebar button:focus-visible,#savebar input:focus-visible{outline:3px solid #ffd166;outline-offset:2px}
+#savebar .sb-msg{min-height:1.4em;margin-top:4px;font-size:12.5px}
+#savebar .sb-msg.err{color:#ffd0c0;font-weight:700}
+#savebar .sb-msg.ok{color:#bff0d4}
+#savebar .sb-auto{font-size:11.5px;color:#c9d3e6;margin-left:auto}
+#savebar .sb-confirm{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px;padding:6px 10px;border:1px solid #ffd166;border-radius:4px;font-size:12.5px}
+#savebar .sb-confirm[hidden]{display:none}
+.in{width:100%;display:block;font:inherit;font-size:13.5px;line-height:1.5;color:#16233b;background:#fff;border:1px solid #6b7a94;border-radius:4px;padding:5px 8px}
+textarea.in{resize:vertical;min-height:2.4em;overflow:hidden}
+textarea.in.l{min-height:7em}
+textarea.in.code{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre;overflow:auto;tab-size:4;min-height:12em;background:#fbfcfe}
+textarea.in.draw{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;white-space:pre;overflow:auto;min-height:9em}
+.in:focus-visible,.ck input:focus-visible,.rg input:focus-visible{outline:3px solid #3572a5;outline-offset:1px}
+.in.invalid{border:2px solid #b3401f}
+input.in.s{display:inline-block;width:3.2em;padding:1px 4px;text-align:center}
+table.fill td.in-cell{padding:3px;height:auto}
+.ans-row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.ans-row>.n{padding-top:6px;font-weight:700;color:#3572a5}
+.mycode{margin:8px 0 12px}
+.mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
+.hint{font-size:12px;color:#5b6b85;margin:2px 0}
+.ck{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
+.ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
+.rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
+.rg label{display:inline-flex;align-items:center;gap:5px}
+@media (max-width:640px){#savebar{padding:8px 14px}#savebar .sb-auto{margin-left:0}}
+#printid{display:none}
+@media print{
+  #printid{display:block;font:600 12pt "IBM Plex Sans KR",sans-serif;margin:0 0 8px;padding-bottom:4px;border-bottom:1px solid #999;white-space:pre-wrap}
+  #savebar,.hint.noprint{display:none!important}
+  .in{border:none;border-bottom:1px solid #9aa7bd;border-radius:0;background:transparent;padding:2px 2px;-webkit-appearance:none;appearance:none;resize:none}
+  textarea.in{overflow:visible}
+  textarea.in.code,textarea.in.draw{border:1px solid #ccd;white-space:pre-wrap}
+  select.in{background-image:none}
+  .ans-row,.mycode{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="prompt">&gt;&gt;&gt; lab.week(11)  # 학생용 · 실습 코드 3부 (A10 시작 때 배포)</div>
+  <h1>11주차 실습 코드 3부 — 섬의 개수, 과제 점검</h1>
+  <p class="lead">A10과 A13에 사용한다. A10은 먼저 손으로 센 개수를 활동지에 예측으로 쓴다. A13 블록은 교사 지시 후 펼친다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+</header>
+<nav><a href="#how">#사용법</a><a href="#A10">#A10</a><a href="#A13">#A13</a><a href="#assign">#과제서술</a><a href="#ai">#AI활용</a><a href="index.html">목록</a></nav>
+
+<section id="how">
+<h2>사용법<small>#how</small></h2>
+<ol>
+<li>이 파일은 3차시 A10 시작 때 배포한다. 코드는 복사해 한 파일에 이어 붙인다. A10에는 1부의 <code class="i">grid_neighbors</code>와 <code class="i">DIRS</code>가 먼저 있어야 한다.</li>
+<li>A10에서는 먼저 활동지 <a href="student_workbook_part3.html#A10">3부 A10</a>의 예측 칸에 섬의 개수를 손으로 세어 쓰고, 그 뒤 코드를 완성해 실행한 값을 실제 칸에 쓴다.</li>
+<li>아래쪽 A13 블록은 접혀 있다. <b>교사가 지시하면</b> 펼친다.</li>
+</ol>
+</section>
+<section id="A10" class="sheet">
+<h2>A10 · 섬의 개수<small>14분 · 짝</small></h2>
+<p><code class="i">count_islands</code>와 <code class="i">explore</code>를 완성한다. 격자는 문자열 리스트이고 &lsquo;1&rsquo;이 땅, &lsquo;0&rsquo;이 바다이다. 완성한 뒤 ISLE에서 실행하고, <code class="i">explore</code>에서 꺼내는 줄을 <code class="i">popleft()</code>와 <code class="i">pop()</code>으로 바꿔 가며 개수가 변하는지 관찰한다. (선택) 대각선 8방향도 이웃으로 보면 어떻게 되는지 실험한다.</p><h3>제공 코드(입력)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-1">ISLE = ["1100010",
+        "1100011",
+        "0010000",
+        "0001100",
+        "1000100",
+        "1000001"]                            # '1' 땅, '0' 바다 (행 6, 열 7)</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A10-2">def count_islands(grid):
+    if not grid:
+        return 0
+    seen = set()
+    count = 0
+    for r in range(len(grid)):
+        for c in range(len(grid[0])):
+            if ____15____:                   # ⑮ 땅이면서 아직 안 센 칸
+                count += 1
+                ____16____                   # ⑯ 이 섬 전체를 seen에 표시
+
+    return count
+
+def explore(grid, r, c, seen):
+    seen.add((r, c))
+    todo = deque([(r, c)])
+    while todo:
+        cr, cc = ____17____                  # ⑰ todo에서 하나 꺼낸다
+        for n in grid_neighbors(grid, cr, cc, "1"):
+            if n not in seen:
+                seen.add(n)
+                todo.append(n)</code></pre></div><div class="mycode"><label>내 코드 · A10 (count_islands, explore 작성)</label><textarea class="in code" rows="20" data-type="code" data-key="A10.mycode" data-label="A10 (count_islands, explore 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>실행 틀</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-3"># 실행 예(출력 값은 적혀 있지 않다)
+print(count_islands(ISLE))</code></pre></div><h3>(선택) 8방향 실험</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-4"># (선택) 8방향 실험 · grid_neighbors가 읽는 전역 DIRS를 바꾼다. 실험이 끝나면 되돌려 둔다.
+DIRS8 = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+DIRS = DIRS8
+print(count_islands(ISLE))
+DIRS = [(0, 1), (1, 0), (0, -1), (-1, 0)]</code></pre></div><h3>자체 점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A10-5"># A10 점검: 기대 개수는 적혀 있지 않다. 이웃 칸을 맞대 가며 번호를 합치는 다른 계산으로 구한 개수와 비교한다.
+def ref_islands(grid):
+    lab = {(r, c): (r, c) for r in range(len(grid)) for c in range(len(grid[0])) if grid[r][c] == "1"}
+    cells = sorted(lab)
+    changed = True
+    while changed:
+        changed = False
+        for cell in cells + cells[::-1]:
+            for dr, dc in ((0, 1), (1, 0), (0, -1), (-1, 0)):
+                nb = (cell[0] + dr, cell[1] + dc)
+                if nb in lab and lab[nb] &lt; lab[cell]:
+                    lab[cell] = lab[nb]
+                    changed = True
+    return len(set(lab.values()))
+
+def limited(real, limit, what):
+    cnt = [0]
+    def wrapped(*a):
+        cnt[0] += 1
+        if cnt[0] &gt; limit:
+            raise RuntimeError(what + "를 너무 많이 불렀다(끝나지 않는 반복이 의심된다)")
+        return real(*a)
+    return wrapped
+
+ISLANDS = [ISLE, [], ["000"], ["111"], ["101", "010", "101"], ["1"], ["0"],
+           ["11011", "10001", "00100", "11011"], ["1010101", "0101010", "1010101"], ["111", "101", "111"]]
+fails = []
+real_gn = grid_neighbors
+try:
+    for k, grid in enumerate(ISLANDS):
+        grid_neighbors = limited(real_gn, 400, "grid_neighbors")   # 격자마다 새로 센다
+        try:
+            got = count_islands(grid)
+        except RuntimeError as e:
+            fails.append("격자 %d: %s" % (k, e))
+            continue
+        if got != ref_islands(grid):
+            fails.append("격자 %d: 섬의 개수가 다르다" % k)
+finally:
+    grid_neighbors = real_gn
+for f in fails:
+    print("FAIL", f)
+assert not fails, "A10 점검 실패: %s" % fails
+print("A10 점검 통과")</code></pre></div>
+</section>
+<section id="A13" class="sheet">
+<h2>A13 · 과제 마무리 점검과 전이<small>12분 · 개인(옆 학생과 결과 비교)</small></h2>
+<details><summary>A13 블록 (교사 지시 후 펼친다)</summary>
+<div class="warn"><b>과제 요건</b><ul><li><code class="i">grid_neighbors</code>는 <code class="i">yield</code>를 쓰는 제네레이터여야 한다(리스트 반환 불가).</li><li><code class="i">shortest_path_len</code>의 제출본은 큐를 쓰는 너비 우선 탐색이어야 한다. 검증용 비교 코드를 직접 쓰는 것은 허용된다.</li><li>입력 격자를 바꾸지 않아야 하고, 같은 입력으로 두 번 호출해도 같은 값이어야 한다(<code class="i">seen=set()</code> 같은 기본 인자를 쓰지 않는다).</li><li>1&times;1500 같은 큰 입력에서도 <code class="i">RecursionError</code> 없이 끝나야 한다.</li></ul></div><h3>(가) 과제 마무리 점검 (8분)</h3><p>내가 쓴 세 함수를 입력, 내 코드, 점검 순으로 이어 붙여 실행한다. 코드를 고치지 않고 새 입력에서도 통과하는지 본다. 기대 값은 적혀 있지 않고 점검이 입력에서 계산한다.</p><h3>점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-1"># A13 점검(교사 지시 후): 기대 값은 적혀 있지 않다. 계산으로 구한 값과 비교한다. 코드를 고치지 않고 통과해야 한다.
+import inspect
+
+def ref_adj(grid, r, c, passable):
+    return {(i, j) for i in range(len(grid)) for j in range(len(grid[0]))
+            if abs(i - r) + abs(j - c) == 1 and grid[i][j] in passable}
+
+def ref_dist(grid, start):
+    d = {start: 0}
+    changed = True
+    while changed:
+        changed = False
+        for cell in list(d):
+            for n in ref_adj(grid, cell[0], cell[1], ".SE"):
+                if d[cell] + 1 &lt; d.get(n, 10 ** 9):
+                    d[n] = d[cell] + 1
+                    changed = True
+    return d
+
+def ref_islands(grid):
+    lab = {(r, c): (r, c) for r in range(len(grid)) for c in range(len(grid[0])) if grid[r][c] == "1"}
+    cells = sorted(lab)
+    changed = True
+    while changed:
+        changed = False
+        for cell in cells + cells[::-1]:
+            for dr, dc in ((0, 1), (1, 0), (0, -1), (-1, 0)):
+                nb = (cell[0] + dr, cell[1] + dc)
+                if nb in lab and lab[nb] &lt; lab[cell]:
+                    lab[cell] = lab[nb]
+                    changed = True
+    return len(set(lab.values()))
+
+fails = []
+def check(cond, msg):
+    if not cond:
+        fails.append(msg)
+
+# 1~2 grid_neighbors: 제네레이터, 경계 검사, 우하좌상 순서, 벽 제외
+check(inspect.isgenerator(grid_neighbors(MAZE, 0, 0, ".SE")), "1: grid_neighbors가 제네레이터가 아니다")
+for (r, c) in ((0, 0), (2, 2), (4, 6), (3, 0)):
+    got = list(grid_neighbors(MAZE, r, c, ".SE"))
+    ref = ref_adj(MAZE, r, c, ".SE")
+    check(set(got) == ref and len(got) == len(ref), "1~2: (%d, %d)의 이웃이 다르다" % (r, c))
+    idx = [DIRS.index((a - r, b - c)) for a, b in got if (a - r, b - c) in DIRS]
+    check(idx == sorted(idx), "1~2: (%d, %d)의 이웃이 우, 하, 좌, 상 순서가 아니다" % (r, c))
+# 3~5 shortest_path_len
+check(shortest_path_len(MAZE, START, GOAL) == ref_dist(MAZE, START).get(GOAL, -1), "3: MAZE 최단 거리가 다르다")
+check(shortest_path_len(["S#E"], (0, 0), (0, 2)) == ref_dist(["S#E"], (0, 0)).get((0, 2), -1), "4: 닿을 수 없는 경우가 다르다")
+check(shortest_path_len(MAZE, START, START) == ref_dist(MAZE, START)[START], "5: 시작과 도착이 같은 경우가 다르다")
+# 6~7 count_islands
+check(count_islands(ISLE) == ref_islands(ISLE), "6: ISLE의 섬 개수가 다르다")
+for grid in ([], ["000"], ["111"], ["101", "010", "101"]):
+    check(count_islands(grid) == ref_islands(grid), "7: 경계 사례 %r가 다르다" % (grid,))
+# 8 두 번 호출해도 같은 값, 입력 불변
+copy_isle, copy_maze = list(ISLE), list(MAZE)
+a1, a2 = count_islands(ISLE), count_islands(ISLE)
+check(a1 == a2, "8: 같은 입력으로 두 번 부르면 값이 달라진다")
+shortest_path_len(MAZE, START, GOAL)
+check(ISLE == copy_isle and MAZE == copy_maze, "8: 입력 격자가 바뀌었다")
+check(all(p.default is inspect.Parameter.empty for p in inspect.signature(count_islands).parameters.values()),
+      "8: count_islands에 기본 인자가 있다")
+# 9 큰 입력(1 x 1500)
+try:
+    check(count_islands(["1" * 1500]) == ref_islands(["1" * 1500]), "9: 1x1500 땅의 섬 개수가 다르다")
+    wide = ["S" + "." * 1498 + "E"]
+    check(shortest_path_len(wide, (0, 0), (0, len(wide[0]) - 1)) == len(wide[0]) - 1, "9: 1x1500 통로의 거리가 다르다")
+except RecursionError:
+    fails.append("9: 큰 입력에서 RecursionError가 났다")
+for f in fails:
+    print("FAIL", f)
+assert not fails, "A13 점검 실패: %s" % fails
+print("A13 점검 통과")</code></pre></div><h3>(나) 전이: 숫자 변환 퍼즐 (4분, 채점하지 않는다)</h3><p>3에서 시작해 &ldquo;+1&rdquo; 또는 &ldquo;&times;2&rdquo;만 써서 14를 만드는 가장 적은 연산 횟수를 구한다. 그래프는 메모리에 없고 <code class="i">next_states</code>가 이웃을 내준다. 같은 틀로 <code class="i">num_bfs(start, goal)</code>을 작성한다. 활동지 <a href="student_workbook_part3.html#A13">3부 A13</a>의 질문에 답한다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A13-2"># 전이 연습 NUM(채점하지 않는다) · 시작 상태: 탐색마다 새 거리 딕셔너리와 큐를 만든다.
+# 3에서 시작해 "+1" 또는 "x2"만 써서 14를 만드는 가장 적은 연산 횟수를 같은 틀로 찾는다. 수는 100 이하이다.
+def next_states(n):                  # 제네레이터(제공). 상태 n에서 한 걸음에 갈 수 있는 수
+    if n + 1 &lt;= 100:
+        yield n + 1
+    if n * 2 &lt;= 100:
+        yield n * 2</code></pre></div><div class="mycode"><label>내 코드 · A13 NUM (num_bfs 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A13.num.mycode" data-label="A13 NUM (num_bfs 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-3"># NUM 점검: 기대 값은 적혀 있지 않다. 연산 횟수를 줄여 갈 수 있으면 계속 줄이는 다른 계산과 비교한다.
+assert "num_bfs" in globals(), "먼저 num_bfs(start, goal)를 작성한다(최소 연산 횟수를 돌려준다)"
+def ref_ops(start, goal):
+    d = {start: 0}
+    changed = True
+    while changed:
+        changed = False
+        for n in list(d):
+            for m in next_states(n):
+                if d[n] + 1 &lt; d.get(m, 10 ** 9):
+                    d[m] = d[n] + 1
+                    changed = True
+    return d.get(goal, -1)
+
+bad = [(a, b) for a, b in ((3, 14), (1, 10), (5, 5), (2, 100), (50, 49)) if num_bfs(a, b) != ref_ops(a, b)]
+for a, b in bad:
+    print("FAIL", a, "-&gt;", b)
+assert not bad, "NUM 점검 실패: %s" % bad
+print("NUM 점검 통과")</code></pre></div>
+</details>
+</section>
+<section id="assign" class="sheet">
+<h2>과제 서술 입력<small>실습 과제 · 주간 과제 제출 때 함께 낸다</small></h2>
+<p>제출물은 파이썬 코드(<code class="i">.py</code>)와 성찰일지이며, 아래 두 칸은 구현 계획과 복잡도 서술이다. 4단계 채점기준은 <a href="rubric.html">rubric.html</a>을 본다.</p><div class="mycode"><label>구현 계획 한 줄<textarea class="in" rows="2" data-key="assign.plan" data-label="실습 과제 구현 계획 한 줄"></textarea></label></div><div class="mycode"><label>구현한 함수의 시간·공간 복잡도와 그 근거 (직접 서술)<textarea class="in l" rows="5" data-key="assign.complexity" data-label="실습 과제 시간·공간 복잡도와 그 근거"></textarea></label></div>
+</section>
+<section id="ai" class="sheet">
+<h2>AI 활용 3단계 · 이 과제에 맞춘 예<small>허용 · 조건부 허용 · 금지</small></h2>
+<p>기준은 &ldquo;AI에게 무엇을 시켰는가&rdquo;이다. 개념·문법·오류 원인을 묻는 것은 허용이고, 과제 요구사항이나 완성된 구현 자체를 입력해 결과물(코드·글)을 받아 제출하는 것은 금지이다.</p>
+<div class="grid">
+<div class="card" style="--c:#1d7a4f"><b class="h">허용 — 성찰일지에 간단히 기록</b><ul><li>&ldquo;BFS와 DFS는 어떤 자료구조를 쓰는지 개념 설명해 줘&rdquo;, &ldquo;deque는 list와 뭐가 달라?&rdquo; 같은 개념·문법 질의</li><li>&ldquo;NameError: name is not defined가 무슨 뜻이야?&rdquo;, &ldquo;IndexError: string index out of range가 왜 나오는지 해설&rdquo; 같은 오류 메시지 해설</li><li>&ldquo;격자 탐색에서 4방향 이동은 보통 어떻게 표현해?&rdquo; 같은 용어·설계 배경 설명(코드는 받지 않음)</li><li>내 코드 결과가 점검 테스트와 다를 때 원인 <b>힌트</b>만 요청</li></ul></div>
+<div class="card" style="--c:#8a6d1f"><b class="h">조건부 허용 — 출처와 반영 여부를 성찰일지에 반드시 기록</b><ul><li>완성한 구현의 엣지 케이스 브레인스토밍(시작=도착, 도달 불가, 한 칸짜리 격자, 모두 바다/모두 땅, 빈 격자)</li><li>내가 쓴 코드의 부작용과 반복 사용 시 동작을 검토해 달라는 요청(수정은 직접 한다)</li><li>내 코드의 개선 아이디어 제안 요청(제안만 참고하고 코드는 직접 다시 작성)</li><li>기록 예: &ldquo;AI가 시작=도착 케이스를 제안 &rarr; 채택/미채택, 이유&rdquo;</li></ul></div>
+<div class="card" style="--c:#b3401f"><b class="h">금지 — 적발 시 계획서의 위반 처리방안 적용</b><ul><li>과제 문장(&ldquo;격자 미로의 S&rarr;E 최단 거리를 구하고 섬의 개수를 세는 함수를 작성하라&rdquo;)을 그대로 입력해 전체 코드 생성</li><li>AI가 쓴 <code class="i">shortest_path_len</code>/<code class="i">count_islands</code>를 그대로, 또는 변수명만 바꿔 제출</li><li>어느 목적에 BFS·DFS 중 무엇을 쓸지, 방문 기록을 어떻게 할지 등 설계 판단을 AI가 대신 내림</li><li>성찰일지 AI 대필</li></ul></div>
+</div>
+<div class="note"><b>수업 운영 규칙</b>(금지 목록과 별개) 수업 중 A6~A10·A13~A14는 AI 도움 없이 수행한다. A14 형성평가는 AI를 쓰지 않는 시험 상황으로 운영하며, 위 위반 처리(감점 등)는 형성평가에 적용하지 않는다. 주간 과제를 제출할 때 위 3단계가 적용된다. A15에서 성찰일지에 AI 활용 내역을 쓰는 방법을 다시 안내한다.</div>
+</section>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
+</script>
+<script id="week11-submit">
+/* week11 학생 입력 저장 (7개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week11-student-v1 */
+(function(){
+"use strict";
+var FILE_KEY="code_lab_part3";
+var FILES={workbook:"student_workbook.html",code_lab:"student_code_lab.html",workbook_part2:"student_workbook_part2.html",code_lab_part2:"student_code_lab_part2.html",code_lab_part3:"student_code_lab_part3.html",workbook_part3:"student_workbook_part3.html",formative:"formative_check.html"};
+var FILE=FILES[FILE_KEY], STORE="week11:"+FILE, SCHEMA="week11-student-v1";
+var bar,idIn,nameIn,msg,autoEl,saveBtn,clearBtn,confirmBox,busy=false,timer=null;
+var draftBtn,loadBtn,fileIn,yesBtn,confirmTxt,pending=null,baseline="";
+
+function q(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
+function kind(el){
+  var t=el.getAttribute("data-type");
+  if(t)return t;
+  var tag=el.tagName.toLowerCase();
+  if(tag==="textarea")return "textarea";
+  if(tag==="select")return "select";
+  if(tag==="input")return el.type==="checkbox"?"checkbox":"text";
+  return "text";
+}
+function labelOf(el){
+  var l=el.getAttribute("data-label");
+  if(l)return l;
+  if(el.labels&&el.labels.length)return el.labels[0].textContent.replace(/\s+/g," ").trim();
+  return el.getAttribute("aria-label")||"";
+}
+function readValue(el,k){
+  if(k==="checkbox")return !!el.checked;
+  if(k==="radio"){var r=el.querySelector("input[type=radio]:checked");return r?r.value:null;}
+  return el.value;
+}
+function collect(){
+  return q("[data-key]").map(function(el){
+    var k=kind(el);
+    return {key:el.getAttribute("data-key"),label:labelOf(el),type:k,value:readValue(el,k)};
+  });
+}
+function studentInfo(){return {id:idIn.value.trim(),name:nameIn.value.trim()};}
+function buildJSON(status){
+  return {schema:SCHEMA,week:11,file:FILE,status:status||"final",student:studentInfo(),savedAt:new Date().toISOString(),answers:collect()};
+}
+function safe(s){return String(s).replace(/[\\\/:*?"<>|\s\u0000-\u001f]+/g,"_").replace(/^\.+/,"_");}
+function fileName(st,draft){return "week11_"+FILE_KEY+"_"+safe(st.id||"학번미입력")+"_"+safe(st.name||"이름미입력")+(draft?"_임시저장":"")+".json";}
+function validate(){
+  var miss=[];
+  [[idIn,"학번"],[nameIn,"이름"]].forEach(function(p){
+    var bad=!p[0].value.trim();
+    p[0].classList.toggle("invalid",bad);
+    p[0].setAttribute("aria-invalid",bad?"true":"false");
+    if(bad)miss.push(p);
+  });
+  return miss;
+}
+function updatePrintId(){
+  var p=document.getElementById("printid");
+  if(!p)return;
+  var s=studentInfo();
+  p.textContent="학번: "+(s.id||"          ")+"   이름: "+(s.name||"          ");
+}
+function say(text,cls){msg.textContent=text;msg.className="sb-msg"+(cls?" "+cls:"");}
+
+function download(draft){
+  var obj=buildJSON(draft?"draft":"final"),name=fileName(obj.student,draft);
+  var blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"});
+  var url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;a.style.display="none";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1500);
+  return name;
+}
+function onSave(){
+  if(busy)return;
+  var miss=validate();
+  if(miss.length){
+    say("학번과 이름을 입력해야 저장할 수 있다. 표시된 칸을 채운 뒤 다시 누른다.","err");
+    miss[0][0].focus();return;
+  }
+  busy=true;saveBtn.disabled=true;
+  try{
+    var n=download();
+    say("저장했다: "+n+" (내려받은 JSON 파일 한 개를 제출한다.)","ok");
+  }catch(e){say("저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;saveBtn.disabled=false;},1200);
+}
+
+/* 이어 쓰기: 임시 저장 파일 내려받기 / 저장한 파일 불러오기 */
+function snap(){return JSON.stringify(collect().map(function(a){return a.value;}));}
+function isDirty(){return snap()!==baseline;}
+function ask(text,fn){
+  confirmTxt.textContent=text;pending=fn;confirmBox.hidden=false;
+  clearBtn.disabled=true;loadBtn.disabled=true;
+}
+function closeAsk(){
+  pending=null;confirmBox.hidden=true;clearBtn.disabled=false;loadBtn.disabled=false;
+}
+function onDraft(){
+  if(busy)return;
+  busy=true;draftBtn.disabled=true;
+  try{
+    var n=download(true),s=studentInfo();
+    say("임시 저장했다: "+n+" (제출 파일이 아니다. 이어 쓸 때 [불러오기]로 이 파일을 고른다."+((s.id&&s.name)?"":" 학번과 이름을 쓰면 파일 이름에 들어간다.")+")","ok");
+  }catch(e){say("임시 저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;draftBtn.disabled=false;},1200);
+}
+function applyLoaded(j){
+  if(!j||typeof j!=="object"||Array.isArray(j))return {err:"저장 파일 형식이 아니다."};
+  if(j.schema!==SCHEMA)return {err:"이 워크북의 저장 파일이 아니다(schema 불일치). 이 활동지에서 저장한 JSON 파일을 고른다."};
+  if(j.file!==FILE)return {err:"이 파일은 '"+String(j.file)+"'에서 저장한 것이다. 지금 열린 '"+FILE+"'에서 저장한 파일만 불러올 수 있다."};
+  if(!Array.isArray(j.answers))return {err:"저장 파일에 answers가 없거나 형식이 틀리다."};
+  var vals={};
+  j.answers.forEach(function(a){if(a&&typeof a.key==="string")vals[a.key]=a.value;});
+  var n=0;
+  q("[data-key]").forEach(function(el){
+    var key=el.getAttribute("data-key");
+    if(!Object.prototype.hasOwnProperty.call(vals,key))return;
+    var v=vals[key],t=typeof v;
+    if(v!==null&&t!=="string"&&t!=="boolean")return;
+    setValue(el,v);n++;
+  });
+  if(j.student&&typeof j.student==="object"){
+    idIn.value=typeof j.student.id==="string"?j.student.id:"";
+    nameIn.value=typeof j.student.name==="string"?j.student.name:"";
+    [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  }
+  autosizeAll();updatePrintId();stash();
+  return {n:n,draft:j.status==="draft",at:j.savedAt};
+}
+function onLoadClick(){
+  if(isDirty()||idIn.value.trim()||nameIn.value.trim()){
+    ask("지금 입력한 내용이 불러온 파일의 내용으로 바뀐다. 계속하려면 [불러오기 진행]을 누르고 파일을 고른다.",function(){closeAsk();fileIn.click();});
+    yesBtn.textContent="불러오기 진행";
+  }else{fileIn.click();}
+}
+function onFileChosen(){
+  var f=fileIn.files&&fileIn.files[0];
+  if(!f)return;
+  if(f.size>3*1024*1024){say("파일이 너무 크다(3MB 초과). 이 활동지에서 저장한 JSON 파일이 맞는지 확인한다.","err");fileIn.value="";return;}
+  var r=new FileReader();
+  r.onerror=function(){say("파일을 읽지 못했다. 다시 시도한다.","err");fileIn.value="";};
+  r.onload=function(){
+    var res;
+    try{res=applyLoaded(JSON.parse(String(r.result)));}
+    catch(e){res={err:"JSON 파일을 읽지 못했다. 이 활동지에서 저장한 파일이 맞는지 확인한다."};}
+    if(res.err){say(res.err+" (입력란은 바뀌지 않았다.)","err");}
+    else{say("불러왔다: "+f.name+" ("+res.n+"칸"+(res.at?", 저장 시각 "+res.at.slice(0,16).replace("T"," "):"")+"). 이어서 쓴다."+(res.draft?"":" (제출용 파일을 불러왔다.)"),"ok");}
+    fileIn.value="";
+  };
+  r.readAsText(f,"utf-8");
+}
+
+/* 임시 보관 (localStorage, 모두 try/catch) */
+function stash(){
+  try{
+    var vals={};collect().forEach(function(a){vals[a.key]=a.value;});
+    localStorage.setItem(STORE,JSON.stringify({student:studentInfo(),values:vals,at:Date.now()}));
+    var d=new Date();
+    autoEl.textContent="임시 저장됨 "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
+  }catch(e){autoEl.textContent="임시 저장 사용 불가(저장(JSON)은 가능)";}
+}
+function schedule(){clearTimeout(timer);timer=setTimeout(stash,300);}
+function setValue(el,v){
+  var k=kind(el);
+  if(k==="checkbox"){el.checked=(v===true);}
+  else if(k==="radio"){q("input[type=radio]",el).forEach(function(r){r.checked=(v!==null&&v!==undefined&&r.value===v);});}
+  else{el.value=(v===null||v===undefined)?"":String(v);}
+}
+function restore(){
+  try{
+    var raw=localStorage.getItem(STORE);if(!raw)return;
+    var s=JSON.parse(raw);if(!s)return;
+    if(s.student){idIn.value=s.student.id||"";nameIn.value=s.student.name||"";}
+    var any=false;
+    q("[data-key]").forEach(function(el){var key=el.getAttribute("data-key");if(s.values&&Object.prototype.hasOwnProperty.call(s.values,key)){setValue(el,s.values[key]);any=true;}});
+    autosizeAll();
+    if(any||(s.student&&(s.student.id||s.student.name)))autoEl.textContent="이전 임시 저장을 불러왔다";
+  }catch(e){}
+}
+function resetAll(){
+  q("[data-key]").forEach(function(el){setValue(el,kind(el)==="checkbox"?false:(kind(el)==="radio"?null:""));});
+  idIn.value="";nameIn.value="";
+  [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  autosizeAll();
+}
+function doClear(){
+  try{localStorage.removeItem(STORE);}catch(e){}
+  resetAll();
+  closeAsk();
+  autoEl.textContent="";
+  say("이 브라우저의 자동 보관을 지우고 입력란을 비웠다. (내려받은 임시 저장 파일은 그대로다.)","ok");
+}
+
+/* 입력란 보조 */
+function autosize(t){if(t.classList.contains("code")||t.classList.contains("draw"))return;t.style.height="auto";if(t.scrollHeight>0)t.style.height=(t.scrollHeight+2)+"px";}
+function autosizeAll(){q("textarea.in").forEach(autosize);}
+function codeKeys(e){
+  var t=e.target;
+  if(!t||!t.classList||!t.classList.contains("code"))return;
+  if(e.key==="Escape"){t._esc=true;return;}
+  if(e.key==="Tab"&&!e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey){
+    if(t._esc){t._esc=false;return;}
+    e.preventDefault();
+    var s=t.selectionStart,en=t.selectionEnd;
+    t.setRangeText("    ",s,en,"end");
+    t.dispatchEvent(new Event("input",{bubbles:true}));
+  }else if(e.key!=="Shift"){t._esc=false;}
+}
+function labelControls(){
+  q("[data-key]").forEach(function(el){
+    var l=el.getAttribute("data-label");
+    var isGroup=el.getAttribute("data-type")==="radio";
+    if(isGroup){el.setAttribute("role","radiogroup");if(l)el.setAttribute("aria-label",l);return;}
+    var has=el.labels&&el.labels.length;
+    if(!has&&l&&!el.getAttribute("aria-label"))el.setAttribute("aria-label",l);
+  });
+}
+function buildBar(){
+  bar=document.createElement("div");bar.id="savebar";bar.setAttribute("role","region");bar.setAttribute("aria-label","제출 저장 바");
+  bar.innerHTML='<div class="sb-in"><div class="sb-row">'
+   +'<label for="sb-id">학번 <input type="text" id="sb-id" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<label for="sb-name">이름 <input type="text" id="sb-name" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<button type="button" id="sb-save">저장(JSON)</button>'
+   +'<button type="button" id="sb-draft" class="sec" title="다 못 쓴 내용을 파일로 보관한다. 제출 파일이 아니다.">임시 저장</button>'
+   +'<button type="button" id="sb-load" class="sec" title="임시 저장한 파일을 불러와 이어 쓴다.">불러오기</button>'
+   +'<input type="file" id="sb-file" accept=".json,application/json" hidden aria-label="저장한 JSON 파일 선택">'
+   +'<button type="button" id="sb-clear" class="sec">자동 보관 지우기</button>'
+   +'<span class="sb-auto" id="sb-auto"></span></div>'
+   +'<div class="sb-confirm" id="sb-confirm" hidden><span id="sb-ctext"></span>'
+   +'<button type="button" id="sb-yes">확인</button><button type="button" id="sb-no" class="sec">취소</button></div>'
+   +'<div class="sb-msg" id="sb-msg" role="status" aria-live="polite">다 쓰면 학번과 이름을 쓰고 [저장(JSON)]을 눌러 제출 파일 한 개를 만든다. 시간이 모자라면 [임시 저장]으로 파일을 보관하고, 다음에 [불러오기]로 이어 쓴다.</div></div>';
+  document.body.insertBefore(bar,document.body.firstChild);
+  var pid=document.createElement("div");pid.id="printid";pid.setAttribute("aria-hidden","true");
+  document.body.insertBefore(pid,bar.nextSibling);
+  idIn=bar.querySelector("#sb-id");nameIn=bar.querySelector("#sb-name");msg=bar.querySelector("#sb-msg");
+  autoEl=bar.querySelector("#sb-auto");saveBtn=bar.querySelector("#sb-save");clearBtn=bar.querySelector("#sb-clear");confirmBox=bar.querySelector("#sb-confirm");
+  draftBtn=bar.querySelector("#sb-draft");loadBtn=bar.querySelector("#sb-load");fileIn=bar.querySelector("#sb-file");yesBtn=bar.querySelector("#sb-yes");confirmTxt=bar.querySelector("#sb-ctext");
+  saveBtn.addEventListener("click",onSave);
+  draftBtn.addEventListener("click",onDraft);
+  loadBtn.addEventListener("click",onLoadClick);
+  fileIn.addEventListener("change",onFileChosen);
+  clearBtn.addEventListener("click",function(){yesBtn.textContent="지우기";ask("이 브라우저의 자동 보관을 지우고 입력란을 모두 비운다. 임시 저장 파일이나 JSON으로 저장하지 않은 내용은 되찾을 수 없다.",doClear);bar.querySelector("#sb-no").focus();});
+  bar.querySelector("#sb-no").addEventListener("click",function(){closeAsk();loadBtn.focus();});
+  yesBtn.addEventListener("click",function(){var f=pending;if(f)f();});
+}
+function init(){
+  buildBar();labelControls();baseline=snap();restore();autosizeAll();
+  document.addEventListener("input",function(e){
+    var t=e.target;
+    if(t.tagName==="TEXTAREA")autosize(t);
+    if(t===idIn||t===nameIn){if(t.value.trim()){t.classList.remove("invalid");t.setAttribute("aria-invalid","false");}}
+    if(t===idIn||t===nameIn)updatePrintId();
+    schedule();
+  });
+  document.addEventListener("change",schedule);
+  document.addEventListener("keydown",codeKeys);
+  window.addEventListener("beforeprint",function(){autosizeAll();updatePrintId();});
+  updatePrintId();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(autosizeAll);
+  window.addEventListener("resize",autosizeAll);
+  window.Week11Submit={buildJSON:buildJSON,collect:collect,validate:validate,fileName:fileName,FILE_KEY:FILE_KEY,applyLoaded:applyLoaded};
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+</body>
+</html>

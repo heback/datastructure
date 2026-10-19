@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10주차 실습 과제 루브릭 · 그래프 초기화와 이웃 순회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16233b;--paper:#f7f8fa;--panel:#ffffff;--py-blue:#3572a5;--line:#dfe3ea;--dim:#5b6b85;--code-bg:#101828;--code-fg:#e6edf7;--ok:#1d7a4f;--warn:#8a6d1f;--bad:#b3401f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+code,pre{font-family:"JetBrains Mono","D2Coding",Consolas,monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:24px}
+.prompt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--py-blue);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.lead{color:var(--dim);margin-top:8px;max-width:760px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 20px;font-family:"JetBrains Mono",monospace;font-size:12px}
+nav a{color:var(--py-blue);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+section>h2{font-size:18px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+section>h2 small{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--py-blue);margin-left:8px;font-weight:500}
+h3{font-size:15px;margin:14px 0 6px}
+p{margin:6px 0}
+ul,ol{margin:6px 0 6px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--code-bg);color:var(--code-fg);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;text-align:left;padding:8px}
+td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--py-blue);white-space:nowrap}
+table.fill td{border:1px solid var(--line);height:34px}
+table.fill td.lab{background:#f0f2f6;font-weight:600;height:auto}
+pre{background:var(--code-bg);color:var(--code-fg);padding:12px 14px;border-radius:6px;font-size:12.5px;overflow-x:auto;margin:8px 0;line-height:1.55}
+code.i{background:#eef1f6;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;color:var(--py-blue)}
+.note{background:#eef4fa;border:1px solid #d6e5f2;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.warn{background:#fbf3e4;border:1px solid #ecd9ae;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.concept{background:#f4f7fc;border:1px solid #c9d6ea;border-left:4px solid var(--py-blue);border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0;break-inside:avoid;page-break-inside:avoid}
+.concept b.h{color:var(--py-blue)}
+.concept table{margin:6px 0;font-size:12.5px}
+.concept ul{margin:4px 0 4px 18px}
+.ans{background:#eef8f2;border:1px solid #bfe0cf;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c,var(--py-blue));border-radius:6px;padding:10px 14px;background:#fff}
+.card b.h{color:var(--c)}
+.blank{border:1px dashed #9aa7bd;border-radius:6px;min-height:64px;margin:6px 0;padding:6px 10px;color:var(--dim);font-size:12px}
+.blank.l{min-height:110px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.diagram{background:#f0f2f6;border-radius:6px;padding:10px 14px;font-size:12.5px;overflow-x:auto;color:var(--ink);line-height:1.4}
+.codewrap{position:relative}
+.copy{position:absolute;top:14px;right:8px;font:500 11px "JetBrains Mono",monospace;background:#27364f;color:#e6edf7;border:1px solid #3d506e;border-radius:4px;padding:2px 8px;cursor:pointer}
+.role{display:inline-block;font:700 10.5px "JetBrains Mono",monospace;padding:1px 7px;border-radius:3px;background:#e4ecf6;color:var(--py-blue);margin-right:6px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.links a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:6px;margin:6px 0;color:var(--py-blue);text-decoration:none;font-weight:600}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{
+  body{background:#fff;font-size:11.5pt}.wrap{max-width:none;padding:0}
+  nav,.copy,.noprint{display:none!important}
+  section{border:none;padding:0;margin:0 0 8mm;break-inside:auto}
+  section.sheet{page-break-after:always;break-after:page}
+  section.sheet:last-of-type{page-break-after:auto}
+  header{padding:0 0 8px;margin-bottom:10px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f3f4f7;color:#111;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,.card,.blank{break-inside:avoid}
+}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.gate{border:1px dashed #b3401f;border-radius:8px;padding:6px 12px;background:#fff8f5}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="prompt">&gt;&gt;&gt; rubric.week(10)  # 교사·학생 공통 · 실습 과제 채점기준</div>
+  <h1>10주차 실습 과제 루브릭 — defaultdict(list) 그래프 초기화와 제네레이터 순회</h1>
+  <p class="lead">구조와 배점은 계획서 Ⅰ(실습 과제 평가 운영 지침)의 평가요소·4단계 채점기준을 그대로 따른다(구현 정확성 50, 복잡도 분석 타당성 30, 코드 품질 20, 합계 100점). 오른쪽 열은 이 과제(<code class="i">build_graph</code>, <code class="i">neighbors</code>)에서 관찰하는 모습의 예이며 기준 자체를 바꾸지 않는다. 이 파일은 A13에서 과제 안내와 함께 공개한다.</p>
+</header>
+<nav><a href="#r1">#구현정확성</a><a href="#r2">#복잡도</a><a href="#r3">#코드품질</a><a href="#levels">#성취수준</a><a href="#viol">#위반처리</a><a href="#sheet">#채점표</a><a href="index.html">목록</a></nav>
+
+<section id="r1">
+<h2>요구사항 구현 정확성 · 50점<small>#r1</small></h2>
+<table>
+<tr><th style="width:90px">단계</th><th style="width:36%">계획서 기준</th><th>10주차 과제에서 관찰하는 모습</th></tr><tr><td class="id" style="color:#3572a5">상 · 50</td><td>요구된 자료구조·연산을 모두 정확히 구현하여 모든 테스트 케이스(경계값·예외 상황 포함)에서 의도한 대로 동작한다.</td><td><code class="i">build_graph</code>가 점검 케이스와 새 입력에서 코드 수정 없이 모두 일치한다(무방향은 양쪽, 방향은 한쪽, 빈 간선 목록, 방향 그래프의 끝 노드). <code class="i">defaultdict(list)</code>를 반환하고 <code class="i">neighbors</code>는 yield를 쓰는 제네레이터이며 g에 없는 노드를 물어도 g가 바뀌지 않는다.</td></tr><tr><td class="id" style="color:#3572a5">중상 · 40</td><td>핵심 연산은 정상 동작하나, 일부 경계값이나 예외 상황에서 오류가 발생한다.</td><td>일반 입력은 맞지만 빈 간선 목록이나 방향 그래프의 끝 노드에서 틀린다. <code class="i">neighbors</code>가 g에 없는 노드를 물으면 키를 만든다(읽기 부작용).</td></tr><tr><td class="id" style="color:#3572a5">중하 · 30</td><td>기본 동작은 하지만 요구된 연산의 일부가 누락되었거나 잘못 구현되었다.</td><td>무방향인데 한 방향만 추가하거나, <code class="i">directed</code> 인자를 무시한다. <code class="i">neighbors</code>가 리스트를 반환한다(제네레이터 요건 위반).</td></tr><tr><td class="id" style="color:#3572a5">하 · 20</td><td>프로그램이 정상적으로 실행되지 않거나, 요구사항의 상당 부분이 구현되지 않았다.</td><td>구문 오류로 실행되지 않거나 골격의 TODO가 대부분 남아 있다. 일반 dict로 만들어 KeyError가 난다.</td></tr></table>
+</section>
+<section id="r2">
+<h2>복잡도 분석 타당성 · 30점<small>#r2</small></h2>
+<table>
+<tr><th style="width:90px">단계</th><th style="width:36%">계획서 기준</th><th>10주차 과제에서 관찰하는 모습</th></tr><tr><td class="id" style="color:#1d7a4f">상 · 30</td><td>구현한 자료구조·알고리즘의 시간·공간 복잡도를 정확히 산출하고, 그 근거(반복문 구조, 자료구조 특성 등)를 논리적으로 서술하며 더 효율적인 대안까지 검토한다.</td><td><code class="i">build_graph</code>의 시간·공간이 노드 수와 간선 수에 비례함(간선 한 개당 상수 번의 추가)을 근거와 함께 쓴다. <code class="i">neighbors</code>가 한 노드의 이웃 수에 비례하고 추가 공간이 상수임을 쓴다. 인접 행렬(공간 N&sup2;)과 비교해 이 구조를 선택한 이유와 밀도에 따른 한계를 서술한다.</td></tr><tr><td class="id" style="color:#1d7a4f">중상 · 24</td><td>복잡도를 대체로 정확히 산출하나 근거 서술이 다소 피상적이다.</td><td>간선 수에 비례한다고 쓰지만 근거가 짧고, 공간 복잡도나 인접 행렬과의 비교를 빠뜨린다.</td></tr><tr><td class="id" style="color:#1d7a4f">중하 · 18</td><td>복잡도 표기는 시도했으나 산출 값이 부정확하거나 근거를 제시하지 못한다.</td><td>N&sup2;로 쓰거나 이웃 열거가 항상 노드 수에 비례한다고 쓰는 등 값이 틀리고 이유가 없다.</td></tr><tr><td class="id" style="color:#1d7a4f">하 · 12</td><td>복잡도를 전혀 분석하지 못했거나 개념을 혼동하고 있다.</td><td>복잡도 서술이 없거나, 간선 확인과 이웃 열거의 비용을 혼동한다.</td></tr></table><p class="note">구현 계획(어떤 구조를 어떻게 쓸지)과 복잡도 분석은 학생이 직접 세워야 한다. AI가 대신 세운 것은 금지이며 위반 처리 대상이다. 복잡도 식은 이론 값으로 채점한다.</p>
+</section>
+<section id="r3">
+<h2>코드 품질 · 20점<small>#r3</small></h2>
+<table>
+<tr><th style="width:90px">단계</th><th style="width:36%">계획서 기준</th><th>10주차 과제에서 관찰하는 모습</th></tr><tr><td class="id" style="color:#7a5cc8">상 · 20</td><td>변수·함수명이 역할을 명확히 드러내고, 중복 없이 간결하며, 엣지 케이스 처리가 코드 전반에 일관되게 반영되어 있다.</td><td><code class="i">edges</code>, <code class="i">g</code>, <code class="i">u</code>, <code class="i">v</code>처럼 역할이 드러나는 이름을 쓴다. 구현 계획 주석이 있고, 중복 간선·고립 노드·없는 노드 질의 처리 방침을 주석으로 밝힌다. 불필요한 중복이 없다.</td></tr><tr><td class="id" style="color:#7a5cc8">중상 · 16</td><td>전반적으로 가독성이 양호하나 일부 네이밍이 불명확하거나 사소한 중복 코드가 존재한다.</td><td>이름이 일부 모호하거나(<code class="i">a</code>, <code class="i">x2</code>) 방향/무방향 분기가 중복되어 있다.</td></tr><tr><td class="id" style="color:#7a5cc8">중하 · 12</td><td>동작은 하지만 네이밍 규칙이 일관되지 않고 중복 코드가 다수 존재해 가독성이 떨어진다.</td><td>함수 안에서 이름 규칙이 섞이고, 같은 코드가 반복되며 주석·계획이 없다.</td></tr><tr><td class="id" style="color:#7a5cc8">하 · 8</td><td>코드 구조를 파악하기 어려울 정도로 가독성이 낮고 엣지 케이스 처리가 전무하다.</td><td>구조를 읽기 어렵고, 경계 입력에 대한 고려가 전혀 없다.</td></tr></table>
+</section>
+<section id="levels">
+<h2>성취수준 A~E 관찰 지표<small>#levels · 단원3 진술의 10주차 번역</small></h2>
+<table>
+<tr><th style="width:36px">수준</th><th style="width:30%">계획서 진술(10주차 해당 부분)</th><th>관찰 지표(10주차 활동에서 보이는 행동)</th></tr>
+<tr><td class="id" style="color:#1d7a4f">A</td><td>인접 행렬과 인접 리스트의 효율성을 비교해 문제 상황에 맞는 그래프 표현을 주도적으로 선택한다.</td><td>A4·A14 Q1에서 밀도와 질의 종류 두 가지로 근거를 대어 표현을 고르고(X는 리스트, Y는 저장량이 거의 같고 직항 확인이 잦으므로 행렬), Q2 값을 정확히 계산한다. A8에서 읽기 부작용을 예측해 맞히고, A13에서 neighbors가 g를 바꾸지 않도록 스스로 설계한다. D2에서 &ldquo;없는 노드와 이웃 없는 노드&rdquo;의 구분을 논한다.</td></tr><tr><td class="id" style="color:#3572a5">B</td><td>heapq와 defaultdict(list)를 안내에 따라 활용해 힙·그래프 문제를 해결한다. (그래프 부분)</td><td>A7·A13에서 build_graph가 점검 케이스와 일치한다. 무방향 간선의 양방향 추가를 빠뜨리지 않는다. 힌트 1회 후 제네레이터를 완성한다. A14 Q1 선택은 맞고 근거 중 한 가지만 제시하며, Q2는 정답이다.</td></tr><tr><td class="id" style="color:#8a6d1f">C</td><td>(계획서 C 진술에는 그래프 관련 문구가 없다. 설계자 번역, 설계도 #proposals 4) 기본 활용은 가능하나 오류에 취약하다.</td><td>[[0]*n]*n 별칭(B1)·읽기 부작용(C1)·무방향 반대 방향 누락·제네레이터 소진을 스스로 발견하지 못하고 교사 설명 후 수정한다. A14 Q1에서 &ldquo;작으니 아무거나&rdquo;처럼 근거 없이 선택하고, Q3에서 len 변화를 놓친다.</td></tr><tr><td class="id" style="color:#c07a1f">D</td><td>해시 테이블·트리·힙·그래프의 개념적 차이를 부분적으로만 이해하며, 재귀 함수 작성에 어려움을 겪는다.</td><td>A2에서 두 표현의 역할(칸 vs 목록)을 혼동하고, A3에서 방향 그래프의 비대칭을 보지 못하며, T4(트리)와 G1(그래프)의 간선·노드 수 관계를 정리하지 못한다. A9 실측과 손 계산이 계속 어긋난다.</td></tr><tr><td class="id" style="color:#b3401f">E</td><td>비선형 자료구조의 구조적 특징을 이해하지 못하며, 단순한 탐색조차 적절한 자료구조 없이 접근한다.</td><td>A1·A2에서 &ldquo;누가 누구와 연결되는가&rdquo;를 표나 목록으로 옮기지 못하고 그림 설명만 반복한다. A7에서 일반 dict의 KeyError를 해석하지 못하고 노드 목록을 리스트의 리스트나 문자열 하나로만 저장하려 한다.</td></tr></table><p class="note">관찰 수집: 교사 체크리스트(A2 두 표 일치, A3 대칭·T4 수 세기, A4 비교표 값, A8 예측-실제 표, A9 실측-손 표 대조, A10 예측 표, A13 점검 통과, A14 답안). 개별 피드백은 A7·A9 순회, A13 순회, 주간 과제 채점 때 한다. 실습 과제 채점은 계획서 Ⅰ의 평가요소·4단계 채점기준에 따른다.</p>
+</section>
+<section id="viol">
+<h2>AI 활용 위반 처리(계획서 요약)<small>#viol</small></h2>
+<table>
+<tr><th style="width:170px">구분</th><th>처리</th></tr>
+<tr><td class="id">판별</td><td><b>10주차 과제에 맞춘 예시(계획서 원문의 풀어 쓴 요약이다. 판정은 계획서 Ⅰ을 따른다).</b> 제출 코드와 성찰일지의 서술 수준 불일치, 두 표현 중 이 구조를 고른 이유와 neighbors가 g를 바꾸지 않게 한 방법을 설명하지 못함, 급격한 코드 스타일 변화, AI 문체 특징 등을 근거로 담당 교사가 1차 확인한다. 필요 시 간단한 구술 확인을 한다.<br><b>계획서 원문</b>: 제출 코드와 성찰일지의 서술 수준 불일치, 질의응답 시 복잡도 선택 근거를 설명하지 못하는 경우, 급격한 코드 스타일 변화, AI 문체 특징 등을 근거로 담당 교사가 1차 확인한다. 필요 시 간단한 구술 확인(복잡도 선택 이유 질문)을 진행한다.</td></tr>
+<tr><td class="id">1차 위반</td><td>해당 과제 재작성 지시 및 해당 과제 점수 50% 감점. 학생과 개별 면담으로 허용 범위를 재안내한다.</td></tr>
+<tr><td class="id">2차 위반 또는 명백한 전체 대필</td><td>해당 과제 0점 처리. 학교 학업성실성(생활지도) 규정에 따른 별도 조치를 병행하며 보호자에게 통지한다.</td></tr>
+<tr><td class="id">자진 신고 감경</td><td>제출 전 스스로 금지 범위 활용 사실을 신고하면, 해당 부분을 본인이 다시 작성하는 조건으로 감점 폭을 완화한다(0점 대신 재작성 + 감점).</td></tr>
+</table>
+<p class="note">형성평가(A14)는 AI를 쓰지 않는 수업 운영 규칙으로 진행하며, 위 위반 처리를 형성평가에 적용하지 않는다.</p>
+</section>
+<section id="sheet">
+<h2>채점표<small>#sheet · 교사용 기록</small></h2>
+<table class="fill"><tr><th style="width:100px">학생</th><th>구현 정확성 (50/40/30/20)</th><th>복잡도 분석 (30/24/18/12)</th><th>코드 품질 (20/16/12/8)</th><th style="width:70px">합계</th><th>AI 활용 기록 확인</th></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr></table>
+</section>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
+</script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10주차 탐구 활동지 1차시 · 그래프 모델링 (학생용)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16233b;--paper:#f7f8fa;--panel:#ffffff;--py-blue:#3572a5;--line:#dfe3ea;--dim:#5b6b85;--code-bg:#101828;--code-fg:#e6edf7;--ok:#1d7a4f;--warn:#8a6d1f;--bad:#b3401f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+code,pre{font-family:"JetBrains Mono","D2Coding",Consolas,monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:24px}
+.prompt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--py-blue);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.lead{color:var(--dim);margin-top:8px;max-width:760px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 20px;font-family:"JetBrains Mono",monospace;font-size:12px}
+nav a{color:var(--py-blue);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+section>h2{font-size:18px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+section>h2 small{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--py-blue);margin-left:8px;font-weight:500}
+h3{font-size:15px;margin:14px 0 6px}
+p{margin:6px 0}
+ul,ol{margin:6px 0 6px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--code-bg);color:var(--code-fg);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;text-align:left;padding:8px}
+td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--py-blue);white-space:nowrap}
+table.fill td{border:1px solid var(--line);height:34px}
+table.fill td.lab{background:#f0f2f6;font-weight:600;height:auto}
+pre{background:var(--code-bg);color:var(--code-fg);padding:12px 14px;border-radius:6px;font-size:12.5px;overflow-x:auto;margin:8px 0;line-height:1.55}
+code.i{background:#eef1f6;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.tag{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;color:var(--py-blue)}
+.note{background:#eef4fa;border:1px solid #d6e5f2;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.warn{background:#fbf3e4;border:1px solid #ecd9ae;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.concept{background:#f4f7fc;border:1px solid #c9d6ea;border-left:4px solid var(--py-blue);border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0;break-inside:avoid;page-break-inside:avoid}
+.concept b.h{color:var(--py-blue)}
+.concept table{margin:6px 0;font-size:12.5px}
+.concept ul{margin:4px 0 4px 18px}
+.ans{background:#eef8f2;border:1px solid #bfe0cf;border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-left:4px solid var(--c,var(--py-blue));border-radius:6px;padding:10px 14px;background:#fff}
+.card b.h{color:var(--c)}
+.blank{border:1px dashed #9aa7bd;border-radius:6px;min-height:64px;margin:6px 0;padding:6px 10px;color:var(--dim);font-size:12px}
+.blank.l{min-height:110px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--dim);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.diagram{background:#f0f2f6;border-radius:6px;padding:10px 14px;font-size:12.5px;overflow-x:auto;color:var(--ink);line-height:1.4}
+.codewrap{position:relative}
+.copy{position:absolute;top:14px;right:8px;font:500 11px "JetBrains Mono",monospace;background:#27364f;color:#e6edf7;border:1px solid #3d506e;border-radius:4px;padding:2px 8px;cursor:pointer}
+.role{display:inline-block;font:700 10.5px "JetBrains Mono",monospace;padding:1px 7px;border-radius:3px;background:#e4ecf6;color:var(--py-blue);margin-right:6px}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.links a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:6px;margin:6px 0;color:var(--py-blue);text-decoration:none;font-weight:600}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{
+  body{background:#fff;font-size:11.5pt}.wrap{max-width:none;padding:0}
+  nav,.copy,.noprint{display:none!important}
+  section{border:none;padding:0;margin:0 0 8mm;break-inside:auto}
+  section.sheet{page-break-after:always;break-after:page}
+  section.sheet:last-of-type{page-break-after:auto}
+  header{padding:0 0 8px;margin-bottom:10px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f3f4f7;color:#111;border:1px solid #ccd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,.card,.blank{break-inside:avoid}
+}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.gate{border:1px dashed #b3401f;border-radius:8px;padding:6px 12px;background:#fff8f5}
+</style>
+<style id="week10-submit-style">
+/* week10 제출 바·입력란 공통 스타일 (7개 학생용 파일 동일) */
+#savebar{position:sticky;top:0;z-index:50;background:#16233b;color:#f7f8fa;padding:8px 20px;border-bottom:3px solid #3572a5;font-size:13px}
+#savebar .sb-in{max-width:1000px;margin:0 auto}
+#savebar .sb-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+#savebar label{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+#savebar input[type=text]{width:9.5em;padding:5px 8px;border:2px solid #9aa7bd;border-radius:4px;background:#fff;color:#16233b;font:inherit;font-weight:500}
+#savebar input[type=text].invalid{border-color:#ff9b7a;background:#fff3ee}
+#savebar button{font:600 13px "IBM Plex Sans KR",sans-serif;padding:6px 14px;border-radius:4px;border:2px solid #fff;background:#fff;color:#16233b;cursor:pointer}
+#savebar button.sec{background:transparent;color:#fff;border-color:#9aa7bd}
+#savebar button:disabled{opacity:.6;cursor:default}
+#savebar button:focus-visible,#savebar input:focus-visible{outline:3px solid #ffd166;outline-offset:2px}
+#savebar .sb-msg{min-height:1.4em;margin-top:4px;font-size:12.5px}
+#savebar .sb-msg.err{color:#ffd0c0;font-weight:700}
+#savebar .sb-msg.ok{color:#bff0d4}
+#savebar .sb-auto{font-size:11.5px;color:#c9d3e6;margin-left:auto}
+#savebar .sb-confirm{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px;padding:6px 10px;border:1px solid #ffd166;border-radius:4px;font-size:12.5px}
+#savebar .sb-confirm[hidden]{display:none}
+.in{width:100%;display:block;font:inherit;font-size:13.5px;line-height:1.5;color:#16233b;background:#fff;border:1px solid #6b7a94;border-radius:4px;padding:5px 8px}
+textarea.in{resize:vertical;min-height:2.4em;overflow:hidden}
+textarea.in.l{min-height:7em}
+textarea.in.code{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;line-height:1.55;white-space:pre;overflow:auto;tab-size:4;min-height:12em;background:#fbfcfe}
+textarea.in.draw{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:12.5px;white-space:pre;overflow:auto;min-height:9em}
+.in:focus-visible,.ck input:focus-visible,.rg input:focus-visible{outline:3px solid #3572a5;outline-offset:1px}
+.in.invalid{border:2px solid #b3401f}
+input.in.s{display:inline-block;width:3.2em;padding:1px 4px;text-align:center}
+table.fill td.in-cell{padding:3px;height:auto}
+.ans-row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.ans-row>.n{padding-top:6px;font-weight:700;color:#3572a5}
+.mycode{margin:8px 0 12px}
+.mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
+.hint{font-size:12px;color:#5b6b85;margin:2px 0}
+.ck{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
+.ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
+.rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
+.rg label{display:inline-flex;align-items:center;gap:5px}
+@media (max-width:640px){#savebar{padding:8px 14px}#savebar .sb-auto{margin-left:0}}
+#printid{display:none}
+@media print{
+  #printid{display:block;font:600 12pt "IBM Plex Sans KR",sans-serif;margin:0 0 8px;padding-bottom:4px;border-bottom:1px solid #999;white-space:pre-wrap}
+  #savebar,.hint.noprint{display:none!important}
+  .in{border:none;border-bottom:1px solid #9aa7bd;border-radius:0;background:transparent;padding:2px 2px;-webkit-appearance:none;appearance:none;resize:none}
+  textarea.in{overflow:visible}
+  textarea.in.code,textarea.in.draw{border:1px solid #ccd;white-space:pre-wrap}
+  select.in{background-image:none}
+  .ans-row,.mycode{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="prompt">&gt;&gt;&gt; workbook.week(10)  # 학생용 · 탐구 활동지 A1~A5</div>
+  <h1>10주차 탐구 활동지 1차시 — 그래프(Graph) 구조 모델링</h1>
+  <p class="lead">핵심질문: 친구 관계, 웹페이지 링크, 지하철 노선도처럼 복잡하게 얽힌 망형 구조를 어떻게 컴퓨터 메모리에 올릴까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 정답은 이 활동지에 없다. 빈칸은 스스로 채운다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><label class="ck">모둠 <input type="text" class="in" data-key="meta.group" data-label="모둠" autocomplete="off" style="width:8em;display:inline-block"></label></p>
+</header>
+<nav><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="index.html">목록</a></nav>
+
+<section id="A1" class="sheet">
+<h2>A1 · 얽힌 관계를 컴퓨터에 어떻게 알려 줄까<small>1차시 · 7분 · 개인→짝</small></h2>
+<p class="meta"><span>산출물: 자기 방식 1가지 스케치와 약점 메모</span></p>
+<p>세 가지 사례에는 모두 &ldquo;누가(무엇이) 누구(무엇)와 이어져 있는가&rdquo;가 들어 있다. 앞에서 배운 트리(8주차)와 힙(9주차)은 모양에 규칙이 있었다. 아래 사례는 모양에 규칙이 없다.</p>
+<div class="grid">
+<div class="card"><b class="h">사례 ① 친구 관계</b><p>반 친구 30명 중 서로 친구인 사람끼리 이어져 있다. 누가 누구와 친구인지는 사람마다 다르다.</p></div>
+<div class="card"><b class="h">사례 ② 웹페이지 링크</b><p>한 페이지에 다른 페이지로 가는 링크가 있다. A가 B로 링크를 걸어도 B가 A로 링크를 걸었다는 뜻은 아니다.</p></div>
+<div class="card"><b class="h">사례 ③ 지하철 노선도</b><p>역과 역이 선로로 이어지고, 어떤 역에서는 다른 노선으로 갈아탄다.</p></div>
+</div>
+<div class="note"><b>오늘의 질문</b> 친구 관계, 웹페이지 링크, 지하철 노선도처럼 복잡하게 얽힌 망형 구조를 어떻게 컴퓨터 메모리에 올릴까?</div>
+<h3>관찰·정리</h3>
+<p>컴퓨터는 그림을 볼 수 없다. 그림 대신 무엇을 적어 주어야 하는가?</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A1.must" data-label="A1 세 사례에서 반드시 적어야 하는 정보"></textarea></div>
+<p>내 방식으로 사례 ①(친구 관계)을 컴퓨터가 알 수 있게 적어 보자. 글, 표, 그림 모양 중 편한 방식을 쓴다. (아래 칸은 글자로 그리는 칸이다.)</p>
+<div class="ans-row"><span class="n">2</span><textarea class="in draw" rows="8" data-key="A1.sketch" data-label="A1 내 방식 스케치(친구 관계)" spellcheck="false"></textarea></div>
+<p>내 방식으로 친구 30명 중 &ldquo;철수의 친구 모두&rdquo;를 찾으려면 어디를 보아야 하는가? 내 방식의 약점은 무엇인가?</p>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A1.find" data-label="A1 철수의 친구 모두를 찾으려면 어디를 보는가"></textarea></div>
+<div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A1.weak" data-label="A1 내 방식의 약점 메모"></textarea></div>
+</section>
+<section id="A2" class="sheet">
+<h2>A2 · 같은 관계를 두 가지로 적어 보기 (G1)<small>1차시 · 14분 · 짝</small></h2>
+<p class="meta"><span>산출물: 6×6 표, 노드별 이웃 목록</span></p>
+<div class="concept"><b class="h">약속 · 용어</b>
+<ul>
+<li><b>노드</b>: 관계를 맺는 대상(사람, 페이지, 역). <b>간선</b>: 두 노드를 잇는 관계 한 개. 노드와 간선을 모은 것이 <b>그래프</b>이다.</li>
+<li><b>무방향</b>: 간선에 방향이 없다(친구 관계처럼 서로 같다). <b>방향</b>: 간선에 출발과 도착이 있다(링크처럼 한쪽으로 간다).</li>
+<li><b>인접 행렬</b>: 모든 쌍의 자리를 칸으로 둔 표이다. 노드가 N개면 N&times;N 칸이고, 연결이면 1, 아니면 0을 적는다.</li>
+<li><b>인접 리스트</b>: 노드마다 이웃 목록을 둔다. 존재하는 간선만 적는다.</li>
+</ul></div>
+<p><b>G1 · 친구 관계</b>: 노드 A~F, 간선 5개(무방향) <code class="i">(A,B) (A,C) (B,D) (C,D) (D,E)</code>. 노드 F는 아무와도 이어져 있지 않다.</p>
+<pre class="diagram">   A ─ B
+   │   │
+   C ─ D ─ E        F</pre>
+<h3>(가) 모든 쌍 표(인접 행렬)</h3>
+<p>행은 &ldquo;어디에서&rdquo;, 열은 &ldquo;어디로&rdquo;이다. 칸마다 연결이면 1, 아니면 0을 쓴다.</p><div class="scroll"><table class="fill"><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr><tr><td class="lab" style="text-align:center;width:3em">A</td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r1.c1" data-label="A2 인접 행렬 A행 A열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r1.c2" data-label="A2 인접 행렬 A행 B열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r1.c3" data-label="A2 인접 행렬 A행 C열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r1.c4" data-label="A2 인접 행렬 A행 D열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r1.c5" data-label="A2 인접 행렬 A행 E열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r1.c6" data-label="A2 인접 행렬 A행 F열" autocomplete="off"></td></tr><tr><td class="lab" style="text-align:center;width:3em">B</td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r2.c1" data-label="A2 인접 행렬 B행 A열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r2.c2" data-label="A2 인접 행렬 B행 B열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r2.c3" data-label="A2 인접 행렬 B행 C열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r2.c4" data-label="A2 인접 행렬 B행 D열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r2.c5" data-label="A2 인접 행렬 B행 E열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r2.c6" data-label="A2 인접 행렬 B행 F열" autocomplete="off"></td></tr><tr><td class="lab" style="text-align:center;width:3em">C</td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r3.c1" data-label="A2 인접 행렬 C행 A열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r3.c2" data-label="A2 인접 행렬 C행 B열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r3.c3" data-label="A2 인접 행렬 C행 C열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r3.c4" data-label="A2 인접 행렬 C행 D열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r3.c5" data-label="A2 인접 행렬 C행 E열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r3.c6" data-label="A2 인접 행렬 C행 F열" autocomplete="off"></td></tr><tr><td class="lab" style="text-align:center;width:3em">D</td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r4.c1" data-label="A2 인접 행렬 D행 A열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r4.c2" data-label="A2 인접 행렬 D행 B열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r4.c3" data-label="A2 인접 행렬 D행 C열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r4.c4" data-label="A2 인접 행렬 D행 D열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r4.c5" data-label="A2 인접 행렬 D행 E열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r4.c6" data-label="A2 인접 행렬 D행 F열" autocomplete="off"></td></tr><tr><td class="lab" style="text-align:center;width:3em">E</td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r5.c1" data-label="A2 인접 행렬 E행 A열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r5.c2" data-label="A2 인접 행렬 E행 B열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r5.c3" data-label="A2 인접 행렬 E행 C열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r5.c4" data-label="A2 인접 행렬 E행 D열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r5.c5" data-label="A2 인접 행렬 E행 E열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r5.c6" data-label="A2 인접 행렬 E행 F열" autocomplete="off"></td></tr><tr><td class="lab" style="text-align:center;width:3em">F</td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r6.c1" data-label="A2 인접 행렬 F행 A열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r6.c2" data-label="A2 인접 행렬 F행 B열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r6.c3" data-label="A2 인접 행렬 F행 C열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r6.c4" data-label="A2 인접 행렬 F행 D열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r6.c5" data-label="A2 인접 행렬 F행 E열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A2.m.r6.c6" data-label="A2 인접 행렬 F행 F열" autocomplete="off"></td></tr></table></div>
+<h3>(나) 노드별 이웃 목록(인접 리스트)</h3>
+<p>노드마다 이웃을 모두 적는다. 이웃이 없으면 어떻게 적을지 스스로 정한다.</p><div class="scroll"><table class="fill"><tr><th>노드</th><th>이웃 목록</th></tr><tr><td class="lab" style="width:4em;text-align:center">A</td><td class="in-cell"><input type="text" class="in" data-key="A2.list.A" data-label="A2 이웃 목록 A" autocomplete="off"></td></tr><tr><td class="lab" style="width:4em;text-align:center">B</td><td class="in-cell"><input type="text" class="in" data-key="A2.list.B" data-label="A2 이웃 목록 B" autocomplete="off"></td></tr><tr><td class="lab" style="width:4em;text-align:center">C</td><td class="in-cell"><input type="text" class="in" data-key="A2.list.C" data-label="A2 이웃 목록 C" autocomplete="off"></td></tr><tr><td class="lab" style="width:4em;text-align:center">D</td><td class="in-cell"><input type="text" class="in" data-key="A2.list.D" data-label="A2 이웃 목록 D" autocomplete="off"></td></tr><tr><td class="lab" style="width:4em;text-align:center">E</td><td class="in-cell"><input type="text" class="in" data-key="A2.list.E" data-label="A2 이웃 목록 E" autocomplete="off"></td></tr><tr><td class="lab" style="width:4em;text-align:center">F</td><td class="in-cell"><input type="text" class="in" data-key="A2.list.F" data-label="A2 이웃 목록 F" autocomplete="off"></td></tr></table></div>
+<h3>관찰·정리</h3>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A2.q1" data-label="A2 표의 A행과 B열의 칸은 어떤 관계를 나타내는가"></textarea></div>
+<p>② (가) 표는 대칭인가? 즉 모든 칸에서 (행 i, 열 j)의 값과 (행 j, 열 i)의 값이 같은가? <span class="rg" data-key="A2.sym" data-type="radio" data-label="A2 G1 표는 대칭인가"><label><input type="radio" name="r_A2_sym" value="대칭이다"> 대칭이다</label><label><input type="radio" name="r_A2_sym" value="대칭이 아니다"> 대칭이 아니다</label></span></p>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A2.q3" data-label="A2 고립 노드 F를 표와 목록에서 어떻게 나타냈는가"></textarea></div>
+<p>④ D의 친구를 모두 찾을 때 두 방식에서 어디를 보는가?</p><div class="scroll"><table class="fill"><tr><th style="width:110px">방식</th><th>보는 곳</th></tr><tr><td class="lab">(가) 표</td><td class="in-cell"><input type="text" class="in" data-key="A2.find.matrix" data-label="A2 D의 친구 찾기 표에서 보는 곳" autocomplete="off"></td></tr><tr><td class="lab">(나) 목록</td><td class="in-cell"><input type="text" class="in" data-key="A2.find.list" data-label="A2 D의 친구 찾기 목록에서 보는 곳" autocomplete="off"></td></tr></table></div>
+<h3>일반화 초안 씨앗</h3>
+<p>두 가지 방식이 같은 정보를 담는다는 것은 무엇으로 확인할 수 있는가? 한두 줄로 쓴다.</p>
+<div class="ans-row"><span class="n">5</span><textarea class="in" rows="2" data-key="A2.seed" data-label="A2 두 방식이 같은 정보를 담는지 확인하는 방법"></textarea></div>
+</section>
+<section id="A3" class="sheet">
+<h2>A3 · 방향이 있는 관계와 8주차 트리 다시 보기 (W, T4)<small>1차시 · 13분 · 짝</small></h2>
+<p class="meta"><span>산출물: W 두 표현, 대칭 여부 메모, T4 간선·노드 수 표</span></p>
+<h3>(가) 웹페이지 링크 W (7분)</h3>
+<p>노드 0~3, 방향 간선 5개 <code class="i">0→1, 0→2, 1→2, 2→0, 3→2</code>이다. &ldquo;a→b&rdquo;는 a 페이지에 b로 가는 링크가 있다는 뜻이다. 행은 출발, 열은 도착으로 하여 두 방식으로 적는다.</p><div class="scroll"><table class="fill"><tr><th></th><th>0</th><th>1</th><th>2</th><th>3</th></tr><tr><td class="lab" style="text-align:center;width:3em">0</td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r1.c1" data-label="A3 W 인접 행렬 0행 0열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r1.c2" data-label="A3 W 인접 행렬 0행 1열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r1.c3" data-label="A3 W 인접 행렬 0행 2열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r1.c4" data-label="A3 W 인접 행렬 0행 3열" autocomplete="off"></td></tr><tr><td class="lab" style="text-align:center;width:3em">1</td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r2.c1" data-label="A3 W 인접 행렬 1행 0열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r2.c2" data-label="A3 W 인접 행렬 1행 1열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r2.c3" data-label="A3 W 인접 행렬 1행 2열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r2.c4" data-label="A3 W 인접 행렬 1행 3열" autocomplete="off"></td></tr><tr><td class="lab" style="text-align:center;width:3em">2</td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r3.c1" data-label="A3 W 인접 행렬 2행 0열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r3.c2" data-label="A3 W 인접 행렬 2행 1열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r3.c3" data-label="A3 W 인접 행렬 2행 2열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r3.c4" data-label="A3 W 인접 행렬 2행 3열" autocomplete="off"></td></tr><tr><td class="lab" style="text-align:center;width:3em">3</td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r4.c1" data-label="A3 W 인접 행렬 3행 0열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r4.c2" data-label="A3 W 인접 행렬 3행 1열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r4.c3" data-label="A3 W 인접 행렬 3행 2열" autocomplete="off"></td><td class="in-cell"><input type="text" class="in s" data-key="A3.m.r4.c4" data-label="A3 W 인접 행렬 3행 3열" autocomplete="off"></td></tr></table></div><div class="scroll"><table class="fill"><tr><th>노드</th><th>나가는 링크 목록</th></tr><tr><td class="lab" style="width:4em;text-align:center">0</td><td class="in-cell"><input type="text" class="in" data-key="A3.list.0" data-label="A3 W 이웃 목록 0" autocomplete="off"></td></tr><tr><td class="lab" style="width:4em;text-align:center">1</td><td class="in-cell"><input type="text" class="in" data-key="A3.list.1" data-label="A3 W 이웃 목록 1" autocomplete="off"></td></tr><tr><td class="lab" style="width:4em;text-align:center">2</td><td class="in-cell"><input type="text" class="in" data-key="A3.list.2" data-label="A3 W 이웃 목록 2" autocomplete="off"></td></tr><tr><td class="lab" style="width:4em;text-align:center">3</td><td class="in-cell"><input type="text" class="in" data-key="A3.list.3" data-label="A3 W 이웃 목록 3" autocomplete="off"></td></tr></table></div>
+<p>① 표는 대칭인가? <span class="rg" data-key="A3.sym" data-type="radio" data-label="A3 W 표는 대칭인가"><label><input type="radio" name="r_A3_sym" value="대칭이다"> 대칭이다</label><label><input type="radio" name="r_A3_sym" value="대칭이 아니다"> 대칭이 아니다</label></span></p>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A3.q2" data-label="A3 0→1과 1→0은 같은 간선인가"></textarea></div>
+<p>③ 노드 2로 들어오는 링크는 몇 개인가? <input type="text" class="in" data-key="A3.in2" data-label="A3 노드 2로 들어오는 링크 수" autocomplete="off" style="width:5em;display:inline-block"></p>
+<div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A3.q4" data-label="A3 노드 2로 들어오는 링크를 표와 목록에서 각각 어떻게 찾는가"></textarea></div>
+<h3>(나) 8주차 균형 BST T4를 그래프로 (6분)</h3>
+<p>8주차에서 <code class="i">[4, 2, 6, 1, 3, 5, 7]</code>을 차례로 삽입해 만든 균형 BST(T4)이다. 부모-자식의 화살표 방향을 지우고 <b>방향 없는 간선</b>으로 옮긴다.</p>
+<pre class="diagram">        4
+      /   \
+     2     6
+    / \   / \
+   1   3 5   7</pre>
+<p>간선: <code class="i">(4,2) (4,6) (2,1) (2,3) (6,5) (6,7)</code></p>
+<div class="concept"><b class="h">약속 · 돌아오는 길(사이클)</b><p>같은 간선을 두 번 쓰지 않고 출발한 노드로 되돌아오는 길을 <b>사이클</b>이라고 한다. 예를 들어 노드 세 개를 삼각형으로 잇고 한 바퀴 도는 길이다.</p></div>
+<p>⑤ G1(A2)과 T4를 같은 항목으로 세어 비교한다.</p><div class="scroll"><table class="fill"><tr><th style="width:52%">항목</th><th>G1</th><th>T4</th></tr><tr><td class="lab">노드 수</td><td class="in-cell"><input type="text" class="in" data-key="A3.cmp.r1.c1" data-label="A3 비교 노드 수 G1" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.cmp.r1.c2" data-label="A3 비교 노드 수 T4" autocomplete="off"></td></tr><tr><td class="lab">간선 수</td><td class="in-cell"><input type="text" class="in" data-key="A3.cmp.r2.c1" data-label="A3 비교 간선 수 G1" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.cmp.r2.c2" data-label="A3 비교 간선 수 T4" autocomplete="off"></td></tr><tr><td class="lab">모든 노드가 서로 이어지는가(어느 노드에서 출발해도 다른 모든 노드에 갈 수 있는가)</td><td class="in-cell"><input type="text" class="in" data-key="A3.cmp.r3.c1" data-label="A3 비교 모두 연결 G1" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.cmp.r3.c2" data-label="A3 비교 모두 연결 T4" autocomplete="off"></td></tr><tr><td class="lab">돌아오는 길(사이클)이 있는가</td><td class="in-cell"><input type="text" class="in" data-key="A3.cmp.r4.c1" data-label="A3 비교 사이클 G1" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.cmp.r4.c2" data-label="A3 비교 사이클 T4" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">6</span><textarea class="in" rows="3" data-key="A3.q6" data-label="A3 G1과 T4는 같은 종류의 그림인가 무엇이 다른가"></textarea></div>
+<p>⑦ T4에서 간선 <code class="i">(1,3)</code>을 하나만 더 그으면 노드 수, 간선 수, 돌아오는 길은 어떻게 되는가? 그림에 직접 그어 보고 쓴다.</p>
+<div class="ans-row"><span class="n">7</span><textarea class="in" rows="3" data-key="A3.q7" data-label="A3 T4에 간선 (1,3)을 더 그으면 달라지는 것"></textarea></div>
+<p class="hint">이 활동에서는 수 세기와 관찰만 한다. 결론 문장은 나중에 쓴다.</p>
+</section>
+<section id="A4" class="sheet">
+<h2>A4 · 두 표현의 비용 비교표 (COST)<small>1차시 · 14분 · 모둠</small></h2>
+<p class="meta"><span>산출물: 비교표 + 가설 메모</span></p>
+<div class="concept"><b class="h">약속 · 세는 방법</b>
+<ul>
+<li>질의 ① <b>u–v 간선이 있나</b>: 확인한 칸 또는 원소의 수. 목록에서는 u의 이웃 목록을 앞에서부터 하나씩 보며 v를 찾으면 멈추고, 없으면 목록 전체를 본다.</li>
+<li>질의 ② <b>u의 이웃을 모두 찾기</b>: 훑어 본 칸 또는 원소의 수. 표에서는 u의 행 전체를 훑는다.</li>
+<li>질의 ③ <b>저장 공간</b>: 표의 칸 수 / 목록의 원소 수. 무방향 간선 1개는 목록에 원소 2개(양쪽에 한 번씩)이다.</li>
+<li><b>밀도</b> = 간선 수 &divide; 가능한 쌍의 수. 무방향 그래프의 가능한 쌍은 N(N&minus;1)/2이다. 간선이 적으면 <b>희소</b>, 많으면 <b>밀집</b>이라고 한다.</li>
+</ul></div>
+<h3>그래프 ① G1 (노드 6개, 간선 5개) &mdash; 손으로 센다</h3>
+<p>질의: ① A와 E 사이에 간선이 있나(A에서 E를 찾는다), ② D의 이웃 모두, ③ 저장 공간.</p><div class="scroll"><table class="fill"><tr><th style="width:44%">질의</th><th>인접 행렬</th><th>인접 리스트</th></tr><tr><td class="lab">① A–E 간선 확인(확인한 수)</td><td class="in-cell"><input type="text" class="in" data-key="A4.g1.q1.c1" data-label="A4 g1 ① A–E 간선 확인(확인한 수) 인접 행렬" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g1.q1.c2" data-label="A4 g1 ① A–E 간선 확인(확인한 수) 인접 리스트" autocomplete="off"></td></tr><tr><td class="lab">② D의 이웃 모두(훑은 수)</td><td class="in-cell"><input type="text" class="in" data-key="A4.g1.q2.c1" data-label="A4 g1 ② D의 이웃 모두(훑은 수) 인접 행렬" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g1.q2.c2" data-label="A4 g1 ② D의 이웃 모두(훑은 수) 인접 리스트" autocomplete="off"></td></tr><tr><td class="lab">③ 저장(칸 수 / 원소 수)</td><td class="in-cell"><input type="text" class="in" data-key="A4.g1.q3.c1" data-label="A4 g1 ③ 저장(칸 수 / 원소 수) 인접 행렬" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g1.q3.c2" data-label="A4 g1 ③ 저장(칸 수 / 원소 수) 인접 리스트" autocomplete="off"></td></tr></table></div>
+<h3>그래프 ② SPARSE (노드 1000개, 간선 1500개, 무방향) &mdash; 주어진 수로 계산한다</h3>
+<p>목록의 길이는 노드마다 같다고 보고 평균을 쓴다. 질의 ①은 목록에 없어서 끝까지 보는 경우로 센다.</p><div class="scroll"><table class="fill"><tr><th style="width:44%">질의</th><th>인접 행렬</th><th>인접 리스트</th></tr><tr><td class="lab">① 간선 확인(확인한 수)</td><td class="in-cell"><input type="text" class="in" data-key="A4.sp.q1.c1" data-label="A4 sp ① 간선 확인(확인한 수) 인접 행렬" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.sp.q1.c2" data-label="A4 sp ① 간선 확인(확인한 수) 인접 리스트" autocomplete="off"></td></tr><tr><td class="lab">② 한 노드의 이웃 모두(훑은 수)</td><td class="in-cell"><input type="text" class="in" data-key="A4.sp.q2.c1" data-label="A4 sp ② 한 노드의 이웃 모두(훑은 수) 인접 행렬" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.sp.q2.c2" data-label="A4 sp ② 한 노드의 이웃 모두(훑은 수) 인접 리스트" autocomplete="off"></td></tr><tr><td class="lab">③ 저장(칸 수 / 원소 수)</td><td class="in-cell"><input type="text" class="in" data-key="A4.sp.q3.c1" data-label="A4 sp ③ 저장(칸 수 / 원소 수) 인접 행렬" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.sp.q3.c2" data-label="A4 sp ③ 저장(칸 수 / 원소 수) 인접 리스트" autocomplete="off"></td></tr></table></div>
+<h3>그래프 ③ DENSE (노드 100개, 모든 쌍이 연결, 간선 4950개) &mdash; 주어진 수로 계산한다</h3><div class="scroll"><table class="fill"><tr><th style="width:44%">질의</th><th>인접 행렬</th><th>인접 리스트</th></tr><tr><td class="lab">① 간선 확인(확인한 수)</td><td class="in-cell"><input type="text" class="in" data-key="A4.de.q1.c1" data-label="A4 de ① 간선 확인(확인한 수) 인접 행렬" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.de.q1.c2" data-label="A4 de ① 간선 확인(확인한 수) 인접 리스트" autocomplete="off"></td></tr><tr><td class="lab">② 한 노드의 이웃 모두(훑은 수)</td><td class="in-cell"><input type="text" class="in" data-key="A4.de.q2.c1" data-label="A4 de ② 한 노드의 이웃 모두(훑은 수) 인접 행렬" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.de.q2.c2" data-label="A4 de ② 한 노드의 이웃 모두(훑은 수) 인접 리스트" autocomplete="off"></td></tr><tr><td class="lab">③ 저장(칸 수 / 원소 수)</td><td class="in-cell"><input type="text" class="in" data-key="A4.de.q3.c1" data-label="A4 de ③ 저장(칸 수 / 원소 수) 인접 행렬" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.de.q3.c2" data-label="A4 de ③ 저장(칸 수 / 원소 수) 인접 리스트" autocomplete="off"></td></tr></table></div>
+<h3>밀도와 식 찾기</h3>
+<p>① SPARSE의 밀도 <input type="text" class="in" data-key="A4.dens.sp" data-label="A4 SPARSE 밀도" autocomplete="off" style="width:9em;display:inline-block"> DENSE의 밀도 <input type="text" class="in" data-key="A4.dens.de" data-label="A4 DENSE 밀도" autocomplete="off" style="width:9em;display:inline-block"></p>
+<p>② 위 값에서 규칙을 찾아 노드 수 N, 간선 수 E로 쓴다. 인접 행렬의 칸 수 <input type="text" class="in" data-key="A4.rule.cells" data-label="A4 인접 행렬 칸 수를 N으로" autocomplete="off" style="width:9em;display:inline-block"> 인접 리스트의 원소 수 <input type="text" class="in" data-key="A4.rule.elems" data-label="A4 인접 리스트 원소 수를 E로" autocomplete="off" style="width:9em;display:inline-block"> 인접 리스트에서 한 노드의 평균 이웃 수 <input type="text" class="in" data-key="A4.rule.avg" data-label="A4 한 노드의 평균 이웃 수를 N, E로" autocomplete="off" style="width:9em;display:inline-block"></p>
+<h3>가설 메모 (3줄)</h3>
+<p>표를 보고 &ldquo;어떤 상황에는 어느 표현이 유리한가&rdquo;를 자기 말로 쓴다. 근거가 된 표의 값을 함께 쓴다.</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A4.hyp1" data-label="A4 가설 1"></textarea></div>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A4.hyp2" data-label="A4 가설 2"></textarea></div>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A4.hyp3" data-label="A4 가설 3"></textarea></div>
+</section>
+<section id="A5" class="sheet">
+<h2>A5 · 1차시 정리와 exit ticket<small>1차시 · 2분 · 개인</small></h2>
+<p class="meta"><span>산출물: exit ticket</span></p>
+<p><b>exit ticket</b> 노드 6개의 무방향 그래프(G1)의 인접 행렬에서 값 1이 적힌 칸은 모두 몇 칸인가? <input type="text" class="in" data-key="A5.ticket" data-label="A5 exit ticket G1 인접 행렬에서 값 1인 칸 수" autocomplete="off" style="width:6em;display:inline-block"></p>
+<p>이번 시간에 한 일을 점검한다.</p>
+<p><label class="ck"><input type="checkbox" data-key="A5.chk1" data-label="A5 점검: 노드·간선·인접 행렬·인접 리스트의 뜻을 말할 수 있다"> 노드, 간선, 인접 행렬, 인접 리스트의 뜻을 말할 수 있다</label><label class="ck"><input type="checkbox" data-key="A5.chk2" data-label="A5 점검: G1과 W를 두 방식으로 적었다"> G1과 W를 두 방식으로 적어 보았다</label><label class="ck"><input type="checkbox" data-key="A5.chk3" data-label="A5 점검: 비교표를 모두 채웠다"> 비교표(A4)를 모두 채웠다</label></p>
+<div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A5.muddy" data-label="A5 가장 헷갈린 점"></textarea></div>
+</section>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
+</script>
+<script id="week10-submit">
+/* week10 학생 입력 저장 (7개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week10-student-v1 */
+(function(){
+"use strict";
+var FILE_KEY="workbook";
+var FILES={workbook:"student_workbook.html",code_lab:"student_code_lab.html",workbook_part2:"student_workbook_part2.html",code_lab_part2:"student_code_lab_part2.html",code_lab_part3:"student_code_lab_part3.html",workbook_part3:"student_workbook_part3.html",formative:"formative_check.html"};
+var FILE=FILES[FILE_KEY], STORE="week10:"+FILE, SCHEMA="week10-student-v1";
+var bar,idIn,nameIn,msg,autoEl,saveBtn,clearBtn,confirmBox,busy=false,timer=null;
+var draftBtn,loadBtn,fileIn,yesBtn,confirmTxt,pending=null,baseline="";
+
+function q(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
+function kind(el){
+  var t=el.getAttribute("data-type");
+  if(t)return t;
+  var tag=el.tagName.toLowerCase();
+  if(tag==="textarea")return "textarea";
+  if(tag==="select")return "select";
+  if(tag==="input")return el.type==="checkbox"?"checkbox":"text";
+  return "text";
+}
+function labelOf(el){
+  var l=el.getAttribute("data-label");
+  if(l)return l;
+  if(el.labels&&el.labels.length)return el.labels[0].textContent.replace(/\s+/g," ").trim();
+  return el.getAttribute("aria-label")||"";
+}
+function readValue(el,k){
+  if(k==="checkbox")return !!el.checked;
+  if(k==="radio"){var r=el.querySelector("input[type=radio]:checked");return r?r.value:null;}
+  return el.value;
+}
+function collect(){
+  return q("[data-key]").map(function(el){
+    var k=kind(el);
+    return {key:el.getAttribute("data-key"),label:labelOf(el),type:k,value:readValue(el,k)};
+  });
+}
+function studentInfo(){return {id:idIn.value.trim(),name:nameIn.value.trim()};}
+function buildJSON(status){
+  return {schema:SCHEMA,week:10,file:FILE,status:status||"final",student:studentInfo(),savedAt:new Date().toISOString(),answers:collect()};
+}
+function safe(s){return String(s).replace(/[\\\/:*?"<>|\s\u0000-\u001f]+/g,"_").replace(/^\.+/,"_");}
+function fileName(st,draft){return "week10_"+FILE_KEY+"_"+safe(st.id||"학번미입력")+"_"+safe(st.name||"이름미입력")+(draft?"_임시저장":"")+".json";}
+function validate(){
+  var miss=[];
+  [[idIn,"학번"],[nameIn,"이름"]].forEach(function(p){
+    var bad=!p[0].value.trim();
+    p[0].classList.toggle("invalid",bad);
+    p[0].setAttribute("aria-invalid",bad?"true":"false");
+    if(bad)miss.push(p);
+  });
+  return miss;
+}
+function updatePrintId(){
+  var p=document.getElementById("printid");
+  if(!p)return;
+  var s=studentInfo();
+  p.textContent="학번: "+(s.id||"          ")+"   이름: "+(s.name||"          ");
+}
+function say(text,cls){msg.textContent=text;msg.className="sb-msg"+(cls?" "+cls:"");}
+
+function download(draft){
+  var obj=buildJSON(draft?"draft":"final"),name=fileName(obj.student,draft);
+  var blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"});
+  var url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;a.style.display="none";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1500);
+  return name;
+}
+function onSave(){
+  if(busy)return;
+  var miss=validate();
+  if(miss.length){
+    say("학번과 이름을 입력해야 저장할 수 있다. 표시된 칸을 채운 뒤 다시 누른다.","err");
+    miss[0][0].focus();return;
+  }
+  busy=true;saveBtn.disabled=true;
+  try{
+    var n=download();
+    say("저장했다: "+n+" (내려받은 JSON 파일 한 개를 제출한다.)","ok");
+  }catch(e){say("저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;saveBtn.disabled=false;},1200);
+}
+
+/* 이어 쓰기: 임시 저장 파일 내려받기 / 저장한 파일 불러오기 */
+function snap(){return JSON.stringify(collect().map(function(a){return a.value;}));}
+function isDirty(){return snap()!==baseline;}
+function ask(text,fn){
+  confirmTxt.textContent=text;pending=fn;confirmBox.hidden=false;
+  clearBtn.disabled=true;loadBtn.disabled=true;
+}
+function closeAsk(){
+  pending=null;confirmBox.hidden=true;clearBtn.disabled=false;loadBtn.disabled=false;
+}
+function onDraft(){
+  if(busy)return;
+  busy=true;draftBtn.disabled=true;
+  try{
+    var n=download(true),s=studentInfo();
+    say("임시 저장했다: "+n+" (제출 파일이 아니다. 이어 쓸 때 [불러오기]로 이 파일을 고른다."+((s.id&&s.name)?"":" 학번과 이름을 쓰면 파일 이름에 들어간다.")+")","ok");
+  }catch(e){say("임시 저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
+  setTimeout(function(){busy=false;draftBtn.disabled=false;},1200);
+}
+function applyLoaded(j){
+  if(!j||typeof j!=="object"||Array.isArray(j))return {err:"저장 파일 형식이 아니다."};
+  if(j.schema!==SCHEMA)return {err:"이 워크북의 저장 파일이 아니다(schema 불일치). 이 활동지에서 저장한 JSON 파일을 고른다."};
+  if(j.file!==FILE)return {err:"이 파일은 '"+String(j.file)+"'에서 저장한 것이다. 지금 열린 '"+FILE+"'에서 저장한 파일만 불러올 수 있다."};
+  if(!Array.isArray(j.answers))return {err:"저장 파일에 answers가 없거나 형식이 틀리다."};
+  var vals={};
+  j.answers.forEach(function(a){if(a&&typeof a.key==="string")vals[a.key]=a.value;});
+  var n=0;
+  q("[data-key]").forEach(function(el){
+    var key=el.getAttribute("data-key");
+    if(!Object.prototype.hasOwnProperty.call(vals,key))return;
+    var v=vals[key],t=typeof v;
+    if(v!==null&&t!=="string"&&t!=="boolean")return;
+    setValue(el,v);n++;
+  });
+  if(j.student&&typeof j.student==="object"){
+    idIn.value=typeof j.student.id==="string"?j.student.id:"";
+    nameIn.value=typeof j.student.name==="string"?j.student.name:"";
+    [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  }
+  autosizeAll();updatePrintId();stash();
+  return {n:n,draft:j.status==="draft",at:j.savedAt};
+}
+function onLoadClick(){
+  if(isDirty()||idIn.value.trim()||nameIn.value.trim()){
+    ask("지금 입력한 내용이 불러온 파일의 내용으로 바뀐다. 계속하려면 [불러오기 진행]을 누르고 파일을 고른다.",function(){closeAsk();fileIn.click();});
+    yesBtn.textContent="불러오기 진행";
+  }else{fileIn.click();}
+}
+function onFileChosen(){
+  var f=fileIn.files&&fileIn.files[0];
+  if(!f)return;
+  if(f.size>3*1024*1024){say("파일이 너무 크다(3MB 초과). 이 활동지에서 저장한 JSON 파일이 맞는지 확인한다.","err");fileIn.value="";return;}
+  var r=new FileReader();
+  r.onerror=function(){say("파일을 읽지 못했다. 다시 시도한다.","err");fileIn.value="";};
+  r.onload=function(){
+    var res;
+    try{res=applyLoaded(JSON.parse(String(r.result)));}
+    catch(e){res={err:"JSON 파일을 읽지 못했다. 이 활동지에서 저장한 파일이 맞는지 확인한다."};}
+    if(res.err){say(res.err+" (입력란은 바뀌지 않았다.)","err");}
+    else{say("불러왔다: "+f.name+" ("+res.n+"칸"+(res.at?", 저장 시각 "+res.at.slice(0,16).replace("T"," "):"")+"). 이어서 쓴다."+(res.draft?"":" (제출용 파일을 불러왔다.)"),"ok");}
+    fileIn.value="";
+  };
+  r.readAsText(f,"utf-8");
+}
+
+/* 임시 보관 (localStorage, 모두 try/catch) */
+function stash(){
+  try{
+    var vals={};collect().forEach(function(a){vals[a.key]=a.value;});
+    localStorage.setItem(STORE,JSON.stringify({student:studentInfo(),values:vals,at:Date.now()}));
+    var d=new Date();
+    autoEl.textContent="임시 저장됨 "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
+  }catch(e){autoEl.textContent="임시 저장 사용 불가(저장(JSON)은 가능)";}
+}
+function schedule(){clearTimeout(timer);timer=setTimeout(stash,300);}
+function setValue(el,v){
+  var k=kind(el);
+  if(k==="checkbox"){el.checked=(v===true);}
+  else if(k==="radio"){q("input[type=radio]",el).forEach(function(r){r.checked=(v!==null&&v!==undefined&&r.value===v);});}
+  else{el.value=(v===null||v===undefined)?"":String(v);}
+}
+function restore(){
+  try{
+    var raw=localStorage.getItem(STORE);if(!raw)return;
+    var s=JSON.parse(raw);if(!s)return;
+    if(s.student){idIn.value=s.student.id||"";nameIn.value=s.student.name||"";}
+    var any=false;
+    q("[data-key]").forEach(function(el){var key=el.getAttribute("data-key");if(s.values&&Object.prototype.hasOwnProperty.call(s.values,key)){setValue(el,s.values[key]);any=true;}});
+    autosizeAll();
+    if(any||(s.student&&(s.student.id||s.student.name)))autoEl.textContent="이전 임시 저장을 불러왔다";
+  }catch(e){}
+}
+function resetAll(){
+  q("[data-key]").forEach(function(el){setValue(el,kind(el)==="checkbox"?false:(kind(el)==="radio"?null:""));});
+  idIn.value="";nameIn.value="";
+  [idIn,nameIn].forEach(function(i){i.classList.remove("invalid");i.setAttribute("aria-invalid","false");});
+  autosizeAll();
+}
+function doClear(){
+  try{localStorage.removeItem(STORE);}catch(e){}
+  resetAll();
+  closeAsk();
+  autoEl.textContent="";
+  say("이 브라우저의 자동 보관을 지우고 입력란을 비웠다. (내려받은 임시 저장 파일은 그대로다.)","ok");
+}
+
+/* 입력란 보조 */
+function autosize(t){if(t.classList.contains("code")||t.classList.contains("draw"))return;t.style.height="auto";if(t.scrollHeight>0)t.style.height=(t.scrollHeight+2)+"px";}
+function autosizeAll(){q("textarea.in").forEach(autosize);}
+function codeKeys(e){
+  var t=e.target;
+  if(!t||!t.classList||!t.classList.contains("code"))return;
+  if(e.key==="Escape"){t._esc=true;return;}
+  if(e.key==="Tab"&&!e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey){
+    if(t._esc){t._esc=false;return;}
+    e.preventDefault();
+    var s=t.selectionStart,en=t.selectionEnd;
+    t.setRangeText("    ",s,en,"end");
+    t.dispatchEvent(new Event("input",{bubbles:true}));
+  }else if(e.key!=="Shift"){t._esc=false;}
+}
+function labelControls(){
+  q("[data-key]").forEach(function(el){
+    var l=el.getAttribute("data-label");
+    var isGroup=el.getAttribute("data-type")==="radio";
+    if(isGroup){el.setAttribute("role","radiogroup");if(l)el.setAttribute("aria-label",l);return;}
+    var has=el.labels&&el.labels.length;
+    if(!has&&l&&!el.getAttribute("aria-label"))el.setAttribute("aria-label",l);
+  });
+}
+function buildBar(){
+  bar=document.createElement("div");bar.id="savebar";bar.setAttribute("role","region");bar.setAttribute("aria-label","제출 저장 바");
+  bar.innerHTML='<div class="sb-in"><div class="sb-row">'
+   +'<label for="sb-id">학번 <input type="text" id="sb-id" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<label for="sb-name">이름 <input type="text" id="sb-name" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
+   +'<button type="button" id="sb-save">저장(JSON)</button>'
+   +'<button type="button" id="sb-draft" class="sec" title="다 못 쓴 내용을 파일로 보관한다. 제출 파일이 아니다.">임시 저장</button>'
+   +'<button type="button" id="sb-load" class="sec" title="임시 저장한 파일을 불러와 이어 쓴다.">불러오기</button>'
+   +'<input type="file" id="sb-file" accept=".json,application/json" hidden aria-label="저장한 JSON 파일 선택">'
+   +'<button type="button" id="sb-clear" class="sec">자동 보관 지우기</button>'
+   +'<span class="sb-auto" id="sb-auto"></span></div>'
+   +'<div class="sb-confirm" id="sb-confirm" hidden><span id="sb-ctext"></span>'
+   +'<button type="button" id="sb-yes">확인</button><button type="button" id="sb-no" class="sec">취소</button></div>'
+   +'<div class="sb-msg" id="sb-msg" role="status" aria-live="polite">다 쓰면 학번과 이름을 쓰고 [저장(JSON)]을 눌러 제출 파일 한 개를 만든다. 시간이 모자라면 [임시 저장]으로 파일을 보관하고, 다음에 [불러오기]로 이어 쓴다.</div></div>';
+  document.body.insertBefore(bar,document.body.firstChild);
+  var pid=document.createElement("div");pid.id="printid";pid.setAttribute("aria-hidden","true");
+  document.body.insertBefore(pid,bar.nextSibling);
+  idIn=bar.querySelector("#sb-id");nameIn=bar.querySelector("#sb-name");msg=bar.querySelector("#sb-msg");
+  autoEl=bar.querySelector("#sb-auto");saveBtn=bar.querySelector("#sb-save");clearBtn=bar.querySelector("#sb-clear");confirmBox=bar.querySelector("#sb-confirm");
+  draftBtn=bar.querySelector("#sb-draft");loadBtn=bar.querySelector("#sb-load");fileIn=bar.querySelector("#sb-file");yesBtn=bar.querySelector("#sb-yes");confirmTxt=bar.querySelector("#sb-ctext");
+  saveBtn.addEventListener("click",onSave);
+  draftBtn.addEventListener("click",onDraft);
+  loadBtn.addEventListener("click",onLoadClick);
+  fileIn.addEventListener("change",onFileChosen);
+  clearBtn.addEventListener("click",function(){yesBtn.textContent="지우기";ask("이 브라우저의 자동 보관을 지우고 입력란을 모두 비운다. 임시 저장 파일이나 JSON으로 저장하지 않은 내용은 되찾을 수 없다.",doClear);bar.querySelector("#sb-no").focus();});
+  bar.querySelector("#sb-no").addEventListener("click",function(){closeAsk();loadBtn.focus();});
+  yesBtn.addEventListener("click",function(){var f=pending;if(f)f();});
+}
+function init(){
+  buildBar();labelControls();baseline=snap();restore();autosizeAll();
+  document.addEventListener("input",function(e){
+    var t=e.target;
+    if(t.tagName==="TEXTAREA")autosize(t);
+    if(t===idIn||t===nameIn){if(t.value.trim()){t.classList.remove("invalid");t.setAttribute("aria-invalid","false");}}
+    if(t===idIn||t===nameIn)updatePrintId();
+    schedule();
+  });
+  document.addEventListener("change",schedule);
+  document.addEventListener("keydown",codeKeys);
+  window.addEventListener("beforeprint",function(){autosizeAll();updatePrintId();});
+  updatePrintId();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(autosizeAll);
+  window.addEventListener("resize",autosizeAll);
+  window.Week10Submit={buildJSON:buildJSON,collect:collect,validate:validate,fileName:fileName,FILE_KEY:FILE_KEY,applyLoaded:applyLoaded};
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+</body>
+</html>
