@@ -136,87 +136,96 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A11" class="sheet">
 <h2>A11 · 실행 전에 예측하기<small>8분 · 짝</small></h2>
 <p>코드를 읽고 <b>실행 전에</b> 두 줄의 출력을 <a href="student_workbook_part2.html#A11">활동지 A11</a>에 예측해 적는다. 그다음 실행해 비교한다. 같은 호출을 줄을 나누어 두 번 한다.</p>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A11-1">class Node:
-    def __init__(self, val, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A11-1">class Node:  # 트리의 노드를 만드는 설계도(클래스)이다
+    def __init__(self, val, left=None, right=None):  # 노드를 만들 때 자동 실행된다
+        self.val = val  # 노드에 저장할 값
+        self.left = left  # 왼쪽 자식(없으면 None)
+        self.right = right  # 오른쪽 자식(없으면 None)
 
 def insert(root, val):          # BST 삽입 (A7)
-    if root is None:
-        return Node(val)
+    if root is None:  # 빈 자리(None)인가?
+        return Node(val)  # 그 자리에 새 노드를 만든다
     if val &lt; root.val:
         root.left = insert(root.left, val)
     else:
         root.right = insert(root.right, val)
-    return root
+    return root  # 갱신한 트리의 루트를 돌려준다
 
 def build(values):              # 값 목록을 차례로 삽입해 BST를 만든다
-    root = None
-    for v in values:
-        root = insert(root, v)
-    return root</code></pre></div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="A11-2">def collect_inorder(node, visited=[]):
-    if node is None:
-        return visited
-    collect_inorder(node.left, visited)
-    visited.append(node.val)
-    collect_inorder(node.right, visited)
-    return visited
+    root = None  # 빈 트리에서 시작한다
+    for v in values:  # 값을 앞에서부터 하나씩 꺼낸다
+        root = insert(root, v)  # v를 삽입하고 루트를 갱신한다
+    return root  # 완성된 트리의 루트를 돌려준다</code></pre></div>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="A11-2">def collect_inorder(node, visited=[]):  # 트리의 값을 모아 리스트로 돌려준다
+    if node is None:  # 빈 자리이면 멈춘다
+        return visited  # 모은 리스트를 돌려준다
+    collect_inorder(node.left, visited)  # 왼쪽 부분 트리를 호출한다
+    visited.append(node.val)  # 현재 노드의 값을 리스트에 추가한다
+    collect_inorder(node.right, visited)  # 오른쪽 부분 트리를 호출한다
+    return visited  # 모은 리스트를 돌려준다
 
-t4 = build([4, 2, 6, 1, 3, 5, 7])
+t4 = build([4, 2, 6, 1, 3, 5, 7])  # 이 순서로 삽입해 만든 트리이다
 
-print(collect_inorder(t4))
-print(collect_inorder(t4))</code></pre></div>
+print(collect_inorder(t4))  # t4에 인자 하나로 호출해 출력한다
+print(collect_inorder(t4))  # 같은 호출을 한 번 더 출력한다</code></pre></div>
 
 </section>
 
 <section id="A12" class="sheet">
 <h2>A12 · 관찰하고 수정하기<small>10분 · 짝</small></h2>
 <p>아래 함수를 수정해 테스트를 통과시킨다. 수정 전에 관찰 코드로 <code class="i">__defaults__</code>를 먼저 출력해 본다. 수정 후 한 줄 원인 설명을 <a href="student_workbook_part2.html#A12">활동지 A12</a>에 적는다. 대안(결과 리스트를 인자로 받기, 내부 헬퍼 함수)과 비교하는 것도 활동지에서 한다.</p>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A12-1">class Node:
-    def __init__(self, val, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A12-1">class Node:  # 트리의 노드를 만드는 설계도(클래스)이다
+    def __init__(self, val, left=None, right=None):  # 노드를 만들 때 자동 실행된다
+        self.val = val  # 노드에 저장할 값
+        self.left = left  # 왼쪽 자식(없으면 None)
+        self.right = right  # 오른쪽 자식(없으면 None)
 
 def insert(root, val):          # BST 삽입 (A7)
-    if root is None:
-        return Node(val)
+    if root is None:  # 빈 자리(None)인가?
+        return Node(val)  # 그 자리에 새 노드를 만든다
     if val &lt; root.val:
         root.left = insert(root.left, val)
     else:
         root.right = insert(root.right, val)
-    return root
+    return root  # 갱신한 트리의 루트를 돌려준다
 
 def build(values):              # 값 목록을 차례로 삽입해 BST를 만든다
-    root = None
-    for v in values:
-        root = insert(root, v)
-    return root</code></pre></div>
+    root = None  # 빈 트리에서 시작한다
+    for v in values:  # 값을 앞에서부터 하나씩 꺼낸다
+        root = insert(root, v)  # v를 삽입하고 루트를 갱신한다
+    return root  # 완성된 트리의 루트를 돌려준다</code></pre></div>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A12-2">def collect_inorder(node, visited=[]):
     # TODO(A12): 같은 트리로 몇 번을 호출해도 같은 결과가 나오도록 수정하시오.
     #            호출은 collect_inorder(t)처럼 인자 하나로 할 수 있어야 한다.
-    if node is None:
-        return visited
-    collect_inorder(node.left, visited)
-    visited.append(node.val)
-    collect_inorder(node.right, visited)
-    return visited
+    if node is None:  # 빈 자리이면 멈춘다
+        return visited  # 모은 리스트를 돌려준다
+    collect_inorder(node.left, visited)  # 왼쪽 부분 트리를 호출한다
+    visited.append(node.val)  # 현재 노드의 값을 리스트에 추가한다
+    collect_inorder(node.right, visited)  # 오른쪽 부분 트리를 호출한다
+    return visited  # 모은 리스트를 돌려준다
 
-t4 = build([4, 2, 6, 1, 3, 5, 7])</code></pre></div>
+t4 = build([4, 2, 6, 1, 3, 5, 7])  # 이 순서로 삽입해 만든 트리이다</code></pre></div>
 <div class="mycode"><label>내 코드 · A12 (수정한 collect_inorder)<textarea class="in code" rows="12" data-type="code" data-key="A12.mycode" data-label="A12 (수정한 collect_inorder) 내 코드" spellcheck="false"></textarea></label><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 스켈레톤을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A12-3">print(collect_inorder.__defaults__)
-collect_inorder(t4)
-print(collect_inorder.__defaults__)</code></pre></div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A12-4">t6 = build([40, 20, 60, 10, 30, 50, 70])
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A12-3">print(collect_inorder.__defaults__)  # __defaults__: 기본 인자 값
+collect_inorder(t4)  # 함수를 한 번 호출한다
+print(collect_inorder.__defaults__)  # 호출 뒤의 기본 인자 값을 출력한다</code></pre></div>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A12-4"># 새 트리 t6으로 확인한다. want6는 기대하는 중위 순회 결과이다.
+t6 = build([40, 20, 60, 10, 30, 50, 70])
 want6 = [10, 20, 30, 40, 50, 60, 70]
 
+# 같은 트리를 두 번 호출해 결과를 따로 저장한다.
 first = collect_inorder(t6)
 second = collect_inorder(t6)
+# assert 조건, 메시지: 조건이 거짓이면 멈추고 메시지를 보여 준다.
+# 실패하면 첫 호출 결과가 기대와 다르다는 뜻이다.
 assert first == want6, "첫 호출 결과가 다르다: %s" % first
+# 실패하면 두 번째 호출 결과가 기대와 다르다는 뜻이다.
 assert second == want6, "두 번째 호출 결과가 다르다: %s" % second
+# 다른 트리 t4에서도 올바른 결과가 나와야 한다.
+# 실패하면 t4의 결과가 기대와 다르다는 뜻이다.
 assert collect_inorder(t4) == [1, 2, 3, 4, 5, 6, 7], "다른 트리 호출 결과가 오염되었다"
+# any(...)는 하나라도 참이면 참이고, or ()는 None이면 빈 튜플로
+# 바꾼다. 실패하면 기본 인자에 리스트가 남아 있다는 뜻이다.
 assert not any(isinstance(d, list) for d in (collect_inorder.__defaults__ or ())), "기본 인자에 리스트가 남아 있다"
 print("A12 테스트 통과")</code></pre></div>
 
@@ -226,39 +235,43 @@ print("A12 테스트 통과")</code></pre></div>
 <h2>A14 · 마무리 점검과 새 트리(T6) 전이<small>12분 · 개인</small></h2>
 <p>이 활동은 두 부분이다. (가) <b>실습 과제 마무리 점검</b>: 과제의 범위는 <code class="i">preorder</code>, <code class="i">inorder</code>, <code class="i">postorder</code> 세 함수이다. 코드를 바꾸지 않고 T6에서 기대 결과와 일치하는지 확인한다(아래 T6 기대 결과로 비교: 전위 <code class="i">40 20 10 30 60 50 70</code>, 중위 <code class="i">10 20 30 40 50 60 70</code>, 후위 <code class="i">10 30 20 50 70 60 40</code>). (나) <b>전이 연습</b>: 아래 <code class="i">inorder_list</code>와 <code class="i">height</code>는 과제 제출물이 아니라 보조 연습이며 채점 대상이 아니다.</p>
 <p>(가) 점검용 테스트이다. 1부에서 쓴 <code class="i">Node</code>, <code class="i">insert</code>, <code class="i">build</code>와 과제의 세 함수가 있는 파일 맨 아래에 붙여 실행한다. 함수 코드는 바꾸지 않는다.</p>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14G-1">t3 = build([8, 3, 10, 1, 6, 14, 4, 7, 13])
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14G-1"># 1부의 세 순회 함수를 T3, T6에 적용해 점검한다.
+# 함수 코드는 바꾸지 않는다.
+t3 = build([8, 3, 10, 1, 6, 14, 4, 7, 13])
 t6 = build([40, 20, 60, 10, 30, 50, 70])
 
+# (이름, 트리, 전위 기대, 중위 기대, 후위 기대)를 묶은 목록이다.
 CHECK = [
     ("T3", t3, [8, 3, 1, 6, 4, 7, 10, 14, 13], [1, 3, 4, 6, 7, 8, 10, 13, 14], [1, 4, 7, 6, 3, 13, 14, 10, 8]),
     ("T6", t6, [40, 20, 10, 30, 60, 50, 70], [10, 20, 30, 40, 50, 60, 70], [10, 30, 20, 50, 70, 60, 40]),
 ]
+# 한 묶음씩 꺼내 세 순회를 모두 비교한다.
 for name, tree, pre, ino, post in CHECK:
-    assert preorder(tree, []) == pre, "%s 전위 불일치" % name
-    assert inorder(tree, []) == ino, "%s 중위 불일치" % name
-    assert postorder(tree, []) == post, "%s 후위 불일치" % name
+    assert preorder(tree, []) == pre, "%s 전위 불일치" % name  # 다르면 전위가 틀린 것
+    assert inorder(tree, []) == ino, "%s 중위 불일치" % name  # 다르면 중위가 틀린 것
+    assert postorder(tree, []) == post, "%s 후위 불일치" % name  # 다르면 후위가 틀린 것
 print("A14 (가) 점검 통과")</code></pre></div>
 <p>두 함수를 작성한다. 결과 누적을 안전하게 처리하고(호출 사이에 결과가 섞이지 않게), 높이를 재귀로 구한다. 끝내지 못한 부분은 주간 과제로 이어진다.</p>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A14-1">class Node:
-    def __init__(self, val, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A14-1">class Node:  # 트리의 노드를 만드는 설계도(클래스)이다
+    def __init__(self, val, left=None, right=None):  # 노드를 만들 때 자동 실행된다
+        self.val = val  # 노드에 저장할 값
+        self.left = left  # 왼쪽 자식(없으면 None)
+        self.right = right  # 오른쪽 자식(없으면 None)
 
 def insert(root, val):          # BST 삽입 (A7)
-    if root is None:
-        return Node(val)
+    if root is None:  # 빈 자리(None)인가?
+        return Node(val)  # 그 자리에 새 노드를 만든다
     if val &lt; root.val:
         root.left = insert(root.left, val)
     else:
         root.right = insert(root.right, val)
-    return root
+    return root  # 갱신한 트리의 루트를 돌려준다
 
 def build(values):              # 값 목록을 차례로 삽입해 BST를 만든다
-    root = None
-    for v in values:
-        root = insert(root, v)
-    return root</code></pre></div>
+    root = None  # 빈 트리에서 시작한다
+    for v in values:  # 값을 앞에서부터 하나씩 꺼낸다
+        root = insert(root, v)  # v를 삽입하고 루트를 갱신한다
+    return root  # 완성된 트리의 루트를 돌려준다</code></pre></div>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A14-2">def inorder_list(node, out=None):
     # TODO(A14): 같은 트리로 여러 번 호출해도, 다른 트리를 호출해도 결과가 섞이지 않는 중위 순회를 작성한다.
     raise NotImplementedError("inorder_list를 작성하시오")
@@ -267,12 +280,15 @@ def height(node):
     # TODO(A14): 노드 수 기준 높이(노드 1개 = 1, 빈 트리 = 0)를 재귀로 구한다.
     raise NotImplementedError("height를 작성하시오")</code></pre></div>
 <div class="mycode"><label>내 코드 · A14 (inorder_list, height 작성)<textarea class="in code" rows="14" data-type="code" data-key="A14.mycode" data-label="A14 (inorder_list, height 작성) 내 코드" spellcheck="false"></textarea></label><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 스켈레톤을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-3">t1 = Node("A", Node("B", Node("D"), Node("E")), Node("C", None, Node("F")))
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-3"># 트리 5개를 만든다. t1은 Node를 직접 연결하고 나머지는 build로
+# 만든다.
+t1 = Node("A", Node("B", Node("D"), Node("E")), Node("C", None, Node("F")))
 t3 = build([8, 3, 10, 1, 6, 14, 4, 7, 13])
 t4 = build([4, 2, 6, 1, 3, 5, 7])
 t5 = build([1, 2, 3, 4, 5, 6, 7])
 t6 = build([40, 20, 60, 10, 30, 50, 70])
 
+# (트리, 중위 순회 기대 결과, 높이 기대값)를 묶은 목록이다.
 EXPECT = [
     (t1, list("DBEACF"), 3),
     (t3, [1, 3, 4, 6, 7, 8, 10, 13, 14], 4),
@@ -282,9 +298,17 @@ EXPECT = [
 ]
 for _ in range(2):                         # 두 바퀴 돌려 호출 간 누적이 없는지 본다
     for tree, want, h in EXPECT:
+        # 중위 순회 결과가 기대와 같은지 확인한다. 실패하면 메시지에 실제 결과가
+        # 나온다.
         assert inorder_list(tree) == want, "inorder_list 결과 불일치: %s" % inorder_list(tree)
+        # 높이가 기대와 같은지 확인한다. 실패하면 height가 다른 값을 돌려준
+        # 것이다.
         assert height(tree) == h, "height 불일치"
+# 빈 트리(None)에서는 []와 0이 나와야 한다.
+# and는 두 조건이 모두 참이어야 통과한다.
 assert inorder_list(None) == [] and height(None) == 0
+# any(...)는 하나라도 참이면 참이다. 실패하면 기본 인자에 리스트가 남아
+# 있다는 뜻이다.
 assert not any(isinstance(d, list) for d in (inorder_list.__defaults__ or ())), "기본 인자에 리스트가 남아 있다"
 print("A14 테스트 통과")</code></pre></div>
 </section>

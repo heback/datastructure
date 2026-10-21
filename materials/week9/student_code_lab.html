@@ -139,40 +139,48 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A6" class="sheet">
 <h2>A6 · parent와 sift_up 완성하기<small>14분 · 짝</small></h2>
 
-<p>A3에서 찾은 칸 번호 규칙을 써서 <code class="i">parent</code>를 만들고, 값을 맨 끝에 붙인 뒤 위로 올리는 <code class="i">sift_up</code>을 완성한다. 완성하면 H1에 2와 11을 넣은 결과가 <code class="i">heapq.heappush</code>의 결과와 같아야 한다. 활동지 <a href="student_workbook.html#A6">A6</a>의 손 추적과 비교한다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A6-1">import heapq
+<p>A3에서 찾은 칸 번호 규칙을 써서 <code class="i">parent</code>를 만들고, 값을 맨 끝에 붙인 뒤 위로 올리는 <code class="i">sift_up</code>을 완성한다. 완성하면 H1에 2와 11을 넣은 결과가 <code class="i">heapq.heappush</code>의 결과와 같아야 한다. 활동지 <a href="student_workbook.html#A6">A6</a>의 손 추적과 비교한다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A6-1">import heapq  # 표준 힙 도구 모듈을 불러온다
 
-H1 = [3, 5, 8, 9, 7, 10, 12]   # A3·A4에서 쓴 힙(최소 힙)</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A6-2">def parent(i):
+# 아래 실습에서 비교할 때 쓰는 리스트이다.
+H1 = [3, 5, 8, 9, 7, 10, 12]   # A3·A4에서 쓴 힙(최소 힙)</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A6-2"># 칸 번호 i를 받아 부모 칸 번호를 돌려주는 함수이다.
+def parent(i):
     # TODO(A6): A3에서 찾은 규칙으로, i번 칸의 부모 칸 번호를 돌려준다.
-    raise NotImplementedError("parent를 작성하시오")
+    raise NotImplementedError("parent를 작성하시오")  # 아직 안 쓴 표시. 작성하면 지운다
 
+# h는 힙으로 쓰는 리스트, i는 올릴 값의 칸 번호이다.
 def sift_up(h, i):
     """h[i]를 위로 올려 부모 &lt;= 자식 관계를 회복한다. 자리를 바꾼 횟수를 돌려준다."""
-    swaps = 0
-    while i &gt; 0:
-        p = parent(i)
+    swaps = 0  # 자리를 바꾼 횟수를 세는 변수이다
+    while i &gt; 0:  # i가 0보다 큰 동안 되풀이한다
+        p = parent(i)  # 위에서 만든 parent로 부모 칸을 구한다
         # TODO(A6): 부모 h[p]와 h[i]를 비교해, 올려야 하면 자리를 바꾸고
         #           swaps를 1 늘린 뒤 i를 p로 옮긴다. 올릴 필요가 없으면 반복을 멈춘다.
         raise NotImplementedError("비교와 자리바꿈을 작성하시오")
-    return swaps</code></pre></div><div class="mycode"><label>내 코드 · A6 (parent, sift_up 작성)<textarea class="in code" rows="16" data-type="code" data-key="A6.mycode" data-label="A6 (parent, sift_up 작성) 내 코드" spellcheck="false"></textarea></label><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>자체 테스트 (H1에 값 2, 11 삽입)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A6-3">def push_mine(h, x):
+    return swaps  # 반복이 끝나면 센 횟수를 돌려준다</code></pre></div><div class="mycode"><label>내 코드 · A6 (parent, sift_up 작성)<textarea class="in code" rows="16" data-type="code" data-key="A6.mycode" data-label="A6 (parent, sift_up 작성) 내 코드" spellcheck="false"></textarea></label><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>자체 테스트 (H1에 값 2, 11 삽입)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A6-3"># 값 x를 힙 h에 넣는 함수이다. 위에서 만든 sift_up을 쓴다.
+def push_mine(h, x):
     h.append(x)                      # 맨 끝에 붙이고
     return sift_up(h, len(h) - 1)    # 부모와 비교하며 올린다
 
-failures = []
-for x in (2, 11):
-    mine = list(H1)
-    ref = list(H1)
-    try:
+failures = []  # 실패한 삽입 값을 모아 두는 리스트
+for x in (2, 11):  # 넣어 볼 값을 하나씩 x로 꺼낸다
+    mine = list(H1)  # H1을 복사해 내 코드용 힙을 만든다
+    ref = list(H1)  # 같은 복사본 하나 더(heapq 결과와 비교용)
+    try:  # 오류가 나도 멈추지 않고 except로 간다
         swaps = push_mine(mine, x)
-    except Exception as e:
+    except Exception as e:  # 내 함수가 오류를 내면 여기서 받는다
         print("FAIL 값", x, type(e).__name__)
         failures.append(x)
         continue
-    heapq.heappush(ref, x)
-    ok = (mine == ref)
+    heapq.heappush(ref, x)  # 표준 도구로 같은 값을 넣은 기준 결과
+    ok = (mine == ref)  # 내 결과와 기준 결과가 같은지(True/False)
+    # 같으면 PASS, 다르면 FAIL을 출력한다.
     print("PASS" if ok else "FAIL", "값", x, "내 결과", mine, "자리바꿈", swaps)
     if not ok:
         failures.append(x)
 
+# assert는 조건이 거짓이면 오류를 내고 멈춘다.
+# 여기서는 failures가 비어 있어야 통과이다.
+# 오류가 나면 실패한 값이 있다는 뜻이다.
 assert not failures, "실패한 삽입 값: %s" % failures
 print("A6 테스트 통과")</code></pre></div><div class="note">옆 학생과 자리바꿈 횟수를 비교하고, 손 추적과 다른 부분이 있으면 어느 줄에서 갈렸는지 <a href="student_workbook.html#A6">활동지 A6</a>에 적는다.</div>
 </section>
@@ -182,20 +190,25 @@ print("A6 테스트 통과")</code></pre></div><div class="note">옆 학생과 �
 <p>활동지 A8에서 두 방법을 <b>손으로 모두 한 뒤</b> 확인용 코드를 실행해 결과를 비교한다. 이 코드는 확인용이며 수정하지 않는다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A8-1"># A8 확인용(손으로 두 방법을 모두 해 본 뒤 실행한다)
 import heapq
 
+# 같은 값들로 힙을 두 가지 방법으로 만들어 본다.
 H0 = [9, 4, 7, 1, 8, 2, 6, 3, 5]
 
+# 방법 1: 빈 리스트에 값을 하나씩 heappush로 넣는다.
 by_push = []
 for x in H0:
     heapq.heappush(by_push, x)
 
+# 방법 2: 리스트를 복사해 heapify를 한 번 적용한다.
 by_heapify = list(H0)
-heapq.heapify(by_heapify)
+heapq.heapify(by_heapify)  # 리스트를 제자리에서 힙으로 바꾼다
 
+# 두 결과를 나란히 출력해 비교한다.
 print("하나씩 push :", by_push)
 print("heapify     :", by_heapify)</code></pre></div><h3>도전(선택): 마지막 부모부터 거꾸로 내려 보내는 heapify</h3><p>시간이 남는 모둠이나 개인 과제로 한다. A3의 규칙으로 <code class="i">left_child</code>, <code class="i">right_child</code>를 만들고 <code class="i">sift_down</code>과 <code class="i">my_heapify</code>를 완성한다. 테스트는 <code class="i">heapq.heapify</code>의 결과와 비교한다. A6의 공통 코드(import heapq)가 먼저 있어야 한다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A8-2"># A8 도전(선택): 마지막 부모부터 거꾸로 sift-down 하는 heapify를 직접 만든다.
+# 칸 번호 i를 받아 왼쪽 자식의 칸 번호를 돌려주는 함수이다.
 def left_child(i):
     # TODO(A8 도전): A3에서 찾은 규칙으로 i번 칸의 왼쪽 자식 칸 번호
-    raise NotImplementedError("left_child를 작성하시오")
+    raise NotImplementedError("left_child를 작성하시오")  # 아직 안 쓴 표시. 작성하면 지운다
 
 def right_child(i):
     # TODO(A8 도전): i번 칸의 오른쪽 자식 칸 번호
@@ -203,59 +216,61 @@ def right_child(i):
 
 def sift_down(h, i):
     """h[i]를 아래로 내려 부모 &lt;= 자식 관계를 회복한다."""
-    n = len(h)
-    while True:
+    n = len(h)  # 힙에 든 값의 개수
+    while True:  # 조건 없이 되풀이하는 반복문이다
         # TODO(A8 도전): i, 왼쪽 자식, 오른쪽 자식 중 값이 가장 작은 칸을 찾아
         #                그 칸이 i가 아니면 자리를 바꾸고 i를 옮긴다. 아니면 멈춘다.
         raise NotImplementedError("sift_down을 작성하시오")
 
 def my_heapify(h):
     # TODO(A8 도전): 마지막 부모 칸부터 0번 칸까지 거꾸로 sift_down을 적용한다.
-    raise NotImplementedError("my_heapify를 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A8 도전 (left_child, right_child, sift_down, my_heapify)<textarea class="in code" rows="18" data-type="code" data-key="A8.mycode" data-label="A8 도전 (left_child, right_child, sift_down, my_heapify) 내 코드" spellcheck="false"></textarea></label><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-3">CASES = [
+    raise NotImplementedError("my_heapify를 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A8 도전 (left_child, right_child, sift_down, my_heapify)<textarea class="in code" rows="18" data-type="code" data-key="A8.mycode" data-label="A8 도전 (left_child, right_child, sift_down, my_heapify) 내 코드" spellcheck="false"></textarea></label><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-3"># 시험할 입력 리스트들이다(크기가 작은 경우도 있다).
+CASES = [
     [9, 4, 7, 1, 8, 2, 6, 3, 5],
     [5, 3, 1],
     [8, 6, 7, 5, 3, 0, 9],
     [2, 1],
     [4],
 ]
-failures = []
-for case in CASES:
-    mine = list(case)
-    ref = list(case)
-    heapq.heapify(ref)
+failures = []  # 실패한 입력을 모아 두는 리스트
+for case in CASES:  # 입력을 하나씩 꺼내 시험한다
+    mine = list(case)  # 복사본 1: 내 함수에 넣을 리스트
+    ref = list(case)  # 복사본 2: 기준 결과용 리스트
+    heapq.heapify(ref)  # 기준 결과: 표준 도구로 만든 힙
     try:
-        my_heapify(mine)
-    except Exception as e:
+        my_heapify(mine)  # 내 함수가 mine을 제자리에서 바꾼다
+    except Exception as e:  # 내 함수가 오류를 내면 여기서 받는다
         print("FAIL", case, type(e).__name__)
         failures.append(case)
         continue
-    ok = (mine == ref)
+    ok = (mine == ref)  # 내 결과와 기준 결과가 같은지(True/False)
     print("PASS" if ok else "FAIL", case, "-&gt;", mine)
     if not ok:
         failures.append(case)
+# 실패한 입력이 하나라도 있으면 오류로 멈춘다.
 assert not failures, "실패 %d건" % len(failures)
 print("A8 도전 테스트 통과")</code></pre></div>
 </section>
 <section id="A9" class="sheet">
 <h2>A9 · heapq 관찰과 B3<small>12분 · 짝</small></h2>
 
-<p><a href="student_workbook.html#A9">활동지 A9</a>의 예측을 먼저 쓴 뒤 아래 코드를 실행해 실제 값을 쓴다. 코드는 <code class="i">heappush</code>, <code class="i">heappop</code>, <code class="i">heapify</code>, <code class="i">h[0]</code>만 쓴다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A9-1">import heapq
+<p><a href="student_workbook.html#A9">활동지 A9</a>의 예측을 먼저 쓴 뒤 아래 코드를 실행해 실제 값을 쓴다. 코드는 <code class="i">heappush</code>, <code class="i">heappop</code>, <code class="i">heapify</code>, <code class="i">h[0]</code>만 쓴다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A9-1">import heapq  # 표준 힙 도구 모듈을 불러온다
 
-h = [9, 4, 7, 1, 8, 2, 6, 3, 5]
-heapq.heapify(h)
+h = [9, 4, 7, 1, 8, 2, 6, 3, 5]  # 처음 리스트
+heapq.heapify(h)  # h를 제자리에서 힙으로 만든다
 print(h)
-print(h[0])
-print(h[-1])
-print(h == sorted(h))
+print(h[0])  # h[0]은 0번 칸의 값이다
+print(h[-1])  # h[-1]은 맨 뒤 칸의 값이다
+print(h == sorted(h))  # sorted(h)는 정렬한 새 리스트, ==는 같은지 비교
 
-out = []
-while h:
-    out.append(heapq.heappop(h))
-print(out)</code></pre></div><h3>오개념 코드 B3</h3><p>아래 코드를 실행하고 <code class="i">y</code>가 왜 그런 값이 되는지 한 줄로 설명해 본다(활동지 A9).</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="B3-1">import heapq
+out = []  # 꺼낸 값을 차례로 담을 리스트
+while h:  # 리스트가 비어 있지 않은 동안 되풀이한다
+    out.append(heapq.heappop(h))  # heappop이 꺼낸 값을 out 뒤에 붙인다
+print(out)  # 꺼낸 순서를 출력한다</code></pre></div><h3>오개념 코드 B3</h3><p>아래 코드를 실행하고 <code class="i">y</code>가 왜 그런 값이 되는지 한 줄로 설명해 본다(활동지 A9).</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="B3-1">import heapq
 
-x = [5, 3, 1]
+x = [5, 3, 1]  # 정수 3개가 든 리스트
 y = heapq.heapify(x)
-print(y, x)</code></pre></div><p class="note">질문: 최댓값이 필요하다면 이 도구로 어떻게 해야 할까? 지금은 <b>가설만</b> 활동지 A9에 쓰고, 3차시에 확인한다.</p>
+print(y, x)  # y와 x의 값을 함께 출력한다</code></pre></div><p class="note">질문: 최댓값이 필요하다면 이 도구로 어떻게 해야 할까? 지금은 <b>가설만</b> 활동지 A9에 쓰고, 3차시에 확인한다.</p>
 </section>
 <section id="assign" class="sheet">
 <h2>실습 과제 안내 · heapq로 K번째 최댓값 추출<small>A12 착수 · A14 마무리 · 잔여는 주간 과제</small></h2>

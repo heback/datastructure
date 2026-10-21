@@ -139,20 +139,22 @@ print("index      :", UNS.index(23))</code></pre></div>
 <h2>T2 · 시간을 재 본다<small>A10 필수 · 상대 비교만</small></h2>
 <p>시간은 컴퓨터마다 다르다. 두 시간의 <b>크기 차이(자릿수)</b>만 활동지에 쓴다. 실행에 몇 초 걸릴 수 있다.</p>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-2"># T2 (시작 상태: big은 정렬된 100만 개. 목표는 마지막 값)
+# time: 걸린 시간을 재는 모듈이다
 import time
 from bisect import bisect_left
-big = list(range(0, 2 * 10 ** 6, 2))
-target = big[-1]
+big = list(range(0, 2 * 10 ** 6, 2))  # 0부터 2씩 커지는 정렬된 수 100만 개
+target = big[-1]  # [-1]은 리스트의 마지막 원소이다
 
+# 시작 시각을 초 단위로 기록한다
 t0 = time.perf_counter()
-for _ in range(20):
-    big.index(target)
-t_index = (time.perf_counter() - t0) / 20
+for _ in range(20):  # _는 값을 쓰지 않는 반복 변수이다
+    big.index(target)  # 리스트의 index 메서드로 target의 자리를 찾는다
+t_index = (time.perf_counter() - t0) / 20  # 걸린 시간을 반복 횟수로 나눠 한 번의 시간을 구한다
 
 t0 = time.perf_counter()
 for _ in range(2000):
     bisect_left(big, target)
-t_bis = (time.perf_counter() - t0) / 2000
+t_bis = (time.perf_counter() - t0) / 2000  # 한 번의 시간을 구하는 방법은 위와 같다
 
 print("index 한 번(초):", t_index)
 print("bisect_left 한 번(초):", t_bis)</code></pre></div>
@@ -184,16 +186,19 @@ for x in (12, 0):
 <h2>T4 · 선택 과제<small>선택 · 3.10 이상 필요(key= 인자)</small></h2>
 <p>(가)는 파이썬 3.10 이상에서만 실행된다. (나)는 시간이 조금 걸릴 수 있다.</p>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-4"># T4 선택 (가) 점수 오름차순 리스트에서 key= 인자 (파이썬 3.10 이상)
+# insort: 정렬된 상태를 유지하며 값을 끼워 넣는 함수이다
 from bisect import bisect_left, bisect_right, insort
-students = [("D", 55), ("A", 70), ("C", 70), ("B", 90)]
+students = [("D", 55), ("A", 70), ("C", 70), ("B", 90)]  # (이름, 점수) 쌍(튜플)의 리스트
+# key=: 각 원소의 어느 부분으로 비교할지 정한다
+# lambda s: s[1]은 s의 두 번째 값(점수)을 꺼내는 이름 없는 함수이다
 print(bisect_left(students, 70, key=lambda s: s[1]), bisect_right(students, 70, key=lambda s: s[1]))
 
 # T4 선택 (나) insort 반복 (시작 상태: 새로 만든 정렬 리스트 20만 개)
 import time
-lst = list(range(0, 400000, 2))
+lst = list(range(0, 400000, 2))  # 짝수 20만 개의 정렬된 리스트
 t0 = time.perf_counter()
-for v in range(1, 4001, 2):
-    insort(lst, v)
+for v in range(1, 4001, 2):  # 홀수 2000개를 차례로 넣는다
+    insort(lst, v)  # 정렬을 유지하며 v를 끼워 넣는다
 print("insort 2000번(초):", time.perf_counter() - t0)</code></pre></div>
 </section>
 </div>

@@ -139,54 +139,64 @@ table.fill td.in-cell{padding:3px;height:auto}
 </section>
 <section id="A6" class="sheet">
 <h2>A6 · 그래프에서 너비 우선·깊이 우선 코드 만들기<small>13분 · 개인(옆 학생과 대조)</small></h2>
-<p>A2·A3에서 손으로 한 탐색을 코드로 옮긴다. 10주차의 <code class="i">build_graph</code>와 <code class="i">neighbors</code>는 제공한다. <code class="i">bfs_order</code>는 큐, <code class="i">dfs_order</code>는 재귀로 완성한다. 방문 기록(visited)을 어디서 표시할지는 직접 정한다. 완성한 뒤 G1에서 실행해 A2·A3의 손 추적과 대조하고, 시작 노드를 F로 바꾸면 어떻게 될지 <b>예측한 뒤</b> 실행해 활동지 <a href="student_workbook_part2.html#A6">2부 A6</a>에 쓴다.</p><h3>제공 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A6-1">from collections import defaultdict, deque
+<p>A2·A3에서 손으로 한 탐색을 코드로 옮긴다. 10주차의 <code class="i">build_graph</code>와 <code class="i">neighbors</code>는 제공한다. <code class="i">bfs_order</code>는 큐, <code class="i">dfs_order</code>는 재귀로 완성한다. 방문 기록(visited)을 어디서 표시할지는 직접 정한다. 완성한 뒤 G1에서 실행해 A2·A3의 손 추적과 대조하고, 시작 노드를 F로 바꾸면 어떻게 될지 <b>예측한 뒤</b> 실행해 활동지 <a href="student_workbook_part2.html#A6">2부 A6</a>에 쓴다.</p><h3>제공 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A6-1"># defaultdict: 없는 키를 처음 쓰면 빈 리스트를 만들어 주는 dict
+# deque: 양쪽 끝에서 넣고 꺼내기 쉬운 큐
+from collections import defaultdict, deque
 
 # 10주차 함수(제공). 11주차는 이 함수 위에서 진행한다.
+# 간선 목록을 {노드: [이웃 목록]} 형태의 인접 리스트로 바꾼다.
 def build_graph(edges, directed=False):
-    g = defaultdict(list)
-    for u, v in edges:
-        g[u].append(v)
-        if not directed:
+    g = defaultdict(list)  # 키마다 빈 리스트로 시작한다
+    for u, v in edges:  # 간선 (u, v)를 하나씩 꺼낸다
+        g[u].append(v)  # u의 이웃 목록 끝에 v를 붙인다
+        if not directed:  # 무방향이면 반대쪽도 기록한다
             g[v].append(u)
     return g
 
+# yield: 값을 하나 내주고 멈췄다가 이어 가는 함수(제네레이터)
 def neighbors(g, u):              # 없는 노드를 물어도 g가 변하지 않는 제네레이터
-    if u in g:
-        yield from g[u]
+    if u in g:  # g에 있는 노드만 꺼낸다
+        yield from g[u]  # 이웃을 차례로 하나씩 내준다
 
 # A2에서 손으로 탐색한 친구 관계 G1(무방향). 이웃 순서는 목록 순서이다.
 G1_EDGES = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "D"), ("D", "E")]
-g = build_graph(G1_EDGES)         # 키 5개. 노드 F는 g에 없다(고립).</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A6-2">def bfs_order(g, start):                    # 시작 상태: 호출마다 새 order, 큐, visited
-    order = []
+g = build_graph(G1_EDGES)         # 키 5개. 노드 F는 g에 없다(고립).</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A6-2"># 방문한 순서를 리스트로 돌려주는 함수
+def bfs_order(g, start):                    # 시작 상태: 호출마다 새 order, 큐, visited
+    order = []  # 방문 순서를 담을 리스트
     q = ____1____                           # ① 큐를 만들고 start를 넣는다
     ____2____                               # ② visited를 준비한다
-    while q:
+    while q:  # 큐가 비지 않은 동안 반복한다
         u = ____3____                       # ③ 큐에서 하나 꺼낸다
-        order.append(u)
-        for v in neighbors(g, u):
+        order.append(u)  # 꺼낸 노드를 방문 순서에 기록한다
+        for v in neighbors(g, u):  # u의 이웃을 하나씩 본다
             if ____4____:                   # ④ 아직 안 본 노드만
                 ____5____                   # ⑤ (한두 줄) visited 기록과 큐에 넣기
-    return order
+    return order  # 방문 순서를 돌려준다
 
+# 재귀 함수: 함수 안에서 자기 자신을 다시 부르는 방식이다
 def dfs_order(g, u, visited, order):        # 시작 상태: 바깥에서 새 set(), []를 인자로 전달한다
     ____6____                               # ⑥ (두 줄) 방문 표시와 order 기록
-    for v in neighbors(g, u):
+    for v in neighbors(g, u):  # u의 이웃을 하나씩 본다
         if ____7____:                       # ⑦ 아직 안 본 노드만
             ____8____                       # ⑧ 재귀 호출
-    return order</code></pre></div><div class="mycode"><label>내 코드 · A6 (bfs_order, dfs_order 작성)</label><textarea class="in code" rows="22" data-type="code" data-key="A6.mycode" data-label="A6 (bfs_order, dfs_order 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>자체 점검 (G1 외 4개 그래프)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A6-3"># A6 점검: 기대 순서는 적혀 있지 않다. 간선 목록에서 계산한 거리와 탐색 규칙으로 내 결과를 검사한다.
+    return order  # 방문 순서를 돌려준다</code></pre></div><div class="mycode"><label>내 코드 · A6 (bfs_order, dfs_order 작성)</label><textarea class="in code" rows="22" data-type="code" data-key="A6.mycode" data-label="A6 (bfs_order, dfs_order 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>자체 점검 (G1 외 4개 그래프)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A6-3"># A6 점검: 기대 순서는 적혀 있지 않다. 간선 목록에서 계산한 거리와 탐색 규칙으로 내 결과를 검사한다.
+# 기준값: 탐색 규칙과 상관없이 s에서 각 노드까지의 최소 간선 수를 구한다.
 def true_dist(gr, s):
     # 탐색 순서와 무관하게 s에서 각 노드까지의 최소 간선 수를 구한다(줄여 갈 수 있으면 계속 줄인다)
-    d = {s: 0}
-    changed = True
+    d = {s: 0}  # 딕셔너리 {노드: 거리}. 시작은 0
+    changed = True  # 값이 바뀌면 True로 두고 다시 훑는다
     while changed:
         changed = False
-        for u in list(d):
+        for u in list(d):  # 훑는 중 d가 바뀌므로 복사해서 쓴다
             for v in gr.get(u, []):
+                # 아직 거리를 모르는 노드는 아주 큰 값(10 ** 9)으로 본다
                 if d[u] + 1 &lt; d.get(v, 10 ** 9):
                     d[v] = d[u] + 1
                     changed = True
     return d
 
+# 내 BFS 결과 order가 어긋난 곳을 문장 목록으로 돌려준다(빈 목록이면 통과).
+# 아래 if들은 어긋난 점을 하나씩 찾는다. 걸리면 그 문장이 FAIL로 출력된다.
 def bfs_problems(gr, s, order):
     d = true_dist(gr, s)
     if not isinstance(order, list):
@@ -199,15 +209,19 @@ def bfs_problems(gr, s, order):
         return ["방문한 노드의 집합이 시작 노드에서 닿을 수 있는 노드와 다르다"]
     if any(d[a] &gt; d[b] for a, b in zip(order, order[1:])):
         return ["방문 순서가 A2에서 손으로 따른 큐 규칙의 순서와 다르다"]
+    # 딕셔너리 컴프리헨션: 노드마다 방문 순번을 기록한다
     pos = {x: i for i, x in enumerate(order)}
     keys = []
     for v in order[1:]:
+        # v의 부모(한 단계 앞 노드 중 가장 먼저 방문된 노드)를 찾는다.
+        # key=lambda u: ...는 비교 기준을 정하는 이름 없는 함수이다.
         par = min((u for u in gr.get(v, []) if d.get(u) == d[v] - 1), key=lambda u: pos[u])
         keys.append((d[v], pos[par], gr[par].index(v)))
     if any(a &gt;= b for a, b in zip(keys, keys[1:])):
         return ["방문 순서가 A2에서 손으로 따른 큐 규칙의 순서와 다르다(이웃 목록 순서를 확인한다)"]
-    return []
+    return []  # 어긋난 점이 없다 = 통과
 
+# 내 DFS 결과를 검사한다. 되돌아가는 경로 path를 따로 따라가며 확인한다.
 def dfs_problems(gr, s, order):
     if not isinstance(order, list):
         return ["order가 리스트가 아니다(return을 확인한다)"]
@@ -215,7 +229,7 @@ def dfs_problems(gr, s, order):
         return ["같은 노드가 order에 두 번 이상 나온다"]
     if order[:1] != [s]:
         return ["order가 시작 노드로 시작하지 않는다"]
-    seen, path = {s}, [s]
+    seen, path = {s}, [s]  # 한 줄에서 두 변수를 함께 정한다
     for x in order[1:]:
         while path and all(v in seen for v in gr.get(path[-1], [])):
             path.pop()
@@ -232,15 +246,18 @@ def dfs_problems(gr, s, order):
         return ["방문한 노드의 집합이 시작 노드에서 닿을 수 있는 노드와 다르다"]
     return []
 
+# 함수를 감싸 호출 횟수를 센다. 한도를 넘으면 끝나지 않는 반복으로 보고 멈춘다.
+# (무한 반복으로 컴퓨터가 멈추는 일을 막는 장치이다)
 def limited(real, limit, what):
-    cnt = [0]
-    def wrapped(*a):
+    cnt = [0]  # 리스트에 담아야 안쪽 함수가 값을 바꿀 수 있다
+    def wrapped(*a):  # *a: 인자를 몇 개든 그대로 받는다
         cnt[0] += 1
         if cnt[0] &gt; limit:
             raise RuntimeError(what + "를 너무 많이 불렀다(끝나지 않는 반복이 의심된다)")
-        return real(*a)
+        return real(*a)  # 원래 함수를 그대로 실행한다
     return wrapped
 
+# 검사할 그래프 목록: (이름, 간선 목록, 시작 노드)
 CASES = [
     ("G1, 시작 A", G1_EDGES, "A"),
     ("G1, 시작 D", G1_EDGES, "D"),
@@ -248,11 +265,13 @@ CASES = [
     ("고리 모양", [(1, 2), (2, 3), (3, 4), (4, 1)], 1),
     ("갈래가 많은 그래프", [("x", "y"), ("x", "z"), ("y", "w"), ("z", "w"), ("w", "v"), ("v", "y")], "x"),
 ]
-fails = []
-real_neighbors = neighbors
+fails = []  # 실패 사유를 모아 둔다
+real_neighbors = neighbors  # 원래 neighbors를 보관해 둔다
 for name, edges, s in CASES:
     gr = build_graph(edges)
+    # 탐색 전 그래프를 복사해 두고, 끝난 뒤 변하지 않았는지 비교한다
     keep = {k: list(v) for k, v in gr.items()}
+    # neighbors에 호출 횟수 제한을 건다
     neighbors = limited(real_neighbors, 300, "neighbors")
     try:
         for fn, chk in (("bfs_order", bfs_problems), ("dfs_order", dfs_problems)):
@@ -266,12 +285,16 @@ for name, edges, s in CASES:
                 continue
             for p in chk(gr, s, out):
                 fails.append("%s %s: %s" % (name, fn, p))
+    # 오류가 나도 원래 neighbors로 되돌린다
     finally:
         neighbors = real_neighbors
     if {k: list(v) for k, v in gr.items()} != keep:
         fails.append("%s: 탐색하다가 그래프 g가 바뀌었다" % name)
+# 실패 사유를 모두 출력한다
 for f in fails:
     print("FAIL", f)
+# assert: 조건이 거짓이면 AssertionError로 멈춘다.
+# 실패가 하나라도 있으면 멈추므로, 위에 출력된 FAIL 줄을 읽고 고친다.
 assert not fails, "A6 점검 실패: %s" % fails
 print("A6 점검 통과")</code></pre></div><div class="note">호출은 <code class="i">bfs_order(g, "A")</code>, <code class="i">dfs_order(g, "A", set(), [])</code>이다. 시작 상태는 호출마다 새 order, 큐, visited이다.</div>
 </section>
@@ -279,77 +302,96 @@ print("A6 점검 통과")</code></pre></div><div class="note">호출은 <code cl
 <h2>A7 · 격자 미로 탐색하기<small>14분 · 짝</small></h2>
 <p>2차원 격자 미로 MAZE를 탐색한다. 칸 하나가 노드이고 상하좌우 이웃 칸이 간선이다. <code class="i">grid_neighbors</code>는 10주차 <code class="i">neighbors</code>처럼 이웃을 하나씩 내주는 제네레이터이고, <code class="i">shortest_path_len</code>은 S에서 E까지의 거리(걸음 수)를 돌려주며 닿을 수 없으면 -1이다. 완성한 뒤 MAZE의 S&rarr;E 거리를 구하고 닿을 수 없는 미로 한 개와 시작=도착인 경우도 실행해 활동지 <a href="student_workbook_part2.html#A7">2부 A7</a>에 기록한다.</p><h3>제공 코드(입력)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A7-0">from collections import deque
 
+# 이웃을 보는 방향 목록: (행 변화, 열 변화). 이 순서대로 이웃을 본다.
 DIRS = [(0, 1), (1, 0), (0, -1), (-1, 0)]   # 우 하 좌 상 (제공)
+# 격자는 문자열의 리스트이다. MAZE[행][열]로 한 칸을 읽는다.
 MAZE = ["S..#...",
         ".#.#.#.",
         ".#...#.",
         ".#####.",
         "......E"]                            # '#' 벽, '.' 길, 'S' 시작, 'E' 도착
-START, GOAL = (0, 0), (4, 6)                  # (행, 열)</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A7-2">def grid_neighbors(grid, r, c, passable):
-    for dr, dc in DIRS:
-        nr, nc = r + dr, c + dc
+START, GOAL = (0, 0), (4, 6)                  # (행, 열)</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A7-2"># 칸 (r, c)의 상하좌우 이웃 칸을 하나씩 내주는 제네레이터.
+# passable은 지나갈 수 있는 칸을 나타내는 문자들이다.
+def grid_neighbors(grid, r, c, passable):
+    for dr, dc in DIRS:  # 방향마다 (행 변화, 열 변화)를 꺼낸다
+        nr, nc = r + dr, c + dc  # 그 방향으로 한 칸 옮긴 위치
         if ____9____ and ____10____:        # ⑨ 격자 안인가(행·열 범위)  ⑩ 통과할 수 있는 칸인가
             ____11____                       # ⑪ 이웃 칸을 하나씩 내준다
 
+# 시작 칸에서 도착 칸까지 가는 최소 간선 수를 돌려준다.
 def shortest_path_len(grid, start, goal):
     dist = {start: 0}                       # dist가 visited 역할도 한다
-    q = deque([start])
+    q = deque([start])  # 시작 칸만 든 큐
     while q:
-        cell = q.popleft()
-        if cell == goal:
+        cell = q.popleft()  # 큐의 맨 앞 칸을 꺼낸다
+        if cell == goal:  # 도착 칸에 닿았는가
             return ____12____               # ⑫ start에서 goal까지의 거리
+        # 'S', 'E', '.'만 지나갈 수 있고 '#'은 벽이다.
         for n in grid_neighbors(grid, cell[0], cell[1], ".SE"):
             if ____13____:                  # ⑬ 아직 안 간 칸
                 ____14____                  # ⑭ (두 줄) 거리 기록, 큐에 넣기
     return -1                               # 닿을 수 없을 때</code></pre></div><div class="mycode"><label>내 코드 · A7 (grid_neighbors, shortest_path_len 작성)</label><textarea class="in code" rows="20" data-type="code" data-key="A7.mycode" data-label="A7 (grid_neighbors, shortest_path_len 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>실행 틀</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A7-3"># 실행 예(출력 값은 적혀 있지 않다. 내 함수를 실행해 얻는다)
+# list(...): 제네레이터가 내주는 값을 리스트로 모아 출력한다
 print(list(grid_neighbors(MAZE, 0, 0, ".SE")))
 print(list(grid_neighbors(MAZE, 2, 2, ".SE")))
+# 최단 거리 호출 3가지: 미로, 한 줄짜리 격자, 시작 = 도착
 print(shortest_path_len(MAZE, START, GOAL))
 print(shortest_path_len(["S#E"], (0, 0), (0, 2)))
 print(shortest_path_len(MAZE, START, START))</code></pre></div><h3>자체 점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A7-4"># A7 점검: 기대 값은 적혀 있지 않다. 격자의 모든 칸을 훑는 다른 계산으로 구한 값과 비교한다.
-import inspect
+import inspect  # 제네레이터인지 검사하는 도구
 
+# 기준값 1: 모든 칸을 훑어 (r, c)와 상하좌우로 맞닿은 통과 가능 칸을 모은다.
+# 집합 컴프리헨션이다. (행 차이 + 열 차이 = 1)이면 맞닿은 칸이다.
 def ref_adj(grid, r, c, passable):
     # 모든 칸 중 (r, c)와 상하좌우로 맞닿고 통과할 수 있는 칸을 모은다(경계 검사를 따로 쓰지 않는 계산)
     return {(i, j) for i in range(len(grid)) for j in range(len(grid[0]))
             if abs(i - r) + abs(j - c) == 1 and grid[i][j] in passable}
 
+# 기준값 2: 시작 칸에서 각 칸까지의 최소 거리를 구한다.
+# 더 짧은 거리가 나오는 동안 되풀이해 훑는다.
 def ref_dist(grid, start):
-    d = {start: 0}
-    changed = True
+    d = {start: 0}  # 딕셔너리 {칸: 거리}. 시작 칸은 0
+    changed = True  # 값이 바뀌면 True로 두고 다시 훑는다
     while changed:
         changed = False
-        for cell in list(d):
+        for cell in list(d):  # 훑는 중 d가 바뀌므로 복사해서 쓴다
             for n in ref_adj(grid, cell[0], cell[1], ".SE"):
+                # 아직 모르는 칸은 아주 큰 값(10 ** 9)으로 본다
                 if d[cell] + 1 &lt; d.get(n, 10 ** 9):
                     d[n] = d[cell] + 1
                     changed = True
     return d
 
+# 함수를 감싸 호출 횟수를 센다. 한도를 넘으면 끝나지 않는 반복으로 보고 멈춘다.
+# (무한 반복으로 컴퓨터가 멈추는 일을 막는 장치이다)
 def limited(real, limit, what):
-    cnt = [0]
-    def wrapped(*a):
+    cnt = [0]  # 리스트에 담아야 안쪽 함수가 값을 바꿀 수 있다
+    def wrapped(*a):  # *a: 인자를 몇 개든 그대로 받는다
         cnt[0] += 1
         if cnt[0] &gt; limit:
             raise RuntimeError(what + "를 너무 많이 불렀다(끝나지 않는 반복이 의심된다)")
-        return real(*a)
+        return real(*a)  # 원래 함수를 그대로 실행한다
     return wrapped
 
+# 검사할 격자들(미로, 한 줄짜리, 한 칸짜리 등)
 GRIDS = [MAZE, ["S#E"], ["S.E"], ["S"], ["S..", ".#.", "..E"], ["S.#.E", "..#..", "....."], ["S#.", "#..", "..E"]]
-fails = []
+fails = []  # 실패 사유를 모아 둔다
+# yield를 쓰는 제네레이터가 아니면 실패이다
 if not inspect.isgenerator(grid_neighbors(MAZE, 0, 0, ".SE")):
     fails.append("grid_neighbors가 제네레이터가 아니다(yield로 하나씩 내준다)")
 for k, grid in enumerate(GRIDS):
     for r in range(len(grid)):
         for c in range(len(grid[0])):
-            got = list(grid_neighbors(grid, r, c, ".SE"))
-            ref = ref_adj(grid, r, c, ".SE")
+            got = list(grid_neighbors(grid, r, c, ".SE"))  # 내 함수가 내준 이웃
+            ref = ref_adj(grid, r, c, ".SE")  # 기준 계산의 이웃
+            # 이웃 칸이 기준과 다르거나, 같은 칸을 중복해서 내주면 실패이다
             if set(got) != ref or len(got) != len(ref):
                 fails.append("격자 %d의 (%d, %d): 이웃이 다르다" % (k, r, c))
+            # 내준 이웃의 방향 번호가 오름차순이면 DIRS 순서를 지킨 것이다
             idx = [DIRS.index((a - r, b - c)) for a, b in got if (a - r, b - c) in DIRS]
             if idx != sorted(idx):
                 fails.append("격자 %d의 (%d, %d): 이웃을 우, 하, 좌, 상 순서로 내주지 않았다" % (k, r, c))
-real_gn = grid_neighbors
+real_gn = grid_neighbors  # 원래 함수를 보관해 둔다
 try:
     for k, grid in enumerate(GRIDS):
         cells = [(r, c) for r in range(len(grid)) for c in range(len(grid[0])) if grid[r][c] in ".SE"]
@@ -362,15 +404,19 @@ try:
                 except RuntimeError as e:
                     fails.append("격자 %d %s-&gt;%s: %s" % (k, s0, t0, e))
                     break
+                # d.get(t0, -1): 닿을 수 없는 칸은 -1로 본다
                 if got != d.get(t0, -1):
                     fails.append("격자 %d %s-&gt;%s: 거리가 다르다" % (k, s0, t0))
                     break
             if len(fails) &gt; 12:
                 break
+# 오류가 나도 원래 함수로 되돌린다
 finally:
     grid_neighbors = real_gn
+# 실패 사유를 앞의 12개까지 출력한다
 for f in fails[:12]:
     print("FAIL", f)
+# 실패가 하나라도 있으면 AssertionError로 멈춘다. FAIL 줄을 읽고 고친다.
 assert not fails, "A7 점검 실패: %d건" % len(fails)
 print("A7 점검 통과")</code></pre></div><div class="note">점검은 A6에서 완성한 코드 뒤에 이어 붙여 실행한다(A7 코드는 <code class="i">deque</code>를 쓴다).</div>
 </section>

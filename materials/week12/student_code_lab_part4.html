@@ -130,47 +130,52 @@ table.fill td.in-cell{padding:3px;height:auto}
 <h2>A11 · 정렬 코드와 비교 횟수 측정<small>14분 · 짝</small></h2>
 <p>A4에서 손으로 한 두 방식을 코드로 옮긴다. <code class="i">cnt</code>는 길이 1인 리스트로 비교 횟수를 센다(<code class="i">cnt[0] += 1</code>). 번호는 주석의 ⑫~⑰과 같다. 완성한 뒤 ARR8에서 A4·A5에서 손으로 구한 비교 횟수와 비교한다.</p>
 <h3>골격</h3>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A11-1">def merge_sort(a, cnt):                 # cnt = [0] : 비교 횟수 세기
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A11-1"># 재귀: 함수가 자기 자신을 다시 호출해 문제를 더 작게 나눈다
+def merge_sort(a, cnt):                 # cnt = [0] : 비교 횟수 세기
     if ____12____:                      # ⑫ 더 쪼갤 수 없을 때
         return a
-    mid = len(a) // 2
-    l = merge_sort(a[:mid], cnt)
-    r = merge_sort(a[mid:], cnt)
-    out, i, j = [], 0, 0
-    while i &lt; len(l) and j &lt; len(r):
-        cnt[0] += 1
+    mid = len(a) // 2  # 리스트의 가운데 자리
+    l = merge_sort(a[:mid], cnt)  # a[:mid]는 앞쪽 절반(슬라이싱)이다
+    r = merge_sort(a[mid:], cnt)  # a[mid:]는 뒤쪽 절반이다
+    out, i, j = [], 0, 0  # 결과 리스트와 l, r에서 볼 자리 i, j
+    while i &lt; len(l) and j &lt; len(r):  # 양쪽에 아직 볼 원소가 있는 동안
+        cnt[0] += 1  # 비교하기 직전에 횟수를 1 올린다
         if ____13____:                  # ⑬ 같으면 왼쪽 먼저
-            out.append(l[i]); i += 1
+            out.append(l[i]); i += 1  # l의 원소를 결과에 넣고 한 칸 옮긴다
         else:
-            out.append(r[j]); j += 1
+            out.append(r[j]); j += 1  # r의 원소를 결과에 넣고 한 칸 옮긴다
     return ____14____                   # ⑭ 남은 것을 이어 붙여 돌려준다
 
 def quick_sort(a, cnt):                 # 첫 원소 피벗. 같은 값은 큰 쪽
     if len(a) &lt;= 1:
         return a
     p = ____15____                      # ⑮ 피벗
-    small, big = [], []
-    for x in a[1:]:
-        cnt[0] += 1
+    small, big = [], []  # 두 묶음을 담을 빈 리스트
+    for x in a[1:]:  # a[1:]은 첫 원소를 뺀 나머지이다
+        cnt[0] += 1  # 비교 횟수를 1 올린다
         (small if ____16____ else big).append(x)   # ⑯
     return ____17____                   # ⑰</code></pre></div><div class="mycode"><label>내 코드 · A11 (merge_sort, quick_sort 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A11.mycode" data-label="A11 (merge_sort, quick_sort 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>점검과 ARR8 비교 횟수</h3>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A11-2"># A11 점검: 파이썬 sorted()와 결과가 같은지 본다.
+# random: 무작위 값을 만드는 모듈이다
 import random
-ARR8 = [38, 27, 43, 3, 9, 82, 10, 15]
+ARR8 = [38, 27, 43, 3, 9, 82, 10, 15]  # A4에서 손으로 줄 세운 그 8개이다
+# 여러 입력(빈 리스트, 원소 1개, 같은 값 포함, 이미 정렬된 입력 등)으로 점검한다
 for a in (ARR8, [], [5], [3, 3, 1, 3], [1, 2, 3, 4, 5, 6, 7, 8], [8, 7, 6, 5, 4, 3, 2, 1]):
-    for f in (merge_sort, quick_sort):
-        got = f(a, [0])
+    for f in (merge_sort, quick_sort):  # 함수도 변수처럼 목록에 담아 차례로 쓴다
+        got = f(a, [0])  # f에 정렬을 맡긴다. [0]은 비교 횟수를 셀 새 칸이다
+        # sorted(a)는 파이썬이 정렬한 결과이다. 다르면 내 정렬이 틀린 것이다
         assert got == sorted(a), "%s(%r)의 결과가 정렬된 리스트가 아니다: %r" % (f.__name__, a, got)
-random.seed(5)
+random.seed(5)  # 시드를 고정하면 같은 무작위 입력이 나온다
 for _ in range(50):
-    a = [random.randint(0, 20) for _ in range(random.randint(0, 30))]
+    a = [random.randint(0, 20) for _ in range(random.randint(0, 30))]  # 0~20 정수 0~30개
     assert merge_sort(a, [0]) == sorted(a) and quick_sort(a, [0]) == sorted(a), "무작위 입력에서 결과가 다르다: %r" % a
+# 위의 assert를 모두 통과해야 이 줄이 실행된다
 print("A11 점검 통과")
 
 # ARR8의 비교 횟수 (A4에서 손으로 센 값과 같은지 비교한다)
-c1, c2 = [0], [0]
-merge_sort(ARR8, c1); quick_sort(ARR8, c2)
+c1, c2 = [0], [0]  # 두 정렬의 비교 횟수를 담을 칸
+merge_sort(ARR8, c1); quick_sort(ARR8, c2)  # 결과 리스트는 쓰지 않고 횟수만 쓴다
 print("ARR8 병합 정렬 비교 횟수:", c1[0], " 퀵 정렬(첫 원소 피벗) 비교 횟수:", c2[0])</code></pre></div>
 <h3>예측 후 측정 (SORTBIG)</h3>
 <p>활동지 3부 A11 표의 <b>예측 칸</b>을 먼저 채운 뒤 실행한다. 입력은 시드 12로 고정해 만들므로 같은 코드를 실행하면 같은 값이 나온다. 마지막 입력(정렬된 2000개)에서 무슨 일이 일어나는지도 먼저 예측한다.</p>
@@ -178,11 +183,13 @@ print("ARR8 병합 정렬 비교 횟수:", c1[0], " 퀵 정렬(첫 원소 피벗
 import random
 random.seed(12)
 
+# 0부터 n-1까지를 무작위로 섞은 리스트를 만든다
 def shuffled(n):
-    r = list(range(n))
-    random.shuffle(r)
+    r = list(range(n))  # 0, 1, ..., n-1 리스트
+    random.shuffle(r)  # r을 제자리에서 섞는다
     return r
 
+# 병합 정렬과 퀵 정렬을 실행하고 각 비교 횟수를 돌려준다
 def counts(a):
     c1, c2 = [0], [0]
     merge_sort(a, c1)
@@ -193,6 +200,7 @@ def counts(a):
         q = type(e).__name__
     return c1[0], q
 
+# (이름, 입력) 쌍을 차례로 꺼내 비교 횟수를 출력한다
 for name, a in (("섞은 200", shuffled(200)), ("섞은 500", shuffled(500)), ("섞은 1000", shuffled(1000)),
                 ("정렬된 200", list(range(200))), ("정렬된 500", list(range(500))), ("정렬된 2000", list(range(2000)))):
     m, q = counts(a)
@@ -213,8 +221,10 @@ for name, a in (("섞은 200", shuffled(200)), ("섞은 500", shuffled(500)), ("
 <h3>(가) 과제 점검</h3>
 <p>새 입력 TA에서 코드를 <b>고치지 않고</b> 통과하는지 확인한다(8분). 세 함수를 아래 칸에 쓰거나 붙여 넣고, 점검 코드를 그 아래에 이어 실행한다.</p>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A14-1">TA = [2, 2, 2, 6, 6, 10, 14, 14, 14, 14, 18]     # 정렬된 입력(같은 값이 여럿 있을 수 있다)</code></pre></div><div class="mycode"><label>내 코드 · A14 (count_equal, count_in_range, closest_value 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A14.mycode" data-label="A14 (count_equal, count_in_range, closest_value 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-2"># A14 점검: 입력에서 계산한 느린 방법과 내 결과를 비교한다(기대값을 미리 적어 두지 않았다).
+# random은 무작위 값, time은 걸린 시간을 다루는 모듈이다
 import random, time
 
+# 정의대로 하나씩 세는 느린 기준 함수이다(정답 확인용)
 def brute_equal(a, x):
     return sum(1 for v in a if v == x)
 
@@ -222,30 +232,35 @@ def brute_range(a, lo, hi):
     return sum(1 for v in a if lo &lt;= v &lt;= hi)
 
 def brute_closest(a, x):
+    # abs(v - x)가 가장 작은 값을 고르고, 같으면 더 작은 v를 고른다
+    # lambda는 이름 없는 짧은 함수이고, a가 비면 None을 돌려준다
     return min(a, key=lambda v: (abs(v - x), v)) if a else None
 
+# 여러 입력(빈 리스트, 같은 값만 있는 리스트 포함)으로 점검한다
 for a in (TA, [], [9], [4, 4, 4]):
-    before = list(a)
+    before = list(a)  # 복사본을 저장해 두고 나중에 비교한다
     for x in range(-5, 100, 3):
+        # 내 함수와 느린 기준의 값이 다르면 메시지를 보이며 멈춘다
         assert count_equal(a, x) == brute_equal(a, x), "count_equal(%r, %d)가 다르다" % (a, x)
         assert closest_value(a, x) == brute_closest(a, x), "closest_value(%r, %d)가 다르다" % (a, x)
     for lo in range(-5, 30, 3):
         for hi in range(-5, 30, 4):
             assert count_in_range(a, lo, hi) == brute_range(a, lo, hi), "count_in_range(%r, %d, %d)가 다르다" % (a, lo, hi)
-    assert a == before, "입력 리스트가 바뀌었다"
+    assert a == before, "입력 리스트가 바뀌었다"  # 함수가 입력 리스트를 바꾸지 않았는지 확인한다
+# 위의 assert를 모두 통과해야 실행된다
 print("A14 값 점검 통과")
 
-big = list(range(0, 3 * 10 ** 6, 3))
-random.seed(12)
-qs = [random.randrange(3 * 10 ** 6) for _ in range(100000)]
+big = list(range(0, 3 * 10 ** 6, 3))  # 정렬된 큰 입력(100만 개)
+random.seed(12)  # 시드를 고정하면 같은 질의가 만들어진다
+qs = [random.randrange(3 * 10 ** 6) for _ in range(100000)]  # 무작위 질의 값 10만 개
 t0 = time.perf_counter()
 total = 0
-for k, x in enumerate(qs):
+for k, x in enumerate(qs):  # k는 몇 번째 질의인지 센다
     total += count_equal(big, x) + count_in_range(big, x, x + 50) + (closest_value(big, x) or 0) % 2
-    if time.perf_counter() - t0 &gt; 5:
+    if time.perf_counter() - t0 &gt; 5:  # 5초가 넘으면 중단하는 안전장치
         print("5초 안에 끝나지 않아 중단했다(%d번 질의까지)" % k)
         break
-else:
+else:  # for가 break 없이 끝났을 때만 실행된다
     print("큰 입력 점검 끝: %.2f초 (대략 1초 안쪽이면 충분히 빠른 편이다)" % (time.perf_counter() - t0))</code></pre></div>
 <div class="ans-row"><span class="n">구현 계획 한 줄(주석으로 코드 앞에도 쓴다)</span><textarea class="in" rows="2" data-key="A14.plan" data-label="A14 구현 계획 한 줄"></textarea></div>
 <h3>복잡도 분석 서술 (과제 제출물)</h3>
@@ -261,23 +276,26 @@ def count_pieces(ropes, L):      # 제공
 
 def max_piece_length(ropes, k):
     lo, hi = 1, max(ropes)       # 답의 후보 범위 [lo, hi]
-    while lo &lt; hi:
-        mid = (lo + hi + 1) // 2
+    while lo &lt; hi:  # 범위가 한 값으로 좁혀질 때까지 반복한다
+        mid = (lo + hi + 1) // 2  # 후보 범위의 가운데 값
         if ____18____:           # ⑱ mid 길이로 잘랐을 때 조각이 충분한가
             lo = mid
         else:
             hi = ____19____      # ⑲
     return lo</code></pre></div><div class="mycode"><label>내 코드 · A14 ROPE (max_piece_length 작성)</label><textarea class="in code" rows="14" data-type="code" data-key="A14.rope.mycode" data-label="A14 ROPE (max_piece_length 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14R-2"># ROPE 점검: 1부터 하나씩 늘려 가며 찾은 느린 답과 비교하고, count_pieces를 몇 번 불렀는지 센다.
-_real = count_pieces
-calls = [0]
+_real = count_pieces  # 원래 함수를 따로 보관한다
+calls = [0]  # 호출 횟수를 세는 칸
+# 같은 이름으로 다시 정의해 호출될 때마다 횟수를 1 올린다
 def count_pieces(ropes, L):
     calls[0] += 1
     return _real(ropes, L)
 
-mine = max_piece_length(ropes, k)
-n_calls = calls[0]
-count_pieces = _real
+mine = max_piece_length(ropes, k)  # 내 함수로 답을 구한다
+n_calls = calls[0]  # 호출 횟수를 저장한다
+count_pieces = _real  # 원래 함수로 되돌린다
+# L = 1부터 끝까지 모두 확인해 조건을 만족하는 가장 큰 L을 구한다(느린 기준)
 slow = max(L for L in range(1, max(ropes) + 1) if count_pieces(ropes, L) &gt;= k)
+# 내 값과 느린 기준의 값이 다르면 멈춘다
 assert mine == slow, "max_piece_length가 %r인데 하나씩 확인해 찾은 값은 %r이다" % (mine, slow)
 print("ROPE 점검 통과. 내 값:", mine, " count_pieces 호출 횟수:", n_calls)</code></pre></div>
 </div>

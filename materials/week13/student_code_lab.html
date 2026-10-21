@@ -146,63 +146,70 @@ table.fill td.in-cell{padding:3px;height:auto}
 calls = 0                      # 시작 상태: 0
 steps = 0                      # 시작 상태: 0
 
+# 재귀 함수는 자기 자신을 다시 부르는 함수이다.
 def fib_naive(n):
-    global calls
-    calls += 1
-    if n &lt; 2:
-        return n
-    return fib_naive(n - 1) + fib_naive(n - 2)</code></pre></div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A7-2">def fib_memo(n, memo):
-    global calls
-    calls += 1
+    global calls  # 함수 밖 변수 calls를 고친다는 선언
+    calls += 1    # 불릴 때마다 1 센다
+    if n &lt; 2:     # 더 쪼갤 수 없는 가장 작은 경우
+        return n  # 재귀를 멈추는 곳
+    return fib_naive(n - 1) + fib_naive(n - 2)  # 작은 두 문제의 답을 더한다</code></pre></div>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A7-2">def fib_memo(n, memo):         # memo: 푼 답을 적어 두는 dict
+    global calls               # 함수 밖 변수 calls를 고친다는 선언
+    calls += 1                 # 호출 횟수를 센다
     if ____1____:                    # ① 이미 계산했다면 바로 돌려준다
-        return memo[n]
-    if n &lt; 2:
-        result = n
+        return memo[n]         # dict에서 키 n의 값을 꺼낸다
+    if n &lt; 2:                  # 가장 작은 경우
+        result = n             # 가장 작은 경우의 답
     else:
         result = ____2____           # ② 작은 문제 두 개를 풀어 합친다
-    memo[n] = result
+    memo[n] = result           # 구한 답을 dict에 적어 둔다
     return result
 
-def fib_tab(n):
-    global steps
+def fib_tab(n):                # 표(리스트)를 앞에서부터 채운다
+    global steps               # 반복 횟수를 세는 변수
     if n &lt; 2:
         return n
-    dp = [0] * (n + 1)
-    dp[1] = 1
-    for i in range(2, n + 1):
-        steps += 1
+    dp = [0] * (n + 1)         # 0이 n+1개 든 리스트(표)
+    dp[1] = 1                  # 1번 칸 값을 미리 적는다
+    for i in range(2, n + 1):  # i = 2, 3, ..., n 순서로 반복
+        steps += 1             # 칸을 하나 채울 때마다 1 센다
         dp[i] = ____3____            # ③ 앞의 두 칸에서 만든다
-    return dp[n]</code></pre></div>
+    return dp[n]               # 표의 마지막 칸이 답이다</code></pre></div>
 <div class="mycode"><label>내 코드 · A7 (fib_memo, fib_tab 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A7.mycode" data-label="A7 (fib_memo, fib_tab 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A7-3"># A7 점검: 닫힌 식(비네 공식)으로 구한 값과 내 결과를 비교한다.
+# 비네 공식: 피보나치 수를 식 하나로 구한다(검산용).
 def closed_form(n):
     phi = (1 + 5 ** 0.5) / 2
-    return round(phi ** n / 5 ** 0.5)
+    return round(phi ** n / 5 ** 0.5)  # 실수 오차는 반올림으로 정리한다
 
-for n in range(0, 26):
+for n in range(0, 26):                 # n = 0~25를 모두 검사한다
     want = closed_form(n)
+    # assert 조건, 메시지: 조건이 거짓이면 메시지를 띄우고 멈춘다.
+    # 멈췄다면 그 줄의 함수가 닫힌 식과 다른 값을 냈다는 뜻이다.
     assert fib_naive(n) == want, "fib_naive(%d)=%r 인데 닫힌 식은 %r이다" % (n, fib_naive(n), want)
+    # 메모 방식. 호출마다 빈 dict {}를 새로 준다.
     got = fib_memo(n, {})
     assert got == want, "fib_memo(%d, {})=%r 인데 닫힌 식은 %r이다" % (n, got, want)
+    # 표 방식.
     got = fib_tab(n)
     assert got == want, "fib_tab(%d)=%r 인데 닫힌 식은 %r이다" % (n, got, want)
 shared = {}                          # 한 메모를 여러 번 불러도 맞아야 한다
 for n in (10, 5, 25, 3, 0, 1):
     got = fib_memo(n, shared)
     assert got == closed_form(n), "공유한 메모로 fib_memo(%d)=%r 인데 닫힌 식은 %r이다" % (n, got, closed_form(n))
-print("A7 점검 통과")</code></pre></div>
+print("A7 점검 통과")                      # 위 검사를 모두 통과해야 출력된다</code></pre></div>
 <h3>예측 후 실행</h3><p>n = 20과 30에서 세 방식의 횟수를 먼저 활동지에 <b>예측</b>하고, 아래 코드를 실행해 실제 값을 쓴다. <code class="i">fib_naive(30)</code>은 몇 초 걸릴 수 있다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A7-4"># 예측을 활동지에 먼저 적은 뒤 실행한다.
-for n in (20, 30):
+for n in (20, 30):     # n = 20, 30으로 두 번 실행한다
     calls = 0
-    v1 = fib_naive(n)
-    c1 = calls
+    v1 = fib_naive(n)  # 반환값
+    c1 = calls         # 이 방식이 불린 횟수를 적어 둔다
     calls = 0
     v2 = fib_memo(n, {})
     c2 = calls
     steps = 0
     v3 = fib_tab(n)
-    c3 = steps
+    c3 = steps         # 표를 채운 반복 횟수를 적어 둔다
+    # 값 세 개와 센 횟수 세 개를 한 줄에 출력한다.
     print("n =", n, " 값:", v1, v2, v3, " fib_naive 호출:", c1, " fib_memo 호출:", c2, " fib_tab 반복:", c3)</code></pre></div>
 <p>점검이 통과하면 활동지 2부에 예측과 실제 값을 쓴다. 이 주의 실습 과제는 A8 시작 때 <code class="i">student_code_lab_part2</code>에서 안내한다.</p>
 <div class="ans-row"><span>옆 학생과 대조</span><textarea class="in" rows="2" data-key="A7.compare" data-label="A7 옆 학생의 코드와 다른 점"></textarea></div>

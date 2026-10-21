@@ -137,79 +137,94 @@ table.fill td.in-cell{padding:3px;height:auto}
 </section>
 <section id="A10" class="sheet">
 <h2>A10 · 섬의 개수<small>14분 · 짝</small></h2>
-<p><code class="i">count_islands</code>와 <code class="i">explore</code>를 완성한다. 격자는 문자열 리스트이고 &lsquo;1&rsquo;이 땅, &lsquo;0&rsquo;이 바다이다. 완성한 뒤 ISLE에서 실행하고, <code class="i">explore</code>에서 꺼내는 줄을 <code class="i">popleft()</code>와 <code class="i">pop()</code>으로 바꿔 가며 개수가 변하는지 관찰한다. (선택) 대각선 8방향도 이웃으로 보면 어떻게 되는지 실험한다.</p><h3>제공 코드(입력)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-1">ISLE = ["1100010",
+<p><code class="i">count_islands</code>와 <code class="i">explore</code>를 완성한다. 격자는 문자열 리스트이고 &lsquo;1&rsquo;이 땅, &lsquo;0&rsquo;이 바다이다. 완성한 뒤 ISLE에서 실행하고, <code class="i">explore</code>에서 꺼내는 줄을 <code class="i">popleft()</code>와 <code class="i">pop()</code>으로 바꿔 가며 개수가 변하는지 관찰한다. (선택) 대각선 8방향도 이웃으로 보면 어떻게 되는지 실험한다.</p><h3>제공 코드(입력)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-1"># 격자: 한 줄이 한 문자열이다. ISLE[행][열]로 한 칸을 읽는다.
+ISLE = ["1100010",
         "1100011",
         "0010000",
         "0001100",
         "1000100",
-        "1000001"]                            # '1' 땅, '0' 바다 (행 6, 열 7)</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A10-2">def count_islands(grid):
-    if not grid:
+        "1000001"]                            # '1' 땅, '0' 바다 (행 6, 열 7)</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A10-2"># 섬의 개수를 세어 돌려주는 함수. 격자의 모든 칸을 차례로 훑는다.
+def count_islands(grid):
+    if not grid:  # 격자가 비어 있으면
         return 0
-    seen = set()
-    count = 0
-    for r in range(len(grid)):
-        for c in range(len(grid[0])):
+    seen = set()  # 이미 센 섬에 속한 칸 모음
+    count = 0  # 섬 개수
+    for r in range(len(grid)):  # 행 번호
+        for c in range(len(grid[0])):  # 열 번호
             if ____15____:                   # ⑮ 땅이면서 아직 안 센 칸
-                count += 1
+                count += 1  # 새 섬을 하나 찾았다
                 ____16____                   # ⑯ 이 섬 전체를 seen에 표시
 
-    return count
+    return count  # 센 개수를 돌려준다
 
+# 칸 (r, c)에서 이어진 땅을 모두 seen에 표시하는 함수
 def explore(grid, r, c, seen):
-    seen.add((r, c))
-    todo = deque([(r, c)])
-    while todo:
+    seen.add((r, c))  # 시작 칸을 표시한다
+    todo = deque([(r, c)])  # 앞으로 볼 칸을 담는 deque
+    while todo:  # 볼 칸이 남은 동안 반복한다
         cr, cc = ____17____                  # ⑰ todo에서 하나 꺼낸다
+        # 땅('1')인 이웃 칸만 받는다
         for n in grid_neighbors(grid, cr, cc, "1"):
-            if n not in seen:
-                seen.add(n)
-                todo.append(n)</code></pre></div><div class="mycode"><label>내 코드 · A10 (count_islands, explore 작성)</label><textarea class="in code" rows="20" data-type="code" data-key="A10.mycode" data-label="A10 (count_islands, explore 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>실행 틀</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-3"># 실행 예(출력 값은 적혀 있지 않다)
+            if n not in seen:  # 아직 표시하지 않은 칸이면
+                seen.add(n)  # 표시하고
+                todo.append(n)  # todo에 넣는다</code></pre></div><div class="mycode"><label>내 코드 · A10 (count_islands, explore 작성)</label><textarea class="in code" rows="20" data-type="code" data-key="A10.mycode" data-label="A10 (count_islands, explore 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>실행 틀</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-3"># 실행 예(출력 값은 적혀 있지 않다)
 print(count_islands(ISLE))</code></pre></div><h3>(선택) 8방향 실험</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-4"># (선택) 8방향 실험 · grid_neighbors가 읽는 전역 DIRS를 바꾼다. 실험이 끝나면 되돌려 둔다.
+# 기본 4방향에 대각선 4방향을 더한 목록
 DIRS8 = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
-DIRS = DIRS8
-print(count_islands(ISLE))
-DIRS = [(0, 1), (1, 0), (0, -1), (-1, 0)]</code></pre></div><h3>자체 점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A10-5"># A10 점검: 기대 개수는 적혀 있지 않다. 이웃 칸을 맞대 가며 번호를 합치는 다른 계산으로 구한 개수와 비교한다.
+DIRS = DIRS8  # 전역 DIRS를 8방향으로 바꾼다
+print(count_islands(ISLE))  # 같은 함수를 바뀐 방향으로 실행한다
+DIRS = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # 원래 4방향으로 되돌린다</code></pre></div><h3>자체 점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A10-5"># A10 점검: 기대 개수는 적혀 있지 않다. 이웃 칸을 맞대 가며 번호를 합치는 다른 계산으로 구한 개수와 비교한다.
+# 기준값: 땅 칸마다 번호표를 붙이고, 맞닿은 칸끼리 작은 번호로 통일한다.
+# 끝나면 서로 다른 번호의 개수가 섬의 개수이다.
 def ref_islands(grid):
+    # 딕셔너리 컴프리헨션: 땅 칸마다 처음엔 자기 좌표를 번호로 가진다
     lab = {(r, c): (r, c) for r in range(len(grid)) for c in range(len(grid[0])) if grid[r][c] == "1"}
-    cells = sorted(lab)
-    changed = True
+    cells = sorted(lab)  # 땅 칸 좌표를 정렬한 리스트
+    changed = True  # 번호가 바뀌면 True로 두고 다시 훑는다
     while changed:
         changed = False
-        for cell in cells + cells[::-1]:
+        for cell in cells + cells[::-1]:  # [::-1]은 뒤집은 리스트. 앞뒤로 훑는다
             for dr, dc in ((0, 1), (1, 0), (0, -1), (-1, 0)):
                 nb = (cell[0] + dr, cell[1] + dc)
                 if nb in lab and lab[nb] &lt; lab[cell]:
                     lab[cell] = lab[nb]
                     changed = True
+    # set은 중복을 없앤다. 서로 다른 번호의 수 = 섬의 수
     return len(set(lab.values()))
 
+# 함수를 감싸 호출 횟수를 센다. 한도를 넘으면 끝나지 않는 반복으로 보고 멈춘다.
+# (무한 반복으로 컴퓨터가 멈추는 일을 막는 장치이다)
 def limited(real, limit, what):
-    cnt = [0]
-    def wrapped(*a):
+    cnt = [0]  # 리스트에 담아야 안쪽 함수가 값을 바꿀 수 있다
+    def wrapped(*a):  # *a: 인자를 몇 개든 그대로 받는다
         cnt[0] += 1
         if cnt[0] &gt; limit:
             raise RuntimeError(what + "를 너무 많이 불렀다(끝나지 않는 반복이 의심된다)")
-        return real(*a)
+        return real(*a)  # 원래 함수를 그대로 실행한다
     return wrapped
 
+# 검사할 격자들(빈 격자, 전부 바다, 전부 땅, 점 하나 등 경계 사례 포함)
 ISLANDS = [ISLE, [], ["000"], ["111"], ["101", "010", "101"], ["1"], ["0"],
            ["11011", "10001", "00100", "11011"], ["1010101", "0101010", "1010101"], ["111", "101", "111"]]
-fails = []
-real_gn = grid_neighbors
+fails = []  # 실패 사유를 모아 둔다
+real_gn = grid_neighbors  # 원래 함수를 보관해 둔다
 try:
     for k, grid in enumerate(ISLANDS):
         grid_neighbors = limited(real_gn, 400, "grid_neighbors")   # 격자마다 새로 센다
         try:
-            got = count_islands(grid)
-        except RuntimeError as e:
+            got = count_islands(grid)  # 내 함수의 결과
+        except RuntimeError as e:  # 호출 횟수 초과 오류를 잡는다
             fails.append("격자 %d: %s" % (k, e))
             continue
-        if got != ref_islands(grid):
+        if got != ref_islands(grid):  # 기준 계산과 다르면 실패
             fails.append("격자 %d: 섬의 개수가 다르다" % k)
+# 오류가 나도 원래 함수로 되돌린다
 finally:
     grid_neighbors = real_gn
+# 실패 사유를 모두 출력한다
 for f in fails:
     print("FAIL", f)
+# 실패가 하나라도 있으면 AssertionError로 멈춘다. FAIL 줄을 읽고 고친다.
 assert not fails, "A10 점검 실패: %s" % fails
 print("A10 점검 통과")</code></pre></div>
 </section>
@@ -217,39 +232,49 @@ print("A10 점검 통과")</code></pre></div>
 <h2>A13 · 과제 마무리 점검과 전이<small>12분 · 개인(옆 학생과 결과 비교)</small></h2>
 <details><summary>A13 블록 (교사 지시 후 펼친다)</summary>
 <div class="warn"><b>과제 요건</b><ul><li><code class="i">grid_neighbors</code>는 <code class="i">yield</code>를 쓰는 제네레이터여야 한다(리스트 반환 불가).</li><li><code class="i">shortest_path_len</code>의 제출본은 큐를 쓰는 너비 우선 탐색이어야 한다. 검증용 비교 코드를 직접 쓰는 것은 허용된다.</li><li>입력 격자를 바꾸지 않아야 하고, 같은 입력으로 두 번 호출해도 같은 값이어야 한다(<code class="i">seen=set()</code> 같은 기본 인자를 쓰지 않는다).</li><li>1&times;1500 같은 큰 입력에서도 <code class="i">RecursionError</code> 없이 끝나야 한다.</li></ul></div><h3>(가) 과제 마무리 점검 (8분)</h3><p>내가 쓴 세 함수를 입력, 내 코드, 점검 순으로 이어 붙여 실행한다. 코드를 고치지 않고 새 입력에서도 통과하는지 본다. 기대 값은 적혀 있지 않고 점검이 입력에서 계산한다.</p><h3>점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-1"># A13 점검(교사 지시 후): 기대 값은 적혀 있지 않다. 계산으로 구한 값과 비교한다. 코드를 고치지 않고 통과해야 한다.
-import inspect
+import inspect  # 제네레이터인지 검사하는 도구
 
+# 기준값 1: 모든 칸을 훑어 (r, c)와 상하좌우로 맞닿은 통과 가능 칸을 모은다.
+# 집합 컴프리헨션이다. (행 차이 + 열 차이 = 1)이면 맞닿은 칸이다.
 def ref_adj(grid, r, c, passable):
     return {(i, j) for i in range(len(grid)) for j in range(len(grid[0]))
             if abs(i - r) + abs(j - c) == 1 and grid[i][j] in passable}
 
+# 기준값 2: 시작 칸에서 각 칸까지의 최소 거리를 구한다.
+# 더 짧은 거리가 나오는 동안 되풀이해 훑는다.
 def ref_dist(grid, start):
-    d = {start: 0}
-    changed = True
+    d = {start: 0}  # 딕셔너리 {칸: 거리}. 시작 칸은 0
+    changed = True  # 값이 바뀌면 True로 두고 다시 훑는다
     while changed:
         changed = False
-        for cell in list(d):
+        for cell in list(d):  # 훑는 중 d가 바뀌므로 복사해서 쓴다
             for n in ref_adj(grid, cell[0], cell[1], ".SE"):
+                # 아직 모르는 칸은 아주 큰 값(10 ** 9)으로 본다
                 if d[cell] + 1 &lt; d.get(n, 10 ** 9):
                     d[n] = d[cell] + 1
                     changed = True
     return d
 
+# 기준값: 땅 칸마다 번호표를 붙이고, 맞닿은 칸끼리 작은 번호로 통일한다.
+# 끝나면 서로 다른 번호의 개수가 섬의 개수이다.
 def ref_islands(grid):
+    # 딕셔너리 컴프리헨션: 땅 칸마다 처음엔 자기 좌표를 번호로 가진다
     lab = {(r, c): (r, c) for r in range(len(grid)) for c in range(len(grid[0])) if grid[r][c] == "1"}
-    cells = sorted(lab)
-    changed = True
+    cells = sorted(lab)  # 땅 칸 좌표를 정렬한 리스트
+    changed = True  # 번호가 바뀌면 True로 두고 다시 훑는다
     while changed:
         changed = False
-        for cell in cells + cells[::-1]:
+        for cell in cells + cells[::-1]:  # [::-1]은 뒤집은 리스트. 앞뒤로 훑는다
             for dr, dc in ((0, 1), (1, 0), (0, -1), (-1, 0)):
                 nb = (cell[0] + dr, cell[1] + dc)
                 if nb in lab and lab[nb] &lt; lab[cell]:
                     lab[cell] = lab[nb]
                     changed = True
+    # set은 중복을 없앤다. 서로 다른 번호의 수 = 섬의 수
     return len(set(lab.values()))
 
-fails = []
+fails = []  # 실패 사유를 모아 둔다
+# 조건 cond가 거짓이면 실패 사유 msg를 fails에 모아 둔다.
 def check(cond, msg):
     if not cond:
         fails.append(msg)
@@ -260,6 +285,7 @@ for (r, c) in ((0, 0), (2, 2), (4, 6), (3, 0)):
     got = list(grid_neighbors(MAZE, r, c, ".SE"))
     ref = ref_adj(MAZE, r, c, ".SE")
     check(set(got) == ref and len(got) == len(ref), "1~2: (%d, %d)의 이웃이 다르다" % (r, c))
+    # 내준 이웃의 방향 번호가 오름차순이면 DIRS 순서를 지킨 것이다
     idx = [DIRS.index((a - r, b - c)) for a, b in got if (a - r, b - c) in DIRS]
     check(idx == sorted(idx), "1~2: (%d, %d)의 이웃이 우, 하, 좌, 상 순서가 아니다" % (r, c))
 # 3~5 shortest_path_len
@@ -271,31 +297,36 @@ check(count_islands(ISLE) == ref_islands(ISLE), "6: ISLE의 섬 개수가 다르
 for grid in ([], ["000"], ["111"], ["101", "010", "101"]):
     check(count_islands(grid) == ref_islands(grid), "7: 경계 사례 %r가 다르다" % (grid,))
 # 8 두 번 호출해도 같은 값, 입력 불변
-copy_isle, copy_maze = list(ISLE), list(MAZE)
-a1, a2 = count_islands(ISLE), count_islands(ISLE)
+copy_isle, copy_maze = list(ISLE), list(MAZE)  # 호출 전의 복사본을 보관한다
+a1, a2 = count_islands(ISLE), count_islands(ISLE)  # 같은 입력으로 두 번 호출한다
 check(a1 == a2, "8: 같은 입력으로 두 번 부르면 값이 달라진다")
 shortest_path_len(MAZE, START, GOAL)
 check(ISLE == copy_isle and MAZE == copy_maze, "8: 입력 격자가 바뀌었다")
+# 매개변수에 기본값이 하나도 없어야 한다(이전 호출의 기록이 남지 않게)
 check(all(p.default is inspect.Parameter.empty for p in inspect.signature(count_islands).parameters.values()),
       "8: count_islands에 기본 인자가 있다")
 # 9 큰 입력(1 x 1500)
 try:
     check(count_islands(["1" * 1500]) == ref_islands(["1" * 1500]), "9: 1x1500 땅의 섬 개수가 다르다")
-    wide = ["S" + "." * 1498 + "E"]
+    wide = ["S" + "." * 1498 + "E"]  # 양 끝이 S, E인 1x1500 통로
     check(shortest_path_len(wide, (0, 0), (0, len(wide[0]) - 1)) == len(wide[0]) - 1, "9: 1x1500 통로의 거리가 다르다")
-except RecursionError:
+except RecursionError:  # 재귀가 너무 깊어져 나는 오류
     fails.append("9: 큰 입력에서 RecursionError가 났다")
+# 실패 사유를 모두 출력한다
 for f in fails:
     print("FAIL", f)
+# 실패가 하나라도 있으면 AssertionError로 멈춘다. FAIL 줄을 읽고 고친다.
 assert not fails, "A13 점검 실패: %s" % fails
 print("A13 점검 통과")</code></pre></div><h3>(나) 전이: 숫자 변환 퍼즐 (4분, 채점하지 않는다)</h3><p>3에서 시작해 &ldquo;+1&rdquo; 또는 &ldquo;&times;2&rdquo;만 써서 14를 만드는 가장 적은 연산 횟수를 구한다. 그래프는 메모리에 없고 <code class="i">next_states</code>가 이웃을 내준다. 같은 틀로 <code class="i">num_bfs(start, goal)</code>을 작성한다. 활동지 <a href="student_workbook_part3.html#A13">3부 A13</a>의 질문에 답한다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A13-2"># 전이 연습 NUM(채점하지 않는다) · 시작 상태: 탐색마다 새 거리 딕셔너리와 큐를 만든다.
 # 3에서 시작해 "+1" 또는 "x2"만 써서 14를 만드는 가장 적은 연산 횟수를 같은 틀로 찾는다. 수는 100 이하이다.
 def next_states(n):                  # 제네레이터(제공). 상태 n에서 한 걸음에 갈 수 있는 수
-    if n + 1 &lt;= 100:
-        yield n + 1
+    if n + 1 &lt;= 100:  # 범위(100 이하) 안이면
+        yield n + 1  # +1 한 수를 내준다
     if n * 2 &lt;= 100:
-        yield n * 2</code></pre></div><div class="mycode"><label>내 코드 · A13 NUM (num_bfs 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A13.num.mycode" data-label="A13 NUM (num_bfs 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-3"># NUM 점검: 기대 값은 적혀 있지 않다. 연산 횟수를 줄여 갈 수 있으면 계속 줄이는 다른 계산과 비교한다.
+        yield n * 2  # x2 한 수를 내준다</code></pre></div><div class="mycode"><label>내 코드 · A13 NUM (num_bfs 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A13.num.mycode" data-label="A13 NUM (num_bfs 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-3"># NUM 점검: 기대 값은 적혀 있지 않다. 연산 횟수를 줄여 갈 수 있으면 계속 줄이는 다른 계산과 비교한다.
+# globals(): 지금 정의된 이름 목록. num_bfs를 안 만들었으면 여기서 멈춘다.
 assert "num_bfs" in globals(), "먼저 num_bfs(start, goal)를 작성한다(최소 연산 횟수를 돌려준다)"
+# 기준값: 더 적은 횟수가 나오는 동안 되풀이해 start에서 각 수까지의 최소 연산 횟수를 구한다.
 def ref_ops(start, goal):
     d = {start: 0}
     changed = True
@@ -306,11 +337,13 @@ def ref_ops(start, goal):
                 if d[n] + 1 &lt; d.get(m, 10 ** 9):
                     d[m] = d[n] + 1
                     changed = True
-    return d.get(goal, -1)
+    return d.get(goal, -1)  # 닿을 수 없으면 -1
 
+# (시작, 목표) 쌍마다 내 함수와 기준 값이 다르면 bad에 모은다
 bad = [(a, b) for a, b in ((3, 14), (1, 10), (5, 5), (2, 100), (50, 49)) if num_bfs(a, b) != ref_ops(a, b)]
 for a, b in bad:
     print("FAIL", a, "-&gt;", b)
+# 다르게 나온 쌍이 있으면 AssertionError로 멈춘다.
 assert not bad, "NUM 점검 실패: %s" % bad
 print("NUM 점검 통과")</code></pre></div>
 </details>

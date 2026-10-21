@@ -138,108 +138,127 @@ table.fill td.in-cell{padding:3px;height:auto}
 </section>
 <section id="A8" class="sheet">
 <h2>A8 · 함정 탐색: 예측 후 실행<small>14분 · 짝</small></h2>
-<p>먼저 A7에서 만든 방식으로 G1을 새로 만드는 함수 <code class="i">make_g1</code>을 완성한다. 아래 C1~C5는 모두 <code class="i">make_g1()</code> 뒤에 붙여 실행한다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A8-1">from collections import defaultdict
+<p>먼저 A7에서 만든 방식으로 G1을 새로 만드는 함수 <code class="i">make_g1</code>을 완성한다. 아래 C1~C5는 모두 <code class="i">make_g1()</code> 뒤에 붙여 실행한다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A8-1">from collections import defaultdict  # 표준 라이브러리에서 defaultdict를 가져온다
 
-G1_EDGES = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "D"), ("D", "E")]</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A8-2">def make_g1():
+# 간선 목록은 A7과 같다.
+G1_EDGES = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "D"), ("D", "E")]</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A8-2"># 인자 없이 호출하며, 호출할 때마다 새 G1을 만들어 돌려줘야 한다.
+def make_g1():
     # TODO(A8): A7에서 완성한 방식으로 G1(무방향)을 새로 만들어 돌려준다.
-    raise NotImplementedError("make_g1을 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A8 (make_g1 작성)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.setup.mycode" data-label="A8 (make_g1 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>준비 확인</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-3">g = make_g1()
+    # 작성을 마치면 이 raise 줄은 내 코드로 바꾼다.
+    raise NotImplementedError("make_g1을 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A8 (make_g1 작성)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.setup.mycode" data-label="A8 (make_g1 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>준비 확인</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-3">g = make_g1()  # 내가 만든 함수로 G1을 만든다
+# 확인용 목록: 간선 목록에서 각 노드의 이웃을 계산한다.
 ref = {n: [b if a == n else a for a, b in G1_EDGES if n in (a, b)] for n in {x for e in G1_EDGES for x in e}}
+# type(g).__name__은 g의 자료형 이름이다. 이름을 확인한다.
 assert type(g).__name__ == "defaultdict", "g는 defaultdict(list)여야 한다"
+# 내가 만든 목록이 확인용 목록과 같은지 비교한다. 다르면 AssertionError이다.
 assert dict(g) == ref, "make_g1()의 결과가 G1 손 목록과 다르다"
 print("A8 준비 통과")</code></pre></div><h3>함정 코드 C1~C5</h3><p>한 개씩 실행한다. 실행 전에 예측을 쓴다.</p><h3>코드 C1</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C1-1"># C1
-g = make_g1()
-print(len(g))
-x = g["Z"]
-print(len(g), x)</code></pre></div><h3>코드 C2</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C2-1"># C2
-g = make_g1()
-print("Q" in g)
-print(g.get("Y", []))
-print(len(g))</code></pre></div><h3>코드 C3</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C3-1"># C3
-g = make_g1()
-for u in g:
-    print(u)
+g = make_g1()  # A8에서 만든 함수로 G1을 만든다
+print(len(g))  # g의 노드 수를 출력한다
+x = g["Z"]  # 키 "Z"로 g에서 값을 꺼내 x에 담는다
+print(len(g), x)  # 노드 수와 x를 함께 출력한다</code></pre></div><h3>코드 C2</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C2-1"># C2
+g = make_g1()  # G1을 만든다
+print("Q" in g)  # "Q"가 g의 키인지 True/False로 출력한다
+print(g.get("Y", []))  # "Y"로 찾고 없으면 []를 대신 돌려준다
+print(len(g))  # g의 노드 수를 출력한다</code></pre></div><h3>코드 C3</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C3-1"># C3
+g = make_g1()  # G1을 만든다
+for u in g:  # g의 키를 하나씩 꺼내 u에 담는다
+    print(u)  # 꺼낸 키를 출력한다
     g["Z"]</code></pre></div><h3>코드 C4</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C4-1"># C4
 l = [[]] * 3
-l[0].append(1)
-print(l)</code></pre></div><h3>코드 C5 (선택)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C5-1"># C5 (선택)
-def build(edges, g={}):
+l[0].append(1)  # l의 첫 번째 칸에 1을 덧붙인다
+print(l)  # l을 출력한다</code></pre></div><h3>코드 C5 (선택)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C5-1"># C5 (선택)
+def build(edges, g={}):  # 간선 목록으로 이웃 목록 dict를 만든다
     for u, v in edges:
-        g.setdefault(u, []).append(v)
-    return g
+        g.setdefault(u, []).append(v)  # u가 없으면 []를 넣고 v를 덧붙인다
+    return g  # 만든 dict를 돌려준다
 
-a = build([("A", "B")])
-b = build([("C", "D")])
+a = build([("A", "B")])  # 간선 한 개로 build를 부른다
+b = build([("C", "D")])  # 다른 간선 한 개로 build를 부른다
 print(a)
 print(b)
-print(a is b)</code></pre></div>
+print(a is b)  # a와 b가 같은 객체인지 출력한다</code></pre></div>
 </section>
 <section id="A9" class="sheet">
 <h2>A9 · 두 표현의 연산 카운터 실측<small>9분 · 짝</small></h2>
 <p>A4에서 손으로 센 값을 코드로 확인한다. 함수는 결과와 함께 <b>확인한 칸/원소 수</b>를 돌려준다. 4개 함수 중 세 개는 완성되어 있고, <b>has_edge_list의 빈칸 ⑤ 하나</b>만 채운다. G1 질의 4개를 실행해 나온 값을 활동지 <a href="student_workbook_part2.html#A9">2부 A9</a>의 실측 표에 옮겨 쓰고, 손 값과 다르면 어디서 틀렸는지 한 줄 쓴다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A9-1"># 준비: A6의 make_matrix, add_edge와 A8의 make_g1을 이 코드 앞에 붙여 둔다.
+# 노드 이름 순서가 곧 행렬의 칸 번호이다(A는 0번, B는 1번, ...).
 NODES = ["A", "B", "C", "D", "E", "F"]
+# enumerate는 (번호, 값) 쌍을 차례로 준다. 이름 -&gt; 번호 dict를 만든다.
 MAP = {n: i for i, n in enumerate(NODES)}
+# A6의 함수로 인접 행렬 m을 만든다.
 m = make_matrix(len(NODES))
 for a, b in G1_EDGES:
     add_edge(m, MAP[a], MAP[b])
+# A8의 함수로 인접 리스트 g를 만든다.
 g = make_g1()</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A9-2"># 반환값은 (결과, 확인한 칸/원소 수)이다. 확인한 수는 코드 안에서 직접 센다.
 # 4개 함수 중 has_edge_list의 빈칸 ⑤ 하나만 채우면 된다. 나머지 3개는 이미 완성되어 있다.
+# 행렬 방식: u행 v열 칸 하나만 읽는다.
 def has_edge_matrix(m, u, v):
-    checked = 0
-    cell = m[u][v]
+    checked = 0  # 센 수의 시작값이다
+    cell = m[u][v]  # u행 v열 칸의 값을 읽는다
     checked += 1
-    return cell == 1, checked
+    return cell == 1, checked  # (간선이 있는가, 센 수)를 쉼표로 묶어 돌려준다
 
+# 리스트 방식: u의 이웃을 앞에서부터 차례로 훑는다.
 def has_edge_list(g, u, v):
     checked = 0
-    for w in g.get(u, []):
+    for w in g.get(u, []):  # u의 이웃을 하나씩 w에 담는다
         checked += ____5____      # ⑤ ____5____ 자리에 알맞은 식을 쓴다
-        if w == v:
-            return True, checked
-    return False, checked
+        if w == v:  # 찾는 노드이면
+            return True, checked  # 찾았으니 그 자리에서 끝낸다
+    return False, checked  # 끝까지 못 찾은 경우이다
 
+# u행의 모든 칸을 훑어 1인 칸의 노드 이름을 모은다.
 def neighbors_matrix(m, u):
-    out = []
+    out = []  # 이웃을 모을 빈 리스트이다
     checked = 0
-    for j in range(len(m[u])):
+    for j in range(len(m[u])):  # u행의 칸을 0번부터 끝까지 본다
         checked += 1
-        if m[u][j] == 1:
-            out.append(NODES[j])
+        if m[u][j] == 1:  # 간선이 있는 칸이면
+            out.append(NODES[j])  # 칸 번호 j를 노드 이름으로 바꿔 모은다
     return out, checked
 
+# u의 이웃 목록을 훑으며 하나씩 모은다.
 def neighbors_list(g, u):
     out = []
     checked = 0
     for w in g.get(u, []):
         checked += 1
-        out.append(w)
+        out.append(w)  # 이웃 w를 모은다
     return out, checked</code></pre></div><div class="mycode"><label>내 코드 · A9 (⑤를 채운 카운터 함수 4개)</label><textarea class="in code" rows="18" data-type="code" data-key="A9.mycode" data-label="A9 (⑤를 채운 카운터 함수 4개) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 ⑤를 채우고 실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>실측 실행과 자체 테스트</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A9-3"># G1 질의 4개를 실행해 A4 손 표와 비교한다. 아래 출력을 활동지 A9 표에 옮겨 쓴다.
-queries = [("A", "E"), ("D", "E"), ("A", "B"), ("E", "A")]
-for a, b in queries:
+queries = [("A", "E"), ("D", "E"), ("A", "B"), ("E", "A")]  # (시작, 끝) 질의 4개이다
+for a, b in queries:  # 질의를 하나씩 꺼내 a, b에 담는다
     print("간선 확인", a + "-" + b, "행렬", has_edge_matrix(m, MAP[a], MAP[b]), "리스트", has_edge_list(g, a, b))
+# 이웃 질의: D의 이웃과 확인한 수를 출력한다.
 print("D의 이웃 행렬", neighbors_matrix(m, MAP["D"]), "리스트", neighbors_list(g, "D"))
 
 # 자체 테스트: 모든 (u, v) 쌍에서 확인한 수의 정의(찾으면 그 자리에서 멈추고, 없으면 목록 전체)와 비교한다.
-fails = []
-size = len(g)
+fails = []  # 실패 이유를 모으는 빈 리스트이다
+size = len(g)  # 함수를 부르기 전 g의 크기를 적어 둔다
 for a in NODES:
     for b in NODES:
-        row = g.get(a, [])
-        truth = b in row
+        row = g.get(a, [])  # a의 이웃 목록(없으면 빈 리스트)
+        truth = b in row  # 실제로 간선이 있는가(True/False)
+        # row.index(b)는 b가 있는 위치(0부터)이다. 앞에서부터 센 수는 위치+1이다.
         cnt = row.index(b) + 1 if truth else len(row)
+        # 내 함수의 (결과, 센 수)가 기준과 같은지 비교한다. 다르면 이유를 기록한다.
         if has_edge_matrix(m, MAP[a], MAP[b]) != (truth, 1):
             fails.append("has_edge_matrix(%s,%s)" % (a, b))
         if has_edge_list(g, a, b) != (truth, cnt):
             fails.append("has_edge_list(%s,%s)" % (a, b))
 for a in NODES:
     row = g.get(a, [])
+    # 이웃 질의는 모든 노드에 대해 결과 목록과 센 수를 비교한다.
     if neighbors_matrix(m, MAP[a]) != ([x for x in NODES if x in row], len(NODES)):
         fails.append("neighbors_matrix(%s)" % a)
     if neighbors_list(g, a) != (list(row), len(row)):
         fails.append("neighbors_list(%s)" % a)
+# 함수가 g를 바꾸지 않았는지 확인한다.
 if len(g) != size:
     fails.append("함수가 g의 크기를 바꾸었다")
 # 이름이 긴 노드로도 같은 정의가 성립하는지 본다.
-g2 = {"서울역": ["부산항", "대구광역시"], "부산항": ["서울역"]}
+g2 = {"서울역": ["부산항", "대구광역시"], "부산항": ["서울역"]}  # 같은 정의가 한글 이름에서도 성립하는지 본다
 for a in g2:
     for b in list(g2) + ["대구광역시"]:
         row = g2[a]
@@ -247,8 +266,10 @@ for a in g2:
         cnt = row.index(b) + 1 if truth else len(row)
         if has_edge_list(g2, a, b) != (truth, cnt):
             fails.append("has_edge_list(긴 이름 %s,%s)" % (a, b))
+# 실패 이유는 앞의 8개까지만 출력한다.
 for f in fails[:8]:
     print("FAIL", f)
+# 실패가 하나라도 있으면 AssertionError로 멈춘다.
 assert not fails, "A9 테스트 실패: %d건 (예: %s)" % (len(fails), fails[:3])
 print("A9 테스트 통과")</code></pre></div><div class="note">테스트는 내 값이 &ldquo;간선 확인에서 확인한 수의 정의&rdquo;에 맞는지 계산식으로 비교한다. 손 표와 값이 다르면 손 표와 코드 중 어느 쪽이 틀렸는지 한 줄로 적는다.</div>
 </section>

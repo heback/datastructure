@@ -130,37 +130,45 @@ table.fill td.in-cell{padding:3px;height:auto}
 <h2>A8 · bisect_left와 bisect_right를 예측하고 실행하기<small>12분 · 짝</small></h2>
 <p>이번에는 파이썬 표준 모듈 <code class="i">bisect</code>를 쓴다. 아래 코드를 실행하기 전에 활동지 2부 A8 표의 <b>예측 칸</b>을 먼저 채운다. 실행한 값은 <b>실제 칸</b>에 쓰고, <b>right&minus;left</b> 칸은 직접 계산해 쓴다.</p>
 <h3>예측 후 실행</h3>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A8-1">from bisect import bisect_left, bisect_right
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A8-1"># bisect: 파이썬이 기본으로 제공하는 이진 탐색 도구 모듈이다
+from bisect import bisect_left, bisect_right
 
 DUP = [1, 3, 3, 3, 5, 7, 7, 9, 12, 12, 12, 12, 15]
-xs = [3, 7, 12, 4, 0, 20]
+xs = [3, 7, 12, 4, 0, 20]  # 찾아 볼 값의 목록
 
 # 예측을 활동지 표에 먼저 적은 뒤 실행한다. right - left 열은 직접 계산해 활동지에 쓴다.
+# xs의 값을 하나씩 x에 넣어 두 함수를 호출한다
 for x in xs:
     print("x =", x, " bisect_left:", bisect_left(DUP, x), " bisect_right:", bisect_right(DUP, x))</code></pre></div><div class="mycode"><label>내 코드 · A8 (bisect 호출 실험 메모 또는 추가 실험)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.mycode" data-label="A8 (bisect 호출 실험 메모 또는 추가 실험) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>A7 대조</h3>
 <p>A7에서 완성한 두 함수를 이 코드보다 <b>위</b>에 붙여 넣고 아래 대조를 실행한다. 위쪽 <code class="i">from bisect import ...</code>도 파일 맨 위에 한 번만 있으면 된다.</p>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-2"># A7에서 만든 두 함수가 bisect와 같은 값을 내는지 대조한다. (A7 코드가 같은 파일 위쪽에 있어야 한다)
-for x in range(-2, 20):
+for x in range(-2, 20):  # x를 -2부터 19까지 바꿔 본다
+    # 내 함수와 bisect의 값이 다르면 메시지를 보이며 멈춘다. 메시지의 x가 단서이다
     assert lower_bound(DUP, x) == bisect_left(DUP, x), "x=%d: lower_bound와 bisect_left가 다르다" % x
     assert upper_bound(DUP, x) == bisect_right(DUP, x), "x=%d: upper_bound와 bisect_right가 다르다" % x
+# 위의 assert를 모두 통과해야 실행된다
 print("A8 대조 통과")</code></pre></div>
 <p>대조가 실패하면 오류 메시지의 <code class="i">x</code> 값으로 A7 함수를 손으로 따라가 본다. 값이 다른 이유를 알아내면 활동지 A8의 첫 질문 칸에 쓴다.</p>
 </section>
 <section id="A9" class="sheet">
 <h2>A9 · 개수 세는 함수 만들기<small>12분 · 짝</small></h2>
 <p>구간 [lo, hi]는 양끝을 포함하는 닫힌 구간이다. 두 함수의 골격을 완성한다. <b>⑪은 처음에는 <code class="i">pass</code>로 두고</b> 먼저 예측-실행을 한 뒤, [7, 3]의 결과를 보고 채운다.</p>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A9-1">from bisect import bisect_left, bisect_right
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A9-1"># A8에서 써 본 이진 탐색 도구를 가져온다
+from bisect import bisect_left, bisect_right
 
+# a는 정렬된 리스트, x는 개수를 셀 값이다
 def count_equal(a, x):
     return ____8____                    # ⑧ x와 같은 원소의 개수
 
+# lo, hi는 값의 범위이다(리스트의 자리 번호가 아니다)
 def count_in_range(a, lo, hi):          # 닫힌 구간 [lo, hi]의 원소 개수
     ____11____                          # ⑪ lo &gt; hi일 때의 처리 (A9 후반에 채운다. 처음에는 pass로 둔다)
     return ____9____                    # ⑨ 닫힌 구간 [lo, hi]의 원소 개수를 구하는 식 전체</code></pre></div><div class="mycode"><label>내 코드 · A9 (count_equal, count_in_range 작성)</label><textarea class="in code" rows="14" data-type="code" data-key="A9.mycode" data-label="A9 (count_equal, count_in_range 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>1단계 예측 후 실행</h3>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A9-2">DUP = [1, 3, 3, 3, 5, 7, 7, 9, 12, 12, 12, 12, 15]
 # 예측을 활동지에 먼저 적은 뒤 실행한다.
+# (lo, hi) 쌍을 하나씩 꺼내 그 구간의 개수를 출력한다
 for lo, hi in ((4, 12), (3, 7), (8, 11), (0, 100), (13, 14)):
     print("[%d, %d]" % (lo, hi), count_in_range(DUP, lo, hi))</code></pre></div>
 <h3>2단계 lo &gt; hi 관찰</h3>
@@ -168,18 +176,22 @@ for lo, hi in ((4, 12), (3, 7), (8, 11), (0, 100), (13, 14)):
 print("[7, 3]", count_in_range(DUP, 7, 3))</code></pre></div>
 <h3>3단계 점검</h3>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A9-4"># A9 점검: 정의대로 하나씩 세는 느린 방법과 내 결과를 비교한다.
+# 처음부터 훑으며 조건에 맞는 원소마다 1을 더해 센다(느리지만 확실한 기준)
 def slow_equal(a, x):
-    return sum(1 for v in a if v == x)
+    return sum(1 for v in a if v == x)  # v == x인 원소마다 1을 더한 합
 
 def slow_range(a, lo, hi):
-    return sum(1 for v in a if lo &lt;= v &lt;= hi)
+    return sum(1 for v in a if lo &lt;= v &lt;= hi)  # lo 이상 hi 이하인 원소마다 1을 더한 합
 
+# 여러 리스트(빈 리스트, 원소 1개 포함)로 점검한다
 for a in (DUP, [], [5], [2, 2, 2]):
     for x in range(-2, 20):
+        # 내 함수와 느린 기준의 값이 다르면 메시지를 보이며 멈춘다
         assert count_equal(a, x) == slow_equal(a, x), "count_equal(%r, %d)가 하나씩 센 값과 다르다" % (a, x)
-    for lo in range(-2, 20, 3):
-        for hi in range(-2, 20, 2):
+    for lo in range(-2, 20, 3):  # 3씩 건너뛰며 lo를 바꾼다
+        for hi in range(-2, 20, 2):  # 2씩 건너뛰며 hi를 바꾼다
             assert count_in_range(a, lo, hi) == slow_range(a, lo, hi), "count_in_range(%r, %d, %d)가 하나씩 센 값과 다르다" % (a, lo, hi)
+# 위의 assert를 모두 통과해야 실행된다
 print("A9 점검 통과")</code></pre></div>
 <h3>틀린 식의 반례 찾기</h3>
 <p>활동지 2부 A9에 적힌 &ldquo;왼쪽 경계 두 개로 만든 식&rdquo;을 아래 칸에 <b>직접</b> 코드로 써서 위 구간들에 적용해 본다. 어느 구간에서 값이 달라지는지 찾아 활동지에 쓴다. 이 칸의 코드는 제출하지 않아도 되지만, 쓰면 JSON에 함께 저장된다.</p>
