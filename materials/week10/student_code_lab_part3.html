@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   .ans-row,.mycode{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="../assets/codekit.css">
+<script src="../assets/codekit.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -150,7 +152,7 @@ def neighbors_gen(g, u):
     # (나) TODO(A10) ③④: 이웃을 요청할 때마다 하나씩 내주는 함수로 만든다(함수 본문에 yield를 쓴다).
     # (슬라이드 빈칸 ③: for v in 뒤에 순회할 대상, ④: 이웃 하나를 내주는 문장)
     # 작성을 마치면 이 raise 줄은 내 코드로 바꾼다.
-    raise NotImplementedError("neighbors_gen을 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A10 ((가)(나) 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A10.mycode" data-label="A10 ((가)(나) 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>예측 후 실행</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-3"># 예측 후 실행: 각 줄이 무엇을 출력할지 활동지 A10 표에 먼저 쓰고, 그 다음에 실행한다.
+    raise NotImplementedError("neighbors_gen을 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A10 ((가)(나) 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A10.mycode" data-label="A10 ((가)(나) 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 넣어 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>예측 후 실행</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-3"># 예측 후 실행: 각 줄이 무엇을 출력할지 활동지 A10 표에 먼저 쓰고, 그 다음에 실행한다.
 it = neighbors_gen(g, "D")
 print(type(it).__name__)
 print(next(it))
@@ -211,7 +213,7 @@ W_EDGES = [(0, 1), (0, 2), (1, 2), (2, 0), (3, 2)]
 # 지하철 노선도 SUB: 노선 2개가 환승역에서 만난다.
 SUB_EDGES = [("가", "나"), ("나", "다"), ("다", "라"), ("라", "마"), ("바", "다"), ("다", "사"), ("사", "아")]
 # 리스트에 간선 하나를 더한 목록이다. +는 리스트를 이어 붙인다.
-SUB_PLUS_EDGES = SUB_EDGES + [("마", "아")]</code></pre></div><div class="mycode"><label>내 코드 · A13 과제 (build_graph, neighbors 작성)</label><textarea class="in code" rows="22" data-type="code" data-key="A13.assign.mycode" data-label="A13 과제 (build_graph, neighbors 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>점검 테스트</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-2">import inspect  # 코드의 종류를 검사하는 표준 라이브러리이다
+SUB_PLUS_EDGES = SUB_EDGES + [("마", "아")]</code></pre></div><div class="mycode"><label>내 코드 · A13 과제 (build_graph, neighbors 작성)</label><textarea class="in code" rows="22" data-type="code" data-key="A13.assign.mycode" data-label="A13 과제 (build_graph, neighbors 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 넣어 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>점검 테스트</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-2">import inspect  # 코드의 종류를 검사하는 표준 라이브러리이다
 # 내가 build_graph와 neighbors를 만들었는지 먼저 확인한다.
 assert "build_graph" in globals() and "neighbors" in globals(), "먼저 build_graph와 neighbors를 작성한다"
 
@@ -281,7 +283,7 @@ for name, edges in (("SUB", SUB_EDGES), ("SUB+", SUB_PLUS_EDGES)):
     # sum(...)은 합이다. 각 노드의 이웃 수를 모두 더한 값이 원소 수이다.
     print(name, "노드", len(g), "간선", len(edges), "원소", sum(len(vs) for vs in g.values()))
     # 노드별 이웃 수를 dict로 출력한다.
-    print({u: len(g[u]) for u in g})</code></pre></div><div class="mycode"><label>내 코드 · A13 SUB 전이(선택)</label><textarea class="in code" rows="8" data-type="code" data-key="A13.sub.mycode" data-label="A13 SUB 전이(선택) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div>
+    print({u: len(g[u]) for u in g})</code></pre></div><div class="mycode"><label>내 코드 · A13 SUB 전이(선택)</label><textarea class="in code" rows="8" data-type="code" data-key="A13.sub.mycode" data-label="A13 SUB 전이(선택) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 넣어 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div>
 </section>
 <section id="assign" class="sheet">
 <h2>과제 서술 입력<small>실습 과제 · 주간 과제 제출 때 함께 낸다</small></h2>
@@ -298,9 +300,6 @@ for name, edges in (("SUB", SUB_EDGES), ("SUB+", SUB_PLUS_EDGES)):
 <div class="note"><b>수업 운영 규칙</b>(금지 목록과 별개) 수업 중 A6~A10·A13~A14는 AI 도움 없이 수행한다. A14 형성평가는 AI를 쓰지 않는 시험 상황으로 운영하며, 위 위반 처리(감점 등)는 형성평가에 적용하지 않는다. 주간 과제를 제출할 때 위 3단계가 적용된다. A15에서 성찰일지에 AI 활용 내역을 쓰는 방법을 다시 안내한다.</div>
 </section>
 </div>
-<script>
-document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
-</script>
 <script id="week10-submit">
 /* week10 학생 입력 저장 (7개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week10-student-v1 */
 (function(){

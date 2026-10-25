@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   .ans-row,.mycode{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="../assets/codekit.css">
+<script src="../assets/codekit.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -162,7 +164,7 @@ def fib_t1(n):
 for n in (6, 20):  # n = 6, 20으로 두 번 실행한다
     calls = 0      # 매번 0에서 다시 센다
     value = fib_t1(n)
-    print("T1 n =", n, "값:", value, "호출:", calls)</code></pre></div><div class="mycode"><label>내 코드 · A10 T1 고친 코드</label><textarea class="in code" rows="14" data-type="code" data-key="A10.fix.t1" data-label="A10 T1 고친 코드 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+    print("T1 n =", n, "값:", value, "호출:", calls)</code></pre></div><div class="mycode"><label>내 코드 · A10 T1 고친 코드</label><textarea class="in code" rows="14" data-type="code" data-key="A10.fix.t1" data-label="A10 T1 고친 코드 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>T2</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="A10-2"># T2 (시작 상태: dp[0] = 0, 나머지 칸도 0)
 INF = float("inf")                  # 무한대
 
@@ -176,7 +178,7 @@ def dp_t2(coins, amount):
     return dp[amount] if dp[amount] != INF else -1  # a if 조건 else b: 조건에 따라 값을 고른다
 
 # 실행 전에 두 호출의 결과를 예측한다.
-print("T2", dp_t2([1, 3, 4], 6), dp_t2([5, 7], 3))</code></pre></div><div class="mycode"><label>내 코드 · A10 T2 고친 코드</label><textarea class="in code" rows="12" data-type="code" data-key="A10.fix.t2" data-label="A10 T2 고친 코드 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+print("T2", dp_t2([1, 3, 4], 6), dp_t2([5, 7], 3))</code></pre></div><div class="mycode"><label>내 코드 · A10 T2 고친 코드</label><textarea class="in code" rows="12" data-type="code" data-key="A10.fix.t2" data-label="A10 T2 고친 코드 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>T3</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="A10-3"># T3 (시작 상태: R = 3, C = 4)
 # R행 C열 표(2차원 리스트)를 만들고 시작 칸에 1을 적는 함수.
 def make_grid_t3(R, C):
@@ -187,7 +189,7 @@ def make_grid_t3(R, C):
 # 실행 전에 3행 4열 중 어느 칸이 1이 될지 예측한다.
 grid = make_grid_t3(3, 4)
 for row in grid:  # 행을 하나씩 출력한다
-    print("T3", row)</code></pre></div><div class="mycode"><label>내 코드 · A10 T3 고친 코드</label><textarea class="in code" rows="8" data-type="code" data-key="A10.fix.t3" data-label="A10 T3 고친 코드 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+    print("T3", row)</code></pre></div><div class="mycode"><label>내 코드 · A10 T3 고친 코드</label><textarea class="in code" rows="8" data-type="code" data-key="A10.fix.t3" data-label="A10 T3 고친 코드 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>T4 (선택)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="A10-4"># T4 (선택). 재귀 한도는 코드에서 바꾸지 않는다. 기본값 그대로 실행한다.
 # 메모(dict)를 쓰는 재귀 방식 피보나치.
 def fib_memo_t4(n, memo):
@@ -218,9 +220,6 @@ for name, f in (("fib_memo_t4", lambda: fib_memo_t4(3000, {})), ("fib_tab_t4", l
 <div class="ans-row"><span>옆 학생과 대조</span><textarea class="in" rows="2" data-key="A10.compare" data-label="A10 짝과 비교한 원인 설명의 다른 점"></textarea></div>
 </section>
 </div>
-<script>
-document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
-</script>
 <script id="week13-submit">
 /* week13 학생 입력 저장 (8개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week13-student-v1 */
 (function(){

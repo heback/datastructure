@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   .ans-row,.mycode{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="../assets/codekit.css">
+<script src="../assets/codekit.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -154,7 +156,7 @@ def quick_sort(a, cnt):                 # 첫 원소 피벗. 같은 값은 큰 �
     for x in a[1:]:  # a[1:]은 첫 원소를 뺀 나머지이다
         cnt[0] += 1  # 비교 횟수를 1 올린다
         (small if ____16____ else big).append(x)   # ⑯
-    return ____17____                   # ⑰</code></pre></div><div class="mycode"><label>내 코드 · A11 (merge_sort, quick_sort 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A11.mycode" data-label="A11 (merge_sort, quick_sort 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+    return ____17____                   # ⑰</code></pre></div><div class="mycode"><label>내 코드 · A11 (merge_sort, quick_sort 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A11.mycode" data-label="A11 (merge_sort, quick_sort 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>점검과 ARR8 비교 횟수</h3>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A11-2"># A11 점검: 파이썬 sorted()와 결과가 같은지 본다.
 # random: 무작위 값을 만드는 모듈이다
@@ -220,7 +222,7 @@ for name, a in (("섞은 200", shuffled(200)), ("섞은 500", shuffled(500)), ("
 </ul>
 <h3>(가) 과제 점검</h3>
 <p>새 입력 TA에서 코드를 <b>고치지 않고</b> 통과하는지 확인한다(8분). 세 함수를 아래 칸에 쓰거나 붙여 넣고, 점검 코드를 그 아래에 이어 실행한다.</p>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A14-1">TA = [2, 2, 2, 6, 6, 10, 14, 14, 14, 14, 18]     # 정렬된 입력(같은 값이 여럿 있을 수 있다)</code></pre></div><div class="mycode"><label>내 코드 · A14 (count_equal, count_in_range, closest_value 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A14.mycode" data-label="A14 (count_equal, count_in_range, closest_value 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-2"># A14 점검: 입력에서 계산한 느린 방법과 내 결과를 비교한다(기대값을 미리 적어 두지 않았다).
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A14-1">TA = [2, 2, 2, 6, 6, 10, 14, 14, 14, 14, 18]     # 정렬된 입력(같은 값이 여럿 있을 수 있다)</code></pre></div><div class="mycode"><label>내 코드 · A14 (count_equal, count_in_range, closest_value 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A14.mycode" data-label="A14 (count_equal, count_in_range, closest_value 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-2"># A14 점검: 입력에서 계산한 느린 방법과 내 결과를 비교한다(기대값을 미리 적어 두지 않았다).
 # random은 무작위 값, time은 걸린 시간을 다루는 모듈이다
 import random, time
 
@@ -282,7 +284,7 @@ def max_piece_length(ropes, k):
             lo = mid
         else:
             hi = ____19____      # ⑲
-    return lo</code></pre></div><div class="mycode"><label>내 코드 · A14 ROPE (max_piece_length 작성)</label><textarea class="in code" rows="14" data-type="code" data-key="A14.rope.mycode" data-label="A14 ROPE (max_piece_length 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14R-2"># ROPE 점검: 1부터 하나씩 늘려 가며 찾은 느린 답과 비교하고, count_pieces를 몇 번 불렀는지 센다.
+    return lo</code></pre></div><div class="mycode"><label>내 코드 · A14 ROPE (max_piece_length 작성)</label><textarea class="in code" rows="14" data-type="code" data-key="A14.rope.mycode" data-label="A14 ROPE (max_piece_length 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14R-2"># ROPE 점검: 1부터 하나씩 늘려 가며 찾은 느린 답과 비교하고, count_pieces를 몇 번 불렀는지 센다.
 _real = count_pieces  # 원래 함수를 따로 보관한다
 calls = [0]  # 호출 횟수를 세는 칸
 # 같은 이름으로 다시 정의해 호출될 때마다 횟수를 1 올린다
@@ -302,9 +304,6 @@ print("ROPE 점검 통과. 내 값:", mine, " count_pieces 호출 횟수:", n_ca
 </details>
 </section>
 </div>
-<script>
-document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
-</script>
 <script id="week12-submit">
 /* week12 학생 입력 저장 (8개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week12-student-v1 */
 (function(){

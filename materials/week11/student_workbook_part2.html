@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   .ans-row,.mycode{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="../assets/codekit.css">
+<script src="../assets/codekit.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -167,9 +169,6 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A9.q3" data-label="A9 A4에서 세운 가설은 이 표로 확인되었는가"></textarea></div>
 </section>
 </div>
-<script>
-document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
-</script>
 <script id="week11-submit">
 /* week11 학생 입력 저장 (7개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week11-student-v1 */
 (function(){

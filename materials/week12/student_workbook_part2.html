@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   .ans-row,.mycode{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="../assets/codekit.css">
+<script src="../assets/codekit.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -201,9 +203,6 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A10.q4" data-label="A10 정렬을 유지하며 값을 끼워 넣을 때 insort가 O(log N)이 아닌 이유(선택)"></textarea></div>
 </section>
 </div>
-<script>
-document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
-</script>
 <script id="week12-submit">
 /* week12 학생 입력 저장 (8개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week12-student-v1 */
 (function(){

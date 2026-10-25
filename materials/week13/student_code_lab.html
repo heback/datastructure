@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   .ans-row,.mycode{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="../assets/codekit.css">
+<script src="../assets/codekit.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -175,7 +177,7 @@ def fib_tab(n):                # 표(리스트)를 앞에서부터 채운다
         steps += 1             # 칸을 하나 채울 때마다 1 센다
         dp[i] = ____3____            # ③ 앞의 두 칸에서 만든다
     return dp[n]               # 표의 마지막 칸이 답이다</code></pre></div>
-<div class="mycode"><label>내 코드 · A7 (fib_memo, fib_tab 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A7.mycode" data-label="A7 (fib_memo, fib_tab 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+<div class="mycode"><label>내 코드 · A7 (fib_memo, fib_tab 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A7.mycode" data-label="A7 (fib_memo, fib_tab 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A7-3"># A7 점검: 닫힌 식(비네 공식)으로 구한 값과 내 결과를 비교한다.
 # 비네 공식: 피보나치 수를 식 하나로 구한다(검산용).
 def closed_form(n):
@@ -215,9 +217,6 @@ for n in (20, 30):     # n = 20, 30으로 두 번 실행한다
 <div class="ans-row"><span>옆 학생과 대조</span><textarea class="in" rows="2" data-key="A7.compare" data-label="A7 옆 학생의 코드와 다른 점"></textarea></div>
 </section>
 </div>
-<script>
-document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
-</script>
 <script id="week13-submit">
 /* week13 학생 입력 저장 (8개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week13-student-v1 */
 (function(){

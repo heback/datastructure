@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   .ans-row,.mycode{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="../assets/codekit.css">
+<script src="../assets/codekit.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -153,7 +155,7 @@ def make_matrix(n):
 def add_edge(m, u, v):
     # TODO(A6) ②: 무방향 간선 (u, v)를 행렬 m에 기록한다. u, v는 0~n-1 번호이다. (슬라이드 빈칸 ②: 함수 본문)
     # 작성을 마치면 이 raise 줄은 내 코드로 바꾼다.
-    raise NotImplementedError("add_edge를 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A6 (make_matrix, add_edge 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A6.mycode" data-label="A6 (make_matrix, add_edge 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>자체 테스트 (G1)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A6-3">N = len(MAP)  # 노드 수이다. MAP의 항목 개수와 같다.
+    raise NotImplementedError("add_edge를 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A6 (make_matrix, add_edge 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A6.mycode" data-label="A6 (make_matrix, add_edge 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 넣어 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>자체 테스트 (G1)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A6-3">N = len(MAP)  # 노드 수이다. MAP의 항목 개수와 같다.
 m = make_matrix(N)  # 내가 만든 함수로 행렬을 만든다
 for a, b in G1_EDGES:  # 간선을 하나씩 꺼내 a, b에 담는다
     add_edge(m, MAP[a], MAP[b])  # 이름을 번호로 바꿔 간선을 기록한다
@@ -199,7 +201,7 @@ g = {}  # 빈 dict를 만든다
 for u, v in edges:  # 간선 (u, v)를 하나씩 꺼낸다
     g[u].append(v)  # u의 이웃 목록에 v를 덧붙인다
     g[v].append(u)  # v의 이웃 목록에 u를 덧붙인다
-print(g)  # 만든 g를 출력한다</code></pre></div><p>오류를 해결할 아이디어를 모둠에서 모은다. 교사가 쓸 도구를 확인해 주면, 그 도구로 G1과 W를 다시 만든다. 변수 이름은 G1은 <code class="i">g</code>, W는 <code class="i">gw</code>로 한다. 아래 칸에는 먼저 내 해결 시도를 적고, 교사가 확인한 뒤에는 다시 만든 코드를 적는다.</p><div class="mycode"><label>내 코드 · A7 내 해결 시도</label><textarea class="in code" rows="8" data-type="code" data-key="A7.attempt.mycode" data-label="A7 내 해결 시도 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><div class="mycode"><label>내 코드 · A7 G1·W 다시 만들기(g, gw)</label><textarea class="in code" rows="12" data-type="code" data-key="A7.rebuild.mycode" data-label="A7 G1·W 다시 만들기(g, gw) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>자체 테스트 (G1과 W)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A7-3"># A7 확인: 위에서 만든 g(G1, 무방향)와 gw(W, 방향)가 손 목록과 같은지 계산식으로 비교한다.
+print(g)  # 만든 g를 출력한다</code></pre></div><p>오류를 해결할 아이디어를 모둠에서 모은다. 교사가 쓸 도구를 확인해 주면, 그 도구로 G1과 W를 다시 만든다. 변수 이름은 G1은 <code class="i">g</code>, W는 <code class="i">gw</code>로 한다. 아래 칸에는 먼저 내 해결 시도를 적고, 교사가 확인한 뒤에는 다시 만든 코드를 적는다.</p><div class="mycode"><label>내 코드 · A7 내 해결 시도</label><textarea class="in code" rows="8" data-type="code" data-key="A7.attempt.mycode" data-label="A7 내 해결 시도 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 넣어 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><div class="mycode"><label>내 코드 · A7 G1·W 다시 만들기(g, gw)</label><textarea class="in code" rows="12" data-type="code" data-key="A7.rebuild.mycode" data-label="A7 G1·W 다시 만들기(g, gw) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 넣어 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>자체 테스트 (G1과 W)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A7-3"># A7 확인: 위에서 만든 g(G1, 무방향)와 gw(W, 방향)가 손 목록과 같은지 계산식으로 비교한다.
 # globals()는 지금까지 만든 변수 이름들이다. g, gw가 있는지 본다.
 assert "g" in globals() and "gw" in globals(), "먼저 g(G1)와 gw(W)를 만든다"
 # 확인용 함수: 간선 목록에서 이웃 목록을 계산한다.
@@ -251,9 +253,6 @@ print("A7 확인 통과")</code></pre></div><div class="note">G1을 간선 목�
 <div class="note"><b>수업 운영 규칙</b>(금지 목록과 별개) 수업 중 A6~A10·A13~A14는 AI 도움 없이 수행한다. A14 형성평가는 AI를 쓰지 않는 시험 상황으로 운영하며, 위 위반 처리(감점 등)는 형성평가에 적용하지 않는다. 주간 과제를 제출할 때 위 3단계가 적용된다. A15에서 성찰일지에 AI 활용 내역을 쓰는 방법을 다시 안내한다.</div>
 </section>
 </div>
-<script>
-document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
-</script>
 <script id="week10-submit">
 /* week10 학생 입력 저장 (7개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week10-student-v1 */
 (function(){

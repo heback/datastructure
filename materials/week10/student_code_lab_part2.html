@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   .ans-row,.mycode{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="../assets/codekit.css">
+<script src="../assets/codekit.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -145,7 +147,7 @@ G1_EDGES = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "D"), ("D", "E")]</code></
 def make_g1():
     # TODO(A8): A7에서 완성한 방식으로 G1(무방향)을 새로 만들어 돌려준다.
     # 작성을 마치면 이 raise 줄은 내 코드로 바꾼다.
-    raise NotImplementedError("make_g1을 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A8 (make_g1 작성)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.setup.mycode" data-label="A8 (make_g1 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 완성·실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>준비 확인</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-3">g = make_g1()  # 내가 만든 함수로 G1을 만든다
+    raise NotImplementedError("make_g1을 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A8 (make_g1 작성)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.setup.mycode" data-label="A8 (make_g1 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 넣어 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>준비 확인</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-3">g = make_g1()  # 내가 만든 함수로 G1을 만든다
 # 확인용 목록: 간선 목록에서 각 노드의 이웃을 계산한다.
 ref = {n: [b if a == n else a for a, b in G1_EDGES if n in (a, b)] for n in {x for e in G1_EDGES for x in e}}
 # type(g).__name__은 g의 자료형 이름이다. 이름을 확인한다.
@@ -226,7 +228,7 @@ def neighbors_list(g, u):
     for w in g.get(u, []):
         checked += 1
         out.append(w)  # 이웃 w를 모은다
-    return out, checked</code></pre></div><div class="mycode"><label>내 코드 · A9 (⑤를 채운 카운터 함수 4개)</label><textarea class="in code" rows="18" data-type="code" data-key="A9.mycode" data-label="A9 (⑤를 채운 카운터 함수 4개) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 위 골격을 복사해 편집기에서 ⑤를 채우고 실행한 뒤 이곳에 붙여 넣는다.</p></div><h3>실측 실행과 자체 테스트</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A9-3"># G1 질의 4개를 실행해 A4 손 표와 비교한다. 아래 출력을 활동지 A9 표에 옮겨 쓴다.
+    return out, checked</code></pre></div><div class="mycode"><label>내 코드 · A9 (⑤를 채운 카운터 함수 4개)</label><textarea class="in code" rows="18" data-type="code" data-key="A9.mycode" data-label="A9 (⑤를 채운 카운터 함수 4개) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 골격을 편집기에 넣어 ⑤를 채우고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>실측 실행과 자체 테스트</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A9-3"># G1 질의 4개를 실행해 A4 손 표와 비교한다. 아래 출력을 활동지 A9 표에 옮겨 쓴다.
 queries = [("A", "E"), ("D", "E"), ("A", "B"), ("E", "A")]  # (시작, 끝) 질의 4개이다
 for a, b in queries:  # 질의를 하나씩 꺼내 a, b에 담는다
     print("간선 확인", a + "-" + b, "행렬", has_edge_matrix(m, MAP[a], MAP[b]), "리스트", has_edge_list(g, a, b))
@@ -274,9 +276,6 @@ assert not fails, "A9 테스트 실패: %d건 (예: %s)" % (len(fails), fails[:3
 print("A9 테스트 통과")</code></pre></div><div class="note">테스트는 내 값이 &ldquo;간선 확인에서 확인한 수의 정의&rdquo;에 맞는지 계산식으로 비교한다. 손 표와 값이 다르면 손 표와 코드 중 어느 쪽이 틀렸는지 한 줄로 적는다.</div>
 </section>
 </div>
-<script>
-document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
-</script>
 <script id="week10-submit">
 /* week10 학생 입력 저장 (7개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week10-student-v1 */
 (function(){

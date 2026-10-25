@@ -113,6 +113,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   .ans-row,.mycode{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="../assets/codekit.css">
+<script src="../assets/codekit.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -199,9 +201,6 @@ print(inorder(build([2, 1, 3]), []))</code></pre></div>
 <table class="fill"><tr><td class="lab" style="width:110px">실행 결과</td><td class="in-cell"><textarea class="in" rows="1" data-key="Q5.check.r1.c1" data-label="Q5 재귀 순회 코드 점검 실행 결과"></textarea></td></tr><tr><td class="lab">원인</td><td class="in-cell"><textarea class="in" rows="1" data-key="Q5.check.r2.c1" data-label="Q5 재귀 순회 코드 점검 원인"></textarea></td></tr><tr><td class="lab">수정</td><td class="in-cell"><textarea class="in code" rows="8" data-type="code" data-key="Q5.check.r3.c1" data-label="Q5 재귀 순회 코드 점검 수정" spellcheck="false"></textarea></td></tr></table>
 </section>
 </div>
-<script>
-document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
-</script>
 <script id="week8-submit">
 /* week8 학생 입력 저장 (5개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week8-student-v1 */
 (function(){

@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   .ans-row,.mycode{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="../assets/codekit.css">
+<script src="../assets/codekit.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -164,9 +166,6 @@ print(len(g))</code></pre></div><div class="scroll"><table class="fill"><tr><th 
 <p>Q3의 <code class="i">out_links</code>를 <b>그래프 <code class="i">g</code>가 변하지 않도록</b> 고쳐 쓰시오. 노드 <code class="i">u</code>가 <code class="i">g</code>에 없으면 아무것도 내주지 않아야 한다.</p><textarea class="in" rows="2" data-key="Q4.note" data-label="Q4 풀이 생각"></textarea><textarea class="in code" rows="9" data-type="code" data-key="Q4.code" data-label="Q4 고쳐 쓴 out_links 코드" spellcheck="false"></textarea>
 </section>
 </div>
-<script>
-document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
-</script>
 <script id="week10-submit">
 /* week10 학생 입력 저장 (7개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week10-student-v1 */
 (function(){

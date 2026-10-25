@@ -1,0 +1,48 @@
+/* codekit.css — 학생용 학습지 공용: 흰 배경 코드 블록, 신택스 하이라이팅, 코드 편집기, 예시 코드 팝업 */
+:root{--tk-kw:#cf222e;--tk-str:#0a3069;--tk-cm:#6e7781;--tk-num:#0550ae;--tk-fn:#8250df;--tk-bi:#953800;--tk-cn:#0550ae;--tk-dec:#8250df}
+pre:not(.diagram){background:#fff;color:#1f2328;border:1px solid #cfd6e2}
+.tk-kw{color:var(--tk-kw)}.tk-str{color:var(--tk-str)}.tk-cm{color:var(--tk-cm);font-style:italic}
+.tk-num{color:var(--tk-num)}.tk-fn{color:var(--tk-fn)}.tk-bi{color:var(--tk-bi)}.tk-cn{color:var(--tk-cn);font-weight:600}.tk-dec{color:var(--tk-dec)}
+.copy{background:#fff!important;color:#27364f!important;border:1px solid #9aa7bd!important}
+.copy:hover{background:#eef4fa!important}
+
+/* 편집기 */
+.ck-ed{margin:8px 0 12px;border:1px solid #6b7a94;border-radius:6px;background:#fff;overflow:hidden}
+.ck-ed .ck-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:6px 8px;background:#f0f2f6;border-bottom:1px solid #cfd6e2}
+.ck-ed .ck-bar .ck-title{font-weight:700;font-size:13px;color:#16233b;margin-right:auto}
+.ck-btn{font:600 12px "IBM Plex Sans KR",sans-serif;padding:4px 11px;border-radius:4px;border:1px solid #6b7a94;background:#fff;color:#16233b;cursor:pointer}
+.ck-btn.run{background:#1d7a4f;border-color:#1d7a4f;color:#fff}
+.ck-btn:disabled{opacity:.55;cursor:default}
+.ck-btn:focus-visible{outline:3px solid #3572a5;outline-offset:1px}
+.ck-area{display:grid;position:relative;background:#fff}
+.ck-ed .ck-area>pre.ck-hl,.ck-ed .ck-area>textarea.ck-ta{grid-area:1/1;margin:0;font:12.5px/1.55 "JetBrains Mono","D2Coding",Consolas,monospace;padding:8px 10px;border:0;border-radius:0;tab-size:4;white-space:pre;letter-spacing:0;word-spacing:0}
+.ck-ed .ck-area>pre.ck-hl{overflow:hidden;pointer-events:none;color:#1f2328;background:#fff;padding-bottom:28px;min-width:0}
+.ck-ed .ck-area>textarea.ck-ta{background:transparent!important;color:transparent!important;caret-color:#16233b;overflow:auto;resize:vertical;width:100%;min-width:0;position:relative;z-index:1}
+.ck-ed .ck-area>textarea.ck-ta::selection{background:rgba(53,114,165,.28);color:transparent}
+.ck-out{border-top:1px solid #cfd6e2;background:#fff}
+.ck-out[hidden]{display:none}
+.ck-out .ck-ol{font:600 11px "JetBrains Mono",monospace;color:#5b6b85;padding:4px 10px 0}
+.ck-out pre{margin:0;padding:4px 10px 8px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;word-break:break-all;background:#fff!important;color:#1f2328!important;border:0!important;border-radius:0;max-height:320px;overflow:auto}
+.ck-out pre.err{color:#b3401f!important}
+.ck-out pre.ok{color:#1d7a4f!important}
+
+/* 예시 코드 팝업 */
+.ck-modal{position:fixed;inset:0;z-index:200;background:rgba(16,24,40,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+.ck-modal[hidden]{display:none}
+.ck-dlg{background:#fff;border-radius:10px;max-width:860px;width:100%;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.ck-dlg header{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid #dfe3ea;margin:0}
+.ck-dlg header h3{margin:0;font-size:15px;margin-right:auto}
+.ck-dlg .ck-body{overflow:auto;padding:8px 16px 16px}
+.ck-dlg .ck-item{margin-top:12px}
+.ck-dlg .ck-item .ck-ih{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.ck-dlg .ck-item .ck-ih b{margin-right:auto;font-size:13px}
+.ck-dlg .ck-item pre{margin:0;max-height:46vh;overflow:auto}
+.ck-dlg .ck-hint{font-size:12px;color:#5b6b85;margin-top:8px}
+@media print{
+  .ck-bar,.ck-out,.ck-modal{display:none!important}
+  .ck-ed{border:none}
+  pre:not(.diagram){background:#fff!important;color:#111!important;border:1px solid #bbb!important;white-space:pre-wrap;word-break:break-all}
+  .ck-ed .ck-area>textarea.ck-ta{display:none!important}
+  .ck-ed .ck-area>pre.ck-hl{white-space:pre-wrap;word-break:break-all;overflow:visible;padding-bottom:8px}
+  .tk-cm{color:#555}
+}
