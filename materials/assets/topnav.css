@@ -1,0 +1,9 @@
+/* 상단 이동 막대 */
+#ck-topnav{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;padding:8px 20px;background:#fff;border-bottom:1px solid #dfe3ea;font:500 13px "IBM Plex Sans KR",sans-serif;color:#5b6b85}
+#ck-topnav a{color:#3572a5;text-decoration:none;padding:2px 2px}
+#ck-topnav a:hover{text-decoration:underline}
+#ck-topnav a:focus-visible{outline:3px solid #3572a5;outline-offset:1px;border-radius:3px}
+#ck-topnav .ck-back{font-weight:700;border:1px solid #9aa7bd;border-radius:4px;padding:2px 10px;margin-right:6px}
+#ck-topnav .ck-cur{color:#16233b;font-weight:600}
+@media (max-width:640px){#ck-topnav{padding:8px 14px}}
+@media print{#ck-topnav{display:none!important}}

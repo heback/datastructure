@@ -270,36 +270,9 @@ function buildEditor(ta){
   return ed;
 }
 
-/* ---------- 상단 이동 막대 (전체 목차 › 주차 목록 › 현재 자료) ---------- */
-function buildTopNav(){
-  if(document.getElementById("ck-topnav"))return;
-  var path=decodeURIComponent(location.pathname),wm=/week(\d+)\/([^\/]+)\.html$/.exec(path);
-  if(!wm)return;
-  var week=wm[1],name=wm[2],pm=/_part(\d+)$/.exec(name),part=pm?pm[1]:"1";
-  var base=name.replace(/_part\d+$/,"");
-  var kind={student_workbook:"탐구 활동지 "+part+"부",student_code_lab:"실습 코드 "+part+"부",formative_check:"형성평가",rubric:"실습 과제 루브릭"}[base]||document.title;
-  var nav=document.createElement("nav");nav.id="ck-topnav";nav.setAttribute("aria-label","페이지 이동");
-  function a(href,text){var x=document.createElement("a");x.href=href;x.textContent=text;return x;}
-  function sep(){var s=document.createElement("span");s.className="ck-sep";s.textContent="›";s.setAttribute("aria-hidden","true");return s;}
-  var back=a("index.html","← 이전 페이지");back.className="ck-back";
-  /* 같은 사이트에서 왔으면 브라우저 기록으로 돌아가고, 아니면 주차 목록으로 간다 */
-  back.addEventListener("click",function(e){
-    var ref=document.referrer;
-    if(ref&&ref.indexOf(location.origin)===0&&history.length>1){e.preventDefault();history.back();}
-  });
-  var cur=document.createElement("span");cur.className="ck-cur";cur.textContent=kind;cur.setAttribute("aria-current","page");
-  nav.appendChild(back);
-  nav.appendChild(a("../index.html","전체 목차"));nav.appendChild(sep());
-  nav.appendChild(a("index.html",week+"주차 학습활동"));nav.appendChild(sep());
-  nav.appendChild(cur);
-  document.body.insertBefore(nav,document.body.firstChild);
-}
-
 function init(){
   highlightBlocks();
   bindCopyButtons();
-  /* 저장 바(제출 스크립트)가 body 맨 앞에 들어간 뒤, 그 앞에 이동 막대를 둔다 */
-  if(document.readyState==="complete")buildTopNav();else document.addEventListener("DOMContentLoaded",buildTopNav);
   q("textarea.in.code, textarea.code").forEach(function(t){if(!t._ck){t._ck=true;buildEditor(t);}});
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
