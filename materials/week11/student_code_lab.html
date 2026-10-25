@@ -145,7 +145,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </ol>
 </section>
 <section id="A6" class="sheet">
-<h2>A6 · 그래프에서 너비 우선·깊이 우선 코드 만들기<small>13분 · 개인(옆 학생과 대조)</small></h2>
+<h2>A6 · 그래프에서 너비 우선·깊이 우선 코드 만들기<small>15분 · 개인(옆 학생과 대조)</small></h2>
 <p>A2·A3에서 손으로 한 탐색을 코드로 옮긴다. 10주차의 <code class="i">build_graph</code>와 <code class="i">neighbors</code>는 제공한다. <code class="i">bfs_order</code>는 큐, <code class="i">dfs_order</code>는 재귀로 완성한다. 방문 기록(visited)을 언제 남길지(큐에 넣을 때 / 꺼낼 때)는 골격의 ②·④·⑤를 채우는 방식으로 정해진다. 내 코드가 어느 쪽인지 확인하고, A2의 손 규칙(어느 쪽이었는지 다시 본다)과 같은지 다른지 활동지 2부 A6에 쓴다. 완성한 뒤 G1에서 실행해 A2·A3의 손 추적과 대조하고, 시작 노드를 F로 바꾸면 어떻게 될지 <b>예측한 뒤</b> 실행해 활동지 <a href="student_workbook_part2.html#A6">2부 A6</a>에 쓴다.</p><h3>제공 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A6-1"># defaultdict: 없는 키를 처음 쓰면 빈 리스트를 만들어 주는 dict
 # deque: 양쪽 끝에서 넣고 꺼내기 쉬운 큐
 from collections import defaultdict, deque
@@ -307,7 +307,7 @@ assert not fails, "A6 점검 실패: %s" % fails
 print("A6 점검 통과")</code></pre></div><div class="note">호출은 <code class="i">bfs_order(g, "A")</code>, <code class="i">dfs_order(g, "A", set(), [])</code>이다. 시작 상태는 호출마다 새 order, 큐, visited이다.</div>
 </section>
 <section id="A7" class="sheet">
-<h2>A7 · 격자 미로 탐색하기<small>14분 · 짝</small></h2>
+<h2>A7 · 격자 미로 탐색하기<small>13분 · 짝</small></h2>
 <p>2차원 격자 미로 MAZE를 탐색한다. 칸 하나가 노드이고 상하좌우 이웃 칸이 간선이다. <code class="i">grid_neighbors</code>는 10주차 <code class="i">neighbors</code>처럼 이웃을 하나씩 내주는 제네레이터이고, <code class="i">shortest_path_len</code>은 S에서 E까지의 거리(걸음 수)를 돌려주며 닿을 수 없으면 -1이다. 완성한 뒤 MAZE의 S&rarr;E 거리를 구하고 닿을 수 없는 미로 한 개와 시작=도착인 경우도 실행해 활동지 <a href="student_workbook_part2.html#A7">2부 A7</a>에 기록한다.</p><h3>제공 코드(입력)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A7-0">from collections import deque
 
 # 이웃을 보는 방향 목록: (행 변화, 열 변화). 이 순서대로 이웃을 본다.

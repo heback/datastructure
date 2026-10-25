@@ -131,7 +131,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </header>
 <nav><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="#A6">A6</a><a href="index.html">목록</a></nav>
 <section id="A1" class="sheet">
-<h2>A1 · 몇 번 계산할까, 어떻게 고를까<small>1차시 · 6분 · 개인→짝</small></h2>
+<h2>A1 · 몇 번 계산할까, 어떻게 고를까<small>1차시 · 5분 · 개인→짝</small></h2>
 <p class="meta"><span>산출물: 호출 횟수 어림(자릿수)과 이유, 거스름돈 직원의 규칙 메모</span></p>
 <p>지난주(12주차) 정렬·이진 탐색, 그 전주(11주차) BFS의 &ldquo;이미 본 칸은 다시 보지 않는다(visited)&rdquo;를 떠올리며 아래 세 사례를 읽는다.</p>
 <div class="grid"><div class="card"><b class="h">사례 가 · 편의점 거스름돈</b><p>계산대 직원이 거스름돈을 동전으로 내준다. 직원은 어떤 순서로 동전을 고르는가?</p></div><div class="card"><b class="h">사례 나 · 계단 8칸</b><p>계단을 한 번에 1칸 또는 2칸씩 올라 8칸을 오르는 방법은 모두 몇 가지일까? 내 방식을 메모한다.</p></div><div class="card"><b class="h">사례 다 · fib(30)</b><p>피보나치 수 <code class="i">fib(n) = fib(n&minus;1) + fib(n&minus;2)</code>를 정의 그대로 재귀로 계산한다. <code class="i">fib(30)</code>을 구하려면 함수가 몇 번 불릴까?</p></div></div>
@@ -147,7 +147,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>11주차 BFS에서 visited가 하던 일을 한 문장으로 쓴다.</p><div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A1.visited" data-label="A1 11주차 BFS에서 visited가 하던 일(한 문장)"></textarea></div>
 </section>
 <section id="A2" class="sheet">
-<h2>A2 · fib(6) 호출 트리 그리기<small>1차시 · 10분 · 짝</small></h2>
+<h2>A2 · fib(6) 호출 트리 그리기<small>1차시 · 12분 · 짝</small></h2>
 <p class="meta"><span>산출물: 호출 트리, n별 호출 횟수 표, 전체 호출 수와 서로 다른 입력의 수</span></p>
 <div class="concept"><b class="h">약속 · 계산 규칙</b>
 <p><code class="i">fib(n) = fib(n&minus;1) + fib(n&minus;2)</code>, 기저 <code class="i">fib(0) = 0</code>, <code class="i">fib(1) = 1</code>. 호출 순서는 <code class="i">fib(n&minus;1)</code>을 먼저 부르는 왼쪽 가지 우선이다. 한 번 불리면 <b>호출 1회</b>로 센다. 짝이 되어 한 명은 왼쪽 가지(<code class="i">fib(5)</code>), 다른 한 명은 오른쪽 가지(<code class="i">fib(4)</code>)를 그린 뒤 합산한다.</p></div>
@@ -159,14 +159,14 @@ table.fill td.in-cell{padding:3px;height:auto}
 <h3>관찰·정리</h3>
 <p>fib(2)가 몇 군데에서 나타났는가? 나타날 때마다 값은 같았는가?</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A2.q1" data-label="A2 fib(2)가 몇 군데에서 나타났는가? 나타날 때마다 값은 같았는가?"></textarea></div>
 <p>서로 다른 입력은 몇 개인데 호출은 몇 번인가? n이 하나 늘면 호출은 어떻게 변하는가?</p><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A2.q2" data-label="A2 서로 다른 입력은 몇 개인데 호출은 몇 번인가? n이 하나 늘면 호출은 어떻게 변하는가?"></textarea></div>
-<p>fib(30)이면 서로 다른 입력과 호출의 비율은 어떨 것 같은가? 어림한 값과 까닭을 쓴다.</p><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A2.q3" data-label="A2 fib(30)이면 서로 다른 입력과 호출의 비율은 어떨 것 같은가? 어림한 값과 까닭을 쓴다."></textarea></div>
+<p>(선택) fib(30)이면 서로 다른 입력과 호출의 비율은 어떨 것 같은가? 어림한 값과 까닭을 쓴다.</p><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A2.q3" data-label="A2 fib(30)이면 서로 다른 입력과 호출의 비율은 어떨 것 같은가? 어림한 값과 까닭을 쓴다."></textarea></div>
 <p>fib(6) 호출 트리에서 같은 계산을 줄이는 규칙을 두 줄로 직접 설계한다. 무엇을 적어 두고, 언제 그것을 쓰는가?</p><div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A2.q4" data-label="A2 fib(6) 트리에서 같은 계산을 줄이는 내 규칙(무엇을 적어 두고 언제 쓰는가)"></textarea></div>
 <p>(시간이 남으면) 내 규칙을 쓰면 fib(6)의 호출이 몇 번으로 줄 것 같은지 예측한다.</p><div class="ans-row"><span class="n">5</span><textarea class="in" rows="2" data-key="A2.q4b" data-label="A2 내 규칙을 쓰면 fib(6)의 호출 수 예측"></textarea></div>
 <h3>선택 · fib(7)</h3><p>fib(7)의 n별 호출 횟수(n = 0~7)와 전체 호출 수를 센다.</p>
 <div class="scroll"><table class="fill"><tr><th style="width:90px"></th><th>n=0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>합계</th></tr><tr><td class="lab">호출 횟수</td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c1" data-label="A2 선택 fib(7) 호출 횟수 n=0" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c2" data-label="A2 선택 fib(7) 호출 횟수 1" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c3" data-label="A2 선택 fib(7) 호출 횟수 2" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c4" data-label="A2 선택 fib(7) 호출 횟수 3" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c5" data-label="A2 선택 fib(7) 호출 횟수 4" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c6" data-label="A2 선택 fib(7) 호출 횟수 5" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c7" data-label="A2 선택 fib(7) 호출 횟수 6" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c8" data-label="A2 선택 fib(7) 호출 횟수 7" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.opt7.r1.c9" data-label="A2 선택 fib(7) 호출 횟수 합계" autocomplete="off"></td></tr></table></div>
 </section>
 <section id="A3" class="sheet">
-<h2>A3 · 계산한 값을 적어 두면<small>1차시 · 7분 · 짝</small></h2>
+<h2>A3 · 계산한 값을 적어 두면<small>1차시 · 6분 · 짝</small></h2>
 <p class="meta"><span>산출물: 메모 규칙 호출 순서표(C/H 표시), 호출 수와 계산 수</span></p>
 <div class="concept"><b class="h">교실 표준 규칙 · 메모 규칙(A2에서 내가 쓴 규칙과 비교한다)</b>
 <p>A2와 같은 <code class="i">fib(6)</code>을 다시 호출한다. 다만 <b>계산한 값은 메모에 적고, 이미 메모에 있으면 계산하지 않고 바로 쓴다</b>. 호출 순서는 왼쪽 가지 우선이다. 호출이 불릴 때마다 한 줄에 한 호출씩 적고, 실제로 계산했으면 <b>C</b>, 메모에서 바로 답했으면 <b>H</b>를 고른다. 호출이 끝난 가지 아래는 더 부르지 않는다. <code class="i">fib(0)</code>, <code class="i">fib(1)</code>도 처음 불릴 때는 메모에 없으므로 C로 센다(값을 적어 두고 돌려주는 일도 계산 1회로 본다). 칸이 남으면 비운다.</p></div>
@@ -180,7 +180,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A3.merge" data-label="A3 병합 정렬 트리에서 같은 구간이 두 번 나타나는가와 메모의 도움"></textarea></div>
 </section>
 <section id="A4" class="sheet">
-<h2>A4 · 가장 큰 동전부터 내면 늘 가장 적을까<small>1차시 · 9분 · 짝</small></h2>
+<h2>A4 · 가장 큰 동전부터 내면 늘 가장 적을까<small>1차시 · 8분 · 짝</small></h2>
 <p class="meta"><span>산출물: [1, 3, 4] Greedy 개수 표(1~8), 6원의 더 나은 조합, 한국 동전 1260원 결과, 원인 후보 2개</span></p>
 <div class="concept"><b class="h">약속 · Greedy 규칙</b>
 <p>남은 금액 이하인 <b>가장 큰 동전</b>을 계속 낸다. 남은 금액이 0이 되면 멈춘다. 동전은 얼마든지 쓸 수 있다. 개수는 낸 동전의 수이다.</p></div>
@@ -212,7 +212,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>dp[5]가 INF인 동전 체계에서 dp[12]는 어떻게 구하는가?</p><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A5.opt.q" data-label="A5 선택: dp[12]를 구하는 방법"></textarea></div>
 </section>
 <section id="A6" class="sheet">
-<h2>A6 · 사실 정리와 이름 붙이기<small>1차시 · 8분 · 전체→개인</small></h2>
+<h2>A6 · 사실 정리와 이름 붙이기<small>1차시 · 9분 · 전체→개인</small></h2>
 <p class="meta"><span>산출물: 사실 정리표, 용어 연결, exit ticket</span></p>
 <h3>① 사실 정리(교사가 값을 되짚는 동안 내 표에서 찾아 쓴다)</h3>
 <div class="scroll"><table class="fill"><tr><th style="width:60%">항목</th><th>값</th></tr><tr><td class="lab">fib(6) 순수 재귀 호출 수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r1.c1" data-label="A6 사실 정리 fib(6) 순수 재귀 호출 수 값" autocomplete="off"></td></tr><tr><td class="lab">fib(6)에서 서로 다른 입력의 수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r2.c1" data-label="A6 사실 정리 fib(6)에서 서로 다른 입력의 수 값" autocomplete="off"></td></tr><tr><td class="lab">메모 규칙의 호출 수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r3.c1" data-label="A6 사실 정리 메모 규칙의 호출 수 값" autocomplete="off"></td></tr><tr><td class="lab">메모 규칙의 실제 계산 수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r4.c1" data-label="A6 사실 정리 메모 규칙의 실제 계산 수 값" autocomplete="off"></td></tr><tr><td class="lab">[1, 3, 4] 6원의 Greedy 개수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r5.c1" data-label="A6 사실 정리 [1, 3, 4] 6원의 Greedy 개수 값" autocomplete="off"></td></tr><tr><td class="lab">[1, 3, 4] 6원의 최소 개수(dp)</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r6.c1" data-label="A6 사실 정리 [1, 3, 4] 6원의 최소 개수(dp) 값" autocomplete="off"></td></tr></table></div>
@@ -220,7 +220,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="scroll"><table class="fill"><tr><th style="width:150px">이름</th><th>오늘 활동 중 연결되는 것(내 말)</th></tr><tr><td class="lab">메모이제이션</td><td class="in-cell"><textarea class="in" rows="2" data-key="A6.terms.r1.c1" data-label="A6 이름 붙이기 메모이제이션 오늘 활동 중 연결되는 것(내 말)"></textarea></td></tr><tr><td class="lab">타뷸레이션</td><td class="in-cell"><textarea class="in" rows="2" data-key="A6.terms.r2.c1" data-label="A6 이름 붙이기 타뷸레이션 오늘 활동 중 연결되는 것(내 말)"></textarea></td></tr><tr><td class="lab">동적 계획법</td><td class="in-cell"><textarea class="in" rows="2" data-key="A6.terms.r3.c1" data-label="A6 이름 붙이기 동적 계획법 오늘 활동 중 연결되는 것(내 말)"></textarea></td></tr><tr><td class="lab">탐욕 알고리즘</td><td class="in-cell"><textarea class="in" rows="2" data-key="A6.terms.r4.c1" data-label="A6 이름 붙이기 탐욕 알고리즘 오늘 활동 중 연결되는 것(내 말)"></textarea></td></tr><tr><td class="lab">반례</td><td class="in-cell"><textarea class="in" rows="2" data-key="A6.terms.r5.c1" data-label="A6 이름 붙이기 반례 오늘 활동 중 연결되는 것(내 말)"></textarea></td></tr></table></div>
 <div class="note"><b>오늘의 핵심질문(계획서)</b> 같은 연산을 수만 번 반복하지 않고 과거의 계산 결과를 기억해두면(메모이제이션) 성능이 얼마나 비약적으로 오를까?</div>
 <p>이 질문에 A2·A3에서 내가 센 수(호출 수와 계산 수)를 근거로 한 문장으로 답한다.</p><div class="ans-row"><span class="n">핵심</span><textarea class="in" rows="3" data-key="A6.core" data-label="A6 핵심질문에 대한 내 답(A2·A3에서 센 수를 근거로)"></textarea></div>
-<p>방금 한 일 중 &lsquo;기억&rsquo;이 들어간 것은 무엇인가? &lsquo;한 번 고르면 돌아보지 않는다&rsquo;가 들어간 것은 무엇인가?</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A6.q" data-label="A6 기억이 들어간 것과 돌아보지 않는 것"></textarea></div>
+<p>(선택) 방금 한 일 중 &lsquo;기억&rsquo;이 들어간 것은 무엇인가? &lsquo;한 번 고르면 돌아보지 않는다&rsquo;가 들어간 것은 무엇인가?</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A6.q" data-label="A6 기억이 들어간 것과 돌아보지 않는 것"></textarea></div>
 <h3>③ exit ticket</h3>
 <div class="ans-row"><span class="n">1</span><span>fib(7)을 &ldquo;계산한 값은 메모에 적는&rdquo; 규칙으로 구할 때 호출 </span><input type="text" class="in" data-key="A6.x1.calls" data-label="A6 exit1 fib(7) 메모 호출 횟수" autocomplete="off" style="width:4em;display:inline-block"><span>번, 실제 계산 </span><input type="text" class="in" data-key="A6.x1.comp" data-label="A6 exit1 fib(7) 메모 계산 횟수" autocomplete="off" style="width:4em;display:inline-block"><span>번</span></div>
 <div class="ans-row"><span class="n">2</span><span>[1, 3, 4]에서 9원의 Greedy 개수 </span><input type="text" class="in" data-key="A6.x2.greedy" data-label="A6 exit2 9원 Greedy 개수" autocomplete="off" style="width:4em;display:inline-block"><span>, dp[9] </span><input type="text" class="in" data-key="A6.x2.dp" data-label="A6 exit2 dp[9]" autocomplete="off" style="width:4em;display:inline-block"></div>

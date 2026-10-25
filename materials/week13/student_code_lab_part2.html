@@ -216,14 +216,14 @@ print("dp_coins:", dp_coins([1, 3, 4], 6))</code></pre></div>
 <div class="concept"><b class="h">약속 · 반례 탐색기</b>
 <p><b>반례</b>는 큰 동전부터 쓰는 방식의 개수가 최소 개수와 다른 금액 하나이다. <code class="i">find_failures(coins, limit)</code>는 1부터 <code class="i">limit</code>까지의 금액 중 두 개수가 다른 금액을 작은 것부터 모아 돌려준다. A8에서 완성한 두 함수를 쓴다.</p></div>
 <p><b>실행 순서</b> ① [예시 코드]에서 A9-1(뼈대)을 A9 편집기에 추가하고 ⑩을 채워 [▶ 실행]한다. A8에서 만든 <code class="i">greedy_coins</code>, <code class="i">dp_coins</code>가 이 쪽에 정의되어 있어야 한다. ② 아래 점검을 추가해 실행한다. ③ 체계 4개 실행(A9-3)은 점검이 통과한 뒤 &lsquo;내 체계 확인용&rsquo; 편집기나 A9 편집기에 추가해 실행한다.</p>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A9-1">def find_failures(coins, limit):
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A9-1" data-for="A9.mycode">def find_failures(coins, limit):
     bad = []                       # 두 방법의 개수가 다른 금액을 모을 리스트
     for a in range(1, limit + 1):  # 금액 1~limit을 하나씩 본다
         if ____10____:               # ⑩ Greedy와 DP의 개수가 다른가
             bad.append(a)          # 리스트 끝에 a를 추가한다
     return bad</code></pre></div>
 <div class="mycode"><label>내 코드 · A9 (find_failures 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A9.mycode" data-label="A9 (find_failures 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
-<h3>점검</h3><p>이 점검은 A8 점검 블록(A8-3)에서 정의한 두 함수를 쓴다. A8 편집기를 먼저 실행했는지 확인한 뒤, 이 점검을 A9 편집기 맨 아래에 추가해 실행한다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A9-2"># A9 점검: 정의대로 한 방법으로 모은 목록과 내 결과를 비교한다.
+<h3>점검</h3><p>이 점검은 A8 점검 블록(A8-3)에서 정의한 두 함수를 쓴다. A8 편집기를 먼저 실행했는지 확인한 뒤, 이 점검을 A9 편집기 맨 아래에 추가해 실행한다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A9-2" data-for="A9.mycode"># A9 점검: 정의대로 한 방법으로 모은 목록과 내 결과를 비교한다.
 # greedy_by_definition, fewest_brute는 A8 점검 블록(A8-3)에서 정의했다. 먼저 A8 편집기를 실행해 둔다.
 # fewest_brute는 느려서 limit을 24까지만 쓴다.
 for coins in ([1, 3, 4], [1, 4, 6], [1, 2, 5], [1, 10, 50, 100, 500]):

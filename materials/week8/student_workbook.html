@@ -130,7 +130,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <nav><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="#A6">A6</a><a href="#A7">A7</a><a href="#A8">A8</a><a href="#A9">A9</a><a href="#A10">A10</a><a href="index.html">목록</a></nav>
 
 <section id="A1" class="sheet">
-<h2>A1 · 한 줄 리스트로 옮겨 보기<small>1차시 · 8분 · 개인→짝</small></h2>
+<h2>A1 · 한 줄 리스트로 옮겨 보기<small>1차시 · 6분 · 개인→짝</small></h2>
 <p class="meta"><span>산출물: 불편함 메모 2가지</span></p>
 <div class="grid">
 <div class="card"><b class="h">사례 ① 족보</b><p>왕 한 명과 그 자녀, 자녀의 자녀가 이어지는 왕실 가계.</p></div>
@@ -149,7 +149,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </section>
 
 <section id="A2" class="sheet">
-<h2>A2 · 트리 용어 탐색 (T1)<small>1차시 · 12분 · 짝</small></h2>
+<h2>A2 · 트리 용어 탐색 (T1)<small>1차시 · 11분 · 짝</small></h2>
 <p class="meta"><span>산출물: 용어 라벨링 답, 서브트리 기록</span></p>
 <div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">        A
        / \
@@ -196,7 +196,7 @@ print(t1.val, t1.left.val, t1.right.val)</code></pre></div>
 </section>
 
 <section id="A3" class="sheet">
-<h2>A3 · T1을 손으로 순회하기<small>1차시 · 18분 · 짝</small></h2>
+<h2>A3 · T1을 손으로 순회하기<small>1차시 · 21분 · 짝</small></h2>
 <p class="meta"><span>산출물: 순회 결과 3개 + 호출 추적표 · 수행지시어 순회하다</span></p>
 <div class="concept" style="font-size:12px;padding:8px 12px"><b class="h">개념 정리 · 순회(traversal)</b>
 <p><b>순회</b>란 트리의 모든 노드를 <b>한 번씩</b> 방문하는 규칙이다. 방문 순서를 정하는 규칙에 따라 이름이 나뉜다. 여기서는 전위 규칙만 주어지고, 중위와 후위의 규칙은 이름에서 짐작해 직접 쓴다.</p>
@@ -215,8 +215,8 @@ print(t1.val, t1.left.val, t1.right.val)</code></pre></div>
 <p>호출이 표의 줄보다 많으면 마지막 줄 칸에 이어서 쓴다. 이어서 중위와 후위는 표를 따로 만들지 않고, 같은 호출 순서에서 위 개념 정리 칸에 쓴 내 짐작의 규칙대로 &lsquo;언제 출력하는가&rsquo;만 바꿔 머릿속(또는 연습지)으로 추적해 T1의 결과를 쓴다. 모둠 비교에서 결과가 서로 다르면 어느 규칙을 썼는지 먼저 맞춰 본다.</p>
 <table class="fill"><tr><th style="width:90px">순회</th><th>T1의 결과</th></tr>
 <tr><td class="lab">전위</td><td class="in-cell"><input type="text" class="in" data-key="A3.result.r1.c1" data-label="A3 T1 순회 결과 전위 · T1의 결과" autocomplete="off"></td></tr><tr><td class="lab">중위</td><td class="in-cell"><input type="text" class="in" data-key="A3.result.r2.c1" data-label="A3 T1 순회 결과 중위 · T1의 결과" autocomplete="off"></td></tr><tr><td class="lab">후위</td><td class="in-cell"><input type="text" class="in" data-key="A3.result.r3.c1" data-label="A3 T1 순회 결과 후위 · T1의 결과" autocomplete="off"></td></tr></table>
-<p><b>생각해 볼 질문</b> A에서 왼쪽으로 가기 전에 A를 출력했는가, 후에 출력했는가? D의 자식이 없을 때 함수는 무엇을 하고 돌아오는가?</p>
-<textarea class="in" rows="3" data-key="A3.reflect" data-label="A3 생각해 볼 질문 답"></textarea>
+<p><b>(선택) 생각해 볼 질문</b> 시간이 남으면 쓴다. A에서 왼쪽으로 가기 전에 A를 출력했는가, 후에 출력했는가? D의 자식이 없을 때 함수는 무엇을 하고 돌아오는가?</p>
+<textarea class="in" rows="3" data-key="A3.reflect" data-label="A3 (선택) 생각해 볼 질문 답"></textarea>
 <p><b>호출 수 세기</b> 위 호출 추적표를 모두 채운 뒤 T1의 노드 수와 전체 호출 횟수를 각각 센다. 노드가 N개인 트리라면 호출은 몇 번이라고 짐작하는가? 추적표의 어느 줄이 그 근거인가?</p>
 <textarea class="in" rows="3" data-key="A3.calls" data-label="A3 노드 수와 호출 횟수의 관계 짐작과 근거"></textarea>
 </section>

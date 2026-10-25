@@ -170,7 +170,7 @@ print("A8 대조 통과")</code></pre></div>
 <h2>A9 · 개수 세는 함수 만들기<small>12분 · 짝</small></h2>
 <p>구간 [lo, hi]는 양끝을 포함하는 닫힌 구간이다. 두 함수의 골격을 완성한다. <b>⑪은 처음에는 <code class="i">pass</code>로 두고</b> 먼저 예측-실행을 한 뒤, [7, 3]의 결과를 보고 채운다. 번호 ⑩은 쓰지 않는다. 예측 칸이 비어 있으면 [예시 코드]의 예측 후 실행 코드를 실행하지 않는다.</p>
 <h3>입력과 골격</h3>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A9-1"># A8에서 써 본 이진 탐색 도구를 가져온다
+<div class="codewrap" data-for="A9.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A9-1"># A8에서 써 본 이진 탐색 도구를 가져온다
 from bisect import bisect_left, bisect_right
 
 # 이 활동에서 쓰는 입력이다(같은 값이 여러 번 나오는 정렬된 리스트)
@@ -191,10 +191,10 @@ def count_in_range(a, lo, hi):          # 닫힌 구간 [lo, hi]의 원소 개�
 for lo, hi in ((4, 12), (3, 7), (8, 11), (0, 100), (13, 14)):
     print("[%d, %d]" % (lo, hi), count_in_range(DUP, lo, hi))</code></pre></div>
 <h3>2단계 lo &gt; hi 관찰</h3>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A9-3"># lo &gt; hi인 구간을 실행해 본다. 값을 보고 ⑪을 채운 뒤 다시 실행한다.
+<div class="codewrap" data-for="A9.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A9-3"># lo &gt; hi인 구간을 실행해 본다. 값을 보고 ⑪을 채운 뒤 다시 실행한다.
 print("[7, 3]", count_in_range(DUP, 7, 3))</code></pre></div>
 <h3>3단계 점검</h3>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A9-4"># A9 점검: 정의대로 하나씩 세는 느린 방법과 내 결과를 비교한다.
+<div class="codewrap" data-for="A9.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A9-4"># A9 점검: 정의대로 하나씩 세는 느린 방법과 내 결과를 비교한다.
 # 처음부터 훑으며 조건에 맞는 원소마다 1을 더해 센다(느리지만 확실한 기준)
 def slow_equal(a, x):
     return sum(1 for v in a if v == x)  # v == x인 원소마다 1을 더한 합

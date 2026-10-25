@@ -200,7 +200,10 @@ function openExamples(ed){
   var sec=ed.box.closest("section")||document;
   /* 아직 열지 않은 접힘 블록(details)과 data-noex 블록은 보여 주지 않는다 */
   var blocks=q("pre > code[data-role]",sec).filter(function(c){
-    return !c.hasAttribute("data-noex")&&!c.closest("details:not([open])");
+    if(c.hasAttribute("data-noex")||c.closest("details:not([open])"))return false;
+    /* data-for="편집기 data-key"가 있으면 그 편집기의 팝업에만 나온다 */
+    var f=c.closest("[data-for]");
+    return !f||f.getAttribute("data-for")===ed.ta.getAttribute("data-key");
   });
   var body=modal.querySelector(".ck-body");
   body.innerHTML="";

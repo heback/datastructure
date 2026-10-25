@@ -142,7 +142,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </ol>
 </section>
 <section id="A11" class="sheet">
-<h2>A11 · 정렬 코드와 비교 횟수 측정<small>14분 · 짝</small></h2>
+<h2>A11 · 정렬 코드와 비교 횟수 측정<small>12분 · 짝</small></h2>
 <p>A4에서 손으로 한 두 방식을 코드로 옮긴다. <code class="i">cnt</code>는 길이 1인 리스트로 비교 횟수를 센다(<code class="i">cnt[0] += 1</code>). 번호는 주석의 ⑫~⑰과 같다. 완성한 뒤 ARR8에서 A4에서 손으로 구한 비교 횟수와 비교한다(활동지 A11의 같음/다름 칸).</p>
 <h3>골격</h3>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A11-1"># 재귀: 함수가 자기 자신을 다시 호출해 문제를 더 작게 나눈다
@@ -225,7 +225,7 @@ for name, a in (("섞은 200", shuffled(200)), ("섞은 500", shuffled(500)), ("
 <p>파이썬에는 정렬 도구 <code class="i">sorted()</code>와 <code class="i">list.sort()</code>가 있다. 교사가 소개한다.</p>
 </section>
 <section id="A14" class="sheet">
-<h2>A14 · 과제 마무리 점검과 밧줄 자르기<small>A14에서 교사 지시 후 펼침 · 12분 · 개인</small></h2>
+<h2>A14 · 과제 마무리 점검과 밧줄 자르기<small>A14에서 교사 지시 후 펼침 · 14분 · 개인</small></h2>
 <details>
 <summary>A14에서 교사 지시 후 펼친다(과제 점검 입력, 요건 안내, 보조 연습 ROPE)</summary>
 <div class="gate">
@@ -236,8 +236,8 @@ for name, a in (("섞은 200", shuffled(200)), ("섞은 500", shuffled(500)), ("
 <li>입력은 정렬된(오름차순) 리스트로 주어진다. 정렬되지 않은 입력은 과제 범위가 아니다.</li>
 </ul>
 <h3>(가-1) 과제 점검</h3>
-<p>새 입력 TA에서 코드를 <b>고치지 않고</b> 통과하는지 확인한다(8분). 먼저 A9 쪽(student_code_lab_part2)의 내 코드 칸에서 <code class="i">count_equal</code>, <code class="i">count_in_range</code>를 실행해 성공시켜 둔 뒤, 이 쪽에서 [앞 쪽 코드 불러오기]를 눌러 두 함수의 정의를 이 쪽 환경에 가져온다. 불러오기는 환경에만 정의를 넣고 아래 내 코드 칸에는 코드를 넣지 않는다. <b>제출용으로 두 함수의 코드를 A9 쪽 칸에서 복사해 아래 내 코드 칸 맨 위에 붙여 넣고, 그 아래에 <code class="i">closest_value</code>를 새로 써서 세 함수를 한 칸에 모은다.</b> 칸 전체를 실행한 뒤 [예시 코드]의 TA와 점검 코드를 [편집기에 추가]해 이어 실행한다. 수업 중 점검은 count 두 함수가 대상이고, closest_value는 아래 (가-2)로 확인한다(시간이 남지 않으면 주간 과제에서 이어서 한다). <code class="i">NameError</code>가 나오면 불러오기나 붙여 넣기가 빠졌는지 확인한다.</p>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A14-1">TA = [2, 2, 2, 6, 6, 10, 14, 14, 14, 14, 18]     # 정렬된 입력(같은 값이 여럿 있을 수 있다)</code></pre></div><div class="mycode"><label>내 코드 · A14 (count_equal, count_in_range, closest_value 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A14.mycode" data-label="A14 (count_equal, count_in_range, closest_value 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-2"># A14 점검 (가-1): 입력에서 계산한 느린 방법과 내 두 함수의 결과를 비교한다(기대값을 미리 적어 두지 않았다).
+<p>새 입력 TA에서 코드를 <b>고치지 않고</b> 통과하는지 확인한다(9분). 먼저 A9 쪽(student_code_lab_part2)의 내 코드 칸에서 <code class="i">count_equal</code>, <code class="i">count_in_range</code>를 실행해 성공시켜 둔 뒤, 이 쪽에서 [앞 쪽 코드 불러오기]를 눌러 두 함수의 정의를 이 쪽 환경에 가져온다. 불러오기는 환경에만 정의를 넣고 아래 내 코드 칸에는 코드를 넣지 않는다. <b>제출용으로 두 함수의 코드를 A9 쪽 칸에서 복사해 아래 내 코드 칸 맨 위에 붙여 넣고, 그 아래에 <code class="i">closest_value</code>를 새로 써서 세 함수를 한 칸에 모은다.</b> 칸 전체를 실행한 뒤 [예시 코드]의 TA와 점검 코드를 [편집기에 추가]해 이어 실행한다. 수업 중 점검은 count 두 함수가 대상이고, closest_value는 아래 (가-2)로 확인한다(시간이 남지 않으면 주간 과제에서 이어서 한다). <code class="i">NameError</code>가 나오면 불러오기나 붙여 넣기가 빠졌는지 확인한다.</p>
+<div class="codewrap" data-for="A14.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A14-1">TA = [2, 2, 2, 6, 6, 10, 14, 14, 14, 14, 18]     # 정렬된 입력(같은 값이 여럿 있을 수 있다)</code></pre></div><div class="mycode"><label>내 코드 · A14 (count_equal, count_in_range, closest_value 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A14.mycode" data-label="A14 (count_equal, count_in_range, closest_value 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap" data-for="A14.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-2"># A14 점검 (가-1): 입력에서 계산한 느린 방법과 내 두 함수의 결과를 비교한다(기대값을 미리 적어 두지 않았다).
 # random은 무작위 값, time은 걸린 시간을 다루는 모듈이다
 import random, time
 
@@ -275,7 +275,7 @@ else:  # for가 break 없이 끝났을 때만 실행된다
     print("큰 입력 점검 끝: %.2f초 (대략 1초 안쪽이면 충분히 빠른 편이다)" % (time.perf_counter() - t0))</code></pre></div>
 <h3>(가-2) closest_value 점검</h3>
 <p><code class="i">closest_value</code>를 위 내 코드 칸에 쓰고 실행한 뒤, 아래 점검으로 확인한다. 점검은 내 결과가 &ldquo;정의를 만족하는지&rdquo;를 검사한다. 정답 함수는 제공하지 않는다. 먼저 활동지 2부 A9의 closest 질문 칸에 DUP에서 가장 가까운 값을 눈으로 찾아 쓴 내용을 떠올린다.</p>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-3"># A14 점검 (가-2): closest_value의 결과가 정의를 만족하는지 검사한다.
+<div class="codewrap" data-for="A14.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-3"># A14 점검 (가-2): closest_value의 결과가 정의를 만족하는지 검사한다.
 def check_closest(a, x, r):
     # 정의: 거리가 가장 작고, 거리가 같으면 작은 값이 답이다. 빈 리스트는 None
     if not a:
@@ -308,11 +308,11 @@ else:
     print("closest_value 큰 입력 점검 끝: %.2f초 (대략 1초 안쪽이면 충분히 빠른 편이다)" % (time.perf_counter() - t0))</code></pre></div>
 <div class="ans-row"><span class="n">구현 계획 다시 쓰기: A7에서 쓴 계획 한 줄을 O(log N) 표기로 다듬어 다시 쓰고, 달라진 점을 한 줄 덧붙인다</span><textarea class="in" rows="2" data-key="A14.plan" data-label="A14 구현 계획 한 줄"></textarea></div>
 <h3>복잡도 분석 서술 (과제 제출물)</h3>
-<p>세 함수의 시간·공간 복잡도와 그 근거를 직접 쓴다. 더 단순한 대안(하나씩 세는 방법)과 비교해 본다.</p>
+<p>(선택: 수업 시간에 끝내지 못하면 주간 과제에서 이어서 쓴다) 세 함수의 시간·공간 복잡도와 그 근거를 직접 쓴다. 더 단순한 대안(하나씩 세는 방법)과 비교해 본다.</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="4" data-key="A14.cx.time" data-label="A14 시간 복잡도와 근거"></textarea></div><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A14.cx.space" data-label="A14 공간 복잡도와 근거"></textarea></div><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A14.cx.alt" data-label="A14 더 단순한 방법과의 비교"></textarea></div>
 <h3>(나) 전이: 밧줄 자르기 (채점하지 않는다)</h3>
-<p>밧줄 4개를 모두 같은 길이 L로 잘라 조각을 모은다(조각 수 = 밧줄마다 r // L의 합). 조각이 k = 9개 이상이 되는 <b>가장 긴 L</b>을 구한다. <code class="i">count_pieces</code>는 주어져 있다. 먼저 손으로 몇 가지 L의 조각 수를 구해 보고, ⑱⑲를 채워 범위를 줄이는 코드를 완성한다(4분). 끝내지 못한 부분은 주간 과제이다.</p>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A14R-1">ropes = [120, 85, 47, 63]    # 같은 길이 L로 자를 때 조각 수 = 각 밧줄의 r // L 의 합
+<p>밧줄 4개를 모두 같은 길이 L로 잘라 조각을 모은다(조각 수 = 밧줄마다 r // L의 합). 조각이 k = 9개 이상이 되는 <b>가장 긴 L</b>을 구한다. <code class="i">count_pieces</code>는 주어져 있다. 먼저 손으로 몇 가지 L의 조각 수를 구해 보고, ⑱⑲를 채워 범위를 줄이는 코드를 완성한다(5분). 끝내지 못한 부분은 주간 과제이다.</p>
+<div class="codewrap" data-for="A14.rope.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A14R-1">ropes = [120, 85, 47, 63]    # 같은 길이 L로 자를 때 조각 수 = 각 밧줄의 r // L 의 합
 k = 9                        # 조각이 k개 이상이 되는 가장 긴 L은?
 
 def count_pieces(ropes, L):      # 제공
@@ -326,7 +326,7 @@ def max_piece_length(ropes, k):
             lo = mid
         else:
             hi = ____19____      # ⑲
-    return lo</code></pre></div><div class="mycode"><label>내 코드 · A14 ROPE (max_piece_length 작성)</label><textarea class="in code" rows="14" data-type="code" data-key="A14.rope.mycode" data-label="A14 ROPE (max_piece_length 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14R-2"># ROPE 점검: 1부터 하나씩 늘려 가며 찾은 느린 답과 비교하고, count_pieces를 몇 번 불렀는지 센다.
+    return lo</code></pre></div><div class="mycode"><label>내 코드 · A14 ROPE (max_piece_length 작성)</label><textarea class="in code" rows="14" data-type="code" data-key="A14.rope.mycode" data-label="A14 ROPE (max_piece_length 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap" data-for="A14.rope.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14R-2"># ROPE 점검: 1부터 하나씩 늘려 가며 찾은 느린 답과 비교하고, count_pieces를 몇 번 불렀는지 센다.
 _real = count_pieces  # 원래 함수를 따로 보관한다
 calls = [0]  # 호출 횟수를 세는 칸
 # 같은 이름으로 다시 정의해 호출될 때마다 횟수를 1 올린다

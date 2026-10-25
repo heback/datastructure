@@ -144,36 +144,36 @@ table.fill td.in-cell{padding:3px;height:auto}
 </section>
 <section id="A8" class="sheet">
 <h2>A8 · 함정 탐색: 예측 후 실행<small>14분 · 짝</small></h2>
-<p>먼저 A7에서 만든 방식으로 G1을 새로 만드는 함수 <code class="i">make_g1</code>을 완성한다. 아래 C1~C5는 모두 <code class="i">make_g1()</code> 뒤에 붙여 실행한다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A8-1">from collections import defaultdict  # 표준 라이브러리에서 defaultdict를 가져온다
+<p>먼저 A7에서 만든 방식으로 G1을 새로 만드는 함수 <code class="i">make_g1</code>을 완성한다. 아래 C1~C5는 모두 <code class="i">make_g1()</code> 뒤에 붙여 실행한다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A8-1" data-for="A8.setup.mycode">from collections import defaultdict  # 표준 라이브러리에서 defaultdict를 가져온다
 
 # 간선 목록은 A7과 같다.
-G1_EDGES = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "D"), ("D", "E")]</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A8-2"># 인자 없이 호출하며, 호출할 때마다 새 G1을 만들어 돌려줘야 한다.
+G1_EDGES = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "D"), ("D", "E")]</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A8-2" data-for="A8.setup.mycode"># 인자 없이 호출하며, 호출할 때마다 새 G1을 만들어 돌려줘야 한다.
 def make_g1():
     # TODO(A8): A7에서 완성한 방식으로 G1(무방향)을 새로 만들어 돌려준다.
     # 작성을 마치면 이 raise 줄은 내 코드로 바꾼다.
-    raise NotImplementedError("make_g1을 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A8 (make_g1 작성)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.setup.mycode" data-label="A8 (make_g1 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>준비 확인</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-3">g = make_g1()  # 내가 만든 함수로 G1을 만든다
+    raise NotImplementedError("make_g1을 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A8 (make_g1 작성)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.setup.mycode" data-label="A8 (make_g1 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>준비 확인</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-3" data-for="A8.setup.mycode">g = make_g1()  # 내가 만든 함수로 G1을 만든다
 # 확인용 목록: 간선 목록에서 각 노드의 이웃을 계산한다.
 ref = {n: [b if a == n else a for a, b in G1_EDGES if n in (a, b)] for n in {x for e in G1_EDGES for x in e}}
 # type(g).__name__은 g의 자료형 이름이다. 이름을 확인한다.
 assert type(g).__name__ == "defaultdict", "g는 defaultdict(list)여야 한다"
 # 내가 만든 목록이 확인용 목록과 같은지 비교한다. 다르면 AssertionError이다.
 assert dict(g) == ref, "make_g1()의 결과가 G1 손 목록과 다르다"
-print("A8 준비 통과")</code></pre></div><h3>함정 실행칸</h3><p>make_g1은 위 칸에서 먼저 실행해 두면 같은 쪽 안에서 계속 쓸 수 있다.</p><div class="mycode"><label>함정 실행칸 · A8 (C1~C5를 한 개씩 바꿔 넣고 실행)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.trap.mycode" data-label="A8 함정 실행칸" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 아래 C1~C5 중 한 개를 [예시 코드]에서 추가해 실행한다. 한 개를 실행한 뒤에는 칸을 모두 지우고 다음 C를 추가한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>함정 코드 C1~C5</h3><p>한 개씩 실행한다. 실행 전에 예측을 쓴다. C3 이후에도 오류 메시지는 활동지에 그대로 옮긴다.</p><h3>코드 C1</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C1-1"># C1
+print("A8 준비 통과")</code></pre></div><h3>함정 실행칸</h3><p>make_g1은 위 칸에서 먼저 실행해 두면 같은 쪽 안에서 계속 쓸 수 있다.</p><div class="mycode"><label>함정 실행칸 · A8 (C1~C5를 한 개씩 바꿔 넣고 실행)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.trap.mycode" data-label="A8 함정 실행칸" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. 아래 C1~C5 중 한 개를 [예시 코드]에서 추가해 실행한다. 한 개를 실행한 뒤에는 칸을 모두 지우고 다음 C를 추가한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>함정 코드 C1~C5</h3><p>한 개씩 실행한다. 실행 전에 예측을 쓴다. C3 이후에도 오류 메시지는 활동지에 그대로 옮긴다.</p><h3>코드 C1</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C1-1" data-for="A8.trap.mycode"># C1
 g = make_g1()  # A8에서 만든 함수로 G1을 만든다
 print(len(g))  # g의 노드 수를 출력한다
 x = g["Z"]  # 키 "Z"로 g에서 값을 꺼내 x에 담는다
-print(len(g), x)  # 노드 수와 x를 함께 출력한다</code></pre></div><h3>코드 C2</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C2-1"># C2
+print(len(g), x)  # 노드 수와 x를 함께 출력한다</code></pre></div><h3>코드 C2</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C2-1" data-for="A8.trap.mycode"># C2
 g = make_g1()  # G1을 만든다
 print("Q" in g)  # "Q"가 g의 키인지 True/False로 출력한다
 print(g.get("Y", []))  # "Y"로 찾고 없으면 []를 대신 돌려준다
-print(len(g))  # g의 노드 수를 출력한다</code></pre></div><h3>코드 C3</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C3-1"># C3
+print(len(g))  # g의 노드 수를 출력한다</code></pre></div><h3>코드 C3</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C3-1" data-for="A8.trap.mycode"># C3
 g = make_g1()  # G1을 만든다
 for u in g:  # g의 키를 하나씩 꺼내 u에 담는다
     print(u)  # 꺼낸 키를 출력한다
-    g["Z"]</code></pre></div><h3>코드 C4</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C4-1"># C4
+    g["Z"]</code></pre></div><h3>코드 C4</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C4-1" data-for="A8.trap.mycode"># C4
 l = [[]] * 3
 l[0].append(1)  # l의 첫 번째 칸에 1을 덧붙인다
-print(l)  # l을 출력한다</code></pre></div><h3>코드 C5 (선택)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C5-1"># C5 (선택)
+print(l)  # l을 출력한다</code></pre></div><h3>코드 C5 (선택)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="C5-1" data-for="A8.trap.mycode"># C5 (선택)
 def build(edges, g={}):  # 간선 목록으로 이웃 목록 dict를 만든다
     for u, v in edges:
         g.setdefault(u, []).append(v)  # u가 없으면 []를 넣고 v를 덧붙인다
@@ -186,7 +186,7 @@ print(b)
 print(a is b)  # a와 b가 같은 객체인지 출력한다</code></pre></div>
 </section>
 <section id="A9" class="sheet">
-<h2>A9 · 두 표현의 연산 카운터 실측<small>9분 · 짝</small></h2>
+<h2>A9 · 두 표현의 연산 카운터 실측<small>11분 · 짝</small></h2>
 <p>A4에서 손으로 센 값을 코드로 확인한다. 코드를 돌리기 전에 활동지의 &ldquo;손으로 센 값&rdquo; 칸을 먼저 채운다. 함수는 결과와 함께 <b>확인한 칸/원소 수</b>를 돌려준다. 4개 함수 중 세 개는 완성되어 있고, <b>has_edge_list_count</b>는 함수 머리와 반환 형식만 주어지므로 본문을 직접 쓴다. G1 질의 4개를 실행해 나온 값을 활동지 <a href="student_workbook_part2.html#A9">2부 A9</a>의 실측 표에 옮겨 쓰고, 손 값과 다르면 어디서 틀렸는지 한 줄 쓴다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A9-1"># A6·A8을 끝냈다면 내 코드를 이 칸 앞에 붙이고, 아래 "참조 코드" 줄은 지운다.
 # 끝내지 못했다면 아래 참조 코드를 그대로 쓴다. (A9의 목표는 확인한 수 세기이다.)
 from collections import defaultdict

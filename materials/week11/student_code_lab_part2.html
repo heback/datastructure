@@ -145,8 +145,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="mycode"><label>준비 편집기 &middot; 1부 코드가 불러와지지 않을 때만 붙여 넣는다<textarea class="in code" rows="10" data-type="code" data-noex data-key="A8.prep" data-label="A8 준비 코드 붙여넣기(1부 코드를 불러오지 못한 경우)" spellcheck="false"></textarea></label></div>
 </section>
 <section id="A8" class="sheet">
-<h2>A8 · 함정 탐색: 예측 후 실행<small>14분 · 짝</small></h2>
-<p>각 코드의 위쪽 주석에 시작 상태가 적혀 있다. T 편집기는 실행할 때마다 그 코드의 함수를 처음부터 다시 정의하므로 새로 시작한 상태에서 실행된다(T4는 세 번의 호출이 한 번의 실행 안에서 이어진다). 같은 T 코드를 한 편집기에 두 번 추가하지 않도록 주의한다.</p><h3>T1-a</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="T1-1"># T1-a · 시작 상태: 큐 [start], visited는 비어 있다. g는 G1.
+<h2>A8 · 함정 탐색: 예측 후 실행<small>13분 · 짝</small></h2>
+<p>각 코드의 위쪽 주석에 시작 상태가 적혀 있다. T 편집기는 실행할 때마다 그 코드의 함수를 처음부터 다시 정의하므로 새로 시작한 상태에서 실행된다(T4는 세 번의 호출이 한 번의 실행 안에서 이어진다). 같은 T 코드를 한 편집기에 두 번 추가하지 않도록 주의한다.</p><h3>T1-a</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="T1-1" data-for="A8.code.T1a"># T1-a · 시작 상태: 큐 [start], visited는 비어 있다. g는 G1.
 # g에서 start부터 방문 순서를 만드는 함수(bfs_late)이다.
 def bfs_late(g, start):
     q = deque([start])  # 시작 노드만 든 큐
@@ -161,7 +161,7 @@ def bfs_late(g, start):
                 q.append(v)  # 큐의 뒤에 넣는다
     return order
 
-print(bfs_late(g, "A"))</code></pre></div><div class="mycode"><label>내 코드 &middot; T1-a 실행<textarea class="in code" rows="16" data-type="code" data-key="A8.code.T1a" data-label="A8 T1-a 실행 코드" spellcheck="false"></textarea></label></div><div class="mycode"><label>실행 메모 · T1-a (실행하며 본 것, 오류 이름을 그대로 쓴다)<textarea class="in" rows="2" data-key="A8.memo.T1a" data-label="A8 T1-a 실행 메모"></textarea></label></div><h3>T1-b</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="T1-2"># T1-b · 시작 상태: 함수 안에서 매번 새 큐, seen. 격자는 모두 통과할 수 있는 4x4.
+print(bfs_late(g, "A"))</code></pre></div><div class="mycode"><label>내 코드 &middot; T1-a 실행<textarea class="in code" rows="16" data-type="code" data-key="A8.code.T1a" data-label="A8 T1-a 실행 코드" spellcheck="false"></textarea></label></div><div class="mycode"><label>실행 메모 · T1-a (실행하며 본 것, 오류 이름을 그대로 쓴다)<textarea class="in" rows="2" data-key="A8.memo.T1a" data-label="A8 T1-a 실행 메모"></textarea></label></div><h3>T1-b</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="T1-2" data-for="A8.code.T1b"># T1-b · 시작 상태: 함수 안에서 매번 새 큐, seen. 격자는 모두 통과할 수 있는 4x4.
 # 벽이 없는 4x4 격자(모든 칸이 '.')
 OPEN4 = ["....", "....", "....", "...."]
 
@@ -192,7 +192,7 @@ def bfs_count(grid, start, mark_when):      # mark_when: "enqueue" 또는 "deque
 
 # 표시 시점을 바꿔 두 번 실행하고 각각 출력한다
 print("enqueue", bfs_count(OPEN4, (0, 0), "enqueue"))
-print("dequeue", bfs_count(OPEN4, (0, 0), "dequeue"))</code></pre></div><div class="mycode"><label>내 코드 &middot; T1-b 실행<textarea class="in code" rows="24" data-type="code" data-key="A8.code.T1b" data-label="A8 T1-b 실행 코드" spellcheck="false"></textarea></label></div><div class="mycode"><label>실행 메모 · T1-b (실행하며 본 것, 오류 이름을 그대로 쓴다)<textarea class="in" rows="2" data-key="A8.memo.T1b" data-label="A8 T1-b 실행 메모"></textarea></label></div><h3>T2</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="T2-1"># T2 · 시작 상태: 두 컨테이너를 n마다 새로 만든다. 시간은 환경마다 다르므로 배수(비율)만 본다.
+print("dequeue", bfs_count(OPEN4, (0, 0), "dequeue"))</code></pre></div><div class="mycode"><label>내 코드 &middot; T1-b 실행<textarea class="in code" rows="24" data-type="code" data-key="A8.code.T1b" data-label="A8 T1-b 실행 코드" spellcheck="false"></textarea></label></div><div class="mycode"><label>실행 메모 · T1-b (실행하며 본 것, 오류 이름을 그대로 쓴다)<textarea class="in" rows="2" data-key="A8.memo.T1b" data-label="A8 T1-b 실행 메모"></textarea></label></div><h3>T2</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="T2-1" data-for="A8.code.T2"># T2 · 시작 상태: 두 컨테이너를 n마다 새로 만든다. 시간은 환경마다 다르므로 배수(비율)만 본다.
 import time  # 시간을 재는 도구
 
 # 원소 n개를 앞에서부터 모두 꺼내는 데 걸린 시간을 돌려준다.
@@ -216,7 +216,7 @@ def drain_deque(n):
 t = {n: (drain_list(n), drain_deque(n)) for n in (10000, 100000)}
 print("첫 번째:  n이 10배가 될 때 시간은", round(t[100000][0] / t[10000][0], 1), "배")
 print("두 번째:  n이 10배가 될 때 시간은", round(t[100000][1] / t[10000][1], 1), "배")
-print("n=100000에서 (list 시간) / (deque 시간) =", round(t[100000][0] / t[100000][1], 1))</code></pre></div><div class="mycode"><label>내 코드 &middot; T2 실행<textarea class="in code" rows="18" data-type="code" data-key="A8.code.T2" data-label="A8 T2 실행 코드" spellcheck="false"></textarea></label></div><div class="mycode"><label>실행 메모 · T2 (실행하며 본 것, 오류 이름을 그대로 쓴다)<textarea class="in" rows="2" data-key="A8.memo.T2" data-label="A8 T2 실행 메모"></textarea></label></div><h3>T3</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="T3-1"># T3 · 시작 상태: 호출마다 새 seen. 1 x width 땅 한 줄의 섬을 재귀로 탐색한다.
+print("n=100000에서 (list 시간) / (deque 시간) =", round(t[100000][0] / t[100000][1], 1))</code></pre></div><div class="mycode"><label>내 코드 &middot; T2 실행<textarea class="in code" rows="18" data-type="code" data-key="A8.code.T2" data-label="A8 T2 실행 코드" spellcheck="false"></textarea></label></div><div class="mycode"><label>실행 메모 · T2 (실행하며 본 것, 오류 이름을 그대로 쓴다)<textarea class="in" rows="2" data-key="A8.memo.T2" data-label="A8 T2 실행 메모"></textarea></label></div><h3>T3</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="T3-1" data-for="A8.code.T3"># T3 · 시작 상태: 호출마다 새 seen. 1 x width 땅 한 줄의 섬을 재귀로 탐색한다.
 import sys  # 파이썬 시스템 정보를 쓰는 도구
 print("재귀 한도:", sys.getrecursionlimit())
 
@@ -236,7 +236,7 @@ for width in (500, 1500):
         explore_rec(["1" * width], 0, 0, seen)
         print(width, "방문한 칸:", len(seen))
     except RecursionError as e:  # 재귀 오류를 잡아 e에 담는다
-        print(width, "RecursionError:", e)</code></pre></div><div class="mycode"><label>내 코드 &middot; T3 실행<textarea class="in code" rows="18" data-type="code" data-key="A8.code.T3" data-label="A8 T3 실행 코드" spellcheck="false"></textarea></label></div><div class="mycode"><label>실행 메모 · T3 (실행하며 본 것, 오류 이름을 그대로 쓴다)<textarea class="in" rows="2" data-key="A8.memo.T3" data-label="A8 T3 실행 메모"></textarea></label></div><h3>T4 (선택)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="T4-1"># T4(선택) · 시작 상태: 첫 호출은 새로 시작한 상태이고, 이어지는 두 호출은 같은 프로세스에서 이어서 실행한다.
+        print(width, "RecursionError:", e)</code></pre></div><div class="mycode"><label>내 코드 &middot; T3 실행<textarea class="in code" rows="18" data-type="code" data-key="A8.code.T3" data-label="A8 T3 실행 코드" spellcheck="false"></textarea></label></div><div class="mycode"><label>실행 메모 · T3 (실행하며 본 것, 오류 이름을 그대로 쓴다)<textarea class="in" rows="2" data-key="A8.memo.T3" data-label="A8 T3 실행 메모"></textarea></label></div><h3>T4 (선택)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="T4-1" data-for="A8.code.T4"># T4(선택) · 시작 상태: 첫 호출은 새로 시작한 상태이고, 이어지는 두 호출은 같은 프로세스에서 이어서 실행한다.
 # g에서 u부터 DFS로 방문 순서를 만들어 돌려주는 함수(dfs_bad)이다.
 def dfs_bad(g, u, visited=set()):
     visited.add(u)

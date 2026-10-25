@@ -143,7 +143,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </ol>
 </section>
 <section id="A10" class="sheet">
-<h2>A10 · 이웃 반환 함수 두 가지<small>14분 · 짝</small></h2>
+<h2>A10 · 이웃 반환 함수 두 가지<small>16분 · 짝</small></h2>
 <p>같은 일을 하는 이웃 반환 함수를 두 가지로 만든다. (가)는 이웃을 리스트로 만들어 돌려주고, (나)는 이웃을 요청할 때마다 하나씩 내준다. 교사가 <code class="i">yield</code>의 문법을 설명한 뒤 (나)를 완성한다. (가)와 (나)를 각각 완성한다. 호출하는 쪽 코드 <code class="i">for v in neighbors_gen(g, u)</code>가 (가)와 (나)에서 같은지도 확인한다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A10-1"># 이 쪽의 실행 환경은 앞 쪽과 따로이다. 이 공통 코드를 편집기에 먼저 추가해 실행한 뒤 이어서 쓴다.
 # (A8에서 만든 make_g1이 있다면 아래 참조 코드 대신 내 코드를 써도 된다.)
 from collections import defaultdict
@@ -217,15 +217,15 @@ assert not fails, "A10 테스트 실패: %s" % fails
 print("A10 테스트 통과")</code></pre></div>
 </section>
 <section id="A13" class="sheet">
-<h2>A13 · 과제 마무리 점검과 전이<small>12분 · 개인(옆 학생과 결과 비교)</small></h2>
-<div class="warn"><b>과제 안내 갱신</b> (이 파일에서 처음 안내한다)<ul><li><code class="i">build_graph(edges, directed=False)</code>는 <code class="i">defaultdict(list)</code>를 반환한다.</li><li><code class="i">neighbors(g, u)</code>는 <code class="i">yield</code>를 쓰는 제네레이터여야 한다(이웃 리스트를 반환하면 안 된다).</li><li>검증용으로 일반 dict나 리스트 기반 비교 코드를 직접 쓰는 것은 허용된다.</li></ul></div><h3>(가) 과제 마무리 점검 (8분)</h3><p>A7에서 만든 <code class="i">build_graph</code>는 이 쪽의 [앞 쪽 코드 불러오기]로 가져오거나 아래 편집기에 다시 쓰고, A10의 <code class="i">neighbors_gen</code>은 이름을 <code class="i">neighbors</code>로 바꿔 이 쪽 A13 과제 편집기에 쓴다. 제출용 코드는 두 함수가 모두 이 편집기에 있어야 한다. 내가 쓴 두 함수를 아래 입력과 테스트로 점검한다. 코드를 고치지 않고 새 입력에서도 통과하는지 본다. 먼저 입력, 내 코드, 점검 순으로 이어 붙인다.</p><h3>점검 입력</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A13-1"># 과제 점검 입력 (기대 출력은 적혀 있지 않다)
+<h2>A13 · 과제 마무리 점검과 전이<small>11분 · 개인(옆 학생과 결과 비교)</small></h2>
+<div class="warn"><b>과제 안내 갱신</b> (이 파일에서 처음 안내한다)<ul><li><code class="i">build_graph(edges, directed=False)</code>는 <code class="i">defaultdict(list)</code>를 반환한다.</li><li><code class="i">neighbors(g, u)</code>는 <code class="i">yield</code>를 쓰는 제네레이터여야 한다(이웃 리스트를 반환하면 안 된다).</li><li>검증용으로 일반 dict나 리스트 기반 비교 코드를 직접 쓰는 것은 허용된다.</li></ul></div><h3>(가) 과제 마무리 점검 (7분)</h3><p>A7에서 만든 <code class="i">build_graph</code>는 이 쪽의 [앞 쪽 코드 불러오기]로 가져오거나 아래 편집기에 다시 쓰고, A10의 <code class="i">neighbors_gen</code>은 이름을 <code class="i">neighbors</code>로 바꿔 이 쪽 A13 과제 편집기에 쓴다. 제출용 코드는 두 함수가 모두 이 편집기에 있어야 한다. 내가 쓴 두 함수를 아래 입력과 테스트로 점검한다. 코드를 고치지 않고 새 입력에서도 통과하는지 본다. 먼저 입력, 내 코드, 점검 순으로 이어 붙인다.</p><h3>점검 입력</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A13-1"># 과제 점검 입력 (기대 출력은 적혀 있지 않다)
 # 입력 간선 목록이다. 직접 만든 build_graph에 넣어 점검한다.
 G1_EDGES = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "D"), ("D", "E")]
 W_EDGES = [(0, 1), (0, 2), (1, 2), (2, 0), (3, 2)]
 # 지하철 노선도 SUB: 노선 2개가 환승역에서 만난다.
 SUB_EDGES = [("가", "나"), ("나", "다"), ("다", "라"), ("라", "마"), ("바", "다"), ("다", "사"), ("사", "아")]
 # 리스트에 간선 하나를 더한 목록이다. +는 리스트를 이어 붙인다.
-SUB_PLUS_EDGES = SUB_EDGES + [("마", "아")]</code></pre></div><div class="mycode"><label>내 코드 · A13 과제 (build_graph, neighbors 작성)</label><textarea class="in code" rows="22" data-type="code" data-key="A13.assign.mycode" data-label="A13 과제 (build_graph, neighbors 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>점검 테스트</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-2">import inspect  # 코드의 종류를 검사하는 표준 라이브러리이다
+SUB_PLUS_EDGES = SUB_EDGES + [("마", "아")]</code></pre></div><div class="mycode"><label>내 코드 · A13 과제 (build_graph, neighbors 작성)</label><textarea class="in code" rows="22" data-type="code" data-key="A13.assign.mycode" data-label="A13 과제 (build_graph, neighbors 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>점검 테스트</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-2" data-for="A13.assign.mycode">import inspect  # 코드의 종류를 검사하는 표준 라이브러리이다
 # 내가 build_graph와 neighbors를 만들었는지 먼저 확인한다.
 assert "build_graph" in globals() and "neighbors" in globals(), "먼저 build_graph와 neighbors를 작성한다"
 
@@ -288,7 +288,7 @@ for f in fails:
     print("FAIL", f)
 # 실패가 하나라도 있으면 AssertionError로 멈춘다.
 assert not fails, "A13 추가 점검 실패: %s" % fails
-print("A13 추가 점검 통과")</code></pre></div></details><h3>(나) 전이: 지하철 노선도 SUB (4분)</h3><p>노선 2개가 환승역 한 곳에서 만나는 노선도 SUB이다. 위 입력의 <code class="i">SUB_EDGES</code>를 쓴다. 활동지 <a href="student_workbook_part3.html#A13">3부 A13</a>의 질문에 답한다. 이 연습은 채점하지 않는다. 먼저 활동지 <a href="student_workbook_part3.html#A13">3부 A13</a>의 표에서 노드 수와 간선 수, 환승역을 손으로 적는다. 아래 코드는 손으로 센 값을 확인하는 용도이다. 값이 다르면 어느 쪽이 틀렸는지 찾아 표에서 고친다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A13-3"># SUB 전이 보조: 손으로 센 값을 확인하는 용도이다. 직접 만든 build_graph로 SUB와 SUB+를 만들어 수를 센다.
+print("A13 추가 점검 통과")</code></pre></div></details><h3>(나) 전이: 지하철 노선도 SUB (4분)</h3><p>노선 2개가 환승역 한 곳에서 만나는 노선도 SUB이다. 위 입력의 <code class="i">SUB_EDGES</code>를 쓴다. 활동지 <a href="student_workbook_part3.html#A13">3부 A13</a>의 질문에 답한다. 이 연습은 채점하지 않는다. 먼저 활동지 <a href="student_workbook_part3.html#A13">3부 A13</a>의 표에서 노드 수와 간선 수, 환승역을 손으로 적는다. 아래 코드는 손으로 센 값을 확인하는 용도이다. 값이 다르면 어느 쪽이 틀렸는지 찾아 표에서 고친다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A13-3" data-for="A13.sub.mycode"># SUB 전이 보조: 손으로 센 값을 확인하는 용도이다. 직접 만든 build_graph로 SUB와 SUB+를 만들어 수를 센다.
 # 두 노선도를 차례로 만들어 수를 센다.
 for name, edges in (("SUB", SUB_EDGES), ("SUB+", SUB_PLUS_EDGES)):
     g = build_graph(edges)

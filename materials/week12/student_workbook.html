@@ -131,7 +131,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </header>
 <nav><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="#A6">A6</a><a href="index.html">목록</a></nav>
 <section id="A1" class="sheet">
-<h2>A1 · 몇 번 만에 찾을까<small>1차시 · 7분 · 개인→짝</small></h2>
+<h2>A1 · 몇 번 만에 찾을까<small>1차시 · 6분 · 개인→짝</small></h2>
 <p class="meta"><span>산출물: 나만의 규칙 메모와 최악의 횟수 추정</span></p>
 <p>지난주 BFS는 &ldquo;가까운 곳부터 한 겹씩&rdquo; 살폈다. 이번 주는 정렬된 데이터에서 &ldquo;어디부터 볼까&rdquo;를 생각한다. 아래 세 사례에서 원하는 것을 가장 적은 횟수로 찾는 규칙을 생각해 본다.</p>
 <div class="grid">
@@ -147,7 +147,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A1.guess" data-label="A1 숫자 맞히기 최악의 횟수와 말하는 방법"></textarea></div>
 <p>학번 10억 개를 맨 앞에서 하나씩 보면 최대 몇 번 보아야 하는가? 지금 떠오르는 방법으로 찾으면 몇 번쯤이면 될까? 어림한 값과 까닭을 쓴다.</p>
 <div class="ans-row"><span class="n">3</span><span>하나씩 보면 최대 </span><input type="text" class="in" data-key="A1.billion.lin" data-label="A1 10억 개 하나씩 볼 때 최대 횟수 어림" autocomplete="off" style="width:9em;display:inline-block"><span>번, 지금 생각한 방법으로 하면 </span><input type="text" class="in" data-key="A1.billion.half" data-label="A1 10억 개 지금 생각한 방법으로 할 때 횟수 어림" autocomplete="off" style="width:6em;display:inline-block"><span>번쯤</span></div>
-<p>규칙을 쓰기 전에, 사례 나(1~100 맞히기)에서 첫 번째로 부를 수를 정하고 그 이유를 한 줄 쓴다.</p>
+<p>(선택) 규칙을 쓰기 전에, 사례 나(1~100 맞히기)에서 첫 번째로 부를 수를 정하고 그 이유를 한 줄 쓴다.</p>
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A1.first" data-label="A1 사례 나에서 첫 번째로 부를 수와 이유"></textarea></div>
 <p>세 사례를 모두 풀 수 있는 &ldquo;찾는 규칙&rdquo; 1가지를 내 말로 쓴다. 그리고 그 규칙이 통하지 않을 것 같은 경우를 하나 쓴다.</p>
 <div class="ans-row"><span class="n">5</span><textarea class="in" rows="3" data-key="A1.rule" data-label="A1 내 찾는 규칙 1가지"></textarea></div><div class="ans-row"><span class="n">6</span><textarea class="in" rows="2" data-key="A1.weak" data-label="A1 내 규칙이 통하지 않을 것 같은 경우"></textarea></div>
@@ -184,7 +184,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A2.q3" data-label="A2 1000개와 100만 개에서 두 방법의 최대 비교 횟수"></textarea></div>
 </section>
 <section id="A3" class="sheet">
-<h2>A3 · 같은 규칙을 다른 배열에 적용하기<small>1차시 · 7분 · 짝</small></h2>
+<h2>A3 · 같은 규칙을 다른 배열에 적용하기<small>1차시 · 6분 · 짝</small></h2>
 <p class="meta"><span>산출물: UNS 추적표, 찾은 목표와 놓친 목표, 원인 후보 2개</span></p>
 <p>A2의 규칙 ①~④를 그대로 쓴다. 이번에는 아래 배열 UNS에서 목표 <b>23</b>, <b>5</b>, <b>56</b>을 찾는다. 규칙대로 한 뒤, UNS를 눈으로 처음부터 훑어 실제 위치(인덱스)를 확인하고 비교한다.</p>
 <pre class="diagram">UNS = [38, 5, 72, 16, 91, 2, 23, 56, 12, 8]
@@ -198,7 +198,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A3.q1" data-label="A3 23은 있는데 왜 없음이라 했는가"></textarea></div>
 <p>5는 왜 맞게 찾았는가? 맞는 경우가 있다는 것이 &ldquo;안심해도 된다&rdquo;는 뜻일까?</p>
 <div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A3.q2" data-label="A3 5는 왜 맞게 찾았는가 맞는 경우가 있다는 것이 안심해도 된다는 뜻인가"></textarea></div>
-<p>규칙 ③의 &ldquo;목표가 더 크면 오른쪽만 본다&rdquo;는 말은 무엇을 믿고 하는 말인가?</p>
+<p>(선택) 규칙 ③의 &ldquo;목표가 더 크면 오른쪽만 본다&rdquo;는 말은 무엇을 믿고 하는 말인가?</p>
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A3.q3" data-label="A3 규칙 3의 목표가 더 크면 오른쪽만 본다는 말은 무엇을 믿고 하는 말인가"></textarea></div>
 <p>모둠 대화에서 나온 <b>원인 후보</b>를 2가지 쓴다(결론이 아니라 후보이다).</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A3.cause1" data-label="A3 원인 후보 1"></textarea></div><div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A3.cause2" data-label="A3 원인 후보 2"></textarea></div>
@@ -248,7 +248,7 @@ ARR8  = [38, 27, 43, 3, 9, 82, 10, 15]</pre>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A5.big" data-label="A5 8만 개라면"></textarea></div>
 </section>
 <section id="A6" class="sheet">
-<h2>A6 · 1차시 정리와 exit ticket<small>1차시 · 2분 · 개인</small></h2>
+<h2>A6 · 1차시 정리와 exit ticket<small>1차시 · 4분 · 개인</small></h2>
 <p class="meta"><span>산출물: exit ticket</span></p>
 <div class="concept"><b class="h">이름 붙이기</b><p>오늘부터 A2의 규칙(가운데와 견주어 후보 범위를 절반으로 줄이는 탐색)을 <b>이진 탐색(binary search)</b>, 방식 가(쪼개 합치는 정렬)를 <b>병합 정렬(merge sort)</b>, 방식 나(피벗으로 가르는 정렬)를 <b>퀵 정렬(quick sort)</b>이라고 부른다. 이름만 붙인 것이며 어느 쪽이 더 좋다는 뜻은 아니다.</p></div>
 <div class="note"><b>오늘의 핵심질문(계획서)</b> 10억 개의 정렬된 데이터 속에서 내가 원하는 특정 값이나 구간을 어떻게 단번에(O(log N)) 찾아낼까?</div>
