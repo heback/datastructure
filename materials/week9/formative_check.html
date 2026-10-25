@@ -146,6 +146,14 @@ def kth_largest(nums, k):
         elif x &gt; h[0]:
             ______②______          # x가 루트보다 클 때
     return h[0]</code></pre>
+<div class="learn-box"><span class="lb-title">학습 내용 · 풀이 방법과 표기</span>
+<ul>
+<li>함수 읽는 법: h는 지금까지 본 값 중 일부를 담는 최소 힙(리스트)이다. 반복문은 nums의 값을 앞에서부터 x로 하나씩 꺼내며 조건에 따라 ①이나 ②를 한다. <code class="i">h[0]</code>은 힙의 0번 칸 값이다.</li>
+<li>Q1: 빈칸에는 heapq 함수 이름과 인자까지 갖춘 코드 한 줄을 쓴다(모양의 예: 리스트를 힙으로 바꾸는 코드는 <code class="i">heapq.heapify(h)</code>).</li>
+<li>Q2: 값 하나를 처리한 직후의 h를 쓴다. 처음 값부터 차례로 처리하며 매번 무엇을 했는지 짚어 가고, A6·A7처럼 자리를 고친 뒤의 힙의 배열을 쓴다. 배열은 Q1에서 내가 쓴 ①, ②로 실행했을 때의 것이다.</li>
+<li>Q3: 이유는 내 말로 한 문장으로 쓴다. 문장에 &ldquo;N&rdquo;과 &ldquo;log K&rdquo; 두 말을 넣는다.</li>
+<li>시험 상황이므로 AI·자료·옆 사람 없이 혼자 푼다. 다 쓴 뒤 [저장(JSON)]으로 제출한다. 정답과 점수 기준은 제출한 뒤에 따로 안내한다.</li>
+</ul></div>
 <h3>Q1 · 구현 (4점)</h3>
 <p>① 에 들어갈 코드와 ② 에 들어갈 코드를 쓰시오. <code class="i">kth_largest(nums, 3)</code>이 올바른 값을 돌려주도록 해야 한다.</p>
 <table class="fill"><tr><th style="width:80px">빈칸</th><th>들어갈 코드</th></tr><tr><td class="lab">①</td><td class="in-cell"><input type="text" class="in" data-type="code" data-key="Q1.blank.r1.c1" data-label="Q1 빈칸 ① · 들어갈 코드" autocomplete="off" spellcheck="false" style="font-family:'JetBrains Mono',monospace"></td></tr><tr><td class="lab">②</td><td class="in-cell"><input type="text" class="in" data-type="code" data-key="Q1.blank.r2.c1" data-label="Q1 빈칸 ② · 들어갈 코드" autocomplete="off" spellcheck="false" style="font-family:'JetBrains Mono',monospace"></td></tr></table><h3>Q2 · 추적 (3점)</h3><p>위 입력으로 완성한 함수를 실행할 때, 원소 <b>9</b>를 처리한 직후와 <b>18</b>을 처리한 직후의 <b>힙 리스트</b> <code class="i">h</code>를 각각 쓰시오.</p><table class="fill"><tr><th style="width:120px">처리한 원소</th><th>처리 직후의 h</th></tr><tr><td class="lab">9</td><td class="in-cell"><input type="text" class="in" data-key="Q2.trace.r1.c1" data-label="Q2 힙 리스트 9 · 처리 직후의 h" autocomplete="off"></td></tr><tr><td class="lab">18</td><td class="in-cell"><input type="text" class="in" data-key="Q2.trace.r2.c1" data-label="Q2 힙 리스트 18 · 처리 직후의 h" autocomplete="off"></td></tr></table><h3>Q3 · 복잡도 (3점)</h3><p>이 방법이 O(N log K)인 이유를 &ldquo;N번&rdquo;, &ldquo;log K&rdquo; 두 단어를 써서 <b>한 문장</b>으로 서술하시오. 그리고 전체 정렬 O(N log N)보다 유리한 상황을 하나 드시오.</p><p><b>이유 (한 문장)</b></p><textarea class="in l" rows="3" data-key="Q3.reason" data-label="Q3 O(N log K)인 이유 한 문장"></textarea><p><b>정렬보다 유리한 상황</b></p><textarea class="in" rows="3" data-key="Q3.when" data-label="Q3 정렬보다 유리한 상황"></textarea>

@@ -147,19 +147,48 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A10.q4" data-label="A10 이 코드에서 A2의 두 규칙과 비교해 한 줄만 다른 곳"></textarea></div>
 <p class="qtext">5. 대각선으로만 맞닿은 땅 칸도 이웃으로 보면 ISLE의 섬 개수가 달라질 수 있다(선택 8방향 실험을 했다면 그 결과를, 하지 않았다면 ISLE에서 대각선으로만 이어진 땅 칸 쌍이 있는지 눈으로 찾아 쓴다). 4방향으로 센 개수와 8방향으로 센 개수 중 어느 쪽이 &lsquo;정답&rsquo;인가? 바뀐 것이 무엇인지 입장과 근거를 쓴다.</p>
 <div class="ans-row"><span class="n">5</span><textarea class="in" rows="3" data-key="A10.q5" data-label="A10 대각선 이웃을 인정할 때 섬 개수 중 어느 쪽이 정답인가 알고리즘인가 문제의 정의인가"></textarea></div>
+<p>먼저 위 예측-실제 표와 정리 질문 1~5번 칸에 내 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A10 결과와 정리 질문 해설</summary>
+<pre class="diagram">스캔 순서로 센 섬 번호(4방향)         count_islands(ISLE) → 6, 섬 크기 [4, 3, 1, 3, 2, 1]
+1 1 0 0 0 2 0                       explore가 popleft()일 때 첫 섬에서 꺼낸 칸 순서
+1 1 0 0 0 2 2                         (0,0) (0,1) (1,0) (1,1)
+0 0 3 0 0 0 0                       pop()으로 바꾼 뒤 같은 섬에서 꺼낸 칸 순서
+0 0 0 4 4 0 0                         (0,0) (1,0) (1,1) (0,1)   → 개수와 크기 목록은 그대로 6
+5 0 0 0 4 0 0                       (선택) 8방향: 섬 4개, 크기 [8, 3, 2, 1]
+5 0 0 0 0 0 6</pre>
+<ul>
+<li>손으로 센 값이 6과 다르면 대각선으로만 맞닿은 칸을 이어진 것으로 센 경우(4개), 가장자리의 한 칸짜리 섬을 놓친 경우가 많다.</li>
+<li>꺼내는 쪽을 바꿔도 개수와 섬 크기는 그대로이고 한 섬 안에서 칸을 방문하는 순서만 바뀐다. 한 섬을 다 방문하면 그 섬의 모든 땅 칸이 seen에 남아, 바깥 반복이 이어진 칸을 다시 시작점으로 삼지 않고 섬마다 한 번만 센다.</li>
+<li>explore가 A2의 두 규칙과 다른 곳은 꺼내는 줄 하나(맨 앞 대 맨 위)뿐이다. 나머지(시작 칸 표시, 이웃 넣기, 반복)는 같아서 그 줄만 바꿔도 BFS와 DFS가 된다.</li>
+<li>8방향이면 (1,1)-(2,2)-(3,3)이 이어져 섬이 4개가 된다. 같은 코드에서 바뀐 곳은 이웃 규칙(방향 목록)이다. 문제가 이웃을 어떻게 정의하느냐가 답을 바꾸므로 4방향과 8방향 중 어느 쪽이 정답인지는 문제 정의에 달려 있다.</li>
+</ul></details>
 </section>
 <section id="A11" class="sheet">
 <h2>A11 · 일반화 초안 카드<small>3차시 · 4분 · 개인</small></h2>
-<p class="meta"><span>산출물: 일반화 초안 카드 (개인 메모, 교사는 공개하지 않는다)</span></p>
+<p class="meta"><span>산출물: 일반화 초안 카드 (개인 메모)</span></p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 일반화 문장 쓰는 법과 네 주제</span>
+<ul>
+<li>일반화 문장은 사례 하나의 결과가 아니라 여러 사례에 통하는 말이다. &ldquo;개념 + 개념 + 관계&rdquo;로 쓴다. 사례 이름(G1, H, MAZE, ISLE)은 개념어(그래프, 격자, 노드, 컨테이너 등)로 바꾼다.</li>
+<li>형태 예(8주차 소재): &ldquo;값 5를 찾을 때 3번 비교했다&rdquo;(사례) &rarr; &ldquo;정렬 규칙을 지키는 이진 트리에서는 비교 한 번마다 찾을 범위가 한쪽 가지로 줄어든다&rdquo;(일반화).</li>
+<li>네 주제와 다시 볼 활동: 탐색 틀과 꺼내는 규칙(A2·A3·A10), 최단 거리(A4·A7·A9), 연결 요소(A10), 구현 선택(A8 T1~T3).</li>
+<li>점검: 내 문장에서 &ldquo;미로&rdquo;나 사례 이름을 지워도 말이 되는지 보고, 소문·섬·물통 퍼즐에 대어 보아 통하지 않는 사례가 있으면 반례 칸에 쓴다.</li>
+</ul></div>
 <p>A1~A10에서 발견한 것을 &ldquo;<b>개념 + 개념 + 관계</b>&rdquo; 형태의 문장 한 개로 쓴다. 아래 네 주제 중 오늘 내 생각이 가장 크게 바뀐 하나를 골라 쓴다.</p>
 <p>주제 <span class="rg" data-key="A11.topic" data-type="radio" data-label="A11 고른 주제"><label><input type="radio" name="r_A11_topic" value="탐색 틀과 꺼내는 규칙"> 탐색 틀과 꺼내는 규칙</label><label><input type="radio" name="r_A11_topic" value="최단 거리"> 최단 거리</label><label><input type="radio" name="r_A11_topic" value="연결 요소"> 연결 요소</label><label><input type="radio" name="r_A11_topic" value="구현 선택"> 구현 선택</label></span></p>
 <div class="ans-row"><span class="n">초안</span><textarea class="in l" rows="3" data-key="A11.draft" data-label="A11 내 일반화 초안 문장"></textarea></div>
-<p class="qtext">내 문장은 &lsquo;미로&rsquo; 한 사례에만 해당하는가, 소문&middot;섬&middot;숫자 변환에도 통하는가? 통하지 않는 사례(반례)가 있으면 쓴다.</p>
+<p class="qtext">내 문장은 &lsquo;미로&rsquo; 한 사례에만 해당하는가, 소문&middot;섬&middot;물통 퍼즐에도 통하는가? 통하지 않는 사례(반례)가 있으면 쓴다.</p>
 <div class="ans-row"><span class="n">점검</span><textarea class="in" rows="2" data-key="A11.check" data-label="A11 이 문장은 미로 하나에만 해당하는가 다른 문제에도 통하는가"></textarea></div>
 </section>
 <section id="A12" class="sheet">
 <h2>A12 · 모둠 정제 시트와 구별 기준표<small>3차시 · 12분 · 모둠→전체</small></h2>
 <p class="meta"><span>산출물: 모둠 일반화 문장, 구별 기준표, 수정 이력</span></p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 정제 순서 안내</span>
+<ol>
+<li><b>1단계</b> 개인 초안을 돌려 읽고 사례 이름을 개념어로 바꾼 문장으로 다듬는다. 고친 이유를 수정 이력에 쓴다.</li>
+<li><b>2단계</b> 구별 기준표: 선택 칸에는 BFS, DFS, 둘 다 가능 중 하나를 쓰고, 근거 칸에는 A4·A9·A10의 표 값이나 코드 결과를 든다.</li>
+<li><b>3단계</b> 점검: 문장에서 &ldquo;미로&rdquo;를 지워도 말이 되는지, 소문·섬·물통 퍼즐에도 통하는지 시험한다. visited 검사를 지우면 끝나지 않는 입력이 어떤 모양인지 그림으로 그려 본다.</li>
+<li><b>4단계</b> 아래 정제 문장과 비교해 같은 점·다른 점·고칠 점을 쓴다.</li>
+</ol></div>
 <h3>1단계 · 모둠에서 초안을 합쳐 정제</h3>
 <p>개인 초안을 읽고 사례 이름(G1, H, MAZE, ISLE)을 개념어로 바꾼 문장으로 다듬는다. 주제별로 문장 한 개와 고친 과정을 쓴다. 주제 1·2는 필수이고 3·4는 (선택)이다. 시간이 남으면 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:26%">주제</th><th>정제한 문장</th><th style="width:32%">수정 이력(무엇을 왜 고쳤나)</th></tr><tr><td class="lab" style="width:26%">1. 탐색 틀과 꺼내는 규칙</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r1.c1" data-label="A12 모둠 탐색 틀과 꺼내는 규칙 · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r1.c2" data-label="A12 모둠 탐색 틀과 꺼내는 규칙 · 수정 이력"></textarea></td></tr><tr><td class="lab" style="width:26%">2. 최단 거리</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r2.c1" data-label="A12 모둠 최단 거리 · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r2.c2" data-label="A12 모둠 최단 거리 · 수정 이력"></textarea></td></tr><tr><td class="lab" style="width:26%">3. 연결 요소 (선택)</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r3.c1" data-label="A12 모둠 연결 요소 · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r3.c2" data-label="A12 모둠 연결 요소 · 수정 이력"></textarea></td></tr><tr><td class="lab" style="width:26%">4. 구현 선택 (선택)</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r4.c1" data-label="A12 모둠 구현 선택 · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r4.c2" data-label="A12 모둠 구현 선택 · 수정 이력"></textarea></td></tr></table></div>
 <h3>2단계 · 구별 기준표</h3>
@@ -168,8 +197,21 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p><label class="ck"><input type="checkbox" data-key="A12.chk1" data-label="A12 점검: 사례 이름을 개념어로 바꿨다"> 사례 이름을 개념어로 바꿨다</label><label class="ck"><input type="checkbox" data-key="A12.chk2" data-label="A12 점검: 개념 + 개념 + 관계 형태이다"> &ldquo;개념 + 개념 + 관계&rdquo; 형태이다</label><label class="ck"><input type="checkbox" data-key="A12.chk3" data-label="A12 점검: 미로라는 한정을 지울 수 있다"> 문장에서 &ldquo;미로&rdquo;를 지울 수 있다</label></p>
 <p class="qtext">visited 검사를 지우면 어떤 입력에서 탐색이 끝나지 않는가? 그 입력 그래프를 한 개 그려 쓴다.</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A12.off" data-label="A12 visited를 끄면 어떤 입력에서 무한 반복되는가"></textarea></div>
-<h3>4단계 · 교사 공개 후 대조</h3>
-<p>교사가 공개한 문장과 우리 모둠의 문장을 비교한다. 교사 문장을 그대로 베껴 쓰지 않는다.</p>
+<p>먼저 1~3단계 칸을 모둠의 문장으로 채운 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 정제된 일반화 문장 G1~G4와 구별 기준표</summary>
+<p>이 G1~G4는 일반화 문장의 번호이며 그래프 G1과 번호만 같다.</p>
+<ul>
+<li><b>G1</b> 상태 공간 탐색은 &ldquo;지금 상태에서 한 걸음에 갈 수 있는 이웃 상태를 꺼내 보고, 이미 본 상태는 visited로 걸러내는&rdquo; 하나의 틀이며, 이 틀에서 다음에 꺼낼 상태를 가장 최근 것(스택·Call Stack)으로 고르면 한 갈래를 끝까지 파고드는 DFS가, 가장 오래된 것(큐)으로 고르면 가까운 것부터 넓히는 BFS가 되어 방문 순서와 처음 도착하는 길이 달라진다. (근거: A1, A2, A3, A6, A13)</li>
+<li><b>G2</b> 큐는 시작에서 걸음 수가 같은 노드를 모두 처리한 뒤에야 한 걸음 더 먼 노드를 처리하므로 처음 도착한 경로의 간선 수가 최소임이 보장되지만, 스택·Call Stack은 한 갈래를 먼저 끝까지 가므로 처음 도착한 경로가 최단이라는 보장이 없고 이웃을 보는 순서에 따라 길이가 달라진다. 따라서 최단 거리가 목적이면 BFS를 구별해 쓴다. (근거: A4, A7, A9)</li>
+<li><b>G3</b> 연결된 구역을 모두 묶어 세는 목적(연결 요소 추적, 섬의 개수)은 방문 순서가 결과를 바꾸지 않으므로 DFS와 BFS가 같은 답을 내며, 이때의 선택은 입력 크기에 따른 구현 비용(재귀 깊이, 큐 연산 비용)과 안전성에 달려 있고 visited가 없거나 표시 시점이 어긋나면 중복·무한 반복이 생긴다. (근거: A8 T1, A10, A13)</li>
+<li><b>G4</b> 재귀(Call Stack)로 쓴 DFS는 간결하지만 깊이가 호출 한계에 묶여 입력이 커지면 실패하고, 이를 명시적 스택으로 바꾸면 한계가 없어지는 대신 이웃 처리 순서·visited 표시를 직접 챙겨야 하며, 큐도 맨 앞을 꺼내는 비용이 작은 자료구조(deque)를 골라야 탐색이 입력 크기에 비례해 끝난다. (근거: A3, A8 T2·T3, A10)</li>
+<li><b>구별 기준표</b>: 걸음 수가 가장 적은 길 &rarr; BFS(큐가 가까운 것부터 처리해 처음 도착한 길의 간선 수가 최소). 연결된 구역의 개수 &rarr; 둘 다 가능(방문 순서가 개수를 바꾸지 않으므로 구현 비용·안전성으로 고른다). 어떤 길로든 이어져 있는지만 &rarr; 둘 다 가능(길이는 묻지 않는다).</li>
+<li><b>visited를 끄면</b>: G1의 A-B-D-C-A처럼 한 바퀴 돌아 되돌아오는 길(사이클)이 있는 그래프에서 같은 노드를 계속 다시 처리해 끝나지 않는다.</li>
+<li>(선택) 토론 질문: D1 &ldquo;어떤 순서로 탐색하는 것이 정답일까?&rdquo; 정답은 하나인가, 목적에 따라 다른가? &ldquo;DFS로 길을 찾았으니 충분하다&rdquo;는 언제 틀리는가? D2 섬의 개수에서 대각선으로 맞닿은 땅도 같은 섬인가? 문제의 정의가 알고리즘 선택이 아니라 이웃 규칙을 바꾸는가? D3 재귀 DFS는 코드가 가장 짧은데 입력이 커지면 실패한다. 짧고 읽기 쉬운 코드와 안전한 코드 중 무엇을 택할 것인가? <code class="i">sys.setrecursionlimit</code>을 올리면 해결되는가?</li>
+<li>13주차 한 줄 예고: 같은 상태를 여러 번 만나는 문제에서 visited 대신 결과를 기억하면?</li>
+</ul></details>
+<h3>4단계 · 정제 문장과 대조</h3>
+<p>위 상자의 정제 문장과 우리 모둠의 문장을 비교한다. 상자의 문장을 그대로 베껴 쓰지 않는다.</p>
 <div class="ans-row"><span class="n">같은 점</span><textarea class="in" rows="2" data-key="A12.cmp.same" data-label="A12 대조 같은 점"></textarea></div>
 <div class="ans-row"><span class="n">다른 점</span><textarea class="in" rows="2" data-key="A12.cmp.diff" data-label="A12 대조 다른 점"></textarea></div>
 <div class="ans-row"><span class="n">고칠 점</span><textarea class="in" rows="2" data-key="A12.cmp.fix" data-label="A12 대조 뒤 우리 문장에서 고칠 점"></textarea></div>
@@ -183,6 +225,13 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p><label class="ck"><input type="checkbox" data-key="A13.chk1" data-label="A13 점검: 내 세 함수가 A13 점검 코드를 실행해 모두 통과했다"> 내 세 함수가 A13 점검 코드를 실행해 모두 통과했다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk2" data-label="A13 점검: 코드를 고치지 않고 새 입력에서도 통과했다"> 코드를 고치지 않고 새 입력에서도 통과했다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk3" data-label="A13 점검: 물통 퍼즐의 상태 정의 카드를 썼다(NUM은 선택)"> 물통 퍼즐의 상태 정의 카드를 썼다(NUM은 선택)</label><br></p>
 <p class="qtext">점검을 통과하지 못한 항목 번호와 원인을 쓴다. 모두 통과했다면 &ldquo;없음&rdquo;이라고 쓰고, 통과하기 전에 고친 곳을 쓴다.</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A13.fail" data-label="A13 통과하지 못한 항목과 원인"></textarea></div>
+<div class="learn-box"><span class="lb-title">학습 내용 · 새 문제를 상태와 이웃으로 바꾸는 법</span>
+<ul>
+<li><b>상태</b>는 문제의 한 순간을 나타내는 값(묶음)이다. <b>이웃 상태</b>는 허용된 동작을 한 번 했을 때 바뀌는 상태이다. 이 둘을 정하면 노드 = 상태, 간선 = 동작 한 번으로 보고 미로·섬과 같은 탐색 틀을 쓸 수 있다.</li>
+<li>작은 예(NUM): 상태 = 수 n(1~100), 이웃 = n+1과 n&times;2(100 이하일 때), 시작 = 3, 목표 = 14. 그래프를 미리 만들어 두지 않고 <code class="i">next_states(n)</code>이 이웃을 필요할 때 계산해 내준다. 3의 이웃은 4와 6, 4의 이웃은 5와 8, 6의 이웃은 7과 12이다.</li>
+<li>물통 퍼즐 카드에는 (1) 상태를 이루는 값 (2) 동작 한 번으로 바뀌는 이웃 상태의 예 (3) 시작과 목표 (4) 최소 단계를 구하려면 BFS와 DFS 중 무엇이어야 하는지와 그 까닭을 쓴다. 코드는 쓰지 않는다.</li>
+<li>(가) 점검은 실습 코드 3부 A13 블록의 점검 코드를 실행해 FAIL 줄 앞의 항목 번호를 보고, 통과하지 못한 번호와 원인을 쓴다. 항목이 무엇을 보는지는 그 블록의 안내에 있다.</li>
+</ul></div>
 <h3>(나) 전이: 새 문제의 상태 공간 정의하기 (채점하지 않는다)</h3>
 <p class="qtext">물통 퍼즐: 3L 통과 5L 통이 있고 둘 다 비어 있다. 물을 가득 채우기, 비우기, 다른 통으로 옮기기만 할 수 있다. 한 통에 정확히 4L를 만들 수 있는가? 코드를 쓰지 말고 다음 네 가지를 쓴다. (1) 상태 하나를 무엇으로 나타내는가 (2) 한 걸음에 갈 수 있는 이웃 상태의 예 (3) 시작과 목표 (4) BFS와 DFS 중 최소 단계를 구하려면 무엇이어야 하는가와 그 까닭</p>
 <div class="ans-row"><span class="n">카드</span><textarea class="in l" rows="7" data-key="A13.state" data-label="A13 물통 퍼즐 상태 정의 카드 상태 표현 이웃 상태 시작과 목표 BFS와 DFS 선택과 까닭"></textarea></div>
@@ -190,10 +239,23 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>3에서 시작해 &ldquo;+1&rdquo; 또는 &ldquo;&times;2&rdquo;만 써서 14를 만드는 최소 연산 횟수를 같은 틀로 구한다(수는 100 이하).</p><div class="scroll"><table class="fill"><tr><th style="width:40%">질문</th><th>답</th></tr><tr><td class="lab">내 코드가 구한 최소 연산 횟수</td><td class="in-cell"><input type="text" class="in" data-key="A13.num.ops" data-label="A13 NUM 최소 연산 횟수" autocomplete="off"></td></tr><tr><td class="lab">그때의 경로(예: a &rarr; b &rarr; c)</td><td class="in-cell"><input type="text" class="in" data-key="A13.num.path" data-label="A13 NUM 경로" autocomplete="off"></td></tr><tr><td class="lab">이 문제에서 노드와 간선은 무엇인가</td><td class="in-cell"><textarea class="in" rows="2" data-key="A13.num.graph" data-label="A13 NUM에서 노드와 간선"></textarea></td></tr><tr><td class="lab">메모리에 그래프가 있는가</td><td class="in-cell"><textarea class="in" rows="2" data-key="A13.num.mem" data-label="A13 NUM에서 메모리에 그래프가 있는가"></textarea></td></tr><tr><td class="lab">같은 수를 여러 경로로 만나는가</td><td class="in-cell"><textarea class="in" rows="2" data-key="A13.num.multi" data-label="A13 NUM 같은 수를 여러 경로로 만나는가"></textarea></td></tr></table></div>
 <p class="qtext">NUM을 풀었다면: 틀을 고치지 않고 새 데이터에도 통했는가? 미로&middot;섬과 비교해 바뀐 부분과 바뀌지 않은 부분을 쓴다.</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A13.q" data-label="A13 새 데이터에서도 코드를 안 바꾸고 통하는가"></textarea></div>
+<p>먼저 위 상태 정의 카드(와 풀었다면 NUM 표)를 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 물통 퍼즐 상태 정의와 NUM 확인(채점 외)</summary>
+<ul>
+<li><b>물통 퍼즐</b>: 상태 = (3L 통의 물, 5L 통의 물) = (a, b). 이웃 상태는 가득 채우기 (3, b)·(a, 5), 비우기 (0, b)·(a, 0), 한 통이 비거나 다른 통이 찰 때까지 붓기(예: (3, 0)에서 (0, 3))로 만든다. 시작은 (0, 0), 목표는 어느 한 통이 4L인 상태이다. 최소 단계를 구하려면 걸음 수가 같은 상태를 모두 본 뒤 한 걸음 더 먼 상태를 보는 BFS(큐)여야 한다. 4L를 만들 수 있고, 최소 6단계이다: (0,0) &rarr; (0,5) &rarr; (3,2) &rarr; (0,2) &rarr; (2,0) &rarr; (2,5) &rarr; (3,4).</li>
+<li><b>NUM</b>(채점 외): 3에서 14까지 최소 3회, 경로 3 &rarr; 6 &rarr; 7 &rarr; 14. 14를 꺼낼 때까지 꺼낸 상태 11개, 발견한 상태 18개이다. 거리별 상태: 거리 0 {3}, 1 {4, 6}, 2 {5, 8, 7, 12}, 3 {10, 9, 16, 14, 13, 24}. 노드는 수, 간선은 &ldquo;+1&rdquo;과 &ldquo;&times;2&rdquo;이고 메모리에 그래프는 없다. 같은 수(6은 3&times;2로도, 3&rarr;4&rarr;5&rarr;6으로도)를 여러 경로로 만난다. 같은 이웃 순서(+1 먼저)의 재귀 DFS가 처음 찾은 연산 횟수는 11이다.</li>
+<li>코드를 고치지 않고 새 입력에서도 통과해야 과제 점검을 통과한 것이다. 이 점은 12주차·13주차에서도 이어진다(같은 상태를 다시 계산하지 않기).</li>
+</ul></details>
 </section>
 <section id="A15" class="sheet">
 <h2>A15 · 성찰일지<small>3차시 · 4분 · 개인</small></h2>
 <p class="meta"><span>산출물: 성찰일지 초안(AI 활용 내역 포함)</span></p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 성찰일지 쓰는 법과 12·13주차 연결</span>
+<ul>
+<li>1~3번은 활동 번호와 표의 줄(예: A8 T1-a)을 대 가며 쓴다. 예측이 틀린 곳은 내 예측, 실제 값, 틀린 까닭 한 문장을 쓴다.</li>
+<li>4번은 오늘의 틀(상태·이웃·visited·꺼내는 규칙)이 12주차(정렬과 이진 탐색, bisect: 정렬된 1차원 데이터에서 빠르게 찾기)나 13주차(동적 계획법과 탐욕: 같은 상태의 결과를 캐시하거나 매 순간 최선을 고르기)에서 어디에 쓰일지 쓴다. A13 확인 상자에서 같은 상태를 두 길로 만난 것(물통 퍼즐 또는 선택 NUM)을 떠올린다. 질문: 같은 상태를 여러 번 만나는 문제에서 visited 대신 결과를 기억하면?</li>
+<li>AI 활용 내역: 수업 중(A6~A14)에는 AI를 쓰지 않는다. 주간 과제에서 쓴 경우에만 질문 내용(내 코드의 어느 부분), 단계(허용/조건부 허용), 반영 여부와 이유를 쓴다. 기록 예: &ldquo;AI가 시작=도착 경우를 제안 &rarr; 채택, 이유&rdquo;. 3단계 기준은 실습 코드 1부 끝의 표에 있다.</li>
+</ul></div>
 <p class="qtext">1. 오늘 수업에서 내 생각이 가장 크게 바뀐 것은 무엇이며, 어느 활동 때문이었는가?</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in l" rows="3" data-key="A15.change" data-label="A15 오늘 내 생각이 가장 바뀐 것"></textarea></div>
 <p class="qtext">2. 내 예측이 틀렸거나 놀란 곳은 어디인가(활동 번호와 줄)?</p>
@@ -202,6 +264,15 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A15.wrongwhy" data-label="A15 그 예측이 틀린 원인을 한 문장으로"></textarea></div>
 <p class="qtext">4. 오늘의 틀(상태&middot;이웃&middot;visited&middot;꺼내는 규칙)이 12주차(정렬과 이진 탐색)나 13주차에서 쓰일 것 같은 곳, 또는 더 궁금한 점을 쓴다.</p>
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A15.next" data-label="A15 12주차 정렬과 이진 탐색 13주차 DP에 대해 궁금한 점"></textarea></div>
+<p>먼저 위 1~4번 칸(특히 틀린 예측 칸)을 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 오개념 점검 네 문장</summary>
+<p>다음 네 문장이 맞으면 O, 틀리면 X라고 스스로 판단해 본 뒤 확인한다. 모두 X이다.</p>
+<ul>
+<li>&ldquo;DFS도 처음 찾은 길이 최단이다&rdquo;: MAZE에서 DFS는 14, BFS는 10이었다(A9).</li>
+<li>&ldquo;섬은 BFS로만 센다&rdquo;: popleft든 pop이든 6이었다(A10).</li>
+<li>&ldquo;재귀는 항상 안전하다&rdquo;: 1&times;1500에서 RecursionError가 났다(A8 T3).</li>
+<li>&ldquo;visited 표시는 꺼낼 때가 좋다&rdquo;: 열린 4&times;4 격자에서 넣을 때 표시는 (16, 4), 꺼낼 때 표시는 (25, 7)로 큐가 커지고 일이 늘었다(A8 T1).</li>
+</ul></details>
 <h3>AI 활용 내역</h3>
 <p>주간 과제를 하며 AI를 쓴 부분이 있으면 쓴다. 수업 중(A6~A14)에는 AI를 쓰지 않는다.</p>
 <p><label class="ck"><input type="checkbox" data-key="A15.ai.none" data-label="A15 AI를 쓰지 않았다"> AI를 쓰지 않았다</label></p><div class="scroll"><table class="fill"><tr><th style="width:44px">번호</th><th style="width:36%">무엇을 질문했나(내 코드의 어느 부분인가)</th><th style="width:110px">단계</th><th style="width:120px">반영 여부</th><th>채택·미채택 이유</th></tr><tr><td class="lab">1</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r1.c1" data-label="A15 AI 활용 1 · 질문한 내용"></textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r1.c2" data-label="A15 AI 활용 1 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r1.c3" data-label="A15 AI 활용 1 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r1.c4" data-label="A15 AI 활용 1 · 이유"></textarea></td></tr><tr><td class="lab">2</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r2.c1" data-label="A15 AI 활용 2 · 질문한 내용"></textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r2.c2" data-label="A15 AI 활용 2 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r2.c3" data-label="A15 AI 활용 2 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r2.c4" data-label="A15 AI 활용 2 · 이유"></textarea></td></tr><tr><td class="lab">3</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r3.c1" data-label="A15 AI 활용 3 · 질문한 내용"></textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r3.c2" data-label="A15 AI 활용 3 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r3.c3" data-label="A15 AI 활용 3 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r3.c4" data-label="A15 AI 활용 3 · 이유"></textarea></td></tr></table></div>

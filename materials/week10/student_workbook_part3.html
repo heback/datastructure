@@ -147,11 +147,39 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">5</span><textarea class="in" rows="2" data-key="A10.q4" data-label="A10 호출하는 쪽 코드는 (가)와 (나)에서 같은가 다른가"></textarea></div>
 <p>6. (선택) 이웃 목록을 리스트로 돌려주는 (가)가 더 단순한데, 언제 (나)가 더 나은가? 반대로 (가)가 더 나은 경우는 언제인가?</p>
 <div class="ans-row"><span class="n">6</span><textarea class="in" rows="3" data-key="A10.q5" data-label="A10 (가)가 더 단순한데 언제 (나)가 더 나은가, 반대로 (가)가 더 나은 경우"></textarea></div>
+<p class="hint">먼저 위 정리 질문 1~6번(선택 포함)에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 예측-실제 정답, 읽는 방법, 참조 코드</summary>
+<table style="width:calc(100% - 28px)"><tr><th>줄</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
+<tr><td>실제</td><td>generator</td><td>B</td><td>C</td><td>E</td><td>StopIteration</td><td>['B', 'C', 'E'] []</td><td>['B', 'C', 'E']</td><td>5</td><td>5</td><td>6 True</td></tr></table>
+<ul>
+<li>제네레이터는 <code class="i">next</code>를 부를 때마다 g["D"]의 B, C, E를 한 칸씩 내주고 멈춘다. 마지막 값 뒤에는 꺼낼 값이 없어 <code class="i">StopIteration</code>이 난다. 다 쓴 제네레이터는 처음으로 돌아가지 않아, 두 번째 <code class="i">list(it)</code>는 빈 리스트이다. 다시 순회하려면 함수를 새로 호출한다.</li>
+<li>g[u]를 읽는 일은 함수를 호출한 순간이 아니라 순회할 때(<code class="i">next</code>나 <code class="i">list</code>가 본문을 실행할 때) 일어난다. 9번 줄에서 호출 직후 len(g)는 5이고, 10번 줄에서 <code class="i">list(it)</code> 뒤 6이 되어 &ldquo;Q&rdquo;가 g의 키가 된다. 없는 노드를 순회하자 <code class="i">g["Q"]</code>를 읽어 defaultdict가 키를 만든 것이다.</li>
+<li>g가 바뀌지 않게 하려면 u가 g에 있는지 먼저 확인하고, 있을 때만 이웃을 내준다. 없는 노드를 물으면 아무것도 내주지 않고 g도 그대로이다. <code class="i">for v in neighbors(g, u):</code>라고 부르는 쪽 코드는 (가)(나)(아래 코드)에서 똑같다.</li>
+</ul>
+<pre>def neighbors_list(g, u):      # (가)
+    return list(g[u])
+def neighbors_gen(g, u):       # (나)
+    for v in g[u]:
+        yield v
+def neighbors_safe(g, u):      # g를 바꾸지 않는 형태
+    if u in g:
+        yield from g[u]        # g[u]의 값을 하나씩 그대로 내준다</pre>
+<ul>
+<li>(선택) 5·6번: 호출하는 쪽 코드는 같다. 이웃이 아주 많거나 앞쪽 몇 개만 쓰고 멈출 때는 하나씩 내주는 (나)가 복사를 피한다. 이웃 목록을 여러 번 쓰거나 개수·인덱스가 필요하면 리스트인 (가)가 단순하다.</li>
+</ul>
+</details>
 </section>
 <section id="A11" class="sheet">
 <h2>A11 · 일반화 초안 카드<small>3차시 · 3분 · 개인</small></h2>
 <p class="meta"><span>산출물: 일반화 초안 카드 (개인 메모, 교사는 공개하지 않는다)</span></p>
 <p>A1~A10에서 발견한 것을 &ldquo;<b>개념 + 개념 + 관계</b>&rdquo; 형태의 문장 한 개로 쓴다. 모둠원끼리 서로 다른 주제를 하나씩 맡는다(모둠이 3명이면 한 주제는 함께 쓴다). 내가 맡은 주제에서 오늘 내 생각이 가장 크게 바뀐 점을 골라 쓴다.</p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 일반화 문장 쓰는 방법</span>
+<ul>
+<li>일반화 문장은 &ldquo;<b>개념 + 개념 + 관계</b>&rdquo; 형태이다. 사례 이름(G1, W, 숫자)이 아니라 개념어(예: 완전 이진 트리, 칸 번호)를 두 개 이상 골라 둘이 어떤 관계인지 한 문장으로 쓴다. 칸 틀은 개념 ____ + 개념 ____ &rarr; 관계 ____이다.</li>
+<li>사례 이름을 개념어로 바꾸는 예(9주차 힙): &ldquo;H1의 3번 칸의 부모는 1번 칸이다.&rdquo; &rarr; &ldquo;완전 이진 트리는 빈틈없이 채워지므로 칸 번호 계산만으로 부모와 자식을 찾을 수 있다.&rdquo; H1과 3번이 개념어로 바뀌었고 &ldquo;~므로&rdquo;로 이유가 붙었다.</li>
+<li>주제 4개는 1 모델링 2 표현 선택 3 defaultdict 4 제네레이터이다. 쓴 뒤 &ldquo;G1에서만 성립하는가, 다른 그래프에도 통하는가&rdquo;를 점검한다.</li>
+</ul>
+</div>
 <p class="hint">개념어 만들기: A1~A10 기록에서 반복해 나온 낱말을 두세 개 골라, 사례 이름(G1, W) 대신 쓸 한 단어짜리 말로 바꾼다. 그 말로 문장을 쓴다.</p>
 <p>주제 <span class="rg" data-key="A11.topic" data-type="radio" data-label="A11 고른 주제"><label><input type="radio" name="r_A11_topic" value="모델링"> 모델링</label><label><input type="radio" name="r_A11_topic" value="표현 선택"> 표현 선택</label><label><input type="radio" name="r_A11_topic" value="defaultdict"> defaultdict</label><label><input type="radio" name="r_A11_topic" value="제네레이터"> 제네레이터</label></span></p>
 <div class="ans-row"><span class="n">초안</span><textarea class="in l" rows="3" data-key="A11.draft" data-label="A11 내 일반화 초안 문장"></textarea></div>
@@ -161,14 +189,33 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A12" class="sheet">
 <h2>A12 · 모둠 정제 시트<small>3차시 · 10분 · 모둠→전체</small></h2>
 <p class="meta"><span>산출물: 모둠 일반화 문장, 수정 이력</span></p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 모둠 정제 순서(10분)와 점검 질문</span>
+<ul>
+<li>순서: 초안을 모아 비교한다(4분) &rarr; 모둠 문장으로 정제한다(2분) &rarr; 아래 상자의 문장과 대조한다(4분).</li>
+<li>정제 방법: ① 사례 이름(G1, W, T4)을 개념어로 바꾼다 ② &ldquo;개념 + 개념 + 관계&rdquo; 형태인지 본다 ③ &ldquo;친구 그래프 G1만&rdquo; 같은 한정을 지울 수 있는지 시험한다 ④ 도로망, SNS, 도서관 대출 기록에도 성립하는지 따져 본다.</li>
+<li>점검 질문: 문장에서 &ldquo;G1만&rdquo;을 지울 수 있는가? 문장에서 숫자나 노드 이름이 꼭 필요한가? 트리에 관한 문장에 &ldquo;사이클&rdquo;이라는 말을 넣어도 되는가?</li>
+<li>시간이 남으면 토론한다. 반 친구 30명의 관계라면 어느 표현을 쓰겠는가? defaultdict는 &ldquo;예외 없는 편리한 도구&rdquo;인가 &ldquo;숨은 부작용이 있는 도구&rdquo;인가? 이웃을 리스트로 돌려주는 것이 더 단순한데 제네레이터가 항상 이득인가? 입장과 근거를 한 줄로 말한다.</li>
+</ul>
+</div>
 <h3>1단계 · 모둠에서 초안을 합쳐 정제</h3>
-<p>개인 초안을 읽고 사례 이름(G1, W, T4 등)을 개념어로 바꾼 문장으로 다듬는다. 주제별로 문장 한 개와 고친 과정을 쓴다. 한 주제당 문장 한 개만 정제하되, 4행이 모두 채워지지 않으면 시간 안에 정제한 행만 완성한다. 비운 행은 3단계에서 교사 공개 후 채운다.</p><div class="scroll"><table class="fill"><tr><th style="width:26%">주제</th><th>정제한 문장</th><th style="width:32%">수정 이력(무엇을 왜 고쳤나)</th></tr><tr><td class="lab" style="width:26%">1. 모델링(관계를 노드와 간선으로)</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r1.c1" data-label="A12 모둠 모델링(관계를 노드와 간선으로) · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r1.c2" data-label="A12 모둠 모델링(관계를 노드와 간선으로) · 수정 이력"></textarea></td></tr><tr><td class="lab" style="width:26%">2. 표현 선택(인접 행렬과 인접 리스트)</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r2.c1" data-label="A12 모둠 표현 선택(인접 행렬과 인접 리스트) · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r2.c2" data-label="A12 모둠 표현 선택(인접 행렬과 인접 리스트) · 수정 이력"></textarea></td></tr><tr><td class="lab" style="width:26%">3. defaultdict</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r3.c1" data-label="A12 모둠 defaultdict · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r3.c2" data-label="A12 모둠 defaultdict · 수정 이력"></textarea></td></tr><tr><td class="lab" style="width:26%">4. 제네레이터(이웃 내주기)</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r4.c1" data-label="A12 모둠 제네레이터(이웃 내주기) · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r4.c2" data-label="A12 모둠 제네레이터(이웃 내주기) · 수정 이력"></textarea></td></tr></table></div>
+<p>개인 초안을 읽고 사례 이름(G1, W, T4 등)을 개념어로 바꾼 문장으로 다듬는다. 주제별로 문장 한 개와 고친 과정을 쓴다. 한 주제당 문장 한 개만 정제하되, 4행이 모두 채워지지 않으면 시간 안에 정제한 행만 완성한다. 비운 행은 3단계에서 정제 문장 상자를 연 뒤 채운다.</p><div class="scroll"><table class="fill"><tr><th style="width:26%">주제</th><th>정제한 문장</th><th style="width:32%">수정 이력(무엇을 왜 고쳤나)</th></tr><tr><td class="lab" style="width:26%">1. 모델링(관계를 노드와 간선으로)</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r1.c1" data-label="A12 모둠 모델링(관계를 노드와 간선으로) · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r1.c2" data-label="A12 모둠 모델링(관계를 노드와 간선으로) · 수정 이력"></textarea></td></tr><tr><td class="lab" style="width:26%">2. 표현 선택(인접 행렬과 인접 리스트)</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r2.c1" data-label="A12 모둠 표현 선택(인접 행렬과 인접 리스트) · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r2.c2" data-label="A12 모둠 표현 선택(인접 행렬과 인접 리스트) · 수정 이력"></textarea></td></tr><tr><td class="lab" style="width:26%">3. defaultdict</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r3.c1" data-label="A12 모둠 defaultdict · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r3.c2" data-label="A12 모둠 defaultdict · 수정 이력"></textarea></td></tr><tr><td class="lab" style="width:26%">4. 제네레이터(이웃 내주기)</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r4.c1" data-label="A12 모둠 제네레이터(이웃 내주기) · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r4.c2" data-label="A12 모둠 제네레이터(이웃 내주기) · 수정 이력"></textarea></td></tr></table></div>
 <h3>2단계 · 정제 점검</h3>
 <p><label class="ck"><input type="checkbox" data-key="A12.chk1" data-label="A12 점검: 사례 이름을 개념어로 바꿨다"> 사례 이름을 개념어로 바꿨다</label><label class="ck"><input type="checkbox" data-key="A12.chk2" data-label="A12 점검: 개념 + 개념 + 관계 형태이다"> &ldquo;개념 + 개념 + 관계&rdquo; 형태이다</label><label class="ck"><input type="checkbox" data-key="A12.chk3" data-label="A12 점검: G1 그래프만이라는 한정을 지울 수 있다"> &ldquo;G1 그래프만&rdquo;이라는 한정을 지울 수 있다</label></p>
 <p>도로망, SNS, 도서관 대출 기록에도 우리 모둠의 문장이 성립하는가? 성립하지 않는 경우가 있으면 쓴다.</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A12.other" data-label="A12 도로망·SNS·도서관 대출 기록에도 성립하는가"></textarea></div>
-<h3>3단계 · 교사 공개 후 대조</h3>
-<p>교사가 공개한 문장과 우리 모둠의 문장을 비교한다. 교사 문장을 그대로 베껴 쓰지 않는다.</p>
+<p class="hint">먼저 위 1·2단계에 모둠 문장을 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 정제한 일반화 문장 G1~G4</summary>
+<p>(여기서 G1~G4는 앞에서 쓴 친구 그래프 G1과 번호만 같은 일반화 문장 번호이다.)</p>
+<ol>
+<li><b>G1 (근거 A1~A3)</b> 복잡하게 얽힌 관계는 &ldquo;누가 누구와 연결되는가&rdquo;만 남겨 노드와 간선으로 모델링하면 친구·링크·노선처럼 서로 다른 대상을 같은 구조로 다룰 수 있으며, 간선에 방향이 있는지에 따라 표현의 대칭성이 달라지고 사이클 없는 연결 그래프인 트리는 그 특수한 경우다.</li>
+<li><b>G2 (근거 A2·A4·A6·A9)</b> 모든 쌍의 자리를 미리 마련하는 표현(인접 행렬)은 간선 확인이 한 번에 되는 대신 공간이 노드 수의 제곱이고, 존재하는 간선만 적는 표현(인접 리스트)은 공간과 이웃 열거가 간선 수에 비례하는 대신 간선 확인이 이웃 수에 비례하므로, 어느 쪽이 유리한지는 밀도와 자주 묻는 질문에 따라 달라진다.</li>
+<li><b>G3 (근거 A7·A8)</b> 없는 항목을 읽을 때 자동으로 기본값을 만들어 주는 구조(defaultdict)는 초기화 분기와 예외를 없애 구축 코드를 단순하게 만들지만, &ldquo;읽기&rdquo;가 구조를 바꾸는 부작용을 낳으므로 조회와 생성을 의도적으로 구분해야 한다.</li>
+<li><b>G4 (근거 A10)</b> 이웃을 한꺼번에 리스트로 만들어 넘기지 않고 요청할 때마다 하나씩 내주는 제네레이터로 인터페이스를 두면, 호출하는 쪽은 내부 표현을 몰라도 순회할 수 있고 불필요한 복사를 피하지만, 한 번 소진되고 호출 시점이 아니라 사용 시점에 실행된다는 점을 고려해야 한다.</li>
+</ol>
+<p>대조할 때는 우리 문장이 맞는 부분을 먼저 찾고, 빠진 조건(이유, 얻는 것과 내주는 것)을 &ldquo;고칠 점&rdquo;에 쓴다.</p>
+</details>
+<h3>3단계 · 정제 문장과 대조</h3>
+<p>아래 상자의 문장과 우리 모둠의 문장을 비교한다. 상자의 문장을 그대로 베껴 쓰지 않는다.</p>
 <div class="ans-row"><span class="n">같은 점</span><textarea class="in" rows="2" data-key="A12.cmp.same" data-label="A12 대조 같은 점"></textarea></div>
 <div class="ans-row"><span class="n">다른 점</span><textarea class="in" rows="2" data-key="A12.cmp.diff" data-label="A12 대조 다른 점"></textarea></div>
 <div class="ans-row"><span class="n">고칠 점</span><textarea class="in" rows="2" data-key="A12.cmp.fix" data-label="A12 대조 뒤 우리 문장에서 고칠 점"></textarea></div>
@@ -177,7 +224,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <h2>A13 · 과제 점검표와 전이(SUB)<small>3차시 · 11분 · 개인</small></h2>
 <p class="meta"><span>산출물: 과제 점검, SUB 분석 메모</span></p>
 <h3>(가) 과제 마무리 점검</h3>
-<p><label class="ck"><input type="checkbox" data-key="A13.chk1" data-label="A13 점검: 내 build_graph와 neighbors가 점검 테스트를 모두 통과했다"> 내 build_graph와 neighbors가 점검 테스트를 모두 통과했다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk2" data-label="A13 점검: 무방향 간선이 양쪽에 모두 들어간다"> 무방향 간선이 양쪽에 모두 들어간다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk3" data-label="A13 점검: 방향 그래프에서는 한쪽만 들어간다"> 방향 그래프에서는 한쪽만 들어간다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk4" data-label="A13 점검: 빈 간선 목록에서 오류가 나지 않는다"> 빈 간선 목록에서 오류가 나지 않는다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk5" data-label="A13 추가 점검(교사 지시 후)을 통과했다"> A13 추가 점검(교사 지시 후)을 통과했다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk6" data-label="A13 점검: neighbors가 과제 안내(실습 코드 3부)의 요건을 모두 지켰다"> neighbors가 과제 안내(실습 코드 3부)의 요건을 모두 지켰다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk7" data-label="A13 점검: 코드를 고치지 않고 새 입력에서도 통과했다"> 코드를 고치지 않고 새 입력에서도 통과했다</label><br></p>
+<p><label class="ck"><input type="checkbox" data-key="A13.chk1" data-label="A13 점검: 내 build_graph와 neighbors가 점검 테스트를 모두 통과했다"> 내 build_graph와 neighbors가 점검 테스트를 모두 통과했다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk2" data-label="A13 점검: 무방향 간선이 양쪽에 모두 들어간다"> 무방향 간선이 양쪽에 모두 들어간다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk3" data-label="A13 점검: 방향 그래프에서는 한쪽만 들어간다"> 방향 그래프에서는 한쪽만 들어간다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk4" data-label="A13 점검: 빈 간선 목록에서 오류가 나지 않는다"> 빈 간선 목록에서 오류가 나지 않는다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk5" data-label="A13 추가 점검(접힌 블록)을 통과했다"> A13 추가 점검(접힌 블록)을 통과했다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk6" data-label="A13 점검: neighbors가 과제 안내(실습 코드 3부)의 요건을 모두 지켰다"> neighbors가 과제 안내(실습 코드 3부)의 요건을 모두 지켰다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk7" data-label="A13 점검: 코드를 고치지 않고 새 입력에서도 통과했다"> 코드를 고치지 않고 새 입력에서도 통과했다</label><br></p>
 <p>통과하지 못한 항목이 있다면 어느 항목이고 원인은 무엇인가?</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A13.fail" data-label="A13 통과하지 못한 항목과 원인"></textarea></div>
 <h3>(나) 전이: 지하철 노선도 SUB (채점하지 않는다)</h3>
@@ -191,6 +238,13 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A15" class="sheet">
 <h2>A15 · 성찰일지<small>3차시 · 4분 · 개인</small></h2>
 <p class="meta"><span>산출물: 성찰일지 초안(AI 활용 내역 포함)</span></p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 성찰일지 쓰는 방법과 오개념 점검</span>
+<ul>
+<li>1번은 &ldquo;전에는 ...라고 생각했다. 이제는 ...이다&rdquo;처럼 바뀐 생각을 쓴다. 2·3번은 A8·A10의 예측 표와 A9의 손 값에서 예측이 틀렸던 줄을 찾아 활동 번호와 줄을 쓰고, 틀린 원인을 한 문장으로 쓴다.</li>
+<li>오개념 점검 4가지: 방향이 있어도 표가 대칭일 것이라고 가정했는가? <code class="i">[[0]*n]*n</code>처럼 같은 리스트를 여러 번 참조했는가? 읽기만 했는데 키가 늘어나는 경우를 놓쳤는가? 제네레이터를 두 번 써 보았는가?</li>
+<li>AI 활용 내역은 아래 표에 쓴다. 3단계(허용, 조건부 허용, 금지) 기준은 실습 코드 1부·3부 끝의 표를 따르고, 쓰지 않았으면 &ldquo;AI를 쓰지 않았다&rdquo;를 체크한다. 성찰일지를 AI에게 대신 쓰게 하는 것은 금지이다.</li>
+</ul>
+</div>
 <p>1. 오늘 내 생각이 가장 바뀐 것은 무엇인가?</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in l" rows="3" data-key="A15.change" data-label="A15 오늘 내 생각이 가장 바뀐 것"></textarea></div>
 <p>2. 오늘 내 예측이 틀렸거나 놀란 곳은 어디인가? 활동 번호와 줄을 쓴다.</p>
@@ -199,6 +253,13 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A15.wrongwhy" data-label="A15 그 예측이 틀린 원인을 한 문장으로"></textarea></div>
 <p>4. 이 구조 위에서 모든 노드를 어떤 순서로 돌 수 있을까? (11주차 예고)</p>
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A15.next" data-label="A15 이 구조 위에서 모든 노드를 어떤 순서로 돌 수 있을까(11주차 예고)"></textarea></div>
+<p class="hint">먼저 위 4번에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 11주차 예고</summary>
+<ul>
+<li>11주차에는 한 노드에서 출발해 이웃을 따라 가며 모든 노드를 돌아보는 방법(탐색)을 다룬다. 오늘 만든 <code class="i">defaultdict(list)</code> 그래프와 <code class="i">neighbors(g, u)</code>가 입력 그래프와 이웃 열거로 그대로 쓰인다.</li>
+<li>어떤 순서로 도는 것이 좋은지는 오늘 다루지 않고 11주차에서 정리한다.</li>
+</ul>
+</details>
 <h3>AI 활용 내역</h3>
 <p>주간 과제를 하며 AI를 쓴 부분이 있으면 쓴다. 수업 중(A6~A10·A13~A14)에는 AI를 쓰지 않는다.</p>
 <p><label class="ck"><input type="checkbox" data-key="A15.ai.none" data-label="A15 AI를 쓰지 않았다"> AI를 쓰지 않았다</label></p><div class="scroll"><table class="fill"><tr><th style="width:44px">번호</th><th style="width:36%">무엇을 질문했나(내 코드의 어느 부분인가)</th><th style="width:110px">단계</th><th style="width:120px">반영 여부</th><th>채택·미채택 이유</th></tr><tr><td class="lab">1</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r1.c1" data-label="A15 AI 활용 1 · 질문한 내용"></textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r1.c2" data-label="A15 AI 활용 1 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r1.c3" data-label="A15 AI 활용 1 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r1.c4" data-label="A15 AI 활용 1 · 이유"></textarea></td></tr><tr><td class="lab">2</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r2.c1" data-label="A15 AI 활용 2 · 질문한 내용"></textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r2.c2" data-label="A15 AI 활용 2 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r2.c3" data-label="A15 AI 활용 2 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r2.c4" data-label="A15 AI 활용 2 · 이유"></textarea></td></tr><tr><td class="lab">3</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r3.c1" data-label="A15 AI 활용 3 · 질문한 내용"></textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r3.c2" data-label="A15 AI 활용 3 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r3.c3" data-label="A15 AI 활용 3 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r3.c4" data-label="A15 AI 활용 3 · 이유"></textarea></td></tr></table></div>

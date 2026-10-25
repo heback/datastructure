@@ -127,7 +127,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; lab.week(12)  # 학생용 · 실습 코드 4부(A11·A14)</div>
   <h1>12주차 실습 코드 4부 — 두 정렬의 비교 횟수와 과제 마무리</h1>
-  <p class="lead">3차시 시작(A11)에 사용한다. A11에서는 정렬 골격을 완성하고 비교 횟수를 예측한 뒤 직접 측정한다. A14 블록은 접혀 있다. 교사가 안내하면 펼친다. 정답과 측정값은 이 파일에 없다. 값은 직접 실행해 활동지 3부에 적는다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+  <p class="lead">3차시 시작(A11)에 사용한다. A11에서는 정렬 골격을 완성하고 비교 횟수를 예측한 뒤 직접 측정한다. A14 블록은 접혀 있으며 A14 시작 때 펼친다. 측정값과 정답은 먼저 이 파일의 코드로 직접 구해 활동지 3부에 적는다. 값과 풀이는 활동을 마친 뒤 여는 초록색 확인 상자에만 있다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
 </header>
 <nav><a href="#how">#사용법</a><a href="#A11">#A11</a><a href="#A14">#A14</a><a href="index.html">목록</a></nav>
 <section id="how">
@@ -222,12 +222,25 @@ for name, a in (("섞은 200", shuffled(200)), ("섞은 500", shuffled(500)), ("
                 ("정렬된 200", list(range(200))), ("정렬된 500", list(range(500))), ("정렬된 2000", list(range(2000)))):
     m, q = counts(a)
     print(name, "병합:", m, " 퀵(첫 원소 피벗):", q)</code></pre></div>
-<p>파이썬에는 정렬 도구 <code class="i">sorted()</code>와 <code class="i">list.sort()</code>가 있다. 교사가 소개한다.</p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 파이썬의 정렬 도구 sorted()와 list.sort()</span>
+<ul>
+<li><code class="i">sorted(a)</code>는 a를 바꾸지 않고 정렬된 새 리스트를 돌려준다. <code class="i">a.sort()</code>는 a 자신을 제자리에서 정렬하고 None을 돌려준다.</li>
+<li>위 점검 코드에서 <code class="i">sorted(a)</code>는 내 정렬이 맞는지 비교하는 기준으로 쓰였다.</li>
+</ul>
+</div>
+
 </section>
 <section id="A14" class="sheet">
-<h2>A14 · 과제 마무리 점검과 밧줄 자르기<small>A14에서 교사 지시 후 펼침 · 14분 · 개인</small></h2>
+<h2>A14 · 과제 마무리 점검과 밧줄 자르기<small>A14 시작 때 펼침 · 14분 · 개인</small></h2>
 <details>
-<summary>A14에서 교사 지시 후 펼친다(과제 점검 입력, 요건 안내, 보조 연습 ROPE)</summary>
+<summary>A14 시작 때 펼친다(과제 점검 입력, 요건 안내, 보조 연습 ROPE)</summary>
+<div class="learn-box"><span class="lb-title">학습 내용 · 점검 읽는 법과 과제 요건, 복잡도 서술 쓰는 법</span>
+<ul>
+<li>순서: ① 세 함수를 한 칸에 모아 실행한다. ② TA를 실행한다. ③ 값 점검, 이어서 큰 입력 속도 점검을 실행한다. ④ closest_value 점검을 실행한다. AssertionError가 나오면 메시지의 입력과 두 값을 보고 손으로 따라가 본다.</li>
+<li>요건 확인: <b>입력 불변</b>은 호출 전후에 TA가 같은지 점검 코드가 검사한다. <b>큰 입력</b>은 100만 개 리스트에 질의 10만 번을 약 1초 안쪽(기기에 따라 다르며 상대 판단)에 끝내는지 본다. 5초가 넘으면 중단 메시지가 나온다. <b>bisect 사용</b>은 세 함수가 모두 경계 함수로 계산하는지를 말한다.</li>
+<li>복잡도 서술 쓰는 법(내 답을 쓴다): ① 입력 크기 N과 함수 한 번 부를 때 하는 일(경계 함수를 몇 번 부르는가, 그 한 번에 몇 번쯤 견주는가)을 쓴다. ② 시간 복잡도와 그 근거, 공간 복잡도(새 리스트를 만드는가)와 근거를 쓴다. ③ 하나씩 세는 방법과 비교해 한 줄 덧붙인다.</li>
+</ul>
+</div>
 <div class="gate">
 <h3>과제 요건(과제 안내 후반부)</h3>
 <ul>
@@ -307,6 +320,12 @@ for k, x in enumerate(qs):
 else:
     print("closest_value 큰 입력 점검 끝: %.2f초 (대략 1초 안쪽이면 충분히 빠른 편이다)" % (time.perf_counter() - t0))</code></pre></div>
 <div class="ans-row"><span class="n">구현 계획 다시 쓰기: A7에서 쓴 계획 한 줄을 O(log N) 표기로 다듬어 다시 쓰고, 달라진 점을 한 줄 덧붙인다</span><textarea class="in" rows="2" data-key="A14.plan" data-label="A14 구현 계획 한 줄"></textarea></div>
+<p>먼저 위 점검을 실행해 내 코드로 확인한 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · TA 점검 기대값</summary>
+<p>TA = [2, 2, 2, 6, 6, 10, 14, 14, 14, 14, 18]에서 손으로 구한 값이다. 점검 코드는 이 값을 따로 쓰지 않고 하나씩 세어 비교하므로, 내 결과를 눈으로 대조할 때 쓴다.</p>
+<div class="scroll"><table><tr><th>함수</th><th>호출 → 값</th></tr><tr><td>count_equal</td><td>(TA, 2) → 3 · (TA, 6) → 2 · (TA, 14) → 4 · (TA, 18) → 1 · (TA, 8) → 0 · (TA, 0) → 0 · (TA, 99) → 0 · ([], x) → 0</td></tr><tr><td>count_in_range (양끝 포함)</td><td>(TA, 3, 14) → 7 · (TA, 2, 2) → 3 · (TA, 6, 6) → 2 · (TA, 7, 9) → 0 · (TA, 0, 100) → 11 · (TA, 19, 30) → 0 · (TA, -5, 1) → 0 · (TA, 14, 6) → 0 · ([], lo, hi) → 0</td></tr><tr><td>closest_value (동률이면 작은 값)</td><td>(TA, 0) → 2 · (TA, 2) → 2 · (TA, 4) → 2 · (TA, 8) → 6 · (TA, 12) → 10 · (TA, 16) → 14 · (TA, 20) → 18 · (TA, 99) → 18 · (TA, 6) → 6 · (TA, 10) → 10 · ([], x) → None</td></tr></table></div>
+<p>closest_value(TA, 4)는 2와 6이 같은 거리이므로 작은 값 2이다. 입력 리스트를 정렬하거나 바꾸면 &ldquo;입력 불변&rdquo; 점검에서 걸린다.</p>
+</details>
 <h3>복잡도 분석 서술 (과제 제출물)</h3>
 <p>(선택: 수업 시간에 끝내지 못하면 주간 과제에서 이어서 쓴다) 세 함수의 시간·공간 복잡도와 그 근거를 직접 쓴다. 더 단순한 대안(하나씩 세는 방법)과 비교해 본다.</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="4" data-key="A14.cx.time" data-label="A14 시간 복잡도와 근거"></textarea></div><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A14.cx.space" data-label="A14 공간 복잡도와 근거"></textarea></div><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A14.cx.alt" data-label="A14 더 단순한 방법과의 비교"></textarea></div>

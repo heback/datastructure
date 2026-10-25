@@ -153,6 +153,18 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="mycode"><label for="A7-plan">구현 계획(코드를 쓰기 전에 한 줄): 정렬된 리스트에서 값의 개수·구간의 개수·가장 가까운 값을 구할 때, N개를 모두 보지 않으려면 후보를 어떻게 줄일지와, 이 함수가 몇 번쯤 비교해야 만족스러운지(목표 비용)를 내 말로 쓴다.</label><textarea id="A7-plan" class="in" rows="2" data-key="A7.plan" data-label="A7 구현 계획 한 줄(목표 비용 포함)"></textarea></div>
 <p>먼저 활동지 2부 A7의 &ldquo;코드를 쓰기 전에&rdquo; 칸에 a[mid]와 x의 크기에 따라 lower bound의 위치를 쓰고, 같은 쪽 표에 DUP의 lower bound와 upper bound를 눈으로 보고 <b>예측</b>해 적는다(앞에서 정한 약속의 정의만 쓴다). 예측 칸이 비어 있으면 [예시 코드]의 예측 확인 코드를 실행하지 않는다.</p>
 <p><b>실행 순서</b> ① [예시 코드]에서 [제공 코드]와 [뼈대]를 이 순서로 편집기에 추가하고 빈칸을 채워 [▶ 실행]한다. ② [테스트] 점검을 맨 아래에 추가해 실행한다. ③ 점검이 통과한 뒤 [예시] 예측 후 실행을 추가해 실제 값을 확인하고, 예측과 다른 칸이 있으면 이유를 써 둔다.</p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 후보 범위 [lo, hi)와 lower/upper bound</span>
+<div class="scroll"><table><tr><th></th><th>A2 (닫힌 구간)</th><th>오늘 (반열린 구간)</th></tr><tr><td>후보 범위</td><td>[lo, hi]</td><td>[lo, hi)  (hi는 포함하지 않음)</td></tr><tr><td>시작</td><td>hi = len(a) - 1</td><td>hi = len(a)</td></tr><tr><td>계속 조건</td><td>lo &lt;= hi</td><td>lo &lt; hi</td></tr></table></div>
+<p>위 약속의 정의를 작은 예 B로 본다(B는 DUP와 다른 리스트이다).</p>
+<pre class="diagram">B = [2, 4, 4, 6, 9]      인덱스 0  1  2  3  4
+x = 4 :  2 | 4  4 | 6  9      lower bound = 1 (처음 x 이상), upper bound = 3 (처음 x 초과)
+x = 6 :  2  4  4 | 6 | 9      lower bound = 3,               upper bound = 4
+세로선은 칸과 칸 사이의 경계이다. 두 값은 모두 인덱스이다.</pre>
+<ul>
+<li>lower bound는 bisect_left와, upper bound는 bisect_right와 같은 말이다(A8에서 확인한다).</li>
+<li>빈칸을 채우는 순서: 먼저 ④ &ldquo;a[mid]가 어느 쪽 값이면 답이 mid의 오른쪽에 있다고 말할 수 있는가&rdquo;를 말로 정한 뒤, ⑤⑥에서 후보 범위가 어떻게 줄어야 하는지 정한다. upper_bound는 lower_bound에서 어느 부분이 달라져야 하는지 옆 학생에게 말해 본다.</li>
+</ul>
+</div>
 <h3>입력(DUP, SORTED)</h3>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A7-1"># A7 입력
 # DUP: 같은 값이 여러 번 나오는 정렬된 리스트이다

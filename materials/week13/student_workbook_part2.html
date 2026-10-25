@@ -153,6 +153,16 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>6원에서 greedy_coins와 dp_coins의 반환값이 다르다. 두 함수가 코드의 어느 줄에서 갈라지는지 한 곳을 가리키고 까닭을 쓴다.</p><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A8.q2" data-label="A8 6원에서 두 함수가 갈라지는 코드 줄과 까닭"></textarea></div>
 <p>실습 과제 min_coins의 상태를 이제 어떻게 정의하겠는가? 착수 메모를 고친다면 어떻게 쓰겠는가?</p><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A8.q3" data-label="A8 실습 과제 min_coins의 상태를 이제 어떻게 정의하겠는가? 착수 메모를 고친다면 어떻게 쓰겠는가?"></textarea></div>
 <p><b>선택</b> <code class="i">bisect_right</code>로 가장 큰 동전을 찾는 식을 한 줄로 쓴다.</p><div class="ans-row"><textarea class="in" rows="2" data-key="A8.opt.bisect" data-label="A8 선택: bisect_right로 가장 큰 동전 찾기"></textarea></div>
+<p>먼저 위 칸에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 6원 결과와 두 함수가 갈라지는 곳</summary>
+<ul>
+<li><code class="i">greedy_coins([1, 3, 4], 6)</code>은 3(4+1+1), <code class="i">dp_coins([1, 3, 4], 6)</code>은 2(3+3)이다. A4·A5에서 손으로 구한 값과 같아야 한다.</li>
+<li>두 함수가 갈라지는 곳: greedy_coins는 큰 동전부터 몫을 쓰고 넘어가는 반복문 하나(동전 종류 수만큼)이다. dp_coins는 1원부터 amount원까지 모든 칸을 채우며, 칸마다 모든 동전 후보를 견주어 가장 작은 값을 고른다. 6원에서 greedy는 처음 4를 쓰는 것으로 정해지지만 dp는 4를 마지막으로 쓴 후보(3개)와 3을 마지막으로 쓴 후보(2개)를 모두 견주므로 달라진다.</li>
+<li>INF를 쓰지 않으면 어떤 값이 나오는지는 A10의 T2에서 직접 확인한다.</li>
+<li>착수 메모의 한 예: &ldquo;상태는 dp[a] = a원을 만드는 최소 동전 개수이고, 금액 a마다 동전 수만큼 본다&rdquo;이다. 내 메모가 달라도 의미가 같으면 된다. 달라졌다고 느끼면 q3에서 고쳐 쓴다.</li>
+</ul>
+</details>
+
 </section>
 <section id="A9" class="sheet">
 <h2>A9 · 반례 탐색과 내 체계 설계 기록<small>2차시 · 13분</small></h2>
@@ -169,6 +179,21 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">증명</span><span>금액 </span><input type="text" class="in" data-key="A9.proof.amount" data-label="A9 반례 금액" autocomplete="off" style="width:5em;display:inline-block"><span> 큰 동전부터 </span><input type="text" class="in" data-key="A9.proof.greedy" data-label="A9 큰 동전부터 쓰는 조합" autocomplete="off" style="width:10em;display:inline-block"><span> = </span><input type="text" class="in" data-key="A9.proof.gn" data-label="A9 큰 동전부터 쓰는 개수" autocomplete="off" style="width:3em;display:inline-block"><span>개, 더 나은 조합 </span><input type="text" class="in" data-key="A9.proof.better" data-label="A9 더 나은 조합" autocomplete="off" style="width:10em;display:inline-block"><span> = </span><input type="text" class="in" data-key="A9.proof.bn" data-label="A9 더 나은 개수" autocomplete="off" style="width:3em;display:inline-block"><span>개</span></div>
 <div class="ans-row"><textarea class="in" rows="3" data-key="A9.proof.text" data-label="A9 반례 증명 문장(내 말로)"></textarea></div>
 <p>친구가 내 체계의 반례를 반증해 보았는가? 반증이 되었는지 쓴다.</p><div class="ans-row"><textarea class="in" rows="2" data-key="A9.peer" data-label="A9 친구의 반증 시도 결과"></textarea></div>
+<p>먼저 위 칸에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 체계 4개의 실패 금액</summary>
+<div class="scroll"><table><tr><th>동전 체계</th><th>find_failures(coins, 30)</th><th>find_failures(coins, 50)</th></tr>
+<tr><td>[1, 3, 4]</td><td>[6, 10, 14, 18, 22, 26, 30]</td><td>[6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50]</td></tr>
+<tr><td>[1, 4, 6]</td><td>[8, 9, 14, 15, 20, 21, 26, 27]</td><td>[8, 9, 14, 15, 20, 21, 26, 27, 32, 33, 38, 39, 44, 45, 50]</td></tr>
+<tr><td>[1, 5, 10, 20, 25]</td><td>[]</td><td>[40, 41, 42, 43, 44]</td></tr>
+<tr><td>[1, 10, 50, 100, 500]</td><td>[]</td><td>[] (limit 60에서도 [])</td></tr></table></div>
+<ul>
+<li>[1, 5, 10, 20, 25]는 limit 30에서 [], limit 50에서 40부터 반례가 나온다. 40원은 Greedy 25+10+5 = 3개, 더 나은 조합 20+20 = 2개이다. 25를 낸 선택이 남은 15원을 비효율로 만든다. 시험한 금액이 적으면 반례를 놓칠 수 있다.</li>
+<li>[1, 4, 6]의 반례는 8 이상이면서 6으로 나눈 나머지가 2 또는 3인 금액(8, 9, 14, 15, 20, 21, …)이다. 6칸마다 같은 모양이 반복된다.</li>
+<li>한국 동전의 []은 시험한 범위의 결과이다. 이것이 모든 금액에서 맞는다는 증명인지는 위 q2의 논의를 되돌아보고 A13에서 다시 정리한다.</li>
+<li>Greedy가 맞는 체계의 모양(q4)은 위 표의 동전 값을 나란히 놓고 스스로 찾아본다. 친구의 체계에는 내 반례 문장의 금액으로 두 조합의 개수를 직접 세어 반증한다.</li>
+</ul>
+</details>
+
 </section>
 <section id="A10" class="sheet">
 <h2>A10 · 함정 코드 예측과 원인<small>2차시 · 12분</small></h2>
@@ -193,6 +218,16 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">예측</span><span>fib_memo_t4(3000)은 </span><span class="rg" data-key="A10.t4.pred1" data-type="radio" data-label="A10 T4 fib_memo_t4 예측"><label><input type="radio" name="r_A10_t4_pred1" value="성공한다"> 성공한다</label><label><input type="radio" name="r_A10_t4_pred1" value="오류가 난다"> 오류가 난다</label></span><span> fib_tab_t4(3000)은 </span><span class="rg" data-key="A10.t4.pred2" data-type="radio" data-label="A10 T4 fib_tab_t4 예측"><label><input type="radio" name="r_A10_t4_pred2" value="성공한다"> 성공한다</label><label><input type="radio" name="r_A10_t4_pred2" value="오류가 난다"> 오류가 난다</label></span></div>
 <div class="ans-row"><span class="n">실제</span><span>실제 fib_memo_t4: </span><input type="text" class="in" data-key="A10.t4.real1" data-label="A10 T4 fib_memo_t4 실제" autocomplete="off" style="width:12em;display:inline-block"><span> fib_tab_t4: </span><input type="text" class="in" data-key="A10.t4.real2" data-label="A10 T4 fib_tab_t4 실제" autocomplete="off" style="width:12em;display:inline-block"></div>
 <p>상향식(표 방식)은 왜 깊은 재귀 오류가 없는가? 원인을 쓴다.</p><div class="ans-row"><span class="n">원인</span><textarea class="in" rows="3" data-key="A10.t4.cause" data-label="A10 T4 원인: 상향식은 왜 깊은 재귀 오류가 없는가"></textarea></div>
+<p>먼저 위 칸에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · T1~T4의 결과와 원인</summary>
+<div class="scroll"><table><tr><th style="width:14%">코드</th><th>결과</th><th>원인과 고침</th></tr>
+<tr><td>T1</td><td>fib_t1(6)은 호출 25번(값 8), fib_t1(20)은 호출 21,891번(값 6765). 순수 재귀와 같은 횟수이다. 값은 맞다.</td><td>함수가 불릴 때마다 <code class="i">memo = {}</code>가 새로 만들어져 저장이 재사용되지 않는다. memo를 호출 밖에서 한 번 만들고 재귀 호출에 인자로 넘긴다.</td></tr>
+<tr><td>T2</td><td><code class="i">dp_t2([1, 3, 4], 6)</code>은 0(정답 2), <code class="i">dp_t2([5, 7], 3)</code>은 0(정답 -1). <code class="i">dp_t2([1, 3, 4], 0)</code>은 0으로 우연히 맞는다.</td><td>초기값이 0이면 <code class="i">dp[a-c] + 1 &lt; dp[a]</code>, 곧 1 &lt; 0이 한 번도 참이 되지 않아 어떤 칸도 바뀌지 않는다. 만들 수 없는(아직 못 구한) 칸을 INF로 시작해야 min이 동작한다.</td></tr>
+<tr><td>T3</td><td>세 행이 모두 [1, 0, 0, 0]이다.</td><td><code class="i">[[0] * C] * R</code>은 안쪽 리스트 하나를 R번 가리킨다. 한 행을 바꾸면 모든 행이 바뀐다. <code class="i">[[0] * C for _ in range(R)]</code>로 행마다 새 리스트를 만든다.</td></tr>
+<tr><td>T4(선택)</td><td><code class="i">fib_memo_t4(3000, {})</code>은 RecursionError, <code class="i">fib_tab_t4(3000)</code>은 성공(큰 정수 하나)이다.</td><td>재귀는 깊이가 n에 비례해 호출 스택 한도(기본 1000)에 걸린다. 반복문은 깊이가 늘지 않는다. 한도 값은 환경마다 다를 수 있어 3000을 썼다.</td></tr></table></div>
+<p>8주차의 <code class="i">memo={}</code> 기본 인자는 반대로 호출 사이에 값이 남아 공유되는 함정이었다. T1은 새로 만들어져 아무것도 남지 않는 함정이다.</p>
+</details>
+
 </section>
 </div>
 <script id="week13-submit">

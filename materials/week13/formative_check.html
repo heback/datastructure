@@ -134,6 +134,13 @@ table.fill td.in-cell{padding:3px;height:auto}
 <h2>Q1 · 패러다임 판단<small></small></h2>
 <p class="meta"><span>시험 상황 · 개인 · AI 비사용 · 8분(필수 Q1~Q3)</span></p>
 <p>코드 없이 표와 문장으로 푼다. 정답 개수만이 아니라 <b>반례의 금액과 조합</b>을 쓴다.</p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 풀이 방법</span>
+<ul>
+<li>8분 안에 필수 Q1~Q3를 푼다. 코드를 쓰지 않고 표와 문장으로 푼다. AI는 쓰지 않는다. 시간이 모자라면 Q1의 (a), (d)와 Q2 (iii)의 &ldquo;어느 칸에서 왔는지&rdquo;는 비워도 된다.</li>
+<li>네 선택지의 이름은 오늘과 12주차에 쓴 방식의 이름이다. 뜻이 헷갈리면 A13 구별 기준표와 활동지 3부의 A13 확인 상자를 참고한다.</li>
+<li>Q2의 반례 증명은 <b>금액, 두 조합, 개수 비교</b>의 세 요소를 모두 쓴다. 정답 개수만 쓰지 않는다. Q3의 설계는 상태 정의, 전이, 초기값, 계산 순서를 모두 쓴다.</li>
+</ul>
+</div>
 <h3>Q1 · 어떤 방식이 어울리는가</h3><p>아래 네 상황마다 어울리는 방식을 하나 고르고, 부분 문제가 겹치는지 또는 선택을 되돌릴 일이 없는지에 근거해 한 문장으로 쓴다.</p>
 <p>(a) 재귀로 풀면 같은 인자의 호출이 수천 번 되풀이되는 점화식</p><div class="ans-row"><span class="rg" data-key="Q1.a.pick" data-type="radio" data-label="Q1 (a) 어울리는 방식"><label><input type="radio" name="r_Q1_a_pick" value="메모이제이션·DP"> 메모이제이션·DP</label><label><input type="radio" name="r_Q1_a_pick" value="Greedy 가능"> Greedy 가능</label><label><input type="radio" name="r_Q1_a_pick" value="Greedy 불가(DP 필요)"> Greedy 불가(DP 필요)</label><label><input type="radio" name="r_Q1_a_pick" value="기억해도 이득 없음"> 기억해도 이득 없음</label></span></div>
 <div class="ans-row"><span class="n">근거</span><textarea class="in" rows="2" data-key="Q1.a.why" data-label="Q1 (a) 근거 한 문장"></textarea></div>
@@ -172,6 +179,9 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="scroll"><table class="fill"><tr><th style="width:180px">규칙</th><th>선택된 회의</th><th style="width:100px">개수</th></tr><tr><td class="lab">끝나는 시각이 빠른 순</td><td class="in-cell"><input type="text" class="in" data-key="Q4.rule.r1.c1" data-label="Q4 두 규칙 끝나는 시각이 빠른 순 선택된 회의" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q4.rule.r1.c2" data-label="Q4 두 규칙 끝나는 시각이 빠른 순 개수" autocomplete="off"></td></tr><tr><td class="lab">시작 시각이 빠른 순</td><td class="in-cell"><input type="text" class="in" data-key="Q4.rule.r2.c1" data-label="Q4 두 규칙 시작 시각이 빠른 순 선택된 회의" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q4.rule.r2.c2" data-label="Q4 두 규칙 시작 시각이 빠른 순 개수" autocomplete="off"></td></tr></table></div>
 <div class="ans-row"><span>틀린 규칙의 반례가 되는 회의 </span><input type="text" class="in" data-key="Q4.counter" data-label="Q4 반례가 되는 회의" autocomplete="off" style="width:10em;display:inline-block"></div>
 <p>틀린 규칙이 왜 틀렸는지, 위에서 찾은 반례 회의를 들어 쓴다.</p><div class="ans-row"><textarea class="in" rows="3" data-key="Q4.why" data-label="Q4 틀린 규칙이 틀린 이유"></textarea></div>
+<p>다 쓴 뒤 [저장(JSON)]으로 저장해 제출한다. 정답과 해설은 제출한 뒤 따로 확인한다.</p>
+
+
 </section>
 </div>
 <script id="week13-submit">

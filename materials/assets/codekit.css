@@ -46,3 +46,18 @@ pre:not(.diagram){background:#fff;color:#1f2328;border:1px solid #cfd6e2}
   .ck-ed .ck-area>pre.ck-hl{white-space:pre-wrap;word-break:break-all;overflow:visible;padding-bottom:8px}
   .tk-cm{color:#555}
 }
+
+/* ---------- 학습 내용 상자: 활동에 필요한 설명·그림·규칙을 테두리로 구분한다 ---------- */
+.learn-box{border:2px solid #2b6cb0;border-radius:10px;background:#f4f8fd;margin:14px 0;padding:0 0 10px;overflow:hidden;color:#1a202c}
+.learn-box>.lb-title{display:block;margin:0 0 10px;padding:6px 14px;background:#2b6cb0;color:#fff;font-weight:700;font-size:.95em}
+.learn-box>:not(.lb-title){margin-left:14px;margin-right:14px}
+.learn-box>:last-child{margin-bottom:0}
+.learn-box p{margin:8px 14px}
+.learn-box ul,.learn-box ol{margin:8px 14px;padding-left:22px}
+.learn-box pre{background:#fff}
+/* 활동을 마친 뒤 펼쳐 확인하는 학습 내용(일반화·정리) */
+details.learn-box.after{border-color:#2f855a;background:#f2faf5}
+details.learn-box.after>summary{padding:6px 14px;background:#2f855a;color:#fff;font-weight:700;font-size:.95em;cursor:pointer;margin:0 0 10px}
+details.learn-box.after:not([open])>summary{margin-bottom:0}
+details.learn-box.after>:not(summary){margin-left:14px;margin-right:14px}
+@media print{.learn-box{break-inside:avoid;background:#fff!important}details.learn-box.after:not([open])>:not(summary){display:none}}

@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "entries": {
+    "79a93d4a2f8f50b95f852280616242fee1855dc99a3c75211917f55e72e95fae": {
+      "last_emitted_at_ms": 1792932420679,
+      "message": "Use parallel execution for independent tasks. Use run_in_background for long operations (npm install, builds, tests)."
+    },
+    "445ed27a3872b681d98190bae61ccb84954e1bc4e140df5370be958dee776b3a": {
+      "last_emitted_at_ms": 1792932392974,
+      "message": "Verify changes work after editing. Test functionality before marking complete."
+    },
+    "466399dafa2d20f60587180bad0a07358eb7f2bce724df0ff682f038ad33f5ad": {
+      "last_emitted_at_ms": 1792932179248,
+      "message": "Read multiple files in parallel when possible for faster analysis."
+    },
+    "1866315e6aa0ae0176474b6a5e229f99677c3d1550c8453c5078b17998e7c91a": {
+      "last_emitted_at_ms": 1792931801955,
+      "message": "Spawning agent: materials-developer (sonnet) | Task: 13주차 학습 내용 상자 추가"
+    },
+    "95c45e16daf20cb896c600c6243b0c4269bc9c4babefc8e9373092660787cd34": {
+      "last_emitted_at_ms": 1792931793642,
+      "message": "Spawning agent: materials-developer (sonnet) | Task: 12주차 학습 내용 상자 추가"
+    },
+    "df37ac0a925be91575bbdfd060b8cc2d13d181f7726398564092dbb01ce0cd55": {
+      "last_emitted_at_ms": 1792931786638,
+      "message": "Spawning agent: materials-developer (sonnet) | Task: 11주차 학습 내용 상자 추가"
+    },
+    "d457ed5798ad18a41318fbe4ebc4d67c626b3148a183422addc8efc895a27104": {
+      "last_emitted_at_ms": 1792931779746,
+      "message": "Spawning agent: materials-developer (sonnet) | Task: 10주차 학습 내용 상자 추가"
+    },
+    "98c069701e1469e85edb5f351d2f66c21be65280b30e9907a8d118ae41cc30a3": {
+      "last_emitted_at_ms": 1792931772848,
+      "message": "Spawning agent: materials-developer (sonnet) | Task: 9주차 학습 내용 상자 추가"
+    },
+    "18631903589233c0475140c7c0c05a76d37959c8899a711c248abb6f8c9b02fc": {
+      "last_emitted_at_ms": 1792931765869,
+      "message": "Spawning agent: materials-developer (sonnet) | Task: 8주차 학습 내용 상자 추가"
+    }
+  },
+  "updated_at": "2026-10-25T12:47:00.679Z"
+}

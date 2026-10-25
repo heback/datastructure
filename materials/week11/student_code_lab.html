@@ -146,7 +146,13 @@ table.fill td.in-cell{padding:3px;height:auto}
 </section>
 <section id="A6" class="sheet">
 <h2>A6 · 그래프에서 너비 우선·깊이 우선 코드 만들기<small>15분 · 개인(옆 학생과 대조)</small></h2>
-<p>A2·A3에서 손으로 한 탐색을 코드로 옮긴다. 10주차의 <code class="i">build_graph</code>와 <code class="i">neighbors</code>는 제공한다. <code class="i">bfs_order</code>는 큐, <code class="i">dfs_order</code>는 재귀로 완성한다. 방문 기록(visited)을 언제 남길지(큐에 넣을 때 / 꺼낼 때)는 골격의 ②·④·⑤를 채우는 방식으로 정해진다. 내 코드가 어느 쪽인지 확인하고, A2의 손 규칙(어느 쪽이었는지 다시 본다)과 같은지 다른지 활동지 2부 A6에 쓴다. 완성한 뒤 G1에서 실행해 A2·A3의 손 추적과 대조하고, 시작 노드를 F로 바꾸면 어떻게 될지 <b>예측한 뒤</b> 실행해 활동지 <a href="student_workbook_part2.html#A6">2부 A6</a>에 쓴다.</p><h3>제공 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A6-1"># defaultdict: 없는 키를 처음 쓰면 빈 리스트를 만들어 주는 dict
+<p>A2·A3에서 손으로 한 탐색을 코드로 옮긴다. 10주차의 <code class="i">build_graph</code>와 <code class="i">neighbors</code>는 제공한다. <code class="i">bfs_order</code>는 큐, <code class="i">dfs_order</code>는 재귀로 완성한다. 방문 기록(visited)을 언제 남길지(큐에 넣을 때 / 꺼낼 때)는 골격의 ②·④·⑤를 채우는 방식으로 정해진다. 내 코드가 어느 쪽인지 확인하고, A2의 손 규칙(어느 쪽이었는지 다시 본다)과 같은지 다른지 활동지 2부 A6에 쓴다. 완성한 뒤 G1에서 실행해 A2·A3의 손 추적과 대조하고, 시작 노드를 F로 바꾸면 어떻게 될지 <b>예측한 뒤</b> 실행해 활동지 <a href="student_workbook_part2.html#A6">2부 A6</a>에 쓴다.</p><div class="learn-box"><span class="lb-title">학습 내용 · 빈칸 ①~⑧ 채우는 길잡이</span>
+<ul>
+<li>활동지 1부 A2의 손 규칙 1~4단계와 A3 의사코드를 코드 줄로 옮긴 것이다. bfs_order(큐)에서 손 규칙 1(시작 노드를 넣는다)은 ①②, 규칙 2(꺼낸다)는 ③, 규칙 3(방문 기록에 쓰고 이웃을 넣는다)은 ④⑤, 규칙 4(빌 때까지 반복)는 <code class="i">while q</code>이다. dfs_order(재귀)에서 ⑥은 A3 의사코드의 첫 두 줄, ⑦은 if 줄, ⑧은 호출 줄이다.</li>
+<li><b>deque</b>는 <code class="i">deque([x])</code>로 만들고, <code class="i">q.append(x)</code>는 뒤에 넣고, <code class="i">q.popleft()</code>는 앞에서 꺼낸다. <b>set</b>은 <code class="i">x in s</code>로 있는지 보고 <code class="i">s.add(x)</code>로 넣는다. dfs_order의 인자는 (g, 노드, visited, order)이다.</li>
+<li>visited를 언제 기록할지(큐에 넣을 때인지 꺼낼 때인지)는 ②·④·⑤에 걸려 있다. 내 코드가 어느 쪽인지 읽고 활동지 2부 A6에 쓴다. 막히면 활동지 1부 A2·A3의 표를 옆에 두고 한 줄씩 대응시킨다.</li>
+</ul></div>
+<h3>제공 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A6-1"># defaultdict: 없는 키를 처음 쓰면 빈 리스트를 만들어 주는 dict
 # deque: 양쪽 끝에서 넣고 꺼내기 쉬운 큐
 from collections import defaultdict, deque
 
@@ -305,10 +311,28 @@ for f in fails:
 # 실패가 하나라도 있으면 멈추므로, 위에 출력된 FAIL 줄을 읽고 고친다.
 assert not fails, "A6 점검 실패: %s" % fails
 print("A6 점검 통과")</code></pre></div><div class="note">호출은 <code class="i">bfs_order(g, "A")</code>, <code class="i">dfs_order(g, "A", set(), [])</code>이다. 시작 상태는 호출마다 새 order, 큐, visited이다.</div>
+<p>먼저 빈칸을 채워 점검을 통과해 본 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A6 빈칸 정답</summary>
+<ul>
+<li>① <code class="i">deque([start])</code> ② <code class="i">visited = {start}</code> ③ <code class="i">q.popleft()</code> ④ <code class="i">v not in visited</code> ⑤ <code class="i">visited.add(v)</code>와 <code class="i">q.append(v)</code> ⑥ <code class="i">visited.add(u)</code>와 <code class="i">order.append(u)</code> ⑦ <code class="i">v not in visited</code> ⑧ <code class="i">dfs_order(g, v, visited, order)</code></li>
+<li>②에서 시작 노드를 처음부터 visited에 넣고 ⑤에서 큐에 넣을 때 기록하므로 &ldquo;넣을 때 기록&rdquo; 방식이다. 꺼낼 때 기록하는 방식으로 짜도 되지만 ③ 아래에 방문 확인·기록 줄이 더 필요하다. 두 방식의 차이는 A8 T1에서 비교한다.</li>
+<li>G1, 시작 A의 결과 값은 활동지 2부 A6에 기록한 뒤 그 쪽의 확인 상자에서 비교한다.</li>
+</ul></details>
 </section>
 <section id="A7" class="sheet">
 <h2>A7 · 격자 미로 탐색하기<small>13분 · 짝</small></h2>
-<p>2차원 격자 미로 MAZE를 탐색한다. 칸 하나가 노드이고 상하좌우 이웃 칸이 간선이다. <code class="i">grid_neighbors</code>는 10주차 <code class="i">neighbors</code>처럼 이웃을 하나씩 내주는 제네레이터이고, <code class="i">shortest_path_len</code>은 S에서 E까지의 거리(걸음 수)를 돌려주며 닿을 수 없으면 -1이다. 완성한 뒤 MAZE의 S&rarr;E 거리를 구하고 닿을 수 없는 미로 한 개와 시작=도착인 경우도 실행해 활동지 <a href="student_workbook_part2.html#A7">2부 A7</a>에 기록한다.</p><h3>제공 코드(입력)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A7-0">from collections import deque
+<p>2차원 격자 미로 MAZE를 탐색한다. 칸 하나가 노드이고 상하좌우 이웃 칸이 간선이다. <code class="i">grid_neighbors</code>는 10주차 <code class="i">neighbors</code>처럼 이웃을 하나씩 내주는 제네레이터이고, <code class="i">shortest_path_len</code>은 S에서 E까지의 거리(걸음 수)를 돌려주며 닿을 수 없으면 -1이다. 완성한 뒤 MAZE의 S&rarr;E 거리를 구하고 닿을 수 없는 미로 한 개와 시작=도착인 경우도 실행해 활동지 <a href="student_workbook_part2.html#A7">2부 A7</a>에 기록한다.</p><div class="learn-box"><span class="lb-title">학습 내용 · MAZE 읽는 법과 빈칸 ⑨~⑭ 길잡이</span>
+<pre class="diagram">     열 0 1 2 3 4 5 6
+행 0     S . . # . . .         칸 (행, 열)이 노드이고 상하좌우로 맞닿은 길 칸이 이웃이다.
+행 1     . # . # . # .         '#'은 벽이라 지나갈 수 없다. S=(0,0), E=(4,6).
+행 2     . # . . . # .         이웃은 DIRS 순서(우, 하, 좌, 상)로 하나씩 내준다.
+행 3     . # # # # # .
+행 4     . . . . . . E</pre>
+<ul>
+<li><b>grid_neighbors</b>: 방향마다 한 칸 옮긴 위치 (nr, nc)를 구해, ⑨ 격자 안인지(행은 0 이상 len(grid) 미만, 열은 0 이상 len(grid[0]) 미만)와 ⑩ passable에 든 글자인지를 모두 만족하면 ⑪ yield로 내준다. 그 칸의 글자는 grid[nr][nc]로 읽으므로 범위를 먼저 확인해야 한다(and는 앞이 거짓이면 뒤를 읽지 않는다).</li>
+<li><b>shortest_path_len</b>은 bfs_order와 같은 큐 틀이다. 다른 점은 visited 대신 dist(칸 &rarr; 시작에서의 걸음 수)를 쓰는 것이다. ⑫ 도착 칸의 거리를 돌려주고, ⑬ dist에 아직 없는 칸이면 ⑭ 이웃의 거리를 현재 칸 거리보다 1 크게 기록하고 큐에 넣는다. 도착 칸을 만나지 못하고 큐가 비면 -1이다.</li>
+</ul></div>
+<h3>제공 코드(입력)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A7-0">from collections import deque
 
 # 이웃을 보는 방향 목록: (행 변화, 열 변화). 이 순서대로 이웃을 본다.
 DIRS = [(0, 1), (1, 0), (0, -1), (-1, 0)]   # 우 하 좌 상 (제공)
@@ -427,6 +451,18 @@ for f in fails[:12]:
 # 실패가 하나라도 있으면 AssertionError로 멈춘다. FAIL 줄을 읽고 고친다.
 assert not fails, "A7 점검 실패: %d건" % len(fails)
 print("A7 점검 통과")</code></pre></div><div class="note">점검은 A7 편집기 맨 아래에 [예시 코드]에서 [편집기에 추가]해 실행한다(같은 페이지에서는 앞에서 실행한 정의가 남아 있다). 가장자리 칸의 이웃을 미리 예측하고 싶다면 편집기에서 &#9320;의 경계 검사 한쪽(<code class="i">0 &lt;= nr &lt; len(grid)</code>)만 지우고 <code class="i">list(grid_neighbors(MAZE, 0, 0, ".SE"))</code>를 실행해 활동지 2부 A7의 예측과 비교해 볼 수 있다. 확인한 뒤에는 반드시 원래대로 되돌린다.</div>
+<p>먼저 빈칸을 채워 점검을 통과해 본 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A7 빈칸 정답과 거리 값</summary>
+<ul>
+<li>⑨ <code class="i">0 &lt;= nr &lt; len(grid) and 0 &lt;= nc &lt; len(grid[0])</code> ⑩ <code class="i">grid[nr][nc] in passable</code> ⑪ <code class="i">yield nr, nc</code> ⑫ <code class="i">dist[cell]</code> ⑬ <code class="i">n not in dist</code> ⑭ <code class="i">dist[n] = dist[cell] + 1</code>과 <code class="i">q.append(n)</code></li>
+<li>값: MAZE의 S&rarr;E 거리 10, <code class="i">["S#E"]</code>는 -1(S와 E 사이가 벽이라 큐가 비도록 E를 만나지 못한다), 시작=도착은 0, (0,0)의 이웃 <code class="i">[(0, 1), (1, 0)]</code>, (2,2)의 이웃 <code class="i">[(2, 3), (1, 2)]</code>이다.</li>
+</ul>
+<pre class="diagram">dist 지도(시작에서의 걸음 수): E에 처음 닿은 층의 번호가 10이다.
+ 0  1  2  #  8  9 10
+ 1  #  3  #  7  # 11
+ 2  #  4  5  6  # 12
+ 3  #  #  #  #  # 11
+ 4  5  6  7  8  9 10   (E)</pre></details>
 </section>
 <section id="assign" class="sheet">
 <h2>실습 과제 안내 · 2차원 Grid 미로 탐색 및 섬의 개수<small>A7 착수 · A10 이어짐 · A13 마무리 · 잔여는 주간 과제</small></h2>
@@ -435,7 +471,7 @@ print("A7 점검 통과")</code></pre></div><div class="note">점검은 A7 편�
 <li><code class="i">grid_neighbors(grid, r, c, passable)</code>: 칸 (r, c)의 상하좌우 이웃 중 격자 안에 있고 <code class="i">passable</code>에 들어 있는 글자의 칸을 하나씩 내주는 제네레이터이다.</li>
 <li><code class="i">shortest_path_len(grid, start, goal)</code>: 시작 칸에서 도착 칸까지 지나는 걸음 수의 최솟값을 돌려준다. 닿을 수 없으면 -1이다.</li>
 <li><code class="i">count_islands(grid)</code>: 땅 &lsquo;1&rsquo;이 상하좌우로 이어진 덩어리(섬)의 개수를 돌려준다. 격자는 문자열 리스트이다.</li>
-<li>A7에서 앞의 두 함수를 착수하고, A10(3차시)에서 <code class="i">count_islands</code>를 시작하며, A13은 마무리 점검이다. A13의 숫자 변환 퍼즐은 채점하지 않는 보조 연습이다. 미완 부분은 주간 과제로 이어진다.</li>
+<li>A7에서 앞의 두 함수를 착수하고, A10(3차시)에서 <code class="i">count_islands</code>를 시작하며, A13은 마무리 점검이다. A13에서 물통 퍼즐은 수업 중 전이이고 숫자 변환 퍼즐(NUM)은 집에서 하는 채점하지 않는 선택 연습이다. 미완 부분은 주간 과제로 이어진다.</li>
 </ul></div>
 <div class="card"><b class="h">제출물</b><ul>
 <li>파이썬 코드: student_code_lab_part3의 &lsquo;최종 코드&rsquo; 칸(저장 JSON에 들어간다)과 성찰일지(AI 활용 내역 포함). 별도 <code class="i">.py</code> 파일은 내지 않는다(제출은 [저장(JSON)] 한 가지이다).</li>

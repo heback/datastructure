@@ -146,6 +146,22 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">5</span><textarea class="in" rows="3" data-key="A6.odd" data-label="A6 예상하지 못한 칸까지 값이 바뀐 경우의 모습과 원인 생각"></textarea></div>
 <p>6. 옆 학생의 코드와 비교해 다른 점은 무엇인가?</p>
 <div class="ans-row"><span class="n">6</span><textarea class="in" rows="2" data-key="A6.compare" data-label="A6 옆 학생 코드와 비교해 다른 점"></textarea></div>
+<p class="hint">먼저 위 칸에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 한 칸을 바꿨는데 여러 칸이 바뀌는 이유와 참조 코드</summary>
+<p>손 표와 코드가 같은지 볼 때는 모든 (i, j)에서 <code class="i">m[i][j] == m[j][i]</code>인지 확인하면 대칭 여부를 알 수 있다. 노드 이름 &ldquo;A&rdquo;의 칸 번호는 번호표 <code class="i">MAP["A"]</code>로 안다.</p>
+<pre>m = [[0] * 3] * 3
+m[0][1] = 1
+print(m)   # [[0, 1, 0], [0, 1, 0], [0, 1, 0]]
+m = [[0] * 3 for _ in range(3)]
+m[0][1] = 1
+print(m)   # [[0, 1, 0], [0, 0, 0], [0, 0, 0]]</pre>
+<p>원인: <code class="i">[[0] * 3] * 3</code>은 같은 행 리스트 하나를 3번 가리킨다(같은 행 3번). 한 행을 바꾸면 세 행이 함께 바뀐다. <code class="i">for _ in range(3)</code>로 행마다 새 리스트를 만들면 행이 따로 3개가 된다.</p>
+<pre>def make_matrix(n):
+    return [[0] * n for _ in range(n)]
+def add_edge(m, u, v):
+    m[u][v] = 1
+    m[v][u] = 1   # 무방향이므로 두 칸에 모두 적는다</pre>
+</details>
 </section>
 <section id="A7" class="sheet">
 <h2>A7 · 일반 dict로 만든 인접 리스트의 오류와 해결 아이디어<small>2차시 · 13분 · 짝</small></h2>
@@ -154,9 +170,9 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>실습 코드 1부 A7의 시도 코드를 실행한 결과를 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:34%">항목</th><th>내가 쓴 것</th></tr><tr><td class="lab">오류가 난 줄(어느 줄의 어느 부분인가)</td><td class="in-cell"><input type="text" class="in" data-key="A7.err.line" data-label="A7 오류가 난 줄" autocomplete="off"></td></tr><tr><td class="lab">오류 이름과 메시지</td><td class="in-cell"><input type="text" class="in" data-key="A7.err.name" data-label="A7 오류 이름과 메시지" autocomplete="off"></td></tr><tr><td class="lab">원인 한 줄</td><td class="in-cell"><input type="text" class="in" data-key="A7.err.cause" data-label="A7 KeyError 원인 한 줄" autocomplete="off"></td></tr></table></div>
 <h3>(나) 해결 아이디어 모으기</h3>
 <p>모둠에서 이 오류를 없앨 방법을 최대한 많이 모은다.</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A7.idea1" data-label="A7 해결 아이디어 1"></textarea></div><div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A7.idea2" data-label="A7 해결 아이디어 2"></textarea></div><div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A7.idea3" data-label="A7 해결 아이디어 3"></textarea></div>
-<h3>(다) 교사가 확인한 도구로 다시 만들기</h3>
-<p>교사가 도구를 확인한 뒤 G1과 W를 다시 만든다(실습 코드 1부 A7).</p>
-<p>1. 교사가 확인한 도구의 이름은? <input type="text" class="in" data-key="A7.tool" data-label="A7 교사가 확인한 도구의 이름" autocomplete="off" style="width:14em;display:inline-block"></p>
+<h3>(다) 실습 코드 1부의 상자에서 확인한 도구로 다시 만들기</h3>
+<p>실습 코드 1부 A7의 &ldquo;활동을 마친 뒤 열어 확인한다&rdquo; 상자에서 도구를 확인한 뒤 G1과 W를 다시 만든다.</p>
+<p>1. 상자에서 확인한 도구의 이름은? <input type="text" class="in" data-key="A7.tool" data-label="A7 상자에서 확인한 도구의 이름" autocomplete="off" style="width:14em;display:inline-block"></p>
 <p>2. 일반 dict와 이 도구는 무엇이 다른가? 한 문장으로 쓴다.</p>
 <div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A7.diff1" data-label="A7 일반 dict와 이 도구의 차이를 한 문장으로"></textarea></div>
 <p>3. 다시 만든 목록이 1차시 A2·A3의 손 목록과 같은가? <label class="ck"><input type="checkbox" data-key="A7.same.g1" data-label="A7 G1 재구축이 손 목록과 같다"> G1이 같다</label><label class="ck"><input type="checkbox" data-key="A7.same.w" data-label="A7 W 재구축이 손 목록과 같다"> W가 같다</label></p>
@@ -167,6 +183,16 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>6. 방향 없는 간선인데 코드에서 한쪽(<code class="i">g[u].append(v)</code>)만 추가하면 D의 이웃은 어떻게 되겠는가? 예측하고 실제로 시험해 쓴다.</p>
 <div class="ans-row"><span class="n">6</span><textarea class="in" rows="2" data-key="A7.oneway" data-label="A7 한쪽만 추가하면 D의 이웃은(예측과 실제)"></textarea></div>
 <p>7. 노드 이름으로 리스트를 쓰면 어떤 오류가 나는가? 튜플은 어떤가? 직접 시험해 쓴다. 노드 이름(키) <input type="text" class="in" data-key="A7.key.list" data-label="A7 노드 이름이 리스트일 때 결과" autocomplete="off" style="width:12em;display:inline-block"> 튜플 <input type="text" class="in" data-key="A7.key.tuple" data-label="A7 노드 이름이 튜플일 때 결과" autocomplete="off" style="width:12em;display:inline-block"></p>
+<p class="hint">먼저 위 칸에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 오류 원인과 관찰한 것의 정리</summary>
+<ul>
+<li>오류가 난 줄은 <code class="i">g[u].append(v)</code>이고 <code class="i">KeyError: 'A'</code>이다. g가 빈 dict여서 &lsquo;A&rsquo;라는 키가 없는데 <code class="i">g[u]</code>로 읽었기 때문이다.</li>
+<li>해결 아이디어 예: 키가 없으면 먼저 빈 리스트를 넣는다(<code class="i">if u not in g</code>), <code class="i">setdefault</code>, <code class="i">try/except KeyError</code>, 키를 미리 모두 만들어 두기(노드 이름을 먼저 알아야 한다), 6주차에서 쓴 <code class="i">defaultdict</code>. 일반 dict는 없는 키를 읽으면 KeyError이고, <code class="i">defaultdict(list)</code>는 빈 리스트를 만들어 넣고 돌려준다.</li>
+<li>다시 만든 결과는 G1이 A: B, C / B: A, D / C: A, D / D: B, C, E / E: D이고, W가 0: 1, 2 / 1: 2 / 2: 0 / 3: 2이다. G1에서 <code class="i">'F' in g</code>는 False이고 <code class="i">len(g)</code>는 5이다. F는 간선에 한 번도 나오지 않아 키가 만들어지지 않은 것이다. 오류가 아니다.</li>
+<li>한쪽만 추가하면 D의 이웃은 ['E'], B의 이웃은 ['D']만 남아 G1과 달라진다.</li>
+<li>노드 이름으로 리스트를 쓰면 <code class="i">TypeError: unhashable type: 'list'</code>이고 튜플은 오류가 없다. 6주차에서 본 해시 규칙과 같다. 바뀔 수 있는 리스트는 키가 될 수 없고, 문자열·숫자·튜플은 노드 이름이 될 수 있다. 행렬로 만들 때는 노드 이름을 0~N-1 정수 번호로 바꿔야 했다.</li>
+</ul>
+</details>
 </section>
 <section id="A8" class="sheet">
 <h2>A8 · 함정 코드 예측-실제 표<small>2차시 · 14분 · 짝</small></h2>
@@ -181,6 +207,18 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A8.q3" data-label="A8 for로 g를 돌며 g[v]를 읽으면 왜 오류가 나는가"></textarea></div>
 <p>4. 그래프에서 &ldquo;없는 노드&rdquo;와 &ldquo;이웃이 없는 노드&rdquo;는 같은가? 이유를 쓴다.</p>
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A8.q4" data-label="A8 그래프에서 없는 노드와 이웃이 없는 노드는 같은가"></textarea></div>
+<p class="hint">먼저 위 칸에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · C1~C5의 결과와 원인</summary>
+<table style="width:calc(100% - 28px)"><tr><th>코드</th><th>실제 결과</th><th>원인</th><th>흔히 만나는 곳</th></tr>
+<tr><td>C1</td><td>5, 그리고 6 [] (len 5가 6이 되고 x는 [])</td><td>읽기가 키 Z를 만든다</td><td>이웃을 묻는 함수, 방문 코드에서 없는 노드를 확인할 때</td></tr>
+<tr><td>C2</td><td>False, [], 5 (len 그대로)</td><td>in과 get은 키를 만들지 않는다</td><td>조회 전에 존재 확인</td></tr>
+<tr><td>C3</td><td>A를 출력한 뒤 RuntimeError: dictionary changed size during iteration</td><td>순회 중 읽기가 g의 크기를 바꿨다</td><td>11주차처럼 모든 노드를 돌며 이웃을 읽는 코드</td></tr>
+<tr><td>C4</td><td>[[1], [1], [1]] (올바른 [[] for _ in range(3)]는 [[1], [], []])</td><td>같은 리스트를 3번 참조(A6의 같은 행 3번과 같은 원인)</td><td>행렬·이웃 목록 초기화</td></tr>
+<tr><td>C5</td><td>{'A': ['B'], 'C': ['D']}, 같은 dict, a is b가 True</td><td>기본 인자 g={}가 호출 사이에 공유된다(8주차 가변 기본 인자)</td><td>함수의 기본 인자로 그래프를 받을 때</td></tr></table>
+<ul>
+<li>정리 질문 힌트: 1번은 g의 노드 수가 늘고 &ldquo;그래프에 있는 노드인가&rdquo;의 판단이 틀어진다. 2번은 <code class="i">in</code>이 포함 여부만 확인하고 값을 꺼내지 않기 때문이다. 3번은 for로 도는 동안 g의 크기가 바뀌어서이다. 4번은 같지 않다. 없는 노드는 g에 키가 없는 것이고, 이웃이 없는 노드는 키가 있고 목록이 비어 있는 것(또는 방향 그래프에서 도착만 있는 끝 노드)이다.</li>
+</ul>
+</details>
 </section>
 <section id="A9" class="sheet">
 <h2>A9 · 연산 카운터 실측 vs 손 표<small>2차시 · 11분 · 짝</small></h2>

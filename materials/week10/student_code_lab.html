@@ -143,10 +143,21 @@ table.fill td.in-cell{padding:3px;height:auto}
 </section>
 <section id="A6" class="sheet">
 <h2>A6 · 인접 행렬 코드로 만들기<small>12분 · 개인(옆 학생과 대조)</small></h2>
-<p>A2에서 손으로 만든 6&times;6 표를 코드로 만든다. 행렬은 칸 번호가 정수여야 하므로 노드 A~F를 0~5로 바꾸는 번호표(<code class="i">MAP</code>)를 쓴다. <code class="i">make_matrix</code>(빈칸 ①)와 <code class="i">add_edge</code>(빈칸 ②)를 완성하고, 만든 행렬을 활동지 <a href="student_workbook_part2.html#A6">2부 A6</a>의 손 표와 대조한다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A6-1"># A2에서 쓴 친구 관계 G1(무방향). 노드는 A~F이고 F는 간선이 없다.
+<p>A2에서 손으로 만든 6&times;6 표를 코드로 만든다. 행렬은 칸 번호가 정수여야 하므로 노드 A~F를 0~5로 바꾸는 번호표(<code class="i">MAP</code>)를 쓴다. <code class="i">make_matrix</code>(빈칸 ①)와 <code class="i">add_edge</code>(빈칸 ②)를 완성하고, 만든 행렬을 활동지 <a href="student_workbook_part2.html#A6">2부 A6</a>의 손 표와 대조한다.</p><div class="learn-box"><span class="lb-title">학습 내용 · 리스트의 리스트와 칸 번호</span>
+<ul>
+<li>행렬은 리스트 안에 행(리스트)을 넣어 만든다. <code class="i">m[i][j]</code>는 i번 행의 j번 칸이고 0부터 센다. <code class="i">[0] * 3</code>은 <code class="i">[0, 0, 0]</code>이다.</li>
+</ul>
+<pre>m = [[0, 0], [0, 0]]
+m[0][1] = 5
+print(m)   # [[0, 5], [0, 0]]</pre>
+<ul>
+<li>순서는 ① 행 하나를 만든다 ② 그 행을 N개 모은다 ③ <code class="i">add_edge</code>에서 간선 하나가 표의 몇 칸을 바꾸는지 A2의 표로 확인한다 ④ 자체 테스트를 돌려 FAIL 줄을 읽는다.</li>
+</ul>
+</div>
+<h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A6-1"># A2에서 쓴 친구 관계 G1(무방향). 노드는 A~F이고 F는 간선이 없다.
 # 튜플 ("A", "B")는 A와 B를 잇는 간선 하나이다. 리스트에 간선을 모은다.
 G1_EDGES = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "D"), ("D", "E")]
-# 행렬의 칸 번호는 정수여야 하므로, 교사가 정해 준 번호표를 쓴다.
+# 행렬의 칸 번호는 정수여야 하므로, 정해진 번호표를 쓴다.
 # dict는 {키: 값} 묶음이다. MAP["C"]처럼 키로 값을 찾는다.
 MAP = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5}</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A6-2"># def는 함수를 만드는 문법이다. def 이름(받는 값): 아래를 들여써서 쓴다.
 def make_matrix(n):
@@ -178,12 +189,12 @@ if m != ref:
     fails.append("행렬이 간선 목록에서 계산한 참조 행렬과 다르다")
 # 확인 3: 모든 (i, j)에서 m[i][j]와 m[j][i]가 같은가
 if any(m[i][j] != m[j][i] for i in range(N) for j in range(N)):
-    fails.append("행렬이 대칭이 아니다")
+    fails.append("행렬이 기대와 다르다")
 # 확인 4: 작은 행렬 t의 한 칸만 바꿨을 때 합이 1인가
 t = make_matrix(3)
 t[0][1] = 1
 if sum(sum(row) for row in t) != 1:
-    fails.append("작은 행렬 t의 한 칸만 바꿨는데 합이 1이 아니다")
+    fails.append("작은 행렬 t의 값이 기대와 다르다")
 # 모은 실패 이유를 한 줄씩 출력한다.
 for f in fails:
     print("FAIL", f)
@@ -194,7 +205,18 @@ print("A6 테스트 통과")</code></pre></div><div class="note">행렬 전체�
 </section>
 <section id="A7" class="sheet">
 <h2>A7 · 인접 리스트 만들기: 일반 dict 시도<small>13분 · 짝</small></h2>
-<p>이번에는 노드마다 이웃 목록을 두는 인접 리스트를 일반 dict로 만들어 본다. 아래 코드를 <b>실행하기 전에</b> 어떻게 될지 생각하고, 실행한 뒤 어느 줄에서 무슨 오류가 났는지 활동지 <a href="student_workbook_part2.html#A7">2부 A7</a>에 쓴다.</p><h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A7-0"># A7 준비: 친구 관계 G1(무방향)과 웹페이지 링크 W(방향, 노드 0~3, 간선 5개)
+<p>이번에는 노드마다 이웃 목록을 두는 인접 리스트를 일반 dict로 만들어 본다. 아래 코드를 <b>실행하기 전에</b> 어떻게 될지 생각하고, 실행한 뒤 어느 줄에서 무슨 오류가 났는지 활동지 <a href="student_workbook_part2.html#A7">2부 A7</a>에 쓴다.</p><div class="learn-box"><span class="lb-title">학습 내용 · 오류 메시지 읽는 법과 활동 순서</span>
+<ul>
+<li>오류가 나면 맨 아래 줄이 오류 이름과 메시지이고, 그 위에 오류가 난 코드 줄이 나온다. 예를 들어 dict에 없는 키를 읽으면 <code class="i">KeyError: 'b'</code>가 난다.</li>
+</ul>
+<pre>d = {"a": 1}
+print(d["a"])   # 1
+print(d["b"])   # KeyError: 'b'</pre>
+<ul>
+<li>순서: ① 시도 코드를 실행하기 전에 예측한다 ② 실행해 오류 줄·이름·원인을 활동지 2부 A7에 쓴다 ③ 모둠에서 해결 아이디어를 모은다. &ldquo;키를 미리 모두 만들려면 노드 이름을 먼저 알아야 하는가? 간선만 주어지면?&rdquo;을 함께 생각한다 ④ 아래 상자로 도구를 확인하고 G1(변수 g)과 W(변수 gw)를 다시 만든다.</li>
+</ul>
+</div>
+<h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A7-0"># A7 준비: 친구 관계 G1(무방향)과 웹페이지 링크 W(방향, 노드 0~3, 간선 5개)
 G1_EDGES = [("A", "B"), ("A", "C"), ("B", "D"), ("C", "D"), ("D", "E")]
 # 방향 간선 (a, b)는 a에서 b로 가는 한 방향 간선이다.
 W_EDGES = [(0, 1), (0, 2), (1, 2), (2, 0), (3, 2)]</code></pre></div><h3>시도 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="A7-1" data-for="A7.attempt.mycode"># A7: 일반 dict로 인접 리스트를 만들어 본다.
@@ -204,7 +226,21 @@ g = {}  # 빈 dict를 만든다
 for u, v in edges:  # 간선 (u, v)를 하나씩 꺼낸다
     g[u].append(v)  # u의 이웃 목록에 v를 덧붙인다
     g[v].append(u)  # v의 이웃 목록에 u를 덧붙인다
-print(g)  # 만든 g를 출력한다</code></pre></div><p>오류를 해결할 아이디어를 모둠에서 모은다. 교사가 쓸 도구를 확인해 주면, 그 도구로 G1과 W를 다시 만든다. 변수 이름은 G1은 <code class="i">g</code>, W는 <code class="i">gw</code>로 한다. 아래 칸에는 먼저 내 해결 시도를 적고, 교사가 확인한 뒤에는 다시 만든 코드를 적는다.</p><div class="mycode"><label>내 코드 · A7 내 해결 시도</label><textarea class="in code" rows="8" data-type="code" data-key="A7.attempt.mycode" data-label="A7 내 해결 시도 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 필요한 블록을 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><div class="mycode"><label>내 코드 · A7 G1·W 다시 만들기(g, gw)</label><textarea class="in code" rows="12" data-type="code" data-key="A7.rebuild.mycode" data-label="A7 G1·W 다시 만들기(g, gw) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 필요한 블록을 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>자체 테스트 (G1과 W)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A7-3" data-for="A7.rebuild.mycode"># A7 확인: 위에서 만든 g(G1, 무방향)와 gw(W, 방향)가 손 목록과 같은지 계산식으로 비교한다.
+print(g)  # 만든 g를 출력한다</code></pre></div><p>오류를 해결할 아이디어를 모둠에서 모은다. 아래 &ldquo;활동을 마친 뒤 열어 확인한다&rdquo; 상자에서 도구를 확인하면, 그 도구로 G1과 W를 다시 만든다. 변수 이름은 G1은 <code class="i">g</code>, W는 <code class="i">gw</code>로 한다. 아래 칸에는 먼저 내 해결 시도를 적고, 상자에서 도구를 확인한 뒤에는 다시 만든 코드를 적는다.</p><div class="mycode"><label>내 코드 · A7 내 해결 시도</label><textarea class="in code" rows="8" data-type="code" data-key="A7.attempt.mycode" data-label="A7 내 해결 시도 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 필요한 블록을 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><p class="hint">먼저 위 칸에 내 해결 시도를 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 도구 defaultdict(list)</summary>
+<ul>
+<li><code class="i">defaultdict</code>는 6주차에서 빈도 집계에 쓴 <code class="i">defaultdict(int)</code>와 같은 도구이다. <code class="i">defaultdict(list)</code>는 없는 키를 읽으면 빈 리스트를 만들어 그 키에 넣고 돌려주는 dict이다.</li>
+</ul>
+<pre>from collections import defaultdict
+d = defaultdict(list)
+d["x"].append(1)
+print(d)   # defaultdict(&lt;class 'list'&gt;, {'x': [1]})</pre>
+<ul>
+<li>괄호 안에는 함수 자체인 <code class="i">list</code>를 쓴다. 호출한 결과인 <code class="i">list()</code>나 <code class="i">[]</code>를 쓰면 <code class="i">TypeError: first argument must be callable or None</code>이 난다.</li>
+<li>이 도구로 G1은 간선마다 양쪽 노드의 목록에 이웃을 넣고, W는 방향 간선이므로 출발 노드의 목록에만 도착 노드를 넣는다.</li>
+</ul>
+</details>
+<div class="mycode"><label>내 코드 · A7 G1·W 다시 만들기(g, gw)</label><textarea class="in code" rows="12" data-type="code" data-key="A7.rebuild.mycode" data-label="A7 G1·W 다시 만들기(g, gw) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 필요한 블록을 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>자체 테스트 (G1과 W)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A7-3" data-for="A7.rebuild.mycode"># A7 확인: 위에서 만든 g(G1, 무방향)와 gw(W, 방향)가 손 목록과 같은지 계산식으로 비교한다.
 # globals()는 지금까지 만든 변수 이름들이다. g, gw가 있는지 본다.
 assert "g" in globals() and "gw" in globals(), "먼저 g(G1)와 gw(W)를 만든다"
 # 확인용 함수: 간선 목록에서 이웃 목록을 계산한다.

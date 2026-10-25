@@ -135,6 +135,13 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A6" class="sheet">
 <h2>A6 · 손 추적과 코드 출력 대조<small>2차시 · 15분 · 개인(옆 학생과 대조)</small></h2>
 <p class="meta"><span>산출물: 손 추적과의 일치 확인, 시작 노드 F 예측-실제</span></p>
+<div class="learn-box"><span class="lb-title">학습 내용 · A6 기록 방법</span>
+<ol>
+<li>실습 코드 1부 A6에서 빈칸을 채우고 <code class="i">bfs_order(g, "A")</code>와 <code class="i">dfs_order(g, "A", set(), [])</code>를 실행한다.</li>
+<li>나온 리스트를 아래 표에 옮기고 손 추적과 비교한다. bfs_order는 활동지 1부 A2의 큐 규칙 순서와, dfs_order는 A3 재귀의 순서와 비교한다. 처음으로 달라지는 자리를 찾는다.</li>
+<li>시작 노드 F 예측: g는 G1의 간선 다섯 개로 만든 인접 리스트이다. F는 간선에 한 번도 나오지 않는다. <code class="i">neighbors(g, "F")</code>가 무엇을 내주는지 코드를 읽고 예측한다.</li>
+<li>&ldquo;넣을 때 기록&rdquo;은 큐에 넣는 줄에서 visited에도 넣는 방식이고, &ldquo;꺼낼 때 기록&rdquo;은 큐에서 꺼낸 직후 visited에 넣는 방식이다. 3번에 쓸 때 내 코드의 ②·⑤ 줄을 읽고 어느 쪽인지 판단하고, A2 손 규칙 3단계가 방문 기록에 쓰는 때와 비교한다.</li>
+</ol></div>
 <p>실습 코드 1부(<a href="student_code_lab.html#A6">A6</a>)의 <code class="i">bfs_order</code>, <code class="i">dfs_order</code>를 G1, 시작 A에서 실행한다. <code class="i">bfs_order</code>는 A2 큐 규칙의 방문 순서와, <code class="i">dfs_order</code>는 A3 재귀의 방문 순서와 비교한다.</p><div class="scroll"><table class="fill"><tr><th style="width:18%">함수</th><th>코드가 낸 방문 순서</th><th style="width:34%">손 추적과 같은가</th></tr><tr><td class="lab">bfs_order (비교: A2 큐 규칙)</td><td class="in-cell"><input type="text" class="in" data-key="A6.bfs.out" data-label="A6 bfs_order 출력" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A6.bfs.same" data-type="radio" data-label="A6 bfs_order는 손 추적과 같은가"><label><input type="radio" name="r_A6_bfs_same" value="같다"> 같다</label><label><input type="radio" name="r_A6_bfs_same" value="다르다"> 다르다</label><label><input type="radio" name="r_A6_bfs_same" value="아직 완성하지 못했다"> 아직 완성하지 못했다</label></span></td></tr><tr><td class="lab">dfs_order (비교: A3 재귀)</td><td class="in-cell"><input type="text" class="in" data-key="A6.dfs.out" data-label="A6 dfs_order 출력" autocomplete="off"></td><td class="in-cell"><span class="rg" data-key="A6.dfs.same" data-type="radio" data-label="A6 dfs_order는 손 추적과 같은가"><label><input type="radio" name="r_A6_dfs_same" value="같다"> 같다</label><label><input type="radio" name="r_A6_dfs_same" value="다르다"> 다르다</label><label><input type="radio" name="r_A6_dfs_same" value="아직 완성하지 못했다"> 아직 완성하지 못했다</label></span></td></tr></table></div>
 <p class="qtext">1. 코드가 낸 순서가 손 추적과 다르다면 어디서부터 달라지는지 쓴다. 같다면 &ldquo;같음&rdquo;이라고 쓴다. 또 <code class="i">dfs_order</code>의 순서를 A2 스택 규칙의 방문 순서와도 비교해 같은지 다른지 쓴다.</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A6.diff" data-label="A6 다르다면 어디가 다른가"></textarea></div>
@@ -148,6 +155,14 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A6.mark.pred" data-label="A6 꺼낼 때 기록하도록 바꾸면 방문 순서가 같을지 예측과 실행 결과"></textarea></div>
 <p class="qtext">5. (선택) dfs_order의 visited를 <code class="i">visited=set()</code> 같은 기본 인자로 두고 같은 함수를 두 번 부르면 어떤 일이 생길 것 같은가? 먼저 예측해 쓴다(A8 T4를 실행했다면 결과를 함께 쓴다).</p>
 <div class="ans-row"><span class="n">5</span><textarea class="in" rows="2" data-key="A6.default" data-label="A6 dfs_order의 visited를 기본 인자로 두고 두 번 부르면 생길 일(예측)"></textarea></div>
+<p>먼저 위 표와 1~5번 칸에 내 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A6 결과 확인</summary>
+<ul>
+<li>G1, 시작 A: bfs_order는 <code class="i">['A', 'B', 'C', 'D', 'E']</code>로 A2 큐 규칙과 같다. dfs_order는 <code class="i">['A', 'B', 'D', 'C', 'E']</code>로 A3 재귀와 같고, A2 스택 규칙의 A, C, D, E, B와는 다르다.</li>
+<li>시작 F: 두 함수 모두 <code class="i">['F']</code>이다. 시작 노드는 이웃이 없어도 방문 순서에 기록되고, 시작 노드에서 닿는 노드만 방문되기 때문이다.</li>
+<li>코드의 큐(꺼낸 직후): A → [B, C], B → [C, D], C → [D], D → [E], E → [ ]. A2의 손 규칙에서는 D가 큐에 두 번 들어갔지만 코드의 큐에는 한 번 들어간다. 완성형은 ②에서 시작 노드를 visited에 넣고 ⑤에서 이웃을 큐에 넣을 때 함께 기록하는 &ldquo;넣을 때 기록&rdquo; 방식이다. 손 규칙은 꺼낸 직후 방문 기록에 쓴다. 두 방식의 차이는 A8 T1에서 확인한다.</li>
+<li>기본 인자 <code class="i">visited=set()</code>이면 같은 set이 호출 사이에 이어져 두 번째 호출부터 이전 방문 기록이 남아 결과가 달라진다(8주차에서 본 것과 같다).</li>
+</ul></details>
 </section>
 <section id="A7" class="sheet">
 <h2>A7 · 미로 MAZE 결과 기록<small>2차시 · 13분 · 짝</small></h2>
@@ -163,6 +178,15 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A7.q4" data-label="A7 A2의 큐 규칙과 shortest_path_len에서 같은 곳"></textarea></div>
 <p class="qtext">5. 10주차 neighbors와 grid_neighbors는 어떤 점이 같은 모양인가? 그래서 탐색 틀을 고치지 않고 격자에 쓸 수 있는 까닭을 쓴다.</p>
 <div class="ans-row"><span class="n">5</span><textarea class="in" rows="2" data-key="A7.q5" data-label="A7 10주차 neighbors와 grid_neighbors에서 같은 모양"></textarea></div>
+<p>먼저 위 표와 1~5번 칸에 내 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A7 질문 해설</summary>
+<ul>
+<li>dist에 이미 있는 칸은 더 이른 거리로 이미 큐에 넣은 칸이므로 다시 넣지 않는다. dist는 시작에서의 거리 기록과 방문 기록(visited), 두 가지 일을 한다.</li>
+<li>(0,0)은 모서리라 위·왼쪽이 격자 밖이어서 이웃이 적고, (2,2)는 아래·왼쪽이 벽이다. 행 검사만 빼면 위쪽 음수 행이 아래 끝 행으로 읽혀 (0,0)의 이웃이 3개로 나오고, 행·열 검사를 모두 빼면 4개로 나오며, 아래·오른쪽 가장자리에서는 IndexError가 난다.</li>
+<li>시작=도착이면 큐에서 처음 꺼낸 칸이 곧 도착 칸이라 거리 0을 돌려준다. 도달 불가의 -1은 큐가 빌 때까지 도착 칸을 만나지 못했을 때 맨 마지막 줄에서 나온다.</li>
+<li>A2 큐 규칙과 같은 곳은 시작을 넣고, 앞에서 꺼내 방문하지 않은 이웃을 뒤에 넣는 틀이다. 다른 곳은 방문 기록 대신 거리 기록 dist를 쓰는 것과 도착 칸을 만나면 멈추는 것이다.</li>
+<li>neighbors와 grid_neighbors는 둘 다 yield로 이웃을 하나씩 내준다. 호출하는 쪽은 내부 표현(인접 리스트인지 격자인지)을 몰라도 되어서 탐색 틀을 고치지 않고 쓸 수 있다.</li>
+</ul></details>
 </section>
 <section id="A8" class="sheet">
 <h2>A8 · 함정 코드 예측-실제 표<small>2차시 · 13분 · 짝</small></h2>
@@ -177,6 +201,16 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A8.q3" data-label="A8 n이 10배가 되면 pop(0) 시간과 deque 시간은 각각 몇 배인가"></textarea></div>
 <p class="qtext">4. T3에서 1&times;1500 입력은 정상 입력인데 왜 실패했는가? 피하는 방법 한 가지와 그 대가를 쓴다.</p>
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A8.q4" data-label="A8 1x1500 입력은 정상 입력인데 왜 실패하는가 어떻게 피할까"></textarea></div>
+<p>먼저 위 표와 정리 질문 1~4번 칸에 내 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · T1~T4 결과와 원인</summary>
+<ul>
+<li><b>T1-a</b> <code class="i">['A', 'B', 'C', 'D', 'D', 'E', 'E']</code>. 꺼낸 뒤에야 visited에 넣어, 큐에 이미 들어 있는 노드도 &ldquo;아직 안 본 노드&rdquo;로 보여 여러 번 들어간다. A2에서 큐에 D가 두 번 들어간 것과 같은 원인이다(이미 큐에 있는 노드를 방문 기록이 없어 또 넣음).</li>
+<li><b>T1-b</b> enqueue (16, 4), dequeue (25, 7). 넣을 때 표시하면 칸이 처음 보일 때 한 번만 큐에 들어가 16번이고, 꺼낼 때 표시하면 같은 칸이 여러 번 들어가 25번이며 큐도 커진다. 답은 같아도 일이 늘어난다. 약속: BFS는 큐에 넣을 때 표시한다.</li>
+<li><b>T2</b> n이 10배일 때 list.pop(0)은 약 100배(환경에 따라 80~200배), deque.popleft는 약 10배이다. pop(0)은 나머지 원소를 모두 당겨서 길이 n인 리스트를 앞에서 모두 꺼내면 이동 합이 n(n-1)/2이고 n=1000이면 499,500이다. popleft는 맨 앞 하나만 떼어낸다. 큰 격자의 BFS에서 큐를 list로 만들면 느려지므로 deque를 쓴다.</li>
+<li><b>T3</b> 재귀 한도 1000. 1&times;500은 정상(500칸 방문), 1&times;1500은 RecursionError: maximum recursion depth exceeded이다. 재귀 깊이는 한 갈래의 길이와 같아 한도를 넘었다. 한도가 환경에 따라 다를 수 있어 &ldquo;500은 통과, 1500은 실패&rdquo;만 본다. 피하는 방법은 재귀 대신 직접 만든 스택(<code class="i">todo = [(r, c)]; todo.pop()</code>)이나 큐로 바꾸는 것이고, 대가는 이웃 처리 순서와 visited 표시를 직접 챙기는 것이다. 한도를 올리는 방법은 토론 D3에서 다룬다.</li>
+<li><b>T4</b> <code class="i">['A', 'B', 'D', 'C', 'E']</code> / <code class="i">['A']</code> / <code class="i">['B']</code>. 두 번째 호출부터 기본 인자 set이 이전 기록을 유지한다.</li>
+<li>어디서 만나는가 예: 표시를 꺼내는 줄에 쓴 큐 코드(T1), 큐를 list로 흉내 낸 코드(T2), 긴 입력의 재귀 DFS(T3), visited를 기본 인자로 받는 함수(T4).</li>
+</ul></details>
 </section>
 <section id="A9" class="sheet">
 <h2>A9 · DIRS 순서를 바꿔 DFS와 BFS 비교<small>2차시 · 9분 · 짝</small></h2>
@@ -192,6 +226,13 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A9.q3" data-label="A9 A4에서 세운 가설은 이 표로 확인되었는가"></textarea></div>
 <p class="qtext">4. (선택) BFS 최단 거리와 같은 DFS 길이가 나온 순서들에 공통점이 있는가? 있다면 MAZE 그림에서 그 까닭을 찾아 설명한다.</p>
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A9.pattern" data-label="A9 BFS와 같은 DFS 길이가 나온 순서들의 공통점과 MAZE 그림에서의 까닭"></textarea></div>
+<p>먼저 위 표와 1~4번 칸에 내 말로 쓴 뒤 아래 상자를 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 24가지 결과 읽기</summary>
+<ul>
+<li>BFS 값은 24가지 모두 10이다. DFS 값은 14가 나온 순서 12가지, 10이 나온 순서 12가지이다(예: 우하좌상은 DFS 14, 하우좌상은 DFS 10). DFS 값이 BFS 값과 같아지는 순서는 12가지이다.</li>
+<li>방향 순서를 바꾸면 이웃을 보는 순서가 바뀌어 DFS가 처음 닿는 길이 달라진다. BFS 값은 바뀌지 않았다. A4에서 세운 가설(순서에 따라 DFS의 값은 달라지고 큐 규칙의 값은 그대로이다)이 이 표의 14와 10, 10과 맞는지 보고 확인·수정·반박 중 하나를 고른다.</li>
+<li>탐색한 칸 수(도착 칸을 꺼내거나 호출할 때까지): BFS가 꺼낸 칸 21개, DFS가 호출한 칸 15개이다. DFS가 더 적은 칸을 보고 끝났어도 길은 14로 더 길었다. DFS가 더 좋은지는 목적에 따라 다르다.</li>
+</ul></details>
 </section>
 </div>
 <script id="week11-submit">

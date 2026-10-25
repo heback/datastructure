@@ -146,7 +146,14 @@ table.fill td.in-cell{padding:3px;height:auto}
 </section>
 <section id="A8" class="sheet">
 <h2>A8 · 함정 탐색: 예측 후 실행<small>13분 · 짝</small></h2>
-<p>각 코드의 위쪽 주석에 시작 상태가 적혀 있다. T 편집기는 실행할 때마다 그 코드의 함수를 처음부터 다시 정의하므로 새로 시작한 상태에서 실행된다(T4는 세 번의 호출이 한 번의 실행 안에서 이어진다). 같은 T 코드를 한 편집기에 두 번 추가하지 않도록 주의한다.</p><h3>T1-a</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="T1-1" data-for="A8.code.T1a"># T1-a · 시작 상태: 큐 [start], visited는 비어 있다. g는 G1.
+<p>각 코드의 위쪽 주석에 시작 상태가 적혀 있다. T 편집기는 실행할 때마다 그 코드의 함수를 처음부터 다시 정의하므로 새로 시작한 상태에서 실행된다(T4는 세 번의 호출이 한 번의 실행 안에서 이어진다). 같은 T 코드를 한 편집기에 두 번 추가하지 않도록 주의한다.</p><div class="learn-box"><span class="lb-title">학습 내용 · T1~T4가 보여 주려는 것과 예측 쓰는 법</span>
+<ul>
+<li><b>T1</b>은 visited에 &ldquo;봤다&rdquo;고 표시하는 시점(큐에 넣을 때 / 꺼낼 때)을 바꿔 본다. T1-a는 G1에서 나온 방문 순서, T1-b는 열린 4&times;4 격자에서 (큐에 넣은 횟수, 큐 길이의 최댓값) 한 쌍을 두 방식으로 출력한다.</li>
+<li><b>T2</b>는 큐를 list로 만들어 <code class="i">pop(0)</code>으로 꺼낼 때와 deque의 <code class="i">popleft()</code>로 꺼낼 때를 비교한다. 시간은 환경마다 다르므로 &ldquo;n이 10배가 될 때 시간이 몇 배가 되는가&rdquo;를 본다. 10배 근처인지 아닌지를 예측한다.</li>
+<li><b>T3</b>은 한 줄로 이어진 땅(너비 500, 1500)을 재귀로 탐색한다. 한 줄로 이어진 땅이 길어지면 어떻게 되는지 두 너비의 결과를 예측한다. <b>T4</b>(선택)는 visited를 기본 인자 <code class="i">set()</code>으로 둔 함수를 세 번 부른다.</li>
+<li><b>하는 방법</b>: &#9312; 코드를 읽고 활동지 2부 A8의 예측 칸을 먼저 쓴다 &#9313; 편집기에서 실행해 실제 값을 쓴다 &#9314; 예측과 다르면 원인 한 줄을, 마지막 칸에는 실제 코드 어디서 만날지 한 줄을 쓴다. 오류가 나면 오류 이름과 메시지를 그대로 옮겨 적는다. 정리 질문을 마친 뒤 활동지 2부 A8의 확인 상자에서 값을 대조한다.</li>
+</ul></div>
+<h3>T1-a</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="T1-1" data-for="A8.code.T1a"># T1-a · 시작 상태: 큐 [start], visited는 비어 있다. g는 G1.
 # g에서 start부터 방문 순서를 만드는 함수(bfs_late)이다.
 def bfs_late(g, start):
     q = deque([start])  # 시작 노드만 든 큐
@@ -253,7 +260,14 @@ print(dfs_bad(g, "B"))</code></pre></div><div class="mycode"><label>내 코드 &
 </section>
 <section id="A9" class="sheet">
 <h2>A9 · 같은 미로에서 깊이 우선과 비교<small>9분 · 짝</small></h2>
-<p>같은 MAZE에서 재귀로 처음 찾은 길의 간선 수를 구해 A7에서 구한 값과 비교한다. <code class="i">first_path_len</code>은 완성본이 제공된다. 이번에는 방향 순서 24가지를 모두 돌려 DFS 값과 BFS 값이 각각 어떻게 변하는지 한 번에 출력한다. 실행하기 전에 활동지 <a href="student_workbook_part2.html#A9">2부 A9</a>의 예측 칸을 먼저 채우고, 출력에서 골라 표에 옮겨 쓴다.</p><h3>제공 코드(완성본)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A9-1"># A9 제공(완성본) · 시작 상태: seen은 호출마다 새로 만든다. dirs 순서대로 이웃을 본다.
+<p>같은 MAZE에서 재귀로 처음 찾은 길의 간선 수를 구해 A7에서 구한 값과 비교한다. <code class="i">first_path_len</code>은 완성본이 제공된다. 이번에는 방향 순서 24가지를 모두 돌려 DFS 값과 BFS 값이 각각 어떻게 변하는지 한 번에 출력한다. 실행하기 전에 활동지 <a href="student_workbook_part2.html#A9">2부 A9</a>의 예측 칸을 먼저 채우고, 출력에서 골라 표에 옮겨 쓴다.</p><div class="learn-box"><span class="lb-title">학습 내용 · DIRS 순서와 24가지 실험</span>
+<ul>
+<li><b>DIRS</b>는 grid_neighbors가 이웃을 내주는 방향 순서(기본 우·하·좌·상)이다. 방향이 4개이므로 순서의 경우의 수는 4&times;3&times;2&times;1 = 24가지이다. 출력의 <code class="i">우하좌상</code>은 방향 순서를 첫 글자 순서로 쓴 것이다.</li>
+<li><b>first_path_len</b>은 재귀 DFS가 목표 칸에 처음 닿았을 때의 간선 수(걸음 수)를 돌려준다. 완성본이므로 읽기만 하고 아래 실행 틀을 실행한다.</li>
+<li>실행 틀은 방향 순서마다 DIRS를 바꿔 BFS 값(shortest_path_len)과 DFS 값(first_path_len)을 함께 구한다. 출력은 첫 줄이 BFS 값의 종류이고, 이어서 방향 순서 이름과 DFS 값이 24줄 나온다.</li>
+<li><b>하는 방법</b>: 실행하기 전에 24가지 중 DFS 값이 BFS 값과 같아지는 순서가 몇 가지일지 숫자로 예측해 활동지 2부 A9에 쓴다. 실행한 뒤 같은 순서 2개와 다른 순서 2개를 표에 옮기고, DFS 값이 같은 순서끼리 묶어 규칙을 찾는다.</li>
+</ul></div>
+<h3>제공 코드(완성본)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A9-1"># A9 제공(완성본) · 시작 상태: seen은 호출마다 새로 만든다. dirs 순서대로 이웃을 본다.
 # 재귀(DFS)로 처음 닿은 길의 간선 수를 구한다. dirs 순서대로 이웃을 본다.
 def first_path_len(grid, start, goal, dirs):
     seen = set()  # 이미 지난 칸 모음

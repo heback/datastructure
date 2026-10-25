@@ -124,7 +124,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(8)  # 학생용 · 탐구 활동지 A1~A10</div>
   <h1>8주차 탐구 활동지 — 트리와 이진 탐색 트리(BST)</h1>
-  <p class="lead">핵심질문: 데이터가 1차원이 아닌 족보나 조직도처럼 뻗어나갈 때, 어떻게 저장하고 가장 빨리 탐색할까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 정답은 이 활동지에 없다. 빈칸은 스스로 채운다.</p>
+  <p class="lead">핵심질문: 데이터가 1차원이 아닌 족보나 조직도처럼 뻗어나갈 때, 어떻게 저장하고 가장 빨리 탐색할까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 확인할 내용은 활동을 마친 뒤 여는 초록색 상자에만 있다. 빈칸은 스스로 채운다.</p>
   <p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><label class="ck">모둠 <input type="text" class="in" style="width:8em;display:inline-block" data-key="meta.group" data-label="모둠" autocomplete="off"></label></p>
 </header>
 <nav><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="#A6">A6</a><a href="#A7">A7</a><a href="#A8">A8</a><a href="#A9">A9</a><a href="#A10">A10</a><a href="index.html">목록</a></nav>
@@ -137,6 +137,12 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="card"><b class="h">사례 ② 폴더</b><p>폴더 안에 폴더가 있고, 그 안에 또 파일과 폴더가 있는 저장 구조.</p></div>
 <div class="card"><b class="h">사례 ③ 조직도</b><p>학교 안의 부서, 부서 안의 팀, 팀 안의 구성원.</p></div>
 </div>
+<div class="learn-box"><span class="lb-title">학습 내용 · 한 줄 리스트로 옮기는 방법과 예</span>
+<p><b>오늘의 목표</b> 트리의 전/중/후위 순회를 재귀 함수로 구현하고, 가변 기본 인자 안티 패턴을 식별해 수정한다(성취기준 [12자구03-02]). 먼저 재귀 함수와 3주차의 가변 객체(얕은/깊은 복사)를 떠올려 둔다.</p>
+<p>이 활동은 핵심질문 &ldquo;데이터가 1차원이 아닌 족보나 조직도처럼 뻗어나갈 때, 어떻게 저장하고 가장 빨리 탐색할까?&rdquo;를 생각하는 출발이다. 정해진 정답은 없고, 직접 옮겨 적으며 불편한 점을 찾는 것이 목적이다.</p>
+<ol><li>사례마다 가상의 이름 5~7개를 정하고 위에서 아래, 왼쪽에서 오른쪽 순서로 읽는다.</li><li>읽은 순서대로 쉼표로 이어 리스트 한 줄로 쓴다(파이썬 리스트와 같은 모양이다).</li><li>한 줄만 보고 원래 구조(누가 누구의 아래에 있는가)를 되살릴 수 있는지 따져 본다.</li></ol>
+<p>예(위 세 사례가 아닌 동아리 조직)이다. 한 줄로 옮기면 <code class="i">["동아리장", "기획팀", "운영팀", "민수", "지아"]</code>와 같이 쓴다.</p>
+</div>
 <h3>관찰·정리</h3>
 <p>세 사례를 각각 가상의 이름으로 5~7개 정도 써서 <b>리스트 한 줄</b>로 옮겨 적고, 한 줄로 옮길 때 사라지거나 불편한 점을 적는다.</p>
 <table class="fill"><tr><th style="width:90px">사례</th><th>한 줄 리스트로 옮긴 모습</th><th style="width:34%">사라진 정보 / 불편한 점</th></tr>
@@ -146,6 +152,20 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">1.</span><textarea class="in" rows="3" data-key="A1.memo.1" data-label="A1 불편함 메모 1"></textarea></div><div class="ans-row"><span class="n">2.</span><textarea class="in" rows="3" data-key="A1.memo.2" data-label="A1 불편함 메모 2"></textarea></div>
 <p><b>생각해 볼 질문</b> 폴더 안의 폴더를 모두 세려면 어떤 방법이 있겠는가? 짝과 이야기한 뒤 한 줄로 적는다.</p>
 <textarea class="in" rows="3" data-key="A1.folder" data-label="A1 폴더 안의 폴더를 세는 방법"></textarea>
+<p>먼저 위 칸에 자기 말로 쓴 뒤 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 한 줄 리스트의 한계와 트리</summary>
+<p>세 사례를 한 줄로 옮긴 예이다. 이름의 나열뿐이어서 내 한 줄과 비슷한지 비교해 본다. 아래 동아리 예는 관계를 그림으로 그리면 이렇다.</p>
+<pre class="diagram" style="background:#fff;color:#1f2328;border:1px solid #cfd6e2;border-radius:6px;padding:8px 12px;font-size:12.5px;line-height:1.4;overflow-x:auto;white-space:pre">동아리장
+├─ 기획팀
+│   └─ 민수
+└─ 운영팀
+    └─ 지아</pre>
+<p>앞의 한 줄 <code class="i">["동아리장", "기획팀", "운영팀", "민수", "지아"]</code>만으로는 &lsquo;민수는 어느 팀 소속인가&rsquo;를 알 수 없다.</p>
+<ul><li>족보: 조부 · 부 · 고모 · 나 · 동생 · 사촌</li><li>폴더: 과제 · 코드 · 사진 · a.py · b.py · c.png</li><li>조직도: 교장 · 교무부 · 학생부 · 1학년 · 2학년 · 상담</li></ul>
+<ul><li>한 줄 리스트는 이름의 <b>순서</b>만 담는다. 누가 누구의 자녀인지, 어느 폴더·부서 안에 있는지(위아래 관계)와 안의 안으로 이어지는 깊이가 드러나지 않는다. 줄마다 들여쓰기로 관계를 표시했다면 이미 리스트 이상의 구조(관계 표현)를 쓴 것이다.</li>
+<li>이런 데이터에는 각 값이 &lsquo;자기 아래에 이어지는 값&rsquo;을 함께 저장하는 <b>계층 구조</b>가 알맞다. 이 구조를 <b>트리(tree)</b>라 하며 오늘 활동 전체의 대상이다.</li>
+<li>폴더 안의 폴더 세기: 폴더 하나를 세는 일을 그 안의 폴더에도 똑같이 시키고, 안에 폴더가 없으면 멈춘다. 같은 일이 안쪽에서 되풀이되는 이 방식을 <b>재귀</b>라 하며 A3에서 직접 쓴다.</li></ul>
+</details>
 </section>
 
 <section id="A2" class="sheet">
@@ -156,6 +176,12 @@ table.fill td.in-cell{padding:3px;height:auto}
       B   C
      / \   \
     D   E   F</div>
+<div class="learn-box"><span class="lb-title">학습 내용 · 트리 그림과 Node 코드 읽기</span>
+<p>그림의 글자 A~F는 노드의 이름이고 선은 노드 사이의 연결이다. 위에 있는 노드가 바로 아래 노드와 이어진다. 용어 라벨링은 이 그림을 보며 <b>먼저 자기 말로</b> 답하고, 정확한 용어는 아래 개념 정리로 확인한다.</p>
+<p>서브트리 탐색은 &lsquo;어떤 노드를 맨 위로 삼고 그 아래만 따라가면 하나의 작은 그림이 되는가&rsquo;를 살피는 활동이다. 노드를 하나씩 맨 위로 삼아 본다.</p>
+<p>아래 Node 코드를 읽는 법: <code class="i">Node(값, 왼쪽 자식, 오른쪽 자식)</code>은 노드 하나를 만든다.</p>
+<pre class="diagram" style="background:#fff;color:#1f2328;border:1px solid #cfd6e2;border-radius:6px;padding:8px 12px;font-size:12.5px;line-height:1.4;overflow-x:auto;white-space:pre">Node("B", Node("D"), Node("E"))  →  값 B, 왼쪽 자식 D, 오른쪽 자식 E</pre>
+</div>
 <p>이 수업에서 <b>높이</b>는 노드 수를 기준으로 센다(정확한 정의는 아래 「개념 정리 · 트리와 용어」에서 확인한다).</p>
 <h3>용어 라벨링</h3>
 <table class="fill"><tr><th style="width:42%">질문</th><th>답</th></tr>
@@ -180,6 +206,21 @@ print(t1.val, t1.left.val, t1.right.val)</code></pre></div>
 <p>① <code class="i">Node</code>는 무엇을 저장하는가? ② <code class="i">left</code>와 <code class="i">right</code>에 들어갈 수 있는 값은 무엇인가?</p>
 <div class="ans-row"><span class="n">①</span><textarea class="in" rows="1" data-key="A2.node.q1" data-label="A2 Node가 저장하는 것"></textarea></div>
 <div class="ans-row"><span class="n">②</span><textarea class="in" rows="1" data-key="A2.node.q2" data-label="A2 left·right에 들어갈 수 있는 값"></textarea></div>
+<p>먼저 위 Node 질문과 서브트리 칸에 자기 말로 쓴 뒤 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · T1 도식 라벨, Node, 서브트리</summary>
+<p>T1의 이름 붙이기 결과이다(깊이는 루트를 1로 센다).</p>
+<pre class="diagram" style="background:#fff;color:#1f2328;border:1px solid #cfd6e2;border-radius:6px;padding:8px 12px;font-size:12.5px;line-height:1.4;overflow-x:auto;white-space:pre">        A          ← 루트 (깊이 1)
+       / \
+      B   C        ← B와 C는 서로 형제 (깊이 2)
+     / \   \
+    D   E   F      ← 리프: D, E, F (깊이 3)
+
+노드 6개 / 높이 3 (노드 수 기준)</pre>
+<ul><li>E의 부모는 B, 형제는 D, B의 자식은 D와 E이다.</li>
+<li><b>Node</b>는 값(<code class="i">val</code>)과 왼쪽·오른쪽 자식으로 가는 연결(<code class="i">left</code>, <code class="i">right</code>)을 저장한다. <code class="i">left</code>·<code class="i">right</code>에는 다른 Node 또는 <code class="i">None</code>이 들어간다. 자식이 없는 자리(D·E·F의 양쪽, C의 왼쪽)에는 <code class="i">None</code>이 있다.</li>
+<li><b>서브트리</b>: B를 루트로 보면 {B, D, E}, C를 루트로 보면 {C, F}가 각각 작은 트리이다. D·E·F도 노드 하나짜리 트리이다. 트리 안에는 같은 모양의 작은 트리가 들어 있다.</li></ul>
+</details>
+
 <div class="concept"><b class="h">개념 정리 · 트리와 용어</b> <span class="tag">라벨링 후 확인</span>
 <p>위 용어 라벨링을 <b>먼저 자기 말로 끝낸 뒤</b> 이 정리와 맞춰 본다. 다른 부분은 위 답을 고쳐 쓴다.</p>
 <table><tr><th style="width:150px">용어</th><th>정의</th></tr>
@@ -209,6 +250,17 @@ print(t1.val, t1.left.val, t1.right.val)</code></pre></div>
 <li>빈 트리(<code class="i">None</code>)를 만나면 아무것도 하지 않고 돌아온다(기저 조건).</li>
 <li><b>재귀 복습</b>: 함수가 자기 자신(더 작은 문제)을 호출하는 것.</li>
 <li><b>호출 스택</b>: 호출된 함수들이 쌓이는 곳. 가장 나중에 호출된 것이 먼저 끝난다(LIFO).</li></ul></div>
+<div class="learn-box"><span class="lb-title">학습 내용 · 호출 추적표 쓰는 법</span>
+<p>추적표의 한 줄은 함수 호출 <b>한 번</b>이다. 호출이 시작된 순서대로 쓰고, 한 호출이 끝나야 그 호출을 부른 쪽으로 돌아온다. 빈 자리(<code class="i">None</code>)로 향하는 호출도 한 줄이다. 방문은 호출되어 들어가는 것이고, 출력은 값을 쓰는 것이다. 부모를 거쳐야 자식으로 갈 수 있으므로 A B C D E F처럼 층별로 읽지 않는다.</p>
+<p>예(T1이 아닌 노드 두 개짜리 트리 <code class="i">Node("X", Node("Y"))</code>): 전위 규칙의 앞 3줄이다.</p>
+<table style="width:calc(100% - 28px)"><tr><th>호출 순서</th><th>호출한 노드</th><th>이 호출에서 한 일</th><th>지금까지 출력</th></tr><tr><td>1</td><td>X</td><td>출력 후 왼쪽 호출</td><td>X</td></tr><tr><td>2</td><td>Y</td><td>출력 후 왼쪽 호출</td><td>X Y</td></tr><tr><td>3</td><td>None (Y의 왼쪽)</td><td>바로 반환</td><td>X Y</td></tr></table>
+<p>이어서 Y의 오른쪽 호출, X의 오른쪽 호출도 같은 방식으로 쓴다. 가장 나중에 시작한 호출이 가장 먼저 끝난다(호출 스택, LIFO). T1의 1단계(처음 4번 호출까지) 쌓인 모양이다. 마지막 호출은 None이라 바로 돌아간다.</p>
+<pre class="diagram" style="background:#fff;color:#1f2328;border:1px solid #cfd6e2;border-radius:6px;padding:8px 12px;font-size:12.5px;line-height:1.4;overflow-x:auto;white-space:pre">  preorder(None) → return   ← 가장 나중에 호출, 가장 먼저 끝남
+  preorder(D)
+  preorder(B)
+  preorder(A)               ← 가장 먼저 호출 (아래)</pre>
+<p>중위·후위는 같은 호출 순서를 그대로 두고, 자기 값을 &lsquo;언제 출력하는가&rsquo;만 위 개념 정리에 쓴 짐작대로 바꾸어 추적한다. 시간은 약 21분이며 전위 7분, 중위 7분, 후위 5분, 짝과 확인 2분으로 나눈다.</p>
+</div>
 <p>전위 규칙(자신 → 왼쪽 → 오른쪽)으로 T1을 순회하면서 호출을 한 줄씩 기록한다. 노드가 없을 때(<code class="i">None</code>)의 호출도 한 줄로 기록한다. 7번 줄부터는 여유가 있으면 끝까지 쓰고, 이어지는 <code class="i">None</code> 호출은 한 줄에 합쳐 써도 된다. 표를 다 채우지 못했으면 호출 수는 순서를 따라 머릿속으로 센다.</p>
 <table class="fill"><tr><th style="width:60px">호출 순서</th><th style="width:20%">호출한 노드</th><th>이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)</th><th style="width:22%">지금까지 출력</th></tr>
 <tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r1.c1" data-label="A3 전위 호출 추적표 1행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r1.c2" data-label="A3 전위 호출 추적표 1행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r1.c3" data-label="A3 전위 호출 추적표 1행 · 지금까지 출력" autocomplete="off"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r2.c1" data-label="A3 전위 호출 추적표 2행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r2.c2" data-label="A3 전위 호출 추적표 2행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r2.c3" data-label="A3 전위 호출 추적표 2행 · 지금까지 출력" autocomplete="off"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r3.c1" data-label="A3 전위 호출 추적표 3행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r3.c2" data-label="A3 전위 호출 추적표 3행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r3.c3" data-label="A3 전위 호출 추적표 3행 · 지금까지 출력" autocomplete="off"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r4.c1" data-label="A3 전위 호출 추적표 4행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r4.c2" data-label="A3 전위 호출 추적표 4행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r4.c3" data-label="A3 전위 호출 추적표 4행 · 지금까지 출력" autocomplete="off"></td></tr><tr><td class="lab">5</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r5.c1" data-label="A3 전위 호출 추적표 5행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r5.c2" data-label="A3 전위 호출 추적표 5행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r5.c3" data-label="A3 전위 호출 추적표 5행 · 지금까지 출력" autocomplete="off"></td></tr><tr><td class="lab">6</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r6.c1" data-label="A3 전위 호출 추적표 6행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r6.c2" data-label="A3 전위 호출 추적표 6행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r6.c3" data-label="A3 전위 호출 추적표 6행 · 지금까지 출력" autocomplete="off"></td></tr><tr><td class="lab">7</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r7.c1" data-label="A3 전위 호출 추적표 7행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r7.c2" data-label="A3 전위 호출 추적표 7행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r7.c3" data-label="A3 전위 호출 추적표 7행 · 지금까지 출력" autocomplete="off"></td></tr><tr><td class="lab">8</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r8.c1" data-label="A3 전위 호출 추적표 8행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r8.c2" data-label="A3 전위 호출 추적표 8행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r8.c3" data-label="A3 전위 호출 추적표 8행 · 지금까지 출력" autocomplete="off"></td></tr><tr><td class="lab">9</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r9.c1" data-label="A3 전위 호출 추적표 9행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r9.c2" data-label="A3 전위 호출 추적표 9행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r9.c3" data-label="A3 전위 호출 추적표 9행 · 지금까지 출력" autocomplete="off"></td></tr><tr><td class="lab">10</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r10.c1" data-label="A3 전위 호출 추적표 10행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r10.c2" data-label="A3 전위 호출 추적표 10행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r10.c3" data-label="A3 전위 호출 추적표 10행 · 지금까지 출력" autocomplete="off"></td></tr><tr><td class="lab">11</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r11.c1" data-label="A3 전위 호출 추적표 11행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r11.c2" data-label="A3 전위 호출 추적표 11행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r11.c3" data-label="A3 전위 호출 추적표 11행 · 지금까지 출력" autocomplete="off"></td></tr><tr><td class="lab">12</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r12.c1" data-label="A3 전위 호출 추적표 12행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r12.c2" data-label="A3 전위 호출 추적표 12행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r12.c3" data-label="A3 전위 호출 추적표 12행 · 지금까지 출력" autocomplete="off"></td></tr><tr><td class="lab">13</td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r13.c1" data-label="A3 전위 호출 추적표 13행 · 호출한 노드" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r13.c2" data-label="A3 전위 호출 추적표 13행 · 이 호출에서 한 일 (출력 / 왼쪽 호출 / 오른쪽 호출 / 바로 반환)" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A3.trace.r13.c3" data-label="A3 전위 호출 추적표 13행 · 지금까지 출력" autocomplete="off"></td></tr></table>
@@ -219,23 +271,53 @@ print(t1.val, t1.left.val, t1.right.val)</code></pre></div>
 <textarea class="in" rows="3" data-key="A3.reflect" data-label="A3 (선택) 생각해 볼 질문 답"></textarea>
 <p><b>호출 수 세기</b> 위 호출 추적표를 모두 채운 뒤 T1의 노드 수와 전체 호출 횟수를 각각 센다. 노드가 N개인 트리라면 호출은 몇 번이라고 짐작하는가? 추적표의 어느 줄이 그 근거인가?</p>
 <textarea class="in" rows="3" data-key="A3.calls" data-label="A3 노드 수와 호출 횟수의 관계 짐작과 근거"></textarea>
+<p>먼저 위 결과·추적표·호출 수 칸에 자기 말로 쓴 뒤 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 순회 약속, 결과, 호출 수</summary>
+<p><b>세 순회의 약속</b> 순회는 트리의 모든 노드를 한 번씩 방문하는 규칙이며, 세 순회는 &lsquo;자기 값을 언제 출력하느냐&rsquo;만 다르다. 번호는 일하는 순서이다.</p>
+<table style="width:calc(100% - 28px)"><tr><td>전위</td><td>① 출력(자신) → ② 왼쪽 부분 트리 순회 → ③ 오른쪽 부분 트리 순회</td></tr><tr><td>중위</td><td>① 왼쪽 부분 트리 순회 → ② 출력(자신) → ③ 오른쪽 부분 트리 순회</td></tr><tr><td>후위</td><td>① 왼쪽 부분 트리 순회 → ② 오른쪽 부분 트리 순회 → ③ 출력(자신)</td></tr></table>
+<ul><li>T1의 결과: 전위 A B D E C F / 중위 D B E A C F / 후위 D E B F C A</li>
+<li>호출 순서(∅는 None 호출): A, B, D, ∅, ∅, E, ∅, ∅, C, ∅, F, ∅, ∅ → 모두 13번 = 노드 6개 + None 호출 7번이다. 노드가 N개이면 호출은 2N+1번(노드마다 1번, 빈 자리는 N+1번)이므로 순회의 시간은 노드 수 N에 비례한다.</li>
+<li>(선택 질문) A는 왼쪽으로 가기 전에 출력했다. 자식이 없어 None이면 기저 조건에 따라 아무것도 하지 않고 호출한 곳으로 돌아간다.</li></ul>
+</details>
 </section>
 
 <section id="A4" class="sheet">
 <h2>A4 · 세 순회 비교표<small>1차시 · 10분 · 모둠</small></h2>
 <p class="meta"><span>산출물: 비교표(순회·처리 시점·결과)</span></p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 비교표를 채우는 방법</span>
+<p>표는 A3의 추적을 근거로 모둠이 채운다. 첫 칸에는 자기 값을 출력하는 때를 추적표를 근거로 말로 쓴다. 둘째 칸에는 T1의 결과를 옮기고, 모둠원의 결과가 다르면 쓴 규칙부터 맞춰 보고 추적표로 돌아가 원인을 찾는다.</p>
+<p>마지막 칸은 추적표에서 자기 값을 출력한 호출을 <b>두 자식을 부르는 호출</b>과 견주어 어느 때인지 쓴다.</p>
+</div>
 <table class="fill"><tr><th style="width:80px">순회</th><th>노드를 처리(출력)하는 시점은 언제인가</th><th>T1의 결과</th><th style="width:26%">자기 값을 출력한 호출은 왼쪽 자식 호출보다 앞인가, 사이인가, 뒤인가</th></tr>
 <tr><td class="lab">전위</td><td class="in-cell"><textarea class="in" rows="1" data-key="A4.compare.r1.c1" data-label="A4 세 순회 비교표 전위 · 노드를 처리(출력)하는 시점은 언제인가"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A4.compare.r1.c2" data-label="A4 세 순회 비교표 전위 · T1의 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.compare.r1.c3" data-label="A4 세 순회 비교표 전위 · 자기 값을 출력한 호출은 왼쪽 자식 호출보다 앞·사이·뒤 중 어디인가" autocomplete="off"></td></tr>
 <tr><td class="lab">중위</td><td class="in-cell"><textarea class="in" rows="1" data-key="A4.compare.r2.c1" data-label="A4 세 순회 비교표 중위 · 노드를 처리(출력)하는 시점은 언제인가"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A4.compare.r2.c2" data-label="A4 세 순회 비교표 중위 · T1의 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.compare.r2.c3" data-label="A4 세 순회 비교표 중위 · 자기 값을 출력한 호출은 왼쪽 자식 호출보다 앞·사이·뒤 중 어디인가" autocomplete="off"></td></tr>
 <tr><td class="lab">후위</td><td class="in-cell"><textarea class="in" rows="1" data-key="A4.compare.r3.c1" data-label="A4 세 순회 비교표 후위 · 노드를 처리(출력)하는 시점은 언제인가"></textarea></td><td class="in-cell"><input type="text" class="in" data-key="A4.compare.r3.c2" data-label="A4 세 순회 비교표 후위 · T1의 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.compare.r3.c3" data-label="A4 세 순회 비교표 후위 · 자기 값을 출력한 호출은 왼쪽 자식 호출보다 앞·사이·뒤 중 어디인가" autocomplete="off"></td></tr></table>
 <p><b>생각해 볼 질문</b> 세 순회를 추적하면서(전위는 위 추적표, 중위·후위는 같은 호출 순서에서) 달라지지 않는 것은 무엇인가? 달라진 것은 호출 사이의 어느 동작이었는가?</p>
 <textarea class="in l" rows="5" data-key="A4.reflect" data-label="A4 생각해 볼 질문 답"></textarea>
+<p>먼저 위 칸에 자기 말로 쓴 뒤 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 세 순회의 차이</summary>
+<ul><li>전위는 두 호출 전에, 중위는 두 호출 사이에, 후위는 두 호출 뒤에 자기 값을 처리한다. T1 결과: 전위 A B D E C F / 중위 D B E A C F / 후위 D E B F C A.</li></ul>
+<pre class="diagram" style="background:#fff;color:#1f2328;border:1px solid #cfd6e2;border-radius:6px;padding:8px 12px;font-size:12.5px;line-height:1.4;overflow-x:auto;white-space:pre">def 순회(node):
+    if node is None:      # 기저 조건 (세 순회 모두 같음)
+        return
+    ① 처리   ← 전위
+    순회(node.left)       # 왼쪽 호출 (같음)
+    ② 처리   ← 중위
+    순회(node.right)      # 오른쪽 호출 (같음)
+    ③ 처리   ← 후위</pre>
+<ul><li>달라지지 않는 것: 기저 조건, 왼쪽·오른쪽 호출의 모양과 순서. 달라지는 것: 처리하는 줄이 두 호출의 앞·사이·뒤 중 어디에 있는가, 즉 한 곳의 위치이다.</li></ul>
+</details>
 </section>
 
 <section id="A5" class="sheet">
 <h2>A5 · Exit ticket<small>1차시 · 2분 · 개인</small></h2>
 <p><b>순회 순서를 결정하는 것은 무엇인가?</b> A3·A4에서 관찰한 것을 근거로 한 문장으로 쓴다.</p>
 <textarea class="in l" rows="5" data-key="A5.exit" data-label="A5 Exit ticket 답"></textarea>
+<p>먼저 위 칸에 자기 말로 쓴 뒤 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 1차시 정리</summary>
+<ul><li>순회 순서를 정하는 것은 자신(루트)을 왼쪽·오른쪽 부분 트리보다 먼저, 사이에, 나중에 처리하느냐 하는 <b>처리 시점</b>이다. 왼쪽을 오른쪽보다 먼저 가는 것은 세 순회에서 모두 같다.</li>
+<li>1차시 요약: 계층이 있는 데이터는 트리로 표현한다. 루트·부모·자식·리프·서브트리·높이로 구조를 말한다. 순회는 같은 규칙을 부분 트리에 되풀이(재귀)하고 빈 트리에서 멈춘다(기저 조건).</li></ul>
+</details>
 </section>
 
 <section id="A6" class="sheet">
@@ -256,6 +338,12 @@ print(t1.val, t1.left.val, t1.right.val)</code></pre></div>
 <h3>예측 확인</h3>
 <p>구현을 끝낸 뒤 코드 편집기의 내 inorder에서 기저 조건 두 줄(<code class="i">if node is None:</code>과 그 아래 <code class="i">return</code>)을 <code class="i">#</code>으로 막고 한 번 실행한다. [테스트]를 함께 실행하면 &lsquo;오류&rsquo;로 시작하는 줄에 오류 이름과 메시지가 나온다. 실제로 나온 오류 이름과 메시지를 적고, 위 예측과 같았는지, 다르다면 어느 생각이 틀렸는지 한 줄로 쓴다. 확인한 뒤에는 막은 줄을 되살린다.</p>
 <textarea class="in" rows="3" data-key="A6.predict.actual" data-label="A6 기저 조건을 막고 실행한 결과(오류 이름·메시지)와 예측 비교"></textarea>
+<p>먼저 위 칸에 자기 말로 쓴 뒤 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 기저 조건을 막았을 때 나타나는 오류</summary>
+<ul><li>실제 결과: <code class="i">AttributeError: 'NoneType' object has no attribute 'left'</code> (함수의 첫 줄이 <code class="i">node.left</code>를 읽는 호출이기 때문이다. T1에서는 D의 왼쪽 자식 자리를 호출하는 순간 처음 일어난다.)</li>
+<li>이유: 리프의 빈 자식 자리에는 None이 전달되는데, 기저 조건이 없으면 None에서 속성을 읽으려 한다. 무한 재귀(RecursionError)로 예측했다면, 호출이 끝없이 내려가기 전에 None에서 먼저 멈춘 것이다.</li>
+<li>기저 조건은 재귀를 멈추는 장치이자 빈 자리를 안전하게 처리하는 장치이다.</li></ul>
+</details>
 <p><b>구현 계획 한 줄</b> (결과를 어떻게 모을 것인가, 목표 복잡도는 무엇인가. 목표 복잡도는 A3에서 센 호출 수를 근거로 쓴다.)</p>
 <textarea class="in" rows="3" data-key="A6.plan" data-label="A6 구현 계획 한 줄"></textarea>
 </section>
@@ -270,6 +358,17 @@ print(t1.val, t1.left.val, t1.right.val)</code></pre></div>
 <details><summary>이유를 쓴 뒤에 열어 짝과 확인한다</summary>
 <p>12는 5의 오른쪽 자식이지만 10의 <b>왼쪽 부분 트리</b>에 있다. 위 정의가 요구하는 것은 부모와의 비교만인가, 다른 노드와의 관계까지인가? 내 이유가 이 점을 짚었는지 짝과 비교해 보고, 다르면 위 칸을 고쳐 쓴다.</p></details></div>
 <div class="note"><b>BST 삽입 규칙 카드</b> 빈 트리에서 시작한다. 새 값은 루트부터 비교하여 노드의 값보다 <b>작으면 왼쪽</b>, <b>같거나 크면 오른쪽</b>으로 내려간다. 내려갈 자리가 비어 있으면 거기에 새 노드를 놓는다.</div>
+<div class="learn-box"><span class="lb-title">학습 내용 · 삽입 경로 쓰는 법과 BST의 예</span>
+<p>BST의 예이다. 모든 노드에서 왼쪽 부분 트리의 값은 그 노드보다 작고, 오른쪽 부분 트리의 값은 그 노드보다 크거나 같다(12 아래의 10은 12보다 작고 루트 8보다 크다).</p>
+<pre class="diagram" style="background:#fff;color:#1f2328;border:1px solid #cfd6e2;border-radius:6px;padding:8px 12px;font-size:12.5px;line-height:1.4;overflow-x:auto;white-space:pre">        8
+      /   \
+     3     12
+    / \   /  \
+   1   6 10   15</pre>
+<p>삽입 경로 쓰는 예(T3가 아닌 값 [50, 30, 70, 20]): 비교는 항상 루트부터 시작해, 지금 있는 노드의 값과 비교하며 내려간다.</p>
+<table style="width:calc(100% - 28px)"><tr><th>삽입 값</th><th>비교하며 내려간 경로</th><th>놓인 위치</th></tr><tr><td>50</td><td>(빈 트리이므로 루트가 된다)</td><td>루트</td></tr><tr><td>30</td><td>50의 왼쪽</td><td>50의 왼쪽 자식</td></tr><tr><td>70</td><td>50의 오른쪽</td><td>50의 오른쪽 자식</td></tr><tr><td>20</td><td>50의 왼쪽 → 30의 왼쪽</td><td>30의 왼쪽 자식</td></tr></table>
+<p>완성한 트리는 부모 아래 줄에 <code class="i">/</code>(왼쪽)와 <code class="i">\</code>(오른쪽)로 이어 글자로 그린다. 높이는 노드 수 기준이다.</p>
+</div>
 <p>삽입 순서 <code class="i">[8, 3, 10, 1, 6, 14, 4, 7, 13]</code>를 차례로 삽입한다. 각 값이 지나간 경로(예: 8의 왼쪽 → 3의 ...)와 놓인 위치를 적는다.</p>
 <table class="fill"><tr><th style="width:70px">삽입 값</th><th>비교하며 내려간 경로</th><th style="width:30%">놓인 위치</th></tr>
 <tr><td class="lab">8</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r1.c1" data-label="A7 BST 삽입 경로 8행 · 비교하며 내려간 경로"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r1.c2" data-label="A7 BST 삽입 경로 8행 · 놓인 위치"></textarea></td></tr><tr><td class="lab">3</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r2.c1" data-label="A7 BST 삽입 경로 3행 · 비교하며 내려간 경로"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r2.c2" data-label="A7 BST 삽입 경로 3행 · 놓인 위치"></textarea></td></tr><tr><td class="lab">10</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r3.c1" data-label="A7 BST 삽입 경로 10행 · 비교하며 내려간 경로"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r3.c2" data-label="A7 BST 삽입 경로 10행 · 놓인 위치"></textarea></td></tr><tr><td class="lab">1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r4.c1" data-label="A7 BST 삽입 경로 1행 · 비교하며 내려간 경로"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r4.c2" data-label="A7 BST 삽입 경로 1행 · 놓인 위치"></textarea></td></tr><tr><td class="lab">6</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r5.c1" data-label="A7 BST 삽입 경로 6행 · 비교하며 내려간 경로"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r5.c2" data-label="A7 BST 삽입 경로 6행 · 놓인 위치"></textarea></td></tr><tr><td class="lab">14</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r6.c1" data-label="A7 BST 삽입 경로 14행 · 비교하며 내려간 경로"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r6.c2" data-label="A7 BST 삽입 경로 14행 · 놓인 위치"></textarea></td></tr><tr><td class="lab">4</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r7.c1" data-label="A7 BST 삽입 경로 4행 · 비교하며 내려간 경로"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r7.c2" data-label="A7 BST 삽입 경로 4행 · 놓인 위치"></textarea></td></tr><tr><td class="lab">7</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r8.c1" data-label="A7 BST 삽입 경로 7행 · 비교하며 내려간 경로"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r8.c2" data-label="A7 BST 삽입 경로 7행 · 놓인 위치"></textarea></td></tr><tr><td class="lab">13</td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r9.c1" data-label="A7 BST 삽입 경로 13행 · 비교하며 내려간 경로"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A7.path.r9.c2" data-label="A7 BST 삽입 경로 13행 · 놓인 위치"></textarea></td></tr></table>
@@ -278,23 +377,50 @@ print(t1.val, t1.left.val, t1.right.val)</code></pre></div>
 <textarea class="in draw" rows="6" data-key="A7.tree" data-label="A7 완성한 트리" spellcheck="false"></textarea>
 <p><b>생각해 볼 질문</b> 6은 왜 8의 왼쪽, 3의 오른쪽에 놓이는가? 이 규칙은 모든 노드에서 같은가? 손으로 트리를 완성한 뒤에 student_code_lab의 공통 코드 <code class="i">insert</code>를 읽고, 이 규칙을 나타내는 줄을 코드에서 그대로 옮겨 적는다.</p>
 <textarea class="in" rows="3" data-key="A7.reflect" data-label="A7 생각해 볼 질문 답"></textarea>
+<p>먼저 위 칸에 자기 말로 쓴 뒤 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · T3의 삽입 경로와 완성 모양</summary>
+<table style="width:calc(100% - 28px)"><tr><th>삽입 값</th><th>경로</th></tr><tr><td>8</td><td>루트</td></tr><tr><td>3</td><td>8의 왼쪽</td></tr><tr><td>10</td><td>8의 오른쪽</td></tr><tr><td>1</td><td>8의 왼쪽 → 3의 왼쪽</td></tr><tr><td>6</td><td>8의 왼쪽 → 3의 오른쪽</td></tr><tr><td>14</td><td>8의 오른쪽 → 10의 오른쪽</td></tr><tr><td>4</td><td>8의 왼쪽 → 3의 오른쪽 → 6의 왼쪽</td></tr><tr><td>7</td><td>8의 왼쪽 → 3의 오른쪽 → 6의 오른쪽</td></tr><tr><td>13</td><td>8의 오른쪽 → 10의 오른쪽 → 14의 왼쪽</td></tr></table><pre class="diagram" style="background:#fff;color:#1f2328;border:1px solid #cfd6e2;border-radius:6px;padding:8px 12px;font-size:12.5px;line-height:1.4;overflow-x:auto;white-space:pre">            8
+          /   \
+         3     10
+        / \      \
+       1   6      14
+          / \    /
+         4   7  13      높이 4</pre>
+<ul><li>6은 8보다 작아 왼쪽으로, 3과 비교하면 3 이상이라 오른쪽으로 간다. 이 규칙은 모든 노드에서 같다(작으면 왼쪽, 같거나 크면 오른쪽). 그래서 부분 트리 안에서도 같은 규칙이 똑같이 되풀이된다.</li>
+<li>코드에서는 <code class="i">if val &lt; root.val:</code> 줄부터 <code class="i">else:</code> 아래 <code class="i">root.right = insert(root.right, val)</code> 줄까지가 이 규칙이다.</li></ul>
+</details>
 </section>
 
 <section id="A8" class="sheet">
 <h2>A8 · T3의 세 순회 결과 비교<small>2차시 · 8분 · 짝</small></h2>
 <p class="meta"><span>코드: <a href="student_code_lab.html#A8">student_code_lab.html A8</a></span><span>산출물: 결과 표, 발견한 규칙 1문장</span></p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 결과를 읽는 방법</span>
+<p>코드 쪽 A8을 실행하면 출력 3줄이 차례로 전위, 중위, 후위의 결과이다. 각 줄을 표에 그대로 옮긴다. &lsquo;눈에 띄는 점&rsquo;은 값의 나열을 보고 쓴다. 각 줄의 값 나열을 서로 비교하고, A7에서 그린 트리를 옆에 두고 읽는다. 세 줄을 서로 비교해 한 가지 규칙을 한 문장으로 쓴다.</p>
+</div>
 <table class="fill"><tr><th style="width:90px">순회</th><th>T3의 결과 (코드 실행 결과)</th><th style="width:28%">눈에 띄는 점</th></tr>
 <tr><td class="lab">전위</td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.result.r1.c1" data-label="A8 T3의 세 순회 결과 전위 · T3의 결과 (코드 실행 결과)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.result.r1.c2" data-label="A8 T3의 세 순회 결과 전위 · 눈에 띄는 점"></textarea></td></tr><tr><td class="lab">중위</td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.result.r2.c1" data-label="A8 T3의 세 순회 결과 중위 · T3의 결과 (코드 실행 결과)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.result.r2.c2" data-label="A8 T3의 세 순회 결과 중위 · 눈에 띄는 점"></textarea></td></tr><tr><td class="lab">후위</td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.result.r3.c1" data-label="A8 T3의 세 순회 결과 후위 · T3의 결과 (코드 실행 결과)"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.result.r3.c2" data-label="A8 T3의 세 순회 결과 후위 · 눈에 띄는 점"></textarea></td></tr></table>
 <p><b>발견한 규칙</b> 세 결과를 비교해 눈에 띈 규칙을 한 문장으로 쓴다.</p>
 <textarea class="in l" rows="5" data-key="A8.rule" data-label="A8 발견한 규칙 1문장"></textarea>
 <p><b>생각해 볼 질문</b> 세 결과 가운데 규칙이 가장 잘 보이는 것은 어느 것인가? 다른 것에서는 왜 잘 보이지 않는가?</p>
 <textarea class="in" rows="3" data-key="A8.reflect" data-label="A8 생각해 볼 질문 답"></textarea>
+<p>먼저 위 칸에 자기 말로 쓴 뒤 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · T3 결과와 발견한 규칙</summary>
+<ul><li>전위 8 3 1 6 4 7 10 14 13 / 중위 1 3 4 6 7 8 10 13 14 / 후위 1 4 7 6 3 13 14 10 8</li>
+<li>중위 결과만 작은 값부터 차례로(오름차순) 나온다. BST는 모든 노드에서 왼쪽 부분 트리 &lt; 자신 ≤ 오른쪽 부분 트리이고, 중위는 왼쪽 → 자신 → 오른쪽 순서이므로 이 대소 관계가 그대로 나열 순서가 된다. 전위·후위는 루트를 맨 앞·맨 뒤에서 처리하므로 값의 크기 순서와 직접 관계가 없다.</li>
+<li>이 성질은 정렬 조건이 있는 BST일 때만 성립한다. 값에 크기 조건이 없는 T1의 중위(D B E A C F)는 정렬되어 있지 않다.</li></ul>
+</details>
 </section>
 
 <section id="A9" class="sheet">
 <h2>A9 · 같은 값, 다른 삽입 순서<small>2차시 · 11분 · 모둠</small></h2>
 <p class="meta"><span>산출물: 두 트리의 모양(글자로 그린 모양), 비교 횟수 표</span></p>
 <p>값 1~7을 두 가지 순서로 삽입해 BST를 만든다. <b>T5</b>: <code class="i">[1, 2, 3, 4, 5, 6, 7]</code> / <b>T4</b>: <code class="i">[4, 2, 6, 1, 3, 5, 7]</code>.</p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 그리는 방법과 세는 방법</span>
+<ul><li>모양은 A7처럼 삽입 순서대로 한 값씩 규칙에 따라 넣어 그린다.</li>
+<li><b>방문(비교)한 노드 수</b>: 루트부터 출발해 지나는 노드를 센다. 찾는 값이 든 노드도 1로 센다. 예: T3에서 4를 찾으면 8 → 3 → 6 → 4로 4개이다.</li>
+<li><b>가장 많이 비교하는 경우</b>: 트리에 있는 값 중 찾는 데 가장 오래 걸리는 값을 찾을 때의 방문 노드 수이다.</li>
+<li>높이는 노드 수 기준이며, 중위 순회 결과는 A8에서 쓴 방법으로 쓴다. 코드 쪽 <code class="i">steps_to_find</code>는 위 방문 수를 센다.</li></ul>
+</div>
 <div class="cols"><div><b>T4 모양</b><textarea class="in draw" rows="6" data-key="A9.t4draw" data-label="A9 T4 도식" spellcheck="false"></textarea></div><div><b>T5 모양</b><textarea class="in draw" rows="6" data-key="A9.t5draw" data-label="A9 T5 도식" spellcheck="false"></textarea></div></div>
 <table class="fill"><tr><th style="width:42%">항목</th><th>T4</th><th>T5</th></tr>
 <tr><td class="lab">높이</td><td class="in-cell"><input type="text" class="in" data-key="A9.metrics.r1.c1" data-label="A9 T4·T5 비교 높이 · T4" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.metrics.r1.c2" data-label="A9 T4·T5 비교 높이 · T5" autocomplete="off"></td></tr>
@@ -309,11 +435,28 @@ print(t1.val, t1.left.val, t1.right.val)</code></pre></div>
 <textarea class="in" rows="3" data-key="A9.prune" data-label="A9 탐색에서 제외되는 부분 트리와 BST가 빠르다는 말이 성립하는 때"></textarea>
 <p><b>호출 깊이 세기</b> (시간이 남으면) T5를 전위 순회할 때 호출이 가장 깊이 쌓인 순간에 쌓여 있는 호출은 몇 개인가? 세는 기준(빈 자리 None 호출을 넣었는지)을 함께 쓴다.</p>
 <textarea class="in" rows="2" data-key="A9.stack" data-label="A9 T5 전위 순회에서 가장 깊이 쌓인 호출 수와 세는 기준"></textarea>
+<p>먼저 위 칸에 자기 말로 쓴 뒤 연다.</p>
+<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · T4·T5의 값과 탐색 범위</summary>
+<pre class="diagram" style="background:#fff;color:#1f2328;border:1px solid #cfd6e2;border-radius:6px;padding:8px 12px;font-size:12.5px;line-height:1.4;overflow-x:auto;white-space:pre">T4:        4              T5:  1
+         /   \                  \
+        2     6                  2
+       / \   / \                  \
+      1   3 5   7                  3 ... (오른쪽으로만 7까지)</pre><table style="width:calc(100% - 28px)"><tr><th>항목</th><th>T4</th><th>T5</th></tr><tr><td>높이</td><td>3</td><td>7</td></tr><tr><td>값 7 찾기 방문 수</td><td>3 (4 → 6 → 7)</td><td>7 (1 → 2 → … → 7)</td></tr><tr><td>가장 많이 비교하는 경우</td><td>3 (= 높이)</td><td>7 (= 노드 수 N)</td></tr><tr><td>중위 순회</td><td>1 2 3 4 5 6 7</td><td>1 2 3 4 5 6 7</td></tr></table>
+<ul><li>BST는 한 번 비교할 때마다 한쪽 부분 트리를 통째로 탐색에서 뺀다(분할 정복). T4는 매번 남은 범위가 대략 절반이 되지만, T5에서 7을 찾을 때는 빠지는 쪽이 항상 빈 왼쪽뿐이라 하나씩만 줄어든다. 그래서 &lsquo;빠르다&rsquo;는 말은 트리가 한쪽으로 치우치지 않고 균형일 때 성립한다.</li>
+<li>노드가 N개일 때 균형이면 높이가 약 log₂N, 편향이면 N이다. 100만 개를 정렬된 순서로 넣었다면 마지막 값은 약 1,000,000번, 균형이었다면 약 20번 비교한다.</li>
+<li>T5를 전위로 순회할 때 가장 깊은 순간의 호출은 7개이다(None 호출까지 세면 8개이다).</li></ul>
+</details>
 </section>
 
 <section id="A10" class="sheet">
 <h2>A10 · 일반화 초안 카드<small>2차시 · 3분 · 개인</small></h2>
 <p class="meta"><span>개인 메모 · 이 카드는 A13에서 모둠이 함께 정제한다</span></p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 일반화 문장을 쓰는 방법</span>
+<ul><li>일반화 문장은 한 사례의 사실이 아니라 여러 사례에 통하는 <b>개념 + 개념 + 관계</b>이다. 사례 이름(T1, 8, 폴더 이름)은 개념어로 바꾼다.</li>
+<li>쓸 수 있는 개념어: 루트·리프·높이 / 순회 / 삽입 / 재귀 / 정렬 조건(BST) / 입력 순서 / 탐색 횟수 중 두 개 이상.</li>
+<li>사례 서술과 개념 문장의 차이(트리와 무관한 예): &ldquo;우리 모둠 발표는 3분이 걸렸다.&rdquo;는 사례 서술이고, &ldquo;준비한 분량이 많을수록 시간 초과 위험이 커진다.&rdquo;는 개념 문장이다.</li>
+<li>쓴 뒤 점검: 개념어가 2개 이상인가, 관계를 나타내는 말(~이면, ~하므로, ~에 따라)이 있는가, 사례 이름을 지워도 말이 되는가. 오늘 활동 가운데 가장 크게 생각이 바뀐 것 하나만 골라 쓴다.</li></ul>
+</div>
 <p>오늘의 발견을 <b>&ldquo;개념 + 개념 + 관계&rdquo;</b> 문장 하나로 쓴다. 완성되지 않아도 괜찮다.</p>
 <p>(막힐 때만 본다) 오늘 쓴 개념 중 두 개 이상을 고른다: 계층 · 재귀 · 순회 시점 · 정렬 조건(BST) · 입력 순서 · 탐색 횟수<br>
 문장 틀: &ldquo;(&nbsp;&nbsp;&nbsp;&nbsp;)가 (&nbsp;&nbsp;&nbsp;&nbsp;)이면/하면, (&nbsp;&nbsp;&nbsp;&nbsp;)은(는) (&nbsp;&nbsp;&nbsp;&nbsp;)한다.&rdquo;<br>

@@ -268,6 +268,12 @@ for name, tree, pre, ino, post in CHECK:
 print("A14 (가) 점검 통과")</code></pre></div>
 <div class="mycode"><label>(가) 실행 칸 · A14 (저장되지 않음)<textarea class="in code" rows="14" data-run-only spellcheck="false"></textarea></label><p class="hint noprint">[앞 쪽 코드 불러오기]를 누른 뒤 [테스트] (가)를 추가해 실행한다. 이 칸의 내용은 [저장(JSON)]에 들어가지 않는다. 통과 여부는 활동지 A14의 점검 표에 적는다.</p></div>
 <p>두 함수를 작성한다. 결과 누적을 안전하게 처리하고(호출 사이에 결과가 섞이지 않게), 높이를 재귀로 구한다. 끝내지 못한 부분은 주간 과제로 이어진다. 편집기에 <code class="i">Node</code>·<code class="i">insert</code>·<code class="i">build</code>가 필요하면 [예시 코드]의 [제공 코드]를 먼저 추가해 실행한다(위 (가)에서 앞 쪽 코드를 불러왔다면 이미 환경에 있다).</p>
+<div class="learn-box"><span class="lb-title">학습 내용 · (나) 전이 연습 안내</span>
+<ul><li>(나)는 과제 제출물이 아니라 채점하지 않는 보조 연습이다. 끝내지 못해도 된다.</li>
+<li><code class="i">inorder_list</code>: A12에서 비교한 방법 가운데 하나로, 같은 트리를 여러 번 불러도 다른 트리를 불러도 결과가 섞이지 않게 쓴다. 시그니처 <code class="i">out=None</code>이 힌트이다.</li>
+<li><code class="i">height</code>: 빈 트리는 0이다. 빈 트리가 아니면 자기 자신 1에, 왼쪽 부분 트리의 높이와 오른쪽 부분 트리의 높이 중 큰 값을 더한다(노드 수 기준, 노드 하나는 1). 이 문장이 재귀의 구조를 그대로 보여 준다.</li>
+<li>테스트의 <code class="i">AssertionError</code> 메시지는 어느 트리, 어느 함수에서 틀렸는지 알려 준다.</li></ul>
+</div>
 <h3>(나) 공통 코드 (Node, insert, build)</h3>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A14-1" data-for="A14.mycode">class Node:  # 트리의 노드를 만드는 설계도(클래스)이다
     def __init__(self, val, left=None, right=None):  # 노드를 만들 때 자동 실행된다
