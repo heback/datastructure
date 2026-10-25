@@ -73,11 +73,11 @@ summary{cursor:pointer;font-weight:600}
 <body>
 <div class="wrap">
 <header>
-  <div class="prompt">&gt;&gt;&gt; rubric.week(8)  # 교사·학생 공통 · 실습 과제 채점기준</div>
+  <div class="prompt">&gt;&gt;&gt; rubric.week(8)  # 학생용 · 실습 과제 채점기준</div>
   <h1>8주차 실습 과제 루브릭 — 전/중/후위 순회 재귀 함수 구현</h1>
   <p class="lead">구조와 배점은 계획서 Ⅰ(실습 과제 평가 운영 지침)의 평가요소·4단계 채점기준을 그대로 따른다(구현 정확성 50, 복잡도 분석 타당성 30, 코드 품질 20, 합계 100점). 오른쪽 열은 이 과제에서 관찰하는 모습의 예이며 기준 자체를 바꾸지 않는다.</p>
 </header>
-<nav><a href="#r1">#구현정확성</a><a href="#r2">#복잡도</a><a href="#r3">#코드품질</a><a href="#levels">#성취수준</a><a href="#viol">#위반처리</a><a href="#sheet">#채점표</a><a href="index.html">목록</a></nav>
+<nav><a href="#r1">#구현정확성</a><a href="#r2">#복잡도</a><a href="#r3">#코드품질</a><a href="#levels">#성취수준</a><a href="#viol">#위반처리</a><a href="index.html">목록</a></nav>
 
 <section id="r1">
 <h2>요구사항 구현 정확성 · 50점<small>#r1</small></h2>
@@ -94,10 +94,10 @@ summary{cursor:pointer;font-weight:600}
 <h2>복잡도 분석 타당성 · 30점<small>#r2</small></h2>
 <table>
 <tr><th style="width:90px">단계</th><th style="width:36%">계획서 기준</th><th>8주차 과제에서 관찰하는 모습</th></tr>
-<tr><td class="id" style="color:#1d7a4f">상 · 30</td><td>구현한 자료구조·알고리즘의 시간·공간 복잡도를 정확히 산출하고, 그 근거(반복문 구조, 자료구조 특성 등)를 논리적으로 서술하며 더 효율적인 대안까지 검토한다.</td><td>순회의 시간 복잡도를 노드를 한 번씩 방문하므로 O(N)이라고 근거와 함께 쓴다. 공간은 재귀 호출 깊이(트리 높이)에 비례함을 쓰고, 균형일 때와 편향일 때를 구분한다. 결과 리스트를 모으는 방식의 대안(인자, 내부 함수, 제너레이터 등)을 비교한다.</td></tr>
-<tr><td class="id" style="color:#1d7a4f">중상 · 24</td><td>복잡도를 대체로 정확히 산출하나 근거 서술이 다소 피상적이다.</td><td>O(N)은 쓰지만 &ldquo;한 번씩 방문&rdquo;과 같은 근거가 짧고, 공간 복잡도(호출 스택)를 빠뜨리거나 균형·편향 구분이 없다.</td></tr>
-<tr><td class="id" style="color:#1d7a4f">중하 · 18</td><td>복잡도 표기는 시도했으나 산출 값이 부정확하거나 근거를 제시하지 못한다.</td><td>O(log N)이나 O(N²) 등 값이 틀리거나 이유 없이 결과만 쓴다.</td></tr>
-<tr><td class="id" style="color:#1d7a4f">하 · 12</td><td>복잡도를 전혀 분석하지 못했거나 개념을 혼동하고 있다.</td><td>복잡도 서술이 없거나, BST 탐색의 복잡도와 순회의 복잡도를 혼동한다.</td></tr>
+<tr><td class="id" style="color:#1d7a4f">상 · 30</td><td>구현한 자료구조·알고리즘의 시간·공간 복잡도를 정확히 산출하고, 그 근거(반복문 구조, 자료구조 특성 등)를 논리적으로 서술하며 더 효율적인 대안까지 검토한다.</td><td>순회의 시간 복잡도와 공간 복잡도를 각각 쓰고, 각각의 근거를 코드의 구조(노드 방문 횟수, 호출이 쌓이는 깊이)와 연결해 서술한다. 트리 모양에 따라 달라지는 값이 있는지 따져 보고, 결과를 모으는 방식을 하나 이상 비교한다.</td></tr>
+<tr><td class="id" style="color:#1d7a4f">중상 · 24</td><td>복잡도를 대체로 정확히 산출하나 근거 서술이 다소 피상적이다.</td><td>값은 맞게 쓰나 근거가 짧거나, 시간·공간 중 한쪽을 빠뜨리거나, 트리 모양에 따른 차이를 따지지 않는다.</td></tr>
+<tr><td class="id" style="color:#1d7a4f">중하 · 18</td><td>복잡도 표기는 시도했으나 산출 값이 부정확하거나 근거를 제시하지 못한다.</td><td>값을 쓰려 했으나 값이 틀리거나 근거 없이 결과만 쓴다.</td></tr>
+<tr><td class="id" style="color:#1d7a4f">하 · 12</td><td>복잡도를 전혀 분석하지 못했거나 개념을 혼동하고 있다.</td><td>서술이 없거나 탐색의 비용과 순회의 비용을 혼동한다.</td></tr>
 </table>
 <p class="note">구현 계획(결과 누적 방식 선택, 목표 복잡도)과 복잡도 분석은 학생이 직접 세워야 한다. AI가 대신 세운 것은 금지이며 위반 처리 대상이다.</p>
 </section>
@@ -106,7 +106,7 @@ summary{cursor:pointer;font-weight:600}
 <h2>코드 품질 · 20점<small>#r3</small></h2>
 <table>
 <tr><th style="width:90px">단계</th><th style="width:36%">계획서 기준</th><th>8주차 과제에서 관찰하는 모습</th></tr>
-<tr><td class="id" style="color:#7a5cc8">상 · 20</td><td>변수·함수명이 역할을 명확히 드러내고, 중복 없이 간결하며, 엣지 케이스 처리가 코드 전반에 일관되게 반영되어 있다.</td><td><code class="i">node</code>, <code class="i">out</code> 같은 이름이 역할을 드러낸다. 기저 조건이 세 함수에서 일관되며, 가변 기본 인자를 쓰지 않거나 <code class="i">None</code> 센티널로 안전하게 처리한다. 불필요한 중복이 없다.</td></tr>
+<tr><td class="id" style="color:#7a5cc8">상 · 20</td><td>변수·함수명이 역할을 명확히 드러내고, 중복 없이 간결하며, 엣지 케이스 처리가 코드 전반에 일관되게 반영되어 있다.</td><td><code class="i">node</code>, <code class="i">out</code> 같은 이름이 역할을 드러낸다. 기저 조건이 세 함수에서 일관되며, 호출 사이에 값이 남지 않도록 결과 리스트를 안전하게 다룬다. 불필요한 중복이 없다.</td></tr>
 <tr><td class="id" style="color:#7a5cc8">중상 · 16</td><td>전반적으로 가독성이 양호하나 일부 네이밍이 불명확하거나 사소한 중복 코드가 존재한다.</td><td>이름이 일부 모호하거나(<code class="i">a</code>, <code class="i">x</code>) 세 함수의 겹치는 부분이 정리되지 않았다.</td></tr>
 <tr><td class="id" style="color:#7a5cc8">중하 · 12</td><td>동작은 하지만 네이밍 규칙이 일관되지 않고 중복 코드가 다수 존재해 가독성이 떨어진다.</td><td>함수마다 이름 규칙이 다르고, 같은 코드가 반복되며 주석·계획이 없다.</td></tr>
 <tr><td class="id" style="color:#7a5cc8">하 · 8</td><td>코드 구조를 파악하기 어려울 정도로 가독성이 낮고 엣지 케이스 처리가 전무하다.</td><td>구조를 읽기 어렵고, 빈 트리·한쪽 자식 처리가 전혀 없다.</td></tr>
@@ -117,13 +117,13 @@ summary{cursor:pointer;font-weight:600}
 <h2>성취수준 A~E 관찰 지표<small>#levels · 단원3 진술의 8주차 번역</small></h2>
 <table>
 <tr><th style="width:36px">수준</th><th style="width:30%">계획서 진술(8주차 해당 부분)</th><th>관찰 지표(8주차 활동에서 보이는 행동)</th></tr>
-<tr><td class="id" style="color:#1d7a4f">A</td><td>트리 순회와 힙 연산의 시간 복잡도를 정확히 분석한다.</td><td>A9·A14에서 BST 탐색을 균형일 때 O(log N), 편향일 때 O(N)으로 설명하고, 순회가 O(N)임을 근거와 함께 설명한다. 가변 기본 인자 외 대안 설계(D2)를 비교해 선택 이유를 제시한다. 새 트리(T6)에서 코드 수정 없이 통과한다.</td></tr>
-<tr><td class="id" style="color:#3572a5">B</td><td>트리 순회를 재귀로 정확히 구현한다.</td><td>A6·A14에서 세 순회가 T1·T3·T6의 기대 결과와 일치한다. 기저 조건 누락이 없다. 버그를 안내(힌트 1회) 후 수정하고, 형성평가 Q1·Q3이 정답이다.</td></tr>
-<tr><td class="id" style="color:#8a6d1f">C</td><td>트리 순회 구현에 오류가 잦고, 가변 기본 인자 버그를 스스로 발견하지 못한다.</td><td>순회 순서(전/중/후)를 혼동하거나 기저 조건 누락·출력 위치 오류가 반복된다. A11에서 두 번째 호출의 이상 출력을 보고도 원인을 짚지 못하나(Q2 오답), 교사 설명 후 수정은 가능하다.</td></tr>
+<tr><td class="id" style="color:#1d7a4f">A</td><td>트리 순회와 힙 연산의 시간 복잡도를 정확히 분석한다.</td><td>A9·A14에서 트리 모양에 따라 탐색 비교 횟수가 달라지는 까닭과 순회에 드는 비용을 근거와 함께 설명한다. 결과 리스트를 다루는 다른 방법을 비교해 선택 이유를 제시한다. 새 트리(T6)에서 코드 수정 없이 통과한다.</td></tr>
+<tr><td class="id" style="color:#3572a5">B</td><td>트리 순회를 재귀로 정확히 구현한다.</td><td>A6·A14에서 세 순회가 T1·T3·T6의 기대 결과와 일치한다. 기저 조건 누락이 없다. 버그를 안내(힌트 1회) 후 수정하고, 새 코드에서도 같은 원인을 식별해 고친다.</td></tr>
+<tr><td class="id" style="color:#8a6d1f">C</td><td>트리 순회 구현에 오류가 잦고, 가변 기본 인자 버그를 스스로 발견하지 못한다.</td><td>순회 순서(전/중/후)를 혼동하거나 기저 조건 누락·출력 위치 오류가 반복된다. A11에서 두 번째 호출의 이상 출력을 보고도 원인을 짚지 못하나 교사 설명 후 수정은 가능하다.</td></tr>
 <tr><td class="id" style="color:#c07a1f">D</td><td>트리의 개념적 차이를 부분적으로만 이해하며, 재귀 함수 작성에 어려움을 겪는다.</td><td>A2에서 용어는 구분하나 A3 호출 추적을 끝까지 하지 못한다. 재귀 호출 없이 반복문으로만 시도하거나 골격 없이 작성하지 못한다.</td></tr>
 <tr><td class="id" style="color:#b3401f">E</td><td>비선형 자료구조의 구조적 특징을 이해하지 못하며, 단순한 탐색조차 적절한 자료구조 없이 접근한다.</td><td>A1·A2에서 계층을 리스트 한 줄로만 표현하고 부모–자식 관계를 표시하지 못한다. A7 BST 삽입 규칙을 적용하지 못하고 A9에서 탐색을 전체 순회로만 수행한다.</td></tr>
 </table>
-<p class="note">관찰 수집: 교사 체크리스트(A3 추적표, A6 코드, A12 원인 문장, A15 답안). 개별 피드백은 A14~A16 순회 시간과 주간 과제 채점 때 한다.</p>
+<p class="note">개별 피드백은 A14~A16 순회 시간과 주간 과제 채점 때 한다.</p>
 </section>
 
 <section id="viol">
@@ -137,11 +137,6 @@ summary{cursor:pointer;font-weight:600}
 </table>
 </section>
 
-<section id="sheet">
-<h2>채점표<small>#sheet · 교사용 기록</small></h2>
-<table class="fill"><tr><th style="width:100px">학생</th><th>구현 정확성 (50/40/30/20)</th><th>복잡도 분석 (30/24/18/12)</th><th>코드 품질 (20/16/12/8)</th><th style="width:70px">합계</th><th>AI 활용 기록 확인</th></tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr></table>
-</section>
 </div>
 <script>
 document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});

@@ -123,15 +123,15 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; check.week(8)  # 형성평가 A15 · AI 미사용(시험 운영 규칙)</div>
   <h1>8주차 형성평가 — 코드에서 안티 패턴 찾아 고치기</h1>
-  <p class="lead">성취기준 [12자구03-02]. 평가 의도: 파이썬의 &lsquo;가변 기본 인자(<code class="i">visited=[]</code>)&rsquo; 안티 패턴 버그를 식별하고 수정할 수 있는가? 이 평가는 개별로 풀며, 시험 상황이므로 AI를 사용하지 않는다(수업 운영 규칙이며 계획서의 위반 처리는 이 평가에 적용하지 않는다).</p>
+  <p class="lead">성취기준 [12자구03-02]. 평가 의도: 파이썬의 &lsquo;가변 기본 인자(예: <code class="i">visited=[]</code>)&rsquo; 안티 패턴 버그를 식별하고 수정할 수 있는가? 이 평가는 개별로 풀며, 시험 상황이므로 AI를 사용하지 않는다(수업 운영 규칙이며 계획서의 위반 처리는 이 평가에 적용하지 않는다).</p>
   <p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><span>A15 · 6분 (필수 Q1~Q3) · Q4·Q5는 수업 밖 선택·과제</span></p>
 </header>
 <nav><a href="#Q1">Q1~Q3</a><a href="#Q4">Q4</a><a href="#Q5">Q5</a><a href="index.html">목록</a></nav>
 
 <section id="Q1" class="sheet">
 <h2>Q1~Q3 · 가변 기본 인자 코드<small>수업 시간 A15 · 10점</small></h2>
-<p>아래 코드는 6개 값 <code class="i">[35, 18, 52, 11, 27, 60]</code>을 차례로 삽입한 BST(T7)의 중위 순회 결과를 모으는 코드이다. <code class="i">Node</code>, <code class="i">insert</code>, <code class="i">build</code>는 수업에서 쓴 것과 같다.</p>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A15-1">class Node:
+<p>아래 코드는 6개 값 <code class="i">[35, 18, 52, 11, 27, 60]</code>을 차례로 삽입한 BST(T7)에서 자식이 없는 노드(리프)의 값을 모으는 코드이다. <code class="i">Node</code>, <code class="i">insert</code>, <code class="i">build</code>는 수업에서 쓴 것과 같다. 이 문항지의 코드는 읽고 푸는 문제이다.</p>
+<div class="codewrap"><pre><code class="language-python" data-id="A15-1">class Node:
     def __init__(self, val, left=None, right=None):
         self.val = val
         self.left = left
@@ -151,18 +151,19 @@ def build(values):              # 값 목록을 차례로 삽입해 BST를 만�
     for v in values:
         root = insert(root, v)
     return root</code></pre></div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="bug" data-id="A15-2">def collect_inorder(node, visited=[]):
+<div class="codewrap"><pre><code class="language-python" data-id="A15-2">def collect_leaves(node, leaves=[]):
     if node is None:
-        return visited
-    collect_inorder(node.left, visited)
-    visited.append(node.val)
-    collect_inorder(node.right, visited)
-    return visited
+        return leaves
+    if node.left is None and node.right is None:
+        leaves.append(node.val)
+    collect_leaves(node.left, leaves)
+    collect_leaves(node.right, leaves)
+    return leaves
 
 t7 = build([35, 18, 52, 11, 27, 60])
 
-print(collect_inorder(t7))
-print(collect_inorder(t7))</code></pre></div>
+print(collect_leaves(t7))
+print(collect_leaves(t7))</code></pre></div>
 <h3>Q1 · 예측 (4점)</h3>
 <p>위 코드를 실행했을 때 출력되는 두 줄을 차례로 쓰시오.</p>
 <table class="fill"><tr><td class="lab" style="width:90px">첫 번째 출력</td><td class="in-cell"><input type="text" class="in" data-key="Q1.pred.r1.c1" data-label="Q1 예측 출력 첫 번째 출력" autocomplete="off"></td></tr><tr><td class="lab">두 번째 출력</td><td class="in-cell"><input type="text" class="in" data-key="Q1.pred.r2.c1" data-label="Q1 예측 출력 두 번째 출력" autocomplete="off"></td></tr></table>
@@ -170,8 +171,8 @@ print(collect_inorder(t7))</code></pre></div>
 <p>버그가 있는 줄을 지목하고, 원인을 한 문장으로 서술하시오.</p>
 <textarea class="in l" rows="5" data-key="Q2.reason" data-label="Q2 버그 줄과 원인"></textarea>
 <h3>Q3 · 수정 (3점)</h3>
-<p>같은 트리로 몇 번을 호출해도 결과가 항상 정확하도록 함수를 수정하여 쓰시오. 호출은 <code class="i">collect_inorder(t7)</code>처럼 인자 하나로 할 수 있어야 한다.</p>
-<textarea class="in code" rows="8" data-type="code" data-key="Q3.code" data-label="Q3 수정한 함수" spellcheck="false"></textarea>
+<p>같은 트리로 몇 번을 호출해도 결과가 항상 정확하도록 함수를 수정하여 쓰시오. 호출은 <code class="i">collect_leaves(t7)</code>처럼 인자 하나로 할 수 있어야 한다.</p>
+<div class="mycode"><label>Q3 수정한 함수<textarea class="in code" rows="8" data-type="code" data-key="Q3.code" data-label="Q3 수정한 함수" data-noex spellcheck="false"></textarea></label><p class="hint noprint">수정한 함수의 코드를 쓰는 것이 답안이다. 이 편집기에는 Node·insert·build가 정의되어 있지 않다. 실행해 확인하려면 필요한 코드를 직접 써 넣는다(필수가 아니다).</p></div>
 </section>
 
 <section id="Q4" class="sheet">

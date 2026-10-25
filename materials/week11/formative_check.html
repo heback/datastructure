@@ -98,6 +98,7 @@ input.in.s{display:inline-block;width:3.2em;padding:1px 4px;text-align:center}
 table.fill td.in-cell{padding:3px;height:auto}
 .ans-row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
 .ans-row>.n{padding-top:6px;font-weight:700;color:#3572a5}
+.qtext{margin:12px 0 2px;font-weight:600;break-after:avoid}
 .mycode{margin:8px 0 12px}
 .mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
 .hint{font-size:12px;color:#5b6b85;margin:2px 0}
@@ -133,13 +134,14 @@ table.fill td.in-cell{padding:3px;height:auto}
 
 <section id="Q1" class="sheet">
 <h2>Q1~Q3 · 상황별 구별, 방문 순서·경로 추적, visited 함정<small>수업 시간 A14 · 6분</small></h2>
-<p class="note">개별로 푼다. 시험 상황이므로 AI를 사용하지 않는다. 시간이 모자라면 Q1의 (c)(d)와 Q3의 &ldquo;고치는 방법&rdquo; 서술을 생략할 수 있다. 이 문항의 값은 수업 시간에 쓴 값과 다르다.</p>
+<p class="note">개별로 푼다. 시험 상황이므로 AI를 사용하지 않는다. 시간이 모자라면 Q1의 (c)(d)(e)와 Q3의 &ldquo;고치는 방법&rdquo; 서술을 생략할 수 있다((e)는 선택 문항이다). 이 문항의 값은 수업 시간에 쓴 값과 다르다.</p>
 <h3>Q1 · 상황별 구별</h3>
-<p>각 상황에서 BFS, DFS, 둘 다 가능 중 하나를 고르고, <b>조건</b>(최단 거리 보장이 필요한가, 연결 요소 추적인가)에 근거해 한 문장으로 쓰시오.</p><div class="scroll"><table class="fill"><tr><th style="width:40%">상황</th><th style="width:16%">선택</th><th>근거 한 문장</th></tr><tr><td class="lab">(a) 창문 없는 건물에서 출구까지 최소 몇 걸음인가</td><td class="in-cell"><select class="in" data-key="Q1.a.choice" data-label="Q1 (a) 선택"><option value=""></option><option value="BFS">BFS</option><option value="DFS">DFS</option><option value="둘 다 가능">둘 다 가능</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.a.why" data-label="Q1 (a) 조건에 근거한 한 문장"></textarea></td></tr><tr><td class="lab">(b) 격자 지도에서 호수(연결된 물 칸 묶음)가 몇 개인가</td><td class="in-cell"><select class="in" data-key="Q1.b.choice" data-label="Q1 (b) 선택"><option value=""></option><option value="BFS">BFS</option><option value="DFS">DFS</option><option value="둘 다 가능">둘 다 가능</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.b.why" data-label="Q1 (b) 조건에 근거한 한 문장"></textarea></td></tr><tr><td class="lab">(c) 소문이 3단계 이내에 닿는 친구는 누구인가</td><td class="in-cell"><select class="in" data-key="Q1.c.choice" data-label="Q1 (c) 선택"><option value=""></option><option value="BFS">BFS</option><option value="DFS">DFS</option><option value="둘 다 가능">둘 다 가능</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.c.why" data-label="Q1 (c) 조건에 근거한 한 문장"></textarea></td></tr><tr><td class="lab">(d) 두 지점이 어떤 길로든 이어져 있는가</td><td class="in-cell"><select class="in" data-key="Q1.d.choice" data-label="Q1 (d) 선택"><option value=""></option><option value="BFS">BFS</option><option value="DFS">DFS</option><option value="둘 다 가능">둘 다 가능</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.d.why" data-label="Q1 (d) 조건에 근거한 한 문장"></textarea></td></tr></table></div>
+<p>각 상황에서 BFS, DFS, 둘 다 가능 중 하나를 고르고, <b>조건</b>(최단 거리 보장이 필요한가, 연결 요소 추적인가)에 근거해 한 문장으로 쓰시오. (e)는 위 두 조건 대신 메모리 사용량을 근거로 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:40%">상황</th><th style="width:16%">선택</th><th>근거 한 문장</th></tr><tr><td class="lab">(a) 창문 없는 건물에서 출구까지 최소 몇 걸음인가</td><td class="in-cell"><select class="in" data-key="Q1.a.choice" data-label="Q1 (a) 선택"><option value=""></option><option value="BFS">BFS</option><option value="DFS">DFS</option><option value="둘 다 가능">둘 다 가능</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.a.why" data-label="Q1 (a) 조건에 근거한 한 문장"></textarea></td></tr><tr><td class="lab">(b) 격자 지도에서 호수(연결된 물 칸 묶음)가 몇 개인가</td><td class="in-cell"><select class="in" data-key="Q1.b.choice" data-label="Q1 (b) 선택"><option value=""></option><option value="BFS">BFS</option><option value="DFS">DFS</option><option value="둘 다 가능">둘 다 가능</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.b.why" data-label="Q1 (b) 조건에 근거한 한 문장"></textarea></td></tr><tr><td class="lab">(c) 소문이 3단계 이내에 닿는 친구는 누구인가</td><td class="in-cell"><select class="in" data-key="Q1.c.choice" data-label="Q1 (c) 선택"><option value=""></option><option value="BFS">BFS</option><option value="DFS">DFS</option><option value="둘 다 가능">둘 다 가능</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.c.why" data-label="Q1 (c) 조건에 근거한 한 문장"></textarea></td></tr><tr><td class="lab">(d) 두 지점이 어떤 길로든 이어져 있는가</td><td class="in-cell"><select class="in" data-key="Q1.d.choice" data-label="Q1 (d) 선택"><option value=""></option><option value="BFS">BFS</option><option value="DFS">DFS</option><option value="둘 다 가능">둘 다 가능</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.d.why" data-label="Q1 (d) 조건에 근거한 한 문장"></textarea></td></tr><tr><td class="lab">(e) (선택) 갈래가 수천 개로 넓게 퍼지고 깊이는 20 이하인 구조에서 닿는 곳이 있는지만 확인한다. 메모리를 덜 쓰는 쪽을 고르시오</td><td class="in-cell"><select class="in" data-key="Q1.e.choice" data-label="Q1 (e) 선택(선택 문항)"><option value=""></option><option value="BFS">BFS</option><option value="DFS">DFS</option><option value="둘 다 가능">둘 다 가능</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.e.why" data-label="Q1 (e) 근거 한 문장(선택 문항)"></textarea></td></tr></table></div>
 <h3>Q2 · 방문 순서와 경로 추적</h3>
 <p>무방향 그래프 F의 간선은 <code class="i">(P,Q) (P,R) (Q,S) (R,S) (R,T) (S,U) (T,U)</code>이고 이웃 목록은 다음과 같다. 이웃 순서는 목록 순서이다.</p>
 <pre class="diagram">P: [Q, R]   Q: [P, S]   R: [P, S, T]   S: [Q, R, U]   T: [R, U]   U: [S, T]</pre>
 <p>시작 P에서 큐 규칙(BFS)의 방문 순서와 P&rarr;U의 최소 간선 수, 그리고 이웃 목록 순서대로 재귀 DFS를 했을 때 처음 찾은 P&rarr;U 경로와 그 간선 수를 쓰시오.</p><div class="scroll"><table class="fill"><tr><th style="width:44%">항목</th><th>답</th></tr><tr><td class="lab">큐 규칙(BFS) 방문 순서</td><td class="in-cell"><input type="text" class="in" data-key="Q2.bfs.order" data-label="Q2 BFS 방문 순서" autocomplete="off"></td></tr><tr><td class="lab">P&rarr;U 최소 간선 수</td><td class="in-cell"><input type="text" class="in" data-key="Q2.bfs.len" data-label="Q2 P에서 U 최소 간선 수" autocomplete="off"></td></tr><tr><td class="lab">재귀 DFS가 처음 찾은 P&rarr;U 경로</td><td class="in-cell"><input type="text" class="in" data-key="Q2.dfs.path" data-label="Q2 DFS 처음 찾은 경로" autocomplete="off"></td></tr><tr><td class="lab">그 경로의 간선 수</td><td class="in-cell"><input type="text" class="in" data-key="Q2.dfs.len" data-label="Q2 DFS 경로 간선 수" autocomplete="off"></td></tr></table></div>
+<p class="qtext">BFS와 재귀 DFS의 P&rarr;U 간선 수가 다른 이유를 한 문장으로 쓰시오.</p>
 <div class="ans-row"><span class="n">이유</span><textarea class="in" rows="2" data-key="Q2.why" data-label="Q2 두 값이 다른 이유 한 문장"></textarea></div>
 <h3>Q3 · visited 함정</h3>
 <p>아래 코드를 F에서 시작 P로 실행했을 때 <b>출력되는 방문 순서</b>를 쓰고, 중복이 생기는 이유와 고치는 방법을 한 문장씩 쓰시오.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="F3-1">from collections import deque
@@ -147,20 +149,20 @@ table.fill td.in-cell{padding:3px;height:auto}
 # F: 인접 리스트(Q2와 같은 그래프). 이웃 순서는 목록 순서이다.
 F = {"P": ["Q", "R"], "Q": ["P", "S"], "R": ["P", "S", "T"], "S": ["Q", "R", "U"], "T": ["R", "U"], "U": ["S", "T"]}
 
-def bfs_late(g, start):                      # 시작 상태: 큐 [start], visited는 비어 있다
+def bfs_nostart(g, start):                   # 시작 상태: 큐 [start], visited는 비어 있다
     q = deque([start])
     visited = set()
     order = []
     while q:
         u = q.popleft()
-        visited.add(u)
         order.append(u)
         for v in g[u]:
             if v not in visited:
+                visited.add(v)
                 q.append(v)
     return order
 
-print(bfs_late(F, "P"))</code></pre></div>
+print(bfs_nostart(F, "P"))</code></pre></div>
 <div class="ans-row"><span class="n">출력</span><input type="text" class="in" data-key="Q3.out" data-label="Q3 출력되는 방문 순서" autocomplete="off"></div>
 <div class="ans-row"><span class="n">이유</span><textarea class="in" rows="2" data-key="Q3.why" data-label="Q3 중복이 생기는 이유 한 문장"></textarea></div>
 <div class="ans-row"><span class="n">방법</span><textarea class="in" rows="2" data-key="Q3.fix" data-label="Q3 고치는 방법 한 문장"></textarea></div>

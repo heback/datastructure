@@ -98,6 +98,7 @@ input.in.s{display:inline-block;width:3.2em;padding:1px 4px;text-align:center}
 table.fill td.in-cell{padding:3px;height:auto}
 .ans-row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
 .ans-row>.n{padding-top:6px;font-weight:700;color:#3572a5}
+.qtext{margin:12px 0 2px;font-weight:600;break-after:avoid}
 .mycode{margin:8px 0 12px}
 .mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
 .hint{font-size:12px;color:#5b6b85;margin:2px 0}
@@ -136,10 +137,16 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p class="meta"><span>산출물: 예측-실제 표, 완성된 count_islands</span></p>
 <p>실습 코드 3부 A10의 ISLE를 보고 <b>코드를 쓰기 전에</b> 첫 줄의 예측 칸에 손으로 센 개수를 쓴다. 나머지 줄은 실행하기 전에 예측을 쓰고, 실행한 뒤 실제 칸을 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:46%">줄</th><th>예측</th><th>실제</th></tr><tr><td class="lab">1. ISLE를 보고 손으로 센 섬의 개수(코드 실행 전)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r1.c1" data-label="A10 ISLE를 보고 손으로 센 섬의 개수(코드 실행 전) · 예측"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r1.c2" data-label="A10 ISLE를 보고 손으로 센 섬의 개수(코드 실행 전) · 실제"></textarea></td></tr><tr><td class="lab">2. count_islands(ISLE) 실행 결과(popleft)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r2.c1" data-label="A10 count_islands(ISLE) 실행 결과(popleft) · 예측"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r2.c2" data-label="A10 count_islands(ISLE) 실행 결과(popleft) · 실제"></textarea></td></tr><tr><td class="lab">3. explore의 꺼내는 줄을 pop()으로 바꾼 뒤 실행 결과</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r3.c1" data-label="A10 explore의 꺼내는 줄을 pop()으로 바꾼 뒤 실행 결과 · 예측"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r3.c2" data-label="A10 explore의 꺼내는 줄을 pop()으로 바꾼 뒤 실행 결과 · 실제"></textarea></td></tr><tr><td class="lab">4. (선택) 대각선 8방향으로 바꾼 뒤 실행 결과</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r4.c1" data-label="A10 (선택) 대각선 8방향으로 바꾼 뒤 실행 결과 · 예측"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r4.c2" data-label="A10 (선택) 대각선 8방향으로 바꾼 뒤 실행 결과 · 실제"></textarea></td></tr></table></div>
 <h3>정리 질문</h3>
+<p class="qtext">1. 손으로 센 개수와 코드 결과가 같은가? 다르다면 손으로 센 방법에서 어디를 놓쳤는가?</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A10.q1" data-label="A10 예측한 개수와 같은가 어디를 놓쳤는가"></textarea></div>
+<p class="qtext">2. 꺼내는 줄을 <code class="i">pop()</code>으로 바꾼 뒤 개수가 달라졌는가? 무엇이 바뀌었고 무엇이 그대로인가?</p>
 <div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A10.q2" data-label="A10 꺼내는 줄을 바꾼 뒤 개수가 달라졌는가 무엇이 바뀌었고 무엇이 그대로인가"></textarea></div>
+<p class="qtext">3. 섬 하나를 다 방문하고 나면 seen에는 무엇이 남는가? 그것이 count_islands의 바깥 반복에서 하는 일은 무엇인가?</p>
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A10.q3" data-label="A10 섬 하나를 다 방문하면 seen에 무엇이 남는가"></textarea></div>
+<p class="qtext">4. explore는 A2의 두 규칙과 어느 한 줄만 다른가? 어느 줄이며, 그 한 줄로 같은 코드가 DFS도 BFS도 되는 까닭은 무엇인가?</p>
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A10.q4" data-label="A10 이 코드에서 A2의 두 규칙과 비교해 한 줄만 다른 곳"></textarea></div>
+<p class="qtext">5. 대각선으로만 맞닿은 땅 칸도 이웃으로 보면 ISLE의 섬 개수가 달라질 수 있다(선택 8방향 실험을 했다면 그 결과를, 하지 않았다면 ISLE에서 대각선으로만 이어진 땅 칸 쌍이 있는지 눈으로 찾아 쓴다). 4방향으로 센 개수와 8방향으로 센 개수 중 어느 쪽이 &lsquo;정답&rsquo;인가? 바뀐 것이 무엇인지 입장과 근거를 쓴다.</p>
+<div class="ans-row"><span class="n">5</span><textarea class="in" rows="3" data-key="A10.q5" data-label="A10 대각선 이웃을 인정할 때 섬 개수 중 어느 쪽이 정답인가 알고리즘인가 문제의 정의인가"></textarea></div>
 </section>
 <section id="A11" class="sheet">
 <h2>A11 · 일반화 초안 카드<small>3차시 · 4분 · 개인</small></h2>
@@ -147,6 +154,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>A1~A10에서 발견한 것을 &ldquo;<b>개념 + 개념 + 관계</b>&rdquo; 형태의 문장 한 개로 쓴다. 아래 네 주제 중 오늘 내 생각이 가장 크게 바뀐 하나를 골라 쓴다.</p>
 <p>주제 <span class="rg" data-key="A11.topic" data-type="radio" data-label="A11 고른 주제"><label><input type="radio" name="r_A11_topic" value="탐색 틀과 꺼내는 규칙"> 탐색 틀과 꺼내는 규칙</label><label><input type="radio" name="r_A11_topic" value="최단 거리"> 최단 거리</label><label><input type="radio" name="r_A11_topic" value="연결 요소"> 연결 요소</label><label><input type="radio" name="r_A11_topic" value="구현 선택"> 구현 선택</label></span></p>
 <div class="ans-row"><span class="n">초안</span><textarea class="in l" rows="3" data-key="A11.draft" data-label="A11 내 일반화 초안 문장"></textarea></div>
+<p class="qtext">내 문장은 &lsquo;미로&rsquo; 한 사례에만 해당하는가, 소문&middot;섬&middot;숫자 변환에도 통하는가? 통하지 않는 사례(반례)가 있으면 쓴다.</p>
 <div class="ans-row"><span class="n">점검</span><textarea class="in" rows="2" data-key="A11.check" data-label="A11 이 문장은 미로 하나에만 해당하는가 다른 문제에도 통하는가"></textarea></div>
 </section>
 <section id="A12" class="sheet">
@@ -155,32 +163,44 @@ table.fill td.in-cell{padding:3px;height:auto}
 <h3>1단계 · 모둠에서 초안을 합쳐 정제</h3>
 <p>개인 초안을 읽고 사례 이름(G1, H, MAZE, ISLE)을 개념어로 바꾼 문장으로 다듬는다. 주제별로 문장 한 개와 고친 과정을 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:26%">주제</th><th>정제한 문장</th><th style="width:32%">수정 이력(무엇을 왜 고쳤나)</th></tr><tr><td class="lab" style="width:26%">1. 탐색 틀과 꺼내는 규칙</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r1.c1" data-label="A12 모둠 탐색 틀과 꺼내는 규칙 · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r1.c2" data-label="A12 모둠 탐색 틀과 꺼내는 규칙 · 수정 이력"></textarea></td></tr><tr><td class="lab" style="width:26%">2. 최단 거리</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r2.c1" data-label="A12 모둠 최단 거리 · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r2.c2" data-label="A12 모둠 최단 거리 · 수정 이력"></textarea></td></tr><tr><td class="lab" style="width:26%">3. 연결 요소</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r3.c1" data-label="A12 모둠 연결 요소 · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r3.c2" data-label="A12 모둠 연결 요소 · 수정 이력"></textarea></td></tr><tr><td class="lab" style="width:26%">4. 구현 선택</td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r4.c1" data-label="A12 모둠 구현 선택 · 정제한 문장"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A12.team.r4.c2" data-label="A12 모둠 구현 선택 · 수정 이력"></textarea></td></tr></table></div>
 <h3>2단계 · 구별 기준표</h3>
-<p>목적에 따라 어느 쪽을 고를지, 그 근거를 모둠이 채운다.</p><div class="scroll"><table class="fill"><tr><th style="width:38%">목적</th><th>선택</th><th>근거</th></tr><tr><td class="lab">걸음 수가 가장 적은 길을 알아야 한다</td><td class="in-cell"><textarea class="in" rows="2" data-key="A12.crit.r1.c1" data-label="A12 구별 기준 걸음 수가 가장 적은 길을 알아야 한다 · 선택(BFS/DFS/둘 다)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A12.crit.r1.c2" data-label="A12 구별 기준 걸음 수가 가장 적은 길을 알아야 한다 · 근거"></textarea></td></tr><tr><td class="lab">연결된 구역이 모두 몇 개인지 세야 한다</td><td class="in-cell"><textarea class="in" rows="2" data-key="A12.crit.r2.c1" data-label="A12 구별 기준 연결된 구역이 모두 몇 개인지 세야 한다 · 선택(BFS/DFS/둘 다)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A12.crit.r2.c2" data-label="A12 구별 기준 연결된 구역이 모두 몇 개인지 세야 한다 · 근거"></textarea></td></tr><tr><td class="lab">두 지점이 어떤 길로든 이어져 있는지만 알면 된다</td><td class="in-cell"><textarea class="in" rows="2" data-key="A12.crit.r3.c1" data-label="A12 구별 기준 두 지점이 어떤 길로든 이어져 있는지만 알면 된다 · 선택(BFS/DFS/둘 다)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A12.crit.r3.c2" data-label="A12 구별 기준 두 지점이 어떤 길로든 이어져 있는지만 알면 된다 · 근거"></textarea></td></tr></table></div>
+<p>목적에 따라 어느 쪽을 고를지, 그 근거를 모둠이 채운다(시간이 모자라면 근거 칸은 구두로 말해도 된다).</p><div class="scroll"><table class="fill"><tr><th style="width:38%">목적</th><th>선택</th><th>근거</th></tr><tr><td class="lab">걸음 수가 가장 적은 길을 알아야 한다</td><td class="in-cell"><textarea class="in" rows="2" data-key="A12.crit.r1.c1" data-label="A12 구별 기준 걸음 수가 가장 적은 길을 알아야 한다 · 선택(BFS/DFS/둘 다)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A12.crit.r1.c2" data-label="A12 구별 기준 걸음 수가 가장 적은 길을 알아야 한다 · 근거"></textarea></td></tr><tr><td class="lab">연결된 구역이 모두 몇 개인지 세야 한다</td><td class="in-cell"><textarea class="in" rows="2" data-key="A12.crit.r2.c1" data-label="A12 구별 기준 연결된 구역이 모두 몇 개인지 세야 한다 · 선택(BFS/DFS/둘 다)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A12.crit.r2.c2" data-label="A12 구별 기준 연결된 구역이 모두 몇 개인지 세야 한다 · 근거"></textarea></td></tr><tr><td class="lab">두 지점이 어떤 길로든 이어져 있는지만 알면 된다</td><td class="in-cell"><textarea class="in" rows="2" data-key="A12.crit.r3.c1" data-label="A12 구별 기준 두 지점이 어떤 길로든 이어져 있는지만 알면 된다 · 선택(BFS/DFS/둘 다)"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A12.crit.r3.c2" data-label="A12 구별 기준 두 지점이 어떤 길로든 이어져 있는지만 알면 된다 · 근거"></textarea></td></tr></table></div>
 <h3>3단계 · 정제 점검</h3>
 <p><label class="ck"><input type="checkbox" data-key="A12.chk1" data-label="A12 점검: 사례 이름을 개념어로 바꿨다"> 사례 이름을 개념어로 바꿨다</label><label class="ck"><input type="checkbox" data-key="A12.chk2" data-label="A12 점검: 개념 + 개념 + 관계 형태이다"> &ldquo;개념 + 개념 + 관계&rdquo; 형태이다</label><label class="ck"><input type="checkbox" data-key="A12.chk3" data-label="A12 점검: 미로라는 한정을 지울 수 있다"> 문장에서 &ldquo;미로&rdquo;를 지울 수 있다</label></p>
+<p class="qtext">visited 검사를 지우면 어떤 입력에서 탐색이 끝나지 않는가? 그 입력 그래프를 한 개 그려 쓴다.</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A12.off" data-label="A12 visited를 끄면 어떤 입력에서 무한 반복되는가"></textarea></div>
 <h3>4단계 · 교사 공개 후 대조</h3>
 <p>교사가 공개한 문장과 우리 모둠의 문장을 비교한다. 교사 문장을 그대로 베껴 쓰지 않는다.</p>
 <div class="ans-row"><span class="n">같은 점</span><textarea class="in" rows="2" data-key="A12.cmp.same" data-label="A12 대조 같은 점"></textarea></div>
 <div class="ans-row"><span class="n">다른 점</span><textarea class="in" rows="2" data-key="A12.cmp.diff" data-label="A12 대조 다른 점"></textarea></div>
 <div class="ans-row"><span class="n">고칠 점</span><textarea class="in" rows="2" data-key="A12.cmp.fix" data-label="A12 대조 뒤 우리 문장에서 고칠 점"></textarea></div>
+<p class="qtext">(선택) 추가 질문. 핵심질문 &ldquo;어떤 순서로 탐색하는 것이 정답일까?&rdquo;에 대한 우리 모둠의 답을 근거를 들어 한 문장으로 다시 쓴다. 이 문장이 틀리게 되는 반례를 한 가지 든다.</p>
+<div class="ans-row"><span class="n">질문</span><textarea class="in" rows="3" data-key="A12.d1" data-label="A12 핵심질문에 대한 모둠의 답 한 문장과 그 문장이 틀리게 되는 반례"></textarea></div>
 </section>
 <section id="A13" class="sheet">
-<h2>A13 · 과제 점검표와 전이(숫자 변환)<small>3차시 · 12분 · 개인</small></h2>
-<p class="meta"><span>산출물: 과제 점검, NUM 분석 메모</span></p>
+<h2>A13 · 과제 점검표와 전이(새 문제의 상태 정의)<small>3차시 · 12분 · 개인</small></h2>
+<p class="meta"><span>산출물: 과제 점검, 물통 퍼즐 상태 정의 카드(선택: NUM 분석 메모)</span></p>
 <h3>(가) 과제 마무리 점검</h3>
-<p><label class="ck"><input type="checkbox" data-key="A13.chk1" data-label="A13 점검: 내 세 함수가 교사가 보여 준 점검을 모두 통과했다"> 내 세 함수가 교사가 보여 준 점검을 모두 통과했다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk2" data-label="A13 점검: 코드를 고치지 않고 새 입력에서도 통과했다"> 코드를 고치지 않고 새 입력에서도 통과했다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk3" data-label="A13 점검: 숫자 변환 퍼즐(NUM)을 같은 틀로 풀어 보았다"> 숫자 변환 퍼즐(NUM)을 같은 틀로 풀어 보았다</label><br></p>
+<p><label class="ck"><input type="checkbox" data-key="A13.chk1" data-label="A13 점검: 내 세 함수가 A13 점검 코드를 실행해 모두 통과했다"> 내 세 함수가 A13 점검 코드를 실행해 모두 통과했다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk2" data-label="A13 점검: 코드를 고치지 않고 새 입력에서도 통과했다"> 코드를 고치지 않고 새 입력에서도 통과했다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk3" data-label="A13 점검: 물통 퍼즐의 상태 정의 카드를 썼다(NUM은 선택)"> 물통 퍼즐의 상태 정의 카드를 썼다(NUM은 선택)</label><br></p>
+<p class="qtext">점검을 통과하지 못한 항목 번호와 원인을 쓴다. 모두 통과했다면 &ldquo;없음&rdquo;이라고 쓰고, 통과하기 전에 고친 곳을 쓴다.</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A13.fail" data-label="A13 통과하지 못한 항목과 원인"></textarea></div>
-<h3>(나) 전이: 숫자 변환 퍼즐 NUM (채점하지 않는다)</h3>
+<h3>(나) 전이: 새 문제의 상태 공간 정의하기 (채점하지 않는다)</h3>
+<p class="qtext">물통 퍼즐: 3L 통과 5L 통이 있고 둘 다 비어 있다. 물을 가득 채우기, 비우기, 다른 통으로 옮기기만 할 수 있다. 한 통에 정확히 4L를 만들 수 있는가? 코드를 쓰지 말고 다음 네 가지를 쓴다. (1) 상태 하나를 무엇으로 나타내는가 (2) 한 걸음에 갈 수 있는 이웃 상태의 예 (3) 시작과 목표 (4) BFS와 DFS 중 최소 단계를 구하려면 무엇이어야 하는가와 그 까닭</p>
+<div class="ans-row"><span class="n">카드</span><textarea class="in l" rows="7" data-key="A13.state" data-label="A13 물통 퍼즐 상태 정의 카드 상태 표현 이웃 상태 시작과 목표 BFS와 DFS 선택과 까닭"></textarea></div>
+<h3>(선택 &middot; 집에서) 숫자 변환 퍼즐 NUM</h3>
 <p>3에서 시작해 &ldquo;+1&rdquo; 또는 &ldquo;&times;2&rdquo;만 써서 14를 만드는 최소 연산 횟수를 같은 틀로 구한다(수는 100 이하).</p><div class="scroll"><table class="fill"><tr><th style="width:40%">질문</th><th>답</th></tr><tr><td class="lab">내 코드가 구한 최소 연산 횟수</td><td class="in-cell"><input type="text" class="in" data-key="A13.num.ops" data-label="A13 NUM 최소 연산 횟수" autocomplete="off"></td></tr><tr><td class="lab">그때의 경로(예: a &rarr; b &rarr; c)</td><td class="in-cell"><input type="text" class="in" data-key="A13.num.path" data-label="A13 NUM 경로" autocomplete="off"></td></tr><tr><td class="lab">이 문제에서 노드와 간선은 무엇인가</td><td class="in-cell"><textarea class="in" rows="2" data-key="A13.num.graph" data-label="A13 NUM에서 노드와 간선"></textarea></td></tr><tr><td class="lab">메모리에 그래프가 있는가</td><td class="in-cell"><textarea class="in" rows="2" data-key="A13.num.mem" data-label="A13 NUM에서 메모리에 그래프가 있는가"></textarea></td></tr><tr><td class="lab">같은 수를 여러 경로로 만나는가</td><td class="in-cell"><textarea class="in" rows="2" data-key="A13.num.multi" data-label="A13 NUM 같은 수를 여러 경로로 만나는가"></textarea></td></tr></table></div>
+<p class="qtext">NUM을 풀었다면: 틀을 고치지 않고 새 데이터에도 통했는가? 미로&middot;섬과 비교해 바뀐 부분과 바뀌지 않은 부분을 쓴다.</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A13.q" data-label="A13 새 데이터에서도 코드를 안 바꾸고 통하는가"></textarea></div>
 </section>
 <section id="A15" class="sheet">
 <h2>A15 · 성찰일지<small>3차시 · 4분 · 개인</small></h2>
 <p class="meta"><span>산출물: 성찰일지 초안(AI 활용 내역 포함)</span></p>
+<p class="qtext">1. 오늘 수업에서 내 생각이 가장 크게 바뀐 것은 무엇이며, 어느 활동 때문이었는가?</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in l" rows="3" data-key="A15.change" data-label="A15 오늘 내 생각이 가장 바뀐 것"></textarea></div>
+<p class="qtext">2. 내 예측이 틀렸거나 놀란 곳은 어디인가(활동 번호와 줄)?</p>
 <div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A15.wrong" data-label="A15 오늘 내 예측이 틀렸거나 놀란 곳(활동과 줄)"></textarea></div>
+<p class="qtext">3. 그 예측이 틀린 원인을 한 문장으로 쓴다.</p>
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A15.wrongwhy" data-label="A15 그 예측이 틀린 원인을 한 문장으로"></textarea></div>
+<p class="qtext">4. 오늘의 틀(상태&middot;이웃&middot;visited&middot;꺼내는 규칙)이 12주차(정렬과 이진 탐색)나 13주차에서 쓰일 것 같은 곳, 또는 더 궁금한 점을 쓴다.</p>
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A15.next" data-label="A15 12주차 정렬과 이진 탐색 13주차 DP에 대해 궁금한 점"></textarea></div>
 <h3>AI 활용 내역</h3>
 <p>주간 과제를 하며 AI를 쓴 부분이 있으면 쓴다. 수업 중(A6~A14)에는 AI를 쓰지 않는다.</p>

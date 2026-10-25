@@ -129,10 +129,21 @@ table.fill td.in-cell{padding:3px;height:auto}
   <h1>12주차 실습 코드 4부 — 두 정렬의 비교 횟수와 과제 마무리</h1>
   <p class="lead">3차시 시작(A11)에 사용한다. A11에서는 정렬 골격을 완성하고 비교 횟수를 예측한 뒤 직접 측정한다. A14 블록은 접혀 있다. 교사가 안내하면 펼친다. 정답과 측정값은 이 파일에 없다. 값은 직접 실행해 활동지 3부에 적는다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
 </header>
-<nav><a href="#A11">#A11</a><a href="#A14">#A14</a><a href="index.html">목록</a></nav>
+<nav><a href="#how">#사용법</a><a href="#A11">#A11</a><a href="#A14">#A14</a><a href="index.html">목록</a></nav>
+<section id="how">
+<h2>사용법<small>#how</small></h2>
+<ol>
+<li>코드는 각 활동의 &ldquo;내 코드&rdquo; 칸(편집기)에 쓰고 [▶ 실행](또는 Ctrl/⌘+Enter)으로 확인한다. 골격과 예시는 [예시 코드] 단추에서 [복사]하거나 [편집기에 추가]로 가져온다(편집기의 맨 아래에 이어 붙는다).</li>
+<li>같은 쪽(페이지)의 편집기들은 파이썬 환경을 공유하므로, 앞에서 실행한 함수와 변수를 뒤 편집기에서 쓴다.</li>
+<li>다른 쪽 코드가 필요하면 앞 쪽의 편집기에서 실행해 성공시킨 뒤, 이 쪽에서 [앞 쪽 코드 불러오기]를 누른다. 이 단추는 이 브라우저에서 앞 쪽에 성공한 실행 기록(8시간 안)을 쓰며, 파이썬 환경에만 정의를 가져오고 편집기 칸에는 코드를 넣지 않는다. 기록이 없다는 안내가 나오면 앞 쪽 편집기의 코드를 복사해 이 쪽 편집기 맨 위에 붙여 넣고 실행한다.</li>
+<li><code class="i">NameError</code>는 아직 정의하지 않은 이름을 쓴 것이다. 앞 코드를 실행했는지, [앞 쪽 코드 불러오기]를 눌렀는지 확인한다.</li>
+<li>실행은 15초를 넘기면 멈추고 환경이 초기화된다. 무한 반복이 없는지 확인한다.</li>
+<li>편집기에 쓴 코드는 [저장(JSON)] 때 함께 저장·제출된다. 파이썬 파일(.py)은 따로 만들지 않는다.</li>
+</ol>
+</section>
 <section id="A11" class="sheet">
 <h2>A11 · 정렬 코드와 비교 횟수 측정<small>14분 · 짝</small></h2>
-<p>A4에서 손으로 한 두 방식을 코드로 옮긴다. <code class="i">cnt</code>는 길이 1인 리스트로 비교 횟수를 센다(<code class="i">cnt[0] += 1</code>). 번호는 주석의 ⑫~⑰과 같다. 완성한 뒤 ARR8에서 A4·A5에서 손으로 구한 비교 횟수와 비교한다.</p>
+<p>A4에서 손으로 한 두 방식을 코드로 옮긴다. <code class="i">cnt</code>는 길이 1인 리스트로 비교 횟수를 센다(<code class="i">cnt[0] += 1</code>). 번호는 주석의 ⑫~⑰과 같다. 완성한 뒤 ARR8에서 A4에서 손으로 구한 비교 횟수와 비교한다(활동지 A11의 같음/다름 칸).</p>
 <h3>골격</h3>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A11-1"># 재귀: 함수가 자기 자신을 다시 호출해 문제를 더 작게 나눈다
 def merge_sort(a, cnt):                 # cnt = [0] : 비교 횟수 세기
@@ -177,14 +188,16 @@ for _ in range(50):
 # 위의 assert를 모두 통과해야 이 줄이 실행된다
 print("A11 점검 통과")
 
-# ARR8의 비교 횟수 (A4에서 손으로 센 값과 같은지 비교한다)
+# ARR8의 비교 횟수 (A4에서 손으로 센 값과 같은지 비교한다. 첫 원소 피벗 퀵 정렬은 A4의 값과 비교한다)
 c1, c2 = [0], [0]  # 두 정렬의 비교 횟수를 담을 칸
 merge_sort(ARR8, c1); quick_sort(ARR8, c2)  # 결과 리스트는 쓰지 않고 횟수만 쓴다
 print("ARR8 병합 정렬 비교 횟수:", c1[0], " 퀵 정렬(첫 원소 피벗) 비교 횟수:", c2[0])</code></pre></div>
 <h3>예측 후 측정 (SORTBIG)</h3>
-<p>활동지 3부 A11 표의 <b>예측 칸</b>을 먼저 채운 뒤 실행한다. 입력은 시드 12로 고정해 만들므로 같은 코드를 실행하면 같은 값이 나온다. 마지막 입력(정렬된 2000개)에서 무슨 일이 일어나는지도 먼저 예측한다.</p>
+<p>활동지 3부 A11 표의 <b>예측 칸</b>을 먼저 채운 뒤 실행한다. 입력은 시드 12로 고정해 만들므로 같은 코드를 실행하면 같은 값이 나온다. 마지막 입력(정렬된 2000개)에서 무슨 일이 일어나는지도 먼저 예측한다. 퀵 칸에 숫자 대신 오류 이름이 나오면 그 이름을 그대로 활동지에 쓴다. 예측 칸이 비어 있으면 [예시 코드]의 이 코드를 실행하지 않는다.</p>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A11-3"># SORTBIG: 시드를 12로 고정한 입력. 예측을 활동지에 먼저 적고 실행한다.
-import random
+import random, sys
+# 재귀가 너무 깊어지면 RecursionError가 나도록 한계를 1000으로 정해 둔다
+sys.setrecursionlimit(1000)
 random.seed(12)
 
 # 0부터 n-1까지를 무작위로 섞은 리스트를 만든다
@@ -222,9 +235,9 @@ for name, a in (("섞은 200", shuffled(200)), ("섞은 500", shuffled(500)), ("
 <li>입력 리스트를 <b>바꾸지 않고</b>, 다시 정렬하지도 않는다. 같은 입력으로 두 번 불러도 같은 값을 돌려준다.</li>
 <li>입력은 정렬된(오름차순) 리스트로 주어진다. 정렬되지 않은 입력은 과제 범위가 아니다.</li>
 </ul>
-<h3>(가) 과제 점검</h3>
-<p>새 입력 TA에서 코드를 <b>고치지 않고</b> 통과하는지 확인한다(8분). 세 함수를 아래 칸에 쓰거나 붙여 넣고, 점검 코드를 그 아래에 이어 실행한다.</p>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A14-1">TA = [2, 2, 2, 6, 6, 10, 14, 14, 14, 14, 18]     # 정렬된 입력(같은 값이 여럿 있을 수 있다)</code></pre></div><div class="mycode"><label>내 코드 · A14 (count_equal, count_in_range, closest_value 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A14.mycode" data-label="A14 (count_equal, count_in_range, closest_value 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-2"># A14 점검: 입력에서 계산한 느린 방법과 내 결과를 비교한다(기대값을 미리 적어 두지 않았다).
+<h3>(가-1) 과제 점검</h3>
+<p>새 입력 TA에서 코드를 <b>고치지 않고</b> 통과하는지 확인한다(8분). 먼저 A9 쪽(student_code_lab_part2)의 내 코드 칸에서 <code class="i">count_equal</code>, <code class="i">count_in_range</code>를 실행해 성공시켜 둔 뒤, 이 쪽에서 [앞 쪽 코드 불러오기]를 눌러 두 함수의 정의를 이 쪽 환경에 가져온다. 불러오기는 환경에만 정의를 넣고 아래 내 코드 칸에는 코드를 넣지 않는다. <b>제출용으로 두 함수의 코드를 A9 쪽 칸에서 복사해 아래 내 코드 칸 맨 위에 붙여 넣고, 그 아래에 <code class="i">closest_value</code>를 새로 써서 세 함수를 한 칸에 모은다.</b> 칸 전체를 실행한 뒤 [예시 코드]의 TA와 점검 코드를 [편집기에 추가]해 이어 실행한다. 수업 중 점검은 count 두 함수가 대상이고, closest_value는 아래 (가-2)로 확인한다(시간이 남지 않으면 주간 과제에서 이어서 한다). <code class="i">NameError</code>가 나오면 불러오기나 붙여 넣기가 빠졌는지 확인한다.</p>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A14-1">TA = [2, 2, 2, 6, 6, 10, 14, 14, 14, 14, 18]     # 정렬된 입력(같은 값이 여럿 있을 수 있다)</code></pre></div><div class="mycode"><label>내 코드 · A14 (count_equal, count_in_range, closest_value 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A14.mycode" data-label="A14 (count_equal, count_in_range, closest_value 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-2"># A14 점검 (가-1): 입력에서 계산한 느린 방법과 내 두 함수의 결과를 비교한다(기대값을 미리 적어 두지 않았다).
 # random은 무작위 값, time은 걸린 시간을 다루는 모듈이다
 import random, time
 
@@ -235,18 +248,12 @@ def brute_equal(a, x):
 def brute_range(a, lo, hi):
     return sum(1 for v in a if lo &lt;= v &lt;= hi)
 
-def brute_closest(a, x):
-    # abs(v - x)가 가장 작은 값을 고르고, 같으면 더 작은 v를 고른다
-    # lambda는 이름 없는 짧은 함수이고, a가 비면 None을 돌려준다
-    return min(a, key=lambda v: (abs(v - x), v)) if a else None
-
 # 여러 입력(빈 리스트, 같은 값만 있는 리스트 포함)으로 점검한다
 for a in (TA, [], [9], [4, 4, 4]):
     before = list(a)  # 복사본을 저장해 두고 나중에 비교한다
     for x in range(-5, 100, 3):
         # 내 함수와 느린 기준의 값이 다르면 메시지를 보이며 멈춘다
         assert count_equal(a, x) == brute_equal(a, x), "count_equal(%r, %d)가 다르다" % (a, x)
-        assert closest_value(a, x) == brute_closest(a, x), "closest_value(%r, %d)가 다르다" % (a, x)
     for lo in range(-5, 30, 3):
         for hi in range(-5, 30, 4):
             assert count_in_range(a, lo, hi) == brute_range(a, lo, hi), "count_in_range(%r, %d, %d)가 다르다" % (a, lo, hi)
@@ -260,13 +267,46 @@ qs = [random.randrange(3 * 10 ** 6) for _ in range(100000)]  # 무작위 질의 
 t0 = time.perf_counter()
 total = 0
 for k, x in enumerate(qs):  # k는 몇 번째 질의인지 센다
-    total += count_equal(big, x) + count_in_range(big, x, x + 50) + (closest_value(big, x) or 0) % 2
+    total += count_equal(big, x) + count_in_range(big, x, x + 50)
     if time.perf_counter() - t0 &gt; 5:  # 5초가 넘으면 중단하는 안전장치
         print("5초 안에 끝나지 않아 중단했다(%d번 질의까지)" % k)
         break
 else:  # for가 break 없이 끝났을 때만 실행된다
     print("큰 입력 점검 끝: %.2f초 (대략 1초 안쪽이면 충분히 빠른 편이다)" % (time.perf_counter() - t0))</code></pre></div>
-<div class="ans-row"><span class="n">구현 계획 한 줄(주석으로 코드 앞에도 쓴다)</span><textarea class="in" rows="2" data-key="A14.plan" data-label="A14 구현 계획 한 줄"></textarea></div>
+<h3>(가-2) closest_value 점검</h3>
+<p><code class="i">closest_value</code>를 위 내 코드 칸에 쓰고 실행한 뒤, 아래 점검으로 확인한다. 점검은 내 결과가 &ldquo;정의를 만족하는지&rdquo;를 검사한다. 정답 함수는 제공하지 않는다. 먼저 활동지 2부 A9의 closest 질문 칸에 DUP에서 가장 가까운 값을 눈으로 찾아 쓴 내용을 떠올린다.</p>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-3"># A14 점검 (가-2): closest_value의 결과가 정의를 만족하는지 검사한다.
+def check_closest(a, x, r):
+    # 정의: 거리가 가장 작고, 거리가 같으면 작은 값이 답이다. 빈 리스트는 None
+    if not a:
+        assert r is None, "빈 리스트에서는 None이어야 한다"
+        return
+    assert r in a, "closest_value(%r, %d)가 리스트에 없는 값 %r을 돌려주었다" % (a, x, r)
+    for v in a:
+        assert (abs(r - x), r) &lt;= (abs(v - x), v), "closest_value(%r, %d)=%r보다 %r이 더 가깝거나 동률에서 더 작다" % (a, x, r, v)
+
+# 여러 입력(빈 리스트, 같은 값만 있는 리스트 포함)으로 점검한다
+for a in (TA, [], [9], [4, 4, 4]):
+    before = list(a)  # 복사본을 저장해 두고 나중에 비교한다
+    for x in range(-5, 100, 3):
+        check_closest(a, x, closest_value(a, x))
+    assert a == before, "입력 리스트가 바뀌었다"
+print("A14 closest_value 값 점검 통과")
+
+# 큰 입력에서 속도를 본다(100만 개 리스트, 질의 10만 번)
+import random, time
+big = list(range(0, 3 * 10 ** 6, 3))
+random.seed(12)
+qs = [random.randrange(3 * 10 ** 6) for _ in range(100000)]
+t0 = time.perf_counter()
+for k, x in enumerate(qs):
+    closest_value(big, x)
+    if time.perf_counter() - t0 &gt; 5:  # 5초가 넘으면 중단하는 안전장치
+        print("5초 안에 끝나지 않아 중단했다(%d번 질의까지)" % k)
+        break
+else:
+    print("closest_value 큰 입력 점검 끝: %.2f초 (대략 1초 안쪽이면 충분히 빠른 편이다)" % (time.perf_counter() - t0))</code></pre></div>
+<div class="ans-row"><span class="n">구현 계획 다시 쓰기: A7에서 쓴 계획 한 줄을 O(log N) 표기로 다듬어 다시 쓰고, 달라진 점을 한 줄 덧붙인다</span><textarea class="in" rows="2" data-key="A14.plan" data-label="A14 구현 계획 한 줄"></textarea></div>
 <h3>복잡도 분석 서술 (과제 제출물)</h3>
 <p>세 함수의 시간·공간 복잡도와 그 근거를 직접 쓴다. 더 단순한 대안(하나씩 세는 방법)과 비교해 본다.</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="4" data-key="A14.cx.time" data-label="A14 시간 복잡도와 근거"></textarea></div><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A14.cx.space" data-label="A14 공간 복잡도와 근거"></textarea></div><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A14.cx.alt" data-label="A14 더 단순한 방법과의 비교"></textarea></div>
@@ -281,7 +321,7 @@ def count_pieces(ropes, L):      # 제공
 def max_piece_length(ropes, k):
     lo, hi = 1, max(ropes)       # 답의 후보 범위 [lo, hi]
     while lo &lt; hi:  # 범위가 한 값으로 좁혀질 때까지 반복한다
-        mid = (lo + hi + 1) // 2  # 후보 범위의 가운데 값
+        mid = (lo + hi + 1) // 2  # 활동지 A14 질문 4: lower_bound는 (lo + hi) // 2였는데 여기서는 왜 +1을 하는가
         if ____18____:           # ⑱ mid 길이로 잘랐을 때 조각이 충분한가
             lo = mid
         else:

@@ -76,13 +76,13 @@ function bindCopyButtons(){
 
 /* ---------- Pyodide (Web Worker, 페이지 하나가 파이썬 환경 하나를 공유) ---------- */
 var WORKER_SRC=
-'var py=null,ready=null;\n'+
+'var py=null,ready=null,muted=false;\n'+
 'function init(){\n'+
 ' if(!ready)ready=(async function(){\n'+
 '  importScripts("'+PYODIDE+'pyodide.js");\n'+
 '  py=await loadPyodide({indexURL:"'+PYODIDE+'"});\n'+
-'  py.setStdout({batched:function(s){postMessage({t:"out",s:s});}});\n'+
-'  py.setStderr({batched:function(s){postMessage({t:"err",s:s});}});\n'+
+'  py.setStdout({batched:function(s){if(!muted)postMessage({t:"out",s:s});}});\n'+
+'  py.setStderr({batched:function(s){if(!muted)postMessage({t:"err",s:s});}});\n'+
 ' })();\n'+
 ' return ready;\n'+
 '}\n'+
@@ -92,6 +92,7 @@ var WORKER_SRC=
 '  postMessage({t:"state",s:"loading"});\n'+
 '  await init();\n'+
 '  postMessage({t:"state",s:"running"});\n'+
+'  if(d.pre&&d.pre.length){muted=true;try{for(var i=0;i<d.pre.length;i++)await py.runPythonAsync(d.pre[i]);}catch(e2){muted=false;postMessage({t:"fail",id:d.id,m:"[앞 코드를 불러오다 오류] "+String(e2&&e2.message?e2.message:e2)});return;}muted=false;}\n'+
 '  await py.runPythonAsync(d.code);\n'+
 '  postMessage({t:"done",id:d.id});\n'+
 ' }catch(err){postMessage({t:"fail",id:d.id,m:String(err&&err.message?err.message:err)});}\n'+
@@ -111,7 +112,42 @@ function cleanTrace(m){
   if(i>0)return "Traceback (most recent call last):\n  "+m.slice(i);
   return m;
 }
-function runCode(code,ui){
+/* ---------- 실행 기록(쪽 사이 코드 불러오기, 시간 초과 뒤 복원) ---------- */
+var WEEK=(/week(\d+)\//.exec(location.pathname)||[0,"x"])[1];
+var PAGE=location.pathname.split("/").pop();
+var SS="ck:env:"+WEEK;
+var pageRuns={},autoRestore=false,prevLoaded=false;
+/* 새 탭으로 열어도 앞 쪽 기록이 보이도록 localStorage 를 쓰고, 8시간이 지난 기록은 버린다 */
+var TTL_MS=8*3600*1000;
+function ssLoad(){
+  var o={};
+  try{o=JSON.parse(localStorage.getItem(SS)||"{}")||{};}catch(e){try{o=JSON.parse(sessionStorage.getItem(SS)||"{}")||{};}catch(e2){o={};}}
+  var now=Date.now();Object.keys(o).forEach(function(k){if(!o[k]||now-o[k].t>TTL_MS)delete o[k];});
+  return o;
+}
+function ssSave(o){
+  var j=JSON.stringify(o);
+  try{localStorage.setItem(SS,j);}catch(e){try{sessionStorage.setItem(SS,j);}catch(e2){}}
+}
+function record(id,code){
+  pageRuns[id]={t:Date.now(),code:code};
+  var all=ssLoad();all[PAGE+"|"+id]={page:PAGE,t:Date.now(),code:code};ssSave(all);
+}
+function sortedCodes(map){return Object.keys(map).map(function(k){return map[k];}).sort(function(a,b){return a.t-b.t;}).map(function(r){return r.code;});}
+function otherPageEntries(){
+  var all=ssLoad(),m={};
+  Object.keys(all).forEach(function(k){if(all[k]&&all[k].page!==PAGE)m[k]=all[k];});
+  return m;
+}
+function restoreList(excludeId){
+  var own={};Object.keys(pageRuns).forEach(function(k){if(k!==excludeId)own[k]=pageRuns[k];});
+  return (prevLoaded?sortedCodes(otherPageEntries()):[]).concat(sortedCodes(own));
+}
+function clearPageRuns(){
+  pageRuns={};autoRestore=false;prevLoaded=false;
+  var all=ssLoad();Object.keys(all).forEach(function(k){if(all[k]&&all[k].page===PAGE)delete all[k];});ssSave(all);
+}
+function runCode(code,ui,pre){
   if(current)return;
   if(!worker)newWorker();
   var text="",timer=null,finished=false;
@@ -131,13 +167,13 @@ function runCode(code,ui){
   var armed=false;
   var origState=ui.state;
   ui.state=function(s){origState(s);if(s==="running"&&!armed){armed=true;timer=setTimeout(function(){resetWorker();finish("timeout");},TIMEOUT_MS);}};
-  worker.postMessage({id:1,code:code});
+  worker.postMessage({id:1,code:code,pre:pre||[]});
 }
 function busyAll(b){q(".ck-btn.run").forEach(function(x){x.disabled=b;});}
 
 /* ---------- 예시 코드 팝업 ---------- */
 var modal=null,lastFocus=null;
-var ROLE_LABEL={demo:"예시",skeleton:"뼈대",test:"테스트",bug:"오류 코드"};
+var ROLE_LABEL={demo:"예시",skeleton:"뼈대",test:"테스트",bug:"오류 코드",given:"제공 코드"};
 function ensureModal(){
   if(modal)return modal;
   modal=document.createElement("div");modal.className="ck-modal";modal.hidden=true;
@@ -162,8 +198,10 @@ function blockTitle(code){
 function openExamples(ed){
   ensureModal();
   var sec=ed.box.closest("section")||document;
-  var blocks=q("pre > code[data-role]",sec);
-  if(!blocks.length)blocks=q("pre > code[data-role]");
+  /* 아직 열지 않은 접힘 블록(details)과 data-noex 블록은 보여 주지 않는다 */
+  var blocks=q("pre > code[data-role]",sec).filter(function(c){
+    return !c.hasAttribute("data-noex")&&!c.closest("details:not([open])");
+  });
   var body=modal.querySelector(".ck-body");
   body.innerHTML="";
   if(!blocks.length){
@@ -189,7 +227,7 @@ function openExamples(ed){
     });
   });
   var hint=document.createElement("p");hint.className="ck-hint";
-  hint.textContent="이 활동에 나온 코드를 모아 보여 준다. [편집기에 추가]를 누르면 편집기의 맨 아래에 이 코드가 이어서 붙는다. 앞 코드(예: Node 클래스)가 필요하면 먼저 추가해서 실행한다. 실행 환경은 이 페이지 안에서 공유되어, 앞에서 실행한 함수와 변수가 남아 있다.";
+  hint.textContent="이 활동에 나온 코드를 모아 보여 준다. [편집기에 추가]를 누르면 편집기의 맨 아래에 이 코드가 이어서 붙는다. 앞 활동의 코드가 필요하면 먼저 추가해서 실행한다. 실행 환경은 이 페이지 안에서 공유되어, 앞에서 실행한 함수와 변수가 남아 있다.";
   body.appendChild(hint);
   lastFocus=document.activeElement;
   modal.hidden=false;
@@ -209,8 +247,13 @@ function buildEditor(ta){
   var bar=document.createElement("div");bar.className="ck-bar";
   var ttl=document.createElement("span");ttl.className="ck-title";ttl.textContent=title;
   var bEx=mk("예시 코드"),bRun=mk("▶ 실행");bRun.classList.add("run");
+  var bPrev=mk("앞 쪽 코드 불러오기");bPrev.title="같은 주차의 다른 쪽에서 성공적으로 실행한 코드를 이 쪽의 파이썬 환경에 먼저 실행해 둔다";
   var bRst=mk("실행 환경 초기화");bRst.title="앞에서 실행한 정의(함수·변수)를 모두 지운다";
-  bar.appendChild(ttl);bar.appendChild(bEx);bar.appendChild(bRun);bar.appendChild(bRst);
+  var edId=ta.getAttribute("data-key")||("ed"+q("textarea.code").indexOf(ta));
+  bar.appendChild(ttl);
+  if(!ta.hasAttribute("data-noex"))bar.appendChild(bEx);
+  if(!ta.hasAttribute("data-noprev"))bar.appendChild(bPrev);
+  bar.appendChild(bRun);bar.appendChild(bRst);
   var area=document.createElement("div");area.className="ck-area";
   var hl=document.createElement("pre");hl.className="ck-hl";hl.setAttribute("aria-hidden","true");
   var hc=document.createElement("code");hl.appendChild(hc);
@@ -247,8 +290,25 @@ function buildEditor(ta){
   });
 
   bEx.addEventListener("click",function(){openExamples(ed);});
+  bPrev.addEventListener("click",function(){
+    var ents=otherPageEntries(),pre=sortedCodes(ents);
+    if(!pre.length){out.hidden=false;ol.textContent="앞 쪽 코드";op.className="";op.textContent="불러올 코드가 없다. 이 브라우저에서 앞 쪽의 편집기로 코드를 실행해 성공한 뒤(8시간 안)에 불러올 수 있다. 다른 컴퓨터나 브라우저에서 실행한 코드는 불러올 수 없으므로, 그때는 앞 쪽의 [예시 코드]에서 필요한 코드를 [편집기에 추가]해 실행한다.";return;}
+    if(autoRestore)pre=pre.concat(sortedCodes(pageRuns));
+    out.hidden=false;op.className="";op.textContent="";
+    var n=Object.keys(ents).length;
+    busyAll(true);
+    runCode("pass",{
+      state:function(s){ol.textContent=s==="loading"?"파이썬을 준비하는 중…":"앞 쪽 코드를 불러오는 중…";},
+      partial:function(){},
+      finish:function(kind,text,extra){
+        busyAll(false);
+        if(kind==="ok"){autoRestore=false;prevLoaded=true;ol.textContent="불러왔다";op.className="ok";op.textContent="같은 주차의 앞 쪽에서 실행에 성공한 코드 "+n+"개를 불러왔다. 그 안의 함수와 변수를 이 쪽 편집기에서 쓸 수 있다.";}
+        else{ol.textContent="불러오지 못했다";op.className="err";op.textContent=(extra||"시간 초과")+"\n앞 쪽에서 실행한 코드가 지금도 정상 실행되는지 확인한다.";}
+      }
+    },pre);
+  });
   bRst.addEventListener("click",function(){
-    resetWorker();op.textContent="";out.hidden=false;ol.textContent="실행 환경을 초기화했다. 다음 실행부터 새 환경에서 시작한다.";op.className="";op.textContent="";
+    resetWorker();clearPageRuns();op.textContent="";out.hidden=false;ol.textContent="실행 환경을 초기화했다. 다음 실행부터 새 환경에서 시작한다.";op.className="";op.textContent="";
   });
   bRun.addEventListener("click",function(){
     var code=ta.value;
@@ -260,12 +320,21 @@ function buildEditor(ta){
       finish:function(kind,text,extra){
         busyAll(false);
         if(kind==="ok"){ol.textContent="실행 완료";op.className="ok";op.textContent=text||"(출력 없음. 테스트가 모두 통과했다면 print 결과가 없을 수 있다.)";}
-        else if(kind==="timeout"){ol.textContent="시간 초과";op.className="err";op.textContent=(text||"")+"\n"+(TIMEOUT_MS/1000)+"초 안에 끝나지 않아 멈췄다. 무한 반복이나 종료 조건(기저 조건) 누락이 없는지 확인한다. 실행 환경은 초기화되었다.";}
+        else if(kind==="timeout"){ol.textContent="시간 초과";op.className="err";op.textContent=(text||"")+"\n"+(TIMEOUT_MS/1000)+"초 안에 끝나지 않아 멈췄다. 무한 반복이나 종료 조건(기저 조건) 누락이 없는지 확인한다. 실행 환경은 초기화되었다. 다음 실행 때 이 쪽에서 성공했던 코드를 다시 실행해 복원한다.";autoRestore=true;}
         else{ol.textContent="오류";op.className="err";op.textContent=(text?text+"\n":"")+extra;}
       }
     };
+    var pre=[];
+    if(autoRestore){pre=restoreList(edId);}
+    var wasRestore=autoRestore&&pre.length>0;
     busyAll(true);
-    runCode(code,ui);
+    var fin=ui.finish;
+    ui.finish=function(kind,text,extra){
+      if(kind==="ok"){record(edId,code);if(wasRestore)autoRestore=false;}
+      fin(kind,text,extra);
+      if(kind==="ok"&&wasRestore){op.textContent=(op.textContent?op.textContent+"\n":"")+"(시간 초과로 지워진 환경을 이 쪽에서 성공했던 코드로 복원한 뒤 실행했다.)";}
+    };
+    runCode(code,ui,pre);
   });
   return ed;
 }

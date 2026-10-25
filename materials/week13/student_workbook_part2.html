@@ -139,6 +139,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>fib_memo와 fib_tab은 같은 값을 어떤 순서로 구하는가? 먼저 구하는 값과 나중에 구하는 값을 비교해 쓴다.</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A7.q1" data-label="A7 fib_memo와 fib_tab은 같은 값을 어떤 순서로 구하는가? 먼저 구하는 값과 나중에 구하는 값을 비교해 쓴다."></textarea></div>
 <p>dp[0]과 dp[1]은 왜 따로 정해 주어야 하는가? 정해 주지 않으면 무엇이 일어나는가?</p><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A7.q2" data-label="A7 dp[0]과 dp[1]은 왜 따로 정해 주어야 하는가? 정해 주지 않으면 무엇이 일어나는가?"></textarea></div>
 <p>예측과 실제가 달랐다면 어느 값이 달랐고, 그 까닭은 무엇이라 생각하는가?</p><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A7.q3" data-label="A7 예측과 실제가 달랐다면 어느 값이 달랐고, 그 까닭은 무엇이라 생각하는가?"></textarea></div>
+<p>A1에서 고른 fib(30) 호출 횟수의 자릿수와 실제 호출 수를 견준다. 내 어림은 몇 배 어긋났고, 어긋난 이유는 무엇인가?</p><div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A7.q4" data-label="A7 A1의 fib(30) 어림과 실제 호출 수 비교, 어긋난 이유"></textarea></div>
 </section>
 <section id="A8" class="sheet">
 <h2>A8 · Greedy와 DP 구현 기록<small>2차시 · 14분</small></h2>
@@ -148,8 +149,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <h3>6원 예측-실제</h3><p>동전 [1, 3, 4]로 6원을 만들 때 두 함수의 반환값을 코드를 실행하기 전에 예측한다.</p>
 <div class="scroll"><table class="fill"><tr><th style="width:40%">함수</th><th>예측</th><th>실제</th></tr><tr><td class="lab">greedy_coins([1, 3, 4], 6)</td><td class="in-cell"><input type="text" class="in" data-key="A8.six.r1.c1" data-label="A8 6원 greedy_coins([1, 3, 4], 6) 예측" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A8.six.r1.c2" data-label="A8 6원 greedy_coins([1, 3, 4], 6) 실제" autocomplete="off"></td></tr><tr><td class="lab">dp_coins([1, 3, 4], 6)</td><td class="in-cell"><input type="text" class="in" data-key="A8.six.r2.c1" data-label="A8 6원 dp_coins([1, 3, 4], 6) 예측" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A8.six.r2.c2" data-label="A8 6원 dp_coins([1, 3, 4], 6) 실제" autocomplete="off"></td></tr></table></div>
 <div class="ans-row"><span>A4·A5에서 손으로 한 [1, 3, 4] 값과 코드 결과가 </span><span class="rg" data-key="A8.same" data-type="radio" data-label="A8 손 계산과 코드 결과가 같았는가"><label><input type="radio" name="r_A8_same" value="모두 같았다"> 모두 같았다</label><label><input type="radio" name="r_A8_same" value="다른 곳이 있었다"> 다른 곳이 있었다</label></span><span> 다른 곳: </span><input type="text" class="in" data-key="A8.diff" data-label="A8 손 계산과 코드 결과가 다른 곳" autocomplete="off" style="width:10em;display:inline-block"></div>
-<p>dp_coins는 만들 수 없는 금액을 어떻게 다루는가? 그 칸을 0으로 두면 어떻게 되겠는가?</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A8.q1" data-label="A8 dp_coins는 만들 수 없는 금액을 어떻게 다루는가? 그 칸을 0으로 두면 어떻게 되겠는가?"></textarea></div>
-<p>greedy_coins는 dp_coins와 어떤 점에서 다른 알고리즘인가? 표를 쓰는가, 지난 선택을 되돌아보는가?</p><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A8.q2" data-label="A8 greedy_coins는 dp_coins와 어떤 점에서 다른 알고리즘인가? 표를 쓰는가, 지난 선택을 되돌아보는가?"></textarea></div>
+<p>dp_coins가 만들 수 없는 금액을 어떻게 표시하는가? 그 표시를 쓰지 않으면 어떤 입력에서 어떤 값이 잘못 나올지 예를 하나 든다. (A10 T2에서 확인한다.)</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A8.q1" data-label="A8 dp_coins가 만들 수 없는 금액을 표시하는 방법과 표시를 쓰지 않을 때 잘못 나올 입력 예"></textarea></div>
+<p>6원에서 greedy_coins와 dp_coins의 반환값이 다르다. 두 함수가 코드의 어느 줄에서 갈라지는지 한 곳을 가리키고 까닭을 쓴다.</p><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A8.q2" data-label="A8 6원에서 두 함수가 갈라지는 코드 줄과 까닭"></textarea></div>
 <p>실습 과제 min_coins의 상태를 이제 어떻게 정의하겠는가? 착수 메모를 고친다면 어떻게 쓰겠는가?</p><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A8.q3" data-label="A8 실습 과제 min_coins의 상태를 이제 어떻게 정의하겠는가? 착수 메모를 고친다면 어떻게 쓰겠는가?"></textarea></div>
 <p><b>선택</b> <code class="i">bisect_right</code>로 가장 큰 동전을 찾는 식을 한 줄로 쓴다.</p><div class="ans-row"><textarea class="in" rows="2" data-key="A8.opt.bisect" data-label="A8 선택: bisect_right로 가장 큰 동전 찾기"></textarea></div>
 </section>
@@ -161,7 +162,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>[1, 5, 10, 20, 25]에서 limit 30은 왜 반례를 못 찾았는가?</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A9.q1" data-label="A9 [1, 5, 10, 20, 25]에서 limit 30은 왜 반례를 못 찾았는가?"></textarea></div>
 <p>&ldquo;몇 개 금액을 시험했다고 증명이 되는가?&rdquo; 모둠에서 나눈 의견을 쓴다.</p><div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A9.q2" data-label="A9 “몇 개 금액을 시험했다고 증명이 되는가?” 모둠에서 나눈 의견을 쓴다."></textarea></div>
 <p>[1, 4, 6]에서 나온 반례 금액들을 작은 것부터 늘어놓았을 때 규칙이 보이는가? 보이는 규칙을 쓴다.</p><div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A9.q3" data-label="A9 [1, 4, 6]에서 나온 반례 금액들을 작은 것부터 늘어놓았을 때 규칙이 보이는가? 보이는 규칙을 쓴다."></textarea></div>
-<p>큰 동전부터 쓰는 방식이 모든 금액에서 맞는 체계는 어떤 모양인가? [1, 3, 4]와 [1, 5, 10, 20, 25] 등을 비교해 관찰한 것을 쓴다.</p><div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A9.q4" data-label="A9 큰 동전부터 쓰는 방식이 모든 금액에서 맞는 체계는 어떤 모양인가? [1, 3, 4]와 [1, 5, 10, 20, 25] 등을 비교해 관찰한 것을 쓴다."></textarea></div>
+<p>표의 네 체계 중 limit 50에서 반례가 없는 체계가 있다. 그 체계와 반례가 나온 체계의 동전 값을 나란히 놓고, 동전 값들 사이의 관계에서 달라 보이는 점을 쓴다. 이 관찰이 모든 금액에서 맞음을 보장하는가?</p><div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A9.q4" data-label="A9 limit 50에서 반례가 없는 체계와 있는 체계의 동전 값 비교 관찰, 보장 여부"></textarea></div>
 <h3>내 동전 체계 2개</h3><p>1을 포함하는 오름차순 체계를 직접 만든다. 하나는 큰 동전부터 쓰는 방식이 맞을 것 같은 체계, 하나는 틀릴 것 같은 체계이다. 실행해서 확인한다.</p>
 <div class="scroll"><table class="fill"><tr><th style="width:150px">체계</th><th style="width:30%">동전 목록</th><th style="width:100px">실행한 limit</th><th>find_failures 결과</th></tr><tr><td class="lab">맞을 것 같은 체계</td><td class="in-cell"><input type="text" class="in" data-key="A9.mine.r1.c1" data-label="A9 내 체계 맞을 것 같은 체계 동전 목록" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.mine.r1.c2" data-label="A9 내 체계 맞을 것 같은 체계 실행한 limit" autocomplete="off"></td><td class="in-cell"><textarea class="in" rows="2" data-key="A9.mine.r1.c3" data-label="A9 내 체계 맞을 것 같은 체계 find_failures 결과"></textarea></td></tr><tr><td class="lab">틀릴 것 같은 체계</td><td class="in-cell"><input type="text" class="in" data-key="A9.mine.r2.c1" data-label="A9 내 체계 틀릴 것 같은 체계 동전 목록" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A9.mine.r2.c2" data-label="A9 내 체계 틀릴 것 같은 체계 실행한 limit" autocomplete="off"></td><td class="in-cell"><textarea class="in" rows="2" data-key="A9.mine.r2.c3" data-label="A9 내 체계 틀릴 것 같은 체계 find_failures 결과"></textarea></td></tr></table></div>
 <h3>반례 증명 문장</h3><p>내 체계 중 반례가 나온 체계 하나로 쓴다. 금액, 큰 동전부터 쓰는 조합과 개수, 더 나은 조합과 개수를 모두 쓴다.</p>
@@ -172,23 +173,26 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A10" class="sheet">
 <h2>A10 · 함정 코드 예측과 원인<small>2차시 · 12분</small></h2>
 <p class="meta"><span>산출물: T1~T3(+T4) 예측-실제 표와 원인, 고친 줄</span></p>
-<p>코드 실습 3부의 블록을 실행하기 전에 <b>예측</b>을 쓴다. 실행한 뒤 <b>실제</b>와 <b>원인</b>을 쓰고, 고친 줄을 직접 쓴다.</p>
+<p>코드 실습 3부의 블록을 실행하기 전에 <b>예측</b>을 쓴다. 코드 실습 3부의 한 줄 예측은 실행 전 확인용이고, 이 표의 예측 칸에는 이유까지 쓴다. 실행한 뒤 <b>실제</b>와 <b>원인</b>을 쓰고, 이 활동지의 &lsquo;고친 줄&rsquo; 칸에는 <b>고친 줄 한 줄만</b> 쓴다. 고친 전체 코드는 코드 실습 3부의 &lsquo;고친 코드&rsquo; 칸에 쓴다.</p>
 <h3>T1 fib_t1</h3>
 <div class="scroll"><table class="fill"><tr><th style="width:34%"></th><th>예측</th><th>실제</th></tr><tr><td class="lab">fib_t1(6)과 fib_t1(20)의 호출 횟수</td><td class="in-cell"><textarea class="in" rows="2" data-key="A10.t1.r1.c1" data-label="A10 T1 fib_t1(6)과 fib_t1(20)의 호출 횟수 예측"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A10.t1.r1.c2" data-label="A10 T1 fib_t1(6)과 fib_t1(20)의 호출 횟수 실제"></textarea></td></tr></table></div>
+<p>실행한 뒤, 이 코드가 왜 그렇게 동작했는지 원인을 쓰고 고친 줄을 쓴다.</p>
 <div class="ans-row"><span class="n">원인</span><textarea class="in" rows="3" data-key="A10.t1.cause" data-label="A10 T1 원인"></textarea></div>
-<div class="ans-row"><span class="n">고침</span><textarea class="in draw" rows="3" data-key="A10.t1.fix" data-label="A10 T1 고친 줄"></textarea></div>
+<div class="ans-row"><span class="n">고친 줄</span><textarea class="in draw" rows="3" data-key="A10.t1.fix" data-label="A10 T1 고친 줄(한 줄만)"></textarea></div>
 <h3>T2 dp_t2</h3>
 <div class="scroll"><table class="fill"><tr><th style="width:34%"></th><th>예측</th><th>실제</th></tr><tr><td class="lab">dp_t2([1, 3, 4], 6)과 dp_t2([5, 7], 3)의 반환값</td><td class="in-cell"><textarea class="in" rows="2" data-key="A10.t2.r1.c1" data-label="A10 T2 dp_t2([1, 3, 4], 6)과 dp_t2([5, 7], 3)의 반환값 예측"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A10.t2.r1.c2" data-label="A10 T2 dp_t2([1, 3, 4], 6)과 dp_t2([5, 7], 3)의 반환값 실제"></textarea></td></tr></table></div>
+<p>실행한 뒤, 이 코드가 왜 그렇게 동작했는지 원인을 쓰고 고친 줄을 쓴다.</p>
 <div class="ans-row"><span class="n">원인</span><textarea class="in" rows="3" data-key="A10.t2.cause" data-label="A10 T2 원인"></textarea></div>
-<div class="ans-row"><span class="n">고침</span><textarea class="in draw" rows="3" data-key="A10.t2.fix" data-label="A10 T2 고친 줄"></textarea></div>
+<div class="ans-row"><span class="n">고친 줄</span><textarea class="in draw" rows="3" data-key="A10.t2.fix" data-label="A10 T2 고친 줄(한 줄만)"></textarea></div>
 <h3>T3 make_grid_t3</h3>
 <div class="scroll"><table class="fill"><tr><th style="width:34%"></th><th>예측</th><th>실제</th></tr><tr><td class="lab">3행 4열 중 어느 칸이 1이 될지</td><td class="in-cell"><textarea class="in" rows="2" data-key="A10.t3.r1.c1" data-label="A10 T3 3행 4열 중 어느 칸이 1이 될지 예측"></textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A10.t3.r1.c2" data-label="A10 T3 3행 4열 중 어느 칸이 1이 될지 실제"></textarea></td></tr></table></div>
+<p>실행한 뒤, 이 코드가 왜 그렇게 동작했는지 원인을 쓰고 고친 줄을 쓴다.</p>
 <div class="ans-row"><span class="n">원인</span><textarea class="in" rows="3" data-key="A10.t3.cause" data-label="A10 T3 원인"></textarea></div>
-<div class="ans-row"><span class="n">고침</span><textarea class="in draw" rows="3" data-key="A10.t3.fix" data-label="A10 T3 고친 줄"></textarea></div>
+<div class="ans-row"><span class="n">고친 줄</span><textarea class="in draw" rows="3" data-key="A10.t3.fix" data-label="A10 T3 고친 줄(한 줄만)"></textarea></div>
 <h3>T4 (선택) · 깊은 재귀</h3>
 <div class="ans-row"><span class="n">예측</span><span>fib_memo_t4(3000)은 </span><span class="rg" data-key="A10.t4.pred1" data-type="radio" data-label="A10 T4 fib_memo_t4 예측"><label><input type="radio" name="r_A10_t4_pred1" value="성공한다"> 성공한다</label><label><input type="radio" name="r_A10_t4_pred1" value="오류가 난다"> 오류가 난다</label></span><span> fib_tab_t4(3000)은 </span><span class="rg" data-key="A10.t4.pred2" data-type="radio" data-label="A10 T4 fib_tab_t4 예측"><label><input type="radio" name="r_A10_t4_pred2" value="성공한다"> 성공한다</label><label><input type="radio" name="r_A10_t4_pred2" value="오류가 난다"> 오류가 난다</label></span></div>
 <div class="ans-row"><span class="n">실제</span><span>실제 fib_memo_t4: </span><input type="text" class="in" data-key="A10.t4.real1" data-label="A10 T4 fib_memo_t4 실제" autocomplete="off" style="width:12em;display:inline-block"><span> fib_tab_t4: </span><input type="text" class="in" data-key="A10.t4.real2" data-label="A10 T4 fib_tab_t4 실제" autocomplete="off" style="width:12em;display:inline-block"></div>
-<div class="ans-row"><span class="n">원인</span><textarea class="in" rows="3" data-key="A10.t4.cause" data-label="A10 T4 원인: 상향식은 왜 깊은 재귀 오류가 없는가"></textarea></div>
+<p>상향식(표 방식)은 왜 깊은 재귀 오류가 없는가? 원인을 쓴다.</p><div class="ans-row"><span class="n">원인</span><textarea class="in" rows="3" data-key="A10.t4.cause" data-label="A10 T4 원인: 상향식은 왜 깊은 재귀 오류가 없는가"></textarea></div>
 </section>
 </div>
 <script id="week13-submit">

@@ -98,6 +98,7 @@ input.in.s{display:inline-block;width:3.2em;padding:1px 4px;text-align:center}
 table.fill td.in-cell{padding:3px;height:auto}
 .ans-row{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
 .ans-row>.n{padding-top:6px;font-weight:700;color:#3572a5}
+.qtext{margin:12px 0 2px;font-weight:600;break-after:avoid}
 .mycode{margin:8px 0 12px}
 .mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
 .hint{font-size:12px;color:#5b6b85;margin:2px 0}
@@ -126,7 +127,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="wrap">
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(11)  # 학생용 · 탐구 활동지 A1~A5</div>
-  <h1>11주차 탐구 활동지 1부 — 같은 틀, 다른 꺼내기 규칙 (A1~A5)</h1>
+  <h1>11주차 탐구 활동지 1부 — 이웃으로 계속 나아가며 돌아보기 (A1~A5)</h1>
   <p class="lead">핵심질문: 미로에서 출구를 찾거나 특정 구역이 얼마나 연결되어 있는지 확인할 때, 어떤 순서로 탐색하는 것이 정답일까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 정답은 이 활동지에 없다. 빈칸은 스스로 채운다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><label class="ck">모둠 <input type="text" class="in" data-key="meta.group" data-label="모둠" autocomplete="off" style="width:8em;display:inline-block"></label></p>
 </header>
 <nav><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="index.html">목록</a></nav>
@@ -153,7 +154,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="ans-row"><span class="n">5</span><textarea class="in" rows="2" data-key="A1.weak" data-label="A1 내 규칙의 약점"></textarea></div>
 </section>
 <section id="A2" class="sheet">
-<h2>A2 · 같은 틀, 꺼내는 쪽만 다른 두 규칙<small>1차시 · 14분 · 짝</small></h2>
+<h2>A2 · 컨테이너 두 가지로 손 탐색하기<small>1차시 · 14분 · 짝</small></h2>
 <p class="meta"><span>산출물: 두 방문 순서, 단계별 컨테이너 상태표</span></p>
 <div class="concept"><b class="h">약속 · 용어와 규칙</b>
 <ul>
@@ -161,7 +162,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <li><b>방문</b>: 컨테이너에서 꺼내 처리한 때이다. 방문 순서는 이 처리 순서이다(컨테이너에 들어간 순서가 아니다).</li>
 <li><b>방문 기록</b>: 이미 방문한 노드를 적어 두는 곳이다.</li>
 </ul>
-<p><b>손으로 탐색하는 규칙</b> (두 규칙은 꺼내는 쪽만 다르다)</p>
+<p><b>손으로 탐색하는 규칙</b> (스택 규칙과 큐 규칙을 각각 따라 한다)</p>
 <ol>
 <li>시작 노드를 컨테이너에 넣는다.</li>
 <li>컨테이너에서 하나 꺼낸다. 이미 방문한 노드이면 버리고 다시 꺼낸다.</li>
@@ -180,9 +181,13 @@ A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre>
 <h3>(나) 큐 규칙: 맨 앞(왼쪽)에서 꺼낸다</h3><div class="scroll"><table class="fill"><tr><th style="width:52px">단계</th><th style="width:46%">꺼낸 노드와 결과(방문 / 이미 방문해 버림)</th><th>꺼내고 넣은 직후 컨테이너 내용</th></tr><tr><td class="lab" style="width:3em;text-align:center">1</td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r1.c1" data-label="A2 큐 규칙 1단계 꺼낸 노드와 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r1.c2" data-label="A2 큐 규칙 1단계 컨테이너 내용" autocomplete="off"></td></tr><tr><td class="lab" style="width:3em;text-align:center">2</td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r2.c1" data-label="A2 큐 규칙 2단계 꺼낸 노드와 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r2.c2" data-label="A2 큐 규칙 2단계 컨테이너 내용" autocomplete="off"></td></tr><tr><td class="lab" style="width:3em;text-align:center">3</td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r3.c1" data-label="A2 큐 규칙 3단계 꺼낸 노드와 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r3.c2" data-label="A2 큐 규칙 3단계 컨테이너 내용" autocomplete="off"></td></tr><tr><td class="lab" style="width:3em;text-align:center">4</td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r4.c1" data-label="A2 큐 규칙 4단계 꺼낸 노드와 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r4.c2" data-label="A2 큐 규칙 4단계 컨테이너 내용" autocomplete="off"></td></tr><tr><td class="lab" style="width:3em;text-align:center">5</td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r5.c1" data-label="A2 큐 규칙 5단계 꺼낸 노드와 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r5.c2" data-label="A2 큐 규칙 5단계 컨테이너 내용" autocomplete="off"></td></tr><tr><td class="lab" style="width:3em;text-align:center">6</td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r6.c1" data-label="A2 큐 규칙 6단계 꺼낸 노드와 결과" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r6.c2" data-label="A2 큐 규칙 6단계 컨테이너 내용" autocomplete="off"></td></tr></table></div>
 <div class="ans-row"><span class="n">방문 순서</span><input type="text" class="in" data-key="A2.queue.order" data-label="A2 큐 규칙의 방문 순서" autocomplete="off"></div>
 <h3>관찰·정리</h3>
+<p class="qtext">1. 꺼냈는데 이미 방문한 노드를 버리는 까닭은 무엇인가? 버리지 않으면 표의 어느 단계에서 어떤 일이 생기는지 쓴다.</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A2.q1" data-label="A2 꺼냈는데 이미 방문한 노드는 왜 버리는가"></textarea></div>
+<p class="qtext">2. 스택 규칙에서 D 다음에 B가 아니라 E가 방문된 까닭을 컨테이너 내용을 근거로 쓴다.</p>
 <div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A2.q2" data-label="A2 스택에서 D 다음에 B가 아니라 E가 나온 이유"></textarea></div>
+<p class="qtext">3. 두 규칙의 1~4단계에서 같은 부분과 다른 부분을 각각 쓴다. 다른 부분이 두 방문 순서를 어떻게 달라지게 했는지 순서 값으로 보여 준다.</p>
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A2.q3" data-label="A2 두 규칙에서 틀의 어디가 같고 어디가 다른가"></textarea></div>
+<p class="qtext">4. 노드 F가 한 번도 방문되지 않은 까닭은 무엇인가? F가 방문되려면 입력의 무엇이 달라져야 하는가?</p>
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A2.q4" data-label="A2 F는 왜 한 번도 방문되지 않는가"></textarea></div>
 </section>
 <section id="A3" class="sheet">
@@ -199,9 +204,13 @@ A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre>
 <p>Call Stack이 가장 깊을 때의 모습을 아래 칸에 글자로 그린다(맨 아래가 처음 호출).</p>
 <div class="ans-row"><span class="n">그림</span><textarea class="in draw" rows="6" data-key="A3.stackdraw" data-label="A3 가장 깊을 때 Call Stack 그림" spellcheck="false"></textarea></div>
 <h3>A2 스택 규칙과 비교</h3>
+<p class="qtext">1. A2의 스택 규칙에서는 우리가 컨테이너를 그려 넣었다. 재귀 함수에서 호출이 쌓이고 돌아오면 사라지는 곳은 그 컨테이너와 어떤 점이 같은가? 그곳을 우리가 코드로 만든 적이 있는가?</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A3.q1" data-label="A3 스택은 어디에 있는가 우리가 만든 적이 있는가"></textarea></div>
+<p class="qtext">2. Call Stack이 가장 깊을 때 쌓여 있는 호출들은 G1의 어느 경로 위에 있다는 뜻인가? 그 경로를 노드 이름으로 쓴다.</p>
 <div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A3.q2" data-label="A3 가장 깊을 때 쌓인 호출은 지금 어느 경로 위에 있다는 뜻인가"></textarea></div>
+<p class="qtext">3. A2 스택 규칙의 방문 순서와 A3 재귀의 방문 순서를 비교한다. 같은지 다른지 쓰고, 다르다면 그 까닭을 컨테이너와 Call Stack의 동작으로 설명한다.</p>
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A3.q3" data-label="A3 A2 스택 규칙의 순서와 재귀의 순서를 비교해 다른 점과 이유"></textarea></div>
+<p class="qtext">4. 8주차 트리 순회에는 visited가 없었는데 그래프 순회에는 필요하다. 트리와 그래프의 구조 차이를 들어 까닭을 쓴다.</p>
 <div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A3.q4" data-label="A3 8주차 트리 순회에는 visited가 없었는데 그래프에는 왜 필요한가"></textarea></div>
 </section>
 <section id="A4" class="sheet">
@@ -215,8 +224,11 @@ A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre>
 S: [A, B]   A: [S, C]   B: [S, T]   C: [A, D]   D: [C, T]   T: [D, B]</pre>
 <p>A2의 두 규칙과 A3의 재귀를 각각 손으로 돌려 표를 채운다. &ldquo;T에 처음 도착한 경로&rdquo;는 T가 처음 방문된 때의 S에서 T까지의 길(예: S-x-y-T)이고, 간선 수는 그 길의 간선 개수이다.</p><div class="scroll"><table class="fill"><tr><th style="width:16%">방식</th><th style="width:38%">방문 순서</th><th style="width:28%">T에 처음 도착한 경로</th><th>간선 수</th></tr><tr><td class="lab">큐 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.h.queue.c1" data-label="A4 큐 규칙 방문 순서" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.queue.c2" data-label="A4 큐 규칙 T 도착 경로" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.queue.c3" data-label="A4 큐 규칙 간선 수" autocomplete="off"></td></tr><tr><td class="lab">스택 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.h.stack.c1" data-label="A4 스택 규칙 방문 순서" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.stack.c2" data-label="A4 스택 규칙 T 도착 경로" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.stack.c3" data-label="A4 스택 규칙 간선 수" autocomplete="off"></td></tr><tr><td class="lab">재귀(목록 순서)</td><td class="in-cell"><input type="text" class="in" data-key="A4.h.rec.c1" data-label="A4 재귀 방문 순서" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.rec.c2" data-label="A4 재귀 T 도착 경로" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.rec.c3" data-label="A4 재귀 간선 수" autocomplete="off"></td></tr></table></div>
 <h3>순서를 바꾼 재실험</h3>
-<p>S의 이웃 목록을 <code class="i">[A, B]</code>에서 <code class="i">[B, A]</code>로 바꾼다(나머지 목록은 그대로). 세 방식 중 두 방식을 골라 다시 구한다.</p><div class="scroll"><table class="fill"><tr><th style="width:22%">방식</th><th style="width:48%">T에 처음 도착한 경로</th><th>간선 수</th></tr><tr><td class="lab">큐 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.re.queue.c1" data-label="A4 재실험 큐 규칙 경로" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.re.queue.c2" data-label="A4 재실험 큐 규칙 간선 수" autocomplete="off"></td></tr><tr><td class="lab">재귀</td><td class="in-cell"><input type="text" class="in" data-key="A4.re.rec.c1" data-label="A4 재실험 재귀 경로" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.re.rec.c2" data-label="A4 재실험 재귀 간선 수" autocomplete="off"></td></tr></table></div>
+<p>S의 이웃 목록을 <code class="i">[A, B]</code>에서 <code class="i">[B, A]</code>로 바꾼다(나머지 목록은 그대로). 세 방식을 모두 다시 구한다.</p><div class="scroll"><table class="fill"><tr><th style="width:22%">방식</th><th style="width:48%">T에 처음 도착한 경로</th><th>간선 수</th></tr><tr><td class="lab">큐 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.re.queue.c1" data-label="A4 재실험 큐 규칙 경로" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.re.queue.c2" data-label="A4 재실험 큐 규칙 간선 수" autocomplete="off"></td></tr><tr><td class="lab">스택 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.re.stack.c1" data-label="A4 재실험 스택 규칙 경로" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.re.stack.c2" data-label="A4 재실험 스택 규칙 간선 수" autocomplete="off"></td></tr><tr><td class="lab">재귀</td><td class="in-cell"><input type="text" class="in" data-key="A4.re.rec.c1" data-label="A4 재실험 재귀 경로" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A4.re.rec.c2" data-label="A4 재실험 재귀 간선 수" autocomplete="off"></td></tr></table></div>
+<p class="qtext">1. 큐 규칙이 T에 처음 도착하기 전에 방문한 노드들은 S에서 각각 몇 걸음 떨어져 있는가? 방문 순서와 걸음 수를 함께 쓴다.</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A4.q1" data-label="A4 큐 규칙이 T에 처음 닿을 때 그 앞에 방문한 노드들은 S에서 몇 걸음 거리인가"></textarea></div>
+<p class="qtext">2. A2의 스택 규칙과 A3의 재귀는 둘 다 &lsquo;가장 최근 것부터&rsquo; 꺼내는데 H에서 처음 도착한 경로가 서로 다를 수 있다. 같은 규칙인데 왜 다를 수 있는지 컨테이너 내용으로 설명한다.</p>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A4.q2" data-label="A4 스택 규칙과 재귀는 둘 다 가장 최근 것부터 꺼내는데 왜 처음 도착한 경로가 다를 수 있는가"></textarea></div>
 <h3>가설 메모 (3줄)</h3>
 <p>표를 보고 &ldquo;무엇이 흔들리고 무엇이 안 흔들리는가&rdquo;를 근거가 된 표의 값과 함께 쓴다.</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A4.hyp1" data-label="A4 가설 1"></textarea></div>
@@ -227,9 +239,10 @@ S: [A, B]   A: [S, C]   B: [S, T]   C: [A, D]   D: [C, T]   T: [D, B]</pre>
 <h2>A5 · 1차시 정리와 exit ticket<small>1차시 · 2분 · 개인</small></h2>
 <p class="meta"><span>산출물: exit ticket</span></p>
 <div class="concept"><b class="h">이름 붙이기</b><p>오늘부터 큐 규칙을 <b>너비 우선 탐색(BFS)</b>, 스택 규칙과 재귀 규칙을 <b>깊이 우선 탐색(DFS)</b>이라고 부른다. 이름만 붙인 것이며 어느 쪽이 더 좋다는 뜻은 아니다.</p></div>
-<p><b>exit ticket</b> G1에서 시작 A로 큐 규칙(BFS)을 따를 때, D는 몇 번째로 방문되는가? <input type="text" class="in" data-key="A5.ticket" data-label="A5 exit ticket D는 몇 번째로 방문되는가" autocomplete="off" style="width:6em;display:inline-block"></p>
+<p><b>exit ticket</b> G1에서 시작 D로 큐 규칙(BFS)을 따를 때, A는 몇 번째로 방문되는가? <input type="text" class="in" data-key="A5.ticket" data-label="A5 exit ticket 시작 D에서 A는 몇 번째로 방문되는가" autocomplete="off" style="width:6em;display:inline-block"></p>
 <p>이번 시간에 한 일을 점검한다.</p>
 <p><label class="ck"><input type="checkbox" data-key="A5.chk1" data-label="A5 점검: 두 규칙으로 G1을 손으로 탐색했다"> 두 규칙으로 G1을 손으로 탐색했다</label><label class="ck"><input type="checkbox" data-key="A5.chk2" data-label="A5 점검: 재귀 호출 추적표를 채웠다"> 재귀 호출 추적표를 채웠다</label><label class="ck"><input type="checkbox" data-key="A5.chk3" data-label="A5 점검: H 비교표와 재실험을 채웠다"> H 비교표와 재실험을 채웠다</label></p>
+<p class="qtext">오늘 가장 헷갈린 점 한 가지를 쓴다.</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A5.muddy" data-label="A5 가장 헷갈린 점"></textarea></div>
 </section>
 </div>

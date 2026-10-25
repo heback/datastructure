@@ -133,11 +133,13 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="how">
 <h2>사용법<small>#how</small></h2>
 <ol>
-<li>코드 블록의 <b>복사</b> 단추로 코드를 복사해 한 파일(예: <code class="i">week13.py</code>)에 위에서 아래 순서로 이어 붙인다. 같은 활동 번호의 블록은 이어서 실행한다.</li>
-<li>실행은 <code class="i">python3 week13.py</code>이다. 점검이 실패하면 <code class="i">AssertionError</code>가 나온다.</li>
-<li>골격의 <code class="i">____1____</code> 같은 자리가 채울 곳이다. 번호는 주석의 ①~⑯과 같다. 채우지 않고 실행하면 <code class="i">NameError</code>가 나는데, 아직 채울 곳이 남아 있다는 뜻이다.</li>
-<li>정답과 기대 값은 이 파일에 없다. 점검은 <b>정의대로 구한 값과 내 결과를 비교</b>한다. 값은 내가 실행해서 확인하고 활동지에 쓴다.</li>
-<li>완성한 코드는 아래 &lsquo;내 코드&rsquo; 칸에 붙여 넣어 두면 [저장(JSON)] 때 함께 제출된다.</li>
+<li>이 쪽의 &lsquo;내 코드&rsquo; 칸은 <b>코드 편집기</b>이다. 코드를 쓰고 <b>[▶ 실행]</b>(또는 Ctrl/⌘+Enter)을 누르면 이 쪽 안에서 바로 파이썬이 실행된다. 파이썬을 설치하거나 <code class="i">.py</code> 파일을 만들 필요가 없다. 처음 한 번은 파이썬을 준비하느라 몇 초 걸린다.</li>
+<li>편집기의 <b>[예시 코드]</b>를 누르면 같은 활동의 코드 블록이 나온다. [복사] 또는 [편집기에 추가]로 가져온다. [편집기에 추가]는 편집기의 맨 아래에 이어 붙인다. 뼈대와 점검은 앞의 제공 코드(A8의 <code class="i">INF</code>)를 쓰므로 제공 코드를 먼저 편집기에 추가한다.</li>
+<li>같은 쪽의 편집기들은 파이썬 환경을 함께 쓴다. 앞 편집기에서 실행한 함수와 변수는 뒤 편집기에서 그대로 쓸 수 있다. 쪽을 새로 열거나 [실행 환경 초기화]를 누르면 정의가 지워지므로 위의 편집기부터 다시 실행한다. 다른 쪽에서 만든 함수가 필요하면 그 쪽의 편집기에서 실행을 성공시킨 뒤, 이 쪽의 <b>[앞 쪽 코드 불러오기]</b>를 누른다. 이 단추는 항상 보이며, 같은 주차의 앞 쪽에서 성공한 실행 기록(이 브라우저에 8시간 보관되고 새 탭에서도 유효하다)이 없으면 안내 문구가 나온다. 그때는 앞 쪽 편집기의 코드를 복사해 이 쪽 편집기 맨 위에 붙여 넣고 실행한다. A9의 점검과 실행은 A8 편집기에서 만든 <code class="i">greedy_coins</code>, <code class="i">dp_coins</code>와 A8 점검 블록(A8-3)의 <code class="i">greedy_by_definition</code>, <code class="i">fewest_brute</code>를 쓰므로, A8 편집기를 먼저 실행해 둔다.</li>
+<li>한 번의 실행은 <b>15초</b>를 넘기면 멈추고 환경이 초기화된다. 다음 실행 때 이 쪽에서 성공했던 코드가 자동으로 다시 실행되어 복원된다. 무한 반복이나 종료 조건(기저 조건) 누락이 없는지 확인한다.</li>
+<li>골격의 <code class="i">____4____</code> 같은 자리가 채울 곳이다. 이 쪽의 빈칸은 ④~⑩이다. 채우지 않고 실행하면 <code class="i">NameError: name '____4____' is not defined</code>가 나오는데, 아직 채울 곳이 남아 있다는 뜻이다. 그 밖의 <code class="i">NameError</code>는 아직 정의(실행)하지 않은 이름을 썼다는 뜻이다.</li>
+<li>정답과 기대 값은 이 쪽에 없다. 점검은 <b>정의대로 구한 값과 내 결과를 비교</b>한다. 점검이 실패하면 <code class="i">AssertionError</code>와 함께 어느 입력에서 틀렸는지 나온다. 값은 내가 실행해서 확인하고 활동지에 쓴다.</li>
+<li>편집기에 둔 코드는 위쪽 [저장(JSON)]에 함께 담겨 제출된다. 따로 <code class="i">.py</code> 파일을 내지 않는다.</li>
 </ol>
 </section>
 <section id="A8" class="sheet">
@@ -145,7 +147,9 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p class="meta"><span>산출물: ④ ~ ⑨ 완성 코드, 6원 예측-실제 표(활동지 2부 A8 칸), 과제 착수 메모</span></p>
 <div class="concept"><b class="h">약속 · 두 함수</b>
 <ul><li><code class="i">greedy_coins(coins, amount)</code>는 남은 금액 이하인 가장 큰 동전부터 쓰는 방식의 동전 개수를 돌려준다(A4의 규칙).</li><li><code class="i">dp_coins(coins, amount)</code>는 A5의 표를 코드로 옮긴 것이다. 만들 수 없는 금액은 <code class="i">INF</code>로 두고, 끝에서 <code class="i">-1</code>로 바꿔 돌려준다.</li><li><code class="i">coins</code>는 오름차순이고 1을 포함한다고 가정한다(<code class="i">dp_coins</code>는 1이 없어도 동작한다).</li></ul></div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A8-1"># A8: 거스름돈 두 가지 방법. coins는 오름차순이고 1을 포함한다.
+<p class="hint">점검 코드는 읽기만 하고 베끼지 않는다. 점검은 내 코드가 맞는지 확인하는 도구이다.</p>
+<p><b>실행 순서</b> ① [예시 코드]에서 A8-1(제공 코드)과 A8-2(뼈대)를 이 순서로 편집기에 추가하고, 빈칸을 채워 [▶ 실행]한다. ② A8-3(점검)을 맨 아래에 추가해 실행한다. &ldquo;A8 점검 통과&rdquo;가 나오면 된다. ③ 점검이 통과한 뒤 A8-4(6원 예측 후 실행)를 추가해 실제 값을 확인한다.</p>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A8-1"># A8: 거스름돈 두 가지 방법. coins는 오름차순이고 1을 포함한다.
 # INF: 어떤 수와 비교해도 더 큰 값(무한대)이다.
 INF = float("inf")</code></pre></div>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A8-2">def greedy_coins(coins, amount):    # coins: 동전 목록, amount: 금액
@@ -173,22 +177,17 @@ def greedy_by_definition(coins, amount):       # 남은 금액 이하인 가장 
         n += 1              # 동전 1개를 썼다
     return n
 
-def fewest_by_layers(coins, amount):           # 동전을 한 개씩 늘려 가며 처음으로 만들어지는 개수를 센다
-    seen = {0}              # set: 이미 만든 금액 모음(중복 없음)
-    frontier = [0]          # 이번 단계에서 만든 금액들
-    n = 0
-    while frontier:
-        if amount in seen:  # 목표를 만들었으면 지금 n이 답이다
-            return n
-        nxt = []            # 다음 단계 금액을 모을 리스트
-        for s in frontier:
-            for c in coins:
-                if s + c &lt;= amount and s + c not in seen:
-                    seen.add(s + c)
-                    nxt.append(s + c)
-        frontier = nxt
-        n += 1
-    return -1               # 끝까지 못 만들면 -1
+def fewest_brute(coins, amount):               # 모든 선택을 따져 최소 개수를 구하는 정의 그대로의 방법
+    # 메모가 없어 같은 계산을 되풀이한다. 그래서 작은 금액(24원 이하)에서만 쓴다.
+    if amount == 0:
+        return 0
+    best = None             # 지금까지 찾은 최소 개수(아직 없다는 뜻의 None)
+    for c in coins:
+        if c &lt;= amount:     # 이 동전을 하나 쓸 수 있으면
+            r = fewest_brute(coins, amount - c)   # 남은 금액의 최소 개수
+            if r != -1 and (best is None or r + 1 &lt; best):
+                best = r + 1
+    return -1 if best is None else best   # 끝까지 못 만들면 -1
 
 # 동전 체계 여러 개 x 금액 0~60을 모두 검사한다.
 for coins in ([1, 3, 4], [1, 4, 6], [1, 5, 10, 20, 25], [1, 10, 50, 100, 500], [1, 2], [1]):
@@ -197,10 +196,10 @@ for coins in ([1, 3, 4], [1, 4, 6], [1, 5, 10, 20, 25], [1, 10, 50, 100, 500], [
         got, want = greedy_coins(coins, a), greedy_by_definition(coins, a)
         # 실패하면 내 greedy_coins가 정의대로 낸 개수와 다르다는 뜻이다.
         assert got == want, "greedy_coins(%r, %d)=%r 인데 정의대로 하면 %r이다" % (coins, a, got, want)
-# 이번에는 내 dp_coins를 검사한다.
+# 이번에는 내 dp_coins를 검사한다. fewest_brute는 느려서 금액을 0~24까지만 쓴다.
 for coins in ([1, 3, 4], [1, 4, 6], [1, 5, 10, 20, 25], [5, 7], [2], [3, 5, 9], [1]):
-    for a in range(0, 61):
-        got, want = dp_coins(coins, a), fewest_by_layers(coins, a)
+    for a in range(0, 25):
+        got, want = dp_coins(coins, a), fewest_brute(coins, a)
         # 실패하면 내 dp_coins가 정의대로 센 값과 다르다는 뜻이다.
         assert got == want, "dp_coins(%r, %d)=%r 인데 정의대로 세면 %r이다" % (coins, a, got, want)
 print("A8 점검 통과")</code></pre></div>
@@ -216,24 +215,26 @@ print("dp_coins:", dp_coins([1, 3, 4], 6))</code></pre></div>
 <p class="meta"><span>산출물: ⑩ 완성 코드, 체계 4개 예측-실제 표, 자기 체계 2개와 반례 증명 문장(활동지 2부 A9 칸)</span></p>
 <div class="concept"><b class="h">약속 · 반례 탐색기</b>
 <p><b>반례</b>는 큰 동전부터 쓰는 방식의 개수가 최소 개수와 다른 금액 하나이다. <code class="i">find_failures(coins, limit)</code>는 1부터 <code class="i">limit</code>까지의 금액 중 두 개수가 다른 금액을 작은 것부터 모아 돌려준다. A8에서 완성한 두 함수를 쓴다.</p></div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A8-5">def find_failures(coins, limit):
+<p><b>실행 순서</b> ① [예시 코드]에서 A9-1(뼈대)을 A9 편집기에 추가하고 ⑩을 채워 [▶ 실행]한다. A8에서 만든 <code class="i">greedy_coins</code>, <code class="i">dp_coins</code>가 이 쪽에 정의되어 있어야 한다. ② 아래 점검을 추가해 실행한다. ③ 체계 4개 실행(A9-3)은 점검이 통과한 뒤 &lsquo;내 체계 확인용&rsquo; 편집기나 A9 편집기에 추가해 실행한다.</p>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A9-1">def find_failures(coins, limit):
     bad = []                       # 두 방법의 개수가 다른 금액을 모을 리스트
     for a in range(1, limit + 1):  # 금액 1~limit을 하나씩 본다
         if ____10____:               # ⑩ Greedy와 DP의 개수가 다른가
             bad.append(a)          # 리스트 끝에 a를 추가한다
     return bad</code></pre></div>
 <div class="mycode"><label>내 코드 · A9 (find_failures 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A9.mycode" data-label="A9 (find_failures 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
-<h3>점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-6"># A9 점검: 정의대로 한 방법으로 모은 목록과 내 결과를 비교한다.
-# greedy_by_definition, fewest_by_layers는 A8 점검 블록에서 정의했다.
-for coins in ([1, 3, 4], [1, 4, 6], [1, 5, 10, 20, 25], [1, 10, 50, 100, 500], [1, 2, 5]):
-    for limit in (10, 30, 50):             # limit 세 가지로 검사한다
+<h3>점검</h3><p>이 점검은 A8 점검 블록(A8-3)에서 정의한 두 함수를 쓴다. A8 편집기를 먼저 실행했는지 확인한 뒤, 이 점검을 A9 편집기 맨 아래에 추가해 실행한다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A9-2"># A9 점검: 정의대로 한 방법으로 모은 목록과 내 결과를 비교한다.
+# greedy_by_definition, fewest_brute는 A8 점검 블록(A8-3)에서 정의했다. 먼저 A8 편집기를 실행해 둔다.
+# fewest_brute는 느려서 limit을 24까지만 쓴다.
+for coins in ([1, 3, 4], [1, 4, 6], [1, 2, 5], [1, 10, 50, 100, 500]):
+    for limit in (10, 24):                 # limit 두 가지로 검사한다
         # 컴프리헨션: 조건에 맞는 a만 모은 리스트
-        want = [a for a in range(1, limit + 1) if greedy_by_definition(coins, a) != fewest_by_layers(coins, a)]
+        want = [a for a in range(1, limit + 1) if greedy_by_definition(coins, a) != fewest_brute(coins, a)]
         got = find_failures(coins, limit)  # 내 함수의 결과
         # 실패하면 내 목록이 정의대로 모은 목록과 다르다는 뜻이다.
         assert got == want, "find_failures(%r, %d)=%r 인데 정의대로 모으면 %r이다" % (coins, limit, got, want)
 print("A9 점검 통과")</code></pre></div>
-<h3>체계 4개 실행</h3><p>실행하기 전에 활동지 2부 A9 표에 각 체계·limit별 결과를 <b>예측</b>한다. 그 뒤 아래 코드를 실행해 실제 값을 쓴다. 이어서 내가 만든 동전 체계 2개로도 실행해 본다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A8-7"># 체계 4개를 limit 30과 50으로 실행한다. 예측을 활동지에 먼저 적는다.
+<h3>체계 4개 실행</h3><p>실행하기 전에 활동지 2부 A9 표에 각 체계·limit별 결과를 <b>예측</b>한다. 그 뒤 아래 코드를 실행해 실제 값을 쓴다. 이어서 내가 만든 동전 체계 2개로도 실행해 본다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A9-3"># 체계 4개를 limit 30과 50으로 실행한다. 예측을 활동지에 먼저 적는다.
 # (이름, 동전 목록) 쌍을 모은 리스트
 SYSTEMS = [("[1, 3, 4]", [1, 3, 4]),
            ("[1, 4, 6]", [1, 4, 6]),
@@ -249,7 +250,7 @@ for name, coins in SYSTEMS:  # 쌍을 풀어 name, coins에 담는다
 <h2>실습 과제 안내 · DP 테이블 설계와 반례 도출<small>A8 착수 · A9·A11 이어짐 · A14 마무리 · 잔여는 주간 과제</small></h2>
 <div class="grid">
 <div class="card"><b class="h">과제 (함수 3개 + 서술 1건)</b><ul><li><code class="i">min_coins(coins, amount)</code>: 동전을 무한히 쓸 수 있을 때 <code class="i">amount</code>를 만드는 최소 동전 개수. 만들 수 없으면 <code class="i">-1</code>, <code class="i">amount == 0</code>이면 <code class="i">0</code>이다. <code class="i">coins</code>는 정렬되어 있다고 가정하지 않고 1이 없을 수 있다. 1차원 DP 표를 설계해 구현한다.</li><li><code class="i">grid_paths(grid)</code>: 0 = 통행, 1 = 막힘인 R×C 격자에서 좌상단에서 우하단까지 오른쪽·아래로만 가는 경로 수. 시작이나 도착이 막혀 있으면 0이다. 2차원 DP 표를 설계해 구현한다.</li><li><code class="i">greedy_counterexample(coins)</code>: <code class="i">coins</code>는 오름차순이고 1을 포함한다. 큰 동전부터 쓰는 방식의 개수가 최소 개수와 다른 <b>가장 작은 금액</b>(반례)을 돌려준다. 검사 범위는 1 ~ 2×가장 큰 동전이고, 없으면 <code class="i">None</code>이다.</li><li><b>서술(코드 아님, 3~5문장)</b>: 내가 설계한 동전 체계 1개(반례가 나오는 체계)에 대해 &ldquo;이 금액에서 큰 동전부터 쓰는 방식은 몇 개, 최적은 몇 개이며 어떤 조합인가&rdquo;를 금액·두 조합·개수로 쓰고, <code class="i">min_coins</code>의 상태 정의·전이·초기값을 내 말로 적는다.</li><li>A8에서 착수하고, A9·A11(2차시와 3차시)에서 이어 쓰며, A14에서 마무리 점검한다. 미완 부분은 주간 과제로 이어진다.</li></ul></div>
-<div class="card"><b class="h">제출물</b><ul><li>파이썬 코드(<code class="i">.py</code>) + 서술 + 성찰일지(AI 활용 내역 포함)</li><li>코드 앞에 <b>구현 계획 한 줄</b>을 주석으로 쓴다. 이 한 줄에 <b>상태 정의와 목표 비용</b>(예: &ldquo;금액 a마다 동전 수만큼 본다&rdquo;)을 자기 말로 적는다.</li><li>코드·서술 입력 칸은 student_code_lab_part4에 있다.</li></ul></div>
+<div class="card"><b class="h">제출물</b><ul><li>과제 작성 칸의 코드 3개(<code class="i">assign.min_coins</code>, <code class="i">assign.grid_paths</code>, <code class="i">assign.greedy_counterexample</code>)와 서술 3칸(<code class="i">assign.essay.*</code>), 활동지 3부 A14의 서술 다듬기 3칸(<code class="i">A14.essay.state</code>, <code class="i">A14.essay.cost</code>, <code class="i">A14.essay.cost_grid</code>), 활동지 3부 A16의 성찰일지(AI 활용 신고 포함)이다. 각 파일을 [저장(JSON)]해 제출한다.</li><li>코드 앞에 <b>구현 계획 한 줄</b>을 주석으로 쓴다. 이 한 줄에 <b>상태 정의와 목표 비용</b>(예: &ldquo;금액 a마다 동전 수만큼 본다&rdquo;)을 자기 말로 적는다.</li><li>코드·서술 입력 칸은 student_code_lab_part4.html의 &lsquo;실습 과제 작성 칸&rsquo;에 있고, 성찰일지는 student_workbook_part3.html의 A16에 있다.</li></ul></div>
 <div class="card"><b class="h">평가 (100점)</b><ul><li>요구사항 구현 정확성 50</li><li>복잡도 분석 타당성 30</li><li>코드 품질 20</li><li>4단계 채점기준은 <a href="rubric.html">rubric.html</a>에서 확인한다(A13 직후 공개).</li></ul></div></div>
 <details><summary>과제 안내 후반부 · A14에서 교사 지시 후 펼친다</summary><div class="gate"><ul><li><code class="i">min_coins</code>는 <code class="i">amount</code>가 커도(예: 20000) <code class="i">RecursionError</code> 없이 끝나야 한다. 순수 재귀나 메모 재귀로 쓰면 큰 입력에서 오류가 날 수 있으므로 표를 반복문으로 채우는 방식으로 쓴다.</li><li>세 함수는 입력 리스트를 <b>바꾸지 않는다</b>. 정렬이 필요하면 복사본을 정렬한다.</li><li>서술에는 <code class="i">min_coins</code>와 <code class="i">grid_paths</code>의 시간·공간 복잡도를 반복문 구조에 근거해 한 줄씩 쓴다. 이 항목은 채점기준표(rubric)의 &ldquo;복잡도 분석 타당성&rdquo;과 같은 문구이다.</li></ul></div></details>
 </section>
@@ -257,9 +258,9 @@ for name, coins in SYSTEMS:  # 쌍을 풀어 name, coins에 담는다
 <h2>AI 활용 3단계 · 이 과제에 맞춘 예<small>허용 · 조건부 허용 · 금지</small></h2>
 <p>기준은 &ldquo;AI에게 무엇을 시켰는가&rdquo;이다. 개념·용어·오류 원인을 묻는 것은 허용이고, 과제 요구사항이나 완성된 구현·설계 판단 자체를 AI에게 시켜 결과물을 받아 제출하는 것은 금지이다.</p><div class="grid">
 <div class="card" style="--c:#1d7a4f"><b class="h">허용 — 성찰일지에 간단히 기록</b><ul><li>&ldquo;메모이제이션과 타뷸레이션은 무엇이 달라?&rdquo;, &ldquo;탐욕 알고리즘이 최적이 되려면 어떤 성질이 필요해?&rdquo; 같은 개념·용어 질의</li><li>&ldquo;RecursionError: maximum recursion depth exceeded가 무슨 뜻이야?&rdquo;, &ldquo;IndexError: list index out of range가 왜 나오는지 해설&rdquo; 같은 오류 메시지 해설</li><li>&ldquo;dynamic programming이라는 이름은 어디서 유래했어?&rdquo; 같은 용어 번역·개념 요약, 수업 자료 복습 질문(코드는 받지 않음)</li><li>내 코드 결과가 TEST와 다를 때 원인 힌트만 요청(수정은 직접 한다)</li></ul></div>
-<div class="card" style="--c:#8a6d1f"><b class="h">조건부 허용 — 출처와 반영 여부를 성찰일지에 반드시 기록</b><ul><li>완성한 구현에 대한 복잡도 검토 요청(예: &ldquo;이 구현이 정말 O(amount × 동전 수)가 맞는지 검토해줘&rdquo;). 복잡도 분석을 대신 세우게 하는 것이 아니라 내가 쓴 분석의 검토만 맡긴다</li><li>엣지 케이스 브레인스토밍(amount = 0, 만들 수 없는 금액, 동전 1개, 시작이나 도착이 막힌 격자, 1×1 격자)</li><li>내가 쓴 코드의 경계 조건·성능 검토 요청(수정은 직접 한다)</li><li>내 코드와 서술의 개선 아이디어 제안 요청(제안만 참고하고 코드와 문장은 직접 다시 작성)</li><li>기록 예: &ldquo;AI가 amount = 0 케이스를 제안 &rarr; 채택/미채택, 이유&rdquo;</li></ul></div>
+<div class="card" style="--c:#8a6d1f"><b class="h">조건부 허용 — 출처와 반영 여부를 성찰일지에 반드시 기록</b><ul><li>완성한 구현에 대한 복잡도 검토 요청(예: &ldquo;내가 쓴 복잡도 분석문과 코드를 붙여 줄 테니 분석이 코드와 맞는지 검토해줘&rdquo;). 복잡도 분석을 대신 세우게 하는 것이 아니라 내가 쓴 분석의 검토만 맡긴다</li><li>엣지 케이스 브레인스토밍(amount = 0, 만들 수 없는 금액, 동전 1개, 시작이나 도착이 막힌 격자, 1×1 격자)</li><li>내가 쓴 코드의 경계 조건·성능 검토 요청(수정은 직접 한다)</li><li>내 코드와 서술의 개선 아이디어 제안 요청(제안만 참고하고 코드와 문장은 직접 다시 작성)</li><li>기록 예: &ldquo;AI가 amount = 0 케이스를 제안 &rarr; 채택/미채택, 이유&rdquo;</li></ul></div>
 <div class="card" style="--c:#b3401f"><b class="h">금지 — 적발 시 계획서의 위반 처리방안 적용</b><ul><li>과제 문장(&ldquo;최소 동전 개수를 구하는 함수, 격자 경로 수를 구하는 함수, 큰 동전부터 쓰는 방식과 최솟값이 달라지는 가장 작은 금액(반례)을 구하는 함수를 작성하라&rdquo;)을 그대로 입력해 전체 코드 생성</li><li>AI가 쓴 <code class="i">min_coins</code>/<code class="i">grid_paths</code>/<code class="i">greedy_counterexample</code>를 그대로, 또는 변수명만 바꿔 제출</li><li>상태 정의·전이 방정식·초기값·계산 순서 등 DP 설계 판단, 반례가 되는 동전 체계·금액을 AI가 대신 찾음</li><li>복잡도 분석이나 구현 계획(상태 정의와 목표 비용 포함)을 AI에게 대신 세우게 하여 제출</li><li>상태 정의·전이 설계나 반례 증명 문장을 AI가 대신 쓰게 하여 제출</li><li>성찰일지 AI 대필</li></ul></div></div>
-<div class="note"><b>수업 운영 규칙</b>(금지 목록과 별개) 수업 중 A7~A11·A14~A15는 AI 도움 없이 수행한다. A15 형성평가는 AI를 쓰지 않는 시험 상황으로 운영하며, 위 위반 처리(감점 등)는 형성평가에 적용하지 않는다. 주간 과제를 제출할 때 위 3단계가 적용된다. A16에서 성찰일지에 AI 활용 내역을 쓰는 방법을 다시 안내한다.</div>
+<div class="note"><b>수업 운영 규칙</b>(금지 목록과 별개) 수업 중 활동(A1~A15)은 AI 도움 없이 수행한다. 특히 A12·A13의 일반화 문장은 내가 직접 쓴 것이어야 한다. A15 형성평가는 AI를 쓰지 않는 시험 상황으로 운영하며, 위 위반 처리(감점 등)는 형성평가에 적용하지 않는다. 위 3단계는 주간 과제를 제출할 때 적용되고, A16 성찰일지의 AI 활용 신고도 주간 과제에 대한 것이다. A16에서 성찰일지에 AI 활용 내역을 쓰는 방법을 다시 안내한다.</div>
 </section>
 </div>
 <script id="week13-submit">

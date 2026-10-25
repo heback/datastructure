@@ -132,7 +132,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <nav><a href="#Q1">Q1~Q3</a><a href="#Q4">Q4</a><a href="index.html">목록</a></nav>
 <section id="Q1" class="sheet">
 <h2>Q1~Q3 · 상황 판단, 경계와 개수 산출, 전제와 경계 오류 진단<small>수업 시간 A15 · 6분</small></h2>
-<p class="note">개별로 푼다. 시험 상황이므로 AI를 사용하지 않는다. 시간이 모자라면 Q1의 (c)(d)와 Q3 (ii)의 &ldquo;고치는 방법&rdquo; 서술을 생략할 수 있다. 이 문항의 값은 수업 시간에 쓴 값과 다르다.</p>
+<p class="note">끝까지 못 풀어도 괜찮다. 푼 만큼 낸다. 개별로 푼다. 시험 상황이므로 AI를 사용하지 않는다. 시간이 모자라면 Q1의 (c)(d)와 Q3 (ii)의 &ldquo;고치는 방법&rdquo; 서술을 생략할 수 있다. 이 문항의 값은 수업 시간에 쓴 값과 다르다.</p>
 <h3>Q1 · 상황 판단</h3>
 <p>각 상황에서 이진 탐색(또는 bisect)을 쓸 수 있는지 &ldquo;가능 / 불가 / 조건부&rdquo; 중 하나를 고르고, <b>정렬 전제 또는 질의 횟수</b>에 근거해 한 문장으로 쓰시오.</p>
 <div class="scroll"><table class="fill"><tr><th style="width:42%">상황</th><th style="width:18%">판단</th><th>근거 한 문장</th></tr><tr><td class="lab">(a) 학번이 오름차순으로 정리된 명단에서 한 학번이 있는 자리를 찾는다.</td><td class="in-cell"><select class="in" data-key="Q1.a.choice" data-label="Q1 (a) 선택"><option value=""></option><option value="가능">이진 탐색·bisect 가능</option><option value="불가">불가</option><option value="조건부">조건부</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.a.why" data-label="Q1 (a) 근거 한 문장"></textarea></td></tr><tr><td class="lab">(b) 도착한 순서대로 쌓인 센서 로그(값은 뒤섞여 있음)에서 값 하나가 있는지 한 번만 확인한다.</td><td class="in-cell"><select class="in" data-key="Q1.b.choice" data-label="Q1 (b) 선택"><option value=""></option><option value="가능">이진 탐색·bisect 가능</option><option value="불가">불가</option><option value="조건부">조건부</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.b.why" data-label="Q1 (b) 근거 한 문장"></textarea></td></tr><tr><td class="lab">(c) 오름차순으로 정리된 점수 목록에서 60점 이상 80점 미만인 학생이 몇 명인지 센다.</td><td class="in-cell"><select class="in" data-key="Q1.c.choice" data-label="Q1 (c) 선택"><option value=""></option><option value="가능">이진 탐색·bisect 가능</option><option value="불가">불가</option><option value="조건부">조건부</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.c.why" data-label="Q1 (c) 근거 한 문장"></textarea></td></tr><tr><td class="lab">(d) 뒤섞인 데이터 10만 개에서 &ldquo;이 값이 있는가?&rdquo;라는 질문이 10만 번 들어온다.</td><td class="in-cell"><select class="in" data-key="Q1.d.choice" data-label="Q1 (d) 선택"><option value=""></option><option value="가능">이진 탐색·bisect 가능</option><option value="불가">불가</option><option value="조건부">조건부</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="Q1.d.why" data-label="Q1 (d) 근거 한 문장"></textarea></td></tr></table></div>
@@ -142,23 +142,23 @@ table.fill td.in-cell{padding:3px;height:auto}
 인덱스  0  1  2  3  4  5   6   7   8   9</pre>
 <div class="scroll"><table class="fill"><tr><th style="width:46%">항목</th><th>답</th></tr><tr><td class="lab">bisect_left(F, 9)</td><td class="in-cell"><input type="text" class="in" data-key="Q2.l9" data-label="Q2 bisect_left(F, 9)" autocomplete="off"></td></tr><tr><td class="lab">bisect_right(F, 9)</td><td class="in-cell"><input type="text" class="in" data-key="Q2.r9" data-label="Q2 bisect_right(F, 9)" autocomplete="off"></td></tr><tr><td class="lab">F에서 9의 개수</td><td class="in-cell"><input type="text" class="in" data-key="Q2.c9" data-label="Q2 9의 개수" autocomplete="off"></td></tr><tr><td class="lab">bisect_left(F, 10)과 bisect_right(F, 10)</td><td class="in-cell"><input type="text" class="in" data-key="Q2.lr10" data-label="Q2 x=10의 left와 right" autocomplete="off"></td></tr><tr><td class="lab">닫힌 구간 [5, 20]의 원소 개수</td><td class="in-cell"><input type="text" class="in" data-key="Q2.range" data-label="Q2 구간 [5, 20]의 원소 개수" autocomplete="off"></td></tr></table></div>
 <p>구간 [5, 20]의 개수를 구한 식과 그 근거를 한 문장으로 쓴다.</p>
-<div class="ans-row"><span class="n">?</span><textarea class="in" rows="3" data-key="Q2.why" data-label="Q2 구간 개수 식의 근거 한 문장"></textarea></div>
+<div class="ans-row"><span class="n">식과 근거</span><textarea class="in" rows="3" data-key="Q2.why" data-label="Q2 구간 개수 식의 근거 한 문장"></textarea></div>
 <h3>Q3 · 전제와 경계 오류 진단</h3>
 <pre class="diagram">G = [31, 7, 20, 4, 9, 13, 9, 4, 20, 9]
 인덱스  0  1   2  3  4   5  6  7   8  9</pre>
 <p><b>(i)</b> 리스트 G에 A2의 규칙 ①~④(닫힌 구간 [lo, hi], mid = (lo + hi) // 2)를 그대로 적용해 <b>13</b>을 찾는다. 규칙대로 한 결과와 그 원인을 한 문장으로 쓰시오.</p>
 <div class="ans-row"><span class="n">결과</span><input type="text" class="in" data-key="Q3.i.result" data-label="Q3 (i) 규칙대로 13을 찾은 결과" autocomplete="off" style="width:10em"></div>
-<div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="Q3.i.why" data-label="Q3 (i) 원인 한 문장"></textarea></div>
+<div class="ans-row"><span class="n">원인</span><textarea class="in" rows="2" data-key="Q3.i.why" data-label="Q3 (i) 원인 한 문장"></textarea></div>
 <p><b>(ii)</b> 정렬된 F에서 구간 [5, 20]의 개수를 <code class="i">bisect_left(F, 20) &minus; bisect_left(F, 5)</code>로 구했다. 이 식의 결과와 올바른 결과의 차이, 그리고 고치는 방법을 한 문장으로 쓰시오.</p>
 <div class="ans-row"><span class="n">식의 결과</span><input type="text" class="in" data-key="Q3.ii.wrong" data-label="Q3 (ii) 틀린 식의 결과" autocomplete="off" style="width:8em"><span class="n">올바른 결과</span><input type="text" class="in" data-key="Q3.ii.right" data-label="Q3 (ii) 올바른 결과" autocomplete="off" style="width:8em"></div>
-<div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="Q3.ii.fix" data-label="Q3 (ii) 고치는 방법 한 문장"></textarea></div>
+<div class="ans-row"><span class="n">고치는 방법</span><textarea class="in" rows="2" data-key="Q3.ii.fix" data-label="Q3 (ii) 고치는 방법 한 문장"></textarea></div>
 </section>
 <section id="Q4" class="sheet">
 <h2>Q4 · 보조 문항: 가장 가까운 값과 정렬 선택<small>수업 밖 선택·과제</small></h2>
 <p>정렬된 F에 대해 <code class="i">closest_value(F, x)</code>(가장 가까운 원소, 동률이면 작은 값)를 직접 계산한다. 그리고 병합 정렬과 퀵 정렬(첫 원소 피벗) 중에서 <b>입력이 이미 정렬되어 있을 가능성이 높은 로그</b>를 정렬해야 할 때 더 안전한 쪽을 근거와 함께 고른다.</p>
 <div class="scroll"><table class="fill"><tr><th style="width:30%">x</th><th>closest_value(F, x)</th></tr><tr><td class="lab">10</td><td class="in-cell"><input type="text" class="in" data-key="Q4.c10" data-label="Q4 x=10 가장 가까운 값" autocomplete="off"></td></tr><tr><td class="lab">25</td><td class="in-cell"><input type="text" class="in" data-key="Q4.c25" data-label="Q4 x=25 가장 가까운 값" autocomplete="off"></td></tr><tr><td class="lab">14</td><td class="in-cell"><input type="text" class="in" data-key="Q4.c14" data-label="Q4 x=14 가장 가까운 값" autocomplete="off"></td></tr></table></div>
 <div class="ans-row"><span class="n">선택</span><span class="rg" data-key="Q4.sort" data-type="radio" data-label="Q4 정렬 방식 선택"><label><input type="radio" name="r_Q4_sort" value="병합 정렬"> 병합 정렬</label><label><input type="radio" name="r_Q4_sort" value="퀵 정렬(첫 원소 피벗)"> 퀵 정렬(첫 원소 피벗)</label></span></div>
-<div class="ans-row"><span class="n">?</span><textarea class="in" rows="3" data-key="Q4.sort.why" data-label="Q4 정렬 방식을 고른 근거"></textarea></div>
+<div class="ans-row"><span class="n">선택 이유</span><textarea class="in" rows="3" data-key="Q4.sort.why" data-label="Q4 정렬 방식을 고른 근거"></textarea></div>
 </section>
 </div>
 <script id="week12-submit">
