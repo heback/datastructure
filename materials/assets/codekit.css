@@ -6,6 +6,15 @@ pre:not(.diagram){background:#fff;color:#1f2328;border:1px solid #cfd6e2}
 .copy{background:#fff!important;color:#27364f!important;border:1px solid #9aa7bd!important}
 .copy:hover{background:#eef4fa!important}
 
+/* 상단 이동 막대 */
+#ck-topnav{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;padding:8px 20px;background:#fff;border-bottom:1px solid #dfe3ea;font:500 13px "IBM Plex Sans KR",sans-serif;color:#5b6b85}
+#ck-topnav a{color:#3572a5;text-decoration:none;padding:2px 2px}
+#ck-topnav a:hover{text-decoration:underline}
+#ck-topnav a:focus-visible{outline:3px solid #3572a5;outline-offset:1px;border-radius:3px}
+#ck-topnav .ck-back{font-weight:700;border:1px solid #9aa7bd;border-radius:4px;padding:2px 10px;margin-right:6px}
+#ck-topnav .ck-cur{color:#16233b;font-weight:600}
+@media (max-width:640px){#ck-topnav{padding:8px 14px}}
+
 /* 편집기 */
 .ck-ed{margin:8px 0 12px;border:1px solid #6b7a94;border-radius:6px;background:#fff;overflow:hidden}
 .ck-ed .ck-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:6px 8px;background:#f0f2f6;border-bottom:1px solid #cfd6e2}
@@ -39,7 +48,7 @@ pre:not(.diagram){background:#fff;color:#1f2328;border:1px solid #cfd6e2}
 .ck-dlg .ck-item pre{margin:0;max-height:46vh;overflow:auto}
 .ck-dlg .ck-hint{font-size:12px;color:#5b6b85;margin-top:8px}
 @media print{
-  .ck-bar,.ck-out,.ck-modal{display:none!important}
+  .ck-bar,.ck-out,.ck-modal,#ck-topnav{display:none!important}
   .ck-ed{border:none}
   pre:not(.diagram){background:#fff!important;color:#111!important;border:1px solid #bbb!important;white-space:pre-wrap;word-break:break-all}
   .ck-ed .ck-area>textarea.ck-ta{display:none!important}

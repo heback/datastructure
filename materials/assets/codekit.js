@@ -175,19 +175,21 @@ function openExamples(ed){
     var b=document.createElement("b");
     b.textContent="["+(ROLE_LABEL[c.getAttribute("data-role")]||"코드")+"] "+blockTitle(c);
     var cp=document.createElement("button");cp.type="button";cp.className="ck-btn";cp.textContent="복사";
-    var put=document.createElement("button");put.type="button";put.className="ck-btn";put.textContent="편집기에 넣기";
+    var put=document.createElement("button");put.type="button";put.className="ck-btn";put.textContent="편집기에 추가";
     head.appendChild(b);head.appendChild(cp);head.appendChild(put);
     var pre=document.createElement("pre");var code=document.createElement("code");
     code.innerHTML=highlight(c.textContent);pre.appendChild(code);
     item.appendChild(head);item.appendChild(pre);body.appendChild(item);
     cp.addEventListener("click",function(){copyText(c.textContent,function(ok){flash(cp,ok?"복사됨":"복사 실패");});});
     put.addEventListener("click",function(){
-      if(ed.ta.value.trim()&&!put._arm){put._arm=true;put.textContent="덮어쓰기? 한 번 더";clearTimeout(put._t);put._t=setTimeout(function(){put._arm=false;put.textContent="편집기에 넣기";},2500);return;}
-      ed.set(c.textContent);closeModal();ed.ta.focus();
+      var cur=ed.ta.value.replace(/\s+$/,""),add=c.textContent.replace(/\s+$/,"");
+      ed.set((cur?cur+"\n\n":"")+add+"\n");
+      flash(put,"추가됨");
+      ed.ta.scrollTop=ed.ta.scrollHeight;
     });
   });
   var hint=document.createElement("p");hint.className="ck-hint";
-  hint.textContent="이 활동에 나온 코드를 모아 보여 준다. [편집기에 넣기]를 누르면 편집기의 내용이 이 코드로 바뀐다. 앞 코드(예: Node 클래스)가 필요하면 먼저 편집기에 넣어 실행한다. 실행 환경은 이 페이지 안에서 공유되어, 앞에서 실행한 함수와 변수가 남아 있다.";
+  hint.textContent="이 활동에 나온 코드를 모아 보여 준다. [편집기에 추가]를 누르면 편집기의 맨 아래에 이 코드가 이어서 붙는다. 앞 코드(예: Node 클래스)가 필요하면 먼저 추가해서 실행한다. 실행 환경은 이 페이지 안에서 공유되어, 앞에서 실행한 함수와 변수가 남아 있다.";
   body.appendChild(hint);
   lastFocus=document.activeElement;
   modal.hidden=false;
@@ -268,9 +270,36 @@ function buildEditor(ta){
   return ed;
 }
 
+/* ---------- 상단 이동 막대 (전체 목차 › 주차 목록 › 현재 자료) ---------- */
+function buildTopNav(){
+  if(document.getElementById("ck-topnav"))return;
+  var path=decodeURIComponent(location.pathname),wm=/week(\d+)\/([^\/]+)\.html$/.exec(path);
+  if(!wm)return;
+  var week=wm[1],name=wm[2],pm=/_part(\d+)$/.exec(name),part=pm?pm[1]:"1";
+  var base=name.replace(/_part\d+$/,"");
+  var kind={student_workbook:"탐구 활동지 "+part+"부",student_code_lab:"실습 코드 "+part+"부",formative_check:"형성평가",rubric:"실습 과제 루브릭"}[base]||document.title;
+  var nav=document.createElement("nav");nav.id="ck-topnav";nav.setAttribute("aria-label","페이지 이동");
+  function a(href,text){var x=document.createElement("a");x.href=href;x.textContent=text;return x;}
+  function sep(){var s=document.createElement("span");s.className="ck-sep";s.textContent="›";s.setAttribute("aria-hidden","true");return s;}
+  var back=a("index.html","← 이전 페이지");back.className="ck-back";
+  /* 같은 사이트에서 왔으면 브라우저 기록으로 돌아가고, 아니면 주차 목록으로 간다 */
+  back.addEventListener("click",function(e){
+    var ref=document.referrer;
+    if(ref&&ref.indexOf(location.origin)===0&&history.length>1){e.preventDefault();history.back();}
+  });
+  var cur=document.createElement("span");cur.className="ck-cur";cur.textContent=kind;cur.setAttribute("aria-current","page");
+  nav.appendChild(back);
+  nav.appendChild(a("../index.html","전체 목차"));nav.appendChild(sep());
+  nav.appendChild(a("index.html",week+"주차 학습활동"));nav.appendChild(sep());
+  nav.appendChild(cur);
+  document.body.insertBefore(nav,document.body.firstChild);
+}
+
 function init(){
   highlightBlocks();
   bindCopyButtons();
+  /* 저장 바(제출 스크립트)가 body 맨 앞에 들어간 뒤, 그 앞에 이동 막대를 둔다 */
+  if(document.readyState==="complete")buildTopNav();else document.addEventListener("DOMContentLoaded",buildTopNav);
   q("textarea.in.code, textarea.code").forEach(function(t){if(!t._ck){t._ck=true;buildEditor(t);}});
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
