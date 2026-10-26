@@ -101,6 +101,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 .mycode{margin:8px 0 12px}
 .mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
 .hint{font-size:12px;color:#5b6b85;margin:2px 0}
+.how{font-size:12.5px;color:#8a3b00;font-weight:600;margin:2px 0}
 .ck{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
 .ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
 .rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
@@ -133,7 +134,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 
 <section id="Q1" class="sheet">
 <h2>Q1~Q3 · 상황에 맞는 표현 판단, 저장량 계산, 함정 추적<small>수업 시간 A14 · 6분</small></h2>
-<p class="note">개별로 푼다. 시험 상황이므로 AI를 사용하지 않는다. 시간이 모자라면 Q2의 Y 부분과 Q3의 이유 서술을 생략할 수 있다. 이 문항의 값은 수업 시간에 쓴 값과 다르다.</p>
+<p class="note">개별로 푼다. 시험 상황이므로 AI를 사용하지 않는다. 시간이 모자라면 Q2의 Y 부분과 Q3의 이유 서술을 생략할 수 있다. 생략한 칸에는 빈칸이나 &ldquo;x&rdquo; 대신 &ldquo;시간 부족&rdquo;이라고 쓴다. 이 문항의 값은 수업 시간에 쓴 값과 다르다.</p>
 <div class="learn-box"><span class="lb-title">학습 내용 · 푸는 방법</span>
 <ul>
 <li>수업 시간(A14) 6분 동안 개별로 풀고, 필수는 Q1~Q3이다. 시험 상황이므로 AI를 사용하지 않는다.</li>
@@ -143,15 +144,18 @@ table.fill td.in-cell{padding:3px;height:auto}
 </div>
 <h3>Q1 · 상황 비교</h3>
 <p>두 상황에서 인접 행렬과 인접 리스트 중 어느 표현이 더 유리한지 고르고, <b>밀도</b>와 <b>질의 종류</b> 두 가지로 근거를 쓰시오.</p>
+<p class="how">쓰는 법: 표현은 목록에서 하나를 고른다. 근거 ① 칸에는 밀도가 높은지 낮은지와 그렇게 본 숫자 근거를, 근거 ② 칸에는 자주 하는 질의가 무엇이고 그 질의에 그 표현이 왜 맞는지를 쓴다. 칸마다 1~2문장이다.</p>
 <div class="grid">
 <div class="card"><b class="h">상황 X</b><p>노드 2000개, 간선 3000개(무방향)의 도로망이다. 자주 하는 질의는 &ldquo;한 교차로의 이웃을 모두 구하기&rdquo;이다.</p></div>
 <div class="card"><b class="h">상황 Y</b><p>노드 50개의 노선망이다. 가능한 1225쌍 중 1200쌍이 연결되어 있다(무방향). 자주 하는 질의는 &ldquo;두 도시 사이에 직항이 있나?&rdquo;를 반복해서 확인하는 것이다.</p></div>
-</div><div class="scroll"><table class="fill"><tr><th style="width:60px">상황</th><th style="width:15%">더 유리한 표현</th><th>근거 ① 밀도</th><th>근거 ② 질의 종류</th></tr><tr><td class="lab">X</td><td class="in-cell"><select class="in" data-key="Q1.x.choice" data-label="Q1 X 유리한 표현"><option value=""></option><option value="인접 행렬">인접 행렬</option><option value="인접 리스트">인접 리스트</option></select></td><td class="in-cell"><textarea class="in" rows="3" data-key="Q1.x.density" data-label="Q1 X 근거 밀도"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="Q1.x.query" data-label="Q1 X 근거 질의 종류"></textarea></td></tr><tr><td class="lab">Y</td><td class="in-cell"><select class="in" data-key="Q1.y.choice" data-label="Q1 Y 유리한 표현"><option value=""></option><option value="인접 행렬">인접 행렬</option><option value="인접 리스트">인접 리스트</option></select></td><td class="in-cell"><textarea class="in" rows="3" data-key="Q1.y.density" data-label="Q1 Y 근거 밀도"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="Q1.y.query" data-label="Q1 Y 근거 질의 종류"></textarea></td></tr></table></div>
+</div><div class="scroll"><table class="fill"><tr><th style="width:60px">상황</th><th style="width:15%">더 유리한 표현</th><th>근거 ① 밀도</th><th>근거 ② 질의 종류</th></tr><tr><td class="lab">X</td><td class="in-cell"><select class="in" data-key="Q1.x.choice" data-label="Q1 X 유리한 표현"><option value=""></option><option value="인접 행렬">인접 행렬</option><option value="인접 리스트">인접 리스트</option></select></td><td class="in-cell"><textarea class="in" rows="3" data-key="Q1.x.density" placeholder="밀도 높음/낮음 + 숫자 근거 1~2문장" data-label="Q1 X 근거 밀도"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="Q1.x.query" placeholder="질의 종류 + 이유 1~2문장" data-label="Q1 X 근거 질의 종류"></textarea></td></tr><tr><td class="lab">Y</td><td class="in-cell"><select class="in" data-key="Q1.y.choice" data-label="Q1 Y 유리한 표현"><option value=""></option><option value="인접 행렬">인접 행렬</option><option value="인접 리스트">인접 리스트</option></select></td><td class="in-cell"><textarea class="in" rows="3" data-key="Q1.y.density" placeholder="밀도 높음/낮음 + 숫자 근거 1~2문장" data-label="Q1 Y 근거 밀도"></textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="Q1.y.query" placeholder="질의 종류 + 이유 1~2문장" data-label="Q1 Y 근거 질의 종류"></textarea></td></tr></table></div>
 <h3>Q2 · 저장량 계산</h3>
-<p>상황 X와 Y에서 인접 행렬의 칸 수와 인접 리스트의 원소 수를 구하시오(무방향 간선 1개는 원소 2개). 그리고 두 표현의 차이가 X와 Y에서 어떻게 다른지 한 문장으로 쓰시오.</p><div class="scroll"><table class="fill"><tr><th style="width:40%">상황</th><th>인접 행렬 칸 수</th><th>인접 리스트 원소 수</th></tr><tr><td class="lab">X (N=2000, E=3000)</td><td class="in-cell"><input type="text" class="in" data-key="Q2.x.cells" data-label="Q2 X 행렬 칸 수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q2.x.elems" data-label="Q2 X 리스트 원소 수" autocomplete="off"></td></tr><tr><td class="lab">Y (N=50, E=1200)</td><td class="in-cell"><input type="text" class="in" data-key="Q2.y.cells" data-label="Q2 Y 행렬 칸 수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q2.y.elems" data-label="Q2 Y 리스트 원소 수" autocomplete="off"></td></tr></table></div>
-<div class="ans-row"><span class="n">차이</span><textarea class="in" rows="2" data-key="Q2.diff" data-label="Q2 두 표현의 차이가 X와 Y에서 어떻게 다른가 한 문장"></textarea></div>
+<p>상황 X와 Y에서 인접 행렬의 칸 수와 인접 리스트의 원소 수를 구하시오(무방향 간선 1개는 원소 2개). 그리고 두 표현의 차이가 X와 Y에서 어떻게 다른지 한 문장으로 쓰시오.</p>
+<p class="how">쓰는 법: 칸에는 숫자를 쓰고, 계산식은 괄호 안에 써도 된다. 차이 칸은 한 문장이다.</p><div class="scroll"><table class="fill"><tr><th style="width:40%">상황</th><th>인접 행렬 칸 수</th><th>인접 리스트 원소 수</th></tr><tr><td class="lab">X (N=2000, E=3000)</td><td class="in-cell"><input type="text" class="in" data-key="Q2.x.cells" placeholder="숫자 (계산식)" data-label="Q2 X 행렬 칸 수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q2.x.elems" placeholder="숫자 (계산식)" data-label="Q2 X 리스트 원소 수" autocomplete="off"></td></tr><tr><td class="lab">Y (N=50, E=1200)</td><td class="in-cell"><input type="text" class="in" data-key="Q2.y.cells" placeholder="숫자 (계산식)" data-label="Q2 Y 행렬 칸 수" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="Q2.y.elems" placeholder="숫자 (계산식)" data-label="Q2 Y 리스트 원소 수" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">차이</span><textarea class="in" rows="2" data-key="Q2.diff" placeholder="X와 Y를 비교한 한 문장" data-label="Q2 두 표현의 차이가 X와 Y에서 어떻게 다른가 한 문장"></textarea></div>
 <h3>Q3 · 함정 추적</h3>
-<p>아래 코드를 실행했을 때 <b>출력되는 네 줄</b>을 순서대로 쓰고, 이상한 점이 생기는 이유를 한 문장으로 쓰시오.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="F3-1">from collections import defaultdict
+<p>아래 코드를 실행했을 때 <b>출력되는 네 줄</b>을 순서대로 쓰고, 이상한 점이 생기는 이유를 한 문장으로 쓰시오.</p>
+<p class="how">쓰는 법: 출력 값을 줄마다 그대로 쓴다(리스트는 대괄호까지). 출력이 없는 줄은 &ldquo;출력 없음&rdquo;, 오류가 나는 줄은 오류 이름을 쓴다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="F3-1">from collections import defaultdict
 
 edges = [("P", "Q"), ("P", "R"), ("R", "S"), ("S", "P"), ("S", "Q")]
 g = defaultdict(list)
@@ -165,14 +169,14 @@ def out_links(g, u):
 print(len(g))
 print(list(out_links(g, "S")))
 print(list(out_links(g, "Q")))
-print(len(g))</code></pre></div><div class="scroll"><table class="fill"><tr><th style="width:52%">출력</th><th>값</th></tr><tr><td class="lab">1번째 줄 (len(g))</td><td class="in-cell"><input type="text" class="in" data-key="Q3.o1" data-label="Q3 출력 1번째 줄 처음 len(g)" autocomplete="off"></td></tr><tr><td class="lab">2번째 줄 (list(out_links(g, "S")))</td><td class="in-cell"><input type="text" class="in" data-key="Q3.o2" data-label="Q3 출력 2번째 줄" autocomplete="off"></td></tr><tr><td class="lab">3번째 줄 (list(out_links(g, "Q")))</td><td class="in-cell"><input type="text" class="in" data-key="Q3.o3" data-label="Q3 출력 3번째 줄" autocomplete="off"></td></tr><tr><td class="lab">4번째 줄 (len(g))</td><td class="in-cell"><input type="text" class="in" data-key="Q3.o4" data-label="Q3 출력 4번째 줄 두 번째 호출 뒤 len(g)" autocomplete="off"></td></tr></table></div>
-<div class="ans-row"><span class="n">이유</span><textarea class="in" rows="2" data-key="Q3.why" data-label="Q3 이상한 점이 생기는 이유 한 문장"></textarea></div>
+print(len(g))</code></pre></div><div class="scroll"><table class="fill"><tr><th style="width:52%">출력</th><th>값</th></tr><tr><td class="lab">1번째 줄 (len(g))</td><td class="in-cell"><input type="text" class="in" data-key="Q3.o1" placeholder="출력 그대로" data-label="Q3 출력 1번째 줄 처음 len(g)" autocomplete="off"></td></tr><tr><td class="lab">2번째 줄 (list(out_links(g, "S")))</td><td class="in-cell"><input type="text" class="in" data-key="Q3.o2" placeholder="출력 그대로" data-label="Q3 출력 2번째 줄" autocomplete="off"></td></tr><tr><td class="lab">3번째 줄 (list(out_links(g, "Q")))</td><td class="in-cell"><input type="text" class="in" data-key="Q3.o3" placeholder="출력 그대로" data-label="Q3 출력 3번째 줄" autocomplete="off"></td></tr><tr><td class="lab">4번째 줄 (len(g))</td><td class="in-cell"><input type="text" class="in" data-key="Q3.o4" placeholder="출력 그대로" data-label="Q3 출력 4번째 줄 두 번째 호출 뒤 len(g)" autocomplete="off"></td></tr></table></div>
+<div class="ans-row"><span class="n">이유</span><textarea class="in" rows="2" data-key="Q3.why" placeholder="한 문장" data-label="Q3 이상한 점이 생기는 이유 한 문장"></textarea></div>
 <p><label class="ck"><input type="checkbox" data-key="Q.noai" data-label="Q 확인: AI를 사용하지 않고 풀었다"> AI를 사용하지 않고 풀었다</label></p>
 </section>
 <section id="Q4" class="sheet">
 <h2>Q4 · 보조 문항: 부작용 없게 고쳐 쓰기<small>수업 밖 선택·과제</small></h2>
 <p class="note">이 문항은 보조 문항이다. 수업 시간(A14)에는 Q1~Q3만 풀고, Q4는 수업 밖에서 선택으로 풀거나 주간 과제의 일부로 푼다.</p>
-<p>Q3의 <code class="i">out_links</code>를 <b>그래프 <code class="i">g</code>가 변하지 않도록</b> 고쳐 쓰시오. 노드 <code class="i">u</code>가 <code class="i">g</code>에 없으면 아무것도 내주지 않아야 한다.</p><textarea class="in" rows="2" data-key="Q4.note" data-label="Q4 풀이 생각"></textarea><p class="hint">Q3의 코드는 위 블록의 [복사]로 복사해 이 편집기에 붙여 넣은 뒤 고쳐 쓴다. [▶ 실행]으로 확인할 수 있다.</p><textarea class="in code" rows="9" data-type="code" data-noex data-key="Q4.code" data-label="Q4 고쳐 쓴 out_links 코드" spellcheck="false"></textarea>
+<p>Q3의 <code class="i">out_links</code>를 <b>그래프 <code class="i">g</code>가 변하지 않도록</b> 고쳐 쓰시오. 노드 <code class="i">u</code>가 <code class="i">g</code>에 없으면 아무것도 내주지 않아야 한다.</p><p class="how">쓰는 법: 풀이 생각 칸에는 어떻게 고칠지 1~2문장으로 쓴다. 풀지 않았으면 &ldquo;풀지 않음&rdquo;이라고 쓴다.</p><textarea class="in" rows="2" data-key="Q4.note" placeholder="고칠 방법 1~2문장. 안 풀었으면 풀지 않음" data-label="Q4 풀이 생각"></textarea><p class="hint">Q3의 코드는 위 블록의 [복사]로 복사해 이 편집기에 붙여 넣은 뒤 고쳐 쓴다. [▶ 실행]으로 확인할 수 있다.</p><textarea class="in code" rows="9" data-type="code" data-noex data-key="Q4.code" data-label="Q4 고쳐 쓴 out_links 코드" spellcheck="false"></textarea>
 </section>
 </div>
 <script id="week10-submit">
