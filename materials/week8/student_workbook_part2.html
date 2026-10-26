@@ -96,6 +96,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 .mycode{margin:8px 0 12px}
 .mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
 .hint{font-size:12px;color:#5b6b85;margin:2px 0}
+.how{font-size:12.5px;color:#8a3b00;font-weight:600;margin:2px 0}
 .ck{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
 .ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
 .rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
@@ -123,7 +124,7 @@ table.fill td.in-cell{padding:3px;height:auto}
   <div class="prompt">&gt;&gt;&gt; workbook.week(8, part=2)  # 학생용 · 3차시 탐구 활동지 A11~A16</div>
   <h1>8주차 탐구 활동지 2부 — 3차시</h1>
   <p class="lead">3차시 A11 시작 때 받는다. 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 확인할 내용은 활동을 마친 뒤 여는 초록색 상자에만 있다. 빈칸은 스스로 채운다.</p>
-  <p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><label class="ck">모둠 <input type="text" class="in" style="width:8em;display:inline-block" data-key="meta.group" data-label="모둠" autocomplete="off"></label></p>
+  <p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><label class="ck">모둠(모둠 번호나 이름만 쓴다. 내 이름이 아니다. 혼자 하면 &ldquo;개인&rdquo;) <input type="text" class="in" style="width:8em;display:inline-block" data-key="meta.group" placeholder="예: 3모둠" data-label="모둠" autocomplete="off"></label></p>
 </header>
 <nav><a href="#A11">A11</a><a href="#A12">A12</a><a href="#A13">A13</a><a href="#A14">A14</a><a href="#A15">A15</a><a href="#A16">A16</a><a href="student_workbook.html">1~2차시 활동지</a><a href="index.html">목록</a></nav>
 
@@ -137,10 +138,10 @@ table.fill td.in-cell{padding:3px;height:auto}
 <li>예측은 실행하기 전에 두 출력을 리스트로 직접 쓴다.</li>
 <li>실행한 뒤 &lsquo;같은가?&rsquo;는 예측과 실제를 견주어 고른다.</li></ul>
 </div>
-<table class="fill"><tr><th style="width:90px">호출</th><th>예측</th><th>실제 출력</th><th style="width:14%">같은가?</th></tr>
-<tr><td class="lab">첫 번째</td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r1.c1" data-label="A11 예측-실제 비교표 첫 번째 · 예측" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r1.c2" data-label="A11 예측-실제 비교표 첫 번째 · 실제 출력" autocomplete="off"></td><td class="in-cell"><select class="in" data-key="A11.predict.r1.c3" data-label="A11 예측-실제 비교표 첫 번째 · 같은가?"><option value="">선택</option><option value="같다">같다</option><option value="다르다">다르다</option></select></td></tr><tr><td class="lab">두 번째</td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r2.c1" data-label="A11 예측-실제 비교표 두 번째 · 예측" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r2.c2" data-label="A11 예측-실제 비교표 두 번째 · 실제 출력" autocomplete="off"></td><td class="in-cell"><select class="in" data-key="A11.predict.r2.c3" data-label="A11 예측-실제 비교표 두 번째 · 같은가?"><option value="">선택</option><option value="같다">같다</option><option value="다르다">다르다</option></select></td></tr></table>
-<p><b>생각해 볼 질문</b> 두 번째 호출의 결과는 왜 이렇게 나왔는가? 리스트는 언제, 몇 번 만들어졌다고 생각하는가? (짐작이라도 적는다.)</p>
-<textarea class="in l" rows="5" data-key="A11.reason" data-label="A11 두 번째 호출 결과의 이유"></textarea>
+<p class="how">쓰는 법: &ldquo;예측&rdquo;은 실행 전에 출력할 값을 대괄호와 쉼표로 쓴다(꼴: [1, 2, 3]). &ldquo;실제 출력&rdquo;은 실행한 뒤 화면에 나온 것을 그대로 옮긴다. 마지막 칸에서 같은가를 고른다. 예측은 틀려도 된다.</p><table class="fill"><tr><th style="width:90px">호출</th><th>예측</th><th>실제 출력</th><th style="width:14%">같은가?</th></tr>
+<tr><td class="lab">첫 번째</td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r1.c1" placeholder="대괄호와 쉼표로" data-label="A11 예측-실제 비교표 첫 번째 · 예측" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r1.c2" placeholder="대괄호와 쉼표로" data-label="A11 예측-실제 비교표 첫 번째 · 실제 출력" autocomplete="off"></td><td class="in-cell"><select class="in" data-key="A11.predict.r1.c3" data-label="A11 예측-실제 비교표 첫 번째 · 같은가?"><option value="">선택</option><option value="같다">같다</option><option value="다르다">다르다</option></select></td></tr><tr><td class="lab">두 번째</td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r2.c1" placeholder="대괄호와 쉼표로" data-label="A11 예측-실제 비교표 두 번째 · 예측" autocomplete="off"></td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r2.c2" placeholder="대괄호와 쉼표로" data-label="A11 예측-실제 비교표 두 번째 · 실제 출력" autocomplete="off"></td><td class="in-cell"><select class="in" data-key="A11.predict.r2.c3" data-label="A11 예측-실제 비교표 두 번째 · 같은가?"><option value="">선택</option><option value="같다">같다</option><option value="다르다">다르다</option></select></td></tr></table>
+<p><b>생각해 볼 질문</b> ① 두 번째 호출의 결과는 왜 이렇게 나왔는가? ② 리스트는 언제, 몇 번 만들어졌다고 생각하는가? (짐작이라도 적는다.)</p><p class="how">쓰는 법: ①②를 번호를 붙여 2~3문장으로 쓴다. 모르면 짐작한 것을 쓰고 &ldquo;짐작&rdquo;이라고 덧붙인다.</p>
+<textarea class="in l" rows="5" data-key="A11.reason" placeholder="① … ② …" data-label="A11 두 번째 호출 결과의 이유"></textarea>
 <p>먼저 위 칸에 자기 말로 쓴 뒤 연다.</p>
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 예측 정답</summary>
 <ul><li>첫 번째 <code class="i">[1, 2, 3, 4, 5, 6, 7]</code>, 두 번째 <code class="i">[1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7]</code>(14개)이다.</li>
@@ -159,24 +160,24 @@ table.fill td.in-cell{padding:3px;height:auto}
 </div>
 <h3>관찰</h3>
 <p>수정하기 전에 코드 쪽 A12의 관찰 칸에서 관찰 코드를 먼저 실행하고, 출력을 아래 표에 옮긴다.</p>
-<table class="fill"><tr><th style="width:55%">관찰 코드</th><th>출력</th></tr>
-<tr><td class="lab">함수를 한 번도 호출하기 전 <code class="i">collect_inorder.__defaults__</code></td><td class="in-cell"><input type="text" class="in" data-key="A12.observe.r1.c1" data-label="A12 __defaults__ 관찰 출력 함수를 한 번도 호출하기 전 collect_inorder.__defaul… · 출력" autocomplete="off"></td></tr>
-<tr><td class="lab">한 번 호출한 뒤 <code class="i">collect_inorder.__defaults__</code></td><td class="in-cell"><input type="text" class="in" data-key="A12.observe.r2.c1" data-label="A12 __defaults__ 관찰 출력 한 번 호출한 뒤 collect_inorder.__defaults__ · 출력" autocomplete="off"></td></tr></table>
-<p>기본값 식은 언제 평가되는가? 관찰 결과에 근거해 내 생각을 적는다.</p>
-<textarea class="in" rows="3" data-key="A12.when" data-label="A12 기본값 식이 평가되는 시점"></textarea>
+<p class="how">쓰는 법: 코드를 실행해 화면에 나온 출력을 괄호나 대괄호까지 그대로 옮긴다.</p><table class="fill"><tr><th style="width:55%">관찰 코드</th><th>출력</th></tr>
+<tr><td class="lab">함수를 한 번도 호출하기 전 <code class="i">collect_inorder.__defaults__</code></td><td class="in-cell"><input type="text" class="in" data-key="A12.observe.r1.c1" placeholder="화면에 나온 출력 그대로" data-label="A12 __defaults__ 관찰 출력 함수를 한 번도 호출하기 전 collect_inorder.__defaul… · 출력" autocomplete="off"></td></tr>
+<tr><td class="lab">한 번 호출한 뒤 <code class="i">collect_inorder.__defaults__</code></td><td class="in-cell"><input type="text" class="in" data-key="A12.observe.r2.c1" placeholder="화면에 나온 출력 그대로" data-label="A12 __defaults__ 관찰 출력 한 번 호출한 뒤 collect_inorder.__defaults__ · 출력" autocomplete="off"></td></tr></table>
+<p>기본값 식은 언제 평가되는가? 관찰 결과에 근거해 내 생각을 적는다.</p><p class="how">쓰는 법: 한 문장으로 쓴다. 언제 평가되는지(함수를 정의할 때 / 호출할 때마다 / 그 밖 중 하나)를 먼저 쓰고, 위 출력 중 근거를 덧붙인다.</p>
+<textarea class="in" rows="3" data-key="A12.when" placeholder="한 문장" data-label="A12 기본값 식이 평가되는 시점"></textarea>
 <h3>수정 결과</h3>
-<p>수정한 코드에서 바꾸기 전 줄과 바꾼 뒤 줄을 그대로 옮겨 적는다. 테스트 통과 여부를 표시한다. <span class="rg" data-key="A12.fix.pass" data-type="radio" data-label="A12 수정한 코드의 테스트 통과 여부"><label><input type="radio" name="A12pass" value="통과"> 통과</label><label><input type="radio" name="A12pass" value="미통과"> 미통과</label></span></p>
-<textarea class="in" rows="3" data-key="A12.fix" data-label="A12 수정한 줄(바꾸기 전·바꾼 뒤를 그대로)"></textarea>
-<p><b>한 줄 원인 설명</b> 처음 코드에서 두 번째 호출의 결과가 달라진 원인을 한 줄로 쓴다.</p>
-<textarea class="in" rows="3" data-key="A12.cause" data-label="A12 한 줄 원인 설명"></textarea>
+<p>수정한 코드에서 바꾸기 전 줄과 바꾼 뒤 줄을 그대로 옮겨 적는다. 테스트 통과 여부를 표시한다. 칸에는 바꾸기 전 줄과 바꾼 뒤 줄을 &ldquo;전: …&rdquo;, &ldquo;후: …&rdquo; 꼴로 한 줄씩 쓴다. <span class="rg" data-key="A12.fix.pass" data-type="radio" data-label="A12 수정한 코드의 테스트 통과 여부"><label><input type="radio" name="A12pass" value="통과"> 통과</label><label><input type="radio" name="A12pass" value="미통과"> 미통과</label></span></p>
+<textarea class="in" rows="3" data-key="A12.fix" placeholder="전: (코드 줄)&#10;후: (코드 줄)" data-label="A12 수정한 줄(바꾸기 전·바꾼 뒤를 그대로)"></textarea>
+<p><b>한 줄 원인 설명</b> 처음 코드에서 두 번째 호출의 결과가 달라진 원인을 한 줄로 쓴다.</p><p class="how">쓰는 법: 한 문장으로 쓴다.</p>
+<textarea class="in" rows="3" data-key="A12.cause" placeholder="한 문장" data-label="A12 한 줄 원인 설명"></textarea>
 <h3>대안 비교</h3>
-<p>수정을 끝낸 뒤에 이 표를 채운다. 같은 목적(호출마다 새 결과 리스트를 쓰기)을 이루는 방법을 서로 다른 것으로 세 가지 찾아, 방법 이름을 첫 칸에 쓰고 호출하는 모습, 좋은 점, 치르는 대가를 적는다. 세 가지가 안 떠오르면 짝에게 묻는다.</p>
+<p>수정을 끝낸 뒤에 이 표를 채운다. 같은 목적(호출마다 새 결과 리스트를 쓰기)을 이루는 방법을 서로 다른 것으로 찾아, 방법 이름을 첫 칸에 쓰고 호출하는 모습, 좋은 점, 치르는 대가를 적는다. 첫째·둘째 줄은 필수이고 셋째 줄은 (선택)이다. 안 떠오르면 짝에게 묻는다.</p><p class="how">쓰는 법: 줄마다 서로 다른 방법이다. 방법 이름은 짧은 말, 호출하는 모습은 호출 코드 한 줄, 좋은 점과 대가는 각각 한 문장으로 쓴다.</p>
 <table class="fill"><tr><th style="width:26%">방법 이름</th><th>호출하는 모습</th><th>좋은 점</th><th>대가</th></tr>
-<tr><td class="in-cell"><textarea class="in" rows="2" data-key="A12.alt.r1.c0" data-label="A12 대안 비교 1행 · 방법 이름" aria-label="대안 1 방법 이름"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r1.c1" data-label="A12 대안 비교 1행 · 호출하는 모습"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r1.c2" data-label="A12 대안 비교 1행 · 좋은 점"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r1.c3" data-label="A12 대안 비교 1행 · 대가"></textarea></td></tr>
-<tr><td class="in-cell"><textarea class="in" rows="2" data-key="A12.alt.r2.c0" data-label="A12 대안 비교 2행 · 방법 이름" aria-label="대안 2 방법 이름"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r2.c1" data-label="A12 대안 비교 2행 · 호출하는 모습"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r2.c2" data-label="A12 대안 비교 2행 · 좋은 점"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r2.c3" data-label="A12 대안 비교 2행 · 대가"></textarea></td></tr>
-<tr><td class="in-cell"><textarea class="in" rows="2" data-key="A12.alt.r3.c0" data-label="A12 대안 비교 3행 · 방법 이름" aria-label="대안 3 방법 이름"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r3.c1" data-label="A12 대안 비교 3행 · 호출하는 모습"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r3.c2" data-label="A12 대안 비교 3행 · 좋은 점"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r3.c3" data-label="A12 대안 비교 3행 · 대가"></textarea></td></tr></table>
-<p><b>생각해 볼 질문</b> 위에 쓴 세 방법 가운데 함수 안에 조건문(<code class="i">if</code>)이 필요 없는 방법은 어느 것인가? 그 방법은 어떤 대가를 치르는가?</p>
-<textarea class="in" rows="3" data-key="A12.none" data-label="A12 None 검사 없이 해결할 방법"></textarea>
+<tr><td class="in-cell"><textarea class="in" rows="2" data-key="A12.alt.r1.c0" placeholder="방법 이름(짧게)" data-label="A12 대안 비교 1행 · 방법 이름" aria-label="대안 1 방법 이름"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r1.c1" placeholder="호출 코드 한 줄" data-label="A12 대안 비교 1행 · 호출하는 모습"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r1.c2" placeholder="한 문장" data-label="A12 대안 비교 1행 · 좋은 점"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r1.c3" placeholder="한 문장" data-label="A12 대안 비교 1행 · 대가"></textarea></td></tr>
+<tr><td class="in-cell"><textarea class="in" rows="2" data-key="A12.alt.r2.c0" placeholder="방법 이름(짧게)" data-label="A12 대안 비교 2행 · 방법 이름" aria-label="대안 2 방법 이름"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r2.c1" placeholder="호출 코드 한 줄" data-label="A12 대안 비교 2행 · 호출하는 모습"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r2.c2" placeholder="한 문장" data-label="A12 대안 비교 2행 · 좋은 점"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r2.c3" placeholder="한 문장" data-label="A12 대안 비교 2행 · 대가"></textarea></td></tr>
+<tr><td class="in-cell"><textarea class="in" rows="2" data-key="A12.alt.r3.c0" placeholder="방법 이름(짧게) (선택)" data-label="A12 대안 비교 3행 · 방법 이름" aria-label="대안 3 방법 이름"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r3.c1" placeholder="호출 코드 한 줄" data-label="A12 대안 비교 3행 · 호출하는 모습"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r3.c2" placeholder="한 문장" data-label="A12 대안 비교 3행 · 좋은 점"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r3.c3" placeholder="한 문장" data-label="A12 대안 비교 3행 · 대가"></textarea></td></tr></table>
+<p><b>생각해 볼 질문</b> 위에 쓴 방법 가운데 함수 안에 조건문(<code class="i">if</code>)이 필요 없는 방법은 어느 것인가? 그 방법은 어떤 대가를 치르는가?</p><p class="how">쓰는 법: 방법 이름을 먼저 쓰고 대가를 한 문장으로 쓴다. 해당하는 방법이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p>
+<textarea class="in" rows="3" data-key="A12.none" placeholder="방법 이름. 대가 한 문장" data-label="A12 None 검사 없이 해결할 방법"></textarea>
 <p>먼저 위 칸에 자기 말로 쓴 뒤 연다.</p>
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 원인, 수정, 대안</summary>
 <ul><li><b>원인</b>: 기본값 <code class="i">[]</code>은 <code class="i">def</code>가 실행되어 함수가 만들어질 때 한 번만 만들어져 함수에 저장되고, 모든 호출이 같은 리스트를 공유한다. <code class="i">__defaults__</code>가 <code class="i">([],)</code>에서 호출 뒤 값이 든 리스트로 바뀐 것이 증거이다. 한 번의 순회 안에서는 재귀 호출이 <code class="i">visited</code>를 명시적으로 넘겨 정상으로 보이다가, 인자 없이 부르는 두 번째 호출에서 드러난다.</li></ul>
@@ -198,18 +199,18 @@ table.fill td.in-cell{padding:3px;height:auto}
 <ol><li>모둠원의 A10 초안을 서로 읽고, 사례 이름(T1, 폴더 이름, 숫자 값)을 개념어로 바꾼다.</li><li>&ldquo;개념 + 개념 + 관계&rdquo; 형태인지 확인한다(관계는 &lsquo;~이면&rsquo;, &lsquo;~하므로&rsquo;, &lsquo;~에 따라&rsquo; 같은 말로 드러난다).</li><li>&lsquo;이 트리만&rsquo;이라는 한정을 지워도 문장이 성립하는지 시험한다.</li><li>칸 1~4에는 각 칸의 근거 활동에서 발견한 것을 한 문장씩 쓴다. 문장을 고칠 때마다 수정 이력에 무엇을 왜 고쳤는지 적는다.</li></ol>
 <p>이 활동지의 &lsquo;일반화 문장&rsquo; 상자는 우리 문장을 다 쓰고 폴더로 확인한 뒤에 연다. 시간은 약 9분이며 모둠 정제 6분, 대조 3분으로 나눈다.</p>
 </div>
-<table class="fill"><tr><th style="width:90px">칸</th><th style="width:18%">근거 활동</th><th>우리 모둠의 문장</th></tr>
-<tr><td class="lab">칸 1</td><td>A2, A3, A6</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r1.c2" data-label="A13 우리 모둠의 문장 칸 1 · 우리 모둠의 문장"></textarea></td></tr>
-<tr><td class="lab">칸 2</td><td>A4, A7, A8</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r2.c2" data-label="A13 우리 모둠의 문장 칸 2 · 우리 모둠의 문장"></textarea></td></tr>
-<tr><td class="lab">칸 3</td><td>A7, A9</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r3.c2" data-label="A13 우리 모둠의 문장 칸 3 · 우리 모둠의 문장"></textarea></td></tr>
-<tr><td class="lab">칸 4</td><td>A11, A12</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r4.c2" data-label="A13 우리 모둠의 문장 칸 4 · 우리 모둠의 문장"></textarea></td></tr></table>
-<h3>수정 이력</h3>
+<p class="how">쓰는 법: 칸마다 근거 활동에서 모둠이 발견한 것을 일반화한 한 문장을 쓴다. 문장에서 &lsquo;이 트리만&rsquo;이라는 말은 뺀다.</p><table class="fill"><tr><th style="width:90px">칸</th><th style="width:18%">근거 활동</th><th>우리 모둠의 문장</th></tr>
+<tr><td class="lab">칸 1</td><td>A2, A3, A6</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r1.c2" placeholder="한 문장" data-label="A13 우리 모둠의 문장 칸 1 · 우리 모둠의 문장"></textarea></td></tr>
+<tr><td class="lab">칸 2</td><td>A4, A7, A8</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r2.c2" placeholder="한 문장" data-label="A13 우리 모둠의 문장 칸 2 · 우리 모둠의 문장"></textarea></td></tr>
+<tr><td class="lab">칸 3</td><td>A7, A9</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r3.c2" placeholder="한 문장" data-label="A13 우리 모둠의 문장 칸 3 · 우리 모둠의 문장"></textarea></td></tr>
+<tr><td class="lab">칸 4</td><td>A11, A12</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r4.c2" placeholder="한 문장" data-label="A13 우리 모둠의 문장 칸 4 · 우리 모둠의 문장"></textarea></td></tr></table>
+<h3>수정 이력</h3><p class="how">쓰는 법: v1에는 처음 모은 문장을 만든 방법을, v2·v3에는 앞 버전에서 고친 내용과 이유를 한 문장씩 쓴다. 고치지 않았으면 &ldquo;고치지 않음&rdquo;이라고 쓴다. v3은 (선택)이다.</p>
 <table class="fill"><tr><th style="width:70px">버전</th><th>고친 내용</th><th style="width:36%">고친 이유</th></tr>
-<tr><td class="lab">v1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r1.c1" data-label="A13 수정 이력 v1 · 고친 내용"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r1.c2" data-label="A13 수정 이력 v1 · 고친 이유"></textarea></td></tr><tr><td class="lab">v2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r2.c1" data-label="A13 수정 이력 v2 · 고친 내용"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r2.c2" data-label="A13 수정 이력 v2 · 고친 이유"></textarea></td></tr><tr><td class="lab">v3</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r3.c1" data-label="A13 수정 이력 v3 · 고친 내용"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r3.c2" data-label="A13 수정 이력 v3 · 고친 이유"></textarea></td></tr></table>
-<p><b>점검 질문</b> 문장에서 &lsquo;이 트리만&rsquo;을 지울 수 있는가? 다른 구조(그래프, 폴더)에도 성립하는가?</p>
-<textarea class="in" rows="3" data-key="A13.check" data-label="A13 점검 질문 답"></textarea>
-<p><b>폴더로 확인하기</b> 폴더 구조에서 &ldquo;폴더 안 파일 크기의 총합&rdquo;을 구하려면 폴더 자신의 처리와 자식 폴더의 처리 중 무엇이 먼저 끝나야 하는가? 어느 순회와 같은가? 위에서 쓴 우리 모둠의 문장이 이 사례에도 맞는지 확인하고, 맞지 않으면 문장을 고친다.</p>
-<textarea class="in" rows="3" data-key="A13.folder" data-label="A13 폴더 크기 총합 사례로 일반화 문장 확인"></textarea>
+<tr><td class="lab">v1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r1.c1" placeholder="한 문장" data-label="A13 수정 이력 v1 · 고친 내용"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r1.c2" placeholder="한 문장" data-label="A13 수정 이력 v1 · 고친 이유"></textarea></td></tr><tr><td class="lab">v2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r2.c1" placeholder="한 문장" data-label="A13 수정 이력 v2 · 고친 내용"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r2.c2" placeholder="한 문장" data-label="A13 수정 이력 v2 · 고친 이유"></textarea></td></tr><tr><td class="lab">v3</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r3.c1" placeholder="한 문장" data-label="A13 수정 이력 v3 · 고친 내용"></textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r3.c2" placeholder="한 문장" data-label="A13 수정 이력 v3 · 고친 이유"></textarea></td></tr></table>
+<p><b>점검 질문</b> 문장에서 &lsquo;이 트리만&rsquo;을 지울 수 있는가? 다른 구조(그래프, 폴더)에도 성립하는가?</p><p class="how">쓰는 법: 질문마다 &ldquo;가능하다/불가능하다&rdquo;, &ldquo;성립한다/성립하지 않는다&rdquo; 중 하나를 먼저 쓰고 이유를 한 문장으로 쓴다.</p>
+<textarea class="in" rows="3" data-key="A13.check" placeholder="① 가능/불가능 … ② 성립/불성립 …" data-label="A13 점검 질문 답"></textarea>
+<p><b>폴더로 확인하기</b> 폴더 구조에서 &ldquo;폴더 안 파일 크기의 총합&rdquo;을 구하려 한다. ① 폴더 자신의 처리와 자식 폴더의 처리 중 무엇이 먼저 끝나야 하는가? ② 어느 순회와 같은가? ③ 위에서 쓴 우리 모둠의 문장이 이 사례에도 맞는가(맞지 않으면 문장을 고친다)?</p><p class="how">쓰는 법: ①②③ 번호를 붙여 3문장 이내로 쓴다. ②는 순회 이름, ③은 &ldquo;맞다&rdquo;나 &ldquo;고쳤다&rdquo;로 시작한다.</p>
+<textarea class="in" rows="3" data-key="A13.folder" placeholder="① … ② 순회 이름 ③ 맞다/고쳤다 …" data-label="A13 폴더 크기 총합 사례로 일반화 문장 확인"></textarea>
 <p>먼저 위 칸에 우리 모둠의 문장을 쓰고 폴더로 확인한 뒤 연다.</p>
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 오늘의 일반화 G1~G4</summary>
 <p>이 단원에서 이끌어 내는 네 문장이다. 우리 문장과 견주어 같은 점과 다른 점을 아래 &lsquo;공개 후 비교&rsquo; 칸에 쓴다. 베껴 쓰지 말고 우리 문장을 고치는 근거로 쓴다.</p>
@@ -217,8 +218,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>비교 요령: 각 문장에서 개념 둘과 관계를 찾아 우리 문장에 같은 요소가 있는지 본다. &lsquo;이 트리만&rsquo;을 지울 수 있는지, 그래프나 폴더 같은 다른 구조에도 성립하는지 묻는다. G3에서는 &lsquo;BST는 항상 빠르다&rsquo;처럼 지나치게 넓힌 문장을 경계한다.</p>
 </details>
 
-<p><b>공개 후 비교</b> 위 상자의 문장과 우리 문장의 같은 점, 다른 점을 적는다.</p>
-<textarea class="in l" rows="5" data-key="A13.compare" data-label="A13 공개 후 비교"></textarea>
+<p><b>공개 후 비교</b> 위 상자의 문장과 우리 문장의 같은 점, 다른 점을 적는다.</p><p class="how">쓰는 법: 같은 점 한 문장, 다른 점 한 문장으로 쓴다. 다른 점이 없으면 &ldquo;다른 점 없음&rdquo;이라고 쓴다.</p>
+<textarea class="in l" rows="5" data-key="A13.compare" placeholder="같은 점: … 다른 점: …" data-label="A13 공개 후 비교"></textarea>
 </section>
 
 <section id="A14" class="sheet">
@@ -238,17 +239,17 @@ table.fill td.in-cell{padding:3px;height:auto}
 <li><b>(나) 전이 연습</b>은 채점하지 않는 보조 연습이며 안내는 코드 쪽 A14에 있다.</li>
 <li><b>토론 D1</b>: 먼저 내 생각과 반대되는 입장에서 가장 강한 근거를 찾고, 그 근거를 읽은 뒤의 내 입장과 이유를 쓴다.</li></ul>
 </div>
-<table class="fill"><tr><th>점검 항목</th><th style="width:16%">결과</th><th style="width:34%">메모</th></tr>
-<tr><td class="lab">순회 코드를 바꾸지 않고 T6(삽입 <code class="i">[40, 20, 60, 10, 30, 50, 70]</code>)에서 세 순회가 통과하는가</td><td class="in-cell"><select class="in" data-key="A14.check.r1.c1" data-label="A14 마무리 점검 순회 코드를 바꾸지 않고 T6(삽입 [40, 20, 60, 10, 30,… · 결과"><option value="">선택</option><option value="통과">통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r1.c2" data-label="A14 마무리 점검 순회 코드를 바꾸지 않고 T6(삽입 [40, 20, 60, 10, 30,… · 메모"></textarea></td></tr>
-<tr><td class="lab">같은 함수를 여러 번 호출하거나 다른 트리에 호출해도 결과가 섞이지 않는가</td><td class="in-cell"><select class="in" data-key="A14.check.r2.c1" data-label="A14 마무리 점검 같은 함수를 여러 번 호출하거나 다른 트리에 호출해도 결과가 섞이지 않는… · 결과"><option value="">선택</option><option value="통과">통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r2.c2" data-label="A14 마무리 점검 같은 함수를 여러 번 호출하거나 다른 트리에 호출해도 결과가 섞이지 않는… · 메모"></textarea></td></tr>
-<tr><td class="lab">빈 트리, 한쪽 자식만 있는 노드, 편향 트리(T5)에서 동작하는가</td><td class="in-cell"><select class="in" data-key="A14.check.r3.c1" data-label="A14 마무리 점검 빈 트리, 한쪽 자식만 있는 노드, 편향 트리(T5)에서 동작하는가 · 결과"><option value="">선택</option><option value="통과">통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r3.c2" data-label="A14 마무리 점검 빈 트리, 한쪽 자식만 있는 노드, 편향 트리(T5)에서 동작하는가 · 메모"></textarea></td></tr>
-<tr><td class="lab">(보조 연습, 채점 대상 아님) inorder_list·height 테스트 통과</td><td class="in-cell"><select class="in" data-key="A14.check.r4.c1" data-label="A14 마무리 점검 (보조 연습, 채점 대상 아님) inorder_list·height 테스… · 결과"><option value="">선택</option><option value="통과">통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r4.c2" data-label="A14 마무리 점검 (보조 연습, 채점 대상 아님) inorder_list·height 테스… · 메모"></textarea></td></tr></table>
+<p class="how">쓰는 법: 결과 칸에서 통과/미통과를 고른다. 메모 칸은 미통과일 때 실패한 경우와 이유를 한 문장으로 쓰고, 통과이면 비워 둔다. 넷째 줄은 보조 연습이므로 (선택)이다.</p><table class="fill"><tr><th>점검 항목</th><th style="width:16%">결과</th><th style="width:34%">메모</th></tr>
+<tr><td class="lab">순회 코드를 바꾸지 않고 T6(삽입 <code class="i">[40, 20, 60, 10, 30, 50, 70]</code>)에서 세 순회가 통과하는가</td><td class="in-cell"><select class="in" data-key="A14.check.r1.c1" data-label="A14 마무리 점검 순회 코드를 바꾸지 않고 T6(삽입 [40, 20, 60, 10, 30,… · 결과"><option value="">선택</option><option value="통과">통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r1.c2" placeholder="미통과일 때 이유 한 문장" data-label="A14 마무리 점검 순회 코드를 바꾸지 않고 T6(삽입 [40, 20, 60, 10, 30,… · 메모"></textarea></td></tr>
+<tr><td class="lab">같은 함수를 여러 번 호출하거나 다른 트리에 호출해도 결과가 섞이지 않는가</td><td class="in-cell"><select class="in" data-key="A14.check.r2.c1" data-label="A14 마무리 점검 같은 함수를 여러 번 호출하거나 다른 트리에 호출해도 결과가 섞이지 않는… · 결과"><option value="">선택</option><option value="통과">통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r2.c2" placeholder="미통과일 때 이유 한 문장" data-label="A14 마무리 점검 같은 함수를 여러 번 호출하거나 다른 트리에 호출해도 결과가 섞이지 않는… · 메모"></textarea></td></tr>
+<tr><td class="lab">빈 트리, 한쪽 자식만 있는 노드, 편향 트리(T5)에서 동작하는가</td><td class="in-cell"><select class="in" data-key="A14.check.r3.c1" data-label="A14 마무리 점검 빈 트리, 한쪽 자식만 있는 노드, 편향 트리(T5)에서 동작하는가 · 결과"><option value="">선택</option><option value="통과">통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r3.c2" placeholder="미통과일 때 이유 한 문장" data-label="A14 마무리 점검 빈 트리, 한쪽 자식만 있는 노드, 편향 트리(T5)에서 동작하는가 · 메모"></textarea></td></tr>
+<tr><td class="lab">(보조 연습, 채점 대상 아님) inorder_list·height 테스트 통과</td><td class="in-cell"><select class="in" data-key="A14.check.r4.c1" data-label="A14 마무리 점검 (보조 연습, 채점 대상 아님) inorder_list·height 테스… · 결과"><option value="">선택</option><option value="통과">통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r4.c2" placeholder="(선택) 미통과일 때 이유" data-label="A14 마무리 점검 (보조 연습, 채점 대상 아님) inorder_list·height 테스… · 메모"></textarea></td></tr></table>
 <h3>토론 메모 (D1)</h3>
 <p>정렬된 데이터가 들어올 가능성이 높다면 BST는 여전히 좋은 선택인가? 대안이 있다면 무엇인가?</p>
-<p>먼저 내 생각과 반대되는 입장에서 가장 강한 근거를 한 줄로 쓴다.</p>
-<textarea class="in" rows="2" data-key="A14.d1.counter" data-label="A14 토론 D1 반대 입장의 가장 강한 근거 한 줄"></textarea>
-<p>그다음 그 근거를 읽은 뒤의 내 입장과 이유를 쓴다.</p>
-<textarea class="in l" rows="5" data-key="A14.d1" data-label="A14 토론 메모 D1"></textarea>
+<p>먼저 내 생각과 반대되는 입장에서 가장 강한 근거를 한 줄로 쓴다.</p><p class="how">쓰는 법: 한 문장으로 쓴다. 내 입장이 아니라 반대 입장이 내세울 근거를 쓴다.</p>
+<textarea class="in" rows="2" data-key="A14.d1.counter" placeholder="반대 입장의 근거 한 문장" data-label="A14 토론 D1 반대 입장의 가장 강한 근거 한 줄"></textarea>
+<p>그다음 그 근거를 읽은 뒤의 내 입장과 이유를 쓴다.</p><p class="how">쓰는 법: 3~4문장으로 쓴다. ① 내 입장(좋은 선택이다/아니다), ② 이유, ③ 위 반대 근거에 대한 답 순서로 쓴다.</p>
+<textarea class="in l" rows="5" data-key="A14.d1" placeholder="① 입장 ② 이유 ③ 반대 근거에 대한 답" data-label="A14 토론 메모 D1"></textarea>
 <p>먼저 위 토론 칸에 내 입장과 이유를 쓴 뒤 연다.</p>
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 토론 D1과 점검의 의미</summary>
 <ul><li>정렬된 데이터가 자주 들어오면 BST는 T5처럼 한쪽으로 쏠려 탐색이 O(N)이 된다. 매우 긴 편향 입력(약 1000개 이상)에서는 파이썬의 재귀 한도 때문에 RecursionError가 <b>발생할 수 있다</b>.</li>
@@ -258,8 +259,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 </details>
 
 <h3>남은 과제 계획</h3>
-<p>주간 과제로 이어서 할 일을 적는다(제출 기한 전까지 할 일 순서).</p>
-<textarea class="in" rows="3" data-key="A14.plan" data-label="A14 남은 과제 계획"></textarea>
+<p>주간 과제로 이어서 할 일을 적는다(제출 기한 전까지 할 일 순서).</p><p class="how">쓰는 법: 할 일을 순서대로 번호를 붙여 2~4줄로 쓴다.</p>
+<textarea class="in" rows="3" data-key="A14.plan" placeholder="1. …&#10;2. …" data-label="A14 남은 과제 계획"></textarea>
 </section>
 
 <section id="A15" class="sheet">
@@ -271,12 +272,12 @@ table.fill td.in-cell{padding:3px;height:auto}
 <h2>A16 · 성찰일지<small>3차시 · 6분 · 개인</small></h2>
 <h3>오개념 점검</h3>
 <p>다음 진술이 참인지 거짓인지 고르고, 오늘 활동 중 근거가 된 장면(활동 번호)을 적는다.</p>
-<table class="fill"><tr><th>진술</th><th style="width:14%">참/거짓</th><th style="width:30%">근거가 된 장면(활동 번호)</th></tr>
-<tr><td class="lab">① 부모보다 왼쪽 자식이 작고 오른쪽 자식이 크면 BST이다.</td><td class="in-cell"><select class="in" data-key="A16.tf.r1.c1" data-label="A16 진술 ① 참/거짓"><option value="">선택</option><option value="참">참</option><option value="거짓">거짓</option></select></td><td class="in-cell"><input type="text" class="in" data-key="A16.tf.r1.c2" data-label="A16 진술 ① 근거가 된 장면" aria-label="진술 1 근거가 된 장면" autocomplete="off"></td></tr>
-<tr><td class="lab">② BST에서 탐색은 항상 O(log N)이다.</td><td class="in-cell"><select class="in" data-key="A16.tf.r2.c1" data-label="A16 진술 ② 참/거짓"><option value="">선택</option><option value="참">참</option><option value="거짓">거짓</option></select></td><td class="in-cell"><input type="text" class="in" data-key="A16.tf.r2.c2" data-label="A16 진술 ② 근거가 된 장면" aria-label="진술 2 근거가 된 장면" autocomplete="off"></td></tr>
-<tr><td class="lab">③ 함수의 기본값 []는 호출할 때마다 새로 만들어진다.</td><td class="in-cell"><select class="in" data-key="A16.tf.r3.c1" data-label="A16 진술 ③ 참/거짓"><option value="">선택</option><option value="참">참</option><option value="거짓">거짓</option></select></td><td class="in-cell"><input type="text" class="in" data-key="A16.tf.r3.c2" data-label="A16 진술 ③ 근거가 된 장면" aria-label="진술 3 근거가 된 장면" autocomplete="off"></td></tr></table>
-<p>(선택) 위 세 진술 중 오늘 처음 생각을 바꾼 것은 몇 번이며, 바꾸게 한 활동은 무엇인가?</p>
-<textarea class="in" rows="2" data-key="A16.tf.changed" data-label="A16 처음 생각을 바꾼 진술 번호와 바꾸게 한 활동"></textarea>
+<p class="how">쓰는 법: 참/거짓을 고르고, 근거 칸에는 활동 번호만 쓴다(꼴: A1, A5). 근거가 된 활동이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p><table class="fill"><tr><th>진술</th><th style="width:14%">참/거짓</th><th style="width:30%">근거가 된 장면(활동 번호)</th></tr>
+<tr><td class="lab">① 부모보다 왼쪽 자식이 작고 오른쪽 자식이 크면 BST이다.</td><td class="in-cell"><select class="in" data-key="A16.tf.r1.c1" data-label="A16 진술 ① 참/거짓"><option value="">선택</option><option value="참">참</option><option value="거짓">거짓</option></select></td><td class="in-cell"><input type="text" class="in" data-key="A16.tf.r1.c2" placeholder="활동 번호 (예: A1)" data-label="A16 진술 ① 근거가 된 장면" aria-label="진술 1 근거가 된 장면" autocomplete="off"></td></tr>
+<tr><td class="lab">② BST에서 탐색은 항상 O(log N)이다.</td><td class="in-cell"><select class="in" data-key="A16.tf.r2.c1" data-label="A16 진술 ② 참/거짓"><option value="">선택</option><option value="참">참</option><option value="거짓">거짓</option></select></td><td class="in-cell"><input type="text" class="in" data-key="A16.tf.r2.c2" placeholder="활동 번호 (예: A1)" data-label="A16 진술 ② 근거가 된 장면" aria-label="진술 2 근거가 된 장면" autocomplete="off"></td></tr>
+<tr><td class="lab">③ 함수의 기본값 []는 호출할 때마다 새로 만들어진다.</td><td class="in-cell"><select class="in" data-key="A16.tf.r3.c1" data-label="A16 진술 ③ 참/거짓"><option value="">선택</option><option value="참">참</option><option value="거짓">거짓</option></select></td><td class="in-cell"><input type="text" class="in" data-key="A16.tf.r3.c2" placeholder="활동 번호 (예: A1)" data-label="A16 진술 ③ 근거가 된 장면" aria-label="진술 3 근거가 된 장면" autocomplete="off"></td></tr></table>
+<p>(선택) 위 세 진술 중 오늘 처음 생각을 바꾼 것은 몇 번이며, 바꾸게 한 활동은 무엇인가?</p><p class="how">쓰는 법: 한 문장으로 쓴다(꼴: ○번, A○). 바꾼 것이 없으면 비워 둔다.</p>
+<textarea class="in" rows="2" data-key="A16.tf.changed" placeholder="○번, A○" data-label="A16 처음 생각을 바꾼 진술 번호와 바꾸게 한 활동"></textarea>
 <p>먼저 위 표와 칸에 자기 판단을 쓴 뒤 연다.</p>
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 오개념 점검 진술의 답</summary>
 <ul><li>① 거짓: 부모와의 비교만 맞아도 BST가 아닐 수 있다(A7의 10 아래 5, 5의 오른쪽 12). 모든 부분 트리에서 성립해야 한다.</li>
@@ -284,12 +285,12 @@ table.fill td.in-cell{padding:3px;height:auto}
 <li>③ 거짓: 기본값 <code class="i">[]</code>은 함수가 정의될 때 한 번만 만들어져 모든 호출이 공유한다(A11·A12).</li>
 <li>세 진술 모두 &lsquo;원래 알고 있었다&rsquo;고 느꼈다면 ①의 반례를 직접 말해 볼 수 있는지 점검한다.</li></ul>
 </details>
-<table class="fill"><tr><th>점검 질문</th><th style="width:36%">지금의 생각</th></tr>
-<tr><td class="lab">오늘 가장 바뀐 생각은 무엇인가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r1.c1" data-label="A16 오개념 점검 오늘 가장 바뀐 생각은 무엇인가 · 지금의 생각"></textarea></td></tr>
-<tr><td class="lab">아직 헷갈리는 부분은 무엇인가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r2.c1" data-label="A16 오개념 점검 아직 헷갈리는 부분은 무엇인가 · 지금의 생각"></textarea></td></tr>
-<tr><td class="lab">(선택) 내 코드에서 AI를 쓴 부분은 어디인가(아래 AI 활용 내역에 쓰면 생략)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r3.c1" data-label="A16 오개념 점검 내 코드에서 AI를 쓴 부분은 어디인가 · 지금의 생각"></textarea></td></tr></table>
+<p class="how">쓰는 법: 첫째·둘째 줄은 한 문장씩 쓴다. 바뀐 생각이나 헷갈리는 부분이 없으면 &ldquo;없음&rdquo;이라고 쓴다. 셋째 줄은 (선택)이다.</p><table class="fill"><tr><th>점검 질문</th><th style="width:36%">지금의 생각</th></tr>
+<tr><td class="lab">오늘 가장 바뀐 생각은 무엇인가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r1.c1" placeholder="한 문장 / 없음" data-label="A16 오개념 점검 오늘 가장 바뀐 생각은 무엇인가 · 지금의 생각"></textarea></td></tr>
+<tr><td class="lab">아직 헷갈리는 부분은 무엇인가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r2.c1" placeholder="한 문장 / 없음" data-label="A16 오개념 점검 아직 헷갈리는 부분은 무엇인가 · 지금의 생각"></textarea></td></tr>
+<tr><td class="lab">(선택) 내 코드에서 AI를 쓴 부분은 어디인가(아래 AI 활용 내역에 쓰면 생략)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r3.c1" placeholder="(선택)" data-label="A16 오개념 점검 내 코드에서 AI를 쓴 부분은 어디인가 · 지금의 생각"></textarea></td></tr></table>
 <h3>AI 활용 내역 (없으면 &ldquo;사용하지 않음&rdquo;)</h3>
-<p>아래 표는 AI를 사용했을 때만 채운다.</p>
+<p>아래 표는 AI를 사용했을 때만 채운다.</p><p class="how">쓰는 법: 사용하지 않았으면 아래 체크 상자만 표시하고 표는 비워 둔다. 사용했으면 번호마다 질문 요약 한 문장, 단계 선택, 반영 여부와 이유 한 문장을 쓴다.</p>
 <div class="learn-box"><span class="lb-title">학습 내용 · AI 활용 내역을 쓰는 방법</span>
 <ul><li>AI를 쓰지 않았으면 체크 칸만 체크하고 표는 비운다.</li>
 <li>쓴 경우 한 줄에 한 번의 질문을 쓴다. <b>질문 요약</b>에는 AI에게 무엇을 시켰는지, <b>단계</b>에는 허용 또는 조건부 허용, <b>반영 여부와 이유</b>에는 답을 코드·글에 반영했는지(채택·미채택)와 그 이유를 쓴다.</li>
@@ -298,7 +299,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </div>
 <p><label class="ck"><input type="checkbox" data-key="A16.ai.none" data-label="A16 AI를 사용하지 않았음"> AI를 사용하지 않았다(사용하지 않음)</label></p>
 <table class="fill"><tr><th style="width:80px">번호</th><th>AI에게 한 질문(요약)</th><th style="width:15%">단계</th><th style="width:30%">반영 여부와 이유</th></tr>
-<tr><td class="lab">1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r1.c1" data-label="A16 AI 활용 내역 1행 · AI에게 한 질문(요약)"></textarea></td><td class="in-cell"><select class="in" data-key="A16.ai.r1.c2" data-label="A16 AI 활용 내역 1행 · 단계"><option value="">선택</option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r1.c3" data-label="A16 AI 활용 내역 1행 · 반영 여부와 이유"></textarea></td></tr><tr><td class="lab">2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r2.c1" data-label="A16 AI 활용 내역 2행 · AI에게 한 질문(요약)"></textarea></td><td class="in-cell"><select class="in" data-key="A16.ai.r2.c2" data-label="A16 AI 활용 내역 2행 · 단계"><option value="">선택</option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r2.c3" data-label="A16 AI 활용 내역 2행 · 반영 여부와 이유"></textarea></td></tr><tr><td class="lab">3</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r3.c1" data-label="A16 AI 활용 내역 3행 · AI에게 한 질문(요약)"></textarea></td><td class="in-cell"><select class="in" data-key="A16.ai.r3.c2" data-label="A16 AI 활용 내역 3행 · 단계"><option value="">선택</option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r3.c3" data-label="A16 AI 활용 내역 3행 · 반영 여부와 이유"></textarea></td></tr><tr><td class="lab">4</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r4.c1" data-label="A16 AI 활용 내역 4행 · AI에게 한 질문(요약)"></textarea></td><td class="in-cell"><select class="in" data-key="A16.ai.r4.c2" data-label="A16 AI 활용 내역 4행 · 단계"><option value="">선택</option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r4.c3" data-label="A16 AI 활용 내역 4행 · 반영 여부와 이유"></textarea></td></tr></table>
+<tr><td class="lab">1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r1.c1" placeholder="질문 요약 한 문장" data-label="A16 AI 활용 내역 1행 · AI에게 한 질문(요약)"></textarea></td><td class="in-cell"><select class="in" data-key="A16.ai.r1.c2" data-label="A16 AI 활용 내역 1행 · 단계"><option value="">선택</option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r1.c3" placeholder="반영했다/안 했다 + 이유" data-label="A16 AI 활용 내역 1행 · 반영 여부와 이유"></textarea></td></tr><tr><td class="lab">2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r2.c1" placeholder="질문 요약 한 문장" data-label="A16 AI 활용 내역 2행 · AI에게 한 질문(요약)"></textarea></td><td class="in-cell"><select class="in" data-key="A16.ai.r2.c2" data-label="A16 AI 활용 내역 2행 · 단계"><option value="">선택</option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r2.c3" placeholder="반영했다/안 했다 + 이유" data-label="A16 AI 활용 내역 2행 · 반영 여부와 이유"></textarea></td></tr><tr><td class="lab">3</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r3.c1" placeholder="질문 요약 한 문장" data-label="A16 AI 활용 내역 3행 · AI에게 한 질문(요약)"></textarea></td><td class="in-cell"><select class="in" data-key="A16.ai.r3.c2" data-label="A16 AI 활용 내역 3행 · 단계"><option value="">선택</option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r3.c3" placeholder="반영했다/안 했다 + 이유" data-label="A16 AI 활용 내역 3행 · 반영 여부와 이유"></textarea></td></tr><tr><td class="lab">4</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r4.c1" placeholder="질문 요약 한 문장" data-label="A16 AI 활용 내역 4행 · AI에게 한 질문(요약)"></textarea></td><td class="in-cell"><select class="in" data-key="A16.ai.r4.c2" data-label="A16 AI 활용 내역 4행 · 단계"><option value="">선택</option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r4.c3" placeholder="반영했다/안 했다 + 이유" data-label="A16 AI 활용 내역 4행 · 반영 여부와 이유"></textarea></td></tr></table>
 <p class="note">단계는 <b>허용 / 조건부 허용</b> 중에서 적는다. 금지 항목은 사용하지 않는다. 자세한 구분은 <a href="student_code_lab.html#ai">student_code_lab.html</a>의 AI 활용 3단계 표를 따른다. 성찰일지는 직접 쓴다.</p>
 <p>다음 주(9주차)는 힙을 다룬다. 오늘 배운 루트·리프·높이 용어를 다시 떠올려 오자.</p>
 </section>

@@ -97,6 +97,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 .mycode{margin:8px 0 12px}
 .mycode>label{display:block;font-weight:700;font-size:13px;margin-bottom:4px;color:#16233b}
 .hint{font-size:12px;color:#5b6b85;margin:2px 0}
+.how{font-size:12.5px;color:#8a3b00;font-weight:600;margin:2px 0}
 .ck{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
 .ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
 .rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
@@ -176,12 +177,12 @@ print(collect_leaves(t7))</code></pre></div>
 </div>
 <h3>Q1 · 예측 (4점)</h3>
 <p>위 코드를 실행했을 때 출력되는 두 줄을 차례로 쓰시오.</p>
-<table class="fill"><tr><td class="lab" style="width:90px">첫 번째 출력</td><td class="in-cell"><input type="text" class="in" data-key="Q1.pred.r1.c1" data-label="Q1 예측 출력 첫 번째 출력" autocomplete="off"></td></tr><tr><td class="lab">두 번째 출력</td><td class="in-cell"><input type="text" class="in" data-key="Q1.pred.r2.c1" data-label="Q1 예측 출력 두 번째 출력" autocomplete="off"></td></tr></table>
+<p class="how">쓰는 법: 출력된 한 줄을 대괄호와 쉼표로 쓴다(꼴: [1, 2]). 출력 줄마다 한 칸에 쓴다.</p><table class="fill"><tr><td class="lab" style="width:90px">첫 번째 출력</td><td class="in-cell"><input type="text" class="in" data-key="Q1.pred.r1.c1" placeholder="대괄호와 쉼표로" data-label="Q1 예측 출력 첫 번째 출력" autocomplete="off"></td></tr><tr><td class="lab">두 번째 출력</td><td class="in-cell"><input type="text" class="in" data-key="Q1.pred.r2.c1" placeholder="대괄호와 쉼표로" data-label="Q1 예측 출력 두 번째 출력" autocomplete="off"></td></tr></table>
 <h3>Q2 · 식별 (3점)</h3>
-<p>버그가 있는 줄을 지목하고, 원인을 한 문장으로 서술하시오.</p>
-<textarea class="in l" rows="5" data-key="Q2.reason" data-label="Q2 버그 줄과 원인"></textarea>
+<p>버그가 있는 줄을 지목하고, 원인을 한 문장으로 서술하시오.</p><p class="how">쓰는 법: &ldquo;줄: …&rdquo;에는 버그가 있는 코드 줄을 그대로 쓰고, &ldquo;원인: …&rdquo;에는 한 문장으로 쓴다.</p>
+<textarea class="in l" rows="5" data-key="Q2.reason" placeholder="줄: (코드 줄)&#10;원인: 한 문장" data-label="Q2 버그 줄과 원인"></textarea>
 <h3>Q3 · 수정 (3점)</h3>
-<p>같은 트리로 몇 번을 호출해도 결과가 항상 정확하도록 함수를 수정하여 쓰시오. 호출은 <code class="i">collect_leaves(t7)</code>처럼 인자 하나로 할 수 있어야 한다.</p>
+<p>같은 트리로 몇 번을 호출해도 결과가 항상 정확하도록 함수를 수정하여 쓰시오. 호출은 <code class="i">collect_leaves(t7)</code>처럼 인자 하나로 할 수 있어야 한다.</p><p class="how">쓰는 법: 수정한 함수 전체를 쓴다(def 줄부터 return까지). 함수 이름은 그대로 쓴다.</p>
 <div class="mycode"><label>Q3 수정한 함수<textarea class="in code" rows="8" data-type="code" data-key="Q3.code" data-label="Q3 수정한 함수" data-noex spellcheck="false"></textarea></label><p class="hint noprint">수정한 함수의 코드를 쓰는 것이 답안이다. 이 편집기에는 Node·insert·build가 정의되어 있지 않다. 실행해 확인하려면 필요한 코드를 직접 써 넣는다(필수가 아니다).</p></div>
 </section>
 
@@ -195,10 +196,10 @@ print(collect_leaves(t7))</code></pre></div>
      / \
     1   9</div>
 <p>민수는 &ldquo;3의 왼쪽 자식 1은 3보다 작고, 오른쪽 자식 9는 3보다 크며, 8의 왼쪽 자식 3은 8보다 작고, 오른쪽 자식 10은 8보다 크다. 그러므로 BST이다.&rdquo;라고 판단하였다.</p>
-<p>(가) 이 트리는 BST인가? (나) 민수의 판단이 타당한지 근거를 들어 설명하시오.</p>
+<p>(가) 이 트리는 BST인가? (나) 민수의 판단이 타당한지 근거를 들어 설명하시오.</p><p class="how">쓰는 법: (가)는 하나를 고른다. (나)는 2~3문장으로 쓰고, 근거는 트리의 구체적인 노드 값을 들어 쓴다.</p>
 <p><b>(가)</b> <span class="rg" data-key="Q4.a" data-type="radio" data-label="Q4 (가) 이 트리는 BST인가"><label><input type="radio" name="Q4a" value="BST이다"> BST이다</label><label><input type="radio" name="Q4a" value="BST가 아니다"> BST가 아니다</label></span></p>
 <p><b>(나)</b></p>
-<textarea class="in l" rows="5" data-key="Q4.reason" data-label="Q4 (나) BST 판단의 타당성 설명"></textarea>
+<textarea class="in l" rows="5" data-key="Q4.reason" placeholder="2~3문장 (노드 값을 들어서)" data-label="Q4 (나) BST 판단의 타당성 설명"></textarea>
 </section>
 
 <section id="Q5" class="sheet">
@@ -211,7 +212,7 @@ print(collect_leaves(t7))</code></pre></div>
     return out
 
 print(inorder(build([2, 1, 3]), []))</code></pre></div>
-<table class="fill"><tr><td class="lab" style="width:110px">실행 결과</td><td class="in-cell"><textarea class="in" rows="1" data-key="Q5.check.r1.c1" data-label="Q5 재귀 순회 코드 점검 실행 결과"></textarea></td></tr><tr><td class="lab">원인</td><td class="in-cell"><textarea class="in" rows="1" data-key="Q5.check.r2.c1" data-label="Q5 재귀 순회 코드 점검 원인"></textarea></td></tr><tr><td class="lab">수정</td><td class="in-cell"><textarea class="in code" rows="8" data-type="code" data-key="Q5.check.r3.c1" data-label="Q5 재귀 순회 코드 점검 수정" spellcheck="false"></textarea></td></tr></table>
+<p class="how">쓰는 법: &ldquo;실행 결과&rdquo;에는 화면에 나올 오류 이름이나 출력을, &ldquo;원인&rdquo;에는 원인이 되는 줄과 이유 한 문장을, &ldquo;수정&rdquo;에는 고친 함수 전체 코드를 쓴다.</p><table class="fill"><tr><td class="lab" style="width:110px">실행 결과</td><td class="in-cell"><textarea class="in" rows="1" data-key="Q5.check.r1.c1" placeholder="오류 이름 또는 출력" data-label="Q5 재귀 순회 코드 점검 실행 결과"></textarea></td></tr><tr><td class="lab">원인</td><td class="in-cell"><textarea class="in" rows="1" data-key="Q5.check.r2.c1" placeholder="원인이 되는 줄과 이유 한 문장" data-label="Q5 재귀 순회 코드 점검 원인"></textarea></td></tr><tr><td class="lab">수정</td><td class="in-cell"><textarea class="in code" rows="8" data-type="code" data-key="Q5.check.r3.c1" placeholder="고친 함수 전체 코드" data-label="Q5 재귀 순회 코드 점검 수정" spellcheck="false"></textarea></td></tr></table>
 </section>
 </div>
 <script id="week8-submit">
