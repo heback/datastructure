@@ -276,6 +276,24 @@ def neighbors_safe(g, u):      # g를 바꾸지 않는 형태
 <h3>AI 활용 내역</h3>
 <p>주간 과제를 하며 AI를 쓴 부분이 있으면 쓴다. 수업 중(A6~A10·A13~A14)에는 AI를 쓰지 않는다. AI를 쓴 횟수만큼만 행을 채우고 쓰지 않은 행은 비워 둔다. 쓰지 않았으면 아래 체크 칸만 체크한다.</p>
 <p><label class="ck"><input type="checkbox" data-key="A15.ai.none" data-label="A15 AI를 쓰지 않았다"> AI를 쓰지 않았다</label></p><div class="scroll"><table class="fill"><tr><th style="width:44px">번호</th><th style="width:36%">무엇을 질문했나(내 코드의 어느 부분인가)</th><th style="width:110px">단계</th><th style="width:120px">반영 여부</th><th>채택·미채택 이유</th></tr><tr><td class="lab">1</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r1.c1" placeholder="질문 내용 한 문장" data-label="A15 AI 활용 1 · 질문한 내용"></textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r1.c2" data-label="A15 AI 활용 1 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r1.c3" data-label="A15 AI 활용 1 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r1.c4" placeholder="이유 한 문장" data-label="A15 AI 활용 1 · 이유"></textarea></td></tr><tr><td class="lab">2</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r2.c1" placeholder="질문 내용 한 문장" data-label="A15 AI 활용 2 · 질문한 내용"></textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r2.c2" data-label="A15 AI 활용 2 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r2.c3" data-label="A15 AI 활용 2 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r2.c4" placeholder="이유 한 문장" data-label="A15 AI 활용 2 · 이유"></textarea></td></tr><tr><td class="lab">3</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r3.c1" placeholder="질문 내용 한 문장" data-label="A15 AI 활용 3 · 질문한 내용"></textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r3.c2" data-label="A15 AI 활용 3 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r3.c3" data-label="A15 AI 활용 3 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r3.c4" placeholder="이유 한 문장" data-label="A15 AI 활용 3 · 이유"></textarea></td></tr></table></div>
+<details class="learn-box after" id="theory-after"><summary>마지막 활동을 마친 뒤 연다 &middot; 오늘의 일반화와 흔한 오개념</summary>
+<p class="hint">A12~A15까지 모두 마친 뒤 연다. 내 문장을 먼저 쓰고 나서 비교한다.</p>
+<h3>오늘의 일반화(A12에서 쓴 내 문장과 비교한다)</h3>
+<ul>
+<li>복잡하게 얽힌 관계는 &ldquo;누가 누구와 연결되는가&rdquo;만 남겨 노드와 간선으로 모델링하면 친구·링크·노선처럼 서로 다른 대상을 같은 구조로 다룰 수 있다. 간선에 방향이 있는지에 따라 표현의 대칭성이 달라지며, 사이클 없는 연결 그래프인 트리는 그래프의 특수한 경우이다.</li>
+<li>모든 쌍의 자리를 미리 마련하는 인접 행렬은 간선 확인이 한 번에 되는 대신 공간이 O(N<sup>2</sup>)이다. 존재하는 간선만 적는 인접 리스트는 공간과 이웃 열거가 간선 수에 비례하는 대신 간선 확인이 그 노드의 이웃 수에 비례한다. 어느 쪽이 유리한지는 그래프의 밀도와 자주 묻는 질문에 따라 달라진다.</li>
+<li>defaultdict는 초기화 분기와 예외를 없애 구축 코드를 단순하게 하지만, 없는 키를 &ldquo;읽기만 해도&rdquo; 키가 생기는 부작용이 있어 조회와 생성을 구분해야 한다.</li>
+<li>이웃을 제네레이터로 내주면 호출하는 쪽이 내부 표현을 몰라도 순회할 수 있고 복사를 피한다. 다만 한 번 소진되며, 함수를 호출한 시점이 아니라 값을 꺼내 쓰는 시점에 본문이 실행된다.</li>
+</ul>
+<h3>흔한 오개념</h3>
+<ul>
+<li>&ldquo;인접 행렬은 항상 대칭이다&rdquo;는 무방향 그래프에서만 맞다. 방향 그래프에서는 (i, j)와 (j, i)가 다를 수 있다.</li>
+<li>&ldquo;노드 이름이 곧 행렬의 칸 번호이다&rdquo;는 틀리다. 행렬에서는 이름을 번호로 바꾸는 번호표가 필요하다.</li>
+<li><code class="i">[[0] * n] * n</code>은 같은 행 리스트를 n번 참조하므로 한 칸을 바꾸면 여러 행이 함께 바뀐다. <code class="i">[[0] * n for _ in range(n)]</code>로 만든다.</li>
+<li>&ldquo;간선 수 = 노드 수 &minus; 1이면 트리이다&rdquo;는 불충분하다. 연결되어 있고 사이클이 없다는 조건까지 확인해야 한다.</li>
+<li>&ldquo;defaultdict는 예외가 없으니 안전하다&rdquo;, &ldquo;희소하면 무조건 리스트&rdquo;는 근거 없는 단정이다. 밀도와 질의 종류를 근거로 고른다.</li>
+</ul>
+</details>
 </section>
 </div>
 <script id="week10-submit">

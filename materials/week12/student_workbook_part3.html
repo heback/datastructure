@@ -285,6 +285,32 @@ table.fill td.in-cell{padding:3px;height:auto}
 </ul>
 </details>
 </section>
+<section id="wrapup" class="sheet">
+<h2>마무리 정리<small>모든 활동을 마친 뒤 · 별도 활동 시간 없음</small></h2>
+<details class="learn-box after" id="theory-after"><summary>활동을 마친 뒤 확인 · 정리</summary>
+<p>A12에서 일반화 초안을, A16에서 오개념 점검과 성찰을 내 말로 먼저 쓴 다음에 연다.</p>
+<h3>오늘의 일반화</h3>
+<ul>
+<li>정렬되어 있다는 성질 덕분에 한 번 견줄 때마다 후보 범위의 절반을 통째로 버릴 수 있다. 그래서 비교 횟수가 N이 아니라 log N에 비례한다. 그러나 정렬되지 않은 입력에서는 오류 없이 빠르게 틀린 답을 낸다. 알고리즘의 속도는 입력이 만족해야 하는 전제 조건과 한 쌍으로 이해한다.</li>
+<li>분할 정복 정렬의 비용은 쪼개는 균형이 결정한다. 병합 정렬은 항상 절반으로 나누므로 입력 순서와 무관하게 O(N log N)이지만 합칠 때 보조 메모리를 쓴다. 퀵 정렬은 피벗이 고르게 나누면 평균 O(N log N)이지만 한쪽으로 치우치면 O(N²)과 깊은 재귀가 된다.</li>
+<li>값이 여럿이거나 없을 때는 &ldquo;있는가&rdquo;가 아니라 &ldquo;조건이 처음 참이 되는 경계&rdquo;(Lower/Upper Bound)를 찾는 문제로 본다. 두 경계의 차이로 개수와 구간 빈도를 O(log N)에 구한다. 경계를 포함할지 정하는 방식에 따라 답이 하나씩 틀어진다.</li>
+<li>정렬은 O(N log N)을 한 번 지불해 이후 질의마다 O(log N)을 얻는 선행 투자이다. 질의가 많고 데이터가 고정일수록 이득이고, 질의가 적거나 자주 바뀌면 손해일 수 있다.</li>
+</ul>
+<h3>복잡도 결론</h3>
+<ul>
+<li>이진 탐색과 bisect: O(log N). 하나씩 견주기: O(N).</li>
+<li>병합 정렬: 항상 O(N log N), 보조 메모리 필요. 퀵 정렬: 평균 O(N log N), 최악 O(N²).</li>
+<li>정렬 뒤 질의 Q번: O(N log N + Q log N).</li>
+</ul>
+<h3>흔한 오개념</h3>
+<ul>
+<li>&ldquo;정렬이 안 된 리스트에 bisect를 쓰면 오류가 난다.&rdquo; 오류 없이 엉뚱한 값을 돌려준다.</li>
+<li>&ldquo;없는 값을 bisect에 넣으면 오류나 -1이 나온다.&rdquo; Lower와 Upper가 같은 삽입 위치를 준다.</li>
+<li>&ldquo;퀵 정렬은 언제나 병합 정렬보다 빠르다.&rdquo; 첫 원소를 피벗으로 쓰면 이미 정렬된 입력에서 O(N²)이 된다.</li>
+<li>&ldquo;항상 정렬한 뒤 이진 탐색이 낫다.&rdquo; 질의가 한 번뿐이거나 데이터가 자주 바뀌면 손해일 수 있다.</li>
+</ul>
+</details>
+</section>
 </div>
 <script id="week12-submit">
 /* week12 학생 입력 저장 (8개 학생용 파일 동일, FILE_KEY만 다름). 규격: schema week12-student-v1 */

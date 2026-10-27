@@ -130,7 +130,56 @@ table.fill td.in-cell{padding:3px;height:auto}
   <h1>10주차 탐구 활동지 1차시 — 그래프(Graph) 구조 모델링</h1>
   <p class="lead">핵심질문: 친구 관계, 웹페이지 링크, 지하철 노선도처럼 복잡하게 얽힌 망형 구조를 어떻게 컴퓨터 메모리에 올릴까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 확인할 내용은 활동을 마친 뒤 여는 초록색 상자에만 있다. 빈칸은 스스로 채운다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><label class="ck">모둠(모둠 번호나 이름을 쓴다. 내 이름이 아니다) <input type="text" class="in" data-key="meta.group" placeholder="예: 3모둠" data-label="모둠" autocomplete="off" style="width:8em;display:inline-block"></label></p>
 </header>
-<nav><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="index.html">목록</a></nav>
+<nav><a href="#theory">이론</a><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="index.html">목록</a></nav>
+
+<section id="theory" class="sheet">
+<h2>이론 정리 · 배경 지식<small>수업 전 예습 · 활동 중 참고 · 입력란 없음</small></h2>
+<p class="meta"><span>이 자료는 별도 활동 시간 없이 예습하거나 활동 중에 찾아본다. 오늘 탐구에서 직접 알아낼 내용은 여기에 없다. 오늘의 일반화와 오개념 정리는 마지막 활동 학습지(3부) 끝의 초록색 상자에 있다.</span></p>
+<div class="learn-box"><span class="lb-title">이론 정리 · 배경 지식</span>
+<p>이번 주 성취기준은 [12자구03-03]이다. defaultdict(list)와 제네레이터로 그래프를 모델링한다. 이 상자는 활동에 필요한 낱말·문법·표기만 정리한다.</p>
+<h3>1. 그래프란 무엇인가</h3>
+<ul>
+<li><b>그래프(graph)</b>는 <b>노드(node, 정점)</b>와 노드 사이를 잇는 <b>간선(edge)</b>으로 이루어진 구조이다. 노드는 사람·웹페이지·역처럼 &ldquo;대상&rdquo;을, 간선은 &ldquo;관계&rdquo;를 나타낸다.</li>
+<li>간선에 방향이 없으면 <b>무방향 그래프</b>, 방향이 있으면 <b>방향 그래프</b>라고 한다.</li>
+<li>간선으로 바로 이어진 노드를 <b>이웃</b>, 노드에 붙은 간선의 수를 <b>차수</b>라 한다. 경로·연결·사이클·고립 노드·희소/밀집 같은 용어는 활동 안에서 그때 정한 약속을 따른다.</li>
+</ul>
+<h3>2. 컴퓨터에 적는 두 가지 대표 형식</h3>
+<p>컴퓨터는 그림을 볼 수 없으므로 노드와 간선을 숫자·문자로 적어야 한다. 대표 형식은 두 가지이다. 아래 작은 예는 노드 P, Q, R과 간선 (P,Q), (Q,R)이며, 이 예 자체는 활동 문제와 다르다.</p>
+<ul>
+<li><b>인접 행렬(adjacency matrix)</b>: 노드를 행과 열에 모두 늘어놓은 N&times;N 표이다. 행 i, 열 j의 칸 값이 1이면 i에서 j로 간선이 있다는 뜻으로 읽고, 없으면 0을 둔다. 표의 위치(행·열 번호)로 노드를 찾으므로 노드에 0, 1, 2&hellip; 번호를 매긴다.</li>
+<li><b>인접 리스트(adjacency list)</b>: 노드마다 이웃의 목록을 따로 적는다. 파이썬에서는 <code class="i">dict</code>의 키에 노드, 값에 이웃 <code class="i">list</code>를 둔 모양이다.</li>
+</ul>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="TH-1" data-noex>g = {"P": ["Q"], "Q": ["P", "R"], "R": ["Q"]}   # 인접 리스트
+print(len(g["Q"]), "R" in g["Q"])                 # 2 True</code></pre></div>
+<p>위에서 <code class="i">g["Q"]</code>는 &ldquo;Q의 이웃 목록&rdquo;이고, <code class="i">in</code>은 그 목록 안에 값이 있는지 확인하는 연산이다. 중첩 리스트 <code class="i">[[0, 1], [1, 0]]</code>은 <code class="i">m[행][열]</code>로 칸 하나를 읽는다.</p>
+<h3>3. 파이썬 도구</h3>
+<ul>
+<li><b>defaultdict</b>(<code class="i">collections</code> 모듈)는 <code class="i">dict</code>와 거의 같지만, 생성할 때 &ldquo;값을 만드는 함수&rdquo;를 인자로 준다. 인자는 <code class="i">list</code>처럼 <b>호출할 수 있는 객체 자체</b>이고, <code class="i">list()</code>처럼 호출한 결과가 아니다.</li>
+<li><b>제네레이터(generator)</b>는 <code class="i">return</code> 대신 <code class="i">yield</code>로 값을 하나씩 내주는 함수이다. <code class="i">for</code> 문이나 <code class="i">list()</code>, <code class="i">sum()</code>에 넣어 값을 받아 쓴다.</li>
+</ul>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="TH-2" data-noex>from collections import defaultdict
+
+words = ["apple", "bean", "avocado", "banana", "cherry"]
+groups = defaultdict(list)          # 값을 list()로 만들어 주는 dict
+for w in words:
+    groups[w[0]].append(w)          # 첫 글자별로 묶기
+print(dict(groups))
+# {'a': ['apple', 'avocado'], 'b': ['bean', 'banana'], 'c': ['cherry']}
+
+def squares(n):
+    for i in range(n):
+        yield i * i                 # 값을 하나씩 내준다
+
+print([x for x in squares(4)])      # [0, 1, 4, 9]
+print(sum(squares(4)))              # 14</code></pre></div>
+<h3>4. 복잡도 표기 읽는 법</h3>
+<ul>
+<li><b>시간 복잡도</b>는 입력 크기가 커질 때 작업량(비교·확인 횟수)이 어떻게 늘어나는지 나타내고, <b>공간 복잡도</b>는 저장에 필요한 칸·원소 수가 어떻게 늘어나는지 나타낸다. 정확한 시간(초)이 아니라 <b>늘어나는 모양</b>을 본다.</li>
+<li><b>O(&middot;)</b> 표기는 상수 배와 작은 항을 무시하고 가장 크게 영향을 주는 부분만 적는다. 예를 들어 길이 n인 리스트에서 값을 찾느라 처음부터 끝까지 훑으면 최악의 경우 n번 확인하므로 <b>O(n)</b>이고, n이 두 배가 되면 작업량도 대략 두 배가 된다. 하나의 값에 바로 접근하는 일은 <b>O(1)</b>이다.</li>
+<li>그래프에서는 보통 <b>N</b>은 노드 수, <b>E</b>는 간선 수를 뜻한다. 식에 N<sup>2</sup>이 있으면 N이 두 배일 때 대략 네 배가 되는 증가를 뜻한다.</li>
+</ul>
+</div>
+</section>
 
 <section id="A1" class="sheet">
 <h2>A1 · 얽힌 관계를 컴퓨터에 어떻게 알려 줄까<small>1차시 · 6분 · 개인→짝</small></h2>

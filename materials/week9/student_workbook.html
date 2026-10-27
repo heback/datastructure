@@ -130,7 +130,43 @@ table.fill td.in-cell{padding:3px;height:auto}
   <h1>9주차 탐구 활동지 — 힙(Heap)과 우선순위 큐</h1>
   <p class="lead">핵심질문: 들어온 순서와 무관하게, 우선순위가 가장 높은 데이터를 즉시(O(1)) 뽑아내려면 어떻게 해야 할까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 정답은 활동을 마친 뒤 여는 초록 상자에만 있다. 빈칸은 스스로 채운다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><label class="ck">모둠 <input type="text" class="in" style="width:8em;display:inline-block" data-key="meta.group" data-label="모둠" autocomplete="off"> <span class="hint">모둠 이름이나 번호만 쓴다(예: 5모둠). 본인 이름이 아니다. 모둠 없이 혼자 하면 &ldquo;개인&rdquo;이라고 쓴다.</span></label></p>
 </header>
-<nav><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="#A6">A6</a><a href="#A7">A7</a><a href="#A8">A8</a><a href="#A9">A9</a><a href="#A10">A10</a><a href="index.html">목록</a></nav>
+<nav><a href="#theory">이론</a><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="#A6">A6</a><a href="#A7">A7</a><a href="#A8">A8</a><a href="#A9">A9</a><a href="#A10">A10</a><a href="index.html">목록</a></nav>
+
+<section id="theory" class="sheet">
+<h2>이론 정리 · 배경 지식<small>예습·활동 중 참고용</small></h2>
+<p class="meta"><span>별도 활동 시간은 없다. 수업 전에 읽거나 활동 중 모르는 말이 나올 때 찾아본다.</span></p>
+<div class="learn-box"><span class="lb-title">이론 정리 · 배경 지식</span>
+<ul>
+<li><b>우선순위 큐</b>(priority queue)는 데이터를 넣을 때 우선순위(먼저 처리할 정도를 나타내는 값)를 함께 두고, 꺼낼 때는 넣은 순서가 아니라 <b>우선순위가 가장 높은 것</b>을 꺼내는 자료구조이다. 줄 선 순서대로 꺼내는 일반 큐(FIFO)와 꺼내는 기준이 다르다. 쓰이는 곳은 운영체제의 작업 스케줄링, 게임 이벤트 처리, 길 찾기 등이다.</li>
+<li><b>힙</b>(heap)은 우선순위 큐를 구현하는 한 가지 방법이다. &ldquo;우선순위 큐&rdquo;는 어떤 기능인지를, &ldquo;힙&rdquo;은 그 기능을 어떻게 만드는지를 가리킨다.</li>
+<li><b>이진 트리</b>는 각 노드의 자식이 최대 2개(왼쪽·오른쪽)인 트리이다. 위쪽 노드를 <b>부모</b>, 바로 아래 노드를 <b>자식</b>, 맨 위를 <b>루트</b>, 자식이 없는 노드를 <b>리프</b>라 한다. 트리의 <b>높이</b>는 루트에서 가장 먼 리프까지의 노드 수이다(8주차와 같다).</li>
+<li><b>완전 이진 트리</b>는 위층부터 차례로, 같은 층에서는 왼쪽부터 빈틈없이 채운 이진 트리이다.</li>
+<li><b>최소 힙</b>은 <b>모든 부모가 자식보다 크지 않은</b>(작거나 같은) 완전 이진 트리이다. 반대로 모든 부모가 자식보다 작지 않으면 <b>최대 힙</b>이다.</li>
+<li><b>배열(리스트)로 트리 나타내기</b>: 노드 값을 위에서 아래로, 같은 층에서는 왼쪽에서 오른쪽으로 리스트에 차례로 담을 수 있다. 칸 번호는 0부터 센다. 칸 번호와 부모·자식 사이의 관계는 A3에서 직접 찾는다.</li>
+<li><b>파이썬 heapq 모듈</b>은 리스트를 힙의 배열로 보고 다룬다. 최소 힙만 제공한다. 쓰는 법은 아래와 같고, 각 함수의 동작은 A9에서 실행하며 확인한다.</li>
+</ul>
+<table><tr><th>쓰는 법</th><th>하는 일</th></tr>
+<tr><td><code class="i">heapq.heappush(h, x)</code></td><td>힙 h에 값 x를 넣는다.</td></tr>
+<tr><td><code class="i">heapq.heappop(h)</code></td><td>가장 작은 값을 빼서 돌려준다.</td></tr>
+<tr><td><code class="i">heapq.heapify(h)</code></td><td>이미 있는 리스트 h를 힙으로 바꾼다.</td></tr>
+<tr><td><code class="i">h[0]</code></td><td>0번 칸의 값을 읽는다.</td></tr></table>
+<p>작은 예이다. (우선순위, 이름) 튜플은 앞의 값부터 비교되므로 우선순위가 작은 것이 먼저 나온다. 숫자가 작을수록 우선순위가 높다.</p>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="T-1">import heapq
+
+events = []
+heapq.heappush(events, (3, "효과음"))
+heapq.heappush(events, (1, "데미지"))
+heapq.heappush(events, (2, "화면 흔들림"))
+print(events[0])
+while events:
+    print(heapq.heappop(events))</code></pre></div>
+<p>출력은 <code class="i">(1, '데미지')</code>가 한 번 나온 뒤, <code class="i">(1, '데미지')</code>, <code class="i">(2, '화면 흔들림')</code>, <code class="i">(3, '효과음')</code>이 한 줄씩 나온다. 처음 한 줄은 <code class="i">events[0]</code>을 읽기만 한 것이고, 이어지는 세 줄은 하나씩 꺼낸 것이다.</p>
+<ul>
+<li><b>시간복잡도 표기 읽는 법</b>: 입력 크기를 N이라 할 때 작업량이 N이 커지면 어떻게 늘어나는지를 나타낸다. <b>O(1)</b>은 N과 무관하게 일정한 횟수, <b>O(N)</b>은 N에 비례, <b>O(N<sup>2</sup>)</b>은 N의 제곱에 비례, <b>O(log N)</b>은 N이 두 배가 될 때 한 단계만 늘어나는 정도이다. 예: 1024를 계속 반으로 나누면 10번 만에 1이 되므로 log<sub>2</sub> 1024 = 10이다. 이 수업에서 log는 밑이 2인 로그를 뜻한다.</li>
+<li>같은 일을 하는 두 방법의 비용은 &ldquo;비교·자리바꿈을 몇 번 했는가&rdquo;를 세어 비교한다. 이것은 A2에서 직접 센다.</li>
+</ul></div>
+
+</section>
 
 <section id="A1" class="sheet">
 <h2>A1 · 가장 급한 사람 먼저<small>1차시 · 8분 · 개인→짝</small></h2>

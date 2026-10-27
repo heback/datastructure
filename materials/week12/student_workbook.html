@@ -130,7 +130,45 @@ table.fill td.in-cell{padding:3px;height:auto}
   <p class="lead">핵심질문: 10억 개의 정렬된 데이터 속에서 내가 원하는 특정 값이나 구간을 어떻게 가장 적은 비교로 찾아낼까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 정답은 활동을 마친 뒤 여는 초록색 확인 상자에 있다. 빈칸은 먼저 스스로 채운다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span><label class="ck">모둠 <small>(모둠 이름이나 번호. 본인 이름이 아니다. 모둠이 없으면 &lsquo;없음&rsquo;)</small> <input type="text" class="in" data-key="meta.group" data-label="모둠" placeholder="예: 3모둠" autocomplete="off" style="width:8em;display:inline-block"></label></p>
 </header>
 <p class="note"><b>칸 쓰는 법(공통)</b> 숫자 칸에는 숫자만 쓴다(인덱스는 0부터 센다). 짧은 칸은 한 단어나 한 문장, 긴 칸은 2~3문장으로 쓴다. 칸 바로 위의 <b>쓰는 법</b> 줄이 그 칸의 형식이다. 막혀서 못 쓴 칸은 &lsquo;x&rsquo;나 &lsquo;-&rsquo; 대신 <b>모름</b>이라고 쓰고, 쓸 내용이 없는 서술 칸은 <b>없음</b>이라고 쓴다. (선택) 표시가 있는 칸은 쓰지 않으면 비워 둔다. 칸이 모자라서 생략한다는 말은 쓰지 않는다.</p>
-<nav><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="#A6">A6</a><a href="index.html">목록</a></nav>
+<nav><a href="#theory">이론</a><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="#A6">A6</a><a href="index.html">목록</a></nav>
+<section id="theory" class="sheet">
+<h2>이론 정리<small>수업 전 예습 · 활동 중 참고 · 별도 활동 시간 없음</small></h2>
+<div class="learn-box"><span class="lb-title">이론 정리 · 배경 지식</span>
+<p>이번 주 성취기준은 [12자구04-02]이다. 정렬된 데이터에서 bisect 모듈로 Lower/Upper Bound를 적용해 고속 탐색을 수행한다. 이 상자는 활동에 필요한 낱말·문법·표기만 정리한다. 탐구로 알아낼 내용은 활동 뒤의 초록색 확인 상자와 마지막 학습지(3부) 끝의 정리 상자에 있다.</p>
+<h3>1. 낱말</h3>
+<ul>
+<li><b>탐색 · 정렬</b>: 탐색은 원하는 값의 자리를 찾거나 없음을 확인하는 일이고, 정렬은 값의 크기 순서(오름차순은 작은 것부터)로 줄 세우는 일이다. 같은 값이 여러 개 있어도 된다. 예: <code class="i">[3, 8, 8, 15, 21]</code>.</li>
+<li><b>인덱스</b>: 원소의 자리 번호이다. 맨 앞이 0번이고, 길이가 N이면 마지막은 N-1번이다.</li>
+<li><b>비교 1회</b>: 목표 값과 후보 하나를 견주어 같은지, 큰지, 작은지 알아보는 일 한 번이다. 알고리즘의 빠르기는 이 횟수로 가늠한다.</li>
+<li><b>분할 정복</b>: 문제를 더 작은 같은 꼴의 문제로 나누어 풀고 결과를 합치는 방법이다. 재귀(8주차)로 쓰는 경우가 많다.</li>
+<li><b>병합(merge)</b>: 이미 정렬된 두 리스트의 맨 앞끼리 견주어 작은 것을 하나씩 꺼내 붙여 하나의 정렬된 리스트로 합치는 일이다.</li>
+<li><b>피벗(pivot)</b>: 나머지 원소를 &ldquo;피벗보다 작은 쪽 / 큰 쪽&rdquo;으로 가르는 기준이 되는 원소이다.</li>
+<li><b>Lower Bound / Upper Bound</b>: 정렬된 리스트에 값 x를 넣어도 정렬이 유지되는 자리의 경계이다. Lower Bound는 x 이상인 값이 처음 나오는 인덱스, Upper Bound는 x보다 큰 값이 처음 나오는 인덱스이다. 그런 값이 없으면 리스트의 길이이다.</li>
+</ul>
+<h3>2. 파이썬 문법과 표준 라이브러리</h3>
+<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="TH-1" data-noex># 이론 정리 예: 작은 리스트로 문법 확인
+a = [3, 8, 8, 15, 21]            # 오름차순, 같은 값 8이 둘
+print(a.index(8))                # 1  (처음 나오는 8의 인덱스)
+print(8 in a, 9 in a)            # True False  (in: 있는지)
+print(sorted([5, 2, 9, 2]))      # [2, 2, 5, 9]  (정렬된 새 리스트)
+print(7 // 2, 10 // 3)           # 3 3  (//: 나눗셈의 몫만 남긴다)
+
+import bisect                    # 정렬된 리스트용 표준 라이브러리
+print(bisect.bisect_left(a, 8))  # 1  (Lower Bound)
+print(bisect.bisect_right(a, 8)) # 3  (Upper Bound)</code></pre></div>
+<ul>
+<li><code class="i">list.sort()</code>는 그 리스트를 제자리에서 정렬하고, <code class="i">sorted(리스트)</code>는 원래 리스트를 두고 새 리스트를 돌려준다.</li>
+<li><code class="i">bisect_left(a, x)</code>, <code class="i">bisect_right(a, x)</code>는 정렬된 리스트 <code class="i">a</code>에서 각각 Lower Bound, Upper Bound 인덱스를 돌려준다. 값을 바꾸거나 넣지는 않는다.</li>
+<li>함수는 <code class="i">def 이름(매개변수):</code>로 정의하고 <code class="i">return</code>으로 값을 돌려준다. 재귀는 함수가 자기 자신을 부르는 것이다.</li>
+</ul>
+<h3>3. 복잡도 표기 읽는 법</h3>
+<ul>
+<li>N은 입력 원소 수이다. <b>O( )</b>는 N이 커질 때 비용이 대략 어떤 모양으로 늘어나는지 나타낸다. 상수배와 작은 항은 무시한다. 예: 3N + 5는 O(N)이다. O(N)은 N에 비례해 늘고, O(N²)은 N이 10배가 되면 100배가 된다.</li>
+<li><b>log₂ N</b>은 &ldquo;2를 몇 번 곱해야 N이 되는가&rdquo;이다. 예: 2³ = 8이므로 log₂ 8 = 3이다. 표기에서 밑 2는 보통 생략하고 <b>O(log N)</b>으로 쓴다. <b>O(N log N)</b>은 N에 log N을 곱한 모양이다.</li>
+<li><b>최악의 경우</b>는 운이 가장 나쁜 입력에서의 비용이고, <b>평균</b>은 보통의 입력에서의 비용이다. 같은 알고리즘도 둘이 다를 수 있다.</li>
+</ul>
+</div>
+</section>
 <section id="A0" class="sheet">
 <div class="learn-box"><span class="lb-title">학습 내용 · 오늘의 질문과 흐름</span>
 <ul>
