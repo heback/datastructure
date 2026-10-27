@@ -347,6 +347,48 @@ function init(){
   bindCopyButtons();
   q("textarea.in.code, textarea.code").forEach(function(t){if(!t._ck){t._ck=true;buildEditor(t);}});
 }
+/* ---------- 답 가림 모드: 예시 정답을 불러온 화면을 수업에서 보여 줄 때 쓴다 ----------
+   t 키로 켜고 끈다. 켜면 모든 입력 내용이 가려지고, 마우스로 누른 입력란만 보인다.
+   입력란에 글을 쓰는 중에는 t가 글자로 입력되므로, Esc로 입력란을 벗어난 뒤 누른다. */
+function initHide(){
+  var badge=null;
+  function on(){return document.body.classList.contains("ans-hide");}
+  function target(el){
+    if(!el||!el.closest)return null;
+    if(el.closest("#savebar"))return null;
+    var c=el.closest(".ck-ed");if(c)return c;
+    var d=el.closest("[data-key]");if(d)return d;
+    var l=el.closest("label");
+    if(l){var i=l.querySelector("[data-key]");if(i)return i;}
+    return null;
+  }
+  function reveal(e){if(!on())return;var t=target(e.target);if(t)t.classList.add("ans-on");}
+  function toggle(){
+    var b=document.body,next=!on();
+    q(".ans-on").forEach(function(x){x.classList.remove("ans-on");});
+    b.classList.toggle("ans-hide",next);
+    if(next&&document.activeElement&&document.activeElement!==b)document.activeElement.blur();
+    if(!badge){
+      badge=document.createElement("div");badge.id="ans-badge";badge.hidden=true;
+      badge.textContent="답 가림 · 칸을 누르면 그 칸만 보인다 · t 키로 해제";
+      b.appendChild(badge);
+    }
+    badge.hidden=!next;
+  }
+  document.addEventListener("pointerdown",reveal,true);
+  document.addEventListener("focusin",reveal,true);
+  document.addEventListener("keydown",function(e){
+    if(e.code!=="KeyT"||e.ctrlKey||e.metaKey||e.altKey||e.repeat)return;
+    var a=document.activeElement,tag=a&&a.tagName;
+    if(a&&(tag==="TEXTAREA"||tag==="SELECT"||a.isContentEditable||(tag==="INPUT"&&!/^(checkbox|radio|button)$/.test(a.type))))return;
+    var m=document.querySelector(".ck-modal");if(m&&!m.hidden)return;
+    e.preventDefault();toggle();
+  });
+  document.addEventListener("keydown",function(e){
+    if(e.key==="Escape"){var a=document.activeElement;if(a&&a!==document.body&&/^(TEXTAREA|INPUT|SELECT)$/.test(a.tagName))a.blur();}
+  });
+}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initHide);else initHide();
 window.CodeKit={highlight:highlight};
 })();
