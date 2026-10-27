@@ -392,5 +392,10 @@ function initHide(){
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initHide);else initHide();
+/* ---------- 제출 단추: 저장 바의 [제출]은 제출 사이트를 새 창으로 연다 ---------- */
+document.addEventListener("click",function(e){
+  var b=e.target&&e.target.closest?e.target.closest("#sb-submit"):null;
+  if(b)window.open("https://dshs-ds-grader.web.app/student.html","_blank","noopener");
+});
 window.CodeKit={highlight:highlight};
 })();
