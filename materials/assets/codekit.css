@@ -63,8 +63,9 @@ details.learn-box.after>:not(summary){margin-left:14px;margin-right:14px}
 @media print{.learn-box{break-inside:avoid;background:#fff!important}details.learn-box.after:not([open])>:not(summary){display:none}}
 
 /* ---------- 답 가림 모드(t 키): 입력 내용을 가리고, 누른 칸만 보인다. 인쇄에는 적용하지 않는다 ---------- */
-#ans-badge{position:fixed;right:12px;bottom:12px;z-index:120;background:#16233b;color:#fff;font:600 12.5px "IBM Plex Sans KR",sans-serif;padding:7px 12px;border-radius:6px;box-shadow:0 2px 10px rgba(0,0,0,.3);pointer-events:none}
-#ans-badge[hidden]{display:none}
+#ans-badge{position:fixed;right:12px;bottom:12px;z-index:120;background:#16233b;color:#fff;font:600 12.5px "IBM Plex Sans KR",sans-serif;padding:7px 12px;border:1px solid #fff;border-radius:6px;box-shadow:0 2px 10px rgba(0,0,0,.3);cursor:pointer;opacity:.55}
+#ans-badge:hover,#ans-badge:focus-visible,#ans-badge[aria-pressed=true]{opacity:1}
+@media print{#ans-badge{display:none!important}}
 @media screen{
   body.ans-hide textarea[data-key]:not(.ans-on),body.ans-hide input[data-key][type=text]:not(.ans-on),body.ans-hide input[data-key]:not([type]):not(.ans-on),body.ans-hide select[data-key]:not(.ans-on){color:transparent!important;-webkit-text-fill-color:transparent!important;text-shadow:none!important}
   body.ans-hide input[data-key][type=checkbox]:not(.ans-on),body.ans-hide input[data-key][type=radio]:not(.ans-on){-webkit-appearance:none;appearance:none;width:16px;height:16px;border:2px solid #3572a5;border-radius:3px;background:#fff;vertical-align:middle}
