@@ -175,7 +175,7 @@ def dp_coins(coins, amount):        # [x] * k는 x를 k개 늘어놓은 리스�
             if c &lt;= a and ____8____:   # ⑧ 더 적은 개수가 되는가
                 dp[a] = ____9____      # ⑨
     return dp[amount] if dp[amount] != INF else -1  # a if 조건 else b: 조건에 따라 값을 고른다</code></pre></div>
-<div class="mycode"><label>내 코드 · A8 (greedy_coins, dp_coins 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A8.mycode" data-label="A8 (greedy_coins, dp_coins 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+<div class="mycode"><label>내 코드 · A8 (greedy_coins, dp_coins 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A8.mycode" data-label="A8 (greedy_coins, dp_coins 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-3"># A8 점검: 정의대로 한 방법과 내 결과를 비교한다.
 def greedy_by_definition(coins, amount):       # 남은 금액 이하인 가장 큰 동전을 계속 낸다
     n = 0
@@ -241,7 +241,7 @@ Greedy는 이 체계에서 최적이 아니다.</pre>
         if ____10____:               # ⑩ Greedy와 DP의 개수가 다른가
             bad.append(a)          # 리스트 끝에 a를 추가한다
     return bad</code></pre></div>
-<div class="mycode"><label>내 코드 · A9 (find_failures 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A9.mycode" data-label="A9 (find_failures 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+<div class="mycode"><label>내 코드 · A9 (find_failures 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A9.mycode" data-label="A9 (find_failures 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>점검</h3><p>이 점검은 A8 점검 블록(A8-3)에서 정의한 두 함수를 쓴다. A8 편집기를 먼저 실행했는지 확인한 뒤, 이 점검을 A9 편집기 맨 아래에 추가해 실행한다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A9-2" data-for="A9.mycode"># A9 점검: 정의대로 한 방법으로 모은 목록과 내 결과를 비교한다.
 # greedy_by_definition, fewest_brute는 A8 점검 블록(A8-3)에서 정의했다. 먼저 A8 편집기를 실행해 둔다.
 # fewest_brute는 느려서 limit을 24까지만 쓴다.

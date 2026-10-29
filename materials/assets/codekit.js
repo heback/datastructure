@@ -260,6 +260,7 @@ function buildEditor(ta){
   var area=document.createElement("div");area.className="ck-area";
   var hl=document.createElement("pre");hl.className="ck-hl";hl.setAttribute("aria-hidden","true");
   var hc=document.createElement("code");hl.appendChild(hc);
+  var gut=document.createElement("div");gut.className="ck-gut";gut.setAttribute("aria-hidden","true");
   var out=document.createElement("div");out.className="ck-out";out.hidden=true;
   var ol=document.createElement("div");ol.className="ck-ol";
   var op=document.createElement("pre");op.setAttribute("aria-live","polite");
@@ -267,21 +268,58 @@ function buildEditor(ta){
   host.parentNode.insertBefore(box,host);
   if(!ta.getAttribute("aria-label"))ta.setAttribute("aria-label",ta.getAttribute("data-label")||title);
   ta.classList.add("ck-ta");
-  area.appendChild(hl);area.appendChild(ta);
+  area.appendChild(gut);area.appendChild(hl);area.appendChild(ta);
   box.appendChild(bar);box.appendChild(area);box.appendChild(out);
   if(label)label.remove();
   function mk(t){var b=document.createElement("button");b.type="button";b.className="ck-btn";b.textContent=t;return b;}
-  function render(){hc.innerHTML=highlight(D.get.call(ta))+"\n";}
-  function sync(){hl.scrollTop=ta.scrollTop;hl.scrollLeft=ta.scrollLeft;}
+  var gutN=0;
+  function render(){
+    var v=D.get.call(ta);hc.innerHTML=highlight(v)+"\n";
+    var n=v.split("\n").length;
+    if(n!==gutN){var t=[];for(var i=1;i<=n;i++)t.push(i);gut.textContent=t.join("\n");gutN=n;}
+  }
+  function sync(){hl.scrollTop=ta.scrollTop;hl.scrollLeft=ta.scrollLeft;gut.scrollTop=ta.scrollTop;}
   Object.defineProperty(ta,"value",{get:function(){return D.get.call(ta);},set:function(v){D.set.call(ta,v);render();},configurable:true});
   ta.addEventListener("input",render);
   ta.addEventListener("scroll",sync);
   render();
   var ed={box:box,ta:ta,set:function(v){ta.value=v;ta.dispatchEvent(new Event("input",{bubbles:true}));}};
 
+  /* Tab: 4칸 들여쓰기, Shift+Tab: 내어쓰기. 여러 줄을 고르면 고른 줄 전체에 적용한다(Esc 후 Tab으로 다음 칸 이동) */
+  function put(text){
+    var before=ta.value,a=ta.selectionStart,b=ta.selectionEnd;
+    try{document.execCommand("insertText",false,text);}catch(_){}
+    if(ta.value===before)ta.setRangeText(text,a,b,"end");
+  }
+  function tabKey(e){
+    var v=ta.value,s=ta.selectionStart,en=ta.selectionEnd;
+    var multi=v.slice(s,en).indexOf("\n")>=0;
+    e.preventDefault();
+    if(!e.shiftKey&&!multi){put("    ");ta.dispatchEvent(new Event("input",{bubbles:true}));return;}
+    var ls=v.lastIndexOf("\n",s-1)+1,end=(en>s&&v.charAt(en-1)==="\n")?en-1:en;
+    var le=v.indexOf("\n",end);if(le<0)le=v.length;
+    var lines=v.slice(ls,le).split("\n"),first=0,i;
+    for(i=0;i<lines.length;i++){
+      var ln=lines[i],d;
+      if(e.shiftKey){var m=/^( {1,4}|\t)/.exec(ln);d=m?m[0].length:0;lines[i]=ln.slice(d);if(i===0)first=-d;}
+      else{d=ln.length?4:0;lines[i]=ln.length?"    "+ln:ln;if(i===0)first=d;}
+    }
+    var blk=lines.join("\n"),old=v.slice(ls,le);
+    if(blk===old)return;
+    ta.setSelectionRange(ls,le);put(blk);
+    var ns=Math.max(ls,s+first),ne=en+(blk.length-old.length);
+    if(ne<ns)ne=ns;
+    ta.setSelectionRange(ns,ne);
+    ta.dispatchEvent(new Event("input",{bubbles:true}));
+  }
+
   /* Enter: 앞줄 들여쓰기 유지(콜론으로 끝나면 4칸 추가) */
   ta.addEventListener("keydown",function(e){
     if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();bRun.click();return;}
+    if(e.key==="Tab"&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.isComposing){
+      if(ta._esc)return; /* Esc를 누른 직후의 Tab은 다음 칸으로 이동(각 페이지의 codeKeys가 처리) */
+      e.stopPropagation();tabKey(e);return;
+    }
     if(e.key!=="Enter"||e.shiftKey||e.altKey||e.isComposing)return;
     var v=ta.value,s=ta.selectionStart;
     var ls=v.lastIndexOf("\n",s-1)+1,line=v.slice(ls,s);

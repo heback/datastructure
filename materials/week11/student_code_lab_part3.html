@@ -197,7 +197,7 @@ def explore(grid, r, c, seen):
         for n in grid_neighbors(grid, cr, cc, "1"):
             if n not in seen:  # 아직 표시하지 않은 칸이면
                 seen.add(n)  # 표시하고
-                todo.append(n)  # todo에 넣는다</code></pre></div><div class="mycode"><label>내 코드 · A10 (count_islands, explore 작성)</label><textarea class="in code" rows="20" data-type="code" data-key="A10.mycode" data-label="A10 (count_islands, explore 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>실행 틀</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-3"># 실행 예(출력 값은 적혀 있지 않다)
+                todo.append(n)  # todo에 넣는다</code></pre></div><div class="mycode"><label>내 코드 · A10 (count_islands, explore 작성)</label><textarea class="in code" rows="20" data-type="code" data-key="A10.mycode" data-label="A10 (count_islands, explore 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>실행 틀</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-3"># 실행 예(출력 값은 적혀 있지 않다)
 print(count_islands(ISLE))</code></pre></div><h3>(선택) 8방향 실험</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-4"># (선택) 8방향 실험 · grid_neighbors가 읽는 전역 DIRS를 바꾼다. 실험이 끝나면 되돌려 둔다.
 # 기본 4방향에 대각선 4방향을 더한 목록
 DIRS8 = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
@@ -381,7 +381,7 @@ def next_states(n):                  # 제네레이터(제공). 상태 n에서 �
     if n + 1 &lt;= 100:  # 범위(100 이하) 안이면
         yield n + 1  # +1 한 수를 내준다
     if n * 2 &lt;= 100:
-        yield n * 2  # x2 한 수를 내준다</code></pre></div><div class="mycode"><label>내 코드 · A13 NUM (num_bfs 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A13.num.mycode" data-label="A13 NUM (num_bfs 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-3" data-for="A13.num.mycode"># NUM 점검: 기대 값은 적혀 있지 않다. 연산 횟수를 줄여 갈 수 있으면 계속 줄이는 다른 계산과 비교한다.
+        yield n * 2  # x2 한 수를 내준다</code></pre></div><div class="mycode"><label>내 코드 · A13 NUM (num_bfs 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A13.num.mycode" data-label="A13 NUM (num_bfs 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-3" data-for="A13.num.mycode"># NUM 점검: 기대 값은 적혀 있지 않다. 연산 횟수를 줄여 갈 수 있으면 계속 줄이는 다른 계산과 비교한다.
 # globals(): 지금 정의된 이름 목록. num_bfs를 안 만들었으면 여기서 멈춘다.
 assert "num_bfs" in globals(), "먼저 num_bfs(start, goal)를 작성한다(최소 연산 횟수를 돌려준다)"
 # 기준값: 더 적은 횟수가 나오는 동안 되풀이해 start에서 각 수까지의 최소 연산 횟수를 구한다.

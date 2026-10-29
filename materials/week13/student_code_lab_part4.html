@@ -187,7 +187,7 @@ GRID = [
             if c &gt; 0:               # 왼쪽 칸이 격자 안에 있을 때만
                 dp[r][c] += ____14____        # ⑭ 왼쪽 칸에서 오는 경로
     return dp[R - 1][C - 1]         # 맨 오른쪽 아래 칸의 값</code></pre></div>
-<div class="mycode"><label>내 코드 · A11 (grid_paths 작성)</label><textarea class="in code" rows="22" data-type="code" data-key="A11.mycode" data-label="A11 (grid_paths 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+<div class="mycode"><label>내 코드 · A11 (grid_paths 작성)</label><textarea class="in code" rows="22" data-type="code" data-key="A11.mycode" data-label="A11 (grid_paths 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A11-3"># A11 점검: 가능한 길을 직접 모두 따라가 세는 방법과 내 결과를 비교한다.
 def count_by_walking(grid, r=0, c=0):  # 칸 (r, c)에서 출발해 길을 모두 따라간다(재귀)
     R, C = len(grid), len(grid[0])
@@ -221,9 +221,9 @@ print(grid_paths(GRID))  # GRID의 경로 수를 출력한다</code></pre></div>
 <h2>실습 과제 작성 칸<small>A8 착수 · A14 마무리</small></h2>
 <p>실습 과제의 코드와 서술을 쓰는 칸이다. A8에서 착수하고 A14에서 마무리한다. 구현 계획 한 줄(상태 정의와 목표 비용)을 코드 맨 앞 주석에 쓴다.</p>
 <p class="hint">이 칸의 [예시 코드]에는 코드가 나오지 않는다. 과제는 A8·A11에서 만든 코드를 바탕으로 직접 쓴다. 다른 쪽(student_code_lab_part2.html)의 코드를 가져오려면 그 편집기의 내용을 복사해 이 칸에 붙여 넣는다. 세 칸의 함수는 각각 [▶ 실행]해 정의해 두어야 A14의 점검에서 불러 쓸 수 있다.</p>
-<div class="mycode"><label>내 코드 · 과제 min_coins</label><textarea class="in code" rows="16" data-type="code" data-key="assign.min_coins" data-label="과제 min_coins 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
-<div class="mycode"><label>내 코드 · 과제 grid_paths</label><textarea class="in code" rows="18" data-type="code" data-key="assign.grid_paths" data-label="과제 grid_paths 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
-<div class="mycode"><label>내 코드 · 과제 greedy_counterexample</label><textarea class="in code" rows="16" data-type="code" data-key="assign.greedy_counterexample" data-label="과제 greedy_counterexample 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+<div class="mycode"><label>내 코드 · 과제 min_coins</label><textarea class="in code" rows="16" data-type="code" data-key="assign.min_coins" data-label="과제 min_coins 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+<div class="mycode"><label>내 코드 · 과제 grid_paths</label><textarea class="in code" rows="18" data-type="code" data-key="assign.grid_paths" data-label="과제 grid_paths 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+<div class="mycode"><label>내 코드 · 과제 greedy_counterexample</label><textarea class="in code" rows="16" data-type="code" data-key="assign.greedy_counterexample" data-label="과제 greedy_counterexample 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>서술(3~5문장)</h3><p>내가 설계한 동전 체계 1개에 대해 금액·두 조합·개수로 반례를 증명하고, <code class="i">min_coins</code>의 상태 정의·전이·초기값을 내 말로 적는다. 상태 정의·전이는 A14에서 표기로 다듬어 활동지 3부 A14 서술 칸(<code class="i">A14.essay.state</code>)에 다시 쓰며, 채점은 다듬은 쪽을 기준으로 한다. 복잡도 서술은 활동지 3부 A14 서술 칸에 쓴다.</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="1" data-key="assign.essay.system" data-label="과제 서술: 내가 설계한 동전 체계"></textarea></div>
 <div class="ans-row"><span class="n">2</span><textarea class="in" rows="4" data-key="assign.essay.proof" data-label="과제 서술: 반례 증명(금액, 두 조합, 개수)"></textarea></div>
@@ -307,7 +307,7 @@ MEET = [(1, 4), (3, 5), (0, 6), (5, 7), (3, 9), (5, 9),
             count += 1       # 회의를 하나 고른다
             last_end = e     # 마지막으로 고른 회의의 끝을 갱신
     return count</code></pre></div>
-<div class="mycode"><label>내 코드 · A14 (max_meetings 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A14.mycode" data-label="A14 (max_meetings 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+<div class="mycode"><label>내 코드 · A14 (max_meetings 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A14.mycode" data-label="A14 (max_meetings 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-4" data-for="A14.mycode"># 점검: 모든 부분집합을 직접 따져 본 최댓값과 견준다.
 from itertools import combinations
 

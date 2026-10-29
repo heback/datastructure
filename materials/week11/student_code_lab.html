@@ -193,7 +193,7 @@ def dfs_order(g, u, visited, order):        # 시작 상태: 바깥에서 새 se
     for v in neighbors(g, u):  # u의 이웃을 하나씩 본다
         if ____7____:                       # ⑦ 아직 안 본 노드만
             ____8____                       # ⑧ 재귀 호출
-    return order  # 방문 순서를 돌려준다</code></pre></div><div class="mycode"><label>내 코드 · A6 (bfs_order, dfs_order 작성)</label><textarea class="in code" rows="22" data-type="code" data-key="A6.mycode" data-label="A6 (bfs_order, dfs_order 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>자체 점검 (G1 외 4개 그래프)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A6-3"># A6 점검: 기대 순서는 적혀 있지 않다. 간선 목록에서 계산한 거리와 탐색 규칙으로 내 결과를 검사한다.
+    return order  # 방문 순서를 돌려준다</code></pre></div><div class="mycode"><label>내 코드 · A6 (bfs_order, dfs_order 작성)</label><textarea class="in code" rows="22" data-type="code" data-key="A6.mycode" data-label="A6 (bfs_order, dfs_order 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>자체 점검 (G1 외 4개 그래프)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A6-3"># A6 점검: 기대 순서는 적혀 있지 않다. 간선 목록에서 계산한 거리와 탐색 규칙으로 내 결과를 검사한다.
 # 이 점검의 비교식이 무엇을 확인하는지는 A12에서 다시 이야기한다. 지금은 읽지 않고 실행만 해도 된다.
 # 기준값: 탐색 규칙과 상관없이 s에서 각 노드까지의 최소 간선 수를 구한다.
 def true_dist(gr, s):
@@ -363,7 +363,7 @@ def shortest_path_len(grid, start, goal):
         for n in grid_neighbors(grid, cell[0], cell[1], ".SE"):
             if ____13____:                  # ⑬ 아직 안 간 칸
                 ____14____                  # ⑭ (두 줄) 거리 기록, 큐에 넣기
-    return -1                               # 닿을 수 없을 때</code></pre></div><div class="mycode"><label>내 코드 · A7 (grid_neighbors, shortest_path_len 작성)</label><textarea class="in code" rows="20" data-type="code" data-key="A7.mycode" data-label="A7 (grid_neighbors, shortest_path_len 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>실행 틀</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A7-3"># 실행 예(출력 값은 적혀 있지 않다. 내 함수를 실행해 얻는다)
+    return -1                               # 닿을 수 없을 때</code></pre></div><div class="mycode"><label>내 코드 · A7 (grid_neighbors, shortest_path_len 작성)</label><textarea class="in code" rows="20" data-type="code" data-key="A7.mycode" data-label="A7 (grid_neighbors, shortest_path_len 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>실행 틀</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A7-3"># 실행 예(출력 값은 적혀 있지 않다. 내 함수를 실행해 얻는다)
 # list(...): 제네레이터가 내주는 값을 리스트로 모아 출력한다
 print(list(grid_neighbors(MAZE, 0, 0, ".SE")))
 print(list(grid_neighbors(MAZE, 2, 2, ".SE")))

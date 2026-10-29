@@ -182,7 +182,7 @@ def sift_up(h, i):
         # TODO(A6): 부모 h[p]와 h[i]를 비교해, 올려야 하면 자리를 바꾸고
         #           swaps를 1 늘린 뒤 i를 p로 옮긴다. 올릴 필요가 없으면 반복을 멈춘다.
         raise NotImplementedError("비교와 자리바꿈을 작성하시오")
-    return swaps  # 반복이 끝나면 센 횟수를 돌려준다</code></pre></div></details><div class="mycode"><label>내 코드 · A6 (parent, sift_up 작성)<textarea class="in code" rows="16" data-type="code" data-key="A6.mycode" data-label="A6 (parent, sift_up 작성) 내 코드" spellcheck="false"></textarea></label><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 [편집기에 추가]해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>자체 테스트 (H1에 값 2, 11 삽입)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A6-3">import heapq  # 표준 힙 도구 모듈(앞 코드를 지웠을 때를 대비해 다시 불러온다)
+    return swaps  # 반복이 끝나면 센 횟수를 돌려준다</code></pre></div></details><div class="mycode"><label>내 코드 · A6 (parent, sift_up 작성)<textarea class="in code" rows="16" data-type="code" data-key="A6.mycode" data-label="A6 (parent, sift_up 작성) 내 코드" spellcheck="false"></textarea></label><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 [편집기에 추가]해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>자체 테스트 (H1에 값 2, 11 삽입)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A6-3">import heapq  # 표준 힙 도구 모듈(앞 코드를 지웠을 때를 대비해 다시 불러온다)
 H1 = [3, 5, 8, 9, 7, 10, 12]   # A3·A4에서 쓴 힙(최소 힙)
 
 # 값 x를 힙 h에 넣는 함수이다. 위에서 만든 sift_up을 쓴다.
@@ -286,7 +286,7 @@ def sift_down(h, i):
 
 def my_heapify(h):
     # TODO(A8 도전): 마지막 부모 칸부터 0번 칸까지 거꾸로 sift_down을 적용한다.
-    raise NotImplementedError("my_heapify를 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A8 도전 (left_child, right_child, sift_down, my_heapify)<textarea class="in code" rows="18" data-type="code" data-key="A8.mycode" data-label="A8 도전 (left_child, right_child, sift_down, my_heapify) 내 코드" spellcheck="false"></textarea></label><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 [편집기에 추가]해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-for="A8.mycode" data-id="A8-3">import heapq  # 표준 힙 도구 모듈(앞 코드를 지웠을 때를 대비해 다시 불러온다)
+    raise NotImplementedError("my_heapify를 작성하시오")</code></pre></div><div class="mycode"><label>내 코드 · A8 도전 (left_child, right_child, sift_down, my_heapify)<textarea class="in code" rows="18" data-type="code" data-key="A8.mycode" data-label="A8 도전 (left_child, right_child, sift_down, my_heapify) 내 코드" spellcheck="false"></textarea></label><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 [편집기에 추가]해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-for="A8.mycode" data-id="A8-3">import heapq  # 표준 힙 도구 모듈(앞 코드를 지웠을 때를 대비해 다시 불러온다)
 
 # 시험할 입력 리스트들이다(크기가 작은 경우도 있다).
 CASES = [

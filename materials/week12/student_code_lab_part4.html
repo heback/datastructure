@@ -170,7 +170,7 @@ def quick_sort(a, cnt):                 # 첫 원소 피벗. 같은 값은 큰 �
     for x in a[1:]:  # a[1:]은 첫 원소를 뺀 나머지이다
         cnt[0] += 1  # 비교 횟수를 1 올린다
         (small if ____16____ else big).append(x)   # ⑯
-    return ____17____                   # ⑰</code></pre></div><div class="mycode"><label>내 코드 · A11 (merge_sort, quick_sort 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A11.mycode" data-label="A11 (merge_sort, quick_sort 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+    return ____17____                   # ⑰</code></pre></div><div class="mycode"><label>내 코드 · A11 (merge_sort, quick_sort 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A11.mycode" data-label="A11 (merge_sort, quick_sort 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>점검과 ARR8 비교 횟수</h3>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A11-2"># A11 점검: 파이썬 sorted()와 결과가 같은지 본다.
 # random: 무작위 값을 만드는 모듈이다
@@ -251,7 +251,7 @@ for name, a in (("섞은 200", shuffled(200)), ("섞은 500", shuffled(500)), ("
 </ul>
 <h3>(가-1) 과제 점검</h3>
 <p>새 입력 TA에서 코드를 <b>고치지 않고</b> 통과하는지 확인한다(9분). 먼저 A9 쪽(student_code_lab_part2)의 내 코드 칸에서 <code class="i">count_equal</code>, <code class="i">count_in_range</code>를 실행해 성공시켜 둔 뒤, 이 쪽에서 [앞 쪽 코드 불러오기]를 눌러 두 함수의 정의를 이 쪽 환경에 가져온다. 불러오기는 환경에만 정의를 넣고 아래 내 코드 칸에는 코드를 넣지 않는다. <b>제출용으로 두 함수의 코드를 A9 쪽 칸에서 복사해 아래 내 코드 칸 맨 위에 붙여 넣고, 그 아래에 <code class="i">closest_value</code>를 새로 써서 세 함수를 한 칸에 모은다.</b> 칸 전체를 실행한 뒤 [예시 코드]의 TA와 점검 코드를 [편집기에 추가]해 이어 실행한다. 수업 중 점검은 count 두 함수가 대상이고, closest_value는 아래 (가-2)로 확인한다(시간이 남지 않으면 주간 과제에서 이어서 한다). <code class="i">NameError</code>가 나오면 불러오기나 붙여 넣기가 빠졌는지 확인한다.</p>
-<div class="codewrap" data-for="A14.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A14-1">TA = [2, 2, 2, 6, 6, 10, 14, 14, 14, 14, 18]     # 정렬된 입력(같은 값이 여럿 있을 수 있다)</code></pre></div><div class="mycode"><label>내 코드 · A14 (count_equal, count_in_range, closest_value 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A14.mycode" data-label="A14 (count_equal, count_in_range, closest_value 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap" data-for="A14.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-2"># A14 점검 (가-1): 입력에서 계산한 느린 방법과 내 두 함수의 결과를 비교한다(기대값을 미리 적어 두지 않았다).
+<div class="codewrap" data-for="A14.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A14-1">TA = [2, 2, 2, 6, 6, 10, 14, 14, 14, 14, 18]     # 정렬된 입력(같은 값이 여럿 있을 수 있다)</code></pre></div><div class="mycode"><label>내 코드 · A14 (count_equal, count_in_range, closest_value 작성)</label><textarea class="in code" rows="24" data-type="code" data-key="A14.mycode" data-label="A14 (count_equal, count_in_range, closest_value 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap" data-for="A14.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-2"># A14 점검 (가-1): 입력에서 계산한 느린 방법과 내 두 함수의 결과를 비교한다(기대값을 미리 적어 두지 않았다).
 # random은 무작위 값, time은 걸린 시간을 다루는 모듈이다
 import random, time
 
@@ -346,7 +346,7 @@ def max_piece_length(ropes, k):
             lo = mid
         else:
             hi = ____19____      # ⑲
-    return lo</code></pre></div><div class="mycode"><label>내 코드 · A14 ROPE (max_piece_length 작성)</label><textarea class="in code" rows="14" data-type="code" data-key="A14.rope.mycode" data-label="A14 ROPE (max_piece_length 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap" data-for="A14.rope.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14R-2"># ROPE 점검: 1부터 하나씩 늘려 가며 찾은 느린 답과 비교하고, count_pieces를 몇 번 불렀는지 센다.
+    return lo</code></pre></div><div class="mycode"><label>내 코드 · A14 ROPE (max_piece_length 작성)</label><textarea class="in code" rows="14" data-type="code" data-key="A14.rope.mycode" data-label="A14 ROPE (max_piece_length 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div><div class="codewrap" data-for="A14.rope.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14R-2"># ROPE 점검: 1부터 하나씩 늘려 가며 찾은 느린 답과 비교하고, count_pieces를 몇 번 불렀는지 센다.
 _real = count_pieces  # 원래 함수를 따로 보관한다
 calls = [0]  # 호출 횟수를 세는 칸
 # 같은 이름으로 다시 정의해 호출될 때마다 횟수를 1 올린다

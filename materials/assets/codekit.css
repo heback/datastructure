@@ -14,8 +14,13 @@ pre:not(.diagram){background:#fff;color:#1f2328;border:1px solid #cfd6e2}
 .ck-btn.run{background:#1d7a4f;border-color:#1d7a4f;color:#fff}
 .ck-btn:disabled{opacity:.55;cursor:default}
 .ck-btn:focus-visible{outline:3px solid #3572a5;outline-offset:1px}
-.ck-area{display:grid;position:relative;background:#fff}
-.ck-ed .ck-area>pre.ck-hl,.ck-ed .ck-area>textarea.ck-ta{grid-area:1/1;margin:0;font:12.5px/1.55 "JetBrains Mono","D2Coding",Consolas,monospace;padding:8px 10px;border:0;border-radius:0;tab-size:4;white-space:pre;letter-spacing:0;word-spacing:0}
+.ck-ed{--ck-lh:20px;--ck-pt:8px;--ck-dash:#d9dde5}
+.ck-area{display:grid;grid-template-columns:auto minmax(0,1fr);position:relative;background:#fff}
+/* 행간 점선: 줄마다 아래쪽 1px을 점선으로 그린다 */
+.ck-area::before{content:"";grid-area:1/1/2/-1;margin-top:var(--ck-pt);pointer-events:none;z-index:2;background:linear-gradient(to right,var(--ck-dash) 50%,transparent 50%) 0 0/6px 100%;-webkit-mask-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--ck-lh) - 1px),#000 calc(var(--ck-lh) - 1px),#000 var(--ck-lh));mask-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--ck-lh) - 1px),#000 calc(var(--ck-lh) - 1px),#000 var(--ck-lh))}
+/* 행번호 */
+.ck-gut{grid-area:1/1;margin:0;min-width:2.8em;padding:var(--ck-pt) 8px var(--ck-pt) 10px;font:11.5px/var(--ck-lh) "JetBrains Mono","D2Coding",Consolas,monospace;text-align:right;white-space:pre;color:#6e7781;background:#f6f8fa;border-right:1px solid #cfd6e2;overflow:hidden;min-height:0;user-select:none;-webkit-user-select:none;font-variant-numeric:tabular-nums}
+.ck-ed .ck-area>pre.ck-hl,.ck-ed .ck-area>textarea.ck-ta{grid-area:1/2;margin:0;font:12.5px/var(--ck-lh) "JetBrains Mono","D2Coding",Consolas,monospace;padding:var(--ck-pt) 10px;border:0;border-radius:0;tab-size:4;white-space:pre;letter-spacing:0;word-spacing:0}
 .ck-ed .ck-area>pre.ck-hl{overflow:hidden;pointer-events:none;color:#1f2328;background:#fff;padding-bottom:28px;min-width:0}
 .ck-ed .ck-area>textarea.ck-ta{background:transparent!important;color:transparent!important;caret-color:#16233b;overflow:auto;resize:vertical;width:100%;min-width:0;position:relative;z-index:1}
 .ck-ed .ck-area>textarea.ck-ta::selection{background:rgba(53,114,165,.28);color:transparent}
@@ -39,7 +44,7 @@ pre:not(.diagram){background:#fff;color:#1f2328;border:1px solid #cfd6e2}
 .ck-dlg .ck-item pre{margin:0;max-height:46vh;overflow:auto}
 .ck-dlg .ck-hint{font-size:12px;color:#5b6b85;margin-top:8px}
 @media print{
-  .ck-bar,.ck-out,.ck-modal{display:none!important}
+  .ck-bar,.ck-out,.ck-modal,.ck-area::before,.ck-gut{display:none!important}
   .ck-ed{border:none}
   pre:not(.diagram){background:#fff!important;color:#111!important;border:1px solid #bbb!important;white-space:pre-wrap;word-break:break-all}
   .ck-ed .ck-area>textarea.ck-ta{display:none!important}

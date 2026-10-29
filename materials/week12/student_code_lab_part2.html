@@ -161,7 +161,7 @@ xs = [3, 7, 12, 4, 0, 20]  # 찾아 볼 값의 목록
 # 예측을 활동지 표에 먼저 적은 뒤 실행한다. right - left 열은 직접 계산해 활동지에 쓴다.
 # xs의 값을 하나씩 x에 넣어 두 함수를 호출한다
 for x in xs:
-    print("x =", x, " bisect_left:", bisect_left(DUP, x), " bisect_right:", bisect_right(DUP, x))</code></pre></div><div class="mycode"><label>내 코드 · A8 (bisect 호출 실험 메모 또는 추가 실험)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.mycode" data-label="A8 (bisect 호출 실험 메모 또는 추가 실험) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+    print("x =", x, " bisect_left:", bisect_left(DUP, x), " bisect_right:", bisect_right(DUP, x))</code></pre></div><div class="mycode"><label>내 코드 · A8 (bisect 호출 실험 메모 또는 추가 실험)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.mycode" data-label="A8 (bisect 호출 실험 메모 또는 추가 실험) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>A7 대조</h3>
 <p>A7 쪽(student_code_lab)의 내 코드 칸에서 <code class="i">lower_bound</code>와 <code class="i">upper_bound</code>를 실행해 성공시켜 둔다. 이 쪽에서 [앞 쪽 코드 불러오기]를 눌러 그 정의를 이 쪽 환경에 가져온다(편집기 칸에 코드가 들어오지는 않는다). 이어서 위 예측 후 실행 코드(<code class="i">DUP</code>와 <code class="i">bisect</code> 가져오기)를 실행하고, [예시 코드]의 A8 대조 코드를 [편집기에 추가]해 실행한다. 불러오기에서 &ldquo;불러올 코드가 없다&rdquo;는 안내가 나오면 A7 쪽 내 코드 칸의 코드를 복사해 이 쪽 편집기 맨 위에 붙여 넣는다. <code class="i">NameError: name 'lower_bound' is not defined</code>가 나오면 이 단계가 빠진 것이고, <code class="i">AssertionError</code>는 값이 다르다는 뜻이다.</p>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-2"># A7에서 만든 두 함수가 bisect와 같은 값을 내는지 대조한다. (A7 코드를 [앞 쪽 코드 불러오기]로 불러온 뒤 실행한다)
@@ -190,7 +190,7 @@ def count_equal(a, x):
 # lo, hi는 값의 범위이다(리스트의 자리 번호가 아니다)
 def count_in_range(a, lo, hi):          # 닫힌 구간 [lo, hi]의 원소 개수
     ____11____                          # ⑪ lo &gt; hi일 때의 처리 (A9 후반에 채운다. 처음에는 pass로 둔다)
-    return ____9____                    # ⑨ 닫힌 구간 [lo, hi]의 원소 개수를 구하는 식 전체</code></pre></div><div class="mycode"><label>내 코드 · A9 (count_equal, count_in_range 작성)</label><textarea class="in code" rows="14" data-type="code" data-key="A9.mycode" data-label="A9 (count_equal, count_in_range 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+    return ____9____                    # ⑨ 닫힌 구간 [lo, hi]의 원소 개수를 구하는 식 전체</code></pre></div><div class="mycode"><label>내 코드 · A9 (count_equal, count_in_range 작성)</label><textarea class="in code" rows="14" data-type="code" data-key="A9.mycode" data-label="A9 (count_equal, count_in_range 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 <h3>1단계 예측 후 실행</h3>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A9-2">DUP = [1, 3, 3, 3, 5, 7, 7, 9, 12, 12, 12, 12, 15]
 # 예측을 활동지에 먼저 적은 뒤 실행한다.
@@ -221,7 +221,7 @@ for a in (DUP, [], [5], [2, 2, 2]):
 print("A9 점검 통과")</code></pre></div>
 <h3>틀린 식의 반례 찾기</h3>
 <p>활동지 2부 A9에 적힌 &ldquo;왼쪽 경계 두 개로 만든 식&rdquo;을 아래 칸에 <b>직접</b> 코드로 써서 위 구간들에 적용해 본다. 어느 구간에서 값이 달라지는지 찾아 활동지에 쓴다. 이 칸의 코드는 제출하지 않아도 되지만, 쓰면 JSON에 함께 저장된다.</p>
-<div class="mycode"><label>내 코드 · A9 (틀린 식으로 값 구해 보기)</label><textarea class="in code" rows="8" data-type="code" data-key="A9.badcode" data-label="A9 (틀린 식으로 값 구해 보기) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+<div class="mycode"><label>내 코드 · A9 (틀린 식으로 값 구해 보기)</label><textarea class="in code" rows="8" data-type="code" data-key="A9.badcode" data-label="A9 (틀린 식으로 값 구해 보기) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
 </section>
 <section id="note" class="sheet">
 <h2>실습 과제와의 연결<small>A9 이어짐</small></h2>
