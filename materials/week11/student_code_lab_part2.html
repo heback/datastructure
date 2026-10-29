@@ -145,7 +145,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="mycode"><label>준비 편집기 &middot; 1부 코드가 불러와지지 않을 때만 붙여 넣는다<textarea class="in code" rows="10" data-type="code" data-noex data-key="A8.prep" data-label="A8 준비 코드 붙여넣기(1부 코드를 불러오지 못한 경우)" spellcheck="false"></textarea></label></div>
 </section>
 <section id="A8" class="sheet">
-<h2>A8 · 함정 탐색: 예측 후 실행<small>13분 · 짝</small></h2>
+<h2>A8 · 함정 탐색: 예측 후 실행<small>13분 · 개인</small></h2>
 <p>각 코드의 위쪽 주석에 시작 상태가 적혀 있다. T 편집기는 실행할 때마다 그 코드의 함수를 처음부터 다시 정의하므로 새로 시작한 상태에서 실행된다(T4는 세 번의 호출이 한 번의 실행 안에서 이어진다). 같은 T 코드를 한 편집기에 두 번 추가하지 않도록 주의한다.</p><div class="learn-box"><span class="lb-title">학습 내용 · T1~T4가 보여 주려는 것과 예측 쓰는 법</span>
 <ul>
 <li><b>T1</b>은 visited에 &ldquo;봤다&rdquo;고 표시하는 시점(큐에 넣을 때 / 꺼낼 때)을 바꿔 본다. T1-a는 G1에서 나온 방문 순서, T1-b는 열린 4&times;4 격자에서 (큐에 넣은 횟수, 큐 길이의 최댓값) 한 쌍을 두 방식으로 출력한다.</li>
@@ -259,7 +259,7 @@ print(dfs_bad(g, "A"))
 print(dfs_bad(g, "B"))</code></pre></div><div class="mycode"><label>내 코드 &middot; T4(선택) 실행<textarea class="in code" rows="14" data-type="code" data-key="A8.code.T4" data-label="A8 T4 실행 코드" spellcheck="false"></textarea></label></div><div class="mycode"><label>실행 메모 · T4 (실행하며 본 것, 오류 이름을 그대로 쓴다)<textarea class="in" rows="2" data-key="A8.memo.T4" data-label="A8 T4 실행 메모"></textarea></label></div>
 </section>
 <section id="A9" class="sheet">
-<h2>A9 · 같은 미로에서 깊이 우선과 비교<small>9분 · 짝</small></h2>
+<h2>A9 · 같은 미로에서 깊이 우선과 비교<small>9분 · 개인</small></h2>
 <p>같은 MAZE에서 재귀로 처음 찾은 길의 간선 수를 구해 A7에서 구한 값과 비교한다. <code class="i">first_path_len</code>은 완성본이 제공된다. 이번에는 방향 순서 24가지를 모두 돌려 DFS 값과 BFS 값이 각각 어떻게 변하는지 한 번에 출력한다. 실행하기 전에 활동지 <a href="student_workbook_part2.html#A9">2부 A9</a>의 예측 칸을 먼저 채우고, 출력에서 골라 표에 옮겨 쓴다.</p><div class="learn-box"><span class="lb-title">학습 내용 · DIRS 순서와 24가지 실험</span>
 <ul>
 <li><b>DIRS</b>는 grid_neighbors가 이웃을 내주는 방향 순서(기본 우·하·좌·상)이다. 방향이 4개이므로 순서의 경우의 수는 4&times;3&times;2&times;1 = 24가지이다. 출력의 <code class="i">우하좌상</code>은 방향 순서를 첫 글자 순서로 쓴 것이다.</li>

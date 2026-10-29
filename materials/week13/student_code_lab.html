@@ -143,7 +143,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </ol>
 </section>
 <section id="A7" class="sheet">
-<h2>A7 · 같은 값을 세 가지 방식으로 구하고 횟수 재기<small>11분 · 개인(옆자리 확인)</small></h2>
+<h2>A7 · 같은 값을 세 가지 방식으로 구하고 횟수 재기<small>11분 · 개인</small></h2>
 <p class="meta"><span>산출물: ① ~ ③ 완성 코드, 호출 횟수 예측-실제 표(활동지 2부 A7 칸)</span></p>
 <div class="concept"><b class="h">약속 · 세 가지 방식</b>
 <ul><li><code class="i">fib_naive</code>는 정의 그대로 재귀로 구한다(제공). 전역 변수 <code class="i">calls</code>가 함수가 불린 횟수를 센다.</li><li><code class="i">fib_memo(n, memo)</code>는 재귀로 풀되 한 번 계산한 값을 사전 <code class="i">memo</code>에 적어 둔다. 호출하는 쪽이 빈 사전 <code class="i">{}</code>을 만들어 넘긴다.</li><li><code class="i">fib_tab(n)</code>은 작은 값부터 표 <code class="i">dp</code>를 채워 올라간다. 전역 변수 <code class="i">steps</code>가 표의 칸을 채운 횟수를 센다.</li><li>이 파일에서 <code class="i">functools</code>는 쓰지 않는다. 직접 구현이 먼저이다.</li></ul></div>
@@ -228,7 +228,6 @@ for n in (20, 30):     # n = 20, 30으로 두 번 실행한다
     # 값 세 개와 센 횟수 세 개를 한 줄에 출력한다.
     print("n =", n, " 값:", v1, v2, v3, " fib_naive 호출:", c1, " fib_memo 호출:", c2, " fib_tab 반복:", c3)</code></pre></div>
 <p>예측은 실행 전에 활동지 2부에 쓰고, 점검이 통과한 뒤 같은 표의 &lsquo;실제&rsquo; 칸에 값을 쓴다. 이 주의 실습 과제는 A8 시작 때 <code class="i">student_code_lab_part2</code>에서 안내한다.</p>
-<div class="ans-row"><span>옆 학생과 대조</span><textarea class="in" rows="2" data-key="A7.compare" data-label="A7 옆 학생의 코드와 다른 점"></textarea></div>
 <p>먼저 활동지 2부의 표와 위 칸에 쓴 뒤 아래 상자를 연다.</p>
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 횟수 값 표와 참조 해</summary>
 <div class="scroll"><table><tr><th>n</th><th>fib(n)</th><th>fib_naive 호출</th><th>fib_memo 호출</th><th>fib_tab 반복</th></tr><tr><td>20</td><td>6765</td><td>21,891</td><td>39</td><td>19</td></tr><tr><td>30</td><td>832,040</td><td>2,692,537</td><td>59</td><td>29</td></tr></table></div>

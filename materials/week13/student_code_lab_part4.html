@@ -143,7 +143,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </ol>
 </section>
 <section id="A11" class="sheet">
-<h2>A11 · 격자 경로 수를 DP로 설계하고 구현하기<small>10분 · 개인(짝 점검)</small></h2>
+<h2>A11 · 격자 경로 수를 DP로 설계하고 구현하기<small>10분 · 개인</small></h2>
 <p class="meta"><span>산출물: ⑪ ~ ⑭ 완성 코드, GRID dp 표와 경로 수 예측-실제 표(활동지 3부 A11 칸)</span></p>
 <p>11주차 격자 탐색에서 칸을 따라 움직이던 감각을 떠올린다. 이번에는 <b>오른쪽과 아래쪽으로만</b> 움직여 좌상단에서 우하단까지 가는 경로가 모두 몇 가지인지 센다(0 = 통행, 1 = 막힘). 코드를 보기 전에 활동지 3부 A11의 설계 4칸(상태 정의·전이·초기값·계산 순서)을 <b>먼저 말로 쓴다</b>.</p>
 <div class="learn-box"><span class="lb-title">학습 내용 · 격자 경로 설계의 그림과 4칸 질문</span>
@@ -215,7 +215,6 @@ print("A11 점검 통과")</code></pre></div>
 <h3>예측 후 실행</h3><p>GRID의 dp 표와 경로 수를 활동지 3부에 먼저 <b>예측</b>하고 실행한다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A11-4"># 예측을 활동지에 먼저 적은 뒤 실행한다. dp 표를 보려면 grid_paths의 return 바로 앞에
 # for row in dp: print(row) 두 줄을 임시로 넣고, 확인한 뒤 지운다.
 print(grid_paths(GRID))  # GRID의 경로 수를 출력한다</code></pre></div>
-<div class="ans-row"><span>짝 점검</span><textarea class="in" rows="2" data-key="A11.compare" data-label="A11 짝의 설계와 다른 점"></textarea></div>
 </section>
 <section id="assign" class="sheet">
 <h2>실습 과제 작성 칸<small>A8 착수 · A14 마무리</small></h2>
@@ -230,7 +229,7 @@ print(grid_paths(GRID))  # GRID의 경로 수를 출력한다</code></pre></div>
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="5" data-key="assign.essay.dp" data-label="과제 서술: min_coins의 상태 정의·전이·초기값"></textarea></div>
 </section>
 <section id="A14" class="sheet">
-<h2>A14 · 과제 마무리 점검과 회의 선택<small>12분 · 개인→짝</small></h2>
+<h2>A14 · 과제 마무리 점검과 회의 선택<small>12분 · 개인</small></h2>
 <p class="meta"><span>산출물: TEST 점검표(활동지 3부 A14 칸), ⑮ ⑯ 완성 코드와 후보 규칙 반증 기록</span></p>
 <details><summary>A14에서 펼친다(과제 점검 입력, 요건 안내, 회의 선택)</summary><div class="gate">
 <h3>(가) 과제 요건과 점검 입력</h3><ul><li><code class="i">min_coins</code>는 <code class="i">amount</code>가 커도(예: 20000) <code class="i">RecursionError</code> 없이 끝나야 한다. 표를 반복문으로 채우는 방식으로 쓴다.</li><li>세 함수는 입력 리스트를 <b>바꾸지 않는다</b>. 정렬이 필요하면 복사본을 정렬한다.</li><li>과제 서술에는 <code class="i">min_coins</code>와 <code class="i">grid_paths</code>의 시간·공간 복잡도를 반복문 구조에 근거해 한 줄씩 쓴다(활동지 3부 A14 서술 칸).</li><li>아래 점검 코드는 &lsquo;실습 과제 작성 칸&rsquo;에서 실행해 둔 세 함수를 불러 결과를 출력한다. 기대값은 아래 &lsquo;점검 기대값&rsquo; 상자에 있으며, 점검 코드를 실행해 출력을 얻은 뒤 연다. 틀린 입력은 활동지 3부 점검표에 번호로 표시한다(통과하지 못한 번호만 표시해도 된다). </li></ul>
@@ -284,14 +283,14 @@ run("greedy_counterexample", greedy_counterexample, [(c,) for c in TEST_CE])</co
 <p><b>greedy_counterexample</b> (검사 범위는 1 ~ 2×가장 큰 동전이고 반례가 없으면 None)</p><div class="scroll"><table><tr><th>번호</th><th>입력</th><th>기대값</th></tr><tr><td>1</td><td>[1, 3, 4]</td><td>6</td></tr><tr><td>2</td><td>[1, 4, 6]</td><td>8</td></tr><tr><td>3</td><td>[1, 5, 10, 20, 25]</td><td>40</td></tr><tr><td>4</td><td>[1, 5, 6, 9]</td><td>11</td></tr><tr><td>5</td><td>[1, 3, 4, 10]</td><td>6</td></tr><tr><td>6</td><td>[1, 7, 10]</td><td>14</td></tr><tr><td>7</td><td>[1, 5, 12]</td><td>15</td></tr><tr><td>8</td><td>[1, 5, 25]</td><td>None</td></tr><tr><td>9</td><td>[1, 10, 50, 100, 500]</td><td>None</td></tr><tr><td>10</td><td>[1, 5, 10, 25]</td><td>None</td></tr><tr><td>11</td><td>[1]</td><td>None</td></tr></table></div>
 <p>다른 줄이 있으면 점검표의 그 번호에 원인을 쓴다. grid_paths의 2·5번은 시작이나 도착이 막힌 경우이고, min_coins의 3·4번은 만들 수 없는 금액이다. 이런 경계 경우를 놓치면 틀리기 쉽다. 기대값이 None인 체계는 &ldquo;검사 범위까지 반례가 없다&rdquo;는 뜻이다. 검사 범위는 증명 없이 범위만 준 값이며, A9에서 limit이 작으면 반례를 놓쳤던 경험의 연장이다.</p>
 </details>
-<h3>(나) 회의 선택 · 후보 규칙 반증</h3><p>한 회의실에서 겹치지 않게 가장 많은 회의를 고른다. 회의는 [시작, 끝)이다. 회의 고르는 규칙 후보는 ① 시작이 빠른 순, ② 짧은 회의 순, ③ 끝이 빠른 순이다. 모둠이 후보를 나누어 맡고, 맡은 규칙에 맞게 정렬 기준 ⑮를 바꿔 MEET에서 선택 수를 구한다. 모든 경우를 따진 최댓값과 다르면 그 입력이 그 규칙의 반례이다. 같으면 &ldquo;같다&rdquo;고 쓰고, 그래도 증명은 아닌 까닭을 쓴다. 같았던 규칙마다 틀리게 만드는 회의 목록을 하나 만들어 보고, 만들지 못하면 만들지 못했다고 쓴다. 만들지 못했다는 것이 그 규칙이 늘 맞다는 증명은 아니다.</p>
+<h3>(나) 회의 선택 · 후보 규칙 반증</h3><p>한 회의실에서 겹치지 않게 가장 많은 회의를 고른다. 회의는 [시작, 끝)이다. 회의 고르는 규칙 후보는 ① 시작이 빠른 순, ② 짧은 회의 순, ③ 끝이 빠른 순이다. 세 후보 규칙마다 정렬 기준 ⑮를 바꿔 MEET에서 선택 수를 구한다. 모든 경우를 따진 최댓값과 다르면 그 입력이 그 규칙의 반례이다. 같으면 &ldquo;같다&rdquo;고 쓰고, 그래도 증명은 아닌 까닭을 쓴다. 같았던 규칙마다 틀리게 만드는 회의 목록을 하나 만들어 보고, 만들지 못하면 만들지 못했다고 쓴다. 만들지 못했다는 것이 그 규칙이 늘 맞다는 증명은 아니다.</p>
 <div class="learn-box"><span class="lb-title">학습 내용 · 회의 선택 문제와 ⑮ ⑯ 읽는 법</span>
 <p>회의는 [시작, 끝) 반열린이라 한 회의의 끝 시각에 다른 회의가 시작해도 겹치지 않고 이어서 쓸 수 있다.</p>
 <svg viewBox="0 0 520 243" width="520" role="img" aria-label="회의 11개의 시작과 끝 시각" style="max-width:100%;height:auto;background:#fff;border:1px solid #cbd5e0;border-radius:6px"><line x1="70" y1="6" x2="70" y2="219" stroke="#e2e8f0"/><text x="70" y="235" font-size="11" text-anchor="middle" fill="#4a5568">0</text><line x1="122" y1="6" x2="122" y2="219" stroke="#e2e8f0"/><text x="122" y="235" font-size="11" text-anchor="middle" fill="#4a5568">2</text><line x1="174" y1="6" x2="174" y2="219" stroke="#e2e8f0"/><text x="174" y="235" font-size="11" text-anchor="middle" fill="#4a5568">4</text><line x1="226" y1="6" x2="226" y2="219" stroke="#e2e8f0"/><text x="226" y="235" font-size="11" text-anchor="middle" fill="#4a5568">6</text><line x1="278" y1="6" x2="278" y2="219" stroke="#e2e8f0"/><text x="278" y="235" font-size="11" text-anchor="middle" fill="#4a5568">8</text><line x1="330" y1="6" x2="330" y2="219" stroke="#e2e8f0"/><text x="330" y="235" font-size="11" text-anchor="middle" fill="#4a5568">10</text><line x1="382" y1="6" x2="382" y2="219" stroke="#e2e8f0"/><text x="382" y="235" font-size="11" text-anchor="middle" fill="#4a5568">12</text><line x1="434" y1="6" x2="434" y2="219" stroke="#e2e8f0"/><text x="434" y="235" font-size="11" text-anchor="middle" fill="#4a5568">14</text><line x1="486" y1="6" x2="486" y2="219" stroke="#e2e8f0"/><text x="486" y="235" font-size="11" text-anchor="middle" fill="#4a5568">16</text><text x="4" y="20" font-size="11" fill="#1a202c">(1, 4)</text><rect x="96" y="10" width="78" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="39" font-size="11" fill="#1a202c">(3, 5)</text><rect x="148" y="29" width="52" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="58" font-size="11" fill="#1a202c">(0, 6)</text><rect x="70" y="48" width="156" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="77" font-size="11" fill="#1a202c">(5, 7)</text><rect x="200" y="67" width="52" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="96" font-size="11" fill="#1a202c">(3, 9)</text><rect x="148" y="86" width="156" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="115" font-size="11" fill="#1a202c">(5, 9)</text><rect x="200" y="105" width="104" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="134" font-size="11" fill="#1a202c">(6, 10)</text><rect x="226" y="124" width="104" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="153" font-size="11" fill="#1a202c">(8, 11)</text><rect x="278" y="143" width="78" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="172" font-size="11" fill="#1a202c">(8, 12)</text><rect x="278" y="162" width="104" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="191" font-size="11" fill="#1a202c">(2, 14)</text><rect x="122" y="181" width="312" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="210" font-size="11" fill="#1a202c">(12, 16)</text><rect x="382" y="200" width="104" height="12" fill="#bee3f8" stroke="#2b6cb0"/></svg>
 <ul>
 <li>회의는 튜플 (s, e)이고 <code class="i">m[0]</code>은 시작 시각, <code class="i">m[1]</code>은 끝 시각이다. <code class="i">sorted(meets, key=...)</code>는 key 값이 작은 회의부터 늘어놓는다. ⑮에 무엇을 넣느냐가 &ldquo;어떤 순서로 보며 고를 것인가&rdquo;라는 규칙이다.</li>
 <li>⑯은 새 회의를 고를 수 있는지의 조건이다. 새 회의의 시작과 마지막으로 고른 회의의 끝(<code class="i">last_end</code>)을 견주어 겹치는지 판단한다.</li>
-<li>후보 규칙은 ① 시작이 빠른 순(m[0]), ② 짧은 회의 순(m[1] − m[0]), ③ 끝이 빠른 순(m[1])이다. 모둠이 나누어 맡아 ⑮를 바꿔 실행하고, 점검 코드의 모든 경우를 따진 최댓값과 견준다.</li>
+<li>후보 규칙은 ① 시작이 빠른 순(m[0]), ② 짧은 회의 순(m[1] − m[0]), ③ 끝이 빠른 순(m[1])이다. 규칙마다 ⑮를 바꿔 실행하고, 점검 코드의 모든 경우를 따진 최댓값과 견준다.</li>
 <li>규칙의 결과가 최댓값과 다르면 어느 회의 때문에 달라졌는지 찾는다. 같으면 &ldquo;같다&rdquo;고 쓰고, 그것이 증명이 아닌 까닭도 쓴다.</li>
 </ul>
 </div>

@@ -143,7 +143,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </ol>
 </section>
 <section id="A10" class="sheet">
-<h2>A10 · 함정 코드를 예측하고 실행하기<small>12분 · 짝(예측 → 실행 → 원인)</small></h2>
+<h2>A10 · 함정 코드를 예측하고 실행하기<small>12분 · 개인(예측 → 실행 → 원인)</small></h2>
 <p class="meta"><span>산출물: T1~T3(+T4) 예측-실제와 원인(활동지 2부 A10 칸), 고친 코드</span></p>
 <div class="concept"><b class="h">약속 · 예측 → 실행 → 원인</b>
 <p>아래 코드는 일부러 문제가 있는 코드이다. 각 블록을 <b>실행하기 전에</b> 무엇이 나올지 활동지 2부에 예측하고, 실행한 뒤 실제 값과 원인을 쓴다. 각 블록 첫 줄 주석에 시작 상태가 적혀 있다. 해결책은 이 파일에 없다. 원인을 찾은 뒤 고친 코드를 내 코드 칸에 직접 쓴다.</p></div>
@@ -232,7 +232,6 @@ for name, f in (("fib_memo_t4", lambda: fib_memo_t4(3000, {})), ("fib_tab_t4", l
     except Exception as e:  # 오류가 나면 이 줄로 온다
         print("T4", name, "오류:", type(e).__name__)</code></pre></div><p class="hint">T4는 재귀 한도를 코드에서 바꾸지 않는다. 한도 값은 환경에 따라 다를 수 있어 n = 3000을 쓴다.</p>
 <div class="mycode"><label>T4 실행 칸 (저장되지 않는다)</label><textarea class="in code" rows="14" data-run-only data-label="A10 T4 실행 칸" spellcheck="false"></textarea><p class="hint noprint">[예시 코드]에서 T4 블록을 추가해 실행한다. 이 칸의 내용은 제출 JSON에 들어가지 않는다.</p></div>
-<div class="ans-row"><span>옆 학생과 대조</span><textarea class="in" rows="2" data-key="A10.compare" data-label="A10 짝과 비교한 원인 설명의 다른 점"></textarea></div>
 </section>
 </div>
 <script id="week13-submit">

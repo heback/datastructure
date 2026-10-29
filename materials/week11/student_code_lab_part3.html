@@ -142,7 +142,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </ol>
 </section>
 <section id="A10" class="sheet">
-<h2>A10 · 섬의 개수<small>12분 · 짝</small></h2>
+<h2>A10 · 섬의 개수<small>12분 · 개인</small></h2>
 <p><code class="i">count_islands</code>와 <code class="i">explore</code>를 완성한다. 격자는 문자열 리스트이고 &lsquo;1&rsquo;이 땅, &lsquo;0&rsquo;이 바다이다. 완성한 뒤 ISLE에서 실행하고, <code class="i">explore</code>에서 꺼내는 줄을 <code class="i">popleft()</code>와 <code class="i">pop()</code>으로 바꿔 가며 개수가 변하는지 관찰한다. (선택) 대각선 8방향도 이웃으로 보면 어떻게 되는지 실험한다.</p><div class="learn-box"><span class="lb-title">학습 내용 · ISLE 읽는 법과 빈칸 ⑮~⑰ 길잡이</span>
 <pre class="diagram">     열 0 1 2 3 4 5 6       섬은 &lsquo;1&rsquo;(땅) 칸이 상하좌우로 이어진 덩어리이다(이웃은 grid_neighbors와 같은 4방향).
 행 0     1 1 0 0 0 1 0       6행 &times; 7열이다. 손으로 셀 때는 땅 칸 하나를 골라 상하좌우로 이어진 땅 칸에
@@ -264,7 +264,7 @@ print("A10 점검 통과")</code></pre></div>
 </ul></details>
 </section>
 <section id="A13" class="sheet">
-<h2>A13 · 과제 마무리 점검과 전이<small>12분 · 개인(옆 학생과 결과 비교)</small></h2>
+<h2>A13 · 과제 마무리 점검과 전이<small>12분 · 개인</small></h2>
 <details><summary>A13 블록 (A10까지 마친 뒤 A13에서 펼친다)</summary>
 <div class="warn"><b>과제 요건</b><ul><li><code class="i">grid_neighbors</code>는 <code class="i">yield</code>를 쓰는 제네레이터여야 한다(리스트 반환 불가).</li><li><code class="i">shortest_path_len</code>의 제출본은 큐를 쓰는 너비 우선 탐색이어야 한다. 검증용 비교 코드를 직접 쓰는 것은 허용된다.</li><li>입력 격자를 바꾸지 않아야 하고, 같은 입력으로 두 번 호출해도 같은 값이어야 한다(<code class="i">seen=set()</code> 같은 기본 인자를 쓰지 않는다).</li><li>1&times;1500 같은 큰 입력에서도 <code class="i">RecursionError</code> 없이 끝나야 한다.</li></ul></div><div class="learn-box"><span class="lb-title">학습 내용 · A13 점검 항목 1~9가 보는 것</span>
 <table><tr><th>항목</th><th>점검하는 함수와 입력</th><th>보는 것</th></tr>

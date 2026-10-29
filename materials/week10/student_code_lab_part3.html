@@ -143,7 +143,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </ol>
 </section>
 <section id="A10" class="sheet">
-<h2>A10 · 이웃 반환 함수 두 가지<small>16분 · 짝</small></h2>
+<h2>A10 · 이웃 반환 함수 두 가지<small>16분 · 개인</small></h2>
 <p>같은 일을 하는 이웃 반환 함수를 두 가지로 만든다. (가)는 이웃을 리스트로 만들어 돌려주고, (나)는 이웃을 요청할 때마다 하나씩 내준다. 아래 상자에서 <code class="i">yield</code>의 문법을 읽은 뒤 (나)를 완성한다. (가)와 (나)를 각각 완성한다. 호출하는 쪽 코드 <code class="i">for v in neighbors_gen(g, u)</code>가 (가)와 (나)에서 같은지도 확인한다.</p><div class="learn-box"><span class="lb-title">학습 내용 · 제네레이터와 yield, 예측 표 쓰는 법</span>
 <ul>
 <li>함수 본문에 <code class="i">yield</code>가 있으면 제네레이터 함수이다. 호출하면 값을 곧바로 주지 않고 제네레이터 객체를 돌려준다. <code class="i">next(it)</code>를 부를 때마다 본문이 다음 <code class="i">yield</code>까지 실행되고, 그 값을 내준 뒤 멈춘다. 다시 <code class="i">next</code>를 부르면 멈춘 곳에서 이어서 실행한다. <code class="i">for v in it:</code>은 <code class="i">next</code>를 반복해 부르는 문법이고, <code class="i">list(it)</code>는 내주는 값을 끝까지 모아 리스트로 만든다.</li>
@@ -233,7 +233,7 @@ assert not fails, "A10 테스트 실패: %s" % fails
 print("A10 테스트 통과")</code></pre></div>
 </section>
 <section id="A13" class="sheet">
-<h2>A13 · 과제 마무리 점검과 전이<small>11분 · 개인(옆 학생과 결과 비교)</small></h2>
+<h2>A13 · 과제 마무리 점검과 전이<small>11분 · 개인</small></h2>
 <div class="warn"><b>과제 안내 갱신</b> (이 파일에서 처음 안내한다)<ul><li><code class="i">build_graph(edges, directed=False)</code>는 <code class="i">defaultdict(list)</code>를 반환한다.</li><li><code class="i">neighbors(g, u)</code>는 <code class="i">yield</code>를 쓰는 제네레이터여야 한다(이웃 리스트를 반환하면 안 된다).</li><li>검증용으로 일반 dict나 리스트 기반 비교 코드를 직접 쓰는 것은 허용된다.</li></ul></div><div class="learn-box"><span class="lb-title">학습 내용 · 점검 순서와 판정 기준, 점검 입력, 손 풀이 도구</span>
 <ul>
 <li>붙이는 순서는 점검 입력, 내 코드(<code class="i">build_graph</code>와 A10의 <code class="i">neighbors_gen</code>을 <code class="i">neighbors</code>로 이름 바꾼 것), 점검 테스트이다. <code class="i">FAIL</code> 줄이 없고 &ldquo;A13 점검 통과&rdquo;가 나오면 통과이다. FAIL 줄의 입력 이름(예: &ldquo;G1 무방향&rdquo;)을 보고 그 입력으로 직접 호출해 어긋난 곳을 찾는다.</li>

@@ -141,7 +141,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>전위(<code class="i">preorder</code>)는 완성되어 있다. 이를 읽고 중위·후위를 직접 작성한다. 결과는 <code class="i">out</code> 리스트에 모으며, 호출하는 쪽이 새 리스트를 넘긴다(<code class="i">preorder(t, [])</code>).</p>
 <div class="note"><b>순서</b> ① 아래 편집기의 [예시 코드]를 열어 [제공 코드] 공통 코드와 [뼈대]를 <b>한 번씩만</b> [편집기에 추가]한다. ② 편집기에서 <code class="i">inorder</code>와 <code class="i">postorder</code>의 TODO를 직접 쓴다. ③ [테스트]를 [편집기에 추가]하고 [▶ 실행]한다. 뼈대를 다시 추가하면 내가 쓴 함수 아래에 처음 상태의 함수가 이어 붙어 내 함수를 덮어쓰므로 처음 한 번만 넣는다.</div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 순회 함수 구조와 테스트 읽는 법</span>
-<p><b>할 일</b> ① 전위를 실행해 T1 결과를 확인한다. ② 중위, 후위를 직접 작성한다. ③ T1과 빈 트리(<code class="i">None</code>)로 자체 검증한다. ④ 옆 학생과 결과를 비교한다. A6은 AI 도움 없이 하며, 기준은 이 쪽 아래 &lsquo;AI 활용 3단계&rsquo;를 따른다.</p>
+<p><b>할 일</b> ① 전위를 실행해 T1 결과를 확인한다. ② 중위, 후위를 직접 작성한다. ③ T1과 빈 트리(<code class="i">None</code>)로 자체 검증한다. ④ 결과를 손 추적과 비교해 어긋난 곳을 찾는다. A6은 AI 도움 없이 하며, 기준은 이 쪽 아래 &lsquo;AI 활용 3단계&rsquo;를 따른다.</p>
 <pre class="diagram" style="background:#fff;color:#1f2328;border:1px solid #cfd6e2;border-radius:6px;padding:8px 12px;font-size:12.5px;line-height:1.4;overflow-x:auto;white-space:pre">def 순회(node, out):
     if node is None:          # 기저 조건: 빈 자리이면 out을 돌려주고 끝낸다
         return out
@@ -228,11 +228,11 @@ for label, fn in FUNCS:
 # 위의 FAIL 줄에서 어느 함수가 틀렸는지 찾는다.
 assert not failures, "실패 %d건: %s" % (len(failures), failures)
 print("모든 테스트 통과")</code></pre></div>
-<div class="note">옆 학생과 결과를 비교하고, 서로 다른 부분이 있으면 어느 줄에서 갈렸는지 찾아 <a href="student_workbook.html#A6">활동지 A6</a>에 적는다.</div>
+<div class="note">결과를 A3에서 손으로 추적한 결과와 비교하고, 서로 다른 부분이 있으면 어느 줄에서 갈렸는지 찾아 <a href="student_workbook.html#A6">활동지 A6</a>에 적는다.</div>
 </section>
 
 <section id="A8" class="sheet">
-<h2>A8 · T3에 세 순회 실행하기<small>8분 · 짝</small></h2>
+<h2>A8 · T3에 세 순회 실행하기<small>8분 · 개인</small></h2>
 <p>A7에서 손으로 만든 T3를 코드로 만들어(삽입 순서는 활동지 A7과 같다) A6 테스트를 통과한 함수로 세 순회를 실행한다. 이 페이지의 A6 편집기에서 테스트를 통과시켜 두면 <code class="i">Node</code>, <code class="i">build</code>와 세 순회 함수가 환경에 남아 있으므로, 아래 실행 칸에는 [예시 코드]의 [예시] 블록만 [편집기에 추가]해 [▶ 실행]한다. <code class="i">NameError</code>가 나면 A6 편집기를 다시 [▶ 실행]한 뒤에 한다. 결과를 <a href="student_workbook.html#A8">활동지 A8</a>의 표에 옮기고, 눈에 띄는 점을 한 문장으로 쓴다.</p>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A6-4"># A8: T3에 세 순회를 실행해 결과를 비교한다.
 t3 = build([8, 3, 10, 1, 6, 14, 4, 7, 13])  # 삽입 순서대로 BST를 만든다
@@ -243,7 +243,7 @@ print(postorder(t3, []))  # 후위 순회 결과를 출력한다</code></pre></d
 </section>
 
 <section id="A9" class="sheet">
-<h2>A9 · T4와 T5의 방문 횟수 확인하기<small>11분 · 모둠</small></h2>
+<h2>A9 · T4와 T5의 방문 횟수 확인하기<small>11분 · 개인</small></h2>
 <p>먼저 손으로 두 트리를 그리고 값 7을 찾을 때의 방문 수를 센다. <b>손으로 센 뒤에</b> 아래 코드로 확인한다. 이 코드는 확인용이니 [▶ 실행]만 한다. 값을 바꾸어 보고 싶으면 실행 칸에서 바꾸어 보아도 된다(저장되지 않는다). 실행 칸에는 [예시 코드]의 세 블록을 위에서 아래 순서대로 [편집기에 추가]한다.</p>
 <h3>공통 코드 (Node, insert, build)</h3>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A9-1">class Node:  # 트리의 노드를 만드는 설계도(클래스)이다
@@ -296,7 +296,7 @@ print("T5에서 7:", steps_to_find(t5, 7))  # 방문 수를 출력한다</code><
 <div class="card"><b class="h">과제</b><ul>
 <li><code class="i">preorder</code>, <code class="i">inorder</code>, <code class="i">postorder</code>를 재귀로 구현한다.</li>
 <li>T1, T3, T6에서 기대 결과와 일치해야 하며, 빈 트리·한쪽 자식만 있는 노드·편향 트리(T5)에서도 동작해야 한다. 과제의 범위는 이 <b>세 함수</b>이다.</li>
-<li>A14(3차시)는 이 과제의 <b>마무리 점검</b>(T6에서 코드를 바꾸지 않고 통과하는지 확인)과 전이 연습으로 이루어진다. A14에서 함께 하는 전이 연습(3차시 배부 자료)은 과제 제출물이 아닌 보조 연습이며 채점 대상이 아니다.</li>
+<li>A14(3차시)는 이 과제의 <b>마무리 점검</b>(T6에서 코드를 바꾸지 않고 통과하는지 확인)과 전이 연습으로 이루어진다. A14에서 하는 전이 연습(3차시 배부 자료)은 과제 제출물이 아닌 보조 연습이며 채점 대상이 아니다.</li>
 <li>호출 방식과 상관없이 같은 입력에는 같은 결과가 나와야 한다.</li>
 </ul></div>
 <div class="card"><b class="h">제출물</b><ul>

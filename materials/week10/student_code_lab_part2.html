@@ -143,7 +143,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </ol>
 </section>
 <section id="A8" class="sheet">
-<h2>A8 · 함정 탐색: 예측 후 실행<small>14분 · 짝</small></h2>
+<h2>A8 · 함정 탐색: 예측 후 실행<small>14분 · 개인</small></h2>
 <p>먼저 A7에서 만든 방식으로 G1을 새로 만드는 함수 <code class="i">make_g1</code>을 완성한다. 아래 C1~C5는 모두 <code class="i">make_g1()</code> 뒤에 붙여 실행한다.</p><div class="learn-box"><span class="lb-title">학습 내용 · 함정 코드를 실행하는 방법과 코드에 나오는 말</span>
 <ul>
 <li>순서: ① make_g1을 완성하고 &ldquo;준비 확인&rdquo;을 통과시킨다. 힌트는 A7에서 g와 gw를 만든 방식을 함수 안에 넣고 <code class="i">return g</code>를 하는 것이다. A7을 끝내지 못해 make_g1을 쓸 수 없다면 1부 A7의 상자(defaultdict(list))와 시도 코드를 다시 읽고, 그래도 막히면 A9 공통 코드의 참조 <code class="i">make_g1</code>을 [예시 코드]에서 편집기에 추가해 C1~C5를 먼저 실행한다 ② 활동지 2부 A8의 예측 칸에 코드별 출력과 len(g)의 변화를 먼저 쓴다 ③ C1을 [예시 코드]에서 [편집기에 추가]해 실행하고 나온 값을 실제 칸에 그대로 옮긴다 ④ 칸을 지우고 C2, C3, C4, (C5)를 같은 방식으로 한다. 오류가 나면 맨 아래 줄의 오류 이름과 메시지를 옮긴다.</li>
@@ -194,7 +194,7 @@ print(b)
 print(a is b)  # a와 b가 같은 객체인지 출력한다</code></pre></div>
 </section>
 <section id="A9" class="sheet">
-<h2>A9 · 두 표현의 연산 카운터 실측<small>11분 · 짝</small></h2>
+<h2>A9 · 두 표현의 연산 카운터 실측<small>11분 · 개인</small></h2>
 <p>A4에서 손으로 센 값을 코드로 확인한다. 코드를 돌리기 전에 활동지의 &ldquo;손으로 센 값&rdquo; 칸을 먼저 채운다. 함수는 결과와 함께 <b>확인한 칸/원소 수</b>를 돌려준다. 4개 함수 중 세 개는 완성되어 있고, <b>has_edge_list_count</b>는 함수 머리와 반환 형식만 주어지므로 본문을 직접 쓴다. G1 질의 4개를 실행해 나온 값을 활동지 <a href="student_workbook_part2.html#A9">2부 A9</a>의 실측 표에 옮겨 쓰고, 손 값과 다르면 어디서 틀렸는지 한 줄 쓴다.</p><div class="learn-box"><span class="lb-title">학습 내용 · 확인한 수를 세는 규칙과 쓰는 순서</span>
 <ul>
 <li>&ldquo;확인한 수&rdquo;는 A4와 같은 규칙이다. 이웃 목록을 앞에서부터 하나씩 보며 원소 하나를 볼 때마다 1을 센다. 찾으면 그 자리에서 멈추고, 못 찾으면 목록 끝까지 본다. 예를 들어 어떤 노드의 목록이 [A, D]일 때 D를 찾으면 A를 보고(1) D를 보고(2) 멈추므로 확인한 수는 2이다.</li>
