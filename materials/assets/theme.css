@@ -251,6 +251,12 @@ a.card.late{border-left-color:var(--line)}
 a.card.late b{color:var(--bad)}
 a.card.late em{background:var(--bad-soft);color:var(--bad)}
 .nav{font-family:var(--font-sans);font-size:13.5px}
+/* 목차 카드를 격자(2열, 좁은 화면 1열)로 배치 */
+.cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:14px;margin:14px 0}
+.cardgrid>a.card{display:flex;flex-direction:column;align-items:flex-start;margin:0;padding:16px 20px;min-width:0}
+.cardgrid>a.card b,.cardgrid>a.card span{overflow-wrap:anywhere}
+.cardgrid>a.card span{flex:1 1 auto}
+.cardgrid>a.card em{margin-top:12px}
 
 /* ---------- 좁은 화면 ---------- */
 @media (max-width:640px){
