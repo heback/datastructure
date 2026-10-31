@@ -116,6 +116,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   select.in{background-image:none}
   .ans-row,.mycode{break-inside:avoid}
 }
+/* 워크북은 제출하지 않는 자습용 자료이다. 학번·이름·저장 단추가 있는 저장 바와 인쇄용 학번 줄을 보이지 않게 한다(입력 자동 보관은 그대로 동작). */
+#savebar,#printid{display:none!important}
 </style>
 <link rel="stylesheet" href="../assets/codekit.css">
 <script src="../assets/codekit.js" defer></script>
@@ -128,7 +130,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(12)  # 학생용 · 탐구 활동지 A1~A6</div>
   <h1>12주차 탐구 활동지 1부 — 몇 번 만에 찾을까, 그리고 어떻게 줄 세울까 (A1~A6)</h1>
-  <p class="lead">핵심질문: 10억 개의 정렬된 데이터 속에서 내가 원하는 특정 값이나 구간을 어떻게 가장 적은 비교로 찾아낼까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 정답은 활동을 마친 뒤 여는 초록색 확인 상자에 있다. 빈칸은 먼저 스스로 채운다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+  <p class="lead">핵심질문: 10억 개의 정렬된 데이터 속에서 내가 원하는 특정 값이나 구간을 어떻게 가장 적은 비교로 찾아낼까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 정답은 활동을 마친 뒤 여는 초록색 확인 상자에 있다. 빈칸은 먼저 스스로 채운다.</p><p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
 </header>
 <p class="note"><b>칸 쓰는 법(공통)</b> 숫자 칸에는 숫자만 쓴다(인덱스는 0부터 센다). 짧은 칸은 한 단어나 한 문장, 긴 칸은 2~3문장으로 쓴다. 칸 바로 위의 <b>쓰는 법</b> 줄이 그 칸의 형식이다. 막혀서 못 쓴 칸은 &lsquo;x&rsquo;나 &lsquo;-&rsquo; 대신 <b>모름</b>이라고 쓰고, 쓸 내용이 없는 서술 칸은 <b>없음</b>이라고 쓴다. (선택) 표시가 있는 칸은 쓰지 않으면 비워 둔다. 칸이 모자라서 생략한다는 말은 쓰지 않는다.</p>
 <nav><a href="#theory">이론</a><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="#A6">A6</a><a href="index.html">목록</a></nav>
@@ -175,7 +177,7 @@ print(bisect.bisect_right(a, 8)) # 3  (Upper Bound)</code></pre></div>
 <ul>
 <li>성취기준 [12자구04-02]: bisect 모듈로 Lower/Upper Bound를 적용해 정렬된 데이터에서 고속 탐색을 수행할 수 있다.</li>
 <li>지난주 11주차 BFS는 &ldquo;가까운 곳부터 한 겹씩&rdquo; 살폈다. 이번 주는 &ldquo;가운데부터 절반씩&rdquo; 줄여 갈 수 있는지 살핀다. 8주차의 재귀와 트리 높이도 다시 쓰인다.</li>
-<li>1차시(이 활동지): 손으로 추적해 보는 탐색과 정렬(A1~A6). 2차시: 코드로 lower/upper bound, bisect, 함정(A7~A10). 3차시: 정렬 코드, 일반화, 과제 마무리, 형성평가, 성찰(A11~A16).</li>
+<li>1차시(이 활동지): 손으로 추적해 보는 탐색과 정렬(A1~A6). 2차시: 코드로 lower/upper bound, bisect, 함정(A7~A10). 3차시: 정렬 코드, 일반화, 과제 마무리, 형성평가, 오개념 점검(A11~A16).</li>
 <li>각 쪽의 파란 <b>학습 내용</b> 상자는 활동 방법과 낱말·규칙·예이다. 활동을 마친 뒤 여는 초록색 상자는 내 답을 먼저 쓴 다음에만 연다. 지금 안내된 파일만 연다(index.html의 사용 시점 표).</li>
 </ul>
 </div>

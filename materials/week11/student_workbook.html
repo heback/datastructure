@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   select.in{background-image:none}
   .ans-row,.mycode{break-inside:avoid}
 }
+/* 워크북은 제출하지 않는 자습용 자료이다. 학번·이름·저장 단추가 있는 저장 바와 인쇄용 학번 줄을 보이지 않게 한다(입력 자동 보관은 그대로 동작). */
+#savebar,#printid{display:none!important}
 </style>
 <link rel="stylesheet" href="../assets/codekit.css">
 <script src="../assets/codekit.js" defer></script>
@@ -129,7 +131,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(11)  # 학생용 · 탐구 활동지 A1~A5</div>
   <h1>11주차 탐구 활동지 1부 — 이웃으로 계속 나아가며 돌아보기 (A1~A5)</h1>
-  <p class="lead">핵심질문: 미로에서 출구를 찾거나 특정 구역이 얼마나 연결되어 있는지 확인할 때, 어떤 순서로 탐색하는 것이 정답일까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 확인할 내용은 활동을 마친 뒤 여는 초록색 상자에만 있다. 빈칸은 스스로 채운다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+  <p class="lead">핵심질문: 미로에서 출구를 찾거나 특정 구역이 얼마나 연결되어 있는지 확인할 때, 어떤 순서로 탐색하는 것이 정답일까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 확인할 내용은 활동을 마친 뒤 여는 초록색 상자에만 있다. 빈칸은 스스로 채운다.</p><p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
 </header>
 <nav><a href="#theory">이론</a><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="index.html">목록</a></nav>
 

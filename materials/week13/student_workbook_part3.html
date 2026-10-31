@@ -116,6 +116,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   select.in{background-image:none}
   .ans-row,.mycode{break-inside:avoid}
 }
+/* 워크북은 제출하지 않는 자습용 자료이다. 학번·이름·저장 단추가 있는 저장 바와 인쇄용 학번 줄을 보이지 않게 한다(입력 자동 보관은 그대로 동작). */
+#savebar,#printid{display:none!important}
 </style>
 <link rel="stylesheet" href="../assets/codekit.css">
 <script src="../assets/codekit.js" defer></script>
@@ -127,8 +129,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="wrap">
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(13)  # 학생용 · 탐구 활동지 3부 A11~A16</div>
-  <h1>13주차 탐구 활동지 3부 — 설계, 일반화, 점검, 성찰 (A11·A12·A13·A14·A16)</h1>
-  <p class="lead">이 파일은 3차시 시작 때 배포한다. G 문장 칸과 예측 칸은 모두 비어 있다. 일반화 문장은 A12에서 내가 쓰고 A13에서 내가 다듬는다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p><div class="note"><b>입력 칸 쓰는 법</b> ① 칸 위의 &lsquo;쓰는 법&rsquo; 줄을 먼저 읽는다. ② &lsquo;숫자&rsquo;라고 한 칸에는 숫자만 쓴다(단위·설명·기호는 쓰지 않는다). ③ 문장 칸은 &lsquo;…한다/…이다&rsquo;로 끝나는 문장으로 쓰고, 문장 수가 정해져 있으면 그 수를 지킨다. ④ 질문에 선택지가 있으면 선택지 중 하나를 먼저 쓰고 까닭을 잇는다. ⑤ 모르거나 막히면 &lsquo;x&rsquo;나 빈칸 대신 &lsquo;모르겠다. 막힌 곳: …&rsquo;처럼 어디서 막혔는지 한 줄 쓴다. ⑥ 표 줄이 모자라면 &lsquo;생략&rsquo;이라 쓰지 말고 마지막 줄 칸에 쉼표로 이어 쓴다. ⑦ &lsquo;(선택)&rsquo;이나 &lsquo;…할 때만 쓴다&rsquo;라고 한 칸은 해당하지 않으면 비워 둔다. 그 밖의 칸은 비우지 않는다.</div>
+  <h1>13주차 탐구 활동지 3부 — 설계, 일반화, 점검 (A11·A12·A13·A14·A16)</h1>
+  <p class="lead">이 파일은 3차시 시작 때 배포한다. G 문장 칸과 예측 칸은 모두 비어 있다. 일반화 문장은 A12에서 내가 쓰고 A13에서 내가 다듬는다.</p><p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p><div class="note"><b>입력 칸 쓰는 법</b> ① 칸 위의 &lsquo;쓰는 법&rsquo; 줄을 먼저 읽는다. ② &lsquo;숫자&rsquo;라고 한 칸에는 숫자만 쓴다(단위·설명·기호는 쓰지 않는다). ③ 문장 칸은 &lsquo;…한다/…이다&rsquo;로 끝나는 문장으로 쓰고, 문장 수가 정해져 있으면 그 수를 지킨다. ④ 질문에 선택지가 있으면 선택지 중 하나를 먼저 쓰고 까닭을 잇는다. ⑤ 모르거나 막히면 &lsquo;x&rsquo;나 빈칸 대신 &lsquo;모르겠다. 막힌 곳: …&rsquo;처럼 어디서 막혔는지 한 줄 쓴다. ⑥ 표 줄이 모자라면 &lsquo;생략&rsquo;이라 쓰지 말고 마지막 줄 칸에 쉼표로 이어 쓴다. ⑦ &lsquo;(선택)&rsquo;이나 &lsquo;…할 때만 쓴다&rsquo;라고 한 칸은 해당하지 않으면 비워 둔다. 그 밖의 칸은 비우지 않는다.</div>
 </header>
 <nav><a href="#A11">A11</a><a href="#A12">A12</a><a href="#A13">A13</a><a href="#A14">A14</a><a href="#A16">A16</a><a href="index.html">목록</a></nav>
 <section id="A11" class="sheet">
@@ -261,8 +263,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 
 </section>
 <section id="A16" class="sheet">
-<h2>A16 · 오개념 점검, 성찰일지, AI 활용 신고<small>3차시 · 6분 · 개인</small></h2>
-<p class="meta"><span>산출물: 오개념 점검 답, 성찰일지(배운 것, 어려웠던 지점, AI 활용 신고), 14주차 연결</span></p>
+<h2>A16 · 오개념 점검과 14주차 연결<small>3차시 · 6분 · 개인</small></h2>
+<p class="meta"><span>산출물: 오개념 점검 답, 14주차 연결</span></p>
 <h3>오개념 점검 · 문장 1~4</h3><p>A15 뒤에 여는 아래 접힌 상자의 문장 4개를 읽고, 문장마다 참인지 거짓인지 고르고 근거를 한 줄로 쓴다.</p>
 <p>A15 형성평가를 제출한 뒤 아래 접힌 상자를 열어 문장 4개를 읽는다. 문장이 맞는지 틀린지는 지금까지 직접 해 본 활동(A3, A9, A10, A14 등)을 근거로 판단한다. 이 상자는 A15 전에는 열지 않는다.</p>
 <details class="learn-box"><summary style="padding:6px 14px;background:#2b6cb0;color:#fff;font-weight:700;font-size:.95em;cursor:pointer">A15 제출 뒤 연다 · 오개념 점검 문장 1~4</summary>
@@ -287,23 +289,17 @@ table.fill td.in-cell{padding:3px;height:auto}
 <li><b>문장 4</b> 거짓이다. 40원에서 Greedy는 25+10+5로 3개이고 최적은 20+20으로 2개이다. 확인한 범위는 증명이 아니다(A9).</li>
 </ul>
 </details>
-<h3>성찰일지</h3>
-<p>오늘 내 예측이 가장 크게 빗나간 것 하나(A1 어림, A7, A9, A10 중)를 골라 &#9312; 무엇을 예상했고 &#9313; 실제는 무엇이었으며 &#9314; 내 생각의 어떤 부분을 고쳤는지 쓴다.</p><p class="hint"><b>쓰는 법</b> 3문장으로 ① 예상 ② 실제 ③ 고친 생각을 번호를 붙여 쓴다. 어느 활동의 일인지(A1, A7, A9, A10 중)를 첫머리에 쓴다.</p><div class="ans-row"><span class="n">1</span><textarea class="in" rows="4" data-key="A16.learn" placeholder="A○. ① 예상: ~ ② 실제: ~ ③ 고친 생각: ~" data-label="A16 성찰: 가장 크게 빗나간 예측(예상, 실제, 고친 생각)">① fib(30)의 호출 수를 천 단위로 어림했다. ② 실제는 2,692,537번(백만 단위)이었다. ③ 같은 계산을 되풀이할 때 호출 수가 지수로 늘어난다는 것을 고쳐 생각했다.</textarea></div>
-<p>가장 어려웠던 지점과 내가 어떻게 해결했는가, 그리고 다음에 같은 어려움이 오면 먼저 할 일 한 가지</p><p class="hint"><b>쓰는 법</b> 3문장으로 쓴다. 1문장: 어려웠던 지점. 2문장: 해결한 방법. 3문장: 다음에 먼저 할 일 한 가지.</p><div class="ans-row"><span class="n">2</span><textarea class="in" rows="4" data-key="A16.hard" placeholder="어려웠던 지점: ~ / 해결: ~ / 다음에 먼저 할 일: ~" data-label="A16 성찰: 가장 어려웠던 지점, 해결 방법, 다음에 먼저 할 일">6원에서 Greedy가 틀리는 이유가 처음에는 이해되지 않았는데, 4원을 먼저 내면 3+3을 쓸 수 없다는 것을 dp 표에서 직접 따라가 보고 이해했다. 다음에 같은 어려움이 오면 먼저 작은 금액을 손으로 따라가 보겠다.</textarea></div>
-<h3>실습 과제 AI 활용 신고</h3><p>AI 활용 3단계(허용·조건부 허용·금지)에 맞춰 사용한 것을 쓴다. 쓰지 않았으면 &ldquo;사용하지 않았다&rdquo;를 고른다. 조건부 허용은 출처와 반영 여부를 반드시 쓴다.</p>
-<p class="hint"><b>쓰는 법</b> &lsquo;사용하지 않았다&rsquo;를 고르면 아래 표 세 줄은 모두 비워 둔다. 사용했다면 쓴 횟수만큼의 줄에 &lsquo;요청, 답 요약(출처), 반영 여부와 이유&rsquo;를 쓴다(쓰지 않은 줄은 비워 둔다).</p><div class="ans-row"><span class="n">신고</span><span class="rg" data-key="A16.ai.level" data-type="radio" data-label="A16 AI 활용 수준"><label><input type="radio" name="r_A16_ai_level" value="사용하지 않았다"> 사용하지 않았다</label><label><input type="radio" name="r_A16_ai_level" value="허용 범위만 사용했다"> 허용 범위만 사용했다</label><label><input type="radio" name="r_A16_ai_level" value="조건부 허용 범위를 사용했다" checked> 조건부 허용 범위를 사용했다</label></span></div>
-<div class="scroll"><table class="fill"><tr><th style="width:60px">번호</th><th>AI에게 한 요청</th><th>AI의 답(요약, 출처)</th><th>반영 여부와 이유</th></tr><tr><td class="lab">1</td><td class="in-cell"><textarea class="in" rows="2" data-key="A16.ai.r1.c1" placeholder="사용했을 때만" data-label="A16 AI 활용 기록 1 AI에게 한 요청">RecursionError가 무슨 뜻인지 물었다.</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A16.ai.r1.c2" placeholder="사용했을 때만" data-label="A16 AI 활용 기록 1 AI의 답(요약, 출처)">재귀 깊이가 한도를 넘었다는 뜻이라는 설명(허용 범위).</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A16.ai.r1.c3" placeholder="사용했을 때만" data-label="A16 AI 활용 기록 1 반영 여부와 이유">반영: 큰 입력에서는 표를 반복문으로 채우도록 구조를 직접 바꿨다.</textarea></td></tr><tr><td class="lab">2</td><td class="in-cell"><textarea class="in" rows="2" data-key="A16.ai.r2.c1" placeholder="사용했을 때만" data-label="A16 AI 활용 기록 2 AI에게 한 요청">amount = 0, 만들 수 없는 금액, 동전 1개 같은 엣지 케이스를 제안해 달라고 했다.</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A16.ai.r2.c2" placeholder="사용했을 때만" data-label="A16 AI 활용 기록 2 AI의 답(요약, 출처)">세 가지 케이스를 제안(AI 대화, 요약).</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A16.ai.r2.c3" placeholder="사용했을 때만" data-label="A16 AI 활용 기록 2 반영 여부와 이유">반영: amount = 0과 만들 수 없는 금액은 채택해 직접 테스트했고, 나머지는 이미 통과해 미채택.</textarea></td></tr><tr><td class="lab">3</td><td class="in-cell"><textarea class="in" rows="2" data-key="A16.ai.r3.c1" placeholder="사용했을 때만" data-label="A16 AI 활용 기록 3 AI에게 한 요청">내가 쓴 복잡도 분석문이 코드와 맞는지 검토해 달라고 했다.</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A16.ai.r3.c2" placeholder="사용했을 때만" data-label="A16 AI 활용 기록 3 AI의 답(요약, 출처)">분석이 반복문 구조와 맞다는 검토 의견(AI 대화, 요약).</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A16.ai.r3.c3" placeholder="사용했을 때만" data-label="A16 AI 활용 기록 3 반영 여부와 이유">반영: 공간 복잡도 문장에 표의 크기를 명시했다(채택).</textarea></td></tr></table></div>
 <h3>14주차 연결</h3><p>14주차 알고리즘 문제 해결 수행평가(90분)에서 새 문제를 받으면 어떤 질문부터 하겠는가?</p><p class="hint"><b>쓰는 법</b> 질문 1~2개를 &lsquo;~인가?&rsquo; 꼴로 쓰고, 질문한 뒤 할 일을 한 문장 잇는다.</p><div class="ans-row"><textarea class="in" rows="4" data-key="A16.next" placeholder="먼저 ~인가? 라고 묻는다. 그다음 ~" data-label="A16 14주차 새 문제를 받으면 어떤 질문부터 하겠는가">먼저 같은 부분 문제가 겹치는지, 지금의 선택이 이후 선택을 해치지 않는다고 보일 수 있는지를 묻겠다. 작은 입력으로 반례를 먼저 찾아 보고, 그다음 상태 정의·전이·초기값·계산 순서를 쓰겠다.</textarea></div>
 <p>먼저 위 칸에 새 문제를 받으면 어떤 질문부터 할지 쓴 뒤 아래 상자를 연다.</p>
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 14주차 연결과 AI 활용 3단계</summary>
 <ul>
 <li><b>시험에서 문제 유형을 고르는 세 질문</b>(14주차 알고리즘 문제 해결, 90분): ① 부분 문제가 겹치는가? 겹치고 작은 문제의 최적해로 큰 문제의 최적해가 만들어지면 기억한다(DP). ② 선택이 되돌릴 수 없어도 안전한가? 지금의 최선이 이후 선택을 해치지 않음을 보일 수 있으면 선택한다(Greedy). ③ 반례가 있는가? 작은 입력으로 Greedy를 먼저 시험한다. 반례 하나면 충분하고, 맞는 몇 개는 증명이 아니다.</li>
-<li><b>AI 활용 3단계</b>(실습 과제에 적용, 자세한 표는 <a href="student_code_lab_part2.html#ai">실습 코드 2부</a>): 허용은 개념·용어 질의, 오류 메시지 해설, 용어 번역·복습 질문, TEST와 다를 때 원인 힌트이다. 조건부 허용은 내가 쓴 복잡도 분석의 검토, 엣지 케이스 브레인스토밍, 경계 조건·성능 검토, 개선 아이디어 제안이며 출처와 반영 여부를 기록한다. 금지는 과제 문장을 그대로 입력해 코드를 받는 일, AI 코드 제출, 상태·전이·초기값·계산 순서나 반례 체계를 AI가 대신 찾는 일, 복잡도 분석·구현 계획·반례 증명 문장을 대신 쓰게 하는 일, 성찰일지 대필이다.</li>
-<li>수업 중 활동(A1~A15)은 AI 없이 한다. 형성평가는 AI를 쓰지 않는 시험 상황이다. 위 3단계는 과제를 제출할 때 적용되고 AI 활용은 위 신고 칸에 쓴다.</li>
-<li>제출할 JSON은 모두 8개(활동지 3개, 실습 코드 4개, 형성평가 1개)이다. 이 활동지는 A16을 쓴 뒤 다시 저장한다.</li>
+<li><b>AI 활용 3단계</b>(실습 과제에 적용, 자세한 표는 <a href="student_code_lab_part2.html#ai">실습 코드 2부</a>): 허용은 개념·용어 질의, 오류 메시지 해설, 용어 번역·복습 질문, TEST와 다를 때 원인 힌트이다. 조건부 허용은 내가 쓴 복잡도 분석의 검토, 엣지 케이스 브레인스토밍, 경계 조건·성능 검토, 개선 아이디어 제안이다. 금지는 과제 문장을 그대로 입력해 코드를 받는 일, AI 코드 제출, 상태·전이·초기값·계산 순서나 반례 체계를 AI가 대신 찾는 일, 복잡도 분석·구현 계획·반례 증명 문장을 대신 쓰게 하는 일이다.</li>
+<li>수업 중 활동(A1~A15)은 AI 없이 한다. 형성평가는 AI를 쓰지 않는 시험 상황이다. 위 3단계는 과제를 제출할 때 적용된다.</li>
+<li>제출할 JSON은 모두 5개(실습 코드 4개, 형성평가 1개)이다. 활동지는 제출하지 않는다.</li>
 </ul>
 </details>
-<div class="note">A16을 다 쓴 뒤에는 이 활동지를 [저장(JSON)]으로 <b>다시 저장해 다시 제출</b>한다(A16 입력이 이 파일의 JSON에 들어간다).</div>
+<div class="note">이 활동지는 제출하지 않는다. A16에 쓴 내용은 이 브라우저에 자동으로 보관된다.</div>
 <details class="learn-box after" id="theory-after"><summary>마지막 활동 A16을 마친 뒤 연다 · 용어, 일반화와 정리</summary>
 <p>A16까지 모두 쓴 뒤에 여는 상자이다. 아래 일반화를 A12에서 직접 쓴 내 문장과 견주어 본다.</p>
 <h3>용어와 표기</h3>

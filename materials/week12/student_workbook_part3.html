@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>12주차 탐구 활동지 3부 · 정렬 측정, 일반화, 점검, 성찰 (학생용)</title>
+<title>12주차 탐구 활동지 3부 · 정렬 측정, 일반화, 점검 (학생용)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   select.in{background-image:none}
   .ans-row,.mycode{break-inside:avoid}
 }
+/* 워크북은 제출하지 않는 자습용 자료이다. 학번·이름·저장 단추가 있는 저장 바와 인쇄용 학번 줄을 보이지 않게 한다(입력 자동 보관은 그대로 동작). */
+#savebar,#printid{display:none!important}
 </style>
 <link rel="stylesheet" href="../assets/codekit.css">
 <script src="../assets/codekit.js" defer></script>
@@ -128,8 +130,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="wrap">
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(12)  # 학생용 · 탐구 활동지 A11~A16 기록</div>
-  <h1>12주차 탐구 활동지 3부 — 측정하고, 문장으로 정리하고, 돌아보기 (A11~A16)</h1>
-  <p class="lead">3차시에 사용하는 기록 쪽이다. 핵심질문: 10억 개의 정렬된 데이터 속에서 내가 원하는 특정 값이나 구간을 어떻게 단번에(O(log N)) 찾아낼까? <b>먼저 예측</b>을 적고 실행한 <b>실제 값</b>을 적는다. 일반화 문장은 A12·A13에서 내 말로 직접 쓴다. 정답은 활동을 마친 뒤 여는 초록색 확인 상자에 있다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+  <h1>12주차 탐구 활동지 3부 — 측정하고, 문장으로 정리하고, 점검하기 (A11~A16)</h1>
+  <p class="lead">3차시에 사용하는 기록 쪽이다. 핵심질문: 10억 개의 정렬된 데이터 속에서 내가 원하는 특정 값이나 구간을 어떻게 단번에(O(log N)) 찾아낼까? <b>먼저 예측</b>을 적고 실행한 <b>실제 값</b>을 적는다. 일반화 문장은 A12·A13에서 내 말로 직접 쓴다. 정답은 활동을 마친 뒤 여는 초록색 확인 상자에 있다.</p><p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
 </header>
 <p class="note"><b>칸 쓰는 법(공통)</b> 숫자 칸에는 숫자만 쓴다(인덱스는 0부터 센다). 짧은 칸은 한 단어나 한 문장, 긴 칸은 2~3문장으로 쓴다. 칸 바로 위의 <b>쓰는 법</b> 줄이 그 칸의 형식이다. 막혀서 못 쓴 칸은 &lsquo;x&rsquo;나 &lsquo;-&rsquo; 대신 <b>모름</b>이라고 쓰고, 쓸 내용이 없는 서술 칸은 <b>없음</b>이라고 쓴다. (선택) 표시가 있는 칸은 쓰지 않으면 비워 둔다. 칸이 모자라서 생략한다는 말은 쓰지 않는다.</p>
 <nav><a href="#A11">A11</a><a href="#A12">A12</a><a href="#A13">A13</a><a href="#A14">A14</a><a href="#A16">A16</a><a href="index.html">목록</a></nav>
@@ -251,13 +253,11 @@ table.fill td.in-cell{padding:3px;height:auto}
 </details>
 </section>
 <section id="A16" class="sheet">
-<h2>A16 · 성찰일지<small>3차시 · 3분 · 개인</small></h2>
-<p class="meta"><span>산출물: 성찰일지 초안(AI 활용 내역 포함)</span></p>
-<div class="learn-box"><span class="lb-title">학습 내용 · 성찰일지와 AI 활용 표시 쓰는 법</span>
+<h2>A16 · 오개념 점검과 다음 주<small>3차시 · 3분 · 개인</small></h2>
+<p class="meta"><span>산출물: 오개념 점검 판단과 이유, 14주차 도구 목록</span></p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 오개념 점검 쓰는 법</span>
 <ul>
 <li>오개념 점검: &ldquo;맞다 / 틀리다 / 조건에 따라 다르다&rdquo; 중 하나를 고르고, 이유에는 활동에서 직접 본 값(T1 결과, A11 표 등)을 근거로 쓴다.</li>
-<li>성찰: 처음 생각 → 틀렸음을 알게 한 값(어느 활동의 어느 칸인지) → 지금의 생각 순서로 쓴다.</li>
-<li>AI 활용 신고: 쓴 만큼 그대로 쓴다. 무엇을 물었고 그 답을 채택했는지(채택/미채택과 이유)를 적는다. 쓰지 않았으면 &ldquo;쓰지 않았다&rdquo;라고 적는다. 성찰일지를 AI가 대신 쓰게 하는 것은 금지이다(AI 활용 3단계 표는 student_code_lab.html에 있다).</li>
 </ul>
 </div>
 <h3>오개념 점검</h3>
@@ -267,14 +267,6 @@ table.fill td.in-cell{padding:3px;height:auto}
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 오개념 점검 해설</summary>
 <div class="scroll"><table><tr><th>말</th><th>판정</th><th>근거</th></tr><tr><td>정렬이 안 된 데이터에도 bisect를 쓸 수 있다</td><td>틀리다</td><td>호출은 되지만 정렬 여부를 검사하지 않아 오류 없이 틀린 값을 낸다(T1: UNS에서 10). 전제는 호출하는 쪽의 책임이다.</td></tr><tr><td>bisect_left(a, x)가 준 자리에 끼워 넣으면 계속 정렬되어 있다</td><td>맞다</td><td>그 자리는 처음 x 이상이 나오는 자리이므로 왼쪽은 모두 x 미만, 오른쪽은 모두 x 이상이다.</td></tr><tr><td>값이 없으면 bisect_left와 right는 쓸모 있는 값을 주지 못한다</td><td>틀리다</td><td>없는 값에서도 left = right = 삽입 위치이다(DUP의 4: 4, 4). 이 값이 정렬을 유지한 삽입과 개수 계산(right − left = 0)에 쓰인다.</td></tr><tr><td>퀵 정렬은 항상 병합 정렬보다 빠르다</td><td>틀리다</td><td>정렬된 입력에서 첫 원소 피벗 퀵은 크게 느리다(A5, A11).</td></tr><tr><td>첫 원소 피벗 퀵은 이미 정렬된 입력에서 병합 정렬보다 훨씬 많이 비교한다</td><td>맞다</td><td>정렬된 500개에서 124750 대 2216이다. 피벗이 늘 최솟값이라 한쪽이 비기 때문이다.</td></tr><tr><td>이진 탐색은 항상 정렬 비용을 넘어서는 이득이 있다</td><td>틀리다</td><td>질의가 적거나 데이터가 자주 바뀌면 손해일 수 있다. 질의가 1번뿐이면 선형 탐색이 더 싸다. &ldquo;항상&rdquo;이 틀린 부분이다.</td></tr></table></div>
 </details>
-<h3>성찰</h3>
-<p>오늘 A1·A3·A5에 쓴 내 예측이나 가설 중 틀린 것을 하나 골라, 처음 생각, 틀렸음을 알게 한 값, 지금의 생각을 차례로 쓴다.</p><p class="hint"><b>쓰는 법</b> 3문장으로 쓴다. &ldquo;처음에는 ○○라고 생각했다. ○○(활동과 칸의 값)을 보고 틀렸음을 알았다. 지금은 ○○라고 생각한다.&rdquo; 모양이다. 틀린 것이 없었으면 &ldquo;틀린 것 없음&rdquo;과 가장 자신 없던 예측 하나를 쓴다.</p>
-<div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A16.changed" placeholder="처음에는 …라고 생각했다. …을 보고 틀렸음을 알았다. 지금은 …" data-label="A16 틀린 예측 하나: 처음 생각, 틀렸음을 알게 한 값, 지금의 생각">A5에서 가운데 피벗이 늘 좋을 줄 알았는데 표의 값(ARR8에서 21번)이 첫 피벗(18번)보다 많아 입력에 따라 다르다고 바꿨다.</textarea></div>
-<p>내 코드에서 AI를 쓴 부분은 어디인가? (쓰지 않았으면 &ldquo;쓰지 않았다&rdquo;)</p>
-<div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A16.ai.where" placeholder="쓴 부분(함수 이름·활동 번호) / 쓰지 않았다" data-label="A16 내 코드에서 AI를 쓴 부분은 어디인가">쓰지 않았다.</textarea></div>
-<p>AI 활용 단계 표시(해당하는 것 모두): <label class="ck"><input type="checkbox" data-key="A16.ai.none" data-label="A16 AI 사용 안 함" checked> 사용하지 않았다</label><label class="ck"><input type="checkbox" data-key="A16.ai.ok" data-label="A16 AI 허용 범위 사용"> 허용 범위(개념·오류 해설)</label><label class="ck"><input type="checkbox" data-key="A16.ai.cond" data-label="A16 AI 조건부 허용 사용"> 조건부 허용(출처·반영 기록)</label></p>
-<p>AI를 썼다면 무엇을 물었고, 그 답을 채택했는지(채택/미채택과 이유)를 쓴다. 쓰지 않았으면 &ldquo;쓰지 않았다&rdquo;라고 쓴다.</p><p class="hint"><b>쓰는 법</b> 쓴 경우 &ldquo;물은 것: …. 채택 또는 미채택, 이유: …&rdquo; 모양으로 쓴다. 쓰지 않았으면 &ldquo;쓰지 않았다&rdquo;라고 쓴다.</p>
-<div class="ans-row"><span class="n">?</span><textarea class="in" rows="3" data-key="A16.ai.log" placeholder="물은 것: … 채택/미채택, 이유: … (쓰지 않았으면 쓰지 않았다)" data-label="A16 AI 활용 기록: 무엇을 물었고 채택했는가">해당 없음.</textarea></div>
 <h3>다음 주</h3>
 <p>13주차(DP)와 14주차 알고리즘 문제 해결 수행평가(90분)에 대한 예고이다. 14주차에서 쓸 수 있는 도구를 지금까지 배운 것에서 골라 목록으로 쓴다.</p><p class="hint"><b>쓰는 법</b> 도구 이름(언제 쓰는지)을 쉼표로 이어 3개 이상 쓴다. 형식 예: 도구이름(언제 쓰는지), 도구이름(언제 쓰는지).</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="3" data-key="A16.tools" placeholder="도구이름(언제 쓰는지), 도구이름(언제 쓰는지), …" data-label="A16 14주차에서 쓸 수 있는 도구 목록">bisect_left·bisect_right로 개수와 구간 세기, lower/upper bound 직접 구현, 병합 정렬·sorted(), 범위 절반 버리기(ROPE).</textarea></div>
@@ -289,7 +281,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="wrapup" class="sheet">
 <h2>마무리 정리<small>모든 활동을 마친 뒤 · 별도 활동 시간 없음</small></h2>
 <details class="learn-box after" id="theory-after"><summary>활동을 마친 뒤 확인 · 정리</summary>
-<p>A12에서 일반화 초안을, A16에서 오개념 점검과 성찰을 내 말로 먼저 쓴 다음에 연다.</p>
+<p>A12에서 일반화 초안을, A16에서 오개념 점검을 내 말로 먼저 쓴 다음에 연다.</p>
 <h3>오늘의 일반화</h3>
 <ul>
 <li>정렬되어 있다는 성질 덕분에 한 번 견줄 때마다 후보 범위의 절반을 통째로 버릴 수 있다. 그래서 비교 횟수가 N이 아니라 log N에 비례한다. 그러나 정렬되지 않은 입력에서는 오류 없이 빠르게 틀린 답을 낸다. 알고리즘의 속도는 입력이 만족해야 하는 전제 조건과 한 쌍으로 이해한다.</li>

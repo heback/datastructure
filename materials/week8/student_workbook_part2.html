@@ -112,6 +112,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   select.in{background-image:none}
   .ans-row,.mycode{break-inside:avoid}
 }
+/* 워크북은 제출하지 않는 자습용 자료이다. 학번·이름·저장 단추가 있는 저장 바와 인쇄용 학번 줄을 보이지 않게 한다(입력 자동 보관은 그대로 동작). */
+#savebar,#printid{display:none!important}
 </style>
 <link rel="stylesheet" href="../assets/codekit.css">
 <script src="../assets/codekit.js" defer></script>
@@ -125,7 +127,7 @@ table.fill td.in-cell{padding:3px;height:auto}
   <div class="prompt">&gt;&gt;&gt; workbook.week(8, part=2)  # 학생용 · 3차시 탐구 활동지 A11~A16</div>
   <h1>8주차 탐구 활동지 2부 — 3차시</h1>
   <p class="lead">3차시 A11 시작 때 받는다. 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 확인할 내용은 활동을 마친 뒤 여는 초록색 상자에만 있다. 빈칸은 스스로 채운다.</p>
-  <p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+  <p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
 </header>
 <nav><a href="#A11">A11</a><a href="#A12">A12</a><a href="#A13">A13</a><a href="#A14">A14</a><a href="#A15">A15</a><a href="#A16">A16</a><a href="student_workbook.html">1~2차시 활동지</a><a href="index.html">목록</a></nav>
 
@@ -264,7 +266,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 
 <h3>남은 과제 계획</h3>
 <p>주간 과제로 이어서 할 일을 적는다(제출 기한 전까지 할 일 순서).</p><p class="how">쓰는 법: 할 일을 순서대로 번호를 붙여 2~4줄로 쓴다.</p>
-<textarea class="in" rows="3" data-key="A14.plan" placeholder="1. …&#10;2. …" data-label="A14 남은 과제 계획">오늘 중 inorder_list·height 테스트를 끝내고, 내일까지 복잡도 서술과 성찰일지의 AI 활용 내역을 쓴 뒤, 제출 기한 전날 최종 실행 점검을 한다.</textarea>
+<textarea class="in" rows="3" data-key="A14.plan" placeholder="1. …&#10;2. …" data-label="A14 남은 과제 계획">오늘 중 inorder_list·height 테스트를 끝내고, 내일까지 복잡도 서술을 쓴 뒤, 제출 기한 전날 최종 실행 점검을 한다.</textarea>
 </section>
 
 <section id="A15" class="sheet">
@@ -273,7 +275,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 </section>
 
 <section id="A16" class="sheet">
-<h2>A16 · 성찰일지<small>3차시 · 6분 · 개인</small></h2>
+<h2>A16 · 오개념 점검<small>3차시 · 6분 · 개인</small></h2>
 <h3>오개념 점검</h3>
 <p>다음 진술이 참인지 거짓인지 고르고, 오늘 활동 중 근거가 된 장면(활동 번호)을 적는다.</p>
 <p class="how">쓰는 법: 참/거짓을 고르고, 근거 칸에는 활동 번호만 쓴다(꼴: A1, A5). 근거가 된 활동이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p><table class="fill"><tr><th>진술</th><th style="width:14%">참/거짓</th><th style="width:30%">근거가 된 장면(활동 번호)</th></tr>
@@ -289,22 +291,10 @@ table.fill td.in-cell{padding:3px;height:auto}
 <li>③ 거짓: 기본값 <code class="i">[]</code>은 함수가 정의될 때 한 번만 만들어져 모든 호출이 공유한다(A11·A12).</li>
 <li>세 진술 모두 &lsquo;원래 알고 있었다&rsquo;고 느꼈다면 ①의 반례를 직접 말해 볼 수 있는지 점검한다.</li></ul>
 </details>
-<p class="how">쓰는 법: 첫째·둘째 줄은 한 문장씩 쓴다. 바뀐 생각이나 헷갈리는 부분이 없으면 &ldquo;없음&rdquo;이라고 쓴다. 셋째 줄은 (선택)이다.</p><table class="fill"><tr><th>점검 질문</th><th style="width:36%">지금의 생각</th></tr>
+<p class="how">쓰는 법: 각 줄은 한 문장씩 쓴다. 바뀐 생각이나 헷갈리는 부분이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p><table class="fill"><tr><th>점검 질문</th><th style="width:36%">지금의 생각</th></tr>
 <tr><td class="lab">오늘 가장 바뀐 생각은 무엇인가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r1.c1" placeholder="한 문장 / 없음" data-label="A16 오개념 점검 오늘 가장 바뀐 생각은 무엇인가 · 지금의 생각">순회는 규칙 하나를 반복하고 처리 시점만 바꾸면 된다는 점이 가장 바뀐 생각이다.</textarea></td></tr>
 <tr><td class="lab">아직 헷갈리는 부분은 무엇인가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r2.c1" placeholder="한 문장 / 없음" data-label="A16 오개념 점검 아직 헷갈리는 부분은 무엇인가 · 지금의 생각">기본 인자가 언제 평가되는지는 알았지만, 다른 변경 가능한 값에서도 같은 일이 생기는지는 아직 헷갈린다.</textarea></td></tr>
-<tr><td class="lab">(선택) 내 코드에서 AI를 쓴 부분은 어디인가(아래 AI 활용 내역에 쓰면 생략)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r3.c1" placeholder="(선택)" data-label="A16 오개념 점검 내 코드에서 AI를 쓴 부분은 어디인가 · 지금의 생각">inorder에서 막혀 개념 설명만 허용 단계로 물어보았고 코드는 직접 썼다.</textarea></td></tr></table>
-<h3>AI 활용 내역 (없으면 &ldquo;사용하지 않음&rdquo;)</h3>
-<p>아래 표는 AI를 사용했을 때만 채운다.</p><p class="how">쓰는 법: 사용하지 않았으면 아래 체크 상자만 표시하고 표는 비워 둔다. 사용했으면 번호마다 질문 요약 한 문장, 단계 선택, 반영 여부와 이유 한 문장을 쓴다.</p>
-<div class="learn-box"><span class="lb-title">학습 내용 · AI 활용 내역을 쓰는 방법</span>
-<ul><li>AI를 쓰지 않았으면 체크 칸만 체크하고 표는 비운다.</li>
-<li>쓴 경우 한 줄에 한 번의 질문을 쓴다. <b>질문 요약</b>에는 AI에게 무엇을 시켰는지, <b>단계</b>에는 허용 또는 조건부 허용, <b>반영 여부와 이유</b>에는 답을 코드·글에 반영했는지(채택·미채택)와 그 이유를 쓴다.</li>
-<li>기준은 &ldquo;AI에게 무엇을 시켰는가&rdquo;이다. 개념·문법·오류 원인을 묻는 것은 허용이고, 내가 쓴 코드의 검토·엣지 케이스·개선 아이디어는 조건부 허용(출처와 반영 여부 필수)이다. 과제 전체 코드 생성, 구현 계획·누적 방식의 대신 설계, 수업 중 A6·A14·A15의 AI 사용, 성찰일지 대필은 금지이므로 이 표에 쓰는 항목이 아니다.</li>
-<li>기록 예: &ldquo;빈 트리 테스트를 제안받음 → 채택, 이유: 기저 조건 확인에 필요했다&rdquo;</li></ul>
-</div>
-<p><label class="ck"><input type="checkbox" data-key="A16.ai.none" data-label="A16 AI를 사용하지 않았음"> AI를 사용하지 않았다(사용하지 않음)</label></p>
-<table class="fill"><tr><th style="width:80px">번호</th><th>AI에게 한 질문(요약)</th><th style="width:15%">단계</th><th style="width:30%">반영 여부와 이유</th></tr>
-<tr><td class="lab">1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r1.c1" placeholder="질문 요약 한 문장" data-label="A16 AI 활용 내역 1행 · AI에게 한 질문(요약)">중위에서 append 위치가 왜 달라지는지 설명해 줘</textarea></td><td class="in-cell"><select class="in" data-key="A16.ai.r1.c2" data-label="A16 AI 활용 내역 1행 · 단계"><option value="">선택</option><option value="허용" selected>허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r1.c3" placeholder="반영했다/안 했다 + 이유" data-label="A16 AI 활용 내역 1행 · 반영 여부와 이유">개념만 이해에 반영하고 코드는 직접 작성했다.</textarea></td></tr><tr><td class="lab">2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r2.c1" placeholder="질문 요약 한 문장" data-label="A16 AI 활용 내역 2행 · AI에게 한 질문(요약)">내 코드의 실행 오류를 설명해 줘</textarea></td><td class="in-cell"><select class="in" data-key="A16.ai.r2.c2" data-label="A16 AI 활용 내역 2행 · 단계"><option value="">선택</option><option value="허용" selected>허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r2.c3" placeholder="반영했다/안 했다 + 이유" data-label="A16 AI 활용 내역 2행 · 반영 여부와 이유">오류 원인을 확인한 뒤 내가 고쳐 쓰고 어디를 고쳤는지 기록했다.</textarea></td></tr><tr><td class="lab">3</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r3.c1" placeholder="질문 요약 한 문장" data-label="A16 AI 활용 내역 3행 · AI에게 한 질문(요약)">내가 쓴 코드의 빈 트리 같은 엣지 케이스를 알려 줘</textarea></td><td class="in-cell"><select class="in" data-key="A16.ai.r3.c2" data-label="A16 AI 활용 내역 3행 · 단계"><option value="">선택</option><option value="허용">허용</option><option value="조건부 허용" selected>조건부 허용</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r3.c3" placeholder="반영했다/안 했다 + 이유" data-label="A16 AI 활용 내역 3행 · 반영 여부와 이유">빈 트리 테스트 제안을 채택했다. 기저 조건 확인에 필요했기 때문이다.</textarea></td></tr><tr><td class="lab">4</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r4.c1" placeholder="질문 요약 한 문장" data-label="A16 AI 활용 내역 4행 · AI에게 한 질문(요약)">내가 쓴 복잡도 서술이 맞는지 검토해 줘(먼저 직접 씀)</textarea></td><td class="in-cell"><select class="in" data-key="A16.ai.r4.c2" data-label="A16 AI 활용 내역 4행 · 단계"><option value="">선택</option><option value="허용">허용</option><option value="조건부 허용" selected>조건부 허용</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.ai.r4.c3" placeholder="반영했다/안 했다 + 이유" data-label="A16 AI 활용 내역 4행 · 반영 여부와 이유">공간 복잡도에서 호출 깊이 설명을 보강했고 문장은 직접 다시 썼다.</textarea></td></tr></table>
-<p class="note">단계는 <b>허용 / 조건부 허용</b> 중에서 적는다. 금지 항목은 사용하지 않는다. 자세한 구분은 <a href="student_code_lab.html#ai">student_code_lab.html</a>의 AI 활용 3단계 표를 따른다. 성찰일지는 직접 쓴다.</p>
+</table>
 <p>다음 주(9주차)는 힙을 다룬다. 오늘 배운 루트·리프·높이 용어를 다시 떠올려 오자.</p>
 </section>
 

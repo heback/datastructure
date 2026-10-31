@@ -239,7 +239,7 @@ print("A7 점검 통과")</code></pre></div>
 <li>A7에서 착수하고, A9(2차시)에서 앞의 두 함수를 이어 쓰며, A14(3차시)에서 세 함수를 마무리 점검한다. A14의 밧줄 자르기는 채점하지 않는 보조 연습이다. 미완 부분은 주간 과제로 이어진다.</li>
 </ul></div>
 <div class="card"><b class="h">제출물</b><ul>
-<li>이 주차의 제출은 JSON 파일이다. 과제 코드(세 함수)와 복잡도 서술은 student_code_lab_part4의 A14 칸에, 성찰일지(AI 활용 내역 포함)는 student_workbook_part3의 A16 칸에 쓰고, 각 파일에서 [저장(JSON)]을 눌러 낸다. .py 파일은 따로 만들지 않는다. 시간이 모자라 끝내지 못한 부분은 같은 파일을 다시 열어 [불러오기] 후 이어 쓰고 다시 [저장(JSON)]으로 낸다.</li>
+<li>이 주차의 제출은 JSON 파일이다. 과제 코드(세 함수)와 복잡도 서술은 student_code_lab_part4의 A14 칸에 쓰고 [저장(JSON)]을 눌러 낸다. 활동지(student_workbook)는 제출하지 않는다. .py 파일은 따로 만들지 않는다. 시간이 모자라 끝내지 못한 부분은 같은 파일을 다시 열어 [불러오기] 후 이어 쓰고 다시 [저장(JSON)]으로 낸다.</li>
 <li>코드를 쓰기 전에 <b>구현 계획 한 줄</b>을 쓴다(위 A7 칸). 이 한 줄에 <b>목표 비용</b>(이 함수가 얼마나 빨라야 하는지)을 자기 말로 적는다. A14에서 이 계획을 다듬어 다시 쓴다.</li>
 <li>시간·공간 복잡도와 그 근거를 직접 서술한다(서술 칸은 student_code_lab_part4에 있다).</li>
 <li>추가 안내는 후속 파일(student_code_lab_part2, part4)에서 한다.</li>
@@ -256,11 +256,11 @@ print("A7 점검 통과")</code></pre></div>
 <h2>AI 활용 3단계 · 이 과제에 맞춘 예<small>허용 · 조건부 허용 · 금지</small></h2>
 <p>기준은 &ldquo;AI에게 무엇을 시켰는가&rdquo;이다. 개념·문법·오류 원인을 묻는 것은 허용이고, 과제 요구사항이나 완성된 구현 자체를 입력해 결과물(코드·글)을 받아 제출하는 것은 금지이다.</p>
 <div class="grid">
-<div class="card" style="--c:#1d7a4f"><b class="h">허용 — 성찰일지에 간단히 기록</b><ul><li>&ldquo;이진 탐색이란 무엇이야?&rdquo;, &ldquo;lower bound와 upper bound는 뭐가 달라?&rdquo; 같은 개념·문법 질의</li><li>&ldquo;TypeError: '&lt;' not supported between instances of 'int' and 'str'가 무슨 뜻이야?&rdquo;, &ldquo;IndexError: list index out of range가 왜 나오는지 해설&rdquo; 같은 오류 메시지 해설</li><li>&ldquo;lower bound라는 말은 어디서 유래했어?&rdquo; 같은 용어·설계 배경 설명(코드는 받지 않음), 용어 번역·개념 요약, 수업 자료 복습 질문</li><li>내 코드 결과가 점검 테스트와 다를 때 원인 <b>힌트</b>만 요청</li></ul></div>
-<div class="card" style="--c:#8a6d1f"><b class="h">조건부 허용 — 출처와 반영 여부를 성찰일지에 반드시 기록</b><ul><li>완성한 구현의 엣지 케이스 브레인스토밍(빈 리스트, 원소 1개, 모두 같은 값, 목표가 전체보다 작거나 큼, lo&gt;hi, 같은 값이 여러 개)</li><li>내가 쓴 코드가 입력 리스트를 바꾸는지, 두 번 호출해도 같은 값인지, 큰 입력에서 느리지 않은지 검토해 달라는 요청(수정은 직접 한다)</li><li>내가 작성한 구현의 복잡도가 맞는지 검토해 달라는 요청(예: &ldquo;내가 쓴 복잡도 분석문과 코드를 붙여 줄 테니 분석이 코드와 맞는지 검토해줘&rdquo;). 복잡도 분석 자체는 내가 먼저 쓰고 AI가 대신 쓰지 않는다</li><li>내 코드의 개선 아이디어 제안 요청(제안만 참고하고 코드는 직접 다시 작성)</li><li>기록 예: &ldquo;AI가 빈 리스트 케이스를 제안 &rarr; 채택/미채택, 이유&rdquo;</li></ul></div>
-<div class="card" style="--c:#b3401f"><b class="h">금지 — 적발 시 계획서의 위반 처리방안 적용</b><ul><li>과제 문장(&ldquo;정렬된 리스트에서 값의 개수, 구간 개수, 가장 가까운 값을 구하는 함수를 작성하라&rdquo;)을 그대로 입력해 전체 코드 생성</li><li>AI가 쓴 <code class="i">count_in_range</code>/<code class="i">closest_value</code>를 그대로, 또는 변수명만 바꿔 제출</li><li>경계를 포함할지 여부, 어느 경계를 쓸지, 동률일 때 어느 값을 고를지 등 설계 판단을 AI가 대신 내림</li><li>복잡도 분석이나 구현 계획을 AI가 대신 세우게 하여 제출</li><li>성찰일지 AI 대필</li></ul></div>
+<div class="card" style="--c:#1d7a4f"><b class="h">허용</b><ul><li>&ldquo;이진 탐색이란 무엇이야?&rdquo;, &ldquo;lower bound와 upper bound는 뭐가 달라?&rdquo; 같은 개념·문법 질의</li><li>&ldquo;TypeError: '&lt;' not supported between instances of 'int' and 'str'가 무슨 뜻이야?&rdquo;, &ldquo;IndexError: list index out of range가 왜 나오는지 해설&rdquo; 같은 오류 메시지 해설</li><li>&ldquo;lower bound라는 말은 어디서 유래했어?&rdquo; 같은 용어·설계 배경 설명(코드는 받지 않음), 용어 번역·개념 요약, 수업 자료 복습 질문</li><li>내 코드 결과가 점검 테스트와 다를 때 원인 <b>힌트</b>만 요청</li></ul></div>
+<div class="card" style="--c:#8a6d1f"><b class="h">조건부 허용</b><ul><li>완성한 구현의 엣지 케이스 브레인스토밍(빈 리스트, 원소 1개, 모두 같은 값, 목표가 전체보다 작거나 큼, lo&gt;hi, 같은 값이 여러 개)</li><li>내가 쓴 코드가 입력 리스트를 바꾸는지, 두 번 호출해도 같은 값인지, 큰 입력에서 느리지 않은지 검토해 달라는 요청(수정은 직접 한다)</li><li>내가 작성한 구현의 복잡도가 맞는지 검토해 달라는 요청(예: &ldquo;내가 쓴 복잡도 분석문과 코드를 붙여 줄 테니 분석이 코드와 맞는지 검토해줘&rdquo;). 복잡도 분석 자체는 내가 먼저 쓰고 AI가 대신 쓰지 않는다</li><li>내 코드의 개선 아이디어 제안 요청(제안만 참고하고 코드는 직접 다시 작성)</li><li>기록 예: &ldquo;AI가 빈 리스트 케이스를 제안 &rarr; 채택/미채택, 이유&rdquo;</li></ul></div>
+<div class="card" style="--c:#b3401f"><b class="h">금지 — 적발 시 계획서의 위반 처리방안 적용</b><ul><li>과제 문장(&ldquo;정렬된 리스트에서 값의 개수, 구간 개수, 가장 가까운 값을 구하는 함수를 작성하라&rdquo;)을 그대로 입력해 전체 코드 생성</li><li>AI가 쓴 <code class="i">count_in_range</code>/<code class="i">closest_value</code>를 그대로, 또는 변수명만 바꿔 제출</li><li>경계를 포함할지 여부, 어느 경계를 쓸지, 동률일 때 어느 값을 고를지 등 설계 판단을 AI가 대신 내림</li><li>복잡도 분석이나 구현 계획을 AI가 대신 세우게 하여 제출</li></ul></div>
 </div>
-<div class="note"><b>수업 운영 규칙</b>(금지 목록과 별개) 수업 중 활동(A1~A15)은 AI 도움 없이 수행한다. 특히 A12·A13의 일반화 문장은 내가 직접 쓴 것이어야 한다. A15 형성평가는 AI를 쓰지 않는 시험 상황으로 운영하며, 위 위반 처리(감점 등)는 형성평가에 적용하지 않는다. 주간 과제를 제출할 때 위 3단계가 적용된다. A16에서 성찰일지에 AI 활용 내역을 쓰는 방법을 다시 안내한다.</div>
+<div class="note"><b>수업 운영 규칙</b>(금지 목록과 별개) 수업 중 활동(A1~A15)은 AI 도움 없이 수행한다. 특히 A12·A13의 일반화 문장은 내가 직접 쓴 것이어야 한다. A15 형성평가는 AI를 쓰지 않는 시험 상황으로 운영하며, 위 위반 처리(감점 등)는 형성평가에 적용하지 않는다. 주간 과제를 제출할 때 위 3단계가 적용된다.</div>
 </section>
 </div>
 <script id="week12-submit">

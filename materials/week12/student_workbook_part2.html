@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   select.in{background-image:none}
   .ans-row,.mycode{break-inside:avoid}
 }
+/* 워크북은 제출하지 않는 자습용 자료이다. 학번·이름·저장 단추가 있는 저장 바와 인쇄용 학번 줄을 보이지 않게 한다(입력 자동 보관은 그대로 동작). */
+#savebar,#printid{display:none!important}
 </style>
 <link rel="stylesheet" href="../assets/codekit.css">
 <script src="../assets/codekit.js" defer></script>
@@ -129,7 +131,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(12)  # 학생용 · 탐구 활동지 A7~A10 기록</div>
   <h1>12주차 탐구 활동지 2부 — 경계 찾기와 함정 (A7~A10)</h1>
-  <p class="lead">2차시에 사용하는 기록 쪽이다. 코드는 실습 코드 파일(1·2·3부)에서 쓰고, 이 활동지에는 <b>먼저 예측</b>을 적고 실행한 <b>실제 값</b>을 적는다. 예측과 실제가 다른 칸이 가장 중요하다. 정답은 활동을 마친 뒤 여는 초록색 확인 상자에 있다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+  <p class="lead">2차시에 사용하는 기록 쪽이다. 코드는 실습 코드 파일(1·2·3부)에서 쓰고, 이 활동지에는 <b>먼저 예측</b>을 적고 실행한 <b>실제 값</b>을 적는다. 예측과 실제가 다른 칸이 가장 중요하다. 정답은 활동을 마친 뒤 여는 초록색 확인 상자에 있다.</p><p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
 </header>
 <p class="note"><b>칸 쓰는 법(공통)</b> 숫자 칸에는 숫자만 쓴다(인덱스는 0부터 센다). 짧은 칸은 한 단어나 한 문장, 긴 칸은 2~3문장으로 쓴다. 칸 바로 위의 <b>쓰는 법</b> 줄이 그 칸의 형식이다. 막혀서 못 쓴 칸은 &lsquo;x&rsquo;나 &lsquo;-&rsquo; 대신 <b>모름</b>이라고 쓰고, 쓸 내용이 없는 서술 칸은 <b>없음</b>이라고 쓴다. (선택) 표시가 있는 칸은 쓰지 않으면 비워 둔다. 칸이 모자라서 생략한다는 말은 쓰지 않는다.</p>
 <nav><a href="#A7">A7</a><a href="#A8">A8</a><a href="#A9">A9</a><a href="#A10">A10</a><a href="index.html">목록</a></nav>

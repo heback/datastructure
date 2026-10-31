@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   select.in{background-image:none}
   .ans-row,.mycode{break-inside:avoid}
 }
+/* 워크북은 제출하지 않는 자습용 자료이다. 학번·이름·저장 단추가 있는 저장 바와 인쇄용 학번 줄을 보이지 않게 한다(입력 자동 보관은 그대로 동작). */
+#savebar,#printid{display:none!important}
 </style>
 <link rel="stylesheet" href="../assets/codekit.css">
 <script src="../assets/codekit.js" defer></script>
@@ -128,8 +130,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="wrap">
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(11)  # 학생용 · 탐구 활동지 3부 A10~A15</div>
-  <h1>11주차 탐구 활동지 3부 — 섬의 개수, 일반화, 전이, 성찰 (A10~A15)</h1>
-  <p class="lead">3차시에 사용한다. 일반화 문장은 이 활동지에 없다. 개인 초안(A11)과 정제 문장(A12)을 스스로 쓴다. 예측 칸은 실행하기 전에 먼저 쓴다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+  <h1>11주차 탐구 활동지 3부 — 섬의 개수, 일반화, 전이 (A10~A15)</h1>
+  <p class="lead">3차시에 사용한다. 일반화 문장은 이 활동지에 없다. 개인 초안(A11)과 정제 문장(A12)을 스스로 쓴다. 예측 칸은 실행하기 전에 먼저 쓴다.</p><p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
 </header>
 <nav><a href="#A10">A10</a><a href="#A11">A11</a><a href="#A12">A12</a><a href="#A13">A13</a><a href="#A15">A15</a><a href="index.html">목록</a></nav>
 
@@ -264,27 +266,16 @@ table.fill td.in-cell{padding:3px;height:auto}
 </ul></details>
 </section>
 <section id="A15" class="sheet">
-<h2>A15 · 성찰일지<small>3차시 · 4분 · 개인</small></h2>
-<p class="meta"><span>산출물: 성찰일지 초안(AI 활용 내역 포함)</span></p>
-<div class="learn-box"><span class="lb-title">학습 내용 · 성찰일지 쓰는 법과 12·13주차 연결</span>
+<h2>A15 · 오개념 점검과 12·13주차 연결<small>3차시 · 4분 · 개인</small></h2>
+<p class="meta"><span>산출물: 12·13주차 연결 한두 문장</span></p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 12·13주차 연결</span>
 <ul>
-<li>1~3번은 활동 번호와 표의 줄(예: A8 T1-a)을 대 가며 쓴다. 예측이 틀린 곳은 내 예측, 실제 값, 틀린 까닭 한 문장을 쓴다.</li>
-<li>4번은 오늘의 틀(상태·이웃·visited·꺼내는 규칙)이 12주차(정렬과 이진 탐색, bisect: 정렬된 1차원 데이터에서 빠르게 찾기)나 13주차(동적 계획법과 탐욕: 같은 상태의 결과를 캐시하거나 매 순간 최선을 고르기)에서 어디에 쓰일지 쓴다. A13 확인 상자에서 같은 상태를 두 길로 만난 것(물통 퍼즐 또는 선택 NUM)을 떠올린다. 질문: 같은 상태를 여러 번 만나는 문제에서 visited 대신 결과를 기억하면?</li>
-<li>AI 활용 내역: 수업 중(A6~A14)에는 AI를 쓰지 않는다. 주간 과제에서 쓴 경우에만 질문 내용(내 코드의 어느 부분), 단계(허용/조건부 허용), 반영 여부와 이유를 쓴다. 기록 예: &ldquo;AI가 시작=도착 경우를 제안 &rarr; 채택, 이유&rdquo;. 3단계 기준은 실습 코드 1부 끝의 표에 있다.</li>
+<li>오늘의 틀(상태·이웃·visited·꺼내는 규칙)이 12주차(정렬과 이진 탐색, bisect: 정렬된 1차원 데이터에서 빠르게 찾기)나 13주차(동적 계획법과 탐욕: 같은 상태의 결과를 캐시하거나 매 순간 최선을 고르기)에서 어디에 쓰일지 쓴다. A13 확인 상자에서 같은 상태를 두 길로 만난 것(물통 퍼즐 또는 선택 NUM)을 떠올린다. 질문: 같은 상태를 여러 번 만나는 문제에서 visited 대신 결과를 기억하면?</li>
 </ul></div>
-<p class="qtext">1. 오늘 수업에서 내 생각이 가장 크게 바뀐 것은 무엇이며, 어느 활동 때문이었는가?</p>
-<p class="hint"><b>쓰는 법</b> 1~2문장. 바뀐 생각과 그 계기가 된 활동 번호(예: A8)를 함께 쓴다.</p>
-<div class="ans-row"><span class="n">1</span><textarea class="in l" rows="3" data-key="A15.change" data-label="A15 오늘 내 생각이 가장 바뀐 것">BFS와 DFS가 다른 알고리즘이라고만 생각했는데, 꺼내는 규칙 한 줄만 다른 같은 틀이라는 것으로 바뀌었다.</textarea></div>
-<p class="qtext">2. 내 예측이 틀렸거나 놀란 곳은 어디인가(활동 번호와 줄)?</p>
-<p class="hint"><b>쓰는 법</b> 활동 번호와 줄(예: A8 T2)을 쓰고 무엇이 달랐는지 1문장을 쓴다. 틀린 곳이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p>
-<div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A15.wrong" data-label="A15 오늘 내 예측이 틀렸거나 놀란 곳(활동과 줄)">A8 T2에서 pop(0)과 popleft가 둘 다 10배일 줄 알았는데 list는 100배 넘게 늘었다.</textarea></div>
-<p class="qtext">3. 그 예측이 틀린 원인을 한 문장으로 쓴다.</p>
-<p class="hint"><b>쓰는 법</b> 1문장. 위 2번에서 &ldquo;없음&rdquo;이라고 썼으면 &ldquo;없음&rdquo;이라고 쓴다.</p>
-<div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A15.wrongwhy" data-label="A15 그 예측이 틀린 원인을 한 문장으로">pop(0)은 나머지를 모두 앞으로 당기는 O(N) 연산이라 n이 늘면 전체가 제곱에 가깝게 커지기 때문이다.</textarea></div>
-<p class="qtext">4. 오늘의 틀(상태&middot;이웃&middot;visited&middot;꺼내는 규칙)이 12주차(정렬과 이진 탐색)나 13주차에서 쓰일 것 같은 곳, 또는 더 궁금한 점을 쓴다.</p>
+<p class="qtext">1. 오늘의 틀(상태&middot;이웃&middot;visited&middot;꺼내는 규칙)이 12주차(정렬과 이진 탐색)나 13주차에서 쓰일 것 같은 곳, 또는 더 궁금한 점을 쓴다.</p>
 <p class="hint"><b>쓰는 법</b> 1~2문장. 쓰일 것 같은 곳 또는 더 궁금한 점 중 하나를 쓴다.</p>
-<div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A15.next" data-label="A15 12주차 정렬과 이진 탐색 13주차 DP에 대해 궁금한 점">정렬도 이런 틀 한 가지로 설명되는지, 같은 상태를 여러 번 만나면(NUM) 결과를 기억해 두는 방법이 있는지 궁금하다.</textarea></div>
-<p>먼저 위 1~4번 칸(특히 틀린 예측 칸)을 쓴 뒤 아래 상자를 연다.</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A15.next" data-label="A15 12주차 정렬과 이진 탐색 13주차 DP에 대해 궁금한 점">정렬도 이런 틀 한 가지로 설명되는지, 같은 상태를 여러 번 만나면(NUM) 결과를 기억해 두는 방법이 있는지 궁금하다.</textarea></div>
+<p>먼저 위 질문에 답을 쓴 뒤 아래 상자를 연다.</p>
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 오개념 점검 네 문장</summary>
 <p>다음 네 문장이 맞으면 O, 틀리면 X라고 스스로 판단해 본 뒤 확인한다. 모두 X이다.</p>
 <ul>
@@ -293,9 +284,6 @@ table.fill td.in-cell{padding:3px;height:auto}
 <li>&ldquo;재귀는 항상 안전하다&rdquo;: 1&times;1500에서 RecursionError가 났다(A8 T3).</li>
 <li>&ldquo;visited 표시는 꺼낼 때가 좋다&rdquo;: 열린 4&times;4 격자에서 넣을 때 표시는 (16, 4), 꺼낼 때 표시는 (25, 7)로 큐가 커지고 일이 늘었다(A8 T1).</li>
 </ul></details>
-<h3>AI 활용 내역</h3>
-<p>주간 과제를 하며 AI를 쓴 부분이 있으면 쓴다. 수업 중(A6~A14)에는 AI를 쓰지 않는다.</p>
-<p><label class="ck"><input type="checkbox" data-key="A15.ai.none" data-label="A15 AI를 쓰지 않았다"> AI를 쓰지 않았다</label></p><div class="scroll"><table class="fill"><tr><th style="width:44px">번호</th><th style="width:36%">무엇을 질문했나(내 코드의 어느 부분인가)</th><th style="width:110px">단계</th><th style="width:120px">반영 여부</th><th>채택·미채택 이유</th></tr><tr><td class="lab">1</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r1.c1" data-label="A15 AI 활용 1 · 질문한 내용">deque.popleft()와 list.pop(0)이 어떻게 다른지 개념을 설명해 달라고 했다.</textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r1.c2" data-label="A15 AI 활용 1 · 단계"><option value=""></option><option value="허용" selected>허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r1.c3" data-label="A15 AI 활용 1 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)" selected>해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r1.c4" data-label="A15 AI 활용 1 · 이유">개념 설명을 듣고 내가 직접 코드를 썼다. 개념 질의라 반영 여부는 해당 없다.</textarea></td></tr><tr><td class="lab">2</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r2.c1" data-label="A15 AI 활용 2 · 질문한 내용">내가 완성한 shortest_path_len의 엣지 케이스(시작=도착, 도달 불가, 한 칸짜리 격자)를 알려 달라고 했다.</textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r2.c2" data-label="A15 AI 활용 2 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용" selected>조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r2.c3" data-label="A15 AI 활용 2 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택" selected>채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r2.c4" data-label="A15 AI 활용 2 · 이유">한 칸짜리 격자를 내가 놓쳤고 테스트로 직접 확인한 뒤 수정했다.</textarea></td></tr><tr><td class="lab">3</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r3.c1" data-label="A15 AI 활용 3 · 질문한 내용">내 count_islands가 입력 격자를 바꾸는지 검토해 달라고 했다.</textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r3.c2" data-label="A15 AI 활용 3 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용" selected>조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r3.c3" data-label="A15 AI 활용 3 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택" selected>미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r3.c4" data-label="A15 AI 활용 3 · 이유">내 코드는 seen을 따로 두어 격자를 바꾸지 않아서 제안이 해당되지 않았다.</textarea></td></tr></table></div>
 </section>
 <details class="learn-box after" id="theory-after"><summary>마지막 활동(A15)을 마친 뒤 연다 · 이론 정리 확인</summary>
 <ul>

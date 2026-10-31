@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   select.in{background-image:none}
   .ans-row,.mycode{break-inside:avoid}
 }
+/* 워크북은 제출하지 않는 자습용 자료이다. 학번·이름·저장 단추가 있는 저장 바와 인쇄용 학번 줄을 보이지 않게 한다(입력 자동 보관은 그대로 동작). */
+#savebar,#printid{display:none!important}
 </style>
 <link rel="stylesheet" href="../assets/codekit.css">
 <script src="../assets/codekit.js" defer></script>
@@ -128,8 +130,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <div class="wrap">
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(10)  # 학생용 · 탐구 활동지 3부 A10~A15</div>
-  <h1>10주차 탐구 활동지 3부 — 제네레이터, 일반화, 전이, 성찰 (A10~A15)</h1>
-  <p class="lead">3차시에 사용한다. 일반화 문장은 이 활동지에 없다. 일반화 초안(A11)과 정제 문장(A12)을 스스로 쓴다. 예측 칸은 실행하기 전에 먼저 쓴다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+  <h1>10주차 탐구 활동지 3부 — 제네레이터, 일반화, 전이 (A10~A15)</h1>
+  <p class="lead">3차시에 사용한다. 일반화 문장은 이 활동지에 없다. 일반화 초안(A11)과 정제 문장(A12)을 스스로 쓴다. 예측 칸은 실행하기 전에 먼저 쓴다.</p><p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
 </header>
 <nav><a href="#A10">A10</a><a href="#A11">A11</a><a href="#A12">A12</a><a href="#A13">A13</a><a href="#A15">A15</a><a href="index.html">목록</a></nav>
 
@@ -246,37 +248,23 @@ def neighbors_safe(g, u):      # g를 바꾸지 않는 형태
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A13.q" placeholder="1~2문장" data-label="A13 간선 1개를 더 놓으면 트리가 아니게 되는 이유">트리는 간선 수가 노드 수 − 1이고 이미 모든 노드가 연결되어 있다. 간선을 하나 더 놓으면 이미 이어져 있던 두 노드를 또 잇게 되어 돌아오는 길(사이클)이 생기고 간선 수가 노드 수 − 1을 넘는다.</textarea></div>
 </section>
 <section id="A15" class="sheet">
-<h2>A15 · 성찰일지<small>3차시 · 4분 · 개인</small></h2>
-<p class="meta"><span>산출물: 성찰일지 초안(AI 활용 내역 포함)</span></p>
-<div class="learn-box"><span class="lb-title">학습 내용 · 성찰일지 쓰는 방법과 오개념 점검</span>
+<h2>A15 · 오개념 점검과 11주차 예고<small>3차시 · 4분 · 개인</small></h2>
+<p class="meta"><span>산출물: 11주차 예고 한 문장</span></p>
+<div class="learn-box"><span class="lb-title">학습 내용 · 오개념 점검</span>
 <ul>
-<li>1번은 &ldquo;전에는 ...라고 생각했다. 이제는 ...이다&rdquo;처럼 바뀐 생각을 쓴다. 2·3번은 A8·A10의 예측 표와 A9의 손 값에서 예측이 틀렸던 줄을 찾아 활동 번호와 줄을 쓰고, 틀린 원인을 한 문장으로 쓴다.</li>
 <li>오개념 점검 4가지: 방향이 있어도 표가 대칭일 것이라고 가정했는가? <code class="i">[[0]*n]*n</code>처럼 같은 리스트를 여러 번 참조했는가? 읽기만 했는데 키가 늘어나는 경우를 놓쳤는가? 제네레이터를 두 번 써 보았는가?</li>
-<li>AI 활용 내역은 아래 표에 쓴다. 3단계(허용, 조건부 허용, 금지) 기준은 실습 코드 1부·3부 끝의 표를 따르고, 쓰지 않았으면 &ldquo;AI를 쓰지 않았다&rdquo;를 체크한다. 성찰일지를 AI에게 대신 쓰게 하는 것은 금지이다.</li>
 </ul>
 </div>
-<p>1. 오늘 내 생각이 가장 바뀐 것은 무엇인가?</p>
-<p class="how">쓰는 법: 형식은 &ldquo;전에는 …라고 생각했다. 이제는 …이다.&rdquo; 두 문장이다.</p>
-<div class="ans-row"><span class="n">1</span><textarea class="in l" rows="3" data-key="A15.change" placeholder="전에는 …. 이제는 …." data-label="A15 오늘 내 생각이 가장 바뀐 것">표현이 하나뿐인 줄 알았는데 상황에 따라 인접 행렬과 인접 리스트를 골라야 한다는 것이 가장 바뀌었다.</textarea></div>
-<p>2. 오늘 내 예측이 틀렸거나 놀란 곳은 어디인가? 활동 번호와 줄을 쓴다.</p>
-<p class="how">쓰는 법: 형식은 &ldquo;활동 번호 + 줄 이름이나 번호&rdquo;이다. 틀린 곳이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p>
-<div class="ans-row"><span class="n">2</span><textarea class="in" rows="3" data-key="A15.wrong" placeholder="활동 번호 + 줄. 없으면 없음" data-label="A15 오늘 내 예측이 틀렸거나 놀란 곳(활동과 줄)">A10의 9번 줄에서 함수를 호출하면 len(g)가 바로 6이 될 줄 알았는데 5였다.</textarea></div>
-<p>3. 그 예측이 틀린 원인을 한 문장으로 쓴다.</p>
-<p class="how">쓰는 법: 한 문장으로 쓴다. 2번이 &ldquo;없음&rdquo;이면 &ldquo;없음&rdquo;이라고 쓴다.</p>
-<div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A15.wrongwhy" placeholder="한 문장. 없으면 없음" data-label="A15 그 예측이 틀린 원인을 한 문장으로">제네레이터는 호출할 때가 아니라 처음 값을 꺼낼 때 본문이 실행되기 때문이다.</textarea></div>
-<p>4. 이 구조 위에서 모든 노드를 어떤 순서로 돌 수 있을까? (11주차 예고)</p>
+<p>1. 이 구조 위에서 모든 노드를 어떤 순서로 돌 수 있을까? (11주차 예고)</p>
 <p class="how">쓰는 법: 한 문장으로 쓴다. 떠오르지 않으면 &ldquo;모르겠다&rdquo;와 그 이유를 쓴다.</p>
-<div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A15.next" placeholder="한 문장" data-label="A15 이 구조 위에서 모든 노드를 어떤 순서로 돌 수 있을까(11주차 예고)">한 노드에서 이웃을 따라 이동하면서 아직 안 간 노드를 계속 방문하면 모든 노드를 돌 수 있을 것 같다. 같은 노드를 두 번 가지 않도록 표시가 필요할 것 같다.</textarea></div>
-<p class="hint">먼저 위 4번에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A15.next" placeholder="한 문장" data-label="A15 이 구조 위에서 모든 노드를 어떤 순서로 돌 수 있을까(11주차 예고)">한 노드에서 이웃을 따라 이동하면서 아직 안 간 노드를 계속 방문하면 모든 노드를 돌 수 있을 것 같다. 같은 노드를 두 번 가지 않도록 표시가 필요할 것 같다.</textarea></div>
+<p class="hint">먼저 위 1번에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 11주차 예고</summary>
 <ul>
 <li>11주차에는 한 노드에서 출발해 이웃을 따라 가며 모든 노드를 돌아보는 방법(탐색)을 다룬다. 오늘 만든 <code class="i">defaultdict(list)</code> 그래프와 <code class="i">neighbors(g, u)</code>가 입력 그래프와 이웃 열거로 그대로 쓰인다.</li>
 <li>어떤 순서로 도는 것이 좋은지는 오늘 다루지 않고 11주차에서 정리한다.</li>
 </ul>
 </details>
-<h3>AI 활용 내역</h3>
-<p>주간 과제를 하며 AI를 쓴 부분이 있으면 쓴다. 수업 중(A6~A10·A13~A14)에는 AI를 쓰지 않는다. AI를 쓴 횟수만큼만 행을 채우고 쓰지 않은 행은 비워 둔다. 쓰지 않았으면 아래 체크 칸만 체크한다.</p>
-<p><label class="ck"><input type="checkbox" data-key="A15.ai.none" data-label="A15 AI를 쓰지 않았다"> AI를 쓰지 않았다</label></p><div class="scroll"><table class="fill"><tr><th style="width:44px">번호</th><th style="width:36%">무엇을 질문했나(내 코드의 어느 부분인가)</th><th style="width:110px">단계</th><th style="width:120px">반영 여부</th><th>채택·미채택 이유</th></tr><tr><td class="lab">1</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r1.c1" placeholder="질문 내용 한 문장" data-label="A15 AI 활용 1 · 질문한 내용">KeyError: A가 왜 나오는지 알려 달라고 질문했다(A7 오류 메시지).</textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r1.c2" data-label="A15 AI 활용 1 · 단계"><option value=""></option><option value="허용" selected>허용</option><option value="조건부 허용">조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r1.c3" data-label="A15 AI 활용 1 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)" selected>해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r1.c4" placeholder="이유 한 문장" data-label="A15 AI 활용 1 · 이유">오류 메시지의 뜻을 이해하는 데만 썼다.</textarea></td></tr><tr><td class="lab">2</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r2.c1" placeholder="질문 내용 한 문장" data-label="A15 AI 활용 2 · 질문한 내용">내가 쓴 neighbors가 g를 바꾸는지 검토해 달라고 했다.</textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r2.c2" data-label="A15 AI 활용 2 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용" selected>조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r2.c3" data-label="A15 AI 활용 2 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택" selected>채택</option><option value="미채택">미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r2.c4" placeholder="이유 한 문장" data-label="A15 AI 활용 2 · 이유">없는 노드를 물을 때 g에 키가 생긴다는 점을 알려 주어 직접 고쳤다.</textarea></td></tr><tr><td class="lab">3</td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r3.c1" placeholder="질문 내용 한 문장" data-label="A15 AI 활용 3 · 질문한 내용">빈 간선 목록이나 고립 노드에서 확인할 경우를 알려 달라고 했다.</textarea></td><td class="in-cell"><select class="in" data-key="A15.ai.r3.c2" data-label="A15 AI 활용 3 · 단계"><option value=""></option><option value="허용">허용</option><option value="조건부 허용" selected>조건부 허용</option></select></td><td class="in-cell"><select class="in" data-key="A15.ai.r3.c3" data-label="A15 AI 활용 3 · 반영 여부"><option value=""></option><option value="해당 없음(허용 단계)">해당 없음(허용 단계)</option><option value="채택">채택</option><option value="미채택" selected>미채택</option></select></td><td class="in-cell"><textarea class="in" rows="2" data-key="A15.ai.r3.c4" placeholder="이유 한 문장" data-label="A15 AI 활용 3 · 이유">이미 내가 테스트했던 내용이어서 새로 반영한 것이 없었다.</textarea></td></tr></table></div>
 <details class="learn-box after" id="theory-after"><summary>마지막 활동을 마친 뒤 연다 &middot; 오늘의 일반화와 흔한 오개념</summary>
 <p class="hint">A12~A15까지 모두 마친 뒤 연다. 내 문장을 먼저 쓰고 나서 비교한다.</p>
 <h3>오늘의 일반화(A12에서 쓴 내 문장과 비교한다)</h3>

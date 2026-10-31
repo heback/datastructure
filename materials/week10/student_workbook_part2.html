@@ -117,6 +117,8 @@ table.fill td.in-cell{padding:3px;height:auto}
   select.in{background-image:none}
   .ans-row,.mycode{break-inside:avoid}
 }
+/* 워크북은 제출하지 않는 자습용 자료이다. 학번·이름·저장 단추가 있는 저장 바와 인쇄용 학번 줄을 보이지 않게 한다(입력 자동 보관은 그대로 동작). */
+#savebar,#printid{display:none!important}
 </style>
 <link rel="stylesheet" href="../assets/codekit.css">
 <script src="../assets/codekit.js" defer></script>
@@ -129,7 +131,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(10)  # 학생용 · 탐구 활동지 2부 A6~A9</div>
   <h1>10주차 탐구 활동지 2부 — 코드 실습 기록 (A6~A9)</h1>
-  <p class="lead">2차시에 사용한다. 코드로 만들고 실행한 결과를 기록하는 활동지이다. 예측 칸은 실행하기 전에 먼저 쓴다. 이 활동지에는 정답과 실행 결과 값이 없다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+  <p class="lead">2차시에 사용한다. 코드로 만들고 실행한 결과를 기록하는 활동지이다. 예측 칸은 실행하기 전에 먼저 쓴다. 이 활동지에는 정답과 실행 결과 값이 없다.</p><p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
 </header>
 <nav><a href="#A6">A6</a><a href="#A7">A7</a><a href="#A8">A8</a><a href="#A9">A9</a><a href="index.html">목록</a></nav>
 
