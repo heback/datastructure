@@ -1,4 +1,4 @@
-/* 탐구 활동지: 상단 문항 링크를 누르면 그 문항(section.sheet)만 보여 준다.
+/* 탐구 활동지·실습 코드: 상단 링크를 누르면 그 문항(.wrap 바로 아래 section)만 보여 준다.
    - 숨긴 문항의 입력란은 DOM에 그대로 있어 자동 보관·저장(JSON)은 영향이 없다.
    - 인쇄할 때는 모든 문항이 나온다(sheettabs.css 참고).
    - 주소의 #해시가 문항 안의 요소를 가리키면 그 문항을 열고 요소로 이동한다. */
@@ -7,7 +7,7 @@
   var wrap = document.querySelector(".wrap");
   if (!wrap) return;
   var nav = wrap.querySelector(":scope>nav");
-  var secs = [].slice.call(wrap.querySelectorAll(":scope>section.sheet"));
+  var secs = [].slice.call(wrap.querySelectorAll(":scope>section"));
   if (!nav || secs.length < 2) return;
 
   var EXTRA = { "theory-after": "마무리 정리", "wrapup": "마무리 정리" };
@@ -37,6 +37,8 @@
     tabs[s0.id] = a0;
   }
   secs.forEach(function (s) {
+    var tl = tabs[s.id].textContent;
+    if (tl.charAt(0) === "#") tabs[s.id].textContent = tl.slice(1);
     var h2 = s.querySelector("h2");
     if (h2 && tabs[s.id]) {
       var t = h2.cloneNode(true);
@@ -86,8 +88,20 @@
     }
   }
 
+  /* 실습 코드 쪽은 저장 바(#savebar)가 위에 붙어 있으므로 링크 막대는 그 아래에 붙인다 */
+  function barH() {
+    var b = document.getElementById("savebar");
+    if (!b) return 0;
+    return window.getComputedStyle(b).position === "sticky" ? b.offsetHeight : 0;
+  }
+  function placeNav() { nav.style.top = barH() + "px"; }
+  placeNav();
+  window.addEventListener("resize", placeNav);
+  var sbEl = document.getElementById("savebar");
+  if (sbEl && window.ResizeObserver) new ResizeObserver(placeNav).observe(sbEl);
+
   function scrollToSection(sec, target) {
-    var navH = nav.offsetHeight;
+    var navH = nav.offsetHeight + barH();
     var el = target && target !== sec ? target : sec;
     var top = el.getBoundingClientRect().top + window.pageYOffset - navH - 8;
     window.scrollTo(0, Math.max(0, top));
@@ -99,7 +113,7 @@
     if (!id) return false;
     var el = document.getElementById(id);
     if (!el) return false;
-    var sec = el.closest ? el.closest(".wrap>section.sheet") : null;
+    var sec = el.closest ? el.closest(".wrap>section") : null;
     if (!sec || !byId[sec.id]) return false;
     show(sec.id);
     if (doScroll) scrollToSection(sec, el);

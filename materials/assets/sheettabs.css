@@ -1,6 +1,6 @@
 /* 탐구 활동지 문항 탭: 한 번에 한 문항만 보인다. 인쇄할 때는 전부 보인다. */
 @media screen {
-  .st-on .wrap>section.sheet:not(.st-active){display:none}
+  .st-on .wrap>section:not(.st-active){display:none}
 
   /* 문항 링크 막대: 스크롤해도 위에 붙어 있어 다시 올라갈 필요가 없다 */
   .st-on .wrap>nav{position:sticky;top:0;z-index:30;margin:0 -24px 18px;padding:10px 24px;gap:6px;background:color-mix(in srgb,var(--paper,#f6f3ed) 94%,transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-bottom:1px solid var(--line,#dcd5c6)}
@@ -23,6 +23,6 @@
   }
 }
 @media print {
-  .st-on .wrap>section.sheet{display:block!important}
+  .st-on .wrap>section{display:block!important}
   .st-on .wrap>nav,.st-pager{display:none!important}
 }
