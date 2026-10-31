@@ -1,0 +1,28 @@
+/* 탐구 활동지 문항 탭: 한 번에 한 문항만 보인다. 인쇄할 때는 전부 보인다. */
+@media screen {
+  .st-on .wrap>section.sheet:not(.st-active){display:none}
+
+  /* 문항 링크 막대: 스크롤해도 위에 붙어 있어 다시 올라갈 필요가 없다 */
+  .st-on .wrap>nav{position:sticky;top:0;z-index:30;margin:0 -24px 18px;padding:10px 24px;gap:6px;background:color-mix(in srgb,var(--paper,#f6f3ed) 94%,transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-bottom:1px solid var(--line,#dcd5c6)}
+  .st-on .wrap>nav a{min-width:38px;text-align:center}
+  .st-on .wrap>nav a.on{background:var(--accent,#1f4f78);border-color:var(--accent,#1f4f78);color:#fff;font-weight:700}
+  .st-on .wrap>nav a.on:hover{background:var(--accent-strong,#163a5a);color:#fff}
+  .st-on .wrap>nav a:not([href^="#"]){margin-left:auto;border-style:dashed}
+  .st-on .wrap>nav a:not([href^="#"])~a:not([href^="#"]){margin-left:0}
+
+  /* 하단 이전·다음 */
+  .st-pager{display:flex;justify-content:space-between;gap:10px;margin-top:22px;padding-top:14px;border-top:1px dashed var(--line,#dcd5c6)}
+  .st-pager a{font:600 13px var(--font-mono,"JetBrains Mono",monospace);text-decoration:none;color:var(--accent,#1f4f78);background:var(--panel,#fffdfa);border:1px solid var(--accent-line,#b9cde0);border-radius:999px;padding:7px 16px}
+  .st-pager a:hover{background:var(--accent-soft,#e8eff5)}
+  .st-pager .st-next{margin-left:auto}
+
+  @media (max-width:640px){
+    .st-on .wrap>nav{margin:0 -14px 14px;padding:8px 14px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .st-on .wrap>nav a{flex:none;white-space:nowrap}
+    .st-on .wrap>nav a:not([href^="#"]){margin-left:0}
+  }
+}
+@media print {
+  .st-on .wrap>section.sheet{display:block!important}
+  .st-on .wrap>nav,.st-pager{display:none!important}
+}
