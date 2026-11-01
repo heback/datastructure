@@ -260,7 +260,7 @@ a.card.late em{background:var(--bad-soft);color:var(--bad)}
 
 /* ---------- 좁은 화면 ---------- */
 /* 워크북↔코드랩 상호 링크: 버튼형 */
-a.xlink{display:inline-flex;align-items:center;gap:.35em;margin:0 .15em;padding:.1em .8em .14em;border:1px solid var(--accent);border-radius:var(--radius-pill);background:var(--accent-soft);color:var(--accent-strong);font-family:var(--font-sans);font-size:.9em;font-weight:600;line-height:1.55;text-decoration:none;white-space:nowrap;vertical-align:baseline;box-shadow:0 1.5px 0 var(--accent-line);transition:background .15s,color .15s,border-color .15s,transform .15s,box-shadow .15s}
+a.xlink{display:inline-flex;align-items:center;gap:.35em;margin:0 .15em;padding:.1em .75em .14em;border:1px solid var(--accent);border-radius:var(--radius-sm);background:var(--accent-soft);color:var(--accent-strong);font-family:var(--font-sans);font-size:.9em;font-weight:600;line-height:1.55;text-decoration:none;white-space:nowrap;vertical-align:baseline;box-shadow:0 1.5px 0 var(--accent-line);transition:background .15s,color .15s,border-color .15s,transform .15s,box-shadow .15s}
 a.xlink::after{content:"\2192";font-weight:700;transition:transform .15s}
 a.xlink:hover{background:var(--accent);border-color:var(--accent);color:var(--on-accent);box-shadow:0 3px 8px -3px rgba(31,79,120,.55);transform:translateY(-1px)}
 a.xlink:hover::after{transform:translateX(3px)}
