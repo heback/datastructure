@@ -259,6 +259,14 @@ a.card.late em{background:var(--bad-soft);color:var(--bad)}
 .cardgrid>a.card em{margin-top:12px}
 
 /* ---------- 좁은 화면 ---------- */
+/* 워크북↔코드랩 상호 링크: 버튼형 */
+a.xlink{display:inline-flex;align-items:center;gap:.35em;margin:0 .15em;padding:.1em .8em .14em;border:1px solid var(--accent);border-radius:var(--radius-pill);background:var(--accent-soft);color:var(--accent-strong);font-family:var(--font-sans);font-size:.9em;font-weight:600;line-height:1.55;text-decoration:none;white-space:nowrap;vertical-align:baseline;box-shadow:0 1.5px 0 var(--accent-line);transition:background .15s,color .15s,border-color .15s,transform .15s,box-shadow .15s}
+a.xlink::after{content:"\2192";font-weight:700;transition:transform .15s}
+a.xlink:hover{background:var(--accent);border-color:var(--accent);color:var(--on-accent);box-shadow:0 3px 8px -3px rgba(31,79,120,.55);transform:translateY(-1px)}
+a.xlink:hover::after{transform:translateX(3px)}
+a.xlink:active{transform:translateY(0);box-shadow:none}
+a.xlink[href^="student_workbook"]{border-color:var(--gold-ink);background:var(--gold-soft);color:var(--gold-ink);box-shadow:0 1.5px 0 var(--gold-line)}
+a.xlink[href^="student_workbook"]:hover{background:var(--gold-ink);border-color:var(--gold-ink);color:#fff;box-shadow:0 3px 8px -3px rgba(134,98,26,.55)}
 @media (max-width:640px){
   body{font-size:15.5px}
   .wrap{padding:0 14px 72px}

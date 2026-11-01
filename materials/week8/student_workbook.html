@@ -375,7 +375,7 @@ print(t1.val, t1.left.val, t1.right.val)</code></pre></div>
 
 <section id="A6" class="sheet">
 <h2>A6 · 재귀 순회 구현 기록<small>2차시 · 16분 · 개인</small></h2>
-<p class="meta"><span>코드: <a href="student_code_lab.html#A6">student_code_lab.html A6</a></span><span>실습 과제 착수</span></p>
+<p class="meta"><span>코드: <a class="xlink" href="student_code_lab.html#A6">코드 실습 A6</a></span><span>실습 과제 착수</span></p>
 <h3>예측</h3>
 <p>코드를 쓰기 전에 적는다. 순회 함수에서 <code class="i">if node is None:</code> 줄(기저 조건)을 지우면 어떤 일이 일어나겠는가? 어느 시점에 일어나겠는가?</p><p class="how">쓰는 법: 1~2문장으로 쓴다. 일어날 일(어떤 오류나 현상)과 그 시점(어느 호출에서)을 함께 쓴다. 틀려도 된다.</p>
 <textarea class="in" rows="3" data-key="A6.predict" placeholder="1~2문장" data-label="A6 기저 조건 제거 예측">기저 조건을 지우면 리프의 비어 있는 자식(None)을 호출하는 순간 None의 속성을 읽으려다 AttributeError가 난다. T1에서는 D의 왼쪽 자식을 호출하는 시점에 처음 일어난다.</textarea>
@@ -457,7 +457,7 @@ else:
 
 <section id="A8" class="sheet">
 <h2>A8 · T3의 세 순회 결과 비교<small>2차시 · 8분 · 개인</small></h2>
-<p class="meta"><span>코드: <a href="student_code_lab.html#A8">student_code_lab.html A8</a></span><span>산출물: 결과 표, 발견한 규칙 1문장</span></p>
+<p class="meta"><span>코드: <a class="xlink" href="student_code_lab.html#A8">코드 실습 A8</a></span><span>산출물: 결과 표, 발견한 규칙 1문장</span></p>
 <div class="learn-box"><span class="lb-title">학습 내용 · 결과를 읽는 방법</span>
 <p>코드 쪽 A8을 실행하면 출력 3줄이 차례로 전위, 중위, 후위의 결과이다. 각 줄을 표에 그대로 옮긴다. &lsquo;눈에 띄는 점&rsquo;은 값의 나열을 보고 쓴다. 각 줄의 값 나열을 서로 비교하고, A7에서 그린 트리를 옆에 두고 읽는다. 세 줄을 서로 비교해 한 가지 규칙을 한 문장으로 쓴다.</p>
 </div>
@@ -507,7 +507,7 @@ else:
 <tr><td class="lab">값 7을 찾을 때 방문(비교)한 노드 수</td><td class="in-cell"><input type="text" class="in" data-key="A9.metrics.r2.c1" placeholder="숫자" data-label="A9 T4·T5 비교 값 7을 찾을 때 방문(비교)한 노드 수 · T4" autocomplete="off" value="3"></td><td class="in-cell"><input type="text" class="in" data-key="A9.metrics.r2.c2" placeholder="숫자" data-label="A9 T4·T5 비교 값 7을 찾을 때 방문(비교)한 노드 수 · T5" autocomplete="off" value="7"></td></tr>
 <tr><td class="lab">가장 많이 비교하는 경우의 횟수</td><td class="in-cell"><input type="text" class="in" data-key="A9.metrics.r3.c1" placeholder="숫자" data-label="A9 T4·T5 비교 가장 많이 비교하는 경우의 횟수 · T4" autocomplete="off" value="3"></td><td class="in-cell"><input type="text" class="in" data-key="A9.metrics.r3.c2" placeholder="숫자" data-label="A9 T4·T5 비교 가장 많이 비교하는 경우의 횟수 · T5" autocomplete="off" value="7"></td></tr>
 <tr><td class="lab">중위 순회 결과</td><td class="in-cell"><input type="text" class="in" data-key="A9.metrics.r4.c1" placeholder="숫자를 공백으로" data-label="A9 T4·T5 비교 중위 순회 결과 · T4" autocomplete="off" value="1 2 3 4 5 6 7"></td><td class="in-cell"><input type="text" class="in" data-key="A9.metrics.r4.c2" placeholder="숫자를 공백으로" data-label="A9 T4·T5 비교 중위 순회 결과 · T5" autocomplete="off" value="1 2 3 4 5 6 7"></td></tr></table>
-<p>손으로 센 뒤 <a href="student_code_lab.html#A9">student_code_lab.html A9</a>의 코드로 확인한다. 내 값과 코드의 값이 다르면 어느 쪽이 틀렸는지 찾아 적는다.</p><p class="how">쓰는 법: 1~2문장으로 쓴다. 모두 같으면 &ldquo;모두 같았다&rdquo;라고 쓰고, 다르면 어느 칸(항목, T4/T5)이 다르고 어느 쪽이 틀렸는지 쓴다. 비워 두지 않는다.</p>
+<p>손으로 센 뒤 <a class="xlink" href="student_code_lab.html#A9">코드 실습 A9</a>의 코드로 확인한다. 내 값과 코드의 값이 다르면 어느 쪽이 틀렸는지 찾아 적는다.</p><p class="how">쓰는 법: 1~2문장으로 쓴다. 모두 같으면 &ldquo;모두 같았다&rdquo;라고 쓰고, 다르면 어느 칸(항목, T4/T5)이 다르고 어느 쪽이 틀렸는지 쓴다. 비워 두지 않는다.</p>
 <textarea class="in" rows="3" data-key="A9.check" placeholder="모두 같았다 / 다른 칸과 이유" data-label="A9 손으로 센 값과 코드 값 비교">내 값과 코드의 값이 같았다(T4에서 7은 3, T5에서 7은 7). 높이는 노드 수 기준으로 세었다.</textarea>
 <p><b>생각해 볼 질문</b> ① 같은 값 7개인데 왜 방문 횟수가 다른가? ② 값이 100만 개이고 정렬된 순서로 삽입되었다면, 마지막으로 삽입한 값을 찾을 때 비교 횟수는 어떻게 되겠는가? 예상(대략의 수)을 적고 이유를 쓴다.</p><p class="how">쓰는 법: ①②를 번호를 붙여 쓴다. ①은 한 문장, ②는 예상하는 수와 이유 한 문장이다.</p>
 <textarea class="in" rows="3" data-key="A9.reflect" placeholder="① … ② 예상 □번, 이유 …" data-label="A9 생각해 볼 질문 답">삽입 순서가 달라 트리 모양(균형/편향)이 달라졌다. T4는 비교할 때마다 탐색 범위가 절반으로 줄지만 T5는 하나씩만 줄어든다. 100만 개가 정렬 순서로 삽입되었다면 마지막 값은 약 1,000,000번 비교한다. 균형이었다면 약 20번(log₂1,000,000 ≈ 20)이다.</textarea>

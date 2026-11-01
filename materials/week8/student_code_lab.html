@@ -230,12 +230,12 @@ for label, fn in FUNCS:
 # 위의 FAIL 줄에서 어느 함수가 틀렸는지 찾는다.
 assert not failures, "실패 %d건: %s" % (len(failures), failures)
 print("모든 테스트 통과")</code></pre></div>
-<div class="note">결과를 A3에서 손으로 추적한 결과와 비교하고, 서로 다른 부분이 있으면 어느 줄에서 갈렸는지 찾아 <a href="student_workbook.html#A6">활동지 A6</a>에 적는다.</div>
+<div class="note">결과를 A3에서 손으로 추적한 결과와 비교하고, 서로 다른 부분이 있으면 어느 줄에서 갈렸는지 찾아 <a class="xlink" href="student_workbook.html#A6">활동지 A6</a>에 적는다.</div>
 </section>
 
 <section id="A8" class="sheet">
 <h2>A8 · T3에 세 순회 실행하기<small>8분 · 개인</small></h2>
-<p>A7에서 손으로 만든 T3를 코드로 만들어(삽입 순서는 활동지 A7과 같다) A6 테스트를 통과한 함수로 세 순회를 실행한다. 이 페이지의 A6 편집기에서 테스트를 통과시켜 두면 <code class="i">Node</code>, <code class="i">build</code>와 세 순회 함수가 환경에 남아 있으므로, 아래 실행 칸에는 [예시 코드]의 [예시] 블록만 [편집기에 추가]해 [▶ 실행]한다. <code class="i">NameError</code>가 나면 A6 편집기를 다시 [▶ 실행]한 뒤에 한다. 결과를 <a href="student_workbook.html#A8">활동지 A8</a>의 표에 옮기고, 눈에 띄는 점을 한 문장으로 쓴다.</p>
+<p>A7에서 손으로 만든 T3를 코드로 만들어(삽입 순서는 활동지 A7과 같다) A6 테스트를 통과한 함수로 세 순회를 실행한다. 이 페이지의 A6 편집기에서 테스트를 통과시켜 두면 <code class="i">Node</code>, <code class="i">build</code>와 세 순회 함수가 환경에 남아 있으므로, 아래 실행 칸에는 [예시 코드]의 [예시] 블록만 [편집기에 추가]해 [▶ 실행]한다. <code class="i">NameError</code>가 나면 A6 편집기를 다시 [▶ 실행]한 뒤에 한다. 결과를 <a class="xlink" href="student_workbook.html#A8">활동지 A8</a>의 표에 옮기고, 눈에 띄는 점을 한 문장으로 쓴다.</p>
 <div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A6-4"># A8: T3에 세 순회를 실행해 결과를 비교한다.
 t3 = build([8, 3, 10, 1, 6, 14, 4, 7, 13])  # 삽입 순서대로 BST를 만든다
 print(preorder(t3, []))  # 새 빈 리스트 []를 넘기고 출력한다
