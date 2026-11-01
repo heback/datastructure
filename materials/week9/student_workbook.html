@@ -295,11 +295,18 @@ while events:
          /       \
     5               8
    /   \           /   \
-9       7       10      12</div></div><div><p><b>판정</b> <span class="rg" data-key="A4.J1.verdict" data-type="radio" data-label="A4 카드 J1 최소 힙인가"><label><input type="radio" name="r_A4_J1_verdict" value="최소 힙이다" checked> 최소 힙이다</label><label><input type="radio" name="r_A4_J1_verdict" value="최소 힙이 아니다"> 최소 힙이 아니다</label></span></p><textarea class="in" rows="2" data-key="A4.J1.reason" data-label="A4 카드 J1 이유">모든 부모가 자식 이하이다(3≤5,8 / 5≤9,7 / 8≤10,12). 형제 사이(5와 8, 9와 7)는 크기 관계가 필요 없다.</textarea></div></div></div><div class="card" style="margin:8px 0"><b class="h">카드 J2</b> <code class="i">[2, 8, 3, 9, 10, 4, 5]</code><div class="cols"><div><div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">            2
+9       7       10      12</div></div><div><p><b>판정</b> <span class="rg" data-key="A4.J1.verdict" data-type="radio" data-label="A4 카드 J1 최소 힙인가"><label><input type="radio" name="r_A4_J1_verdict" value="최소 힙이다" checked> 최소 힙이다</label><label><input type="radio" name="r_A4_J1_verdict" value="최소 힙이 아니다"> 최소 힙이 아니다</label></span></p><textarea class="in" rows="5" data-key="A4.J1.reason" data-label="A4 카드 J1 이유">모든 부모가 자식 이하이다.
+3≤5,8
+5≤9,7
+8≤10,12
+형제 사이(5와 8, 9와 7)는 크기 관계가 필요 없다.</textarea></div></div></div><div class="card" style="margin:8px 0"><b class="h">카드 J2</b> <code class="i">[2, 8, 3, 9, 10, 4, 5]</code><div class="cols"><div><div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">            2
          /       \
     8               3
    /   \           /   \
-9       10      4       5</div></div><div><p><b>판정</b> <span class="rg" data-key="A4.J2.verdict" data-type="radio" data-label="A4 카드 J2 최소 힙인가"><label><input type="radio" name="r_A4_J2_verdict" value="최소 힙이다" checked> 최소 힙이다</label><label><input type="radio" name="r_A4_J2_verdict" value="최소 힙이 아니다"> 최소 힙이 아니다</label></span></p><textarea class="in" rows="2" data-key="A4.J2.reason" data-label="A4 카드 J2 이유">0번 2 ≤ 8,3 / 1번 8 ≤ 9,10 / 2번 3 ≤ 4,5이므로 모든 부모가 자식 이하이다. 형제 8과 3이 정렬되어 있지 않아도 힙이다.</textarea></div></div></div><div class="card" style="margin:8px 0"><b class="h">카드 J3</b> <code class="i">[3, 5, 8, 4, 7, 10, 12]</code><div class="cols"><div><div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">            3
+9       10      4       5</div></div><div><p><b>판정</b> <span class="rg" data-key="A4.J2.verdict" data-type="radio" data-label="A4 카드 J2 최소 힙인가"><label><input type="radio" name="r_A4_J2_verdict" value="최소 힙이다" checked> 최소 힙이다</label><label><input type="radio" name="r_A4_J2_verdict" value="최소 힙이 아니다"> 최소 힙이 아니다</label></span></p><textarea class="in" rows="4" data-key="A4.J2.reason" data-label="A4 카드 J2 이유">0번 2 ≤ 8,3
+1번 8 ≤ 9,10
+2번 3 ≤ 4,5
+따라서 모든 부모가 자식 이하이다. 형제 8과 3이 정렬되어 있지 않아도 힙이다.</textarea></div></div></div><div class="card" style="margin:8px 0"><b class="h">카드 J3</b> <code class="i">[3, 5, 8, 4, 7, 10, 12]</code><div class="cols"><div><div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">            3
          /       \
     5               8
    /   \           /   \
@@ -312,7 +319,7 @@ while events:
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A4 정리: 판정과 비교표</summary>
 <table><tr><th>카드</th><th>판정</th><th>이유</th></tr>
 <tr><td>J1</td><td>최소 힙</td><td>모든 부모 &le; 자식. 형제 5와 8, 9와 7 사이는 따지지 않는다.</td></tr>
-<tr><td>J2</td><td>최소 힙</td><td>2&le;8,3 / 8&le;9,10 / 3&le;4,5. 형제 8과 3은 정렬되어 있지 않아도 된다.</td></tr>
+<tr><td>J2</td><td>최소 힙</td><td>2&le;8,3<br>8&le;9,10<br>3&le;4,5<br>형제 8과 3은 정렬되어 있지 않아도 된다.</td></tr>
 <tr><td>J3</td><td>아님</td><td>1번 칸 값 5의 자식인 3번 칸 값 4가 부모보다 작다.</td></tr>
 <tr><td>J4</td><td>최소 힙</td><td>정렬된 배열은 항상 힙이다.</td></tr></table>
 <table><tr><th>비교 항목</th><th>BST (8주차)</th><th>최소 힙 (오늘)</th></tr>
