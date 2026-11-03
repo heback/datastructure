@@ -7,12 +7,14 @@
   "use strict";
   var CFG = { "apiKey": "AIzaSyC9ar4WbYKUEWDYsVkdAyFEPGusWPKLWA0", "authDomain": "dshs-ds-grader.firebaseapp.com", "projectId": "dshs-ds-grader", "appId": "1:102718931158:web:b439c1de801ed95a468977" };
   var BASE = "https://www.gstatic.com/firebasejs/10.12.2/", REGION = "asia-northeast3", DOMAIN = "@ts.hs.kr";
-  var ACK_KEY = "ck-chat-ack-v1", MAX_HIST = 8;
+  var ACK_KEY = "ck-chat-ack-v2", MAX_HIST = 8;
+  var MAX_IMGS = 3, MAX_IMG_B64 = 300000, MAX_IMG_TOTAL = 880000;   /* 서버(chat.js) 한도보다 조금 작게 줄여 보낸다 */
 
   var path = decodeURIComponent(location.pathname), pm = /week(\d+)\/([^\/]+\.html)$/.exec(path);
   var WEEK = pm ? parseInt(pm[1], 10) : 0, FILE = pm ? pm[2] : "";
 
-  var fab, panel, body, where, input, sendBtn, mineBox, meter, foot;
+  var fab, panel, body, where, input, sendBtn, mineBox, meter, foot, strip;
+  var pending = [];   /* 붙여넣은 이미지 {mime, data(base64), url} */
   var fb = null, user = null, callChat = null, loading = null;
   var msgs = [], convId = newId(), busy = false, enabled = true;
 
@@ -118,25 +120,27 @@
     lab.appendChild(mineBox); lab.appendChild(document.createTextNode("이 문항에 쓴 내 답·코드도 함께 보내기"));
     meter = el("span"); opt.appendChild(lab); opt.appendChild(meter);
     var row = el("div", "cc-row");
-    input = el("textarea"); input.placeholder = "막힌 점을 쓴다. (Enter: 보내기, Shift+Enter: 줄바꿈)"; input.maxLength = 1200;
+    strip = el("div", "cc-imgs"); strip.hidden = true;
+    input = el("textarea"); input.placeholder = "막힌 점을 쓴다. 화면 캡처는 붙여넣는다(Ctrl/⌘+V). Enter: 보내기, Shift+Enter: 줄바꿈"; input.maxLength = 1200;
     input.setAttribute("aria-label", "질문 입력");
     sendBtn = el("button", "cc-btn cc-send", "보내기"); sendBtn.type = "button";
     row.appendChild(input); row.appendChild(sendBtn);
-    foot.appendChild(opt); foot.appendChild(row);
+    foot.appendChild(opt); foot.appendChild(strip); foot.appendChild(row);
 
     panel.appendChild(head); panel.appendChild(where); panel.appendChild(body); panel.appendChild(foot);
     document.body.appendChild(fab); document.body.appendChild(panel);
 
     fab.addEventListener("click", open);
     bClose.addEventListener("click", close);
-    bNew.addEventListener("click", function () { if (!busy) { msgs = []; convId = newId(); showChat(); } });
+    bNew.addEventListener("click", function () { if (!busy) { msgs = []; pending = []; renderPending(); convId = newId(); showChat(); } });
     sendBtn.addEventListener("click", send);
+    input.addEventListener("paste", onPaste);
     input.addEventListener("keydown", function (e) {
       if (e.key === "Enter" && !e.shiftKey && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); send(); }
       if (e.key === "Escape") close();
     });
     /* 이 입력란의 키 입력이 페이지의 다른 단축키·자동 보관에 닿지 않게 한다 */
-    ["keydown", "keyup", "keypress", "input"].forEach(function (t) { panel.addEventListener(t, function (e) { e.stopPropagation(); }); });
+    ["keydown", "keyup", "keypress", "input", "paste"].forEach(function (t) { panel.addEventListener(t, function (e) { e.stopPropagation(); }); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden && !panel.contains(e.target)) close(); });
   }
   function open() { fab.hidden = true; panel.hidden = false; refreshWhere(); start(); }
@@ -150,6 +154,66 @@
     body.appendChild(d); scrollDown(); return d;
   }
 
+  function addMe(text, imgs) {
+    var d = add("me", text, true);
+    (imgs || []).forEach(function (u) { var i = el("img"); i.src = u; i.alt = "붙여넣은 이미지"; d.appendChild(i); });
+    scrollDown(); return d;
+  }
+
+  /* ── 이미지 붙여넣기: 큰 캡처는 줄여서(JPEG) 보낸다 ── */
+  function shrink(file) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), img = new Image();
+      img.onload = function () {
+        URL.revokeObjectURL(url);
+        var steps = [[1600, 0.7], [1400, 0.6], [1200, 0.55], [1024, 0.5], [800, 0.5]];
+        for (var i = 0; i < steps.length; i++) {
+          var sc = Math.min(1, steps[i][0] / Math.max(img.width, img.height));
+          var w = Math.max(1, Math.round(img.width * sc)), h = Math.max(1, Math.round(img.height * sc));
+          var c = document.createElement("canvas"); c.width = w; c.height = h;
+          var x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, w, h); x.drawImage(img, 0, 0, w, h);
+          var u = c.toDataURL("image/jpeg", steps[i][1]), b = u.slice(u.indexOf(",") + 1);
+          if (b.length <= MAX_IMG_B64) { res({ mime: "image/jpeg", data: b, url: u }); return; }
+        }
+        rej(new Error("이미지가 너무 커서 줄이지 못했다. 일부 영역만 캡처해 다시 붙여넣는다."));
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error("이미지를 읽지 못했다.")); };
+      img.src = url;
+    });
+  }
+  function renderPending() {
+    strip.textContent = ""; strip.hidden = !pending.length;
+    pending.forEach(function (p, i) {
+      var t = el("span", "cc-th"), im = el("img"), x = el("button", "", "\u00d7");
+      im.src = p.url; im.alt = "붙여넣은 이미지 " + (i + 1); x.type = "button"; x.title = "이 이미지 빼기"; x.setAttribute("aria-label", "이미지 " + (i + 1) + " 빼기");
+      x.addEventListener("click", function () { pending.splice(i, 1); renderPending(); });
+      t.appendChild(im); t.appendChild(x); strip.appendChild(t);
+    });
+  }
+  /* 연속으로 붙여넣어도 한 장씩 차례로 처리해야 장수·용량 한도가 정확하다 */
+  var addQ = Promise.resolve();
+  function addImages(files) { addQ = addQ.then(function () { return addImagesNow(files); }); return addQ; }
+  async function addImagesNow(files) {
+    for (var i = 0; i < files.length; i++) {
+      if (pending.length >= MAX_IMGS) { add("sys", "이미지는 한 번에 " + MAX_IMGS + "장까지 붙여넣을 수 있다.", true); break; }
+      try {
+        var p = await shrink(files[i]);
+        var total = pending.reduce(function (s, q) { return s + q.data.length; }, 0);
+        if (total + p.data.length > MAX_IMG_TOTAL) { add("sys", "이미지 용량이 너무 크다. 장수를 줄이거나 일부 영역만 캡처한다.", true); break; }
+        pending.push(p); renderPending();
+      } catch (e) { add("err", e.message || "이미지를 붙여넣지 못했다.", true); }
+    }
+  }
+  function onPaste(e) {
+    var items = (e.clipboardData && e.clipboardData.items) || [], files = [];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].kind === "file" && /^image\//.test(items[i].type)) { var f = items[i].getAsFile(); if (f) files.push(f); }
+    }
+    if (!files.length || busy) return;
+    if (!e.clipboardData.getData("text/plain")) e.preventDefault();   /* 글자도 함께 복사했으면 글자는 그대로 붙인다 */
+    addImages(files);
+  }
+
   /* 처음 열 때: 안내 확인 → 로그인 → 대화 */
   function start() {
     body.textContent = ""; setFoot(false); meter.textContent = "";
@@ -161,7 +225,7 @@
     var c = el("div", "cc-card"); c.appendChild(el("h4", "", "AI 도우미를 쓰기 전에"));
     var ul = el("ul");
     ["개념·문법 설명과 막힌 곳에 대한 힌트를 준다. 과제 코드와 활동지 답은 알려 주지 않는다.",
-      "내가 한 질문과 AI의 답은 교사가 볼 수 있게 기록된다.",
+      "내가 한 질문과 AI의 답, 붙여넣은 이미지는 교사가 볼 수 있게 기록된다. 이름·연락처 같은 개인정보가 보이는 화면은 올리지 않는다.",
       "수업 중 AI 도움 없이 하는 활동에서는 쓰지 않는다. 그 시간에는 교사가 꺼 둘 수 있다.",
       "AI의 답은 틀릴 수 있다. 코드는 직접 실행해 확인한다."].forEach(function (t) { ul.appendChild(el("li", "", t)); });
     c.appendChild(ul);
@@ -213,7 +277,7 @@
   async function showChat() {
     body.textContent = ""; enabled = true;
     add("sys", user.email + " 계정으로 연결했다. 막힌 점을 쓰면 힌트를 준다.", true);
-    msgs.forEach(function (m) { add(m.role === "user" ? "me" : "bot", m.role === "user" ? m.text : render(m.text), m.role === "user"); });
+    msgs.forEach(function (m) { if (m.role === "user") addMe(m.text, m.imgs); else add("bot", render(m.text)); });
     setFoot(true); refreshWhere();
     try {
       var r = await callChat({ action: "status" });
@@ -228,16 +292,19 @@
 
   async function send() {
     var q = input.value.trim();
-    if (busy || !q || !callChat) return;
+    if (busy || (!q && !pending.length) || !callChat) return;
     busy = true; setFoot(false);
     var hist = msgs.slice(-MAX_HIST).map(function (m) { return { role: m.role, text: m.text }; });
     while (hist.length && hist[0].role !== "user") hist.shift();
-    add("me", q, true); input.value = "";
+    var imgs = pending.slice(), shown = q || "(이미지를 붙여넣었다)";
+    addMe(shown, imgs.map(function (p) { return p.url; })); input.value = "";
     var wait = add("bot", "<span class=\"cc-typing\">생각하는 중…</span>");
     try {
-      var r = await callChat({ message: q, history: hist, convId: convId, context: context() });
+      var r = await callChat({ message: q, history: hist, convId: convId, context: context(),
+        images: imgs.map(function (p) { return { mime: p.mime, data: p.data }; }) });
+      pending = []; renderPending();
       wait.innerHTML = render(r.data.answer); scrollDown();
-      msgs.push({ role: "user", text: q }, { role: "model", text: r.data.answer });
+      msgs.push({ role: "user", text: q || "(이미지 첨부)", imgs: imgs.map(function (p) { return p.url; }) }, { role: "model", text: r.data.answer });
       showMeter(r.data);
     } catch (e) {
       wait.className = "cc-m err"; wait.textContent = (e && e.code === "functions/unauthenticated") ? "로그인이 끝났다. 닫았다가 다시 연다." : (e && e.message) || "답을 받지 못했다. 다시 보낸다.";

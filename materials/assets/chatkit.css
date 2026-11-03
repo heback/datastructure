@@ -24,6 +24,12 @@
 #ck-chat .cc-btn:hover{background:var(--accent-strong,#163a5a)}
 #ck-chat .cc-btn:disabled{opacity:.55;cursor:default}
 #ck-chat .cc-m{max-width:92%;padding:9px 13px;border-radius:12px;word-break:break-word}
+#ck-chat .cc-imgs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+#ck-chat .cc-imgs[hidden]{display:none}
+#ck-chat .cc-th{position:relative;width:56px;height:56px;border:1px solid var(--line,#dcd5c6);border-radius:8px;overflow:hidden;background:#fff}
+#ck-chat .cc-th img{width:100%;height:100%;object-fit:cover;display:block}
+#ck-chat .cc-th button{position:absolute;top:2px;right:2px;width:18px;height:18px;padding:0;border:0;border-radius:50%;background:rgba(22,32,46,.82);color:#fff;font:700 12px/18px sans-serif;cursor:pointer}
+#ck-chat .cc-m.me img{display:block;max-width:150px;max-height:110px;margin-top:6px;border:1px solid var(--accent-line,#b9cde0);border-radius:6px;background:#fff}
 #ck-chat .cc-m.me{align-self:flex-end;background:var(--accent-soft,#e8eff5);border:1px solid var(--accent-line,#b9cde0);white-space:pre-wrap}
 #ck-chat .cc-m.bot{align-self:flex-start;background:var(--panel,#fffdfa);border:1px solid var(--line,#dcd5c6)}
 #ck-chat .cc-m.err{align-self:stretch;max-width:none;background:var(--bad-soft,#f8e7e0);border:1px solid #e3b9aa;color:var(--bad,#a03a1c)}
