@@ -1,0 +1,46 @@
+/* chatkit.css — 학습지 AI 도우미(챗봇) 화면. chatkit.js와 함께 쓴다. theme.css의 토큰을 쓰되 없어도 보이도록 기본값을 둔다. */
+#ck-chat-fab{position:fixed;right:20px;bottom:20px;z-index:900;display:flex;align-items:center;gap:8px;padding:11px 18px;border:0;border-radius:999px;
+  background:var(--navy,#16202e);color:var(--on-navy,#f3efe6);font:600 14px "IBM Plex Sans KR",sans-serif;cursor:pointer;
+  box-shadow:0 10px 26px -10px rgba(22,32,46,.55),0 0 0 1px rgba(212,174,85,.55) inset}
+#ck-chat-fab:hover{background:#1f2d42}
+#ck-chat-fab:focus-visible,#ck-chat button:focus-visible,#ck-chat textarea:focus-visible{outline:3px solid var(--focus-on-navy,#f0cd73);outline-offset:2px}
+#ck-chat-fab .ck-dot{width:8px;height:8px;border-radius:50%;background:var(--gold,#d4ae55)}
+#ck-chat{position:fixed;right:20px;bottom:20px;z-index:901;width:392px;max-width:calc(100vw - 24px);height:min(620px,calc(100vh - 40px));display:flex;flex-direction:column;
+  background:var(--panel,#fffdfa);color:var(--ink,#1a2332);border:1px solid var(--line,#dcd5c6);border-radius:14px;overflow:hidden;
+  box-shadow:0 24px 60px -20px rgba(22,32,46,.45);font:400 14px/1.65 "IBM Plex Sans KR",sans-serif}
+#ck-chat[hidden],#ck-chat-fab[hidden]{display:none}
+#ck-chat .cc-head{display:flex;align-items:center;gap:8px;padding:11px 12px 11px 16px;background:var(--navy,#16202e);color:var(--on-navy,#f3efe6)}
+#ck-chat .cc-head b{font:700 15px "IBM Plex Sans KR",sans-serif;flex:1}
+#ck-chat .cc-head button{border:1px solid var(--navy-line,#6a778c);background:transparent;color:var(--on-navy,#f3efe6);border-radius:6px;padding:3px 10px;font:500 12px "IBM Plex Sans KR",sans-serif;cursor:pointer}
+#ck-chat .cc-head button:hover{background:rgba(255,255,255,.1)}
+#ck-chat .cc-where{padding:6px 16px;font-size:12px;color:var(--dim,#5a6372);background:var(--panel-sunk,#f1ede5);border-bottom:1px solid var(--line,#dcd5c6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#ck-chat .cc-body{flex:1;overflow-y:auto;padding:14px 14px 6px;display:flex;flex-direction:column;gap:10px;background:var(--paper,#f6f3ed)}
+#ck-chat .cc-card{background:var(--panel,#fffdfa);border:1px solid var(--line,#dcd5c6);border-radius:10px;padding:14px 16px}
+#ck-chat .cc-card h4{margin:0 0 6px;font:700 14px "IBM Plex Sans KR",sans-serif}
+#ck-chat .cc-card ul{margin:6px 0 12px;padding-left:18px}
+#ck-chat .cc-card li{margin:2px 0}
+#ck-chat .cc-btn{border:0;border-radius:8px;padding:8px 16px;background:var(--accent,#1f4f78);color:var(--on-accent,#fff);font:600 14px "IBM Plex Sans KR",sans-serif;cursor:pointer}
+#ck-chat .cc-btn:hover{background:var(--accent-strong,#163a5a)}
+#ck-chat .cc-btn:disabled{opacity:.55;cursor:default}
+#ck-chat .cc-m{max-width:92%;padding:9px 13px;border-radius:12px;word-break:break-word}
+#ck-chat .cc-m.me{align-self:flex-end;background:var(--accent-soft,#e8eff5);border:1px solid var(--accent-line,#b9cde0);white-space:pre-wrap}
+#ck-chat .cc-m.bot{align-self:flex-start;background:var(--panel,#fffdfa);border:1px solid var(--line,#dcd5c6)}
+#ck-chat .cc-m.err{align-self:stretch;max-width:none;background:var(--bad-soft,#f8e7e0);border:1px solid #e3b9aa;color:var(--bad,#a03a1c)}
+#ck-chat .cc-m.sys{align-self:stretch;max-width:none;background:var(--warn-soft,#f8efd9);border:1px solid var(--gold-line,#e4d2a4);color:var(--warn,#7f5a12)}
+#ck-chat .cc-m p{margin:0 0 6px}#ck-chat .cc-m p:last-child{margin:0}
+#ck-chat .cc-m code{font:500 12.5px "JetBrains Mono",monospace;background:var(--panel-sunk,#f1ede5);padding:1px 5px;border-radius:4px}
+#ck-chat .cc-m pre{margin:6px 0;padding:9px 11px;background:var(--code-surface,#fcfbf8);border:1px solid var(--line,#dcd5c6);border-radius:8px;overflow-x:auto;white-space:pre}
+#ck-chat .cc-m pre code{background:none;padding:0;font-size:12.5px;line-height:1.55}
+#ck-chat .cc-typing{color:var(--dim,#5a6372);font-size:13px}
+#ck-chat .cc-foot{padding:10px 12px 12px;border-top:1px solid var(--line,#dcd5c6);background:var(--panel,#fffdfa)}
+#ck-chat .cc-opt{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 7px;font-size:12px;color:var(--dim,#5a6372)}
+#ck-chat .cc-opt label{display:flex;align-items:center;gap:6px;cursor:pointer}
+#ck-chat .cc-row{display:flex;gap:8px;align-items:flex-end}
+#ck-chat textarea{flex:1;resize:none;height:60px;padding:8px 10px;border:1px solid var(--line-control,#8c8372);border-radius:8px;background:#fff;color:inherit;font:400 14px/1.5 "IBM Plex Sans KR",sans-serif}
+#ck-chat textarea:disabled{background:var(--panel-sunk,#f1ede5)}
+#ck-chat .cc-send{height:36px}
+@media (max-width:520px){
+  #ck-chat{right:0;bottom:0;width:100vw;max-width:100vw;height:86vh;border-radius:14px 14px 0 0}
+  #ck-chat-fab{right:12px;bottom:12px}
+}
+@media print{#ck-chat,#ck-chat-fab{display:none!important}}

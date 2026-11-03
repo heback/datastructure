@@ -123,6 +123,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <link rel="stylesheet" href="../assets/theme.css">
 <link rel="stylesheet" href="../assets/sheettabs.css">
 <script src="../assets/topnav.js" defer></script>
+<link rel="stylesheet" href="../assets/chatkit.css">
+<script src="../assets/chatkit.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -281,6 +283,7 @@ for name, coins in SYSTEMS:  # 쌍을 풀어 name, coins에 담는다
 <div class="card" style="--c:#8a6d1f"><b class="h">조건부 허용</b><ul><li>완성한 구현에 대한 복잡도 검토 요청(예: &ldquo;내가 쓴 복잡도 분석문과 코드를 붙여 줄 테니 분석이 코드와 맞는지 검토해줘&rdquo;). 복잡도 분석을 대신 세우게 하는 것이 아니라 내가 쓴 분석의 검토만 맡긴다</li><li>엣지 케이스 브레인스토밍(amount = 0, 만들 수 없는 금액, 동전 1개, 시작이나 도착이 막힌 격자, 1×1 격자)</li><li>내가 쓴 코드의 경계 조건·성능 검토 요청(수정은 직접 한다)</li><li>내 코드와 서술의 개선 아이디어 제안 요청(제안만 참고하고 코드와 문장은 직접 다시 작성)</li></ul></div>
 <div class="card" style="--c:#b3401f"><b class="h">금지 — 적발 시 계획서의 위반 처리방안 적용</b><ul><li>과제 문장(&ldquo;최소 동전 개수를 구하는 함수, 격자 경로 수를 구하는 함수, 큰 동전부터 쓰는 방식과 최솟값이 달라지는 가장 작은 금액(반례)을 구하는 함수를 작성하라&rdquo;)을 그대로 입력해 전체 코드 생성</li><li>AI가 쓴 <code class="i">min_coins</code>/<code class="i">grid_paths</code>/<code class="i">greedy_counterexample</code>를 그대로, 또는 변수명만 바꿔 제출</li><li>상태 정의·전이 방정식·초기값·계산 순서 등 DP 설계 판단, 반례가 되는 동전 체계·금액을 AI가 대신 찾음</li><li>복잡도 분석이나 구현 계획(상태 정의와 목표 비용 포함)을 AI에게 대신 세우게 하여 제출</li><li>상태 정의·전이 설계나 반례 증명 문장을 AI가 대신 쓰게 하여 제출</li></ul></div></div>
 <div class="note"><b>수업 운영 규칙</b>(금지 목록과 별개) 수업 중 활동(A1~A15)은 AI 도움 없이 수행한다. 특히 A12·A13의 일반화 문장은 내가 직접 쓴 것이어야 한다. A15 형성평가는 AI를 쓰지 않는 시험 상황으로 운영하며, 위 위반 처리(감점 등)는 형성평가에 적용하지 않는다. 위 3단계는 주간 과제를 제출할 때 적용된다.</div>
+<div class="note"><b>AI 도우미</b>(화면 오른쪽 아래 [AI 도우미]) 위 &lsquo;허용&rsquo; 범위인 개념·문법 설명, 오류 원인, 힌트만 해 주고 과제 코드와 활동지 답은 알려 주지 않는다. 학교 계정으로 로그인해야 하며, 내가 한 질문과 AI의 답은 교사가 볼 수 있게 기록된다. 수업 중 AI 도움 없이 하는 활동에서는 교사가 꺼 두므로 쓰지 않는다.</div>
 </section>
 </div>
 <script id="week13-submit">
