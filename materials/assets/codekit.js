@@ -81,21 +81,24 @@ var WORKER_SRC=
 ' if(!ready)ready=(async function(){\n'+
 '  importScripts("'+PYODIDE+'pyodide.js");\n'+
 '  py=await loadPyodide({indexURL:"'+PYODIDE+'"});\n'+
-'  py.setStdout({batched:function(s){if(!muted)postMessage({t:"out",s:s});}});\n'+
-'  py.setStderr({batched:function(s){if(!muted)postMessage({t:"err",s:s});}});\n'+
+'  function sink(t){var dec=new TextDecoder("utf-8");return {write:function(buf){if(!muted){var s=dec.decode(buf,{stream:true});if(s)postMessage({t:t,s:s});}return buf.length;}};}\n'+
+'  py.setStdout(sink("out"));\n'+
+'  py.setStderr(sink("err"));\n'+
 ' })();\n'+
 ' return ready;\n'+
 '}\n'+
+'function fl(){try{py.runPython("import sys\\nsys.stdout.flush()\\nsys.stderr.flush()");}catch(e){}}\n'+
 'onmessage=async function(e){\n'+
 ' var d=e.data;\n'+
 ' try{\n'+
 '  postMessage({t:"state",s:"loading"});\n'+
 '  await init();\n'+
 '  postMessage({t:"state",s:"running"});\n'+
-'  if(d.pre&&d.pre.length){muted=true;try{for(var i=0;i<d.pre.length;i++)await py.runPythonAsync(d.pre[i]);}catch(e2){muted=false;postMessage({t:"fail",id:d.id,m:"[앞 코드를 불러오다 오류] "+String(e2&&e2.message?e2.message:e2)});return;}muted=false;}\n'+
+'  if(d.pre&&d.pre.length){muted=true;try{for(var i=0;i<d.pre.length;i++)await py.runPythonAsync(d.pre[i]);fl();}catch(e2){fl();muted=false;postMessage({t:"fail",id:d.id,m:"[앞 코드를 불러오다 오류] "+String(e2&&e2.message?e2.message:e2)});return;}muted=false;}\n'+
 '  await py.runPythonAsync(d.code);\n'+
+'  fl();\n'+
 '  postMessage({t:"done",id:d.id});\n'+
-' }catch(err){postMessage({t:"fail",id:d.id,m:String(err&&err.message?err.message:err)});}\n'+
+' }catch(err){fl();postMessage({t:"fail",id:d.id,m:String(err&&err.message?err.message:err)});}\n'+
 '};';
 var worker=null,current=null;
 function newWorker(){
@@ -158,7 +161,7 @@ function runCode(code,ui,pre){
   }
   current={onmsg:function(d){
     if(d.t==="state")ui.state(d.s);
-    else if(d.t==="out"||d.t==="err"){text+=d.s+"\n";ui.partial(text);}
+    else if(d.t==="out"||d.t==="err"){text+=d.s;ui.partial(text);}
     else if(d.t==="done")finish("ok");
     else if(d.t==="fail")finish("error",cleanTrace(d.m));
   }};
