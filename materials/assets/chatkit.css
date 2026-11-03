@@ -1,11 +1,12 @@
 /* chatkit.css — 학습지 AI 도우미(챗봇) 화면. chatkit.js와 함께 쓴다. theme.css의 토큰을 쓰되 없어도 보이도록 기본값을 둔다. */
-#ck-chat-fab{position:fixed;right:20px;bottom:20px;z-index:900;display:flex;align-items:center;gap:8px;padding:11px 18px;border:0;border-radius:999px;
-  background:var(--navy,#16202e);color:var(--on-navy,#f3efe6);font:600 14px "IBM Plex Sans KR",sans-serif;cursor:pointer;
+/* 오른쪽 아래 구석에는 codekit의 [답 가림(t)] 단추(#ans-badge)가 있으므로 그 위에 놓는다 */
+#ck-chat-fab{position:fixed;right:12px;bottom:60px;z-index:900;display:flex;align-items:center;gap:8px;padding:9px 15px;border:0;border-radius:999px;
+  background:var(--navy,#16202e);color:var(--on-navy,#f3efe6);font:600 13px "IBM Plex Sans KR",sans-serif;cursor:pointer;
   box-shadow:0 10px 26px -10px rgba(22,32,46,.55),0 0 0 1px rgba(212,174,85,.55) inset}
 #ck-chat-fab:hover{background:#1f2d42}
 #ck-chat-fab:focus-visible,#ck-chat button:focus-visible,#ck-chat textarea:focus-visible{outline:3px solid var(--focus-on-navy,#f0cd73);outline-offset:2px}
 #ck-chat-fab .ck-dot{width:8px;height:8px;border-radius:50%;background:var(--gold,#d4ae55)}
-#ck-chat{position:fixed;right:20px;bottom:20px;z-index:901;width:392px;max-width:calc(100vw - 24px);height:min(620px,calc(100vh - 40px));display:flex;flex-direction:column;
+#ck-chat{position:fixed;right:12px;bottom:60px;z-index:901;width:392px;max-width:calc(100vw - 24px);height:min(620px,calc(100vh - 76px));display:flex;flex-direction:column;
   background:var(--panel,#fffdfa);color:var(--ink,#1a2332);border:1px solid var(--line,#dcd5c6);border-radius:14px;overflow:hidden;
   box-shadow:0 24px 60px -20px rgba(22,32,46,.45);font:400 14px/1.65 "IBM Plex Sans KR",sans-serif}
 #ck-chat[hidden],#ck-chat-fab[hidden]{display:none}
@@ -41,6 +42,6 @@
 #ck-chat .cc-send{height:36px}
 @media (max-width:520px){
   #ck-chat{right:0;bottom:0;width:100vw;max-width:100vw;height:86vh;border-radius:14px 14px 0 0}
-  #ck-chat-fab{right:12px;bottom:12px}
+  #ck-chat-fab{right:12px;bottom:60px}
 }
 @media print{#ck-chat,#ck-chat-fab{display:none!important}}
