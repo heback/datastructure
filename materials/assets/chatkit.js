@@ -280,7 +280,7 @@
     msgs.forEach(function (m) { if (m.role === "user") addMe(m.text, m.imgs); else add("bot", render(m.text)); });
     setFoot(true); refreshWhere();
     try {
-      var r = await callChat({ action: "status" });
+      var r = await callChat({ action: "status", context: { week: WEEK, file: FILE } });
       enabled = r.data.enabled !== false;
       showMeter(r.data);
       if (!enabled) add("err", r.data.message || "지금은 AI 도우미를 쓸 수 없다.", true);
@@ -288,7 +288,11 @@
     } catch (e) { /* 상태를 못 받아도 질문은 시도해 볼 수 있다 */ }
     setFoot(true); if (enabled) input.focus();
   }
-  function showMeter(d) { meter.textContent = d && d.limit != null ? "오늘 " + (d.used || 0) + "/" + d.limit + "회" : ""; }
+  function showMeter(d) {
+    var t = d && d.limit != null ? "오늘 " + (d.used || 0) + "/" + d.limit + "회" : "";
+    if (d && d.weekLimit != null) t += (t ? " · " : "") + (d.week || WEEK) + "주차 " + (d.weekUsed || 0) + "/" + d.weekLimit + "회";
+    meter.textContent = t;
+  }
 
   async function send() {
     var q = input.value.trim();
