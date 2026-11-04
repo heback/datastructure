@@ -84,19 +84,72 @@
 
   /* ── 글 꾸미기(안전하게: 먼저 이스케이프한 뒤 코드·굵게·문단만 처리) ── */
   function esc(s) { return s.replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
-  function inline(s) { return esc(s).replace(/`([^`\n]+)`/g, "<code>$1</code>").replace(/\*\*([^*\n]+)\*\*/g, "<b>$1</b>"); }
+  /* 마크다운 렌더링: 모델 답변을 안전하게 HTML로 바꾼다(모든 글자는 먼저 이스케이프한다).
+     지원: 제목(#), 굵게, 기울임, 취소선, `코드`, 코드 블록, 목록(-, *, 1.; 들여쓰기 중첩), 인용(>), 구분선, 표, 링크(http/https만) */
+  function inline(s) {
+    var codes = [];
+    s = esc(s).replace(/`([^`\n]+)`/g, function (_, c) { codes.push(c); return "\u0000" + (codes.length - 1) + "\u0000"; });
+    s = s.replace(/\[([^\]\n]+)\]\((https?:\/\/[^\s()]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/\*\*(?=\S)([^\n]+?)\*\*/g, "<b>$1</b>")
+      .replace(/(^|[^\w])__(?=\S)([^\n]+?)__(?![\w])/g, "$1<b>$2</b>")
+      .replace(/~~(?=\S)([^\n]+?)~~/g, "<del>$1</del>")
+      .replace(/(^|[^\w*])\*([^\s*](?:[^*\n]*[^\s*])?)\*(?![\w*])/g, "$1<i>$2</i>")
+      .replace(/(^|[^\w])_([^\s_](?:[^_\n]*[^\s_])?)_(?![\w])/g, "$1<i>$2</i>");
+    return s.replace(/\u0000(\d+)\u0000/g, function (_, n) { return "<code>" + codes[+n] + "</code>"; });
+  }
+  function cells(line) { return line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map(function (c) { return c.trim(); }); }
+  function prose(text) {
+    var lines = text.replace(/\r/g, "").split("\n"), html = "", i = 0, para = [];
+    function flush() { if (para.length) { html += "<p>" + para.map(inline).join("<br>") + "</p>"; para = []; } }
+    var LI = /^(\s*)([-*+]|\d+[.)])\s+(.*)$/;
+    while (i < lines.length) {
+      var ln = lines[i], m;
+      if (!ln.trim()) { flush(); i++; continue; }
+      if ((m = /^\s{0,3}(#{1,6})\s+(.*?)\s*#*\s*$/.exec(ln))) { flush(); var lv = m[1].length; html += '<div class="cc-h cc-h' + (lv <= 2 ? 1 : 2) + '">' + inline(m[2]) + "</div>"; i++; continue; }
+      if (/^\s{0,3}([-*_])(\s*\1){2,}\s*$/.test(ln)) { flush(); html += "<hr>"; i++; continue; }
+      if (/^\s{0,3}>/.test(ln)) {
+        flush(); var q = [];
+        while (i < lines.length && /^\s{0,3}>/.test(lines[i])) { q.push(lines[i].replace(/^\s{0,3}>\s?/, "")); i++; }
+        html += "<blockquote>" + prose(q.join("\n")) + "</blockquote>"; continue;
+      }
+      if (/^\s*\|.*\|\s*$/.test(ln) && i + 1 < lines.length && /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/.test(lines[i + 1])) {
+        flush(); var head = cells(ln); i += 2; var rows = [];
+        while (i < lines.length && /^\s*\|.*\|\s*$/.test(lines[i])) { rows.push(cells(lines[i])); i++; }
+        html += '<div class="cc-tw"><table><thead><tr>' + head.map(function (c) { return "<th>" + inline(c) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+          rows.map(function (r) { return "<tr>" + head.map(function (_, k) { return "<td>" + inline(r[k] || "") + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>";
+        continue;
+      }
+      if (LI.test(ln)) {
+        flush();
+        var stack = [], out = "";   /* stack: {indent, tag} */
+        while (i < lines.length && (m = LI.exec(lines[i]))) {
+          var ind = m[1].replace(/\t/g, "    ").length, tag = /\d/.test(m[2]) ? "ol" : "ul";
+          while (stack.length && ind < stack[stack.length - 1].indent) { out += "</li></" + stack.pop().tag + ">"; }
+          if (stack.length && ind === stack[stack.length - 1].indent) {
+            if (stack[stack.length - 1].tag !== tag) { out += "</li></" + stack.pop().tag + "><" + tag + "><li>"; stack.push({ indent: ind, tag: tag }); }
+            else out += "</li><li>";
+          } else if (!stack.length || ind > stack[stack.length - 1].indent) { out += "<" + tag + "><li>"; stack.push({ indent: ind, tag: tag }); }
+          out += inline(m[3]); i++;
+          /* 같은 항목의 이어지는 줄(들여쓴 일반 문장) */
+          while (i < lines.length && lines[i].trim() && !LI.test(lines[i]) && /^\s+\S/.test(lines[i])) { out += "<br>" + inline(lines[i].trim()); i++; }
+        }
+        while (stack.length) out += "</li></" + stack.pop().tag + ">";
+        html += out; continue;
+      }
+      para.push(ln.trim()); i++;
+    }
+    flush();
+    return html;
+  }
   function render(text) {
     var html = "", re = /```[^\n]*\n([\s\S]*?)(?:```|$)/g, last = 0, m;
-    function prose(s) {
-      s.split(/\n{2,}/).forEach(function (p) { p = p.trim(); if (p) html += "<p>" + inline(p).replace(/\n/g, "<br>") + "</p>"; });
-    }
     while ((m = re.exec(text))) {
-      prose(text.slice(last, m.index));
+      html += prose(text.slice(last, m.index));
       html += "<pre><code>" + esc(m[1].replace(/\s+$/, "")) + "</code></pre>";
       last = re.lastIndex;
       if (m[0].length === 0) re.lastIndex++;
     }
-    prose(text.slice(last));
+    html += prose(text.slice(last));
     return html;
   }
 
