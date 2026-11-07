@@ -13,7 +13,7 @@
   var path = decodeURIComponent(location.pathname), pm = /week(\d+)\/([^\/]+\.html)$/.exec(path);
   var WEEK = pm ? parseInt(pm[1], 10) : 0, FILE = pm ? pm[2] : "";
 
-  var fab, panel, body, where, input, sendBtn, mineBox, meter, foot, strip;
+  var fab, panel, body, where, input, mineBox, meter, foot, strip;
   var pending = [];   /* 붙여넣은 이미지 {mime, data(base64), url} */
   var fb = null, user = null, callChat = null, loading = null;
   var msgs = [], convId = newId(), busy = false, enabled = true;
@@ -174,11 +174,11 @@
     meter = el("span"); opt.appendChild(lab); opt.appendChild(meter);
     var row = el("div", "cc-row");
     strip = el("div", "cc-imgs"); strip.hidden = true;
-    input = el("textarea"); input.placeholder = "막힌 점을 쓴다. 화면 캡처는 붙여넣는다(Ctrl/⌘+V). Enter: 보내기, Shift+Enter: 줄바꿈"; input.maxLength = 1200;
+    input = el("textarea"); input.placeholder = "막힌 점을 쓴다."; input.maxLength = 1200;
     input.setAttribute("aria-label", "질문 입력");
-    sendBtn = el("button", "cc-btn cc-send", "보내기"); sendBtn.type = "button";
-    row.appendChild(input); row.appendChild(sendBtn);
-    foot.appendChild(opt); foot.appendChild(strip); foot.appendChild(row);
+    row.appendChild(input);
+    var hint = el("div", "cc-hint", "Enter: 보내기 · Shift+Enter: 줄바꿈 · 화면 캡처는 Ctrl/⌘+V로 붙여넣기");
+    foot.appendChild(opt); foot.appendChild(strip); foot.appendChild(row); foot.appendChild(hint);
 
     panel.appendChild(head); panel.appendChild(where); panel.appendChild(body); panel.appendChild(foot);
     document.body.appendChild(fab); document.body.appendChild(panel);
@@ -186,7 +186,6 @@
     fab.addEventListener("click", open);
     bClose.addEventListener("click", close);
     bNew.addEventListener("click", function () { if (!busy) { msgs = []; pending = []; renderPending(); convId = newId(); showChat(); } });
-    sendBtn.addEventListener("click", send);
     input.addEventListener("paste", onPaste);
     input.addEventListener("keydown", function (e) {
       if (e.key === "Enter" && !e.shiftKey && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); send(); }
@@ -199,7 +198,7 @@
   function open() { fab.hidden = true; panel.hidden = false; refreshWhere(); start(); }
   function close() { panel.hidden = true; fab.hidden = false; fab.focus(); }
   function scrollDown() { body.scrollTop = body.scrollHeight; }
-  function setFoot(on) { input.disabled = !on || !enabled; sendBtn.disabled = !on || !enabled; }
+  function setFoot(on) { input.disabled = !on || !enabled; }
 
   function add(cls, html, isText) {
     var d = el("div", "cc-m " + cls);
