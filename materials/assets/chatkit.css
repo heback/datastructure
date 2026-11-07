@@ -6,7 +6,7 @@
 #ck-chat-fab:hover{background:#1f2d42}
 #ck-chat-fab:focus-visible,#ck-chat button:focus-visible,#ck-chat textarea:focus-visible{outline:3px solid var(--focus-on-navy,#f0cd73);outline-offset:2px}
 #ck-chat-fab .ck-dot{width:8px;height:8px;border-radius:50%;background:var(--gold,#d4ae55)}
-#ck-chat{position:fixed;right:12px;bottom:60px;z-index:901;width:392px;max-width:calc(100vw - 24px);height:min(620px,calc(100vh - 76px));display:flex;flex-direction:column;
+#ck-chat{padding:0;margin:0;position:fixed;right:12px;bottom:60px;z-index:901;width:392px;max-width:calc(100vw - 24px);height:min(620px,calc(100vh - 76px));display:flex;flex-direction:column;
   background:var(--panel,#fffdfa);color:var(--ink,#1a2332);border:1px solid var(--line,#dcd5c6);border-radius:14px;overflow:hidden;
   box-shadow:0 24px 60px -20px rgba(22,32,46,.45);font:400 14px/1.65 "IBM Plex Sans KR",sans-serif}
 #ck-chat[hidden],#ck-chat-fab[hidden]{display:none}
