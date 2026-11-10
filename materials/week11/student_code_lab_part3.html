@@ -157,7 +157,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 행 5     1 0 0 0 0 0 1</pre>
 <ul>
 <li><b>count_islands</b>는 격자의 모든 칸을 차례로 훑는다. ⑮ 땅이면서 아직 어떤 섬에도 세지 않은(seen에 없는) 칸을 만나면 섬을 하나 센다. ⑯ 그 칸에서 explore를 불러 그 섬의 모든 칸을 seen에 표시한다.</li>
-<li><b>explore</b>는 A7의 큐 틀과 같다. todo는 앞으로 볼 칸을 담는 deque이고 시작 칸은 이미 seen에 넣었다. ⑰은 todo에서 한 칸을 꺼내는 줄이다. ⑰을 <code class="i">popleft()</code>와 <code class="i">pop()</code> 두 가지로 써서 결과를 비교한다.</li>
+<li><b>explore</b>는 A7의 큐 틀(시작 칸을 큐에 넣고 표시한다, 큐가 빌 때까지 앞에서 한 칸을 꺼내 그 칸의 이웃 중 아직 표시하지 않은 칸을 표시하고 뒤에 넣는다)과 같은 모양이다. todo는 앞으로 볼 칸을 담는 deque이고 시작 칸은 이미 seen에 넣었다. ⑰은 todo에서 한 칸을 꺼내는 줄이다. ⑰을 <code class="i">popleft()</code>와 <code class="i">pop()</code> 두 가지로 써서 결과를 비교한다.</li>
 <li>(선택) 8방향 실험은 DIRS에 대각선 네 방향을 더해 이웃의 뜻을 바꾼다. 실험이 끝나면 4방향으로 되돌린다.</li>
 </ul></div>
 <h3>준비 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A10-0"># A10 준비 코드: 1부 코드가 불러와지지 않았을 때 먼저 실행한다(이미 있어도 다시 실행해도 된다).

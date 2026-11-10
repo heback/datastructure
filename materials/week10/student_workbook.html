@@ -357,7 +357,14 @@ print(sum(squares(4)))              # 14</code></pre></div>
 <li><b>밀도</b> = 간선 수 &divide; 가능한 쌍의 수. 무방향 그래프의 가능한 쌍은 N(N&minus;1)/2이다. 간선이 적으면 <b>희소</b>, 많으면 <b>밀집</b>이라고 한다.</li>
 </ul></div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 칸과 원소를 세는 작은 예</span>
-<p>A2의 작은 예(노드 P, Q, R, 간선 (P,Q), (Q,R))로 세어 본다.</p>
+<p>노드 P, Q, R과 간선 (P,Q), (Q,R)이 있는 작은 그래프를 두 방식으로 적은 것으로 세어 본다.</p>
+<pre class="diagram">  P ─ Q ─ R
+
+     P  Q  R          P: Q
+  P [0  1  0]         Q: P, R
+  Q [1  0  1]         R: Q
+  R [0  1  0]
+  (인접 행렬)         (인접 리스트)</pre>
 <ul>
 <li>③ 저장: 표의 칸 수와 목록의 원소 수를 센다. 예의 목록은 P: Q / Q: P, R / R: Q이다.</li>
 <li>① P–R 간선 확인: 표는 P행 R열 1칸만 본다. 목록은 P의 목록 [Q]를 앞에서부터 보며 R을 찾는다. Q 하나를 보고 R이 없으므로 1원소이다.</li>

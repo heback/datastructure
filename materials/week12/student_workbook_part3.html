@@ -230,6 +230,10 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>점검에서 실패했거나 고쳐야 했던 곳이 있다면 어느 함수의 어느 부분이었는지, 어떻게 고쳤는지 쓴다. 없었다면 &ldquo;없었다&rdquo;라고 쓴다.</p><p class="hint"><b>쓰는 법</b> 있으면 &ldquo;함수 이름, 고친 부분, 고친 방법&rdquo;을 한두 문장으로 쓴다. 없으면 &ldquo;없었다&rdquo;만 쓴다.</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="3" data-key="A14.fixed" placeholder="함수 이름, 고친 부분, 방법 / 없었다" data-label="A14 점검에서 고쳐야 했던 곳">count_in_range에서 lo&gt;hi를 처리하지 않아 −1이 나왔다. 가드를 추가해 고쳤다.</textarea></div>
 <h3>밧줄 자르기 기록 (채점하지 않음)</h3>
+<pre class="diagram">ropes = [120, 85, 47, 63]    # 밧줄 4개의 길이
+k = 9                        # 필요한 조각 수
+같은 길이 L로 자를 때 조각 수 = 각 밧줄의 r // L 의 합
+목표: 조각이 k = 9개 이상이 되는 가장 긴 L</pre>
 <p class="hint"><b>쓰는 법</b> 조각 수 칸에는 손으로 구한 숫자만 쓴다(계산하지 못한 칸은 &ldquo;모름&rdquo;). 코드를 보기 전에 쓴다.</p><div class="ans-row"><span class="n">손으로 구한 조각 수</span><span>L = 5일 때 </span><input type="text" class="in" data-key="A14.rope.p5" placeholder="숫자" data-label="A14 ROPE L=5 조각 수" autocomplete="off" style="width:5em;display:inline-block" value="62"><span>, L = 10일 때 </span><input type="text" class="in" data-key="A14.rope.p10" placeholder="숫자" data-label="A14 ROPE L=10 조각 수" autocomplete="off" style="width:5em;display:inline-block" value="30"><span>, L = 20일 때 </span><input type="text" class="in" data-key="A14.rope.p20" placeholder="숫자" data-label="A14 ROPE L=20 조각 수" autocomplete="off" style="width:5em;display:inline-block" value="15"></div>
 <p>(선택) 코드를 보기 전에 답한다. L = 5, 10, 20으로 자를 때 조각이 9개 이상인지를 참 또는 거짓으로 나열해 본다. L을 더 키우면 참과 거짓이 어떤 순서로 늘어설 것 같은가? 이것을 이용하면 L을 모두 확인하지 않고 답을 찾을 수 있는가? 어떻게?</p><p class="hint"><b>쓰는 법</b> (선택) 3줄로 쓴다. 1줄: &ldquo;L=5 참/거짓, L=10 참/거짓, L=20 참/거짓&rdquo;. 2줄: L을 더 키울 때 늘어설 모양. 3줄: 이를 이용하는 방법. 쓰지 않으면 비워 둔다.</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="4" data-key="A14.rope.pattern" placeholder="(선택) 1줄: L=5 ○, L=10 ○, L=20 ○&#10;2줄: 늘어설 모양&#10;3줄: 이용하는 방법" data-label="A14 밧줄: L별 조각 9개 이상 참/거짓의 순서와 이를 이용한 탐색 방법">L=5, 10, 20, 30은 참, 40은 거짓이다. 참이 이어지다 한 번 거짓으로 바뀌므로 가운데 L을 확인해 절반씩 버릴 수 있다.</textarea></div>

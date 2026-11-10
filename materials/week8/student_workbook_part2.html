@@ -140,7 +140,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p>중위 순회 함수를 같은 트리로 <b>두 번</b> 호출하는 코드가 주어진다. <b>실행하기 전에</b> 각 호출이 출력할 리스트를 예측해 적는다. 예측을 먼저 쓴 뒤에 코드 쪽 A11의 실행 칸에서 실행한다.</p>
 <div class="learn-box"><span class="lb-title">학습 내용 · 예측하고 비교하는 방법</span>
 <ul><li>코드 쪽 A11의 함수는 <code class="i">collect_inorder(node, visited=[])</code> 모양으로, 트리의 값을 중위 순서로 <code class="i">visited</code> 리스트에 모아 돌려준다. <code class="i">visited=[]</code>는 <b>기본 인자</b>이다. 호출할 때 그 인자를 주지 않으면 쓰이는 값이다.</li>
-<li>두 번의 호출은 같은 트리 <code class="i">t4</code>에 <code class="i">collect_inorder(t4)</code>처럼 인자 하나로 부르며, 서로 다른 <code class="i">print</code> 줄이다.</li>
+<li>두 번의 호출은 같은 트리 <code class="i">t4</code>(값 4, 2, 6, 1, 3, 5, 7을 이 순서로 삽입한 BST)에 <code class="i">collect_inorder(t4)</code>처럼 인자 하나로 부르며, 서로 다른 <code class="i">print</code> 줄이다.</li>
 <li>예측은 실행하기 전에 두 출력을 리스트로 직접 쓴다.</li>
 <li>실행한 뒤 &lsquo;같은가?&rsquo;는 예측과 실제를 견주어 고른다.</li></ul>
 </div>

@@ -296,7 +296,12 @@ A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre>
 <section id="A3" class="sheet">
 <h2>A3 · 재귀로 돌아보기: 호출이 쌓이는 모습<small>1차시 · 13분 · 개인</small></h2>
 <p class="meta"><span>산출물: 재귀 호출 추적표, Call Stack 그림, 두 순서 비교 메모</span></p>
-<p>같은 G1에서 시작 A로, 재귀 함수로 돌아본다. 방문 기록 <code class="i">visited</code>와 방문 순서 <code class="i">order</code>는 바깥에서 새로 만들어 인자로 전달한다.</p>
+<p>같은 G1(노드 A~F, 간선 <code class="i">(A,B) (A,C) (B,D) (C,D) (D,E)</code>)에서 시작 A로, 재귀 함수로 돌아본다. 방문 기록 <code class="i">visited</code>와 방문 순서 <code class="i">order</code>는 바깥에서 새로 만들어 인자로 전달한다.</p>
+<pre class="diagram">   A ─ B
+   │   │
+   C ─ D ─ E        F
+
+A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre>
 <pre class="diagram">def dfs(u):          # 의사코드
     visited에 u 추가, order에 u 기록
     for 이웃 v in (u의 이웃 목록 순서):
@@ -306,7 +311,7 @@ A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre>
 <ul>
 <li><b>enter</b>는 함수 호출이 시작될 때, <b>exit</b>는 그 호출이 끝나 돌아올 때이다. 호출이 시작되면 Call Stack 맨 위에 그 호출이 쌓이고, 끝나면 맨 위가 사라진다. 깊이는 맨 처음 호출을 0으로 하고 호출 안에서 부른 호출마다 1씩 늘어난다.</li>
 <li>Call Stack 칸은 아래부터 위로 <code class="i">[A, B]</code>처럼 쓴다. <b>exit 줄은 그 호출이 끝나 사라진 직후의 모습</b>으로 쓴다(직전 모습으로 쓰려면 표 전체를 한 가지로 통일한다). 깊이는 끝난 호출의 깊이를 쓴다.</li>
-<li>의사코드는 이웃 목록을 앞에서부터 보다가 방문하지 않은 이웃을 만나면 그 자리에서 바로 호출한다. 호출이 끝나면 돌아와 목록의 다음 이웃을 이어서 본다. G1과 이웃 목록은 A2와 같다.</li>
+<li>의사코드는 이웃 목록을 앞에서부터 보다가 방문하지 않은 이웃을 만나면 그 자리에서 바로 호출한다. 호출이 끝나면 돌아와 목록의 다음 이웃을 이어서 본다. G1의 이웃 목록은 위 그림 아래에 적은 그대로이다.</li>
 </ul>
 <p>작은 그래프 P(P: [Q], Q: [P, R], R: [Q])에서 dfs(P)를 추적한 예이다.</p>
 <pre class="diagram">순서  사건      Call Stack    깊이        그림(가장 깊을 때, 아래가 처음 호출)
@@ -368,7 +373,8 @@ dfs(A)   &lt;- 맨 아래가 처음 호출</textarea></div>
 S: [A, B]   A: [S, C]   B: [S, T]   C: [A, D]   D: [C, T]   T: [D, B]</pre>
 <div class="learn-box"><span class="lb-title">학습 내용 · H 비교표 채우는 방법</span>
 <ul>
-<li>세 방식(큐 규칙, 스택 규칙, 재귀)을 차례로 손으로 돌리고 칸이 빈 곳이 없는지 스스로 확인한다. 규칙은 A2·A3과 같고 시작 노드만 S이다. 시작 상태는 S만 컨테이너(또는 호출)에 넣은 상태이다.</li>
+<li>세 방식(큐 규칙, 스택 규칙, 재귀)을 차례로 손으로 돌리고 칸이 빈 곳이 없는지 스스로 확인한다. 시작 노드만 S이고 규칙은 앞에서 쓴 것과 같다. 시작 상태는 S만 컨테이너(또는 호출)에 넣은 상태이다.</li>
+<li>규칙 다시 보기: 컨테이너에서 하나 꺼내 이미 방문한 노드이면 버리고, 아니면 방문 기록에 쓴 뒤 방문하지 않은 이웃을 목록 순서대로 넣는다(큐는 뒤에 넣고 맨 앞에서 꺼내며, 스택은 맨 위에 넣고 맨 위에서 꺼낸다). 재귀는 <code class="i">dfs(u)</code>에서 u를 방문 기록에 쓰고, 이웃 목록을 앞에서부터 보다가 방문하지 않은 이웃 v를 만나면 그 자리에서 <code class="i">dfs(v)</code>를 호출한다.</li>
 <li><b>T에 처음 도착한 경로</b> 구하기: 노드를 컨테이너에 넣을 때마다 &ldquo;누가 넣었는지&rdquo;를 함께 적어 두고, T가 방문되었을 때 그 항목을 넣은 노드를 거꾸로 따라 S까지 간다. 재귀는 그 순간의 Call Stack이 곧 경로이다. 간선 수는 경로의 노드 수에서 1을 뺀 값이다.</li>
 <li>재실험은 S의 목록만 <code class="i">[B, A]</code>로 바꾸고 나머지 목록은 그대로 둔다. 바뀐 목록으로 세 방식을 처음부터 다시 돌린다.</li>
 <li>가설 메모 한 줄의 틀: &ldquo;(바꾼 것)을 바꾸었더니 (방식)의 (값)이 (변했다/그대로였다). 근거: 표의 (칸) (값)&rdquo;.</li>
@@ -409,7 +415,12 @@ S: [A, B]   A: [S, C]   B: [S, T]   C: [A, D]   D: [C, T]   T: [D, B]</pre>
 <div class="learn-box"><span class="lb-title">학습 내용 · 1차시 용어 정리와 exit ticket 푸는 법</span>
 <ul>
 <li><b>컨테이너</b>(스택·큐), <b>방문</b>(꺼내 처리한 때), <b>방문 기록</b>, <b>이웃 순서</b>(목록 순서), <b>Call Stack</b>(재귀 호출이 쌓이는 스택), <b>BFS</b>(큐 규칙), <b>DFS</b>(스택 규칙과 재귀)는 오늘 쓴 말이다.</li>
-<li>exit ticket은 G1에서 시작 노드를 D로 바꿔 A2의 큐 규칙을 처음부터 손으로 따라 한다. 방문 순서는 꺼내 처리한 순서이며, 버려진 줄은 세지 않는다.</li>
+<li>exit ticket은 G1에서 시작 노드를 D로 바꿔 큐 규칙을 처음부터 손으로 따라 한다. 큐 규칙은 시작 노드를 큐에 넣고, 맨 앞에서 하나 꺼내 이미 방문한 노드이면 버리고 아니면 방문 기록에 쓴 뒤 방문하지 않은 이웃을 목록 순서대로 큐 뒤에 넣으며, 큐가 빌 때까지 반복한다. 방문 순서는 꺼내 처리한 순서이며, 버려진 줄은 세지 않는다.</li>
+<li>G1은 노드 A~F, 간선 <code class="i">(A,B) (A,C) (B,D) (C,D) (D,E)</code>이다.<pre class="diagram">   A ─ B
+   │   │
+   C ─ D ─ E        F
+
+A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre></li>
 </ul></div>
 <p><b>exit ticket</b> G1에서 시작 D로 큐 규칙(BFS)을 따를 때, A는 몇 번째로 방문되는가? (시작 노드 D를 1번째로 센다. 숫자 하나만 쓴다.) <input type="text" class="in" placeholder="숫자" data-key="A5.ticket" data-label="A5 exit ticket 시작 D에서 A는 몇 번째로 방문되는가" autocomplete="off" style="width:6em;display:inline-block" value="5"></p>
 <p>이번 시간에 한 일을 점검한다.</p>

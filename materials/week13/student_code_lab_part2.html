@@ -155,7 +155,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <p><b>greedy_coins 따라가기</b> 동전 [1, 5, 10], 17원(과제와 다른 체계)이다. 큰 동전부터 하나씩 보며 그 동전을 몇 개 쓸 수 있는지(몫)를 세고, 남은 금액으로 넘어간다.</p>
 <div class="scroll"><table><tr><th>c</th><th>쓴 개수(amount // c)</th><th>남은 금액</th></tr><tr><td>10</td><td>1</td><td>7</td></tr><tr><td>5</td><td>1</td><td>2</td></tr><tr><td>1</td><td>2</td><td>0</td></tr></table></div>
 <p>합계 4개이다. 이 표에서 &ldquo;남은 금액&rdquo; 열이 ⑤가 만드는 값이다.</p>
-<p><b>dp_coins 읽기</b> dp 리스트의 a번 칸이 A5의 dp[a]이다. 안쪽 <code class="i">for c in coins</code>는 A5에서 c = 1, 3, 4 후보를 하나씩 보던 일이다. 후보(a−c원의 개수 + 1)가 지금 dp[a]보다 작을 때만 dp[a]를 바꾼다. 아직 만들 수 없다고 본 칸은 INF(무한대를 뜻하는 값)로 둔다.</p>
+<p><b>dp_coins 읽기</b> dp 리스트의 a번 칸 dp[a]는 a원을 만드는 최소 동전 개수이고 dp[0] = 0이다. 안쪽 <code class="i">for c in coins</code>는 앞의 표에서 쓴 규칙, 즉 a 이하인 동전 c(예: [1, 3, 4]이면 c = 1, 3, 4)를 후보로 하나씩 보며 &ldquo;dp[a−c] + 1&rdquo;을 구하는 일이다. 후보(a−c원의 개수 + 1)가 지금 dp[a]보다 작을 때만 dp[a]를 바꾼다. 아직 만들 수 없다고 본 칸은 INF(무한대를 뜻하는 값)로 둔다.</p>
 <p><b>착수 메모</b>(활동지 2부 A8) &ldquo;상태는 ___이고, 금액 a마다 ___을(를) 본다&rdquo;처럼 쓴다. <b>상태</b>는 표의 한 칸이 가리키는 것, <b>목표 비용</b>은 이 함수가 얼마나 일해야 하는지이다. 메모이제이션 같은 이름은 쓰지 않아도 되고 내 말로 쓴다.</p>
 </div>
 <p class="hint">점검 코드는 읽기만 하고 베끼지 않는다. 점검은 내 코드가 맞는지 확인하는 도구이다.</p>

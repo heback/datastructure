@@ -149,7 +149,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A6" class="sheet">
 <h2>A6 · parent와 sift_up 완성하기<small>14분 · 개인</small></h2>
 
-<p>A3에서 찾은 칸 번호 규칙을 써서 <code class="i">parent</code>를 만들고, 값을 맨 끝에 붙인 뒤 위로 올리는 <code class="i">sift_up</code>을 완성한다. 완성하면 H1에 2와 11을 넣은 결과가 <code class="i">heapq.heappush</code>의 결과와 같아야 한다. 활동지 <a class="xlink" href="student_workbook.html#A6">A6</a>의 손 추적과 비교한다.</p><div class="learn-box"><span class="lb-title">학습 내용 · 손 추적을 코드로 옮기는 방법</span>
+<p>A3에서 찾은 칸 번호 규칙(i번 칸의 부모는 <code class="i">(i-1)//2</code>번 칸)을 써서 <code class="i">parent</code>를 만들고, 값을 맨 끝에 붙인 뒤 위로 올리는 <code class="i">sift_up</code>을 완성한다. 완성하면 H1에 2와 11을 넣은 결과가 <code class="i">heapq.heappush</code>의 결과와 같아야 한다. 활동지 <a class="xlink" href="student_workbook.html#A6">A6</a>의 손 추적과 비교한다.</p><div class="learn-box"><span class="lb-title">학습 내용 · 손 추적을 코드로 옮기는 방법</span>
 <ul>
 <li>활동지 A6의 손 추적을 한 줄씩 코드로 옮긴다. &ldquo;맨 끝에 붙인다&rdquo;는 <code class="i">append</code>, &ldquo;부모와 비교한다&rdquo;는 <code class="i">parent</code>와 <code class="i">if</code>, &ldquo;올라간 칸으로 옮긴다&rdquo;는 i의 값을 바꾸는 줄, &ldquo;멈춘다&rdquo;는 반복을 끝내는 줄이다.</li>
 <li>두 칸의 값을 맞바꾸는 파이썬 문장은 <code class="i">a[p], a[q] = a[q], a[p]</code>이다(p, q는 아무 두 칸 번호). 오른쪽을 먼저 계산한 뒤 대입하므로 임시 변수가 필요 없다.</li>
@@ -267,7 +267,7 @@ for x in H2:
 b = list(H2)
 heapq.heapify(b)
 print("H2 push   :", a)
-print("H2 heapify:", b)</code></pre></div><div class="mycode"><label>내 코드 · A8 (확인용 실행)<textarea class="in code" rows="12" data-run-only spellcheck="false"></textarea></label><p class="hint noprint">이 편집기는 확인용 실행 칸이며 내용은 저장되지 않는다.</p></div><h3>도전(선택): 마지막 부모부터 거꾸로 내려 보내는 heapify</h3><p>시간이 남으면 개인 과제로 한다. A3의 규칙으로 <code class="i">left_child</code>, <code class="i">right_child</code>를 만들고 <code class="i">sift_down</code>과 <code class="i">my_heapify</code>를 완성한다. 테스트는 <code class="i">heapq.heapify</code>의 결과와 비교한다. 테스트 블록에는 <code class="i">import heapq</code>가 들어 있다. 편집기를 초기화한 뒤에는 앞 정의를 다시 추가해 실행한다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-for="A8.mycode" data-id="A8-2">import heapq  # 표준 힙 도구 모듈(테스트에서 기준 결과를 만들 때 쓴다)
+print("H2 heapify:", b)</code></pre></div><div class="mycode"><label>내 코드 · A8 (확인용 실행)<textarea class="in code" rows="12" data-run-only spellcheck="false"></textarea></label><p class="hint noprint">이 편집기는 확인용 실행 칸이며 내용은 저장되지 않는다.</p></div><h3>도전(선택): 마지막 부모부터 거꾸로 내려 보내는 heapify</h3><p>시간이 남으면 개인 과제로 한다. A3의 규칙(i번 칸의 자식은 <code class="i">2*i+1</code>, <code class="i">2*i+2</code>번 칸)으로 <code class="i">left_child</code>, <code class="i">right_child</code>를 만들고 <code class="i">sift_down</code>과 <code class="i">my_heapify</code>를 완성한다. 테스트는 <code class="i">heapq.heapify</code>의 결과와 비교한다. 테스트 블록에는 <code class="i">import heapq</code>가 들어 있다. 편집기를 초기화한 뒤에는 앞 정의를 다시 추가해 실행한다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-for="A8.mycode" data-id="A8-2">import heapq  # 표준 힙 도구 모듈(테스트에서 기준 결과를 만들 때 쓴다)
 
 # A8 도전(선택): 마지막 부모부터 거꾸로 sift-down 하는 heapify를 직접 만든다.
 # 칸 번호 i를 받아 왼쪽 자식의 칸 번호를 돌려주는 함수이다.

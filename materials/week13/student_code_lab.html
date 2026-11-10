@@ -153,10 +153,10 @@ table.fill td.in-cell{padding:3px;height:auto}
 <ul><li><code class="i">fib_naive</code>는 정의 그대로 재귀로 구한다(제공). 전역 변수 <code class="i">calls</code>가 함수가 불린 횟수를 센다.</li><li><code class="i">fib_memo(n, memo)</code>는 재귀로 풀되 한 번 계산한 값을 사전 <code class="i">memo</code>에 적어 둔다. 호출하는 쪽이 빈 사전 <code class="i">{}</code>을 만들어 넘긴다.</li><li><code class="i">fib_tab(n)</code>은 작은 값부터 표 <code class="i">dp</code>를 채워 올라간다. 전역 변수 <code class="i">steps</code>가 표의 칸을 채운 횟수를 센다.</li><li>이 파일에서 <code class="i">functools</code>는 쓰지 않는다. 직접 구현이 먼저이다.</li></ul></div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 세 함수가 하는 일과 횟수 예측하는 방법</span>
 <ul>
-<li><b>fib_memo</b>의 memo는 푼 답을 적어 두는 dict이다. 호출하는 쪽이 만든 빈 dict {}를 재귀 호출이 계속 넘겨 받으므로 한 번의 바깥 호출 안에서는 같은 dict가 쓰인다. 빈칸 ①은 &ldquo;n의 답이 이미 적혀 있는가&rdquo;를 묻는 조건이고, ②는 A3에서 손으로 한 규칙대로 작은 두 문제의 답을 합치는 식이다.</li>
+<li><b>fib_memo</b>의 memo는 푼 답을 적어 두는 dict이다. 호출하는 쪽이 만든 빈 dict {}를 재귀 호출이 계속 넘겨 받으므로 한 번의 바깥 호출 안에서는 같은 dict가 쓰인다. 빈칸 ①은 &ldquo;n의 답이 이미 적혀 있는가&rdquo;를 묻는 조건이고, ②는 앞에서 손으로 한 규칙대로 작은 두 문제의 답을 합치는 식이다. 그 규칙은 &ldquo;n이 2 이상이면 fib(n) = fib(n−1) + fib(n−2), 이미 구한 n은 적어 둔 값을 그대로 쓴다&rdquo;이다.</li>
 <li><b>fib_tab</b>의 dp[i]는 fib(i)의 값이다. dp[0] = 0은 리스트를 0으로 채울 때 정해지고 dp[1] = 1은 코드가 적는다. i를 2부터 n까지 늘리며 채우므로 ③은 이미 채워 둔 앞쪽 칸을 쓴다.</li>
 <li><b>세는 값이 다르다.</b> fib_naive와 fib_memo는 함수가 불린 횟수(calls)를, fib_tab은 for문이 칸을 채운 횟수(steps)를 센다. 비교할 때 이 차이를 기억한다.</li>
-<li><b>예측하는 방법</b> 순수 재귀는 A2에서 fib(6), fib(7)의 호출 수가 어떻게 늘었는지 보고 n = 20, 30으로 이어 본다. 메모는 A3에서 센 호출 수가 n과 어떤 관계였는지, 표는 for문이 몇 번 도는지 센다. 정확한 값이 아니라 자릿수 어림이면 충분하다. fib_naive(30)은 몇 초 걸릴 수 있다.</li>
+<li><b>예측하는 방법</b> 순수 재귀는 앞에서 센 fib(6), fib(7)의 호출 수가 어떻게 늘었는지 보고 n = 20, 30으로 이어 본다(기억나지 않으면 fib_naive(6), fib_naive(7)을 실행해 calls를 다시 본다). 메모는 앞에서 fib(6)을 메모 규칙으로 풀며 센 호출 수가 n과 어떤 관계였는지, 표는 for문이 몇 번 도는지 센다. 정확한 값이 아니라 자릿수 어림이면 충분하다. fib_naive(30)은 몇 초 걸릴 수 있다.</li>
 <li>값 세 개가 같은지는 assert 점검이 확인한다. 점검이 통과해야 횟수를 잰다.</li>
 </ul>
 </div>

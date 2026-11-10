@@ -294,6 +294,11 @@ print(t1.val, t1.left.val, t1.right.val)</code></pre></div>
 <section id="A3" class="sheet">
 <h2>A3 · T1을 손으로 순회하기<small>1차시 · 21분 · 개인</small></h2>
 <p class="meta"><span>산출물: 순회 결과 3개 + 호출 추적표 · 수행지시어 순회하다</span></p>
+<div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">        A
+       / \
+      B   C
+     / \   \
+    D   E   F</div>
 <div class="concept" style="font-size:12px;padding:8px 12px"><b class="h">개념 정리 · 순회(traversal)</b>
 <p><b>순회</b>란 트리의 모든 노드를 <b>한 번씩</b> 방문하는 규칙이다. 방문 순서를 정하는 규칙에 따라 이름이 나뉜다. 여기서는 전위 규칙만 주어지고, 중위와 후위의 규칙은 이름에서 짐작해 직접 쓴다.</p>
 <p class="how">쓰는 법: 중위·후위 칸에는 &ldquo;자신&rdquo;, &ldquo;왼쪽 부분 트리&rdquo;, &ldquo;오른쪽 부분 트리&rdquo; 세 가지를 방문하는 순서대로 → 로 이어 쓴다. 세 가지를 한 번씩 모두 쓴다. 틀려도 된다.</p><table><tr><th style="width:110px">이름</th><th>방문 순서</th></tr>
@@ -339,6 +344,11 @@ print(t1.val, t1.left.val, t1.right.val)</code></pre></div>
 <section id="A4" class="sheet">
 <h2>A4 · 세 순회 비교표<small>1차시 · 10분 · 개인</small></h2>
 <p class="meta"><span>산출물: 비교표(순회·처리 시점·결과)</span></p>
+<div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">        A
+       / \
+      B   C
+     / \   \
+    D   E   F</div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 비교표를 채우는 방법</span>
 <p>표는 A3의 추적을 근거로 채운다. 첫 칸에는 자기 값을 출력하는 때를 추적표를 근거로 말로 쓴다. 둘째 칸에는 T1의 결과를 옮기고, 결과가 앞서 쓴 짐작과 다르면 쓴 규칙부터 다시 확인하고 추적표로 돌아가 원인을 찾는다.</p>
 <p>마지막 칸은 추적표에서 자기 값을 출력한 호출을 <b>두 자식을 부르는 호출</b>과 견주어 어느 때인지 쓴다.</p>
@@ -461,7 +471,7 @@ else:
 <h2>A8 · T3의 세 순회 결과 비교<small>2차시 · 8분 · 개인</small></h2>
 <p class="meta"><span>코드: <a class="xlink" href="student_code_lab.html#A8">코드 실습 A8</a></span><span>산출물: 결과 표, 발견한 규칙 1문장</span></p>
 <div class="learn-box"><span class="lb-title">학습 내용 · 결과를 읽는 방법</span>
-<p>코드 쪽 A8을 실행하면 출력 3줄이 차례로 전위, 중위, 후위의 결과이다. 각 줄을 표에 그대로 옮긴다. &lsquo;눈에 띄는 점&rsquo;은 값의 나열을 보고 쓴다. 각 줄의 값 나열을 서로 비교하고, A7에서 그린 트리를 옆에 두고 읽는다. 세 줄을 서로 비교해 한 가지 규칙을 한 문장으로 쓴다.</p>
+<p>코드 쪽 A8을 실행하면 출력 3줄이 차례로 전위, 중위, 후위의 결과이다. 각 줄을 표에 그대로 옮긴다. &lsquo;눈에 띄는 점&rsquo;은 값의 나열을 보고 쓴다. 각 줄의 값 나열을 서로 비교하고, T3(삽입 순서 8, 3, 10, 1, 6, 14, 4, 7, 13)의 모양을 A7에서 그린 트리로 옆에 두고 읽는다. 세 줄을 서로 비교해 한 가지 규칙을 한 문장으로 쓴다.</p>
 </div>
 <p class="how">쓰는 법: 가운데 칸에는 코드를 실행해 나온 결과를 값만 공백으로 나열한다(꼴: 21 22 23). 오른쪽 칸에는 눈에 띄는 점을 한 문장으로 쓰고, 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p><table class="fill"><tr><th style="width:90px">순회</th><th>T3의 결과 (코드 실행 결과)</th><th style="width:28%">눈에 띄는 점</th></tr>
 <tr><td class="lab">전위</td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.result.r1.c1" placeholder="예: 21 22 23" data-label="A8 T3의 세 순회 결과 전위 · T3의 결과 (코드 실행 결과)">8 3 1 6 4 7 10 14 13</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.result.r1.c2" placeholder="한 문장 / 없음" data-label="A8 T3의 세 순회 결과 전위 · 눈에 띄는 점">루트 8이 맨 앞에 나온다.</textarea></td></tr><tr><td class="lab">중위</td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.result.r2.c1" placeholder="예: 21 22 23" data-label="A8 T3의 세 순회 결과 중위 · T3의 결과 (코드 실행 결과)">1 3 4 6 7 8 10 13 14</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.result.r2.c2" placeholder="한 문장 / 없음" data-label="A8 T3의 세 순회 결과 중위 · 눈에 띄는 점">작은 값부터 차례로(오름차순) 나온다.</textarea></td></tr><tr><td class="lab">후위</td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.result.r3.c1" placeholder="예: 21 22 23" data-label="A8 T3의 세 순회 결과 후위 · T3의 결과 (코드 실행 결과)">1 4 7 6 3 13 14 10 8</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A8.result.r3.c2" placeholder="한 문장 / 없음" data-label="A8 T3의 세 순회 결과 후위 · 눈에 띄는 점">루트 8이 맨 뒤에 나온다.</textarea></td></tr></table>

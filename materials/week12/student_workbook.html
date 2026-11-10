@@ -278,7 +278,7 @@ s3                         23  38               mid=5 값 23, 같음</pre><div c
 <section id="A3" class="sheet">
 <h2>A3 · 같은 규칙을 다른 배열에 적용하기<small>1차시 · 6분 · 개인</small></h2>
 <p class="meta"><span>산출물: UNS 추적표, 찾은 목표와 놓친 목표, 원인 후보 2개</span></p>
-<p>A2의 규칙 ①~④를 그대로 쓴다. 이번에는 아래 배열 UNS에서 목표 <b>23</b>, <b>5</b>, <b>56</b>을 찾는다. 규칙대로 한 뒤, UNS를 눈으로 처음부터 훑어 실제 위치(인덱스)를 확인하고 비교한다.</p>
+<p>A2의 규칙 ①~④를 그대로 쓴다(닫힌 구간 [lo, hi]를 전체로 시작하고, mid = (lo + hi) // 2의 a[mid]와 목표를 견준다. 같으면 끝, 목표가 크면 lo = mid + 1, 작으면 hi = mid &minus; 1, lo &gt; hi이면 &ldquo;없음&rdquo;이다). 이번에는 아래 배열 UNS에서 목표 <b>23</b>, <b>5</b>, <b>56</b>을 찾는다. 규칙대로 한 뒤, UNS를 눈으로 처음부터 훑어 실제 위치(인덱스)를 확인하고 비교한다.</p>
 <div class="learn-box"><span class="lb-title">학습 내용 · 활동 방법</span>
 <ul>
 <li>UNS는 값이 놓인 순서에 규칙이 없는 배열이다. 규칙 ①~④는 SORTED에서와 똑같이 쓴다. 규칙을 바꾸지 않는다.</li>
@@ -419,7 +419,7 @@ ARR8  = [38, 27, 43, 3, 9, 82, 10, 15]</pre>
 <div class="note"><b>오늘의 핵심질문(계획서)</b> 10억 개의 정렬된 데이터 속에서 내가 원하는 특정 값이나 구간을 어떻게 단번에(O(log N)) 찾아낼까?</div>
 <p>(시간이 남으면) 오늘 1차시의 활동을 바탕으로 이 질문에 내 말로 한 문장으로 답한다. 시간이 없으면 비워 둔다.</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A6.core" placeholder="(선택) 한 문장" data-label="A6 핵심질문에 대한 내 한 문장 답">정렬되어 있으면 가운데와 비교해 절반씩 버려 아주 적은 횟수로 찾는다.</textarea></div>
-<p><b>exit ticket</b> SORTED에서 56을 찾을 때 A2 규칙 ①~④의 <b>첫 번째 mid 값</b>(인덱스가 아니라 그 인덱스에 놓인 값, 즉 a[mid])은 얼마인가? 숫자 하나를 쓴다. <input type="text" class="in" placeholder="숫자 하나" data-key="A6.ticket" data-label="A6 exit ticket 56을 찾을 때 첫 mid의 값" autocomplete="off" style="width:6em;display:inline-block" value="16"></p>
+<p><b>exit ticket</b> SORTED = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]에서 56을 찾을 때 A2 규칙 ①~④(처음 lo = 0, hi = 9, mid = (lo + hi) // 2)의 <b>첫 번째 mid 값</b>(인덱스가 아니라 그 인덱스에 놓인 값, 즉 a[mid])은 얼마인가? 숫자 하나를 쓴다. <input type="text" class="in" placeholder="숫자 하나" data-key="A6.ticket" data-label="A6 exit ticket 56을 찾을 때 첫 mid의 값" autocomplete="off" style="width:6em;display:inline-block" value="16"></p>
 <p>(시간이 남으면) 방금 쓴 규칙이 SORTED에서 되는 것은 무엇 덕분이라고 생각하는가? 답을 확정하지 않아도 된다. 시간이 없으면 비워 둔다.</p>
 <div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A6.ticket.why" placeholder="(선택) 한 문장" data-label="A6 규칙이 SORTED에서 되는 것은 무엇 덕분이라고 생각하는가">값이 작은 것부터 순서대로 놓여 있어서 mid보다 작은 쪽을 통째로 버릴 수 있다.</textarea></div>
 <p>이번 시간에 한 일을 점검한다.</p>

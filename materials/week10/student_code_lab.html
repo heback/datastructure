@@ -147,7 +147,11 @@ table.fill td.in-cell{padding:3px;height:auto}
 </section>
 <section id="A6" class="sheet">
 <h2>A6 · 인접 행렬 코드로 만들기<small>12분 · 개인</small></h2>
-<p>A2에서 손으로 만든 6&times;6 표를 코드로 만든다. 행렬은 칸 번호가 정수여야 하므로 노드 A~F를 0~5로 바꾸는 번호표(<code class="i">MAP</code>)를 쓴다. <code class="i">make_matrix</code>(빈칸 ①)와 <code class="i">add_edge</code>(빈칸 ②)를 완성하고, 만든 행렬을 활동지 <a class="xlink" href="student_workbook_part2.html#A6">2부 A6</a>의 손 표와 대조한다.</p><div class="learn-box"><span class="lb-title">학습 내용 · 리스트의 리스트와 칸 번호</span>
+<p>활동지에서 손으로 만든 G1의 6&times;6 표를 코드로 만든다. G1은 노드 A~F, 간선 <code class="i">(A,B) (A,C) (B,D) (C,D) (D,E)</code>(무방향)이고 F는 간선이 없다.</p>
+<pre class="diagram">   A ─ B
+   │   │
+   C ─ D ─ E        F</pre>
+<p>코드에서 행렬은 칸 번호가 정수여야 하므로 노드 A~F를 0~5로 바꾸는 번호표(<code class="i">MAP</code>)를 쓴다. <code class="i">make_matrix</code>(빈칸 ①)와 <code class="i">add_edge</code>(빈칸 ②)를 완성하고, 만든 행렬을 활동지 <a class="xlink" href="student_workbook_part2.html#A6">2부 A6</a>의 손 표와 대조한다.</p><div class="learn-box"><span class="lb-title">학습 내용 · 리스트의 리스트와 칸 번호</span>
 <ul>
 <li>행렬은 리스트 안에 행(리스트)을 넣어 만든다. <code class="i">m[i][j]</code>는 i번 행의 j번 칸이고 0부터 센다. <code class="i">[0] * 3</code>은 <code class="i">[0, 0, 0]</code>이다.</li>
 </ul>
@@ -155,7 +159,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 m[0][1] = 5
 print(m)   # [[0, 5], [0, 0]]</pre>
 <ul>
-<li>순서는 ① 행 하나를 만든다 ② 그 행을 N개 모은다 ③ <code class="i">add_edge</code>에서 간선 하나가 표의 몇 칸을 바꾸는지 A2의 표로 확인한다 ④ 자체 테스트를 돌려 FAIL 줄을 읽는다.</li>
+<li>순서는 ① 행 하나를 만든다 ② 그 행을 N개 모은다 ③ <code class="i">add_edge</code>에서 간선 하나가 표의 몇 칸을 바꾸는지 위 G1 그림과 손으로 만든 표로 확인한다 ④ 자체 테스트를 돌려 FAIL 줄을 읽는다.</li>
 </ul>
 </div>
 <h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A6-1"># A2에서 쓴 친구 관계 G1(무방향). 노드는 A~F이고 F는 간선이 없다.
