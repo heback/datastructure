@@ -373,6 +373,11 @@ print(sum(squares(4)))              # 14</code></pre></div>
 </ul>
 </div>
 <h3>그래프 ① G1 (노드 6개, 간선 5개) &mdash; 손으로 센다</h3>
+<p>G1은 노드 A~F, 간선 <code class="i">(A,B) (A,C) (B,D) (C,D) (D,E)</code>(무방향)이고 F는 간선이 없다. 인접 리스트는 노드마다 이웃을 적은 다음 목록이다.</p>
+<pre class="diagram">   A ─ B
+   │   │            A: B, C      D: B, C, E
+   C ─ D ─ E   F    B: A, D      E: D
+                    C: A, D      F: (없음)</pre>
 <p>질의: ① A와 E 사이에 간선이 있나(A에서 E를 찾는다), ② D의 이웃 모두, ③ 저장 공간.</p>
 <p class="how">쓰는 법: 칸에는 센 수를 숫자로 쓰고 숫자 뒤에 단위를 붙인다. 행렬은 &ldquo;칸&rdquo;, 리스트는 &ldquo;원소&rdquo;이다(예: 7칸, 4원소). 평균으로 센 값은 앞에 &ldquo;평균&rdquo;을 붙인다. 어느 행·목록을 보았는지 같은 근거는 쓰지 않아도 된다.</p><div class="scroll"><table class="fill"><tr><th style="width:44%">질의</th><th>인접 행렬</th><th>인접 리스트</th></tr><tr><td class="lab">① A–E 간선 확인(확인한 수)</td><td class="in-cell"><input type="text" class="in" data-key="A4.g1.q1.c1" data-label="A4 g1 ① A–E 간선 확인(확인한 수) 인접 행렬" autocomplete="off" value="1칸"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g1.q1.c2" data-label="A4 g1 ① A–E 간선 확인(확인한 수) 인접 리스트" autocomplete="off" value="2원소"></td></tr><tr><td class="lab">② D의 이웃 모두(훑은 수)</td><td class="in-cell"><input type="text" class="in" data-key="A4.g1.q2.c1" data-label="A4 g1 ② D의 이웃 모두(훑은 수) 인접 행렬" autocomplete="off" value="6칸"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g1.q2.c2" data-label="A4 g1 ② D의 이웃 모두(훑은 수) 인접 리스트" autocomplete="off" value="3원소"></td></tr><tr><td class="lab">③ 저장(칸 수 / 원소 수)</td><td class="in-cell"><input type="text" class="in" data-key="A4.g1.q3.c1" data-label="A4 g1 ③ 저장(칸 수 / 원소 수) 인접 행렬" autocomplete="off" value="36칸"></td><td class="in-cell"><input type="text" class="in" data-key="A4.g1.q3.c2" data-label="A4 g1 ③ 저장(칸 수 / 원소 수) 인접 리스트" autocomplete="off" value="10원소"></td></tr></table></div>
 <h3>그래프 ② SPARSE (노드 1000개, 간선 1500개, 무방향) &mdash; 주어진 수로 계산한다</h3>
