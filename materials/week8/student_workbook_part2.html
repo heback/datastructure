@@ -120,6 +120,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <link rel="stylesheet" href="../assets/topnav.css">
 <link rel="stylesheet" href="../assets/theme.css">
 <link rel="stylesheet" href="../assets/sheettabs.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script src="../assets/lesson.js" defer></script>
 <script src="../assets/topnav.js" defer></script>
 <link rel="stylesheet" href="../assets/chatkit.css">
 <script src="../assets/chatkit.js" defer></script>
@@ -129,83 +131,126 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(8, part=2)  # 학생용 · 3차시 탐구 활동지 A11~A16</div>
   <h1>8주차 탐구 활동지 2부 — 3차시</h1>
-  <p class="lead">3차시 A11 시작 때 받는다. 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 확인할 내용은 활동을 마친 뒤 여는 초록색 상자에만 있다. 빈칸은 스스로 채운다.</p>
+  <p class="lead">3차시 A11 시작 때 받는다. 예측은 실행하기 전에 먼저 쓰고, 닫힌 확인 상자는 쓴 뒤에 연다.</p>
   <p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
 </header>
 <nav><a href="#A11">A11</a><a href="#A12">A12</a><a href="#A13">A13</a><a href="#A14">A14</a><a href="#A15">A15</a><a href="#A16">A16</a><a href="student_workbook.html">1~2차시 활동지</a><a href="index.html">목록</a></nav>
 
-<section id="A11" class="sheet">
+<section id="A11" class="sheet lesson">
 <h2>A11 · 실행 전에 예측하기<small>3차시 · 7분 · 개인</small></h2>
-<p class="meta"><span>코드: <a class="xlink" href="student_code_lab_part2.html#A11">코드 실습 A11</a></span><span>산출물: 예측-실제 비교표</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>기본 인자 <code class="i">[]</code>가 있는 함수를 같은 트리로 두 번 부르면 두 번의 출력은 같은가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">예측</span><b>실행하기 전에</b> 두 호출이 각각 출력할 리스트를 대괄호와 쉼표로 쓴다.<span class="tg-where">[예측] 칸</span><span class="tg-done">두 줄 모두 예측이 적혀 있다.</span></li>
-<li><span class="tg-stage">관찰</span>코드 쪽 <a class="xlink" href="student_code_lab_part2.html#A11">실습 코드 A11</a>의 실행 칸에서 실행하고 화면의 출력을 그대로 옮긴다.<span class="tg-where">[실제 출력] 칸</span></li>
-<li><span class="tg-stage">비교</span>예측과 실제가 같은지 고르고, 아래 질문 ①②에 답한다. 모르면 짐작한 것을 쓰고 &ldquo;짐작&rdquo;이라고 덧붙인다.<span class="tg-where">[같은가?] 칸, 생각해 볼 질문 칸</span></li>
-</ol>
+<p class="lead">기본 인자가 있는 함수를 같은 트리로 두 번 부르면 두 번의 출력은 같을까? 먼저 예측하고, 실행은 <a class="xlink" href="student_code_lab_part2.html#A11">실습 코드 A11</a>에서 한다.</p>
+
+<div class="step">
+<h3>기본 인자 겪어 보기</h3>
+<p>함수 정의의 <code class="i">name="친구"</code>처럼 값을 미리 적어 둔 것이 기본 인자이다. 호출할 때 그 인자를 주지 않으면 이 값이 쓰인다.</p>
+<pre class="fig">def hello(name="친구"):
+    print(name, "안녕")
+
+hello()
+hello("지아")</pre>
+<div class="quiz" data-accept="친구 안녕" data-hint="인자를 주지 않았다. 기본 인자의 값이 쓰인다.">
+<p class="q"><code class="i">hello()</code>를 실행하면 무엇이 출력될까?</p>
+<div class="ans"><input type="text" aria-label="hello() 출력" placeholder="예: 이름 안녕"><button type="button">확인</button></div>
+<p class="why">인자가 없으므로 기본값 &ldquo;친구&rdquo;가 쓰여 &ldquo;친구 안녕&rdquo;이 나온다.</p>
 </div>
-<p>중위 순회 함수를 같은 트리로 <b>두 번</b> 호출하는 코드가 주어진다. <b>실행하기 전에</b> 각 호출이 출력할 리스트를 예측해 적는다. 예측을 먼저 쓴 뒤에 코드 쪽 A11의 실행 칸에서 실행한다.</p>
-<div class="learn-box"><span class="lb-title">학습 내용 · 예측하고 비교하는 방법</span>
-<ul><li>코드 쪽 A11의 함수는 <code class="i">collect_inorder(node, visited=[])</code> 모양으로, 트리의 값을 중위 순서로 <code class="i">visited</code> 리스트에 모아 돌려준다. <code class="i">visited=[]</code>는 <b>기본 인자</b>이다. 호출할 때 그 인자를 주지 않으면 쓰이는 값이다.</li>
-<li>두 번의 호출은 같은 트리 <code class="i">t4</code>(값 4, 2, 6, 1, 3, 5, 7을 이 순서로 삽입한 BST)에 <code class="i">collect_inorder(t4)</code>처럼 인자 하나로 부르며, 서로 다른 <code class="i">print</code> 줄이다.</li>
-<li>예측은 실행하기 전에 두 출력을 리스트로 직접 쓴다.</li>
-<li>실행한 뒤 &lsquo;같은가?&rsquo;는 예측과 실제를 견주어 고른다.</li></ul>
 </div>
-<p class="how">쓰는 법: &ldquo;예측&rdquo;은 실행 전에 출력할 값을 대괄호와 쉼표로 쓴다(꼴: [1, 2, 3]). &ldquo;실제 출력&rdquo;은 실행한 뒤 화면에 나온 것을 그대로 옮긴다. 마지막 칸에서 같은가를 고른다. 예측은 틀려도 된다.</p><table class="fill"><tr><th style="width:90px">호출</th><th>예측</th><th>실제 출력</th><th style="width:14%">같은가?</th></tr>
-<tr><td class="lab">첫 번째</td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r1.c1" placeholder="대괄호와 쉼표로" data-label="A11 예측-실제 비교표 첫 번째 · 예측" autocomplete="off" value="[1, 2, 3, 4, 5, 6, 7]"></td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r1.c2" placeholder="대괄호와 쉼표로" data-label="A11 예측-실제 비교표 첫 번째 · 실제 출력" autocomplete="off" value="[1, 2, 3, 4, 5, 6, 7]"></td><td class="in-cell"><select class="in" data-key="A11.predict.r1.c3" data-label="A11 예측-실제 비교표 첫 번째 · 같은가?"><option value="">선택</option><option value="같다" selected>같다</option><option value="다르다">다르다</option></select></td></tr><tr><td class="lab">두 번째</td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r2.c1" placeholder="대괄호와 쉼표로" data-label="A11 예측-실제 비교표 두 번째 · 예측" autocomplete="off" value="[1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7] (14개)"></td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r2.c2" placeholder="대괄호와 쉼표로" data-label="A11 예측-실제 비교표 두 번째 · 실제 출력" autocomplete="off" value="[1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7]"></td><td class="in-cell"><select class="in" data-key="A11.predict.r2.c3" data-label="A11 예측-실제 비교표 두 번째 · 같은가?"><option value="">선택</option><option value="같다" selected>같다</option><option value="다르다">다르다</option></select></td></tr></table>
-<p><b>생각해 볼 질문</b> ① 두 번째 호출의 결과는 왜 이렇게 나왔는가? ② 리스트는 언제, 몇 번 만들어졌다고 생각하는가? (짐작이라도 적는다.)</p><p class="how">쓰는 법: ①②를 번호를 붙여 2~3문장으로 쓴다. 모르면 짐작한 것을 쓰고 &ldquo;짐작&rdquo;이라고 덧붙인다.</p>
-<textarea class="in l" rows="5" data-key="A11.reason" placeholder="① … ② …" data-label="A11 두 번째 호출 결과의 이유">리스트가 호출할 때마다 새로 생기는 것이 아니라 한 번만 만들어져 계속 쓰이는 것 같다. 첫 번째 결과가 남은 채 두 번째 결과가 이어 붙었다.</textarea>
-<p>먼저 위 칸에 자기 말로 쓴 뒤 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 예측 정답</summary>
+
+<div class="step">
+<h3>오늘의 함수 읽기</h3>
+<p>실습 코드 A11의 함수는 <code class="i">collect_inorder(node, visited=[])</code> 모양이다. 트리의 값을 중위 순서로 <code class="i">visited</code>에 모아 돌려주며, 기본 인자는 빈 리스트 <code class="i">[]</code>이다.</p>
+<p>같은 트리 t4에 인자 하나만 주어 두 번 부른다. t4는 값 4, 2, 6, 1, 3, 5, 7을 이 순서로 넣은 BST이다.</p>
+<div class="quiz" data-answer="2">
+<p class="q"><code class="i">collect_inorder(t4)</code>처럼 부르면 <code class="i">visited</code>에는 무엇이 쓰일까?</p>
+<div class="opts"><button type="button" data-hint="위치가 첫 번째 인자는 node이다. visited 자리에는 무엇을 줬는가?">t4</button><button type="button">기본값 []</button><button type="button" data-hint="기본값이 있으므로 인자를 안 줘도 쓸 값이 있다.">아무것도 없다</button></div>
+<p class="why">인자를 주지 않았으므로 기본값 []이 쓰인다.</p>
+</div>
+</div>
+
+<div class="step">
+<h3>실행 전에 예측하기</h3>
+<p>두 호출이 각각 출력할 리스트를 대괄호와 쉼표로 쓴다. 틀려도 된다. 실행은 아직 하지 않는다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:26%">호출</th><th>예측 (실행 전)</th></tr><tr><td class="lab">첫 번째</td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r1.c1" placeholder="대괄호와 쉼표로" data-label="A11 예측-실제 비교표 첫 번째 · 예측" autocomplete="off" value="[1, 2, 3, 4, 5, 6, 7]"></td></tr><tr><td class="lab">두 번째</td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r2.c1" placeholder="대괄호와 쉼표로" data-label="A11 예측-실제 비교표 두 번째 · 예측" autocomplete="off" value="[1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7] (14개)"></td></tr></table></div>
+</div>
+
+<div class="step">
+<h3>실행하고 견주기</h3>
+<p>실습 코드 A11의 실행 칸에서 실행하고, 화면에 나온 출력을 그대로 옮긴다. 그리고 예측과 같은지 고른다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:22%">호출</th><th>실제 출력</th><th style="width:22%">같은가?</th></tr><tr><td class="lab">첫 번째</td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r1.c2" placeholder="대괄호와 쉼표로" data-label="A11 예측-실제 비교표 첫 번째 · 실제 출력" autocomplete="off" value="[1, 2, 3, 4, 5, 6, 7]"></td><td class="in-cell"><select class="in" data-key="A11.predict.r1.c3" data-label="A11 예측-실제 비교표 첫 번째 · 같은가?"><option value="">선택</option><option value="같다" selected>같다</option><option value="다르다">다르다</option></select></td></tr><tr><td class="lab">두 번째</td><td class="in-cell"><input type="text" class="in" data-key="A11.predict.r2.c2" placeholder="대괄호와 쉼표로" data-label="A11 예측-실제 비교표 두 번째 · 실제 출력" autocomplete="off" value="[1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7]"></td><td class="in-cell"><select class="in" data-key="A11.predict.r2.c3" data-label="A11 예측-실제 비교표 두 번째 · 같은가?"><option value="">선택</option><option value="같다" selected>같다</option><option value="다르다">다르다</option></select></td></tr></table></div>
+</div>
+
+<div class="step">
+<h3>왜 그렇게 나왔을까</h3>
+<p>① 두 번째 호출의 결과는 왜 이렇게 나왔는가? ② 리스트는 언제, 몇 번 만들어졌다고 생각하는가? 모르면 짐작해 쓰고 &ldquo;짐작&rdquo;이라고 덧붙인다.</p>
+<div class="ans-row"><span class="n"></span><textarea class="in l" rows="5" data-key="A11.reason" placeholder="① … ② …" data-label="A11 두 번째 호출 결과의 이유">리스트가 호출할 때마다 새로 생기는 것이 아니라 한 번만 만들어져 계속 쓰이는 것 같다. 첫 번째 결과가 남은 채 두 번째 결과가 이어 붙었다.</textarea></div>
+</div>
+
+<p class="wrapup"><b>여기까지</b> 같은 코드가 두 번째에 다른 결과를 낼 수 있음을 예측과 실행으로 확인했다. A12에서 원인을 관찰하고 고친다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · 예측 정답</summary>
 <ul><li>첫 번째 <code class="i">[1, 2, 3, 4, 5, 6, 7]</code>, 두 번째 <code class="i">[1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7]</code>(14개)이다.</li>
 <li>같은 트리, 같은 코드인데 두 번째 결과에 앞의 결과가 남은 채 이어 붙었다. 호출할 때마다 새 빈 리스트가 생길 것이라고 예측했다면 그 생각이 어긋난 것이다. 이유는 A12에서 직접 확인한다.</li></ul>
-</details>
-</section>
+</details></section>
 
-<section id="A12" class="sheet">
+<section id="A12" class="sheet lesson">
 <h2>A12 · 관찰하고 수정하기<small>3차시 · 10분 · 개인</small></h2>
-<p class="meta"><span>코드: <a class="xlink" href="student_code_lab_part2.html#A12">코드 실습 A12</a></span><span>수행지시어 수정하다 · 산출물: 수정된 함수 + 한 줄 원인 설명</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>같은 호출이 왜 다른 결과를 낼 수 있는가? 어떻게 고치면 몇 번 불러도 섞이지 않는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">관찰</span>코드 쪽 <a class="xlink" href="student_code_lab_part2.html#A12">실습 코드 A12</a>의 관찰 칸에서 호출 전과 후의 <code class="i">__defaults__</code> 출력을 그대로 옮긴다.<span class="tg-where">[관찰] 표</span></li>
-<li><span class="tg-stage">설명</span>출력의 달라진 점을 근거로 기본값이 언제 만들어지는지 한 문장으로 쓴다.<span class="tg-where">[관찰] 아래 질문 칸</span></li>
-<li><span class="tg-stage">시도</span>코드 쪽 A12에서 함수를 고쳐 테스트를 통과시키고, 한 줄 원인 설명을 쓴다.<span class="tg-where">[수정 결과]</span></li>
-<li><span class="tg-stage">비교</span>같은 목적을 이루는 다른 방법을 줄마다 하나씩 쓰고 좋은 점과 대가를 견준다.<span class="tg-where">[대안 비교] 표</span></li>
-</ol>
+<p class="lead">같은 호출이 왜 다른 결과를 낼까? 코드는 <a class="xlink" href="student_code_lab_part2.html#A12">실습 코드 A12</a>에서 다루고, 원인과 고친 곳을 이 쪽에 적는다.</p>
+
+<div class="step">
+<h3>None으로 기본값 만들기</h3>
+<p>기본값을 None으로 두고, 함수 안에서 None인지 보아 새로 만드는 방법이 있다. 아래 함수는 <code class="i">name</code>이 None일 때만 &ldquo;친구&rdquo;를 만든다.</p>
+<pre class="fig">def hello(name=None):
+    if name is None:
+        name = "친구"
+    print(name, "안녕")
+
+hello()
+hello("지아")</pre>
+<div class="quiz" data-accept="지아 안녕" data-hint="name에 None이 아닌 값이 들어왔다. if 안으로 들어가는가?">
+<p class="q"><code class="i">hello("지아")</code>를 실행하면 무엇이 출력될까?</p>
+<div class="ans"><input type="text" aria-label="hello("지아") 출력" placeholder="예: 이름 안녕"><button type="button">확인</button></div>
+<p class="why">name이 None이 아니므로 if를 지나가고, &ldquo;지아 안녕&rdquo;이 나온다.</p>
 </div>
-<div class="learn-box"><span class="lb-title">학습 내용 · 관찰 방법과 수정 조건</span>
-<ul><li><code class="i">함수이름.__defaults__</code>는 파이썬이 함수에 저장해 둔 기본 인자 값들을 튜플로 보여 준다. 예: <code class="i">def f(a, b=5)</code>이면 <code class="i">f.__defaults__</code>는 <code class="i">(5,)</code>이다. 호출 전과 후의 출력을 표에 옮기고, 달라진 점에서 &lsquo;기본값이 언제 만들어지는가&rsquo;를 추론한다.</li>
-<li>수정 조건(테스트 기준): 호출은 <code class="i">collect_inorder(t)</code>처럼 인자 하나, 같은 트리를 몇 번 불러도 같은 결과, 다른 트리를 불러도 섞이지 않음, <code class="i">__defaults__</code> 안에 리스트가 남아 있지 않음.</li>
-<li>수정 방향: 호출마다 새로 만들어져야 하는 것은 결과 리스트이다. 수정 방법은 여러 가지이며 대안 비교에서 견준다.</li>
-<li>시간은 약 10분이며 관찰 4분, 수정 4분, 대안 비교 2분으로 나눈다.</li></ul>
 </div>
-<h3>관찰</h3>
-<p>수정하기 전에 코드 쪽 A12의 관찰 칸에서 관찰 코드를 먼저 실행하고, 출력을 아래 표에 옮긴다.</p>
-<p class="how">쓰는 법: 코드를 실행해 화면에 나온 출력을 괄호나 대괄호까지 그대로 옮긴다.</p><table class="fill"><tr><th style="width:55%">관찰 코드</th><th>출력</th></tr>
-<tr><td class="lab">함수를 한 번도 호출하기 전 <code class="i">collect_inorder.__defaults__</code></td><td class="in-cell"><input type="text" class="in" data-key="A12.observe.r1.c1" placeholder="화면에 나온 출력 그대로" data-label="A12 __defaults__ 관찰 출력 함수를 한 번도 호출하기 전 collect_inorder.__defaul… · 출력" autocomplete="off" value="([],)"></td></tr>
-<tr><td class="lab">한 번 호출한 뒤 <code class="i">collect_inorder.__defaults__</code></td><td class="in-cell"><input type="text" class="in" data-key="A12.observe.r2.c1" placeholder="화면에 나온 출력 그대로" data-label="A12 __defaults__ 관찰 출력 한 번 호출한 뒤 collect_inorder.__defaults__ · 출력" autocomplete="off" value="([1, 2, 3, 4, 5, 6, 7],)"></td></tr></table>
-<p>기본값 식은 언제 평가되는가? 관찰 결과에 근거해 내 생각을 적는다.</p><p class="how">쓰는 법: 한 문장으로 쓴다. 언제 평가되는지(함수를 정의할 때 / 호출할 때마다 / 그 밖 중 하나)를 먼저 쓰고, 위 출력 중 근거를 덧붙인다.</p>
-<textarea class="in" rows="3" data-key="A12.when" placeholder="한 문장" data-label="A12 기본값 식이 평가되는 시점">기본값 식은 함수를 호출할 때가 아니라 def가 실행되어 함수가 만들어질 때 한 번 평가된다. 호출 전에 이미 빈 리스트가 만들어져 있었고, 호출 뒤 같은 리스트에 값이 들어 있었다.</textarea>
-<h3>수정 결과</h3>
-<p>수정한 코드에서 바꾸기 전 줄과 바꾼 뒤 줄을 그대로 옮겨 적는다. 테스트 통과 여부를 표시한다. 칸에는 바꾸기 전 줄과 바꾼 뒤 줄을 &ldquo;전: …&rdquo;, &ldquo;후: …&rdquo; 꼴로 한 줄씩 쓴다. <span class="rg" data-key="A12.fix.pass" data-type="radio" data-label="A12 수정한 코드의 테스트 통과 여부"><label><input type="radio" name="A12pass" value="통과" checked> 통과</label><label><input type="radio" name="A12pass" value="미통과"> 미통과</label></span></p>
-<textarea class="in" rows="3" data-key="A12.fix" placeholder="전: (코드 줄)&#10;후: (코드 줄)" data-label="A12 수정한 줄(바꾸기 전·바꾼 뒤를 그대로)">바꾸기 전: def collect_inorder(node, visited=[]):
+
+<div class="step">
+<h3>기본값 들여다보기</h3>
+<p>함수이름.<code class="i">__defaults__</code>는 파이썬이 함수에 저장해 둔 기본 인자 값들을 튜플로 보여 준다. 예를 들어 <code class="i">def f(a, b=5)</code>이면 <code class="i">f.__defaults__</code>는 <code class="i">(5,)</code>이다.</p>
+<div class="quiz" data-accept="(3, 4)" data-hint="기본값이 있는 인자만 순서대로 튜플에 담긴다.">
+<p class="q"><code class="i">def g(x, y=3, z=4)</code>의 <code class="i">g.__defaults__</code>는?</p>
+<div class="ans"><input type="text" aria-label="g.__defaults__" placeholder="예: (1, 2)"><button type="button">확인</button></div>
+<p class="why">y와 z의 기본값 3, 4가 담겨 (3, 4)이다.</p>
+</div>
+<p>실습 코드 A12의 관찰 칸을 실행해 호출 전과 후의 출력을 괄호까지 그대로 옮긴다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:50%">관찰 코드</th><th>출력</th></tr><tr><td class="lab">함수를 한 번도 호출하기 전 collect_inorder.__defaults__</td><td class="in-cell"><input type="text" class="in" data-key="A12.observe.r1.c1" placeholder="화면에 나온 출력 그대로" data-label="A12 __defaults__ 관찰 출력 함수를 한 번도 호출하기 전 collect_inorder.__defaul… · 출력" autocomplete="off" value="([],)"></td></tr><tr><td class="lab">한 번 호출한 뒤 collect_inorder.__defaults__</td><td class="in-cell"><input type="text" class="in" data-key="A12.observe.r2.c1" placeholder="화면에 나온 출력 그대로" data-label="A12 __defaults__ 관찰 출력 한 번 호출한 뒤 collect_inorder.__defaults__ · 출력" autocomplete="off" value="([1, 2, 3, 4, 5, 6, 7],)"></td></tr></table></div>
+<p>출력의 달라진 점을 근거로, 기본값 식은 언제 평가되는지 한 문장으로 쓴다.</p>
+<div class="ans-row"><span class="n"></span><textarea class="in" rows="3" data-key="A12.when" placeholder="한 문장" data-label="A12 기본값 식이 평가되는 시점">기본값 식은 함수를 호출할 때가 아니라 def가 실행되어 함수가 만들어질 때 한 번 평가된다. 호출 전에 이미 빈 리스트가 만들어져 있었고, 호출 뒤 같은 리스트에 값이 들어 있었다.</textarea></div>
+</div>
+
+<div class="step">
+<h3>고치고 원인 쓰기</h3>
+<p>실습 코드 A12에서 함수를 고쳐 테스트를 통과시킨다. 바꾸기 전 줄과 바꾼 뒤 줄을 &ldquo;전: …&rdquo;, &ldquo;후: …&rdquo; 꼴로 옮기고, 통과 여부를 고른다.</p>
+<div class="ans-row"><span class="n"></span><textarea class="in" rows="3" data-key="A12.fix" placeholder="전: (코드 줄)&#10;후: (코드 줄)" data-label="A12 수정한 줄(바꾸기 전·바꾼 뒤를 그대로)">바꾸기 전: def collect_inorder(node, visited=[]):
 바꾼 뒤: def collect_inorder(node, visited=None):
 추가한 줄: if visited is None:
-    visited = []</textarea>
-<p><b>한 줄 원인 설명</b> 처음 코드에서 두 번째 호출의 결과가 달라진 원인을 한 줄로 쓴다.</p><p class="how">쓰는 법: 한 문장으로 쓴다.</p>
-<textarea class="in" rows="3" data-key="A12.cause" placeholder="한 문장" data-label="A12 한 줄 원인 설명">기본값 []은 함수가 정의될 때 한 번만 만들어져 모든 호출이 같은 리스트를 공유하기 때문이다.</textarea>
-<h3>대안 비교</h3>
-<p>수정을 끝낸 뒤에 이 표를 채운다. 같은 목적(호출마다 새 결과 리스트를 쓰기)을 이루는 방법을 서로 다른 것으로 찾아, 방법 이름을 첫 칸에 쓰고 호출하는 모습, 좋은 점, 치르는 대가를 적는다. 첫째·둘째 줄은 필수이고 셋째 줄은 (선택)이다. </p><p class="how">쓰는 법: 줄마다 서로 다른 방법이다. 방법 이름은 짧은 말, 호출하는 모습은 호출 코드 한 줄, 좋은 점과 대가는 각각 한 문장으로 쓴다.</p>
-<table class="fill"><tr><th style="width:26%">방법 이름</th><th>호출하는 모습</th><th>좋은 점</th><th>대가</th></tr>
-<tr><td class="in-cell"><textarea class="in" rows="2" data-key="A12.alt.r1.c0" placeholder="방법 이름(짧게)" data-label="A12 대안 비교 1행 · 방법 이름" aria-label="대안 1 방법 이름">None 센티널</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r1.c1" placeholder="호출 코드 한 줄" data-label="A12 대안 비교 1행 · 호출하는 모습">collect_inorder(t)</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r1.c2" placeholder="한 문장" data-label="A12 대안 비교 1행 · 좋은 점">호출이 간단하다</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r1.c3" placeholder="한 문장" data-label="A12 대안 비교 1행 · 대가">함수 안에 None 검사 두 줄이 필요하다</textarea></td></tr>
-<tr><td class="in-cell"><textarea class="in" rows="2" data-key="A12.alt.r2.c0" placeholder="방법 이름(짧게)" data-label="A12 대안 비교 2행 · 방법 이름" aria-label="대안 2 방법 이름">결과 리스트를 인자로 받기</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r2.c1" placeholder="호출 코드 한 줄" data-label="A12 대안 비교 2행 · 호출하는 모습">out = []; inorder_out(t, out)</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r2.c2" placeholder="한 문장" data-label="A12 대안 비교 2행 · 좋은 점">기본값이 없어 안전하고 흐름이 단순하다</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r2.c3" placeholder="한 문장" data-label="A12 대안 비교 2행 · 대가">호출하는 쪽이 매번 리스트를 만들어야 한다</textarea></td></tr>
-<tr><td class="in-cell"><textarea class="in" rows="2" data-key="A12.alt.r3.c0" placeholder="방법 이름(짧게) (선택)" data-label="A12 대안 비교 3행 · 방법 이름" aria-label="대안 3 방법 이름">내부 헬퍼 함수</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r3.c1" placeholder="호출 코드 한 줄" data-label="A12 대안 비교 3행 · 호출하는 모습">inorder_helper(t)</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r3.c2" placeholder="한 문장" data-label="A12 대안 비교 3행 · 좋은 점">호출이 간단하고 호출마다 새 리스트라 안전하다</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r3.c3" placeholder="한 문장" data-label="A12 대안 비교 3행 · 대가">함수 안에 함수가 하나 더 생겨 코드가 길어진다</textarea></td></tr></table>
-<p><b>생각해 볼 질문</b> 위에 쓴 방법 가운데 함수 안에 조건문(<code class="i">if</code>)이 필요 없는 방법은 어느 것인가? 그 방법은 어떤 대가를 치르는가?</p><p class="how">쓰는 법: 방법 이름을 먼저 쓰고 대가를 한 문장으로 쓴다. 해당하는 방법이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p>
-<textarea class="in" rows="3" data-key="A12.none" placeholder="방법 이름. 대가 한 문장" data-label="A12 None 검사 없이 해결할 방법">결과 리스트를 인자로 받는 방법은 if가 필요 없다. 대가는 호출하는 쪽이 매번 리스트를 만들어 넘겨야 한다는 것이다. 내부 헬퍼 함수도 if가 필요 없지만 함수 안에 함수가 하나 더 생긴다.</textarea>
-<p>먼저 위 칸에 자기 말로 쓴 뒤 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 원인, 수정, 대안</summary>
+    visited = []</textarea></div>
+<p><span class="rg" data-key="A12.fix.pass" data-type="radio" data-label="A12 수정한 코드의 테스트 통과 여부"><label><input type="radio" name="A12pass" value="통과" checked> 통과</label><label><input type="radio" name="A12pass" value="미통과"> 미통과</label></span></p>
+<p>처음 코드에서 두 번째 호출의 결과가 달라진 원인을 한 문장으로 쓴다.</p>
+<div class="ans-row"><span class="n"></span><textarea class="in" rows="3" data-key="A12.cause" placeholder="한 문장" data-label="A12 한 줄 원인 설명">기본값 []은 함수가 정의될 때 한 번만 만들어져 모든 호출이 같은 리스트를 공유하기 때문이다.</textarea></div>
+</div>
+
+<div class="step">
+<h3>다른 방법 찾기 (1)</h3>
+<p>같은 목적(호출마다 새 결과 리스트를 쓰기)을 이루는 서로 다른 방법을 줄마다 하나씩 쓴다. 첫째·둘째 줄은 필수이고 셋째 줄은 (선택)이다. 먼저 방법 이름과 호출하는 모습이다.</p>
+<div class="scroll"><table class="fill"><tr><th>방법 이름</th><th>호출하는 모습</th></tr><tr><td class="in-cell"><textarea class="in" rows="2" data-key="A12.alt.r1.c0" placeholder="방법 이름(짧게)" data-label="A12 대안 비교 1행 · 방법 이름" aria-label="대안 1 방법 이름">None 센티널</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r1.c1" placeholder="호출 코드 한 줄" data-label="A12 대안 비교 1행 · 호출하는 모습">collect_inorder(t)</textarea></td></tr><tr><td class="in-cell"><textarea class="in" rows="2" data-key="A12.alt.r2.c0" placeholder="방법 이름(짧게)" data-label="A12 대안 비교 2행 · 방법 이름" aria-label="대안 2 방법 이름">결과 리스트를 인자로 받기</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r2.c1" placeholder="호출 코드 한 줄" data-label="A12 대안 비교 2행 · 호출하는 모습">out = []; inorder_out(t, out)</textarea></td></tr><tr><td class="in-cell"><textarea class="in" rows="2" data-key="A12.alt.r3.c0" placeholder="방법 이름(짧게) (선택)" data-label="A12 대안 비교 3행 · 방법 이름" aria-label="대안 3 방법 이름">내부 헬퍼 함수</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r3.c1" placeholder="호출 코드 한 줄" data-label="A12 대안 비교 3행 · 호출하는 모습">inorder_helper(t)</textarea></td></tr></table></div>
+</div>
+
+<div class="step">
+<h3>다른 방법 견주기 (2)</h3>
+<p>위에 쓴 방법마다 좋은 점과 치르는 대가를 한 문장씩 쓴다. 어느 방법이 낫다는 정답은 없다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:16%">방법</th><th>좋은 점</th><th>치르는 대가</th></tr><tr><td class="lab">방법 1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r1.c2" placeholder="한 문장" data-label="A12 대안 비교 1행 · 좋은 점">호출이 간단하다</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r1.c3" placeholder="한 문장" data-label="A12 대안 비교 1행 · 대가">함수 안에 None 검사 두 줄이 필요하다</textarea></td></tr><tr><td class="lab">방법 2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r2.c2" placeholder="한 문장" data-label="A12 대안 비교 2행 · 좋은 점">기본값이 없어 안전하고 흐름이 단순하다</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r2.c3" placeholder="한 문장" data-label="A12 대안 비교 2행 · 대가">호출하는 쪽이 매번 리스트를 만들어야 한다</textarea></td></tr><tr><td class="lab">방법 3</td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r3.c2" placeholder="한 문장" data-label="A12 대안 비교 3행 · 좋은 점">호출이 간단하고 호출마다 새 리스트라 안전하다</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.alt.r3.c3" placeholder="한 문장" data-label="A12 대안 비교 3행 · 대가">함수 안에 함수가 하나 더 생겨 코드가 길어진다</textarea></td></tr></table></div>
+</div>
+
+<p class="wrapup"><b>여기까지</b> 원인을 관찰하고 고친 뒤 다른 방법과 견주었다. A13에서는 오늘 발견한 것을 일반화 문장으로 다듬는다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · 원인, 수정, 대안</summary>
 <ul><li><b>원인</b>: 기본값 <code class="i">[]</code>은 <code class="i">def</code>가 실행되어 함수가 만들어질 때 한 번만 만들어져 함수에 저장되고, 모든 호출이 같은 리스트를 공유한다. <code class="i">__defaults__</code>가 <code class="i">([],)</code>에서 호출 뒤 값이 든 리스트로 바뀐 것이 증거이다. 한 번의 순회 안에서는 재귀 호출이 <code class="i">visited</code>를 명시적으로 넘겨 정상으로 보이다가, 인자 없이 부르는 두 번째 호출에서 드러난다.</li></ul>
 <pre class="diagram" style="background:#fff;color:#1f2328;border:1px solid #cfd6e2;border-radius:6px;padding:8px 12px;font-size:12.5px;line-height:1.4;overflow-x:auto;white-space:pre">def collect_inorder(node, visited=None):
     if visited is None:      # 인자를 주지 않았을 때만 새 리스트를 만든다
@@ -214,141 +259,159 @@ table.fill td.in-cell{padding:3px;height:auto}
         return visited</pre><table style="width:calc(100% - 28px)"><tr><th>방법</th><th>좋은 점</th><th>대가</th></tr><tr><td>None 센티널</td><td>호출이 간단하다</td><td>함수 안에 None 검사 두 줄이 필요하다</td></tr><tr><td>결과 리스트를 인자로 받기(A6 방식)</td><td>기본값이 없어 안전하다</td><td>호출하는 쪽이 매번 []를 만들어 넘겨야 한다</td></tr><tr><td>내부 헬퍼 함수 / 제너레이터</td><td>호출이 간단하고 안전하다</td><td>함수 안에 함수가 하나 더 생기거나 list()로 감싸야 한다</td></tr></table>
 <ul><li>잘못된 수정 두 가지: 호출할 때마다 <code class="i">[]</code>를 직접 넘기면 그 호출은 맞지만 인자 없이 부르면 다시 누적된다. 함수 안에서 무조건 <code class="i">visited = []</code>를 쓰면 재귀 호출마다 새 리스트가 생겨 결과가 사라진다.</li>
 <li>어느 방법이 낫다는 정답은 없고, 치르는 대가를 말할 수 있으면 된다.</li></ul>
-</details>
-</section>
+</details></section>
 
-<section id="A13" class="sheet">
+<section id="A13" class="sheet lesson">
 <h2>A13 · 일반화 정제 시트<small>3차시 · 9분 · 개인</small></h2>
-<p class="meta"><span>산출물: 일반화 문장, 수정 이력</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내 초안은 여러 사례에 통하는 문장으로 다듬어졌는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">시도</span>A10에 쓴 초안을 다시 읽고 사례 이름을 개념어로 바꾼다. 칸 1~4에는 각 근거 활동에서 발견한 것을 한 문장씩 쓴다. 칸은 빈칸에서 시작한다.<span class="tg-where">일반화 문장 표 &ldquo;내 문장&rdquo; 칸</span><span class="tg-done">네 칸이 모두 채워져 있다.</span></li>
-<li><span class="tg-stage">설명</span>문장을 고칠 때마다 무엇을 왜 고쳤는지 쓴다.<span class="tg-where">[수정 이력]</span></li>
-<li><span class="tg-stage">적용</span>마지막 질문들에 답하고 &lsquo;이 트리만&rsquo;이라는 말을 지워도 성립하는지 시험한다.<span class="tg-where">아래 질문 칸</span></li>
-<li><span class="tg-stage">비교</span>내 문장을 다 쓴 뒤에 닫힌 상자를 열어 견준다. 같은 점 한 문장, 다른 점 한 문장을 쓴다.<span class="tg-where">비교 칸</span></li>
-</ol>
+<p class="lead">A10에 쓴 내 초안을 &lsquo;정제&rsquo;, 곧 사례 이름을 빼고 더 정확하게 다듬어 보자. 닫힌 상자와 견주는 것은 마지막에 한다.</p>
+
+<div class="step">
+<h3>사례와 개념 문장 구별하기</h3>
+<p>일반화 문장에서는 사례 이름을 개념어로 바꾼다. 청소 이야기로 보면 아래 둘 중 하나가 일반화이다.</p>
+<div class="quiz" data-answer="2">
+<p class="q">(가) &ldquo;지난주 우리 반 청소는 20분 걸렸다.&rdquo; (나) &ldquo;맡은 구역이 넓을수록 청소 시간이 길어진다.&rdquo; 일반화는?</p>
+<div class="opts"><button type="button" data-hint="(가)는 지난주 우리 반의 이야기이다. 다른 반에도 통하는가?">(가)</button><button type="button">(나)</button></div>
+<p class="why">(나)는 사례 이름 없이 개념어(구역, 시간)와 관계로 썼다.</p>
 </div>
-<p>A10에 쓴 내 초안을 가져와 문장을 정제한다. <b>칸은 모두 빈칸으로 둔다.</b> 아래 &lsquo;일반화 문장&rsquo; 상자와 비교하는 것은 마지막에 한다.</p>
-<div class="learn-box"><span class="lb-title">학습 내용 · 일반화 문장을 정제하는 방법</span>
-<ol><li>A10 초안을 다시 읽고, 사례 이름(T1, 폴더 이름, 숫자 값)을 개념어로 바꾼다.</li><li>&ldquo;개념 + 개념 + 관계&rdquo; 형태인지 확인한다(관계는 &lsquo;~이면&rsquo;, &lsquo;~하므로&rsquo;, &lsquo;~에 따라&rsquo; 같은 말로 드러난다).</li><li>&lsquo;이 트리만&rsquo;이라는 한정을 지워도 문장이 성립하는지 시험한다.</li><li>칸 1~4에는 각 칸의 근거 활동에서 발견한 것을 한 문장씩 쓴다. 문장을 고칠 때마다 수정 이력에 무엇을 왜 고쳤는지 적는다.</li></ol>
-<p>이 활동지의 &lsquo;일반화 문장&rsquo; 상자는 내 문장을 다 쓰고 폴더로 확인한 뒤에 연다. 시간은 약 9분이며 정제 6분, 대조 3분으로 나눈다.</p>
 </div>
-<p class="how">쓰는 법: 칸마다 근거 활동에서 내가 발견한 것을 일반화한 한 문장을 쓴다. 문장에서 &lsquo;이 트리만&rsquo;이라는 말은 뺀다.</p><table class="fill"><tr><th style="width:90px">칸</th><th style="width:18%">근거 활동</th><th>내 문장</th></tr>
-<tr><td class="lab">칸 1</td><td>A2, A3, A6</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r1.c2" placeholder="한 문장" data-label="A13 내 문장 칸 1 · 내 문장">트리는 부모–자식 관계가 반복되어, 한 노드에 쓴 규칙이 모든 부분 트리에 똑같이 적용된다.</textarea></td></tr>
-<tr><td class="lab">칸 2</td><td>A4, A7, A8</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r2.c2" placeholder="한 문장" data-label="A13 내 문장 칸 2 · 내 문장">같은 트리라도 노드를 처리하는 시점(전·중·후)에 따라 결과 순서가 다르고, BST의 중위 순회는 정렬 순서가 된다.</textarea></td></tr>
-<tr><td class="lab">칸 3</td><td>A7, A9</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r3.c2" placeholder="한 문장" data-label="A13 내 문장 칸 3 · 내 문장">BST는 비교할 때마다 탐색 범위를 줄이지만, 입력 순서 때문에 한쪽으로 쏠리면 그 이점이 사라진다.</textarea></td></tr>
-<tr><td class="lab">칸 4</td><td>A11, A12</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r4.c2" placeholder="한 문장" data-label="A13 내 문장 칸 4 · 내 문장">재귀가 상태를 함께 쓸 때는 그 상태가 언제 만들어지고 누구 것인지가 결과를 정한다. 기본값은 정의될 때 한 번 만들어져 공유된다.</textarea></td></tr></table>
-<h3>수정 이력</h3><p class="how">쓰는 법: v1에는 처음 모은 문장을 만든 방법을, v2·v3에는 앞 버전에서 고친 내용과 이유를 한 문장씩 쓴다. 고치지 않았으면 &ldquo;고치지 않음&rdquo;이라고 쓴다. v3은 (선택)이다.</p>
-<table class="fill"><tr><th style="width:70px">버전</th><th>고친 내용</th><th style="width:36%">고친 이유</th></tr>
-<tr><td class="lab">v1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r1.c1" placeholder="한 문장" data-label="A13 수정 이력 v1 · 고친 내용">"트리"를 "계층 구조"로 바꾸었다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r1.c2" placeholder="한 문장" data-label="A13 수정 이력 v1 · 고친 이유">폴더에도 통하게 하려고 고쳤다.</textarea></td></tr><tr><td class="lab">v2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r2.c1" placeholder="한 문장" data-label="A13 수정 이력 v2 · 고친 내용">"T1에서"를 지웠다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r2.c2" placeholder="한 문장" data-label="A13 수정 이력 v2 · 고친 이유">오늘 본 트리에만 해당하는 말을 없애려고 고쳤다.</textarea></td></tr><tr><td class="lab">v3</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r3.c1" placeholder="한 문장" data-label="A13 수정 이력 v3 · 고친 내용">개념 사이를 "~이므로"로 이었다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r3.c2" placeholder="한 문장" data-label="A13 수정 이력 v3 · 고친 이유">두 개념의 관계가 드러나게 하려고 고쳤다.</textarea></td></tr></table>
-<p><b>점검 질문</b> 문장에서 &lsquo;이 트리만&rsquo;을 지울 수 있는가? 다른 구조(그래프, 폴더)에도 성립하는가?</p><p class="how">쓰는 법: 질문마다 &ldquo;가능하다/불가능하다&rdquo;, &ldquo;성립한다/성립하지 않는다&rdquo; 중 하나를 먼저 쓰고 이유를 한 문장으로 쓴다.</p>
-<textarea class="in" rows="3" data-key="A13.check" placeholder="① 가능/불가능 … ② 성립/불성립 …" data-label="A13 점검 질문 답">"이 트리만"은 지울 수 있다. 폴더·조직도에는 순회 개념이 그대로 통하지만, "정렬된다"는 값의 크기 비교가 있는 구조에만 성립한다.</textarea>
-<p><b>폴더로 확인하기</b> 폴더 구조에서 &ldquo;폴더 안 파일 크기의 총합&rdquo;을 구하려 한다. ① 폴더 자신의 처리와 자식 폴더의 처리 중 무엇이 먼저 끝나야 하는가? ② 어느 순회와 같은가? ③ 위에서 쓴 내 문장이 이 사례에도 맞는가(맞지 않으면 문장을 고친다)?</p><p class="how">쓰는 법: ①②③ 번호를 붙여 3문장 이내로 쓴다. ②는 순회 이름, ③은 &ldquo;맞다&rdquo;나 &ldquo;고쳤다&rdquo;로 시작한다.</p>
-<textarea class="in" rows="3" data-key="A13.folder" placeholder="① … ② 순회 이름 ③ 맞다/고쳤다 …" data-label="A13 폴더 크기 총합 사례로 일반화 문장 확인">폴더 크기의 총합은 자식 폴더의 크기를 모두 구한 뒤에야 자신의 크기를 계산할 수 있으므로 자식 처리가 먼저 끝나야 한다. 후위 순회와 같다. 우리 문장의 처리 시점 내용은 이 사례에도 맞지만, "정렬된다"는 BST에만 성립하므로 고쳐 쓴다.</textarea>
-<p>먼저 위 칸에 내 문장을 쓰고 폴더로 확인한 뒤 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 오늘의 일반화 G1~G4</summary>
+
+<div class="step">
+<h3>네 칸 쓰기</h3>
+<p>A10의 초안을 다시 읽고, 칸마다 근거 활동에서 발견한 것을 일반화한 한 문장으로 쓴다. &lsquo;이 트리만&rsquo;이라는 말은 뺀다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:60px">칸</th><th style="width:110px">근거 활동</th><th>내 문장</th></tr><tr><td class="lab">칸 1</td><td class="lab">A2, A3, A6</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r1.c2" placeholder="한 문장" data-label="A13 내 문장 칸 1 · 내 문장">트리는 부모–자식 관계가 반복되어, 한 노드에 쓴 규칙이 모든 부분 트리에 똑같이 적용된다.</textarea></td></tr><tr><td class="lab">칸 2</td><td class="lab">A4, A7, A8</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r2.c2" placeholder="한 문장" data-label="A13 내 문장 칸 2 · 내 문장">같은 트리라도 노드를 처리하는 시점(전·중·후)에 따라 결과 순서가 다르고, BST의 중위 순회는 정렬 순서가 된다.</textarea></td></tr><tr><td class="lab">칸 3</td><td class="lab">A7, A9</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r3.c2" placeholder="한 문장" data-label="A13 내 문장 칸 3 · 내 문장">BST는 비교할 때마다 탐색 범위를 줄이지만, 입력 순서 때문에 한쪽으로 쏠리면 그 이점이 사라진다.</textarea></td></tr><tr><td class="lab">칸 4</td><td class="lab">A11, A12</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r4.c2" placeholder="한 문장" data-label="A13 내 문장 칸 4 · 내 문장">재귀가 상태를 함께 쓸 때는 그 상태가 언제 만들어지고 누구 것인지가 결과를 정한다. 기본값은 정의될 때 한 번 만들어져 공유된다.</textarea></td></tr></table></div>
+</div>
+
+<div class="step">
+<h3>고친 이력 남기기</h3>
+<p>문장을 고칠 때마다 무엇을 왜 고쳤는지 한 문장씩 쓴다. 고치지 않았으면 &ldquo;고치지 않음&rdquo;이라고 쓴다. v1에는 처음 모은 문장을 만든 방법을 쓴다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:60px">버전</th><th>고친 내용</th><th>고친 이유</th></tr><tr><td class="lab">v1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r1.c1" placeholder="한 문장" data-label="A13 수정 이력 v1 · 고친 내용">"트리"를 "계층 구조"로 바꾸었다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r1.c2" placeholder="한 문장" data-label="A13 수정 이력 v1 · 고친 이유">폴더에도 통하게 하려고 고쳤다.</textarea></td></tr><tr><td class="lab">v2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r2.c1" placeholder="한 문장" data-label="A13 수정 이력 v2 · 고친 내용">"T1에서"를 지웠다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.hist.r2.c2" placeholder="한 문장" data-label="A13 수정 이력 v2 · 고친 이유">오늘 본 트리에만 해당하는 말을 없애려고 고쳤다.</textarea></td></tr></table></div>
+</div>
+
+<div class="step">
+<h3>점검 질문으로 다듬기</h3>
+<p>내 문장에서 &lsquo;이 트리만&rsquo;을 지울 수 있는가? 다른 구조(그래프, 폴더)에도 성립하는가? &ldquo;성립한다&rdquo;나 &ldquo;성립하지 않는다&rdquo;를 먼저 쓰고 이유를 한 문장으로 잇는다.</p>
+<div class="ans-row"><span class="n"></span><textarea class="in" rows="3" data-key="A13.check" placeholder="① 가능/불가능 … ② 성립/불성립 …" data-label="A13 점검 질문 답">"이 트리만"은 지울 수 있다. 폴더·조직도에는 순회 개념이 그대로 통하지만, "정렬된다"는 값의 크기 비교가 있는 구조에만 성립한다.</textarea></div>
+</div>
+
+<div class="step">
+<h3>폴더로 확인하기</h3>
+<p>폴더에서 &ldquo;폴더 안 파일 크기의 총합&rdquo;을 구한다고 하자. 세 가지를 번호를 붙여 쓴다.</p>
+<ol><li>폴더 자신의 처리와 자식 폴더의 처리 중 무엇이 먼저 끝나야 하는가?</li><li>어느 순회와 같은가?</li><li>위의 내 문장이 이 사례에도 맞는가? 맞지 않으면 문장을 고친다.</li></ol>
+<div class="ans-row"><span class="n"></span><textarea class="in" rows="3" data-key="A13.folder" placeholder="① … ② 순회 이름 ③ 맞다/고쳤다 …" data-label="A13 폴더 크기 총합 사례로 일반화 문장 확인">폴더 크기의 총합은 자식 폴더의 크기를 모두 구한 뒤에야 자신의 크기를 계산할 수 있으므로 자식 처리가 먼저 끝나야 한다. 후위 순회와 같다. 우리 문장의 처리 시점 내용은 이 사례에도 맞지만, "정렬된다"는 BST에만 성립하므로 고쳐 쓴다.</textarea></div>
+</div>
+
+<div class="step">
+<h3>닫힌 상자와 견주기</h3>
+<p>위 칸을 모두 채운 뒤 상자를 연다. 문장을 베끼지 않고 내 문장을 고치는 근거로 쓴다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · 오늘의 일반화 G1~G4</summary>
 <p>이 단원에서 이끌어 내는 네 문장이다. 내 문장과 견주어 같은 점과 다른 점을 아래 &lsquo;공개 후 비교&rsquo; 칸에 쓴다. 베껴 쓰지 말고 내 문장을 고치는 근거로 쓴다.</p>
 <table style="width:calc(100% - 28px)"><tr><td>G1<br>(A2·A3·A6)</td><td>계층 구조는 부모–자식 관계가 재귀적으로 반복되므로, 한 노드에 쓴 처리 규칙이 모든 부분 트리에 똑같이 적용된다.</td></tr><tr><td>G2<br>(A4·A7·A8)</td><td>같은 구조라도 노드를 처리하는 시점(전·중·후)에 따라 결과 순서가 달라지며, 데이터에 불변식이 있으면 특정 시점의 순회가 그 불변식을 결과로 드러낸다(BST의 중위 순회 = 정렬 순서).</td></tr><tr><td>G3<br>(A7·A9)</td><td>정렬 불변식을 유지하는 구조는 매 비교마다 탐색 범위를 줄이지만, 입력 순서에 따라 균형이 깨지면 그 이점이 사라진다.</td></tr><tr><td>G4<br>(A11·A12)</td><td>재귀 호출들이 하나의 상태를 함께 쓸 때, 그 상태가 어디서 만들어지고 누구에게 속하는지(스코프·수명)가 결과를 결정한다. 함수 정의 시점에 한 번 만들어지는 기본값은 모든 호출이 공유한다.</td></tr></table>
 <p>비교 요령: 각 문장에서 개념 둘과 관계를 찾아 내 문장에 같은 요소가 있는지 본다. &lsquo;이 트리만&rsquo;을 지울 수 있는지, 그래프나 폴더 같은 다른 구조에도 성립하는지 묻는다. G3에서는 &lsquo;BST는 항상 빠르다&rsquo;처럼 지나치게 넓힌 문장을 경계한다.</p>
 </details>
+<p>같은 점 한 문장, 다른 점 한 문장을 쓴다. 다른 점이 없으면 &ldquo;다른 점 없음&rdquo;이라고 쓴다.</p>
+<div class="ans-row"><span class="n"></span><textarea class="in l" rows="5" data-key="A13.compare" placeholder="같은 점: … 다른 점: …" data-label="A13 공개 후 비교">같은 점: 처리 시점에 따라 순서가 달라진다. 다른 점: 우리 문장에는 "불변식" 또는 "스코프·수명"에 해당하는 말이 없었다.</textarea></div>
+</div>
 
-<p><b>공개 후 비교</b> 위 상자의 문장과 내 문장의 같은 점, 다른 점을 적는다.</p><p class="how">쓰는 법: 같은 점 한 문장, 다른 점 한 문장으로 쓴다. 다른 점이 없으면 &ldquo;다른 점 없음&rdquo;이라고 쓴다.</p>
-<textarea class="in l" rows="5" data-key="A13.compare" placeholder="같은 점: … 다른 점: …" data-label="A13 공개 후 비교">같은 점: 처리 시점에 따라 순서가 달라진다. 다른 점: 우리 문장에는 "불변식" 또는 "스코프·수명"에 해당하는 말이 없었다.</textarea>
+<p class="wrapup"><b>여기까지</b> 내 일반화 문장을 다듬고 닫힌 상자와 견주었다. A14에서는 새 트리 T6으로 내 코드를 점검한다.</p>
 </section>
 
-<section id="A14" class="sheet">
+<section id="A14" class="sheet lesson">
 <h2>A14 · 과제 마무리 점검과 새 트리(T6) 전이<small>3차시 · 12분 · 개인</small></h2>
-<p class="meta"><span>코드: <a class="xlink" href="student_code_lab_part2.html#A14">코드 실습 A14</a></span><span>산출물: 과제 마무리 점검 + 전이 연습 결과</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>새 트리 T6에서 코드를 바꾸지 않아도 통과하는가? 마무리 점검 뒤 남은 과제는 무엇인가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">과제 착수</span>코드 쪽 <a class="xlink" href="student_code_lab_part2.html#A14">실습 코드 A14</a>의 (가)를 실행해 앞 세 줄에 통과/미통과를 고르고, 미통과이면 실패한 경우와 이유를 쓴다.<span class="tg-where">점검 표 앞 세 줄</span></li>
-<li><span class="tg-stage">적용</span>(나) 전이 연습은 보조 연습이다. 시간이 있을 때만 하고 넷째 줄에 결과를 고른다.<span class="tg-where">점검 표 넷째 줄(선택)</span></li>
-<li><span class="tg-stage">비교</span>토론 D1에서 반대 입장이 내세울 근거 한 문장을 쓰고, 내 입장·이유·반대 근거에 대한 답을 3~4문장으로 쓴다.<span class="tg-where">[토론 메모 (D1)]</span></li>
-<li><span class="tg-stage">설명</span>남은 과제를 할 일 순서대로 번호를 붙여 2~4줄로 쓴다.<span class="tg-where">[남은 과제 계획]</span></li>
-</ol>
-</div>
-<p>(가) 실습 과제(전/중/후위 3개 함수) 마무리 점검 → 아래 표의 앞 세 줄. (나) 전이 연습(보조, 과제 제출물 아님) → 표의 마지막 줄.</p>
-<p>(가)는 코드 쪽 A14의 &lsquo;(가) 실행 칸&rsquo;에서 한다. 이 쪽은 1차시·2차시 코드와 파이썬 환경이 따로이므로, 코드 쪽 안내대로 앞 쪽 코드를 불러와 실행한다.</p>
-<div class="learn-box"><span class="lb-title">학습 내용 · 마무리 점검과 토론 방법</span>
-<p>T6(삽입 <code class="i">[40, 20, 60, 10, 30, 50, 70]</code>)의 모양이다. 오늘 새로 만나는 트리이다.</p>
-<pre class="diagram" style="background:#fff;color:#1f2328;border:1px solid #cfd6e2;border-radius:6px;padding:8px 12px;font-size:12.5px;line-height:1.4;overflow-x:auto;white-space:pre">        40
+<p class="lead">처음 보는 트리 T6에서도 내 순회 코드가 통과할까? 점검은 <a class="xlink" href="student_code_lab_part2.html#A14">실습 코드 A14</a>의 (가) 실행 칸에서 하고, 결과를 이 쪽 표에 적는다.</p>
+
+<div class="step">
+<h3>새 트리 T6 보기</h3>
+<p>T6은 <code class="i">[40, 20, 60, 10, 30, 50, 70]</code>을 이 순서로 넣은 BST이다. 오늘 처음 만나는 트리이다.</p>
+<pre class="fig">        40
       /    \
     20      60
    /  \    /  \
   10  30  50  70</pre>
-<ul><li><b>(가) 마무리 점검</b>: 순회 함수를 T6에 맞추어 고치지 않고, 처음 보는 트리에서도 세 순회가 기대 결과와 일치하는지 본다. 자체 점검용 기대 출력은 코드 쪽 A14에 있다. 실패하면 T6만의 문제가 아니라 함수 자체의 오류이므로 실패 메시지가 가리키는 함수를 고친다.</li>
-<li>표의 둘째 줄은 같은 함수를 여러 번, 또는 다른 트리에 호출해도 결과가 섞이지 않는지를, 셋째 줄은 빈 트리(결과 <code class="i">[]</code>), 한쪽 자식만 있는 노드, 한쪽으로만 이어진 T5를 묻는다. 미완은 주간 과제로 이어지며 제출 형식은 코드 쪽 &lsquo;실습 과제 안내&rsquo;를 따른다.</li>
-<li><b>(나) 전이 연습</b>은 채점하지 않는 보조 연습이며 안내는 코드 쪽 A14에 있다.</li>
-<li><b>토론 D1</b>: 먼저 내 생각과 반대되는 입장에서 가장 강한 근거를 찾고, 그 근거를 읽은 뒤의 내 입장과 이유를 쓴다.</li></ul>
+<div class="quiz" data-accept="40" data-hint="전위는 자신을 먼저 출력한다. T6의 루트는?">
+<p class="q">T6을 전위로 돌 때 처음 출력되는 값은?</p>
+<div class="ans"><input type="text" aria-label="T6 전위의 첫 값" placeholder="예: 숫자"><button type="button">확인</button></div>
+<p class="why">루트 40을 가장 먼저 출력한다.</p>
 </div>
-<p class="how">쓰는 법: 결과 칸에서 통과/미통과를 고른다. 메모 칸은 미통과일 때 실패한 경우와 이유를 한 문장으로 쓰고, 통과이면 비워 둔다. 넷째 줄은 보조 연습이므로 (선택)이다.</p><table class="fill"><tr><th>점검 항목</th><th style="width:16%">결과</th><th style="width:34%">메모</th></tr>
-<tr><td class="lab">순회 코드를 바꾸지 않고 T6(삽입 <code class="i">[40, 20, 60, 10, 30, 50, 70]</code>)에서 세 순회가 통과하는가</td><td class="in-cell"><select class="in" data-key="A14.check.r1.c1" data-label="A14 마무리 점검 순회 코드를 바꾸지 않고 T6(삽입 [40, 20, 60, 10, 30,… · 결과"><option value="">선택</option><option value="통과" selected>통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r1.c2" placeholder="미통과일 때 이유 한 문장" data-label="A14 마무리 점검 순회 코드를 바꾸지 않고 T6(삽입 [40, 20, 60, 10, 30,… · 메모">T6에서 전위·중위·후위 모두 기대 결과와 일치함</textarea></td></tr>
-<tr><td class="lab">같은 함수를 여러 번 호출하거나 다른 트리에 호출해도 결과가 섞이지 않는가</td><td class="in-cell"><select class="in" data-key="A14.check.r2.c1" data-label="A14 마무리 점검 같은 함수를 여러 번 호출하거나 다른 트리에 호출해도 결과가 섞이지 않는… · 결과"><option value="">선택</option><option value="통과" selected>통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r2.c2" placeholder="미통과일 때 이유 한 문장" data-label="A14 마무리 점검 같은 함수를 여러 번 호출하거나 다른 트리에 호출해도 결과가 섞이지 않는… · 메모">두 번 호출해도 같은 결과이고 다른 트리를 호출해도 섞이지 않음(결과를 인자 out으로 넘기는 방식)</textarea></td></tr>
-<tr><td class="lab">빈 트리, 한쪽 자식만 있는 노드, 편향 트리(T5)에서 동작하는가</td><td class="in-cell"><select class="in" data-key="A14.check.r3.c1" data-label="A14 마무리 점검 빈 트리, 한쪽 자식만 있는 노드, 편향 트리(T5)에서 동작하는가 · 결과"><option value="">선택</option><option value="통과" selected>통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r3.c2" placeholder="미통과일 때 이유 한 문장" data-label="A14 마무리 점검 빈 트리, 한쪽 자식만 있는 노드, 편향 트리(T5)에서 동작하는가 · 메모">빈 트리는 [], T5는 한쪽으로만 내려가도 정상</textarea></td></tr>
-<tr><td class="lab">(보조 연습, 채점 대상 아님) inorder_list·height 테스트 통과</td><td class="in-cell"><select class="in" data-key="A14.check.r4.c1" data-label="A14 마무리 점검 (보조 연습, 채점 대상 아님) inorder_list·height 테스… · 결과"><option value="">선택</option><option value="통과" selected>통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r4.c2" placeholder="(선택) 미통과일 때 이유" data-label="A14 마무리 점검 (보조 연습, 채점 대상 아님) inorder_list·height 테스… · 메모">inorder_list와 height 테스트를 통과했다(보조 연습)</textarea></td></tr></table>
-<h3>토론 메모 (D1)</h3>
-<p>정렬된 데이터가 들어올 가능성이 높다면 BST는 여전히 좋은 선택인가? 대안이 있다면 무엇인가?</p>
-<p>먼저 내 생각과 반대되는 입장에서 가장 강한 근거를 한 줄로 쓴다.</p><p class="how">쓰는 법: 한 문장으로 쓴다. 내 입장이 아니라 반대 입장이 내세울 근거를 쓴다.</p>
-<textarea class="in" rows="2" data-key="A14.d1.counter" placeholder="반대 입장의 근거 한 문장" data-label="A14 토론 D1 반대 입장의 가장 강한 근거 한 줄">입력이 정렬되어 있어도 값이 100개 이하라면 편향 트리의 비용이 작아 구현이 단순한 BST로 충분하다.</textarea>
-<p>그다음 그 근거를 읽은 뒤의 내 입장과 이유를 쓴다.</p><p class="how">쓰는 법: 3~4문장으로 쓴다. ① 내 입장(좋은 선택이다/아니다), ② 이유, ③ 위 반대 근거에 대한 답 순서로 쓴다.</p>
-<textarea class="in l" rows="5" data-key="A14.d1" placeholder="① 입장 ② 이유 ③ 반대 근거에 대한 답" data-label="A14 토론 메모 D1">정렬된 데이터가 자주 들어오면 BST는 한쪽으로 쏠려 O(N)이 될 수 있어 그대로는 좋지 않다. 대안은 삽입 전에 입력을 섞기, 스스로 균형을 맞추는 트리(AVL·레드블랙), 정렬된 리스트에서 이진 탐색이다. 반대 근거를 읽어도 값이 많아지면 비용이 커지므로 이 입장을 유지한다.</textarea>
-<p>먼저 위 토론 칸에 내 입장과 이유를 쓴 뒤 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 토론 D1과 점검의 의미</summary>
+</div>
+
+<div class="step">
+<h3>점검 결과 적기</h3>
+<p>실습 코드 A14의 (가)를 실행해 앞 세 줄에 통과 여부를 고른다. 미통과이면 메모에 실패한 경우와 이유를 한 문장으로 쓰고, 통과이면 비워도 된다. 넷째 줄은 보조 연습이라 시간이 있을 때만 한다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:44%">점검 항목</th><th style="width:18%">결과</th><th>메모</th></tr><tr><td class="lab">순회 코드를 바꾸지 않고 T6에서 세 순회가 통과하는가</td><td class="in-cell"><select class="in" data-key="A14.check.r1.c1" data-label="A14 마무리 점검 순회 코드를 바꾸지 않고 T6(삽입 [40, 20, 60, 10, 30,… · 결과"><option value="">선택</option><option value="통과" selected>통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r1.c2" placeholder="미통과일 때 이유 한 문장" data-label="A14 마무리 점검 순회 코드를 바꾸지 않고 T6(삽입 [40, 20, 60, 10, 30,… · 메모">T6에서 전위·중위·후위 모두 기대 결과와 일치함</textarea></td></tr><tr><td class="lab">같은 함수를 여러 번, 또는 다른 트리에 호출해도 결과가 섞이지 않는가</td><td class="in-cell"><select class="in" data-key="A14.check.r2.c1" data-label="A14 마무리 점검 같은 함수를 여러 번 호출하거나 다른 트리에 호출해도 결과가 섞이지 않는… · 결과"><option value="">선택</option><option value="통과" selected>통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r2.c2" placeholder="미통과일 때 이유 한 문장" data-label="A14 마무리 점검 같은 함수를 여러 번 호출하거나 다른 트리에 호출해도 결과가 섞이지 않는… · 메모">두 번 호출해도 같은 결과이고 다른 트리를 호출해도 섞이지 않음(결과를 인자 out으로 넘기는 방식)</textarea></td></tr><tr><td class="lab">빈 트리, 한쪽 자식만 있는 노드, 편향 트리(T5)에서 동작하는가</td><td class="in-cell"><select class="in" data-key="A14.check.r3.c1" data-label="A14 마무리 점검 빈 트리, 한쪽 자식만 있는 노드, 편향 트리(T5)에서 동작하는가 · 결과"><option value="">선택</option><option value="통과" selected>통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r3.c2" placeholder="미통과일 때 이유 한 문장" data-label="A14 마무리 점검 빈 트리, 한쪽 자식만 있는 노드, 편향 트리(T5)에서 동작하는가 · 메모">빈 트리는 [], T5는 한쪽으로만 내려가도 정상</textarea></td></tr><tr><td class="lab">(보조 연습) inorder_list·height 테스트 통과</td><td class="in-cell"><select class="in" data-key="A14.check.r4.c1" data-label="A14 마무리 점검 (보조 연습, 채점 대상 아님) inorder_list·height 테스… · 결과"><option value="">선택</option><option value="통과" selected>통과</option><option value="미통과">미통과</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.check.r4.c2" placeholder="(선택) 미통과일 때 이유" data-label="A14 마무리 점검 (보조 연습, 채점 대상 아님) inorder_list·height 테스… · 메모">inorder_list와 height 테스트를 통과했다(보조 연습)</textarea></td></tr></table></div>
+</div>
+
+<div class="step">
+<h3>토론 D1: 반대 근거부터</h3>
+<p>&ldquo;정렬된 데이터가 들어올 가능성이 높다면 BST는 여전히 좋은 선택인가? 대안이 있다면 무엇인가?&rdquo; 먼저 내 생각과 반대되는 입장이 내세울 가장 강한 근거를 한 문장으로 쓴다.</p>
+<div class="ans-row"><span class="n"></span><textarea class="in" rows="2" data-key="A14.d1.counter" placeholder="반대 입장의 근거 한 문장" data-label="A14 토론 D1 반대 입장의 가장 강한 근거 한 줄">입력이 정렬되어 있어도 값이 100개 이하라면 편향 트리의 비용이 작아 구현이 단순한 BST로 충분하다.</textarea></div>
+</div>
+
+<div class="step">
+<h3>토론 D1: 내 입장</h3>
+<p>그 근거를 읽은 뒤의 내 입장과 이유를 3~4문장으로 쓴다. ① 내 입장, ② 이유, ③ 위 반대 근거에 대한 답 순서이다.</p>
+<div class="ans-row"><span class="n"></span><textarea class="in l" rows="5" data-key="A14.d1" placeholder="① 입장 ② 이유 ③ 반대 근거에 대한 답" data-label="A14 토론 메모 D1">정렬된 데이터가 자주 들어오면 BST는 한쪽으로 쏠려 O(N)이 될 수 있어 그대로는 좋지 않다. 대안은 삽입 전에 입력을 섞기, 스스로 균형을 맞추는 트리(AVL·레드블랙), 정렬된 리스트에서 이진 탐색이다. 반대 근거를 읽어도 값이 많아지면 비용이 커지므로 이 입장을 유지한다.</textarea></div>
+</div>
+
+<div class="step">
+<h3>남은 과제 계획</h3>
+<p>주간 과제로 이어서 할 일을 제출 기한 전까지 할 순서대로 번호를 붙여 2~4줄로 쓴다.</p>
+<div class="ans-row"><span class="n"></span><textarea class="in" rows="3" data-key="A14.plan" placeholder="1. …&#10;2. …" data-label="A14 남은 과제 계획">오늘 중 inorder_list·height 테스트를 끝내고, 내일까지 복잡도 서술을 쓴 뒤, 제출 기한 전날 최종 실행 점검을 한다.</textarea></div>
+</div>
+
+<p class="wrapup"><b>여기까지</b> 새 트리에서 내 코드를 점검하고 남은 과제를 계획했다. A15에서는 AI 없이 형성평가를 푼다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · 토론 D1과 점검의 의미</summary>
 <ul><li>정렬된 데이터가 자주 들어오면 BST는 T5처럼 한쪽으로 쏠려 탐색이 O(N)이 된다. 매우 긴 편향 입력(약 1000개 이상)에서는 파이썬의 재귀 한도 때문에 RecursionError가 <b>발생할 수 있다</b>.</li>
 <li>대안: 입력 순서를 섞어 삽입하기, 스스로 균형을 맞추는 트리(AVL·레드블랙), 정렬된 리스트에 이진 탐색(12주차).</li>
 <li>반대 입장의 근거 예: 값이 적으면(예: 100개 이하) 쏠려도 비용이 작아 구현이 단순한 BST로 충분하다.</li>
 <li>(가)의 의미: 세 순회가 처음 보는 T6에서도 코드를 고치지 않고 통과하면, 함수가 특정 트리가 아니라 &lsquo;부분 트리마다 같은 규칙&rsquo;이라는 구조에 맞춰 쓰였다는 뜻이다.</li></ul>
-</details>
+</details></section>
 
-<h3>남은 과제 계획</h3>
-<p>주간 과제로 이어서 할 일을 적는다(제출 기한 전까지 할 일 순서).</p><p class="how">쓰는 법: 할 일을 순서대로 번호를 붙여 2~4줄로 쓴다.</p>
-<textarea class="in" rows="3" data-key="A14.plan" placeholder="1. …&#10;2. …" data-label="A14 남은 과제 계획">오늘 중 inorder_list·height 테스트를 끝내고, 내일까지 복잡도 서술을 쓴 뒤, 제출 기한 전날 최종 실행 점검을 한다.</textarea>
-</section>
-
-<section id="A15" class="sheet">
+<section id="A15" class="sheet lesson">
 <h2>A15 · 형성평가<small>3차시 · 6분 · 개인</small></h2>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>오늘 배운 것을 AI 없이 내 힘으로 풀 수 있는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">적용</span>별도 문항지의 Q1~Q3을 푼다. AI를 사용하지 않는다.<span class="tg-where"><a class="xlink" href="formative_check.html">형성평가 문항지</a> 입력란</span><span class="tg-done">세 문항에 답이 있다.</span></li>
-</ol>
+<p class="lead">오늘 배운 것을 AI 없이 내 힘으로 풀 수 있는지 확인하자.</p>
+
+<div class="step">
+<h3>문항지 열기</h3>
+<p>별도 문항지 <a class="xlink" href="formative_check.html">형성평가 문항지</a>를 연다. Q1~Q3이 있다.</p>
 </div>
-<p>별도 문항지 <a href="formative_check.html">formative_check.html</a>의 Q1~Q3을 푼다. 답안은 문항지의 입력란에 직접 쓴다. AI를 사용하지 않는 시험적 상황으로 운영한다.</p>
+
+<div class="step">
+<h3>AI 없이 풀기</h3>
+<p>답안은 문항지의 입력란에 직접 쓴다. 이 시간은 AI를 사용하지 않는 시험적 상황으로 운영한다.</p>
+</div>
+
+<p class="wrapup"><b>여기까지</b> 세 문항에 답했다. A16에서는 내가 가졌던 오해를 점검한다.</p>
 </section>
 
-<section id="A16" class="sheet">
+<section id="A16" class="sheet lesson">
 <h2>A16 · 오개념 점검<small>3차시 · 6분 · 개인</small></h2>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내가 가졌던 오해는 오늘 어느 활동에서 확인되었는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">비교</span>진술 세 개가 참인지 거짓인지 고른다.<span class="tg-where">[오개념 점검] 표 참/거짓 칸</span></li>
-<li><span class="tg-stage">설명</span>그렇게 판단한 근거가 된 활동 번호를 쓴다. 근거가 없으면 &ldquo;없음&rdquo;이라고 쓴다.<span class="tg-where">근거 칸</span><span class="tg-done">세 줄이 모두 채워져 있다.</span></li>
-<li><span class="tg-stage">일반화</span>(선택) 처음 생각을 바꾼 진술과 바꾸게 한 활동을 쓴다.<span class="tg-where">(선택) 질문 칸</span></li>
-</ol>
+<p class="lead">내가 가졌던 오해가 오늘 어느 활동에서 확인되었는지 찾아 보자. 닫힌 상자는 표를 채운 뒤에 연다.</p>
+
+<div class="step">
+<h3>세 진술 판단하기</h3>
+<p>진술이 참인지 거짓인지 고르고, 근거가 된 활동 번호를 쓴다(꼴: A1, A5). 근거가 된 활동이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:42%">진술</th><th style="width:16%">참/거짓</th><th>근거가 된 장면(활동 번호)</th></tr><tr><td class="lab">① 부모보다 왼쪽 자식이 작고 오른쪽 자식이 크면 BST이다.</td><td class="in-cell"><select class="in" data-key="A16.tf.r1.c1" data-label="A16 진술 ① 참/거짓"><option value="">선택</option><option value="참">참</option><option value="거짓" selected>거짓</option></select></td><td class="in-cell"><input type="text" class="in" data-key="A16.tf.r1.c2" placeholder="활동 번호 (예: A1)" data-label="A16 진술 ① 근거가 된 장면" aria-label="진술 1 근거가 된 장면" autocomplete="off" value="A7 예측 문항(10의 왼쪽 5, 5의 오른쪽 12). 부모와의 비교만으로는 BST가 아니다."></td></tr><tr><td class="lab">② BST에서 탐색은 항상 O(log N)이다.</td><td class="in-cell"><select class="in" data-key="A16.tf.r2.c1" data-label="A16 진술 ② 참/거짓"><option value="">선택</option><option value="참">참</option><option value="거짓" selected>거짓</option></select></td><td class="in-cell"><input type="text" class="in" data-key="A16.tf.r2.c2" placeholder="활동 번호 (예: A1)" data-label="A16 진술 ② 근거가 된 장면" aria-label="진술 2 근거가 된 장면" autocomplete="off" value="A9(T5에서 7을 찾을 때 7번 방문). 균형일 때만 O(log N)이다."></td></tr><tr><td class="lab">③ 함수의 기본값 []는 호출할 때마다 새로 만들어진다.</td><td class="in-cell"><select class="in" data-key="A16.tf.r3.c1" data-label="A16 진술 ③ 참/거짓"><option value="">선택</option><option value="참">참</option><option value="거짓" selected>거짓</option></select></td><td class="in-cell"><input type="text" class="in" data-key="A16.tf.r3.c2" placeholder="활동 번호 (예: A1)" data-label="A16 진술 ③ 근거가 된 장면" aria-label="진술 3 근거가 된 장면" autocomplete="off" value="A11(두 번째 호출 결과가 14개)과 A12(__defaults__ 관찰)."></td></tr></table></div>
 </div>
-<h3>오개념 점검</h3>
-<p>다음 진술이 참인지 거짓인지 고르고, 오늘 활동 중 근거가 된 장면(활동 번호)을 적는다.</p>
-<p class="how">쓰는 법: 참/거짓을 고르고, 근거 칸에는 활동 번호만 쓴다(꼴: A1, A5). 근거가 된 활동이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p><table class="fill"><tr><th>진술</th><th style="width:14%">참/거짓</th><th style="width:30%">근거가 된 장면(활동 번호)</th></tr>
-<tr><td class="lab">① 부모보다 왼쪽 자식이 작고 오른쪽 자식이 크면 BST이다.</td><td class="in-cell"><select class="in" data-key="A16.tf.r1.c1" data-label="A16 진술 ① 참/거짓"><option value="">선택</option><option value="참">참</option><option value="거짓" selected>거짓</option></select></td><td class="in-cell"><input type="text" class="in" data-key="A16.tf.r1.c2" placeholder="활동 번호 (예: A1)" data-label="A16 진술 ① 근거가 된 장면" aria-label="진술 1 근거가 된 장면" autocomplete="off" value="A7 예측 문항(10의 왼쪽 5, 5의 오른쪽 12). 부모와의 비교만으로는 BST가 아니다."></td></tr>
-<tr><td class="lab">② BST에서 탐색은 항상 O(log N)이다.</td><td class="in-cell"><select class="in" data-key="A16.tf.r2.c1" data-label="A16 진술 ② 참/거짓"><option value="">선택</option><option value="참">참</option><option value="거짓" selected>거짓</option></select></td><td class="in-cell"><input type="text" class="in" data-key="A16.tf.r2.c2" placeholder="활동 번호 (예: A1)" data-label="A16 진술 ② 근거가 된 장면" aria-label="진술 2 근거가 된 장면" autocomplete="off" value="A9(T5에서 7을 찾을 때 7번 방문). 균형일 때만 O(log N)이다."></td></tr>
-<tr><td class="lab">③ 함수의 기본값 []는 호출할 때마다 새로 만들어진다.</td><td class="in-cell"><select class="in" data-key="A16.tf.r3.c1" data-label="A16 진술 ③ 참/거짓"><option value="">선택</option><option value="참">참</option><option value="거짓" selected>거짓</option></select></td><td class="in-cell"><input type="text" class="in" data-key="A16.tf.r3.c2" placeholder="활동 번호 (예: A1)" data-label="A16 진술 ③ 근거가 된 장면" aria-label="진술 3 근거가 된 장면" autocomplete="off" value="A11(두 번째 호출 결과가 14개)과 A12(__defaults__ 관찰)."></td></tr></table>
-<p>(선택) 위 세 진술 중 오늘 처음 생각을 바꾼 것은 몇 번이며, 바꾸게 한 활동은 무엇인가?</p><p class="how">쓰는 법: 한 문장으로 쓴다(꼴: ○번, A○). 바꾼 것이 없으면 비워 둔다.</p>
-<textarea class="in" rows="2" data-key="A16.tf.changed" placeholder="○번, A○" data-label="A16 처음 생각을 바꾼 진술 번호와 바꾸게 한 활동">③번이다. A11에서 두 번째 호출 결과가 14개로 나오고 A12에서 __defaults__가 바뀌는 것을 보고 생각을 바꾸었다.</textarea>
-<p>먼저 위 표와 칸에 자기 판단을 쓴 뒤 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 오개념 점검 진술의 답</summary>
+
+<div class="step">
+<h3>생각이 바뀐 것</h3>
+<p>(선택) 세 진술 중 오늘 처음 생각을 바꾼 것은 몇 번이며, 바꾸게 한 활동은 무엇인가? 꼴은 &ldquo;○번, A○&rdquo;이다. 바꾼 것이 없으면 비워 둔다.</p>
+<div class="ans-row"><span class="n"></span><textarea class="in" rows="2" data-key="A16.tf.changed" placeholder="○번, A○" data-label="A16 처음 생각을 바꾼 진술 번호와 바꾸게 한 활동">③번이다. A11에서 두 번째 호출 결과가 14개로 나오고 A12에서 __defaults__가 바뀌는 것을 보고 생각을 바꾸었다.</textarea></div>
+</div>
+
+<div class="step">
+<h3>돌아보기</h3>
+<p>각 줄을 한 문장씩 쓴다. 바뀐 생각이나 헷갈리는 부분이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:34%">점검 질문</th><th>지금의 생각</th></tr><tr><td class="lab">오늘 가장 바뀐 생각은 무엇인가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r1.c1" placeholder="한 문장 / 없음" data-label="A16 오개념 점검 오늘 가장 바뀐 생각은 무엇인가 · 지금의 생각">순회는 규칙 하나를 반복하고 처리 시점만 바꾸면 된다는 점이 가장 바뀐 생각이다.</textarea></td></tr><tr><td class="lab">아직 헷갈리는 부분은 무엇인가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r2.c1" placeholder="한 문장 / 없음" data-label="A16 오개념 점검 아직 헷갈리는 부분은 무엇인가 · 지금의 생각">기본 인자가 언제 평가되는지는 알았지만, 다른 변경 가능한 값에서도 같은 일이 생기는지는 아직 헷갈린다.</textarea></td></tr></table></div>
+</div>
+
+<p class="wrapup"><b>여기까지</b> 오늘의 오해와 남은 의문을 정리했다. 다음 주(9주차)는 힙을 다룬다. 오늘 배운 루트·리프·높이 용어를 다시 떠올려 오자.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · 오개념 점검 진술의 답</summary>
 <ul><li>① 거짓: 부모와의 비교만 맞아도 BST가 아닐 수 있다(A7의 10 아래 5, 5의 오른쪽 12). 모든 부분 트리에서 성립해야 한다.</li>
 <li>② 거짓: 균형일 때만 O(log N)이고 T5처럼 쏠리면 O(N)이다(A9).</li>
 <li>③ 거짓: 기본값 <code class="i">[]</code>은 함수가 정의될 때 한 번만 만들어져 모든 호출이 공유한다(A11·A12).</li>
 <li>세 진술 모두 &lsquo;원래 알고 있었다&rsquo;고 느꼈다면 ①의 반례를 직접 말해 볼 수 있는지 점검한다.</li></ul>
-</details>
-<p class="how">쓰는 법: 각 줄은 한 문장씩 쓴다. 바뀐 생각이나 헷갈리는 부분이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p><table class="fill"><tr><th>점검 질문</th><th style="width:36%">지금의 생각</th></tr>
-<tr><td class="lab">오늘 가장 바뀐 생각은 무엇인가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r1.c1" placeholder="한 문장 / 없음" data-label="A16 오개념 점검 오늘 가장 바뀐 생각은 무엇인가 · 지금의 생각">순회는 규칙 하나를 반복하고 처리 시점만 바꾸면 된다는 점이 가장 바뀐 생각이다.</textarea></td></tr>
-<tr><td class="lab">아직 헷갈리는 부분은 무엇인가</td><td class="in-cell"><textarea class="in" rows="1" data-key="A16.reflect.r2.c1" placeholder="한 문장 / 없음" data-label="A16 오개념 점검 아직 헷갈리는 부분은 무엇인가 · 지금의 생각">기본 인자가 언제 평가되는지는 알았지만, 다른 변경 가능한 값에서도 같은 일이 생기는지는 아직 헷갈린다.</textarea></td></tr>
-</table>
-<p>다음 주(9주차)는 힙을 다룬다. 오늘 배운 루트·리프·높이 용어를 다시 떠올려 오자.</p>
-</section>
+</details></section>
 
 <section id="theory-after" class="sheet">
 <h2>활동을 마친 뒤 확인 · 정리<small>마지막 활동(A16) 뒤에 연다 · 입력란 없음</small></h2>

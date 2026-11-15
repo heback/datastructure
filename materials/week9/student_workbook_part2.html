@@ -106,6 +106,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 .ck input,.rg input{width:16px;height:16px;accent-color:#3572a5}
 .rg{display:inline-flex;flex-wrap:wrap;gap:4px 14px;vertical-align:middle}
 .rg label{display:inline-flex;align-items:center;gap:5px}
+.qtext{margin:12px 0 2px;font-weight:600;break-after:avoid}
 @media (max-width:640px){#savebar{padding:8px 14px}#savebar .sb-auto{margin-left:0}}
 #printid{display:none}
 @media print{
@@ -125,6 +126,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <link rel="stylesheet" href="../assets/topnav.css">
 <link rel="stylesheet" href="../assets/theme.css">
 <link rel="stylesheet" href="../assets/sheettabs.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script src="../assets/lesson.js" defer></script>
 <script src="../assets/topnav.js" defer></script>
 <link rel="stylesheet" href="../assets/chatkit.css">
 <script src="../assets/chatkit.js" defer></script>
@@ -134,79 +137,175 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(9)  # 학생용 2부 · 탐구 활동지 A11~A16 (3차시 배포)</div>
   <h1>9주차 탐구 활동지 2부 — 최대 힙 우회, K번째 최댓값, 오개념 점검</h1>
-  <p class="lead">3차시(A11 시작) 때 배포하는 활동지이다. 각 활동에서 <b>예측 → 관찰 → 정리</b> 순서로 직접 기록한다. 정답은 활동을 마친 뒤 여는 초록 상자에만 있다.</p><p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
+  <p class="lead">3차시(A11 시작) 때 쓰는 활동지이다. 활동마다 작은 사례를 본 뒤 예측, 관찰, 정리 순서로 해 보자. 확인 상자는 활동 끝에 닫혀 있으니 쓴 뒤에 연다.</p><p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
 </header>
 <nav><a href="#A11">A11</a><a href="#A12">A12</a><a href="#A13">A13</a><a href="#A14">A14</a><a href="#A15">A15</a><a href="#A16">A16</a><a href="index.html">목록</a></nav>
 
-<section id="A11" class="sheet">
+<section id="A11" class="sheet lesson">
 <h2>A11 · 큰 값부터 꺼내려면?<small>3차시 · 8분 · 개인</small></h2>
-<p class="meta"><span>산출물: 예측-실제 표, 우회 코드, 오류 원인 한 줄씩</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>heapq는 작은 값부터 꺼낸다. 큰 값부터 꺼내려면 넣을 때와 꺼낼 때 각각 무엇을 해야 하는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">예측</span>nums를 차례로 넣고 4번 꺼내면 나올 값의 순서를 예측해 쓴다. 실행하기 전에 쓴다.<span class="tg-where">[아이디어 모으기] 위의 예측-실제 표 예측 칸</span></li>
-<li><span class="tg-stage">관찰</span><a class="xlink" href="student_code_lab_part2.html#A11">코드 실습 A11</a>의 첫 코드를 실행해 실제 값을 쓴다.<span class="tg-where">같은 표의 실제 칸</span></li>
-<li><span class="tg-stage">시도</span>큰 값부터 꺼낼 방법을 내 말로 쓰고, 왜 통할 것 같은지 쓴다.<span class="tg-where">[아이디어 모으기]</span></li>
-<li><span class="tg-stage">적용</span><code class="i">push_max</code>, <code class="i">pop_max</code>를 완성하고 테스트 결과를 고른다. 이어서 오류 코드 B1, B2의 결과와 원인을 쓴다.<span class="tg-where">[우회 코드 작성], [오류 코드 B1, B2]</span></li>
-<li><span class="tg-stage">설명</span>내 아이디어에서 한쪽만 적용하면 무엇이 깨지는지 쓴다.<span class="tg-where">&lsquo;생각해 볼 질문&rsquo; 칸</span></li>
-</ol>
+<p class="lead">heapq는 작은 값부터 꺼낸다. 큰 값부터 꺼내려면 어떻게 할까? 작은 사례를 예측하고 실행한 뒤 내 방법을 써 보자.</p>
+
+<div class="step">
+<h3>작은 사례 예측하기</h3>
+<p>heapq의 힙은 작은 값부터 나온다. <code class="i">nums = [3, 1, 2]</code>를 차례로 heappush한 뒤 heappop을 3번 해서 꺼낸 값을 순서대로 모은다. 먼저 예측해 보자.</p>
+<div class="quiz predict">
+<p class="q">꺼낸 값의 순서는 무엇일까?</p>
+<div class="opts"><button type="button">[3, 2, 1]</button><button type="button">[1, 2, 3]</button><button type="button">[3, 1, 2]</button></div>
 </div>
-<p>heapq의 힙은 <b>가장 작은 값</b>이 먼저 나온다. 그런데 <b>가장 큰 값부터</b> 뽑아야 한다면? <b>먼저 예측하고, 그다음 실행</b>한다.</p>
-<div class="learn-box"><span class="lb-title">학습 내용 · A11 활동 순서</span>
-<ol>
-<li><b>예측</b>: 아래 표의 예측 칸에, nums를 차례로 heappush한 뒤 heappop을 4번 하면 나오는 값의 순서를 쓴다. 실행하기 전에 쓴다.</li>
-<li><b>실행</b>: 실습 코드 2부 A11의 첫 코드를 실행해 실제 값을 쓴다. 예측과 다르면 어떤 점이 다른지 본다.</li>
-<li><b>아이디어</b>: 큰 값부터 꺼낼 방법을 스스로 생각해 쓴 뒤, 그 방법으로 push_max, pop_max를 만든다.</li>
-<li><b>오류 코드</b>: 실습 코드 2부 A11의 B1, B2를 실행해 결과와 원인을 쓴다. B2는 4개를 모두 꺼내 본다.</li>
-</ol>
-<p>값을 출력하면서 같은 줄에서 heappop을 하면 pop이 끝난 뒤의 리스트가 출력된다. 출력과 pop은 별도의 줄에 쓴다.</p></div>
-<p><code class="i">nums = [7, 2, 9, 4]</code>를 차례로 <code class="i">heappush</code>한 뒤 <code class="i">heappop</code>을 4번 해서 나온 값을 차례로 리스트에 모은다.</p>
-<p class="hint">쓰는 법: 꺼낸 값 네 개를 꺼낸 순서대로 대괄호와 쉼표로 쓴다(꼴: [8, 6, 5, 1]). 예측은 틀려도 된다.</p><table class="fill"><tr><th style="width:34%">항목</th><th>예측 (실행 전)</th><th>실제 (실행 후)</th></tr><tr><td class="lab">그대로 push, pop 4번 한 결과</td><td class="in-cell"><input type="text" class="in" data-key="A11.pr.r1.c1" data-label="A11 예측-실제 그대로 push, pop 4번 한 결과 · 예측 (실행 전)" autocomplete="off" value="[9, 7, 4, 2]"></td><td class="in-cell"><input type="text" class="in" data-key="A11.pr.r1.c2" data-label="A11 예측-실제 그대로 push, pop 4번 한 결과 · 실제 (실행 후)" autocomplete="off" value="[2, 4, 7, 9]"></td></tr></table><p><a class="xlink" href="student_code_lab_part2.html#A11">코드 실습 A11</a>의 첫 코드로 실행한다.</p><h3>아이디어 모으기</h3><p>이 도구(heapq)로 큰 값부터 꺼내는 방법을 스스로 생각해 낸 대로 적는다. 정답이라고 확신하지 않아도 된다.</p><p>아이디어 1</p><p class="hint">쓰는 법: 한 문장씩 쓴다. 아이디어가 하나뿐이면 아이디어 2에 &ldquo;없음&rdquo;이라고 쓴다.</p><textarea class="in" rows="3" data-key="A11.idea1" data-label="A11 큰 값부터 꺼내는 아이디어 1">넣을 때 값 앞에 -를 붙여서 넣는다.</textarea><p>아이디어 2</p><textarea class="in" rows="3" data-key="A11.idea2" data-label="A11 큰 값부터 꺼내는 아이디어 2">꺼낸 값에 다시 -를 붙여 원래 값으로 되돌린다.</textarea><p>왜 그 아이디어가 통할 것 같은가?</p><p class="hint">쓰는 법: 1~2문장.</p><textarea class="in" rows="3" data-key="A11.idea_why" data-label="A11 아이디어가 통할 것 같은 이유">-를 붙이면 큰 수가 작은 수가 되어 heapq가 먼저 꺼내므로, 꺼낸 뒤 -를 붙이면 원래 큰 값이 먼저 나온다.</textarea><h3>우회 코드 작성</h3><p>코드 실습 A11의 <code class="i">push_max</code>, <code class="i">pop_max</code>를 완성해 테스트를 돌린다.</p><p>테스트 결과: <span class="rg" data-key="A11.test" data-type="radio" data-label="A11 우회 코드 테스트 결과"><label><input type="radio" name="r_A11_test" value="통과" checked> 통과</label><label><input type="radio" name="r_A11_test" value="아직 실패"> 아직 실패</label><label><input type="radio" name="r_A11_test" value="실행해 보지 못함"> 실행해 보지 못함</label></span></p><h3>오류 코드 B1, B2</h3><p>실습 코드 2부 A11의 B1, B2 코드를 실행해 결과를 쓰고, 원인을 한 줄로 쓴다. B2는 <b>한 개만 꺼내 보지 말고 네 개 모두</b> 꺼내 확인한다.</p><p class="hint">쓰는 법: 실행 결과는 화면에 찍힌 값을 그대로 옮긴다. 원인은 한 문장으로 쓴다.</p><table class="fill"><tr><th style="width:26%">코드</th><th>실행 결과</th><th style="width:40%">원인 (한 줄)</th></tr><tr><td class="lab">B1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A11.bug.r1.c1" data-label="A11 오류 코드 B1 · 실행 결과">[-9, -7, -4, -2]</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A11.bug.r1.c2" data-label="A11 오류 코드 B1 · 원인 (한 줄)">꺼낸 값에 -를 다시 붙이지 않았다(넣을 때와 꺼낼 때가 짝이 아니다).</textarea></td></tr><tr><td class="lab">B2 (네 개 모두 꺼낸 결과)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A11.bug.r2.c1" data-label="A11 오류 코드 B2 (네 개 모두 꺼낸 결과) · 실행 결과">[9, 7, 2, -4]</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A11.bug.r2.c2" data-label="A11 오류 코드 B2 (네 개 모두 꺼낸 결과) · 원인 (한 줄)">4만 반전하지 않아 4로 들어가고 가장 마지막에 나오며 꺼낼 때 -4가 된다. 첫 값 9만 보면 맞아 보인다.</textarea></td></tr></table><p><b>생각해 볼 질문</b> (아이디어를 쓴 뒤에 읽는다) ① 내 아이디어로 push한 뒤 pop하면 꺼낸 값은 넣은 값과 같은가? ② 내 아이디어에서 넣을 때와 꺼낼 때 중 한쪽만 적용하면 무엇이 깨지는가? 두 질문에 대한 답을 아래에 쓴다.</p><p class="hint">쓰는 법: ①, ②로 번호를 붙여 한 문장씩 쓴다.</p><textarea class="in" rows="4" data-key="A11.why" data-label="A11 큰 값이 작은 값이 되는 이유와 한쪽만 바꿀 때 깨지는 것">-9가 -2보다 작으므로 부호를 뒤집으면 큰 값이 작은 값이 되어 최소 힙이 먼저 꺼낸다. 꺼낸 뒤 부호를 빼먹으면 B1처럼 음수가 나오고, 일부만 바꾸면 B2처럼 순서가 깨진다. 넣을 때와 꺼낼 때를 짝으로 맞춰야 한다.</textarea>
-<p class="note">먼저 위 칸에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A11 정리: 결과·원인·해결</summary>
+<script type="text/plain" data-id="A11-1">
+import heapq
+nums = [3, 1, 2]
+h = []
+for x in nums:
+    heapq.heappush(h, x)
+out = []
+for _ in range(3):
+    out.append(heapq.heappop(h))
+print(out)
+</script>
+<div class="mycode"><textarea class="in code" rows="9" data-type="code" data-starter="A11-1" data-label="연습 · 꺼내는 순서" spellcheck="false"></textarea></div>
+
+</div>
+
+<div class="step">
+<h3>4개 값으로 예측과 실제</h3>
+<p><code class="i">nums = [7, 2, 9, 4]</code>를 같은 방식으로 넣고 4번 꺼낸다. <a class="xlink" href="student_code_lab_part2.html#A11">실습 코드 A11</a>의 첫 코드를 실행해 실제 칸에 옮긴다. 예측은 틀려도 괜찮다.</p>
+<div class="scroll"><table class="fill"><tr><th>항목</th><th>예측 (실행 전)</th><th>실제 (실행 후)</th></tr><tr><td class="lab">그대로 push, pop 4번 한 결과</td><td class="in-cell"><input type="text" class="in" placeholder="예: [8, 6, 5, 1]" data-key="A11.pr.r1.c1" data-label="A11 예측-실제 그대로 push, pop 4번 한 결과 · 예측 (실행 전)" autocomplete="off" value="[9, 7, 4, 2]"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [8, 6, 5, 1]" data-key="A11.pr.r1.c2" data-label="A11 예측-실제 그대로 push, pop 4번 한 결과 · 실제 (실행 후)" autocomplete="off" value="[2, 4, 7, 9]"></td></tr></table></div>
+
+</div>
+
+<div class="step">
+<h3>큰 값부터 꺼내는 방법</h3>
+<p>heapq로 큰 값부터 꺼내려면 넣을 때와 꺼낼 때 각각 무엇을 해야 할까? 정답이라고 확신하지 않아도 되니 생각한 대로 한 문장씩 쓴다.</p>
+<div class="ans-row"><span class="n" style="white-space:nowrap">넣을 때</span><textarea class="in" rows="3" placeholder="예: 넣을 때 …" data-key="A11.idea1" data-label="A11 큰 값부터 꺼내는 아이디어 1">넣을 때 값 앞에 -를 붙여서 넣는다.</textarea></div>
+<div class="ans-row"><span class="n" style="white-space:nowrap">꺼낼 때</span><textarea class="in" rows="3" placeholder="예: 꺼낸 값에 …" data-key="A11.idea2" data-label="A11 큰 값부터 꺼내는 아이디어 2">꺼낸 값에 다시 -를 붙여 원래 값으로 되돌린다.</textarea></div>
+
+</div>
+
+<div class="step">
+<h3>내 방법을 코드로</h3>
+<p><a class="xlink" href="student_code_lab_part2.html#A11">실습 코드 A11</a>에서 내 방법으로 <code class="i">push_max</code>, <code class="i">pop_max</code>를 완성해 테스트를 돌린다. 결과를 여기에 고른다.</p>
+<p>테스트 결과 <span class="rg" data-key="A11.test" data-type="radio" data-label="A11 우회 코드 테스트 결과"><label><input type="radio" name="r_A11_test" value="통과" checked> 통과</label><label><input type="radio" name="r_A11_test" value="아직 실패"> 아직 실패</label><label><input type="radio" name="r_A11_test" value="실행해 보지 못함"> 실행해 보지 못함</label></span></p>
+
+</div>
+
+<div class="step">
+<h3>오류 코드 B1·B2</h3>
+<p>같은 쪽의 B1, B2 코드를 실행해 결과를 옮겨 적는다. B2는 하나만 꺼내 보지 말고 네 개를 모두 꺼낸다.</p>
+<div class="scroll"><table class="fill"><tr><th>코드</th><th>실행 결과</th></tr><tr><td class="lab">B1</td><td class="in-cell"><textarea class="in" rows="1" placeholder="화면에 찍힌 값" data-key="A11.bug.r1.c1" data-label="A11 오류 코드 B1 · 실행 결과">[-9, -7, -4, -2]</textarea></td></tr><tr><td class="lab">B2 (네 개 모두 꺼낸 결과)</td><td class="in-cell"><textarea class="in" rows="1" placeholder="화면에 찍힌 값" data-key="A11.bug.r2.c1" data-label="A11 오류 코드 B2 (네 개 모두 꺼낸 결과) · 실행 결과">[9, 7, 2, -4]</textarea></td></tr></table></div>
+<div class="quiz" data-answer="1">
+<p class="q">B1의 결과가 [-9, -7, -4, -2]처럼 음수로 나온 까닭은?</p>
+<div class="opts"><button type="button">꺼낸 값에 다시 -를 붙이지 않았다</button><button type="button" data-hint="넣을 때는 -를 붙여 넣었기 때문에 음수가 나온다.">넣을 때 -를 붙이지 않았다</button></div>
+<p class="why">넣을 때와 꺼낼 때가 짝이 아니라서 부호가 되돌려지지 않았다.</p>
+</div>
+<div class="quiz" data-answer="1">
+<p class="q">B2에서 4개를 모두 꺼냈더니 [9, 7, 2, -4]였다. 맨 끝의 -4는 왜 나왔을까?</p>
+<div class="opts"><button type="button">4만 부호를 뒤집지 않고 넣어 가장 늦게 나왔고, 꺼낼 때 -4가 되었다</button><button type="button" data-hint="9, 7, 2는 부호를 뒤집어 넣은 값이다. 4는 어떻게 넣었는가?">4가 가장 작은 값이라서 마지막에 나왔다</button></div>
+<p class="why">첫 값 9만 보면 맞아 보인다. 그래서 네 개를 모두 꺼내 확인해야 한다.</p>
+</div>
+
+</div>
+
+<div class="step">
+<h3>한쪽만 적용하면</h3>
+<p class="qtext">① 내 방법으로 넣은 뒤 꺼낸 값은 넣은 값과 같은가? ② 넣을 때와 꺼낼 때 중 한쪽만 적용하면 무엇이 깨지는가?</p>
+<div class="ans-row"><span class="n" style="white-space:nowrap">내 답</span><textarea class="in" rows="4" placeholder="예: ① …, ② …" data-key="A11.why" data-label="A11 큰 값이 작은 값이 되는 이유와 한쪽만 바꿀 때 깨지는 것">-9가 -2보다 작으므로 부호를 뒤집으면 큰 값이 작은 값이 되어 최소 힙이 먼저 꺼낸다. 꺼낸 뒤 부호를 빼먹으면 B1처럼 음수가 나오고, 일부만 바꾸면 B2처럼 순서가 깨진다. 넣을 때와 꺼낼 때를 짝으로 맞춰야 한다.</textarea></div>
+
+</div>
+
+<p class="wrapup"><b>여기까지</b> 작은 값 먼저 나오는 힙으로 큰 값을 꺼내는 방법을 만들고 오류 코드를 살폈다. A12에서는 K번째로 큰 값을 구한다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · A11 정리: 결과·원인·해결</summary>
 <p>그대로 push, pop 4번 한 결과는 [2, 4, 7, 9]이다. heapq의 힙은 최소 힙이라 작은 값부터 나온다.</p>
 <p>B1은 [-9, -7, -4, -2]이다. 넣을 때만 부호를 뒤집고 꺼낸 값을 되돌리지 않았다. B2는 4개를 모두 꺼내면 [9, 7, 2, -4]이다. 4만 부호를 뒤집지 않아 4로 들어가 가장 늦게 나오고, 꺼낼 때 -4가 되었다. 첫 값 9만 보면 맞아 보이므로 4개를 모두 확인해야 한다.</p>
 <p>해결의 한 예는 넣을 때 값에 &minus;를 붙이고 꺼낸 값에 다시 &minus;를 붙이는 것이다. 부호를 뒤집으면 큰 값이 작은 값이 되어 최소 힙이 먼저 꺼내고, 꺼낸 뒤 되돌리면 원래 값이다. 넣을 때와 꺼낼 때가 짝이어야 하며 한쪽만 적용하면 B1, B2처럼 깨진다.</p><pre style="white-space:pre;overflow-x:auto;font-size:12.5px">def push_max(h, x):
     heapq.heappush(h, -x)
 def pop_max(h):
-    return -heapq.heappop(h)</pre></details>
-</section>
-<section id="A12" class="sheet">
+    return -heapq.heappop(h)</pre></details></section>
+
+<section id="A12" class="sheet lesson">
 <h2>A12 · K번째 최댓값 설계와 추출<small>3차시 · 11분 · 개인</small></h2>
-<p class="meta"><span>산출물: 방법별 비용 표, (다) 손 추적표, 동작하는 kth_largest 초안</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>N개 값에서 K번째로 큰 값 하나를 구하려면 힙에 몇 개를 보관해야 하고, 그 수는 왜 그렇게 정하는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">시도</span>세 후보를 읽고 (다)를 내가 설계한다. 무엇을 힙에 두는가, 새 값이 올 때 무엇을 하는가, 답은 어디서 읽는가를 쓴다.<span class="tg-where">[(다)의 설계]</span><span class="tg-done">두세 문장이 적혀 있다.</span></li>
-<li><span class="tg-stage">관찰</span>방법마다 보관하는 원소 수와 전체 비용의 식을 N, K로 쓰고, N=100만, K=10일 때를 비교한다.<span class="tg-where">[비용 비교] 표와 &lsquo;N이 100만이고 K가 10일 때&rsquo; 질문 칸</span></li>
-<li><span class="tg-stage">적용</span>내 설계대로 K = 3일 때 7, 2, 9, 4, 11을 차례로 처리한다. 값마다 한 일을 쓰고 처리 후 힙의 배열을 쓴다. 5, 8, 3은 선택이다.<span class="tg-where">[(다)를 손으로 추적하기 (K = 3)] 표</span><span class="tg-done">필수 5행이 채워져 있다.</span></li>
-<li><span class="tg-stage">설명</span>처리하는 동안 힙에 든 원소 수가 어떻게 변했는지, 답이 놓인 칸이 왜 그 칸인지 쓴다.<span class="tg-where">&lsquo;생각해 볼 질문&rsquo;과 (시간이 남으면) 질문 칸</span></li>
-<li><span class="tg-stage">적용</span><a class="xlink" href="student_code_lab_part2.html#A12">코드 실습 A12</a>의 [내 코드 · A12] 편집기에 내 설계를 <code class="i">kth_largest</code>로 구현하고, 내 코드의 두 부분과 테스트 결과를 쓴다.<span class="tg-where">[코드로 구현]</span></li>
-<li><span class="tg-stage">비교</span>오류 코드 B4(<code class="i">kth_bug</code>)를 같은 입력으로 실행해 결과와 정답과 다른 이유를 쓴다.<span class="tg-where">[오류 코드 B4] 표</span></li>
-</ol>
-<details class="tg-hint"><summary>막히면 · 힌트 1 ((다)를 설계한 뒤 손 추적이 막힐 때)</summary><p>행마다 처리하기 전에 힙에 든 값의 개수와 0번 칸의 값을 먼저 적고, 그 둘과 새 값을 보고 한 일을 정한다. 배열은 정렬하지 않고 A6·A7처럼 자리를 고친 뒤의 모양이다.</p></details>
-<details class="tg-hint"><summary>막히면 · 힌트 2 (힙 크기를 왜 그렇게 정했는지 막힐 때)</summary><p>답을 읽는 칸이 어디인지부터 정한다. 최소 힙의 0번 칸에는 힙 안의 어떤 값이 있는가? 그 값이 K번째로 큰 값이 되려면 힙에 들어 있어야 하는 값은 어떤 값들인가?</p></details>
+<p class="lead">N개 값에서 K번째로 큰 값을 구하려면 힙에 몇 개를 보관해야 할까? 내가 설계하고 손으로 추적한 뒤 코드로 옮겨 보자.</p>
+
+<div class="step">
+<h3>후보 셋과 작은 사례</h3>
+<p>N개 값에서 K번째로 큰 값 하나를 구하는 후보는 셋이다. 작은 사례로 (가)부터 보자.</p>
+<div class="scroll"><table class="fill"><tr><th>후보</th><th>방법</th></tr><tr><td class="lab">(가) 정렬</td><td>내림차순으로 정렬해 K번째 값을 고른다.</td></tr><tr><td class="lab">(나) 전체 힙</td><td>전체를 힙에 넣고 큰 값부터 K번 꺼낸다.</td></tr><tr><td class="lab">(다) 내가 설계</td><td>힙을 쓰되 힙에 보관하는 원소 수를 (나)보다 줄인다.</td></tr></table></div>
+<pre class="fig">nums = [4, 1, 6, 3]
+내림차순 정렬 → [6, 4, 3, 1]     K=2번째로 큰 값은 4</pre>
+<div class="quiz" data-accept="3" data-hint="내림차순 [6, 4, 3, 1]에서 셋째 값을 읽는다.">
+<p class="q">같은 nums에서 K=3번째로 큰 값은?</p>
+<div class="ans"><input type="text" aria-label="K=3번째로 큰 값" placeholder="숫자"><button type="button">확인</button></div>
+<p class="why">셋째 값은 3이다. 같은 값이 있으면 별개로 센다.</p>
 </div>
-<p>리스트 <code class="i">nums = [7, 2, 9, 4, 11, 5, 8, 3]</code>에서 <b>K = 3번째로 큰 값</b>을 구한다. 값이 같은 원소는 별개로 센다. 먼저 세 가지 방법을 비교해 보고, 하나를 골라 손으로 추적한 뒤 코드로 <b>추출</b>한다.</p>
-<div class="learn-box"><span class="lb-title">학습 내용 · A12 활동 방법과 표 쓰는 법</span>
-<ol>
-<li>(가)(나)(다)는 &ldquo;비교할 후보&rdquo;이다. 어느 것이 좋은지는 비용 표를 채운 뒤 스스로 판단한다.</li>
-<li>(다)를 설계할 때는 힙에 무엇을 두는가, 새 값이 올 때 무엇과 비교해 무엇을 하는가, 답은 힙의 어느 칸에서 읽는가를 정한다. 막히면 스스로 묻는다: 힙에 든 값이 적을 때는 어떻게 하나? 새 값과 비교할 대상은 누구인가?</li>
-<li><b>비용 표</b>는 정확한 식이 아니어도 된다. N개를 정렬하는 비용은 &ldquo;N log N 정도&rdquo;로 쓴다. 힙에 값을 하나 넣거나 빼는 일은 A6·A7에서 센 것처럼 한 경로만 오르내리므로, 그 크기는 힙의 층 수(높이)에 따라 정해진다. 노드 수가 7, 15, 1,000, 1,000,000이면 층 수는 각각 3, 4, 10, 20이다(A4의 높이 표).</li>
-<li><b>추적표</b>의 &ldquo;처리 후 힙 리스트&rdquo;는 정렬된 리스트가 아니라 A6·A7처럼 자리를 고친 뒤의 <b>힙의 배열</b>이다(넣을 때는 맨 끝에 붙여 위로 올리고, 꺼낼 때는 마지막 값을 루트로 옮겨 아래로 내린다). 값이 들어오거나 바뀔 때마다 자리를 고친 배열을 쓴다. 한 일 칸에는 &ldquo;넣는다 / 어떤 값과 바꾼다 / 건너뛴다&rdquo;를 자기 말로 쓴다.</li>
-<li>코드는 설계를 마친 뒤 실습 코드 2부 A12에서 쓴다. 루트를 빼고 새 값을 넣는 일을 한 번에 해 주는 함수가 있는지는 활동을 마친 뒤 확인 상자에서 확인한다. 막히면 그 쪽의 &ldquo;골격&rdquo;을 연다.</li>
-</ol></div>
-<h3>세 가지 후보</h3>
-<div class="grid">
-<div class="card"><b class="h">(가) 정렬</b><p>nums를 내림차순으로 <code class="i">sorted</code>한 뒤 K번째 값을 고른다.</p></div>
-<div class="card"><b class="h">(나) 전체 힙</b><p>nums 전체를 힙에 넣고, 가장 큰 값부터 K번 꺼낸다.</p></div>
-<div class="card"><b class="h">(다) 힙을 쓰되 보관하는 원소 수를 줄이는 방법</b><p>내가 직접 설계한다. nums를 한 번씩 훑으며 힙을 쓰되, 힙에 보관하는 원소의 수를 (나)보다 줄이는 방법이다.</p></div>
+
 </div>
-<h3>(다)의 설계</h3><p>(다)의 설계를 두세 문장으로 쓴다. 무엇을 힙에 두는가? 새 값이 올 때마다 무엇을 하는가? 마지막에 답은 어떻게 읽어 내는가?</p><textarea class="in" rows="3" data-key="A12.design" data-label="A12 (다)의 설계(무엇을 힙에 두는가, 새 값이 올 때 무엇을 하는가, 답은 어떻게 읽는가)">힙에는 지금까지 본 값 중 가장 큰 K개만 둔다. 새 값이 오면 힙의 가장 작은 값(루트)과 비교해, 더 크면 루트를 버리고 새 값을 넣고 아니면 버린다. 다 훑은 뒤 루트가 K번째로 큰 값이다.</textarea> <span class="hint">2~3문장으로, 위 세 질문에 순서대로 답한다.</span>
-<h3>비용 비교</h3><p>원소가 N개, 구하려는 순서가 K일 때, 각 방법이 &ldquo;다루는(보관·정렬하는) 원소 수&rdquo;와 &ldquo;전체 비용의 식&rdquo;을 N, K로 쓴다. (모르면 짐작한 대로 쓰고 이유를 적는다.)</p>
-<p class="hint">쓰는 법: 둘째 칸에는 원소 수를 &ldquo;N개&rdquo;나 &ldquo;2K개&rdquo;처럼 개수로 쓴다. 셋째 칸에는 N, K를 넣은 식으로 쓴다(꼴: N+K). 정확하지 않아도 되며, 모르면 짐작한 식을 쓰고 넷째 칸에 이유를 쓴다. 넷째 칸은 선택이다.</p><table class="fill"><tr><th style="width:26%">방법</th><th style="width:20%">보관·정렬하는 원소 수</th><th style="width:24%">전체 비용의 식 (N, K로)</th><th>장점 / 단점 (선택)</th></tr><tr><td class="lab">(가) 정렬 (한 줄만)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r1.c1" data-label="A12 방법별 비용 표 (가) 정렬 · 보관·정렬하는 원소 수">N개</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r1.c2" data-label="A12 방법별 비용 표 (가) 정렬 · 전체 비용의 식 (N, K로)">N log N</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r1.c3" data-label="A12 방법별 비용 표 (가) 정렬 · 장점 / 단점">코드가 가장 단순하나 전체를 정렬하는 비용이 든다.</textarea></td></tr><tr><td class="lab">(나) 전체 힙, K번 꺼내기</td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r2.c1" data-label="A12 방법별 비용 표 (나) 전체 힙, K번 꺼내기 · 보관·정렬하는 원소 수">N개</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r2.c2" data-label="A12 방법별 비용 표 (나) 전체 힙, K번 꺼내기 · 전체 비용의 식 (N, K로)">힙 만들기(N log N 또는 N 수준) + K log N</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r2.c3" data-label="A12 방법별 비용 표 (나) 전체 힙, K번 꺼내기 · 장점 / 단점">K가 작아도 N개를 모두 보관한다.</textarea></td></tr><tr><td class="lab">(다) 내가 설계한 방법</td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r3.c1" data-label="A12 방법별 비용 표 (다) 크기 K 힙 유지 · 보관·정렬하는 원소 수">K개</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r3.c2" data-label="A12 방법별 비용 표 (다) 크기 K 힙 유지 · 전체 비용의 식 (N, K로)">N log K</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r3.c3" data-label="A12 방법별 비용 표 (다) 크기 K 힙 유지 · 장점 / 단점">K개만 보관하고 한 번만 훑는다.</textarea></td></tr></table><p>N이 100만이고 K가 10일 때, 세 방법 중 어느 쪽이 무엇 때문에 유리하거나 불리한가?</p><p class="hint">쓰는 법: 2~3문장. 세 방법을 각각 한 줄씩 비교하고, 가장 유리한 방법과 그 이유를 쓴다.</p><textarea class="in" rows="3" data-key="A12.big" data-label="A12 N이 100만 K가 10일 때 비교">N=100만, K=10이면 (가)는 100만×약 20, (다)는 100만×약 3.3 정도라서 K개만 보관하는 (다)가 유리하다. (나)는 100만 개를 모두 보관해야 한다.</textarea><h3>(다)를 손으로 추적하기 (K = 3)</h3><p>내가 설계한 (다)대로 K = 3으로 처리한다. 처리할 값마다 한 일을 자기 말로 짧게 쓰고, 처리 후 힙 리스트를 쓴다. 7, 2, 9, 4, 11까지는 필수이고 5, 8, 3은 선택이다.</p><p class="hint">쓰는 법: 한 일 칸에는 &ldquo;넣는다&rdquo;, &ldquo;바꾼다&rdquo;, &ldquo;건너뛴다&rdquo; 중 알맞은 말을 고쳐 짧게 쓴다. 힙 리스트 칸에는 처리한 뒤 힙의 배열 전체를 대괄호와 쉼표로 쓴다(정렬하지 않는다). 표는 nums의 값 8개와 같은 8행이다. 7, 2, 9, 4, 11의 5행은 필수이고, 5, 8, 3의 3행은 선택이므로 쓰지 않으면 비워 둔다.</p><table class="fill"><tr><th style="width:90px">처리할 값</th><th style="width:30%">한 일</th><th>처리 후 힙 리스트</th></tr><tr><td class="lab">7</td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r1.c1" data-label="A12 크기 K 힙 추적 7 · 한 일" autocomplete="off" value="넣는다"></td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r1.c2" data-label="A12 크기 K 힙 추적 7 · 처리 후 힙 리스트" autocomplete="off" value="[7]"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r2.c1" data-label="A12 크기 K 힙 추적 2 · 한 일" autocomplete="off" value="넣는다"></td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r2.c2" data-label="A12 크기 K 힙 추적 2 · 처리 후 힙 리스트" autocomplete="off" value="[2, 7]"></td></tr><tr><td class="lab">9</td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r3.c1" data-label="A12 크기 K 힙 추적 9 · 한 일" autocomplete="off" value="넣는다"></td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r3.c2" data-label="A12 크기 K 힙 추적 9 · 처리 후 힙 리스트" autocomplete="off" value="[2, 7, 9]"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r4.c1" data-label="A12 크기 K 힙 추적 4 · 한 일" autocomplete="off" value="루트보다 크므로 교체"></td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r4.c2" data-label="A12 크기 K 힙 추적 4 · 처리 후 힙 리스트" autocomplete="off" value="[4, 7, 9]"></td></tr><tr><td class="lab">11</td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r5.c1" data-label="A12 크기 K 힙 추적 11 · 한 일" autocomplete="off" value="루트보다 크므로 교체"></td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r5.c2" data-label="A12 크기 K 힙 추적 11 · 처리 후 힙 리스트" autocomplete="off" value="[7, 11, 9]"></td></tr><tr><td class="lab">5 (선택)</td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r6.c1" data-label="A12 크기 K 힙 추적 5 · 한 일" autocomplete="off" value="루트 이하이므로 건너뜀"></td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r6.c2" data-label="A12 크기 K 힙 추적 5 · 처리 후 힙 리스트" autocomplete="off" value="[7, 11, 9]"></td></tr><tr><td class="lab">8 (선택)</td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r7.c1" data-label="A12 크기 K 힙 추적 8 · 한 일" autocomplete="off" value="루트보다 크므로 교체"></td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r7.c2" data-label="A12 크기 K 힙 추적 8 · 처리 후 힙 리스트" autocomplete="off" value="[8, 11, 9]"></td></tr><tr><td class="lab">3 (선택)</td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r8.c1" data-label="A12 크기 K 힙 추적 3 · 한 일" autocomplete="off" value="루트 이하이므로 건너뜀"></td><td class="in-cell"><input type="text" class="in" data-key="A12.trace.r8.c2" data-label="A12 크기 K 힙 추적 3 · 처리 후 힙 리스트" autocomplete="off" value="[8, 11, 9]"></td></tr></table><p>마지막 힙 리스트에서 문제의 답(3번째로 큰 값)이 놓인 칸 번호: <input type="text" class="in s" data-key="A12.root" data-label="A12 최종 루트 값" autocomplete="off" value="0번 칸(값 8)"> <span class="hint">칸 번호와 그 칸의 값을 함께 쓴다(꼴: 5번 칸(값 20)).</span> &nbsp; 마지막 힙 리스트의 값들: <input type="text" class="in" style="display:inline-block;width:25%" data-key="A12.three" data-label="A12 힙 안의 세 값" autocomplete="off" value="[8, 11, 9]"> <span class="hint">값을 대괄호와 쉼표로 쓴다(힙의 배열 순서 그대로).</span></p><p><b>생각해 볼 질문</b> 내 설계에서 힙에 든 원소 수는 처리하는 동안 어떻게 변했는가? 원소를 뺀 적이 있다면 언제, 무엇을 뺐는가?</p><p class="hint">쓰는 법: 1~2문장. 뺀 적이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p><textarea class="in" rows="2" data-key="A12.discard" data-label="A12 누구를 버리는가">힙 크기가 K를 넘으면 힙 안에서 가장 작은 값(루트)을 버린다. 새 값이 루트보다 작으면 아예 넣지 않는다. 힙의 크기는 3을 넘지 않았다.</textarea><p>(시간이 남으면) 마지막 힙 리스트에서 문제의 답이 놓인 칸은 왜 그 칸인가? 그 값이 답이 되는 이유를 쓴다.</p><p class="hint">쓰는 법: (선택) 한 문장.</p><textarea class="in" rows="3" data-key="A12.rootwhy" data-label="A12 루트가 K번째로 큰 값인 이유">힙에는 지금까지 본 값 중 가장 큰 K개만 남고, 그중 가장 작은 값이 루트이기 때문이다.</textarea><p>(시간이 남으면) 내 설계는 큰 값이 먼저 나오는 힙과 작은 값이 먼저 나오는 힙 중 어느 쪽을 썼는가? 왜 그쪽을 골랐는가?</p><p class="hint">쓰는 법: (선택) 1~2문장.</p><textarea class="in" rows="3" data-key="A12.minwhy" data-label="A12 작은 값을 먼저 꺼내는 힙을 쓰는 이유">내보낼 대상이 K개 중 가장 약한(작은) 원소라서 가장 작은 값을 먼저 꺼내는 최소 힙이 맞다.</textarea><h3>코드로 구현</h3><p><a class="xlink" href="student_code_lab_part2.html#A12">코드 실습 A12</a>의 '내 코드 · A12' 편집기에 내 설계를 <code class="i">kth_largest</code>로 구현한다. 이것이 실습 과제의 시작이다. 설계가 막히면 실습 코드 2부 A12의 골격을 연다.</p><p>내 코드에서 새 값을 힙에 그냥 넣는 부분(편집기의 내용과 같게 옮겨 적는다): <input type="text" class="in" data-type="code" data-key="A12.blank1" data-label="A12 빈칸 ①에 쓴 코드" autocomplete="off" spellcheck="false" style="font-family:'JetBrains Mono',monospace" value="heapq.heappush(h, x)"> <span class="hint">코드 한 줄을 함수 이름과 인자까지 쓴다(모양의 예: heapq.heapify(h)).</span></p><p>내 코드에서 새 값을 기존 힙 내용과 견주어 처리하는 부분(편집기의 내용과 같게 옮겨 적는다): <input type="text" class="in" data-type="code" data-key="A12.blank2" data-label="A12 빈칸 ②에 쓴 코드" autocomplete="off" spellcheck="false" style="font-family:'JetBrains Mono',monospace" value="heapq.heapreplace(h, x)"> <span class="hint">코드 한 줄을 함수 이름과 인자까지 쓴다.</span></p><p>테스트 결과: <span class="rg" data-key="A12.test" data-type="radio" data-label="A12 kth_largest 초안 테스트 결과"><label><input type="radio" name="r_A12_test" value="통과" checked> 통과</label><label><input type="radio" name="r_A12_test" value="아직 실패"> 아직 실패</label><label><input type="radio" name="r_A12_test" value="실행해 보지 못함"> 실행해 보지 못함</label></span></p><h3>오류 코드 B4</h3><p>실습 코드 2부 A12의 B4 코드를 같은 입력에 실행해 결과를 쓰고, 정답과 다른 이유를 쓴다.</p><p class="hint">쓰는 법: 실행 결과는 &ldquo;루트 값, 힙 크기&rdquo;를 쉼표로 구분해 쓴다(꼴: 5, 3). 다른 이유는 한 문장으로 쓴다.</p><table class="fill"><tr><th style="width:34%">항목</th><th>내용</th></tr><tr><td class="lab">실행 결과(루트 값, 힙 크기)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.b4.r1.c1" data-label="A12 B4 관찰 실행 결과(루트 값, 힙 크기) · 내용">(2, 8)  루트 2, 힙 크기 8</textarea></td></tr><tr><td class="lab">정답과 다른 이유</td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.b4.r2.c1" data-label="A12 B4 관찰 정답과 다른 이유 · 내용">교체가 아니라 추가만 해서 힙의 크기가 K=3으로 유지되지 않아, 루트가 K번째가 아니라 전체의 최솟값이 된다.</textarea></td></tr></table>
-<p class="note">먼저 위 칸에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A12 정리: 추적·비용·코드·B4</summary>
+
+<div class="step">
+<h3>(다) 설계하기</h3>
+<p><code class="i">nums = [7, 2, 9, 4, 11, 5, 8, 3]</code>에서 K=3번째로 큰 값을 구한다. 힙에 무엇을 두는가, 새 값이 올 때 무엇을 하는가, 답은 어디서 읽는가를 두세 문장으로 쓴다.</p>
+<div class="ans-row"><span class="n" style="white-space:nowrap">설계</span><textarea class="in" rows="3" placeholder="예: 힙에는 …를 둔다. 새 값이 오면 …" data-key="A12.design" data-label="A12 (다)의 설계(무엇을 힙에 두는가, 새 값이 올 때 무엇을 하는가, 답은 어떻게 읽는가)">힙에는 지금까지 본 값 중 가장 큰 K개만 둔다. 새 값이 오면 힙의 가장 작은 값(루트)과 비교해, 더 크면 루트를 버리고 새 값을 넣고 아니면 버린다. 다 훑은 뒤 루트가 K번째로 큰 값이다.</textarea></div>
+<details class="more"><summary>막히면 · 힌트</summary><p>답을 읽는 칸이 어디인지부터 정한다. 최소 힙의 0번 칸에는 힙 안의 어떤 값이 있는가? 그 값이 K번째로 큰 값이 되려면 힙에 들어 있어야 하는 값은 어떤 값들인가?</p></details>
+
+</div>
+
+<div class="step">
+<h3>비용 견주기</h3>
+<p>방법마다 다루는 원소 수와 전체 비용의 식을 N, K로 쓴다. 정확하지 않아도 되고, 정렬은 &ldquo;N log N 정도&rdquo;로 쓴다. 힙에 값을 넣거나 빼는 일은 높이(층 수)에 비례한다.</p>
+<div class="scroll"><table class="fill"><tr><th>방법</th><th>보관·정렬하는 원소 수</th><th>전체 비용의 식</th></tr><tr><td class="lab">(가) 정렬 (한 줄만)</td><td class="in-cell"><textarea class="in" rows="1" placeholder="예: N개" data-key="A12.cost.r1.c1" data-label="A12 방법별 비용 표 (가) 정렬 · 보관·정렬하는 원소 수">N개</textarea></td><td class="in-cell"><textarea class="in" rows="1" placeholder="예: N+K" data-key="A12.cost.r1.c2" data-label="A12 방법별 비용 표 (가) 정렬 · 전체 비용의 식 (N, K로)">N log N</textarea></td></tr><tr><td class="lab">(나) 전체 힙, K번 꺼내기</td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r2.c1" data-label="A12 방법별 비용 표 (나) 전체 힙, K번 꺼내기 · 보관·정렬하는 원소 수">N개</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r2.c2" data-label="A12 방법별 비용 표 (나) 전체 힙, K번 꺼내기 · 전체 비용의 식 (N, K로)">힙 만들기(N log N 또는 N 수준) + K log N</textarea></td></tr><tr><td class="lab">(다) 내가 설계한 방법</td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r3.c1" data-label="A12 방법별 비용 표 (다) 크기 K 힙 유지 · 보관·정렬하는 원소 수">K개</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A12.cost.r3.c2" data-label="A12 방법별 비용 표 (다) 크기 K 힙 유지 · 전체 비용의 식 (N, K로)">N log K</textarea></td></tr></table></div>
+<div class="quiz" data-answer="1">
+<p class="q">N이 100만이고 K가 10일 때 (다)가 유리한 것은 무엇 때문일까?</p>
+<div class="opts"><button type="button">힙에 K개만 보관해서 한 번 넣고 뺄 때 드는 일이 작다</button><button type="button" data-hint="그것은 (가)의 방식이다.">N개를 모두 정렬하기 때문이다</button></div>
+<p class="why">K=10이면 힙의 높이가 작아 값마다 드는 일이 적다. (가)는 100만 개를 모두 정렬한다.</p>
+</div>
+
+</div>
+
+<div class="step">
+<h3>(다)를 손으로 추적하기 (K = 3)</h3>
+<p>내 설계대로 K=3으로 값을 차례로 처리한다. 행마다 한 일(&ldquo;넣는다&rdquo;, &ldquo;바꾼다&rdquo;, &ldquo;건너뛴다&rdquo;)과 처리한 뒤 힙의 배열을 쓴다. 배열은 정렬하지 않고 A6·A7처럼 자리를 고친 모양이다. 5, 8, 3은 선택이다.</p>
+<div class="scroll"><table class="fill"><tr><th>처리할 값</th><th>한 일</th><th>처리 후 힙 리스트</th></tr><tr><td class="lab">7</td><td class="in-cell"><input type="text" class="in" placeholder="예: 넣는다" data-key="A12.trace.r1.c1" data-label="A12 크기 K 힙 추적 7 · 한 일" autocomplete="off" value="넣는다"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [7]" data-key="A12.trace.r1.c2" data-label="A12 크기 K 힙 추적 7 · 처리 후 힙 리스트" autocomplete="off" value="[7]"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" placeholder="예: 넣는다" data-key="A12.trace.r2.c1" data-label="A12 크기 K 힙 추적 2 · 한 일" autocomplete="off" value="넣는다"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [7]" data-key="A12.trace.r2.c2" data-label="A12 크기 K 힙 추적 2 · 처리 후 힙 리스트" autocomplete="off" value="[2, 7]"></td></tr><tr><td class="lab">9</td><td class="in-cell"><input type="text" class="in" placeholder="예: 넣는다" data-key="A12.trace.r3.c1" data-label="A12 크기 K 힙 추적 9 · 한 일" autocomplete="off" value="넣는다"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [7]" data-key="A12.trace.r3.c2" data-label="A12 크기 K 힙 추적 9 · 처리 후 힙 리스트" autocomplete="off" value="[2, 7, 9]"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" placeholder="예: 넣는다" data-key="A12.trace.r4.c1" data-label="A12 크기 K 힙 추적 4 · 한 일" autocomplete="off" value="루트보다 크므로 교체"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [7]" data-key="A12.trace.r4.c2" data-label="A12 크기 K 힙 추적 4 · 처리 후 힙 리스트" autocomplete="off" value="[4, 7, 9]"></td></tr><tr><td class="lab">11</td><td class="in-cell"><input type="text" class="in" placeholder="예: 넣는다" data-key="A12.trace.r5.c1" data-label="A12 크기 K 힙 추적 11 · 한 일" autocomplete="off" value="루트보다 크므로 교체"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [7]" data-key="A12.trace.r5.c2" data-label="A12 크기 K 힙 추적 11 · 처리 후 힙 리스트" autocomplete="off" value="[7, 11, 9]"></td></tr><tr><td class="lab">5 (선택)</td><td class="in-cell"><input type="text" class="in" placeholder="예: 넣는다" data-key="A12.trace.r6.c1" data-label="A12 크기 K 힙 추적 5 · 한 일" autocomplete="off" value="루트 이하이므로 건너뜀"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [7]" data-key="A12.trace.r6.c2" data-label="A12 크기 K 힙 추적 5 · 처리 후 힙 리스트" autocomplete="off" value="[7, 11, 9]"></td></tr><tr><td class="lab">8 (선택)</td><td class="in-cell"><input type="text" class="in" placeholder="예: 넣는다" data-key="A12.trace.r7.c1" data-label="A12 크기 K 힙 추적 8 · 한 일" autocomplete="off" value="루트보다 크므로 교체"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [7]" data-key="A12.trace.r7.c2" data-label="A12 크기 K 힙 추적 8 · 처리 후 힙 리스트" autocomplete="off" value="[8, 11, 9]"></td></tr><tr><td class="lab">3 (선택)</td><td class="in-cell"><input type="text" class="in" placeholder="예: 넣는다" data-key="A12.trace.r8.c1" data-label="A12 크기 K 힙 추적 3 · 한 일" autocomplete="off" value="루트 이하이므로 건너뜀"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [7]" data-key="A12.trace.r8.c2" data-label="A12 크기 K 힙 추적 3 · 처리 후 힙 리스트" autocomplete="off" value="[8, 11, 9]"></td></tr></table></div>
+<details class="more"><summary>막히면 · 힌트</summary><p>행마다 처리하기 전에 힙에 든 값의 개수와 0번 칸의 값을 먼저 적는다. 그 둘과 새 값을 보고 한 일을 정한다.</p></details>
+<p>답이 놓인 칸 <input type="text" class="in s" placeholder="예: 번 칸(값 □)" data-key="A12.root" data-label="A12 최종 루트 값" autocomplete="off" value="0번 칸(값 8)"> &nbsp; 마지막 힙의 값들 <input type="text" class="in" style="display:inline-block;width:25%" placeholder="예: [8, 11, 9]" data-key="A12.three" data-label="A12 힙 안의 세 값" autocomplete="off" value="[8, 11, 9]"></p>
+<div class="quiz" data-answer="2">
+<p class="q">11을 처리한 직후 힙에 든 값은 모두 몇 개인가?</p>
+<div class="opts"><button type="button" data-hint="앞의 세 값을 넣은 뒤로 힙은 얼마까지 늘어나는가?">2개</button><button type="button">3개</button><button type="button" data-hint="지금까지 본 값은 5개이지만 힙에 보관하는 수는 K로 정해 두었다.">5개</button></div>
+<p class="why">힙에는 3개가 든다. 지금까지 본 7, 2, 9, 4, 11 중 힙에 없는 값은 2와 4이다.</p>
+</div>
+
+</div>
+
+<div class="step">
+<h3>힙 크기와 답의 위치</h3>
+<p class="qtext">처리하는 동안 힙에 든 원소 수는 어떻게 변했는가? 원소를 뺀 적이 있다면 언제, 무엇을 뺐는가?</p>
+<div class="ans-row"><span class="n" style="white-space:nowrap">원소 수</span><textarea class="in" rows="2" placeholder="예: 처음엔 …, 그 뒤에는 …" data-key="A12.discard" data-label="A12 누구를 버리는가">힙 크기가 K를 넘으면 힙 안에서 가장 작은 값(루트)을 버린다. 새 값이 루트보다 작으면 아예 넣지 않는다. 힙의 크기는 3을 넘지 않았다.</textarea></div>
+<p class="qtext">마지막 힙에서 답이 놓인 칸은 왜 그 칸인가? 그 값이 답이 되는 이유를 쓴다.</p>
+<div class="ans-row"><span class="n" style="white-space:nowrap">이유</span><textarea class="in" rows="3" placeholder="예: 힙에는 …만 남고, 그중 …" data-key="A12.rootwhy" data-label="A12 루트가 K번째로 큰 값인 이유">힙에는 지금까지 본 값 중 가장 큰 K개만 남고, 그중 가장 작은 값이 루트이기 때문이다.</textarea></div>
+
+</div>
+
+<div class="step">
+<h3>코드로 옮기기</h3>
+<p><a class="xlink" href="student_code_lab_part2.html#A12">실습 코드 A12</a>의 [내 코드 · A12] 편집기에 내 설계를 <code class="i">kth_largest</code>로 구현한다. 이것이 실습 과제의 시작이다. 구현한 뒤 아래 두 부분을 편집기와 같게 옮겨 적는다.</p>
+<p>새 값을 힙에 그냥 넣는 줄 <input type="text" class="in" data-type="code" placeholder="예: heapq.heapify(h)" data-key="A12.blank1" data-label="A12 빈칸 ①에 쓴 코드" autocomplete="off" spellcheck="false" value="heapq.heappush(h, x)"></p>
+<p>새 값을 기존 힙과 견주어 처리하는 줄 <input type="text" class="in" data-type="code" placeholder="함수 이름과 인자까지" data-key="A12.blank2" data-label="A12 빈칸 ②에 쓴 코드" autocomplete="off" spellcheck="false" value="heapq.heapreplace(h, x)"></p>
+<p>테스트 결과 <span class="rg" data-key="A12.test" data-type="radio" data-label="A12 kth_largest 초안 테스트 결과"><label><input type="radio" name="r_A12_test" value="통과" checked> 통과</label><label><input type="radio" name="r_A12_test" value="아직 실패"> 아직 실패</label><label><input type="radio" name="r_A12_test" value="실행해 보지 못함"> 실행해 보지 못함</label></span></p>
+
+</div>
+
+<div class="step">
+<h3>오류 코드 B4</h3>
+<p>같은 쪽의 B4(<code class="i">kth_bug</code>)를 같은 입력에서 실행한다. 결과를 &ldquo;루트 값, 힙 크기&rdquo;로 쓴다.</p>
+<div class="scroll"><table class="fill"><tr><th>항목</th><th>내용</th></tr><tr><td class="lab">실행 결과(루트 값, 힙 크기)</td><td class="in-cell"><textarea class="in" rows="1" placeholder="예: 5, 3" data-key="A12.b4.r1.c1" data-label="A12 B4 관찰 실행 결과(루트 값, 힙 크기) · 내용">(2, 8)  루트 2, 힙 크기 8</textarea></td></tr></table></div>
+<div class="quiz" data-answer="1">
+<p class="q">B4의 결과가 정답과 다른 까닭은?</p>
+<div class="opts"><button type="button">교체가 아니라 추가만 해서 힙이 K개로 유지되지 않는다</button><button type="button" data-hint="(다)는 정렬하지 않는 방법이다. 힙에 든 원소 수를 보자.">정렬을 하지 않았다</button></div>
+<p class="why">힙이 K개로 유지되지 않아 루트가 K번째 큰 값이 아니라 전체의 최솟값이 된다.</p>
+</div>
+
+</div>
+
+<p class="wrapup"><b>여기까지</b> (다)를 설계하고 K=3으로 추적한 뒤 kth_largest의 두 줄을 옮겼다. A13에서 오늘의 일반화 문장을 다듬는다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · A12 정리: 추적·비용·코드·B4</summary>
 <p>아래 추적표는 루트 교체를 heapreplace로 한 경우이다. heappop 뒤 heappush로 했다면 4를 처리한 뒤 [4, 9, 7], 11을 처리한 뒤 [7, 9, 11]처럼 배열이 다를 수 있다. 부모가 자식보다 크지 않고(부모 &le; 자식) 루트가 3번째로 큰 값이면 정답으로 본다.</p>
 <table><tr><th>처리 값</th><th>한 일</th><th>처리 후 힙</th></tr>
 <tr><td>7</td><td>넣는다(힙에 든 값이 3개 미만)</td><td>[7]</td></tr><tr><td>2</td><td>넣는다</td><td>[2, 7]</td></tr><tr><td>9</td><td>넣는다</td><td>[2, 7, 9]</td></tr>
@@ -219,62 +318,111 @@ def pop_max(h):
 <tr><td>(다) 크기 K 힙 유지</td><td>K</td><td>N log K</td><td>K개만 보관하고 한 번 훑는다.</td></tr></table>
 <p>N=100만, K=10이면 (가)는 100만&times;약 20, (다)는 100만&times;약 3.3 정도이다(손으로 계산한 근사값이며 실행으로 측정하지 않았다).</p>
 <p>코드 ①은 <code class="i">heapq.heappush(h, x)</code>, ②는 <code class="i">heapq.heapreplace(h, x)</code>이다. heapreplace는 루트를 빼고 x를 넣는 일을 한 번에 한다. heappop 뒤 heappush로도 같은 값을 얻는다. 다만 이 방법은 두 번 자리를 고치므로 힙의 배열 모양은 heapreplace와 다를 수 있다(반환값과 루트의 값은 같다). ②를 <code class="i">h[0] = x</code>로 쓰면 루트 값만 덮어쓰고 자리를 고치지 않아 힙의 약속이 깨진다(A7).</p>
-<p>B4는 (루트 2, 힙 크기 8)이다. 교체가 아니라 추가만 해서 힙이 3개로 유지되지 않으므로 루트가 3번째로 큰 값이 아니라 전체의 최솟값이 된다.</p></details>
-</section>
-<section id="A13" class="sheet">
+<p>B4는 (루트 2, 힙 크기 8)이다. 교체가 아니라 추가만 해서 힙이 3개로 유지되지 않으므로 루트가 3번째로 큰 값이 아니라 전체의 최솟값이 된다.</p></details></section>
+
+<section id="A13" class="sheet lesson">
 <h2>A13 · 일반화 문장 정제<small>3차시 · 9분 · 개인</small></h2>
-<p class="meta"><span>산출물: 정제한 일반화 문장, 수정 이력</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내 문장은 숫자와 이름을 넘어 다른 상황에서도 성립하는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">관찰</span>A10에서 쓴 문장을 수정 없이 옮겨 적고, A11·A12에서 새로 알게 된 것을 한 문장으로 쓴다.<span class="tg-where">[1단계 · 개인 초안 옮겨 적기]</span></li>
-<li><span class="tg-stage">시도</span>사례 이름을 개념어로 바꾸고 &ldquo;개념 + 개념 + 관계&rdquo; 꼴인지 확인한다. 고칠 때마다 무엇을 왜 고쳤는지 이력을 쓴다.<span class="tg-where">[2단계 · 내 문장 정제] 표</span><span class="tg-done">문장 1, 2의 최종 문장과 이력이 적혀 있다.</span></li>
-<li><span class="tg-stage">비교</span>내 문장을 모두 쓴 뒤 확인 상자를 열어 내 문장과 대조한다. 확인 상자의 문장을 베껴 쓰지 않는다.<span class="tg-where">[3단계 · 확인 상자와 대조] 표</span></li>
-</ol>
+<p class="lead">A10에서 쓴 문장이 숫자와 이름을 넘어 다른 상황에서도 성립할까? 점검 질문으로 다듬은 뒤 닫힌 상자와 견주어 보자.</p>
+
+<div class="step">
+<h3>내 문장 옮기기</h3>
+<p>A10에서 쓴 두 문장을 수정 없이 옮겨 적는다. 쓰지 않았으면 &ldquo;없음&rdquo;이라고 쓴다.</p>
+<div class="ans-row"><span class="n" style="white-space:nowrap">문장 1</span><textarea class="in" rows="3" placeholder="예: A10 문장 1" data-key="A13.my1" data-label="A13 내 초안 문장 1">완전 이진 트리는 빈틈이 없으므로 부모와 자식의 위치를 칸 번호 계산만으로 알 수 있다.</textarea></div>
+<div class="ans-row"><span class="n" style="white-space:nowrap">문장 2</span><textarea class="in" rows="3" placeholder="예: A10 문장 2" data-key="A13.my2" data-label="A13 내 초안 문장 2">힙은 부모가 자식보다 크지 않다는 약속만 지키면 되므로 전체를 정렬하지 않아도 가장 작은 값을 바로 알 수 있다.</textarea></div>
+<div class="quiz" data-answer="1">
+<p class="q">&ldquo;H1의 3번 칸 부모는 1번이다.&rdquo;를 일반화에 가깝게 바꾸려면 먼저 무엇을 고쳐야 할까?</p>
+<div class="opts"><button type="button">H1과 숫자 같은 사례 이름을 개념어로 바꾼다</button><button type="button" data-hint="길이가 아니라 사례 이름을 개념어로 바꾸는 것이 핵심이다.">문장을 더 길게 쓴다</button></div>
+<p class="why">&ldquo;완전 이진 트리&rdquo;, &ldquo;칸 번호&rdquo;처럼 여러 사례에 쓰는 말로 바꾼다.</p>
 </div>
-<p>A10의 개인 초안과 A11·A12에서 알게 된 것을 다듬어 문장으로 정리한다. 확인 상자의 문장을 열어 내 문장과 <b>대조</b>한다. 교사의 문장을 그대로 베껴 쓰지 않는다.</p>
-<div class="learn-box"><span class="lb-title">학습 내용 · 일반화 문장 다듬는 방법</span>
-<ol>
-<li>1단계에 옮겨 적은 내 문장을 다시 읽고 사례 이름(H1, 숫자, 함수 이름)을 개념어로 바꾼다.</li>
-<li>&ldquo;개념 + 개념 + 관계&rdquo; 꼴인지 확인한다. 이유(&ldquo;~이므로&rdquo;)가 있어야 관계가 드러난다.</li>
-<li>&ldquo;이 숫자 배열만&rdquo;, &ldquo;H1에서는&rdquo; 같은 한정을 지울 수 있는지 시험한다. 우선순위 큐가 필요한 다른 상황(운영체제 스케줄링, 길 찾기)에도 성립하는지 따져 본다.</li>
-<li>문장을 끌어올리는 질문: 사례를 말한 문장이면 &ldquo;어떤 경우에도 그런가? 왜 그런가?&rdquo;, &ldquo;빠르다&rdquo;는 말이면 &ldquo;무엇을 얻고 무엇을 포기하는가?&rdquo;, 방법 이름이면 &ldquo;입력의 크기가 달라지면 비용은 어떻게 달라지는가?&rdquo;, 요령이면 &ldquo;어떤 성질 덕분에 통하는가? 한쪽만 바꾸면 무엇이 깨지는가?&rdquo;를 자신에게 묻는다.</li>
-<li>수정할 때마다 표의 이력 칸에 무엇을 왜 고쳤는지 쓴다. 정제한 문장을 모두 쓴 뒤에 &ldquo;3단계&rdquo; 앞의 확인 상자를 연다. 확인 상자의 문장을 베껴 쓰지 않는다. 같은 사례에 대한 내 초안이 두 개 있으면 서로 비교해 하나로 고친다.</li>
-</ol></div>
-<h3>1단계 · 개인 초안 옮겨 적기</h3><p>A10에서 쓴 문장을 옮겨 적는다(수정 없이). 그 아래에는 A11·A12에서 새로 알게 된 것을 쓴다.</p><p>문장 1</p><textarea class="in" rows="3" data-key="A13.my1" data-label="A13 내 초안 문장 1">완전 이진 트리는 빈틈이 없으므로 부모와 자식의 위치를 칸 번호 계산만으로 알 수 있다.</textarea> <span class="hint">A10에 쓴 문장을 그대로 옮긴다. 쓰지 않았으면 &ldquo;없음&rdquo;이라고 쓴다.</span><p>문장 2</p><textarea class="in" rows="3" data-key="A13.my2" data-label="A13 내 초안 문장 2">힙은 부모가 자식보다 크지 않다는 약속만 지키면 되므로 전체를 정렬하지 않아도 가장 작은 값을 바로 알 수 있다.</textarea> <span class="hint">A10 문장 2를 옮긴다. 쓰지 않았으면 &ldquo;없음&rdquo;이라고 쓴다.</span><h3>A11·A12에서 알게 된 것 쓰기</h3><p>(선택, 시간이 부족하면 A12 것만 쓴다) A11에서 알게 된 것을 &ldquo;개념 + 개념 + 관계&rdquo; 한 문장으로 쓴다. &ldquo;이 숫자들에서만&rdquo; 같은 한정은 쓰지 않는다.</p><p class="hint">쓰는 법: (선택) 한 문장.</p><textarea class="in" rows="2" data-key="A13.g4draft" data-label="A13 A11에서 알게 된 것(개념 + 개념 + 관계 한 문장)">순서가 뒤집히도록 변환해 넣고 꺼낸 뒤 되돌리면, 한 방향 순서만 있는 구조로 반대 순서의 문제도 풀 수 있다.</textarea><p>A12에서 알게 된 것을 같은 형태로 쓴다.</p><p class="hint">쓰는 법: 한 문장.</p><textarea class="in" rows="2" data-key="A13.g3draft" data-label="A13 A12에서 알게 된 것(개념 + 개념 + 관계 한 문장)">상위 K개만 필요하면 전체를 보관하지 않고 크기를 K로 제한한 구조로 처리해 전체 정렬보다 적은 비용으로 답한다.</textarea><h3>2단계 · 내 문장 정제</h3><p>1단계에 옮겨 적은 내 문장을 읽고 사례 이름(H1, 숫자)을 개념어로 바꾼다. &ldquo;개념 + 개념 + 관계&rdquo; 형태인지, &ldquo;이 숫자 배열만&rdquo;처럼 한정한 말을 지울 수 있는지 확인한다. 수정할 때마다 이력을 남긴다.</p><p class="hint">쓰는 법: 1차 정제와 최종 문장은 각각 한 문장으로 쓴다. 수정 이력은 &ldquo;무엇을 무엇으로 고쳤고 이유는 무엇인가&rdquo;를 한 줄로 쓴다. 문장 1, 2는 필수이고 문장 3, 4는 시간이 있을 때만 쓴다(쓰지 않으면 비워 둔다).</p><table class="fill"><tr><th style="width:100px">문장</th><th style="width:28%">1차 정제</th><th style="width:26%">수정 이력(무엇을 왜 고쳤는가)</th><th>최종 문장</th></tr><tr><td class="lab">정제 문장 1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r1.c1" data-label="A13 내 문장 정제 시트 문장 1 · 1차 정제">완전 이진 트리는 위치만으로 부모와 자식이 정해져서 칸 번호 계산으로 나타낼 수 있다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r1.c2" data-label="A13 내 문장 정제 시트 문장 1 · 수정 이력(무엇을 왜 고쳤는가)">"H1의 3번 칸" 같은 숫자 사례를 "완전 이진 트리", "칸 번호"로 바꾸고, 빈틈이 없기 때문이라는 이유를 넣었다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r1.c3" data-label="A13 내 문장 정제 시트 문장 1 · 최종 문장">완전 이진 트리는 빈틈없이 채워지므로 위치만으로 부모·자식 관계가 정해져, 포인터 없이 배열의 칸 번호 계산으로 표현할 수 있다.</textarea></td></tr><tr><td class="lab">정제 문장 2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r2.c1" data-label="A13 내 문장 정제 시트 문장 2 · 1차 정제">힙은 부모가 자식보다 작다는 약속만 지키면 가장 작은 값을 바로 알 수 있다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r2.c2" data-label="A13 내 문장 정제 시트 문장 2 · 수정 이력(무엇을 왜 고쳤는가)">"빠르다"라는 말을 "무엇을 얻고 무엇을 포기하는가"로 고쳐 나머지 순서는 보장되지 않는다는 점을 추가했다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r2.c3" data-label="A13 내 문장 정제 시트 문장 2 · 최종 문장">전체 정렬 대신 부모가 자식보다 앞선다는 부분 질서만 지키면, 가장 앞선 원소를 바로 알고 삽입·삭제는 높이에 비례하는 경로만 고치면 되지만 나머지 순서는 보장되지 않는다.</textarea></td></tr><tr><td class="lab">정제 문장 3 (선택)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r3.c1" data-label="A13 내 문장 정제 시트 문장 3 · 1차 정제">상위 K개만 필요하면 크기 K인 힙으로 풀 수 있다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r3.c2" data-label="A13 내 문장 정제 시트 문장 3 · 수정 이력(무엇을 왜 고쳤는가)">"K번째는 힙으로 구한다"라는 방법 암기를 지우고 K가 작을 때 왜 유리한지(K개만 보관, 가장 약한 원소부터 내보냄)를 넣었다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r3.c3" data-label="A13 내 문장 정제 시트 문장 3 · 최종 문장">필요한 것이 상위 K개뿐이면 전체를 정렬하지 않고, 크기를 K로 제한한 구조에서 가장 약한 원소부터 내보내며 N번 갱신해 더 적은 비용으로 답할 수 있다.</textarea></td></tr><tr><td class="lab">정제 문장 4 (선택)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r4.c1" data-label="A13 내 문장 정제 시트 문장 4 · 1차 정제">큰 값이 필요하면 -를 붙여 넣으면 된다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r4.c2" data-label="A13 내 문장 정제 시트 문장 4 · 수정 이력(무엇을 왜 고쳤는가)">"-를 붙이면 된다"는 요령을 "순서를 뒤집는 변환"으로 일반화하고, 넣을 때와 꺼낼 때가 짝이어야 한다는 조건을 추가했다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r4.c3" data-label="A13 내 문장 정제 시트 문장 4 · 최종 문장">도구가 한 방향의 순서만 제공할 때는 값을 순서가 뒤집히게 변환해 넣고 꺼낸 뒤 되돌리면 반대 문제도 풀 수 있으며, 변환은 넣을 때와 꺼낼 때가 짝을 이루어야 한다.</textarea></td></tr></table><p>점검 <label class="ck"><input type="checkbox" data-key="A13.chk1" data-label="A13 점검: 이 숫자 배열만이라는 한정을 지울 수 있다" checked> &ldquo;이 숫자 배열만&rdquo;이라는 한정을 지웠다</label><label class="ck"><input type="checkbox" data-key="A13.chk2" data-label="A13 점검: 다른 상황에도 성립한다" checked> 운영체제 스케줄링·길 찾기에도 성립하는지 따져 보았다</label></p><p class="note">정제한 문장을 모두 쓴 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A13 오늘의 일반화 G1~G4</summary>
+
+</div>
+
+<div class="step">
+<h3>점검 질문으로 다듬기</h3>
+<p>내 문장을 아래 네 질문으로 고친다. 고칠 때마다 무엇을 왜 고쳤는지 이력을 남긴다.</p>
+<ol><li>사례 이름(H1, 숫자)을 개념어로 바꿨는가?</li><li>&ldquo;개념 + 개념 + 관계&rdquo;이고 이유(~이므로)가 있는가?</li><li>&ldquo;이 숫자 배열만&rdquo; 같은 한정을 지웠는가?</li><li>운영체제 스케줄링이나 길 찾기에도 성립하는가?</li></ol>
+<div class="scroll"><table class="fill"><tr><th>문장</th><th>1차 정제</th><th>수정 이력(무엇을 왜 고쳤는가)</th><th>최종 문장</th></tr><tr><td class="lab">정제 문장 1</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r1.c1" data-label="A13 내 문장 정제 시트 문장 1 · 1차 정제">완전 이진 트리는 위치만으로 부모와 자식이 정해져서 칸 번호 계산으로 나타낼 수 있다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r1.c2" data-label="A13 내 문장 정제 시트 문장 1 · 수정 이력(무엇을 왜 고쳤는가)">"H1의 3번 칸" 같은 숫자 사례를 "완전 이진 트리", "칸 번호"로 바꾸고, 빈틈이 없기 때문이라는 이유를 넣었다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r1.c3" data-label="A13 내 문장 정제 시트 문장 1 · 최종 문장">완전 이진 트리는 빈틈없이 채워지므로 위치만으로 부모·자식 관계가 정해져, 포인터 없이 배열의 칸 번호 계산으로 표현할 수 있다.</textarea></td></tr><tr><td class="lab">정제 문장 2</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r2.c1" data-label="A13 내 문장 정제 시트 문장 2 · 1차 정제">힙은 부모가 자식보다 작다는 약속만 지키면 가장 작은 값을 바로 알 수 있다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r2.c2" data-label="A13 내 문장 정제 시트 문장 2 · 수정 이력(무엇을 왜 고쳤는가)">"빠르다"라는 말을 "무엇을 얻고 무엇을 포기하는가"로 고쳐 나머지 순서는 보장되지 않는다는 점을 추가했다.</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.group.r2.c3" data-label="A13 내 문장 정제 시트 문장 2 · 최종 문장">전체 정렬 대신 부모가 자식보다 앞선다는 부분 질서만 지키면, 가장 앞선 원소를 바로 알고 삽입·삭제는 높이에 비례하는 경로만 고치면 되지만 나머지 순서는 보장되지 않는다.</textarea></td></tr></table></div>
+<p><label class="ck"><input type="checkbox" data-key="A13.chk1" data-label="A13 점검: 이 숫자 배열만이라는 한정을 지울 수 있다" checked> &ldquo;이 숫자 배열만&rdquo;이라는 한정을 지웠다</label><label class="ck"><input type="checkbox" data-key="A13.chk2" data-label="A13 점검: 다른 상황에도 성립한다" checked> 운영체제 스케줄링·길 찾기에도 성립하는지 따져 보았다</label></p>
+
+</div>
+
+<div class="step">
+<h3>닫힌 상자와 대조하기</h3>
+<p>정제한 문장을 모두 쓴 뒤에 아래 상자를 연다. 교사의 문장을 그대로 베껴 쓰지 않고, 내 문장과 견주어 빠진 개념과 조건만 찾는다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · A13 오늘의 일반화 G1~G4</summary>
 <p><b>G1</b> 빈틈없이 채워지는 모양(완전 이진 트리)은 위치만으로 부모·자식 관계가 결정되므로, 포인터 없이 배열 인덱스 계산만으로 표현할 수 있고 연산은 값의 자리바꿈으로만 일어난다. (근거 활동: A3, A6, A7)</p>
 <p><b>G2</b> 전체 정렬 대신 &ldquo;부모가 자식보다 앞선다&rdquo;는 부분 질서만 유지하면, 가장 앞선 원소를 즉시 알 수 있고 삽입·삭제 때 높이(log N)에 비례하는 경로만 고치면 되지만, 나머지 원소의 순서는 보장되지 않는다. (A2, A4, A6~A9)</p>
 <p><b>G3</b> 필요한 것이 &ldquo;상위 K개뿐&rdquo;이면, 모두를 보관·정렬하지 않고 크기 K로 제한한 구조에 대해 가장 약한 원소부터 내보내는 방식으로 N번의 갱신을 각 log K에 처리해 전체 정렬보다 적은 비용(O(N log K))으로 답할 수 있다. (A12, A14)</p>
 <p><b>G4</b> 도구가 한 방향의 순서(최소)만 제공할 때, 값을 순서가 뒤집히도록 변환(부호 반전)해 넣고 꺼낸 뒤 되돌리면 같은 구조로 반대 문제(최대)를 풀 수 있다. 변환은 넣을 때와 꺼낼 때가 짝을 이루어야 한다. (A9, A11)</p>
-<p>정제한 내 문장과 비교한다: 같은 점, 다른 점, 빠진 점(빠진 개념, 틀린 관계, 조건)이 무엇인가? 맞는 부분을 먼저 확인하고 빠진 조건을 아래 3단계 표에 쓴다.</p></details>
-<h3>3단계 · 확인 상자와 대조</h3><p>위 확인 상자를 연 뒤에 쓴다.</p><p class="hint">쓰는 법: 칸마다 1~2문장으로 쓴다. 해당하는 것이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p><table class="fill"><tr><th style="width:34%">항목</th><th>내용</th></tr><tr><td class="lab">내 문장과 같은 점</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.compare.r1.c1" data-label="A13 공개 문장과 대조 내 문장과 같은 점 · 내용">내 문장도 위치만으로 관계가 정해진다는 핵심을 말했다.</textarea></td></tr><tr><td class="lab">내 문장과 다른 점(빠진 개념, 틀린 관계)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.compare.r2.c1" data-label="A13 공개 문장과 대조 내 문장과 다른 점(빠진 개념, 틀린 관계) · 내용">내 문장에는 나머지 순서는 보장되지 않는다는 점과 그 이유가 빠져 있었다.</textarea></td></tr><tr><td class="lab">내 문장을 이렇게 고친다</td><td class="in-cell"><textarea class="in" rows="1" data-key="A13.compare.r3.c1" data-label="A13 공개 문장과 대조 내 문장을 이렇게 고친다 · 내용">얻는 것(가장 앞선 원소를 바로 앎)과 포기하는 것(전체 순서 보장)을 한 문장에 함께 쓰도록 고친다.</textarea></td></tr></table>
-</section>
-<section id="A14" class="sheet">
-<h2>A14 · 과제 마무리 점검과 전이<small>3차시 · 13분 · 개인</small></h2>
-<p class="meta"><span>산출물: 과제 코드 초안 + 테스트 출력, 스케줄러 출력</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>A12에서 만든 코드는 새 입력에서도 고치지 않고 통하는가? 같은 도구는 (우선순위, 이름) 튜플에도 통하는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">적용</span><a class="xlink" href="student_code_lab_part2.html#A14">코드 실습 A14</a>에서 점검 케이스를 실행해 7개 케이스마다 통과·실패를 고르고 원인을 쓴다.<span class="tg-where">[(가) 실습 과제 마무리 점검] 표</span><span class="tg-done">7행이 채워져 있다.</span></li>
-<li><span class="tg-stage">설명</span>K가 N보다 크거나 중복 값이 있을 때 내 코드가 어떻게 동작하는지 쓴다.<span class="tg-where">(가)의 &lsquo;생각해 볼 질문&rsquo; 칸</span></li>
-<li><span class="tg-stage">예측</span>(나) 튜플 작업 목록의 처리 순서를 예측해 쓰고, <code class="i">run_tasks</code>를 실행한 실제 출력을 쓴다. 이 연습은 채점하지 않는다.<span class="tg-where">[(나) 전이 과제: 우선순위 튜플 스케줄러] 표</span></li>
-<li><span class="tg-stage">비교</span>우선순위가 같은 두 작업의 순서가 무엇으로 정해졌는지 쓴다. 시간이 남으면 규모별 선택(D1)을 쓴다.<span class="tg-where">(나)의 질문 칸, [규모별 선택 (D1)]</span></li>
-<li><span class="tg-stage">과제 착수</span>[과제 제출 점검] 두 칸을 확인한다.<span class="tg-where">[과제 제출 점검]</span></li>
-</ol>
+<p>정제한 내 문장과 비교한다: 같은 점, 다른 점, 빠진 점(빠진 개념, 틀린 관계, 조건)이 무엇인가? 맞는 부분을 먼저 확인하고 빠진 조건을 아래 3단계 표에 쓴다.</p></details><div class="scroll"><table class="fill"><tr><th>항목</th><th>내용</th></tr><tr><td class="lab">내 문장과 다른 점(빠진 개념, 틀린 관계)</td><td class="in-cell"><textarea class="in" rows="1" placeholder="예: 내 문장에는 …가 빠졌다" data-key="A13.compare.r2.c1" data-label="A13 공개 문장과 대조 내 문장과 다른 점(빠진 개념, 틀린 관계) · 내용">내 문장에는 나머지 순서는 보장되지 않는다는 점과 그 이유가 빠져 있었다.</textarea></td></tr><tr><td class="lab">내 문장을 이렇게 고친다</td><td class="in-cell"><textarea class="in" rows="1" placeholder="예: …를 함께 쓰도록 고친다" data-key="A13.compare.r3.c1" data-label="A13 공개 문장과 대조 내 문장을 이렇게 고친다 · 내용">얻는 것(가장 앞선 원소를 바로 앎)과 포기하는 것(전체 순서 보장)을 한 문장에 함께 쓰도록 고친다.</textarea></td></tr></table></div>
+
 </div>
-<h3>(가) 실습 과제 마무리 점검</h3>
-<div class="learn-box"><span class="lb-title">학습 내용 · A14 활동 방법</span>
-<ul>
-<li>(가) A12에서 완성한 kth_largest를 <b>고치지 않고</b> 실습 코드 2부 A14의 점검 편집기에 붙여 넣고, 점검 케이스를 추가해 실행한다. 출력의 PASS·FAIL 줄 순서가 표의 케이스 1~7이다. FAIL이면 그 입력(nums, k)을 보고 원인을 표에 쓴다. 코드를 고쳤다면 어디를 고쳤는지도 쓴다.</li>
-<li>생각해 볼 질문에서는 k = 1, k = N, 값이 같은 원소, k가 N보다 큰 경우를 직접 입력해 본다.</li>
-<li>(나) 튜플 (우선순위, 이름)을 힙에 넣고 꺼내는 순서를 먼저 <b>예측</b>해 쓴 뒤 run_tasks를 완성해 실행하고 실제 출력을 쓴다. 우선순위가 같은 두 작업의 순서가 어떻게 정해졌는지 본다. 이 연습은 채점하지 않는다.</li>
-<li>규모별 선택(D1)은 시간이 남을 때만 쓴다. 데이터 크기, 값이 들어오는 횟수, 코드의 단순함을 기준으로 근거를 들어 쓴다.</li>
-</ul></div>
-<p>A12에서 만든 <code class="i">kth_largest</code>를 <b>코드를 고치지 않고</b> 새 점검 케이스에 돌려 본다. <a class="xlink" href="student_code_lab_part2.html#A14">코드 실습 A14</a>의 점검 케이스를 열어 실행한다.</p>
-<p class="hint">쓰는 법: 결과는 목록에서 &ldquo;통과&rdquo;나 &ldquo;실패&rdquo;를 고른다. 통과했으면 오른쪽 칸에 &ldquo;없음&rdquo;이라고 쓴다. 실패했으면 그 입력(nums, k)과 원인, 고친 곳을 한 줄로 쓴다. 7행을 모두 쓴다.</p><table class="fill"><tr><th style="width:100px">케이스</th><th style="width:18%">결과</th><th>실패했다면 원인 / 고친 곳</th></tr><tr><td class="lab">케이스 1</td><td class="in-cell"><select class="in" data-key="A14.test.r1.c1" data-label="A14 점검 케이스 결과 케이스 1 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.test.r1.c2" data-label="A14 점검 케이스 결과 케이스 1 · 실패했다면 원인 / 고친 곳">없음</textarea></td></tr><tr><td class="lab">케이스 2</td><td class="in-cell"><select class="in" data-key="A14.test.r2.c1" data-label="A14 점검 케이스 결과 케이스 2 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.test.r2.c2" data-label="A14 점검 케이스 결과 케이스 2 · 실패했다면 원인 / 고친 곳">없음</textarea></td></tr><tr><td class="lab">케이스 3</td><td class="in-cell"><select class="in" data-key="A14.test.r3.c1" data-label="A14 점검 케이스 결과 케이스 3 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.test.r3.c2" data-label="A14 점검 케이스 결과 케이스 3 · 실패했다면 원인 / 고친 곳">없음</textarea></td></tr><tr><td class="lab">케이스 4</td><td class="in-cell"><select class="in" data-key="A14.test.r4.c1" data-label="A14 점검 케이스 결과 케이스 4 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.test.r4.c2" data-label="A14 점검 케이스 결과 케이스 4 · 실패했다면 원인 / 고친 곳">없음</textarea></td></tr><tr><td class="lab">케이스 5</td><td class="in-cell"><select class="in" data-key="A14.test.r5.c1" data-label="A14 점검 케이스 결과 케이스 5 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.test.r5.c2" data-label="A14 점검 케이스 결과 케이스 5 · 실패했다면 원인 / 고친 곳">없음</textarea></td></tr><tr><td class="lab">케이스 6</td><td class="in-cell"><select class="in" data-key="A14.test.r6.c1" data-label="A14 점검 케이스 결과 케이스 6 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.test.r6.c2" data-label="A14 점검 케이스 결과 케이스 6 · 실패했다면 원인 / 고친 곳">없음</textarea></td></tr><tr><td class="lab">케이스 7</td><td class="in-cell"><select class="in" data-key="A14.test.r7.c1" data-label="A14 점검 케이스 결과 케이스 7 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.test.r7.c2" data-label="A14 점검 케이스 결과 케이스 7 · 실패했다면 원인 / 고친 곳">없음</textarea></td></tr></table><p><label class="ck"><input type="checkbox" data-key="A14.c1" data-label="A14 점검: 점검 케이스 전부 통과" checked> 점검 케이스가 모두 통과한다</label><label class="ck"><input type="checkbox" data-key="A14.c2" data-label="A14 점검: 코드를 바꾸지 않고 통과" checked> 새 입력에서 코드를 바꾸지 않았다</label><label class="ck"><input type="checkbox" data-key="A14.c3" data-label="A14 점검: k=1과 k=N 확인" checked> K=1, K=N을 직접 확인했다</label><label class="ck"><input type="checkbox" data-key="A14.c4" data-label="A14 점검: 중복 값 확인" checked> 중복 값이 있는 경우를 확인했다</label></p><p><b>생각해 볼 질문</b> 새 데이터에서도 코드를 안 바꾸고 통하는가? 이 과제는 1 &le; K &le; N을 가정한다. K가 N보다 크면 내 코드는 어떻게 동작하는가? 그 가정을 코드 주석으로 어떻게 밝히겠는가? 중복이 있을 때는 어떠한가?</p><p class="hint">쓰는 법: 3~4문장. ① K가 N보다 클 때의 동작 ② 가정을 주석으로 밝히는 방법 ③ 중복이 있을 때, 세 가지에 모두 답한다.</p><textarea class="in" rows="3" data-key="A14.edge" data-label="A14 경계 입력에서 알게 된 것">코드를 바꾸지 않고도 k=1, k=N, 중복에서 모두 통과했다. K가 N보다 크면 힙이 K개가 차지 않아 루트가 틀릴 수 있어, 입력 범위를 가정하거나 따로 처리해야 한다. 가정은 코드 앞 주석에 1 &lt;= K &lt;= N이라고 밝힌다.</textarea><h3>(나) 전이 과제: 우선순위 튜플 스케줄러</h3><p>작업 목록 <code class="i">tasks = [(2, &quot;email&quot;), (1, &quot;deploy&quot;), (3, &quot;lunch&quot;), (1, &quot;alert&quot;)]</code>를 <code class="i">(우선순위, 이름)</code> 튜플로 힙에 넣어 처리 순서를 만든다. 코드 실습 A14의 <code class="i">run_tasks</code>를 완성한다. 실행하기 전에 처리 순서를 예측해 쓰고, 실행한 뒤 실제 출력을 쓴다. 이 연습은 <b>과제 제출물이 아니며 채점하지 않는다</b>.</p><p class="hint">쓰는 법: 처리 순서를 튜플까지 그대로 대괄호 안에 쓴다(꼴: [(5, &quot;x&quot;), (4, &quot;y&quot;)]). 예측은 틀려도 된다.</p><table class="fill"><tr><th style="width:26%">방식</th><th>예측 (실행 전)</th><th>실제 처리 순서 출력 (실행 후)</th></tr><tr><td class="lab">낮은 숫자 먼저</td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.sched.r1.pred" data-label="A14 스케줄러 낮은 숫자 먼저 · 예측(실행 전)">[(1, 'deploy'), (1, 'alert'), (2, 'email'), (3, 'lunch')]</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.sched.r1.c1" data-label="A14 스케줄러 출력 낮은 숫자 먼저 · 처리 순서 출력">[(1, 'alert'), (1, 'deploy'), (2, 'email'), (3, 'lunch')]</textarea></td></tr><tr><td class="lab">높은 숫자 먼저</td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.sched.r2.pred" data-label="A14 스케줄러 높은 숫자 먼저 · 예측(실행 전)">[(3, 'lunch'), (2, 'email'), (1, 'deploy'), (1, 'alert')]</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.sched.r2.c1" data-label="A14 스케줄러 출력 높은 숫자 먼저 · 처리 순서 출력">[(3, 'lunch'), (2, 'email'), (1, 'alert'), (1, 'deploy')]</textarea></td></tr></table><p>우선순위가 같은 (1, &quot;deploy&quot;)와 (1, &quot;alert&quot;)는 무엇을 기준으로 순서가 정해지는가?</p><p class="hint">쓰는 법: 한 문장.</p><textarea class="in" rows="2" data-key="A14.tie" data-label="A14 우선순위가 같을 때 순서를 정하는 기준">우선순위가 같으면 튜플의 다음 원소인 이름(문자열)을 사전순으로 비교하므로 alert가 deploy보다 앞선다.</textarea><p>(선택) 우선순위가 같은 작업을 먼저 들어온 순서대로 처리해야 하는 서비스라면 지금 방식으로 충분한가? 어떻게 바꾸겠는가?</p><p class="hint">쓰는 법: (선택) 2문장. &ldquo;충분하다&rdquo; 또는 &ldquo;부족하다&rdquo;를 먼저 쓰고 바꾸는 방법을 쓴다.</p><textarea class="in" rows="3" data-key="A14.d3" data-label="A14 (선택) 같은 우선순위를 들어온 순서대로 처리해야 한다면">먼저 들어온 순서를 지켜야 하면 지금 방식으로는 부족하다. 튜플에 (우선순위, 들어온 번호, 이름)처럼 번호를 넣어 같은 우선순위에서 번호순으로 정한다.</textarea><h3>규모별 선택 (D1)</h3><p>(시간이 남으면) 데이터가 100개 정도로 작다면 heapq 대신 그냥 <code class="i">sorted</code>·<code class="i">max</code>를 써도 되는가? 어느 크기·빈도에서 선택이 바뀌는가? 내 의견과 근거를 쓴다.</p><p class="hint">쓰는 법: (선택) 2~3문장. 내 의견과 근거(데이터 크기, 횟수, 단순함 중 하나 이상)를 쓴다.</p><textarea class="in" rows="4" data-key="A14.debate" data-label="A14 규모별 선택 의견">100개 정도면 sorted나 max로 충분하고 코드가 더 단순하다. N이 아주 크거나 값이 계속 들어오고 그때마다 가장 우선인 것을 꺼내야 하면 힙이 유리하다. 기준은 데이터 크기, 반복 빈도, 코드 단순성, 메모리이다.</textarea><h3>과제 제출 점검</h3><p><label class="ck"><input type="checkbox" data-key="A14.s1" data-label="A14 제출: 구현 계획 한 줄 주석" checked> 코드 앞에 구현 계획 한 줄을 주석으로 썼다</label><label class="ck"><input type="checkbox" data-key="A14.s2" data-label="A14 제출: 복잡도 서술" checked> 시간 복잡도와 그 근거를 직접 서술했다</label></p>
-<p class="note">먼저 위 칸에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A14 정리: 점검 케이스와 스케줄러</summary>
+
+<p class="wrapup"><b>여기까지</b> 내 문장을 다듬고 닫힌 상자와 견주어 고칠 곳을 적었다. A14에서 과제 코드를 새 입력으로 점검한다.</p>
+</section>
+
+<section id="A14" class="sheet lesson">
+<h2>A14 · 과제 마무리 점검과 전이<small>3차시 · 13분 · 개인</small></h2>
+<p class="lead">A12에서 만든 코드는 새 입력에서도 고치지 않고 통할까? 같은 도구가 (우선순위, 이름) 튜플에도 통하는지 보자.</p>
+
+<div class="step">
+<h3>튜플은 어떻게 견줄까</h3>
+<p>우선순위와 이름을 묶은 <code class="i">(우선순위, 이름)</code> 튜플도 힙에 넣을 수 있다. <code class="i">tasks = [(2, 'b'), (1, 'z'), (1, 'a')]</code>를 모두 heappush한 뒤 heappop으로 3번 꺼내면 어떤 순서일까?</p>
+<div class="quiz predict">
+<p class="q">꺼낸 순서는?</p>
+<div class="opts"><button type="button">(1, 'z'), (1, 'a'), (2, 'b')</button><button type="button">(1, 'a'), (1, 'z'), (2, 'b')</button><button type="button">(2, 'b'), (1, 'a'), (1, 'z')</button></div>
+</div>
+<script type="text/plain" data-id="A14-1">
+import heapq
+tasks = [(2, 'b'), (1, 'z'), (1, 'a')]
+h = []
+for t in tasks:
+    heapq.heappush(h, t)
+print([heapq.heappop(h) for _ in tasks])
+</script>
+<div class="mycode"><textarea class="in code" rows="8" data-type="code" data-starter="A14-1" data-label="연습 · 튜플 힙" spellcheck="false"></textarea></div>
+
+</div>
+
+<div class="step">
+<h3>(가) 점검 케이스 7개</h3>
+<p><a class="xlink" href="student_code_lab_part2.html#A14">실습 코드 A14</a>에서 A12의 <code class="i">kth_largest</code>를 <b>고치지 않고</b> 점검 케이스를 실행한다. 출력의 PASS·FAIL 줄 순서가 케이스 1~7이다. 결과를 고른다.</p>
+<div class="scroll"><table class="fill"><tr><th>케이스</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr><tr><td class="lab">결과</td><td class="in-cell"><select class="in" data-key="A14.test.r1.c1" data-label="A14 점검 케이스 결과 케이스 1 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><select class="in" data-key="A14.test.r2.c1" data-label="A14 점검 케이스 결과 케이스 2 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><select class="in" data-key="A14.test.r3.c1" data-label="A14 점검 케이스 결과 케이스 3 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><select class="in" data-key="A14.test.r4.c1" data-label="A14 점검 케이스 결과 케이스 4 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><select class="in" data-key="A14.test.r5.c1" data-label="A14 점검 케이스 결과 케이스 5 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><select class="in" data-key="A14.test.r6.c1" data-label="A14 점검 케이스 결과 케이스 6 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td><td class="in-cell"><select class="in" data-key="A14.test.r7.c1" data-label="A14 점검 케이스 결과 케이스 7 · 결과"><option value=""></option><option value="통과" selected>통과</option><option value="실패">실패</option></select></td></tr></table></div>
+<p><label class="ck"><input type="checkbox" data-key="A14.c1" data-label="A14 점검: 점검 케이스 전부 통과" checked> 점검 케이스가 모두 통과한다</label><label class="ck"><input type="checkbox" data-key="A14.c2" data-label="A14 점검: 코드를 바꾸지 않고 통과" checked> 새 입력에서 코드를 바꾸지 않았다</label><label class="ck"><input type="checkbox" data-key="A14.c3" data-label="A14 점검: k=1과 k=N 확인" checked> K=1, K=N을 직접 확인했다</label><label class="ck"><input type="checkbox" data-key="A14.c4" data-label="A14 점검: 중복 값 확인" checked> 중복 값이 있는 경우를 확인했다</label></p>
+
+</div>
+
+<div class="step">
+<h3>경계 값 생각하기</h3>
+<p class="qtext">이 과제는 1 ≤ K ≤ N을 가정한다. K가 N보다 크면 내 코드는 어떻게 동작하는가? 그 가정을 주석으로 어떻게 밝히겠는가? 중복이 있을 때는 어떠한가?</p>
+<div class="ans-row"><span class="n" style="white-space:nowrap">내 답</span><textarea class="in" rows="3" placeholder="예: K가 N보다 크면 …" data-key="A14.edge" data-label="A14 경계 입력에서 알게 된 것">코드를 바꾸지 않고도 k=1, k=N, 중복에서 모두 통과했다. K가 N보다 크면 힙이 K개가 차지 않아 루트가 틀릴 수 있어, 입력 범위를 가정하거나 따로 처리해야 한다. 가정은 코드 앞 주석에 1 &lt;= K &lt;= N이라고 밝힌다.</textarea></div>
+
+</div>
+
+<div class="step">
+<h3>(나) 튜플 스케줄러</h3>
+<p><code class="i">tasks = [(2, "email"), (1, "deploy"), (3, "lunch"), (1, "alert")]</code>의 처리 순서를 만든다. <a class="xlink" href="student_code_lab_part2.html#A14">실습 코드 A14</a>의 <code class="i">run_tasks</code>를 완성해 실행하고, 실행하기 전에 예측을 먼저 쓴다. 이 연습은 채점하지 않는다.</p>
+<div class="scroll"><table class="fill"><tr><th>방식</th><th>예측 (실행 전)</th><th>실제 처리 순서 출력</th></tr><tr><td class="lab">낮은 숫자 먼저</td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.sched.r1.pred" data-label="A14 스케줄러 낮은 숫자 먼저 · 예측(실행 전)">[(1, 'deploy'), (1, 'alert'), (2, 'email'), (3, 'lunch')]</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.sched.r1.c1" data-label="A14 스케줄러 출력 낮은 숫자 먼저 · 처리 순서 출력">[(1, 'alert'), (1, 'deploy'), (2, 'email'), (3, 'lunch')]</textarea></td></tr><tr><td class="lab">높은 숫자 먼저</td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.sched.r2.pred" data-label="A14 스케줄러 높은 숫자 먼저 · 예측(실행 전)">[(3, 'lunch'), (2, 'email'), (1, 'deploy'), (1, 'alert')]</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A14.sched.r2.c1" data-label="A14 스케줄러 출력 높은 숫자 먼저 · 처리 순서 출력">[(3, 'lunch'), (2, 'email'), (1, 'alert'), (1, 'deploy')]</textarea></td></tr></table></div>
+<p class="qtext">우선순위가 같은 (1, "deploy")와 (1, "alert")는 무엇을 기준으로 순서가 정해지는가?</p>
+<div class="ans-row"><span class="n" style="white-space:nowrap">기준</span><textarea class="in" rows="2" placeholder="예: 우선순위가 같으면 …" data-key="A14.tie" data-label="A14 우선순위가 같을 때 순서를 정하는 기준">우선순위가 같으면 튜플의 다음 원소인 이름(문자열)을 사전순으로 비교하므로 alert가 deploy보다 앞선다.</textarea></div>
+<div class="quiz" data-answer="1">
+<p class="q">우선순위가 같은 작업을 먼저 들어온 순서대로 처리하려면 튜플을 어떻게 만들면 좋을까?</p>
+<div class="opts"><button type="button">(우선순위, 들어온 번호, 이름)</button><button type="button" data-hint="이름이 먼저 비교되어 우선순위가 밀려난다.">(이름, 우선순위)</button></div>
+<p class="why">같은 우선순위에서는 둘째 칸인 들어온 번호가 비교되어 먼저 들어온 작업이 앞선다.</p>
+</div>
+
+</div>
+
+<div class="step">
+<h3>규모별 선택과 제출 점검</h3>
+<p class="qtext">(선택, D1) 데이터가 100개 정도로 작다면 heapq 대신 sorted·max를 써도 되는가? 어느 크기·빈도에서 선택이 바뀌는지 근거와 함께 쓴다.</p>
+<div class="ans-row"><span class="n" style="white-space:nowrap">내 의견</span><textarea class="in" rows="4" placeholder="예: …이면 sorted로 충분하다" data-key="A14.debate" data-label="A14 규모별 선택 의견">100개 정도면 sorted나 max로 충분하고 코드가 더 단순하다. N이 아주 크거나 값이 계속 들어오고 그때마다 가장 우선인 것을 꺼내야 하면 힙이 유리하다. 기준은 데이터 크기, 반복 빈도, 코드 단순성, 메모리이다.</textarea></div>
+<p>과제를 내기 전 확인한다. <label class="ck"><input type="checkbox" data-key="A14.s1" data-label="A14 제출: 구현 계획 한 줄 주석" checked> 코드 앞에 구현 계획 한 줄을 주석으로 썼다</label><label class="ck"><input type="checkbox" data-key="A14.s2" data-label="A14 제출: 복잡도 서술" checked> 시간 복잡도와 그 근거를 직접 서술했다</label></p>
+
+</div>
+
+<p class="wrapup"><b>여기까지</b> 과제 코드를 점검 케이스로 확인하고 튜플 스케줄러로 같은 도구를 옮겨 보았다. A15에서 형성평가를 푼다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · A14 정리: 점검 케이스와 스케줄러</summary>
 <table><tr><th>케이스</th><th>nums</th><th>k</th><th>기대값</th></tr>
 <tr><td>1</td><td>[7, 2, 9, 4, 11, 5, 8, 3]</td><td>3</td><td>8</td></tr><tr><td>2</td><td>[5, 5, 5, 2]</td><td>2</td><td>5</td></tr>
 <tr><td>3</td><td>[5, 5, 5, 2]</td><td>4</td><td>2</td></tr><tr><td>4</td><td>[9]</td><td>1</td><td>9</td></tr>
@@ -295,47 +443,78 @@ while h:
     out.append((-p, n))                       # 앞의 -p를 되돌려야 원래 우선순위
 print(out)</pre>
 <p>이름 자리에 dict처럼 서로 비교할 수 없는 값을 두고 우선순위가 같으면 TypeError(&lsquo;&lt;&rsquo; not supported between instances of &lsquo;dict&rsquo; and &lsquo;dict&rsquo;)가 난다. 먼저 들어온 순서를 지키려면 (우선순위, 들어온 번호, 이름)처럼 번호를 둘째 칸에 넣는 방법이 있다.</p>
-<p>규모별 선택의 기준: 데이터가 100개 정도로 작고 한 번만 구하면 sorted·max가 단순하고 충분하다. N이 매우 크거나 값이 계속 들어오고 그때마다 가장 우선인 것을 꺼내야 하면 힙이 유리하다. 힙은 가장 앞 하나만 보장하고 전체 순서는 보장하지 않는 대신 갱신이 싸다.</p></details>
-</section>
-<section id="A15" class="sheet">
+<p>규모별 선택의 기준: 데이터가 100개 정도로 작고 한 번만 구하면 sorted·max가 단순하고 충분하다. N이 매우 크거나 값이 계속 들어오고 그때마다 가장 우선인 것을 꺼내야 하면 힙이 유리하다. 힙은 가장 앞 하나만 보장하고 전체 순서는 보장하지 않는 대신 갱신이 싸다.</p></details></section>
+
+<section id="A15" class="sheet lesson">
 <h2>A15 · 형성평가 안내<small>3차시 · 6분 · 개인</small></h2>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>오늘 배운 것을 도움 없이 꺼내 쓸 수 있는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">적용</span><a class="xlink" href="formative_check.html">형성평가(formative_check.html)</a>를 열어 필수 Q1~Q3을 혼자 6분 안에 푼다. AI와 자료 없이 푼다.<span class="tg-where">형성평가 파일의 입력 칸</span><span class="tg-done">Q1~Q3 칸이 채워져 있다.</span></li>
-<li><span class="tg-stage">적용</span>다 쓰고 [저장(JSON)]으로 제출한다.<span class="tg-where">형성평가 파일의 저장 바</span></li>
-</ol>
+<p class="lead">오늘 배운 것을 도움 없이 꺼내 쓸 수 있는지 형성평가로 확인한다.</p>
+
+<div class="step">
+<h3>형성평가 열기</h3>
+<p><a href="formative_check.html">형성평가(formative_check.html)</a>를 열어 필수 Q1~Q3을 혼자 6분 안에 푼다. 이 활동지에는 문항을 싣지 않는다.</p>
+<div class="quiz" data-answer="1">
+<p class="q">형성평가를 푸는 방법으로 맞는 것은?</p>
+<div class="opts"><button type="button">AI와 자료 없이 혼자 푼다</button><button type="button" data-hint="형성평가는 시험 상황이다. AI를 쓰지 않는다.">AI에게 풀이를 물어 가며 푼다</button></div>
+<p class="why">혼자 푸는 시험 상황이므로 AI와 자료를 쓰지 않는다.</p>
 </div>
 
-<p>형성평가는 <a href="formative_check.html">formative_check.html</a>에서 개인으로 푼다(필수 Q1~Q3, 6분). 시험 상황이므로 AI를 사용하지 않는다. 이 활동지에는 문항을 싣지 않는다.</p>
-<div class="learn-box"><span class="lb-title">학습 내용 · 형성평가 푸는 방법</span>
-<ol>
-<li><a href="formative_check.html">formative_check.html</a>을 열고 필수 Q1~Q3을 개인으로 6분 안에 푼다. 시험 상황이므로 AI·자료 없이 혼자 푼다.</li>
-<li>다 쓰고 [저장(JSON)]으로 제출한다. 정답과 점수 기준은 제출한 뒤에 따로 안내하는 대로 확인한다.</li>
-<li>시간이 모자라면 Q2는 18을 처리한 직후만, Q3은 한 문장으로 줄여 쓴다. Q4는 수업 밖 선택 문항이다.</li>
-</ol></div>
-</section>
-<section id="A16" class="sheet">
-<h2>A16 · 오개념 점검과 다음 주 예고<small>3차시 · 3분 · 개인</small></h2>
-<p class="meta"><span>산출물: 오개념 점검 기록, 10주차 짐작(제출하지 않는 자습용 기록)</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>오늘 활동 전에 믿던 것은 직접 확인한 값과 어떻게 달랐는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">설명</span>수업 전에 내가 믿었던 것 한 가지를 쓰고, 직접 값을 확인한 것에 표시한다.<span class="tg-where">[오개념 점검]</span></li>
-<li><span class="tg-stage">비교</span>그 믿음이 바뀌거나 유지된 순간과 그때 본 값을 쓴다.<span class="tg-where">&lsquo;그 믿음이 바뀐(또는 유지된) 순간&rsquo; 칸</span><span class="tg-done">칸에 내가 본 값이 함께 적혀 있다.</span></li>
-<li><span class="tg-stage">예측</span>다음 주 그래프에서 &ldquo;가장 가까운 곳부터 방문하기&rdquo;가 힙과 어떻게 이어질지 짐작해 쓴다. 틀려도 된다.<span class="tg-where">[다음 주 예고]</span></li>
-</ol>
 </div>
-<p>오늘의 활동에서 내가 믿었던 것과 직접 확인한 값을 비교한다. 아래 글은 <b>내 말로 직접</b> 쓴다(AI 대필 금지).</p><div class="learn-box"><span class="lb-title">학습 내용 · 오개념 점검 쓰는 법</span>
-<ul>
-<li>오개념 점검: 아래 세 문장이 참인지 거짓인지 이유와 함께 판정한다. ① h[-1]은 힙의 최댓값이다. ② 힙 리스트는 정렬되어 있다. ③ -x로 넣고 꺼낸 값을 그대로 출력해도 된다. 판정의 근거가 된 값(출력, 표의 값)을 증거 칸에 쓴다. 직접 확인한 항목에만 표시한다.</li>
-</ul></div>
-<h3>오개념 점검</h3><p>오늘 수업 전에 내가 믿었던 것 한 가지를 쓴다.</p><p class="hint">쓰는 법: 한 문장.</p><textarea class="in" rows="2" data-key="A16.before" data-label="A16 오늘 수업 전에 내가 믿었던 것 한 가지">힙 리스트는 정렬되어 있고 h[-1]이 최댓값일 것이라고 믿었다.</textarea><p>오늘 직접 값을 확인한 것에 표시한다.</p><ul style="list-style:none;margin-left:0"><li><label class="ck"><input type="checkbox" data-key="A16.m1" data-label="A16 오개념 점검: h[-1]은 최댓값이 아님" checked> h[-1]의 값을 직접 확인했다</label></li><li><label class="ck"><input type="checkbox" data-key="A16.m2" data-label="A16 오개념 점검: 힙 리스트는 정렬되어 있지 않음" checked> 힙 리스트의 정렬 여부를 직접 확인했다</label></li><li><label class="ck"><input type="checkbox" data-key="A16.m3" data-label="A16 오개념 점검: 부호 반전 누락" checked> 부호 반전이 필요한 곳과 되돌리는 곳을 내 코드에서 점검했다</label></li></ul><p>그 믿음이 바뀐(또는 유지된) 순간과 그때 내가 본 값을 쓴다.</p><p class="hint">쓰는 법: 1~2문장. 내가 본 값(출력, 표의 값)을 함께 쓴다.</p><textarea class="in" rows="3" data-key="A16.evidence" data-label="A16 오개념 점검 근거">h = [1, 3, 2, 4, 8, 7, 6, 9, 5]에서 h[-1]은 5이고 최댓값은 9였다. h == sorted(h)는 False였다. B3에서 y는 None이었다.</textarea><p class="note">오개념 점검 칸을 먼저 쓴 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A16 오개념 점검 해설</summary>
+
+<div class="step">
+<h3>제출하기</h3>
+<p>다 쓰고 [저장(JSON)]으로 제출한다. 정답과 점수 기준은 제출한 뒤에 따로 안내한다.</p>
+<p class="tip">시간이 모자라면 Q2는 18을 처리한 직후만, Q3은 한 문장으로 줄여 쓴다. Q4는 수업 밖 선택 문항이다.</p>
+
+</div>
+
+<p class="wrapup"><b>여기까지</b> 형성평가를 푸는 방법을 확인했다. A16에서 오늘의 믿음을 점검한다.</p>
+</section>
+
+<section id="A16" class="sheet lesson">
+<h2>A16 · 오개념 점검과 다음 주 예고<small>3차시 · 3분 · 개인</small></h2>
+<p class="lead">오늘 활동 전에 믿던 것은 직접 확인한 값과 어떻게 달랐을까? 틀린 말을 가려내 보자.</p>
+
+<div class="step">
+<h3>세 문장 판단하기</h3>
+<p>배열 <code class="i">h = [1, 3, 2, 4, 8, 7, 6, 9, 5]</code>를 힙으로 만든 뒤의 모습이다. 각 문장이 맞는지 눌러 보자.</p>
+<div class="quiz" data-answer="2">
+<p class="q">&ldquo;h[-1]은 힙의 최댓값이다.&rdquo; 이 말은?</p>
+<div class="opts"><button type="button" data-hint="h[-1]은 마지막 칸의 값이다. 이 h의 최댓값 9는 어느 칸에 있는가?">맞다</button><button type="button">아니다</button></div>
+<p class="why">h[-1]은 5이고 최댓값 9는 7번 칸에 있다(A9).</p>
+</div>
+<div class="quiz" data-answer="2">
+<p class="q">&ldquo;힙 리스트는 정렬되어 있다.&rdquo; 이 말은?</p>
+<div class="opts"><button type="button" data-hint="h를 앞에서부터 읽어 보자. 3 다음에 2가 온다.">맞다</button><button type="button">아니다</button></div>
+<p class="why">h == sorted(h)는 False였다(A9). 꺼내는 순서만 정렬된다.</p>
+</div>
+<div class="quiz" data-answer="2">
+<p class="q">&ldquo;-x로 넣고 꺼낸 값을 그대로 출력해도 된다.&rdquo; 이 말은?</p>
+<div class="opts"><button type="button" data-hint="B1의 출력을 떠올려 보자. 음수가 나왔다.">맞다</button><button type="button">아니다</button></div>
+<p class="why">B1처럼 꺼낸 값을 되돌리지 않으면 [-9, -7, -4, -2]처럼 음수가 나온다(A11).</p>
+</div>
+
+</div>
+
+<div class="step">
+<h3>내가 믿었던 것</h3>
+<p>오늘 수업 전에 내가 믿었던 것 한 가지를 쓴다. 그다음 직접 값을 확인한 것에 표시하고, 믿음이 바뀐(또는 유지된) 순간과 그때 본 값을 쓴다. 이 글은 내 말로 직접 쓴다.</p>
+<div class="ans-row"><span class="n" style="white-space:nowrap">수업 전</span><textarea class="in" rows="2" placeholder="예: …라고 믿었다" data-key="A16.before" data-label="A16 오늘 수업 전에 내가 믿었던 것 한 가지">힙 리스트는 정렬되어 있고 h[-1]이 최댓값일 것이라고 믿었다.</textarea></div>
+<p><label class="ck"><input type="checkbox" data-key="A16.m1" data-label="A16 오개념 점검: h[-1]은 최댓값이 아님" checked> h[-1]의 값을 직접 확인했다</label><label class="ck"><input type="checkbox" data-key="A16.m2" data-label="A16 오개념 점검: 힙 리스트는 정렬되어 있지 않음" checked> 힙 리스트의 정렬 여부를 직접 확인했다</label><label class="ck"><input type="checkbox" data-key="A16.m3" data-label="A16 오개념 점검: 부호 반전 누락" checked> 부호 반전이 필요한 곳과 되돌리는 곳을 내 코드에서 점검했다</label></p>
+<div class="ans-row"><span class="n" style="white-space:nowrap">바뀐 순간</span><textarea class="in" rows="3" placeholder="예: 표의 값 …를 보고 …" data-key="A16.evidence" data-label="A16 오개념 점검 근거">h = [1, 3, 2, 4, 8, 7, 6, 9, 5]에서 h[-1]은 5이고 최댓값은 9였다. h == sorted(h)는 False였다. B3에서 y는 None이었다.</textarea></div>
+
+</div>
+
+<div class="step">
+<h3>다음 주 예고</h3>
+<p>트리(8주) → 힙(9주) → <b>그래프</b>(10주)로 이어진다. 그래프에서 &ldquo;가장 가까운 곳부터 방문하기&rdquo;가 힙과 어떻게 이어질지 짐작해 쓴다. 틀려도 되고, 떠오르지 않으면 &ldquo;모르겠다&rdquo;라고 쓴다.</p>
+<div class="ans-row"><span class="n" style="white-space:nowrap">내 짐작</span><textarea class="in" rows="3" placeholder="예: 거리가 …" data-key="A16.next" data-label="A16 10주차 그래프에 대한 짐작">가장 가까운 곳부터 방문하려면 거리가 작은 것부터 꺼내야 하므로, 거리를 우선순위로 해서 힙에 넣고 가장 작은 값을 꺼내면 될 것 같다.</textarea></div>
+
+</div>
+
+<p class="wrapup"><b>여기까지</b> 오개념 세 문장을 가려내고 내가 믿었던 것을 적었다. 다음 주는 그래프이다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · A16 오개념 점검 해설</summary>
 <p>세 문장은 모두 거짓이다. ① h = [1, 3, 2, 4, 8, 7, 6, 9, 5]에서 h[-1]은 5이고 최댓값은 9이다. ② 같은 리스트에서 h == sorted(h)는 False이다. ③ B1처럼 꺼낸 값을 되돌리지 않으면 [-9, -7, -4, -2]처럼 음수가 나온다.</p>
-<p>내 믿음이 바뀌었다면 그 순간에 본 값을 증거 칸에 옮겨 쓴다.</p></details>
-<h3>다음 주 예고</h3><p>트리(8주) → 힙(9주) → <b>그래프</b>(10주). 10주차에는 점과 선으로 이루어진 망형 구조를 다룬다. 그래프에서 &ldquo;가장 가까운 곳부터 방문하기&rdquo;가 힙과 어떻게 이어질지 짐작해 본다.</p><p class="hint">쓰는 법: 1~2문장. 짐작이므로 틀려도 된다. 떠오르지 않으면 &ldquo;모르겠다&rdquo;와 이유를 쓴다.</p><textarea class="in" rows="3" data-key="A16.next" data-label="A16 10주차 그래프에 대한 짐작">가장 가까운 곳부터 방문하려면 거리가 작은 것부터 꺼내야 하므로, 거리를 우선순위로 해서 힙에 넣고 가장 작은 값을 꺼내면 될 것 같다.</textarea>
-<details class="learn-box after" id="theory-after"><summary>마지막 활동(A16)을 마친 뒤 연다 · 이론 정리의 확인 · 정리</summary>
+<p>내 믿음이 바뀌었다면 그 순간에 본 값을 증거 칸에 옮겨 쓴다.</p></details><details class="learn-box after" id="theory-after"><summary>마지막 활동(A16)을 마친 뒤 연다 · 이론 정리의 확인 · 정리</summary>
 <p>1부 이론 정리의 짝이 되는 정리이다. A16까지 모두 마친 뒤에 열어 본다.</p>
 <p><b>오늘의 일반화(A13에서 내가 다듬은 문장과 대조한다)</b></p>
 <ul>
@@ -362,6 +541,7 @@ print(out)</pre>
 <li>부호 반전을 넣을 때만 하고 꺼낼 때는 되돌리지 않는다.</li>
 </ul></details>
 </section>
+
 
 </div>
 <script id="week9-submit">
