@@ -177,6 +177,14 @@ while events:
 <section id="A1" class="sheet">
 <h2>A1 · 가장 급한 사람 먼저<small>1차시 · 8분 · 개인</small></h2>
 <p class="meta"><span>산출물: 자기 방식 1가지와 약점 메모</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>들어온 순서와 먼저 처리할 순서가 다를 때, 매번 가장 급한 사람을 어떻게 골라야 하는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>도착 순서대로 환자 5명이 있다. 한 명씩 부른다고 생각하고, 매번 아직 안 불린 사람 중 가장 급한 사람을 골라 순서 칸에 쓴다. 어떻게 골랐는지도 쓴다.<span class="tg-where">[관찰·정리] 표</span><span class="tg-done">5행이 모두 채워져 있다.</span></li>
+<li><span class="tg-stage">시도</span>이 환자들이 파이썬 리스트에 들어 있다면 다음 환자를 부를 때마다 무엇을 할지 쓴다.<span class="tg-where">[리스트로 처리하는 나의 방법]</span></li>
+<li><span class="tg-stage">설명</span>내 방법의 약점과 1만 명이 줄 서는 경우를 생각해 쓴다.<span class="tg-where">&lsquo;그 방법의 약점은 무엇인가?&rsquo;와 &lsquo;생각해 볼 질문&rsquo; 칸</span></li>
+</ol>
+</div>
 <p>병원 응급실과 게임 서버, 프린터에는 공통점이 있다. <b>도착한 순서</b>와 <b>먼저 처리해야 하는 순서</b>가 다르다는 점이다.</p>
 <div class="grid">
 <div class="card"><b class="h">사례 ① 응급실 접수</b><p>환자는 도착 순서대로 접수하지만, 의사는 가장 급한 환자부터 부른다.</p></div>
@@ -204,6 +212,14 @@ while events:
 <section id="A2" class="sheet">
 <h2>A2 · 두 가지 리스트 방식의 비용 세기 (P1)<small>1차시 · 12분 · 개인</small></h2>
 <p class="meta"><span>산출물: 비용 표(넣기·꺼내기)</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>값을 넣는 일과 꺼내는 일 중에서, 두 가지 리스트 방식은 각각 어느 쪽이 얼마나 일을 하는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>(가) 7개를 미정렬로 모두 넣은 뒤 첫 번째를 꺼낼 때의 비교 횟수 등을 학습 내용의 세는 규칙대로 센다.<span class="tg-where">[(가) 7개를 모두 넣은 뒤 첫 번째로 꺼낼 때] 표</span></li>
+<li><span class="tg-stage">관찰</span>(나) 7개를 차례로 정렬을 유지하며 넣을 때 행마다 비교 횟수와 뒤로 민 원소 수를 센다.<span class="tg-where">[(나) 7개를 차례로 넣을 때] 표</span><span class="tg-done">7행이 모두 채워져 있다.</span></li>
+<li><span class="tg-stage">비교</span>두 방식을 원소 수 N에 대한 증가 정도로 골라 비용 표를 채우고, 느린 연산을 쓴다.<span class="tg-where">[비용 표]와 &lsquo;생각해 볼 질문&rsquo; 칸</span></li>
+</ol>
+</div>
 <p>값 7개 <code class="i">[7, 2, 9, 4, 11, 5, 8]</code>(P1)이 차례로 들어온다. 작은 값이 더 급하다. 두 방식의 비용을 <b>손으로 직접 세어</b> 비교한다.</p>
 <div class="cols">
 <div class="card"><b class="h">(가) 미정렬 방식</b><p>들어오는 대로 리스트 맨 뒤에 붙인다. 꺼낼 때는 처음부터 끝까지 훑어 가장 작은 값을 찾아 뺀다.</p></div>
@@ -236,6 +252,15 @@ while events:
 <section id="A3" class="sheet">
 <h2>A3 · 배열과 트리 짝지어 보기 (H1)<small>1차시 · 14분 · 개인</small></h2>
 <p class="meta"><span>산출물: 부모·자식 칸 번호 표 + 발견한 규칙 식</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>트리 그림의 노드는 배열의 몇 번 칸에 놓이고, 부모와 자식의 칸 번호는 어떤 식으로 이어지는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>H1의 그림과 배열을 짝지어 각 칸의 부모와 자식 칸 번호를 표에 쓴다. 없으면 &ldquo;없음&rdquo;이다.<span class="tg-where">[부모·자식 칸 번호 표]</span><span class="tg-done">7행 &times; 3칸이 채워져 있다.</span></li>
+<li><span class="tg-stage">설명</span>표의 여러 행을 나란히 놓고 i가 바뀔 때 번호가 어떻게 바뀌는지 식으로 쓴다.<span class="tg-where">[발견한 규칙]</span></li>
+<li><span class="tg-stage">적용</span>찾은 규칙에 칸 3, 4와 칸 9를 넣어 확인한다.<span class="tg-where">&lsquo;확인 질문&rsquo; 두 칸</span></li>
+<li><span class="tg-stage">비교</span>일반 이진 트리 T1을 같은 방식으로 배열에 넣어 H1과 다른 점을 찾는다.<span class="tg-where">[일반 이진 트리는 어떨까 (8주차 T1)]</span></li>
+</ol>
+</div>
 <div class="concept"><b class="h">약속 · 완전 이진 트리</b>
 <p><b>완전 이진 트리</b>란 위에서 아래로, 같은 층에서는 왼쪽에서 오른쪽으로 <b>빈틈없이 채워진</b> 이진 트리이다. (용어 루트·리프·높이는 8주차와 같다. 높이는 노드 수 기준이다.)</p></div>
 <p>아래 트리는 완전 이진 트리이며, 그 값을 위에서 아래·왼쪽에서 오른쪽 순서로 배열에 담은 것이 <code class="i">H1</code>이다.</p>
@@ -281,6 +306,14 @@ while events:
 <section id="A4" class="sheet">
 <h2>A4 · 판정 카드와 BST 비교<small>1차시 · 14분 · 개인</small></h2>
 <p class="meta"><span>산출물: 판정 카드 + BST vs 힙 비교표</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>배열이 최소 힙인지는 어떻게 판정하는가? 최소 힙의 약속은 BST의 약속과 무엇이 다른가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>카드 J1~J4를 학습 내용의 판정 방법으로 하나씩 판정한다. 최소 힙이 아니면 어긴 부모와 자식의 칸 번호와 값을 이유에 쓴다.<span class="tg-where">카드 J1~J4의 판정 칸과 이유 칸</span><span class="tg-done">4장 모두 판정이 선택되어 있다.</span></li>
+<li><span class="tg-stage">비교</span>8주차 BST와 오늘의 힙을 표의 항목마다 비교해 쓴다. 근거가 없으면 &ldquo;가설&rdquo;이라고 덧붙인다.<span class="tg-where">[BST(8주차)와 힙(오늘) 비교표]</span></li>
+<li><span class="tg-stage">설명</span>형제 사이의 순서, 최솟값의 위치, 정렬 여부에 관한 질문 세 개에 답한다.<span class="tg-where">&lsquo;생각해 볼 질문&rsquo; 칸</span></li>
+</ol>
+</div>
 <div class="concept"><b class="h">약속 · 최소 힙</b>
 <p><b>최소 힙</b>(min-heap)은 완전 이진 트리의 모든 부모가 자식보다 크지 않은(부모 &le; 자식) 것이다. 이 약속은 부모와 자식 사이의 관계를 정한다.</p></div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 판정 방법과 비교표 쓰는 법</span>
@@ -334,6 +367,12 @@ while events:
 </section>
 <section id="A5" class="sheet">
 <h2>A5 · Exit ticket<small>1차시 · 2분 · 개인</small></h2>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>오늘 배운 칸 번호 식을 보지 않고 쓸 수 있는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">설명</span>배열 i번 칸의 왼쪽·오른쪽 자식 칸 번호를 식으로 쓰고, 가장 헷갈린 것을 한 가지 쓴다.<span class="tg-where">이 활동의 두 칸</span><span class="tg-done">두 칸이 모두 채워져 있다.</span></li>
+</ol>
+</div>
 
 <p><b>배열의 i번 칸에서 자식의 칸 번호를 구하는 방법을 한 줄로 쓴다.</b></p><p class="hint">쓰는 법: 한 줄. 왼쪽 자식과 오른쪽 자식 두 가지를 i를 넣은 식으로 쓴다.</p><textarea class="in" rows="2" data-key="A5.exit" data-label="A5 Exit ticket 답">왼쪽 자식은 2*i+1, 오른쪽 자식은 2*i+2번 칸이다.</textarea><p>오늘 가장 헷갈린 부분을 한 가지 쓴다.</p><p class="hint">쓰는 법: 한 가지만 한 문장으로 쓴다. 헷갈린 것이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p><textarea class="in" rows="2" data-key="A5.confuse" data-label="A5 가장 헷갈린 부분">부모 칸을 구할 때 왜 1을 빼고 2로 나누는지(왜 i/2가 아닌지) 헷갈렸다.</textarea>
 <p class="note">먼저 위 칸에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
@@ -344,6 +383,15 @@ while events:
 <section id="A6" class="sheet">
 <h2>A6 · 삽입 추적과 sift_up<small>2차시 · 14분 · 개인</small></h2>
 <p class="meta"><span>산출물: 단계별 배열 기록표, 동작하는 sift_up</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>새 값을 맨 끝에 붙이면 약속(부모 &le; 자식)이 깨질 수 있다. 값은 어디까지 올라가고, 그 횟수는 무엇이 정하는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>H1에 값 2를 넣는 과정을 단계마다 배열 전체로 기록한다. 이어서 값 11도 다시 시작해 기록한다.<span class="tg-where">[값 2를 삽입], [값 11을 삽입 (H1에 대해 다시 시작)] 표</span><span class="tg-done">자리바꿈이 일어난 만큼 행이 채워져 있다.</span></li>
+<li><span class="tg-stage">예측</span>코드가 출력할 자리바꿈 횟수가 손으로 센 횟수와 같을지 예측해 쓴다. 실행하기 전에 쓴다.<span class="tg-where">[코드로 확인] 예측 칸</span></li>
+<li><span class="tg-stage">적용</span><a class="xlink" href="student_code_lab.html#A6">코드 실습 A6</a>에서 <code class="i">sift_up</code>을 완성해 테스트를 돌리고 결과를 고른다.<span class="tg-where">[코드로 확인]의 &lsquo;테스트 결과&rsquo; 선택</span></li>
+<li><span class="tg-stage">설명</span>멈춘 칸, 횟수의 이유, 최대로 올라가는 경우에 관한 질문 세 개에 답한다.<span class="tg-where">&lsquo;생각해 볼 질문&rsquo; 칸</span></li>
+</ol>
+</div>
 <p><code class="i">H1 = [3, 5, 8, 9, 7, 10, 12]</code>에 새 값을 <b>맨 끝에 붙인 뒤</b>, 부모와 비교해 필요하면 자리를 바꾸며 위로 올라간다. 배열의 모습을 단계마다 기록한다. 추적은 <b>손으로 먼저</b> 하고, 코드로 확인한다.</p>
 <div class="learn-box"><span class="lb-title">학습 내용 · 삽입(sift-up) 방법과 기록 예</span>
 <ol>
@@ -364,6 +412,14 @@ while events:
 <section id="A7" class="sheet">
 <h2>A7 · 루트 꺼내기 추적과 반례<small>2차시 · 12분 · 개인</small></h2>
 <p class="meta"><span>산출물: 단계별 배열 기록표, 반례 1개</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>루트를 꺼낸 뒤 빈 자리를 왜 마지막 원소로 채우고, 왜 두 자식 중 더 작은 쪽과 바꾸는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>A6에서 값 2를 삽입해 얻은 배열을 옮겨 적고, 규칙 ①~③대로 루트를 꺼내는 과정을 단계마다 기록한다.<span class="tg-where">[반례 만들기] 위의 추적 표</span><span class="tg-done">교환이 일어난 만큼 행이 채워져 있다.</span></li>
+<li><span class="tg-stage">시도</span>규칙 ②를 바꿔 두 자식 중 <b>큰 쪽</b>과 바꿔 보고 결과 배열과 어긋난 곳을 쓴다.<span class="tg-where">[반례 만들기] 표</span></li>
+<li><span class="tg-stage">설명</span>반례를 근거로 마지막 원소를 옮기는 이유와 작은 쪽과 바꾸는 이유를 쓴다.<span class="tg-where">&lsquo;생각해 볼 질문&rsquo; 칸</span></li>
+</ol>
+</div>
 <p>A6에서 값 2를 삽입해 얻은 배열에서 <b>가장 작은 값(루트)</b>을 꺼낸다. 루트 칸이 비면 구멍이 생기므로 채워야 한다. 규칙: ① 배열의 <b>마지막 원소</b>를 루트 자리로 옮긴다. ② 두 자식 중 <b>더 작은 쪽</b>과 비교해 부모가 더 크면 바꾼다. ③ 더 내려갈 수 없을 때까지 반복한다.</p>
 <div class="learn-box"><span class="lb-title">학습 내용 · 꺼내기(sift-down) 방법과 기록 예</span>
 <ul>
@@ -382,6 +438,15 @@ while events:
 <section id="A8" class="sheet">
 <h2>A8 · 무질서 배열을 힙으로 만들기 (Heapify)<small>2차시 · 10분 · 개인</small></h2>
 <p class="meta"><span>산출물: 단계 기록표(마지막 부모 칸 번호 포함)</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>무질서한 배열을 힙으로 만드는 두 방법은 일하는 방향과 자리바꿈 수에서 어떻게 다른가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>(가) H0의 값을 앞에서부터 하나씩 넣는다(A6의 방법). 값마다 배열과 자리바꿈 횟수를 쓴다.<span class="tg-where">[(가) 한 개씩 차례로 넣기(push)]</span></li>
+<li><span class="tg-stage">관찰</span>(나) 마지막 부모 칸부터 0번 칸까지 거꾸로 sift-down한다(A7의 방법). 마지막 부모 칸 번호와 그 이유도 쓴다.<span class="tg-where">[(나) 마지막 부모부터 거꾸로 아래로 내리기]</span><span class="tg-done">두 방법의 최종 배열과 자리바꿈 합계 칸이 채워져 있다.</span></li>
+<li><span class="tg-stage">비교</span>두 결과와 일하는 방향, 아무 일도 하지 않은 칸을 비교한다. <a class="xlink" href="student_code_lab.html#A8">코드 실습 A8</a>의 확인용 코드를 실행해 내 손 결과와 맞춰 본다.<span class="tg-where">[비교] 표와 &lsquo;코드로 확인&rsquo; 칸</span></li>
+<li><span class="tg-stage">설명</span>H2를 두 방법으로 만든 결과를 비교하고, 결과가 늘 같은지 근거를 쓴다.<span class="tg-where">[다른 입력으로 시험]</span></li>
+</ol>
+</div>
 <p>무질서한 배열 <code class="i">H0 = [9, 4, 7, 1, 8, 2, 6, 3, 5]</code>(N=9)를 힙으로 만든다. 두 가지 방법을 모두 손으로 해 보고 비교한다.</p><div class="diagram" style="white-space:pre;font-family:'JetBrains Mono',monospace">                    9
                  /       \
             4               7
@@ -425,6 +490,14 @@ while events:
 <section id="A9" class="sheet">
 <h2>A9 · heapq로 힙 다루기<small>2차시 · 10분 · 개인</small></h2>
 <p class="meta"><span>산출물: 관찰 기록(heap 리스트 출력, pop 순서), B3 원인 한 줄</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>heapq가 만든 힙 리스트는 정렬된 리스트와 무엇이 같고 무엇이 다른가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>표 ①~⑤의 예측 칸을 먼저 채운다. 모르면 &ldquo;모르겠다&rdquo;라고 쓴다.<span class="tg-where">[생각해 볼 질문] 위의 표 ①~⑤ 예측 칸</span></li>
+<li><span class="tg-stage">관찰</span><a class="xlink" href="student_code_lab.html#A9">코드 실습 A9</a>의 코드를 실행해 출력을 실제 칸에 옮긴다. 예측과 달랐던 칸에 표시한다.<span class="tg-where">같은 표의 실제 칸</span><span class="tg-done">①~⑤ 실제 칸이 모두 채워져 있다.</span></li>
+<li><span class="tg-stage">설명</span>[생각해 볼 질문] 네 개에 답하고, 오개념 코드 B3의 출력과 <code class="i">y</code>가 그런 값인 이유를 쓴다.<span class="tg-where">[생각해 볼 질문], [오개념 코드 B3]</span></li>
+</ol>
+</div>
 <p><a class="xlink" href="student_code_lab.html#A9">코드 실습 A9</a>의 <code class="i">heappush</code>, <code class="i">heappop</code>, <code class="i">heapify</code>, <code class="i">h[0]</code>을 쓰는 코드를 실행하기 <b>전에 예측</b>을 먼저 쓰고, 실행한 뒤 실제 값을 쓴다. 코드는 실습 코드 A9의 '내 코드 · A9' 편집기에서 [예시 코드] → [편집기에 추가] → [▶ 실행]으로 실행한다. 예측을 쓰기 전에는 실행하지 않는다.</p>
 <div class="learn-box"><span class="lb-title">학습 내용 · heapq 함수 사용법</span>
 <table><tr><th>쓰는 법</th><th>하는 일</th></tr>
@@ -464,6 +537,14 @@ print(out)                     # ⑤</pre>
 <section id="A10" class="sheet">
 <h2>A10 · 일반화 초안 카드<small>2차시 · 4분 · 개인</small></h2>
 <p class="meta"><span>산출물: 일반화 초안 카드</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>오늘 발견한 것 중 숫자나 이름이 바뀌어도 성립하는 것은 무엇인가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">일반화</span>오늘 &ldquo;왜 그런가?&rdquo;가 궁금했던 활동을 고르고, 거기서 본 사실을 개념어로 바꾼다.</li>
+<li><span class="tg-stage">일반화</span>&ldquo;개념 + 개념 + 관계&rdquo;를 &ldquo;~이므로 ~할 수 있다&rdquo; 꼴로 쓰고 근거로 삼은 활동 번호를 쓴다.<span class="tg-where">[문장 1], [문장 2]</span><span class="tg-done">문장 칸이 채워져 있거나 &ldquo;쓰지 못함&rdquo;과 이유가 적혀 있다.</span></li>
+<li><span class="tg-stage">비교</span>[스스로 점검] 세 칸을 확인하고, 가장 자신 없는 부분을 쓴다.<span class="tg-where">&lsquo;스스로 점검&rsquo; 세 칸</span></li>
+</ol>
+</div>
 <p>오늘까지의 발견을 <b>&ldquo;개념 + 개념 + 관계&rdquo;</b> 형태의 문장으로 쓴다. 이 칸은 <b>개인 메모</b>이며 정답 문장이 공개되지 않는다. 오늘 쓴 숫자(H1, H0 등)가 아니라 <b>다른 데이터에도 통하는 말</b>로 쓴다.</p>
 <div class="learn-box"><span class="lb-title">학습 내용 · 일반화 문장 쓰는 법</span>
 <ul>

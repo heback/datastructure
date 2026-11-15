@@ -185,6 +185,15 @@ for dr, dc in DIRS:
 <section id="A1" class="sheet">
 <h2>A1 · 이웃으로 계속 나아가기: 어느 이웃부터 갈까<small>1차시 · 7분 · 개인</small></h2>
 <p class="meta"><span>산출물: 순서 규칙 1가지 메모와 약점</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>미로·소문·위성지도 세 문제를 모두 풀려면, 지금 있는 곳에서 다음에 어디를 볼지 어떤 규칙으로 정해야 하는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>세 사례(미로·소문·위성지도)를 읽고 10주차의 <code class="i">neighbors</code>를 떠올린다.<span class="tg-done">세 사례에서 “이웃으로 계속 나아간다”는 공통점을 말할 수 있다.</span></li>
+<li><span class="tg-stage">시도</span>1~3번 칸에 갈림길에서의 선택, 이미 지나온 곳을 또 가면 생기는 일, 소문의 “몇 단계”가 센 것을 쓴다.<span class="tg-where">1~3번 칸</span><span class="tg-done">칸 3개가 채워졌다.</span></li>
+<li><span class="tg-stage">설명</span>4번에 세 사례를 모두 풀 수 있는 “다음에 어디를 볼지” 규칙을, 5번에 그 규칙의 약점을 쓴다. 쓴 뒤 4번을 다시 읽고 5번의 약점이 그 규칙에서 정말 생기는지 따진다.<span class="tg-where">4번·5번 칸</span><span class="tg-done">두 칸이 채워졌다(BFS·DFS 이름은 몰라도 된다).</span></li>
+<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
+</ol>
+</div>
 <p>세 사례 모두 &ldquo;이웃으로 계속 나아가기&rdquo;가 들어 있다. 10주차에서 만든 그래프와 <code class="i">neighbors</code>를 떠올려 본다. 이 구조 위에서 모든 노드를 어떤 순서로 돌 수 있을까?</p>
 <div class="grid">
 <div class="card"><b class="h">사례 가 · 미로</b><p>미로에서 입구부터 출구까지 가는 길을 찾는다. 갈림길을 만나면 한쪽을 골라야 한다.</p></div>
@@ -225,6 +234,16 @@ for dr, dc in DIRS:
 <section id="A2" class="sheet">
 <h2>A2 · 컨테이너 두 가지로 손 탐색하기<small>1차시 · 14분 · 개인</small></h2>
 <p class="meta"><span>산출물: 두 방문 순서, 단계별 컨테이너 상태표</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>같은 그래프에서 컨테이너에서 꺼내는 자리를 바꾸면(맨 위 / 맨 앞) 방문 순서는 어떻게 달라지는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">도구 확인</span>위 ‘약속’ 상자의 손 규칙 4단계와 [학습 내용]의 작은 예(그래프 X)를 먼저 읽는다.<span class="tg-done">컨테이너에 넣기·꺼내기·방문 기록의 차이를 말할 수 있다.</span></li>
+<li><span class="tg-stage">적용</span>(가) 스택 규칙으로 G1을 시작 A에서 따라 가며 단계마다 꺼낸 노드와 컨테이너 내용을 적고, 방문 순서를 쓴다.<span class="tg-where">(가) 표와 ‘방문 순서’ 칸</span><span class="tg-done">일찍 끝나면 남는 단계는 비우고, 방문 순서 칸이 채워졌다.</span></li>
+<li><span class="tg-stage">적용</span>(나) 큐 규칙으로 같은 방식으로 표를 채운다.<span class="tg-where">(나) 표와 ‘방문 순서’ 칸</span><span class="tg-done">방문 순서 칸이 채워졌다.</span></li>
+<li><span class="tg-stage">비교</span>두 방문 순서를 나란히 놓고 1~4번 질문에 답한다. 답의 근거는 표의 단계 번호와 컨테이너 내용이다.<span class="tg-where">1~4번 칸</span><span class="tg-done">4칸이 채워졌다.</span></li>
+<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
+</ol>
+</div>
 <div class="concept"><b class="h">약속 · 용어와 규칙</b>
 <ul>
 <li><b>컨테이너</b>: 앞으로 볼 노드를 담아 두는 곳이다. <b>스택</b>은 맨 위(그림에서 오른쪽 끝)에서 꺼내고, <b>큐</b>는 맨 앞(그림에서 왼쪽 끝)에서 꺼낸다. 큐에 넣는 쪽은 뒤(오른쪽)이다.</li>
@@ -296,6 +315,16 @@ A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre>
 <section id="A3" class="sheet">
 <h2>A3 · 재귀로 돌아보기: 호출이 쌓이는 모습<small>1차시 · 13분 · 개인</small></h2>
 <p class="meta"><span>산출물: 재귀 호출 추적표, Call Stack 그림, 두 순서 비교 메모</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>재귀 함수가 호출을 쌓았다 풀며 돌아보는 순서는 A2의 스택 규칙과 어떻게 같고 다른가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">도구 확인</span>의사코드와 [학습 내용]의 enter·exit 작은 예를 읽는다. Call Stack은 호출이 쌓이고 끝나면 사라지는 곳이다.<span class="tg-done">enter와 exit가 각각 언제인지 말할 수 있다.</span></li>
+<li><span class="tg-stage">적용</span>G1을 시작 A에서 재귀로 따라 가며 추적표 10줄을 채우고 방문 순서를 쓴다.<span class="tg-where">추적표와 ‘방문 순서’ 칸</span><span class="tg-done">10줄과 방문 순서 칸이 채워졌다.</span></li>
+<li><span class="tg-stage">관찰</span>Call Stack이 가장 깊을 때의 모습을 “dfs(노드)”를 한 줄씩 쓴 글자 그림으로 그린다.<span class="tg-where">‘그림’ 칸</span><span class="tg-done">맨 위 호출이 첫 줄, 처음 호출이 마지막 줄이다.</span></li>
+<li><span class="tg-stage">비교</span>A2 스택 규칙과 비교하는 1~4번 질문에 답한다.<span class="tg-where">1~4번 칸</span><span class="tg-done">4칸이 채워졌다.</span></li>
+<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
+</ol>
+</div>
 <p>같은 G1(노드 A~F, 간선 <code class="i">(A,B) (A,C) (B,D) (C,D) (D,E)</code>)에서 시작 A로, 재귀 함수로 돌아본다. 방문 기록 <code class="i">visited</code>와 방문 순서 <code class="i">order</code>는 바깥에서 새로 만들어 인자로 전달한다.</p>
 <pre class="diagram">   A ─ B
    │   │
@@ -365,6 +394,16 @@ dfs(A)   &lt;- 맨 아래가 처음 호출</textarea></div>
 <section id="A4" class="sheet">
 <h2>A4 · 두 갈래 길 그래프 H에서 세 방식 비교<small>1차시 · 14분 · 개인</small></h2>
 <p class="meta"><span>산출물: H 비교표, 순서 바꾼 재실험 결과, 가설 메모</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>시작과 목표가 같아도 이웃 순서와 꺼내는 규칙을 바꾸면 처음 닿는 경로와 걸음 수는 어떻게 변하는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">적용</span>그래프 H에서 큐 규칙, 스택 규칙, 재귀 세 방식으로 시작 S에서 목표 T까지 손으로 돌려 비교표를 채운다.<span class="tg-where">H 비교표 (큐·스택·재귀)</span><span class="tg-done">세 줄에 빈 칸이 없다.</span></li>
+<li><span class="tg-stage">시도</span>이웃 순서를 바꾼 재실험 표를 채운다. 바꾸기 전에 결과가 달라질지 생각한다.<span class="tg-where">순서를 바꾼 재실험 표</span><span class="tg-done">표의 칸이 채워졌다.</span></li>
+<li><span class="tg-stage">설명</span>1~2번 질문에 표의 값과 컨테이너 내용을 근거로 답한다.<span class="tg-where">1~2번 칸</span><span class="tg-done">2칸이 채워졌다.</span></li>
+<li><span class="tg-stage">일반화</span>표를 보고 “무엇이 흔들리고 무엇이 안 흔들리는가”를 근거 값과 함께 가설 메모 3줄로 쓴다(A9에서 확인한다).<span class="tg-where">가설 메모 1~3번 칸</span><span class="tg-done">3줄이 채워졌다.</span></li>
+<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
+</ol>
+</div>
 <p><b>H</b>: 노드 6개, 간선 6개(무방향) <code class="i">(S,A) (S,B) (A,C) (C,D) (D,T) (B,T)</code>. 시작 S, 목표 T. 이웃 순서는 목록 순서이다.</p>
 <pre class="diagram">        ┌─ A ── C ── D ─┐
    S ───┤                T
@@ -411,6 +450,14 @@ S: [A, B]   A: [S, C]   B: [S, T]   C: [A, D]   D: [C, T]   T: [D, B]</pre>
 <section id="A5" class="sheet">
 <h2>A5 · 1차시 정리와 exit ticket<small>1차시 · 2분 · 개인</small></h2>
 <p class="meta"><span>산출물: exit ticket</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>오늘 붙인 이름(너비 우선·깊이 우선)과 두 규칙의 차이를 새 시작 노드에서도 쓸 수 있는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">적용</span>G1에서 시작 노드를 D로 바꾸고 큐 규칙을 처음부터 손으로 따라 한 뒤, A가 몇 번째로 방문되는지 숫자 하나로 쓴다(D가 1번째).<span class="tg-where">exit ticket 칸</span><span class="tg-done">숫자 하나가 적혔다.</span></li>
+<li><span class="tg-stage">설명</span>이번 시간에 한 일 세 가지를 점검하고, 가장 헷갈린 점 한 가지를 쓴다.<span class="tg-where">점검 칸 3개와 ‘오늘 가장 헷갈린 점’ 칸</span><span class="tg-done">점검 칸과 헷갈린 점 칸이 채워졌다.</span></li>
+<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
+</ol>
+</div>
 <div class="concept"><b class="h">이름 붙이기</b><p>오늘부터 큐 규칙을 <b>너비 우선 탐색(BFS)</b>, 스택 규칙과 재귀 규칙을 <b>깊이 우선 탐색(DFS)</b>이라고 부른다. 이름만 붙인 것이며 어느 쪽이 더 좋다는 뜻은 아니다.</p></div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 1차시 용어 정리와 exit ticket 푸는 법</span>
 <ul>

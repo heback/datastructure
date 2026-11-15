@@ -190,6 +190,15 @@ print(sum(squares(4)))              # 14</code></pre></div>
 <section id="A1" class="sheet">
 <h2>A1 · 얽힌 관계를 컴퓨터에 어떻게 알려 줄까<small>1차시 · 6분 · 개인</small></h2>
 <p class="meta"><span>산출물: 자기 방식 1가지 스케치와 약점 메모</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>얽힌 관계를 컴퓨터가 알 수 있게 적으려면 무엇을 적어야 하고, 내가 정한 방식은 어디가 불편한가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>위 세 사례(친구 관계, 링크, 노선도)를 읽고, 세 사례에 모두 필요한 정보가 무엇인지 쓴다.<span class="tg-where">[관찰·정리]의 칸 1</span><span class="tg-done">칸 1이 1~2문장으로 차 있다.</span></li>
+<li><span class="tg-stage">시도</span>사례 ①(친구 관계)을 내 방식으로 적는다. 글·표·그림 모양 중 편한 방식을 쓰고, 이름 5~6명 정도만 예로 든다.<span class="tg-where">[관찰·정리]의 칸 2(글자로 그리는 칸)</span></li>
+<li><span class="tg-stage">설명</span>내 방식에서 철수의 친구 모두를 찾으려면 칸 2의 어느 부분을 보는지 쓴다.<span class="tg-where">칸 3</span></li>
+<li><span class="tg-stage">비교</span>내 방식의 약점을 한 가지 쓴다. 약점이 없다면 &ldquo;없음&rdquo;과 이유를 쓴다.<span class="tg-where">칸 4</span><span class="tg-done">칸 1~4가 모두 찼다.</span></li>
+</ol>
+</div>
 <p>세 가지 사례에는 모두 &ldquo;누가(무엇이) 누구(무엇)와 이어져 있는가&rdquo;가 들어 있다. 앞에서 배운 트리(8주차)와 힙(9주차)은 모양에 규칙이 있었다. 아래 사례는 모양에 규칙이 없다.</p>
 <div class="learn-box"><span class="lb-title">학습 내용 · 오늘의 흐름과 질문</span>
 <ul>
@@ -199,7 +208,7 @@ print(sum(squares(4)))              # 14</code></pre></div>
 </ul>
 </div>
 <div class="grid">
-<div class="card"><b class="h">사례 ① 친구 관계</b><p>반 친구 30명 중 서로 친구인 사람끼리 이어져 있다. 누가 누구와 친구인지는 사람마다 다르다.</p></div>
+<div class="card"><b class="h">사례 ① 친구 관계</b><p>반 친구 20명 중 서로 친구인 사람끼리 이어져 있다. 누가 누구와 친구인지는 사람마다 다르다.</p></div>
 <div class="card"><b class="h">사례 ② 웹페이지 링크</b><p>한 페이지에 다른 페이지로 가는 링크가 있다. A가 B로 링크를 걸어도 B가 A로 링크를 걸었다는 뜻은 아니다.</p></div>
 <div class="card"><b class="h">사례 ③ 지하철 노선도</b><p>역과 역이 선로로 이어지고, 어떤 역에서는 다른 노선으로 갈아탄다.</p></div>
 </div>
@@ -209,16 +218,16 @@ print(sum(squares(4)))              # 14</code></pre></div>
 <p class="how">쓰는 법: 1~2문장으로 쓴다. 세 사례에 모두 필요한 것을 쓴다.</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A1.must" placeholder="1~2문장" data-label="A1 세 사례에서 반드시 적어야 하는 정보">누가(무엇이) 누구(무엇)와 이어져 있는가라는 연결 관계이다. 링크 사례에서는 어느 쪽에서 어느 쪽으로 가는지 방향까지 적어야 한다. 노선도에서는 역 이름과 역끼리의 연결이다.</textarea></div>
 <p>내 방식으로 사례 ①(친구 관계)을 컴퓨터가 알 수 있게 적어 보자. 글, 표, 그림 모양 중 편한 방식을 쓴다. (아래 칸은 글자로 그리는 칸이다.)</p>
-<p class="how">쓰는 법: 정해진 형식은 없다. 친구 30명을 전부 쓸 필요는 없고, 이름 5~6명 정도를 예로 들어 관계를 적는다.</p>
+<p class="how">쓰는 법: 정해진 형식은 없다. 친구 20명을 전부 쓸 필요는 없고, 이름 5~6명 정도를 예로 들어 관계를 적는다.</p>
 <div class="ans-row"><span class="n">2</span><textarea class="in draw" rows="8" data-key="A1.sketch" data-label="A1 내 방식 스케치(친구 관계)" spellcheck="false">철수: 영희, 민수
 영희: 철수
 민수: 철수, 지수
 지수: 민수
 (사람마다 친구 이름을 한 줄에 적는다)</textarea></div>
-<p>칸 3: 내 방식으로 친구 30명 중 &ldquo;철수의 친구 모두&rdquo;를 찾으려면, 내가 위 칸 2에 적은 것의 어느 부분을 보아야 하는지 한 문장으로 쓴다.</p>
-<div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A1.find" placeholder="한 문장" data-label="A1 철수의 친구 모두를 찾으려면 어디를 보는가">내 방식에서는 철수 줄을 찾아 그 줄에 적힌 이름을 읽는다. 철수 줄이 없으면 30줄을 모두 훑어야 한다.</textarea></div>
+<p>칸 3: 내 방식으로 친구 20명 중 &ldquo;철수의 친구 모두&rdquo;를 찾으려면, 내가 위 칸 2에 적은 것의 어느 부분을 보아야 하는지 한 문장으로 쓴다.</p>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A1.find" placeholder="한 문장" data-label="A1 철수의 친구 모두를 찾으려면 어디를 보는가">내 방식에서는 철수 줄을 찾아 그 줄에 적힌 이름을 읽는다. 철수 줄이 없으면 20줄을 모두 훑어야 한다.</textarea></div>
 <p>칸 4: 내 방식의 약점을 한 가지만 한 문장으로 쓴다. 약점이 없다고 생각하면 &ldquo;없음&rdquo;과 그 이유를 쓴다.</p>
-<div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A1.weak" placeholder="약점 한 가지를 한 문장으로. 없으면 없음" data-label="A1 내 방식의 약점 메모">친구 관계는 서로이므로 한쪽에만 적으면 빠진다. 같은 이름의 사람은 구별하기 어렵고, 30명을 모두 표로 만들면 칸이 900개로 많다.</textarea></div>
+<div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A1.weak" placeholder="약점 한 가지를 한 문장으로. 없으면 없음" data-label="A1 내 방식의 약점 메모">친구 관계는 서로이므로 한쪽에만 적으면 빠진다. 같은 이름의 사람은 구별하기 어렵고, 20명을 모두 표로 만들면 칸이 400개로 많다.</textarea></div>
 <p class="hint">먼저 위 칸에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 세 사례에서 반드시 적어야 하는 정보</summary>
 <ul>
@@ -231,6 +240,16 @@ print(sum(squares(4)))              # 14</code></pre></div>
 <section id="A2" class="sheet">
 <h2>A2 · 같은 관계를 두 가지로 적어 보기 (G1)<small>1차시 · 14분 · 개인</small></h2>
 <p class="meta"><span>산출물: 6×6 표, 노드별 이웃 목록</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>같은 관계(G1)를 표와 목록 두 가지로 적으면 무엇이 같고 무엇이 달라지는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>G1 그림에서 간선 5개와 노드 6개를 읽는다. 간선 목록과 그림을 번갈아 본다.<span class="tg-where">이 활동 위쪽의 G1 그림과 간선 목록</span></li>
+<li><span class="tg-stage">적용</span>(가) 6&times;6 표를 36칸 모두 0 또는 1로 채운다. 같은 노드끼리의 칸(A행 A열)과 F행·F열도 채운다. 다 쓴 뒤 1이 적힌 칸의 수를 세어 둔다(A5에서 쓴다).<span class="tg-where">[(가) 모든 쌍 표] 36칸</span><span class="tg-done">36칸이 모두 찼다.</span></li>
+<li><span class="tg-stage">적용</span>(나) 노드마다 이웃을 모두 적는다. 이웃이 없는 노드도 한 줄을 쓴다.<span class="tg-where">[(나) 노드별 이웃 목록] 6줄</span></li>
+<li><span class="tg-stage">설명</span>표를 읽고 [관찰·정리]의 질문(표의 한 칸의 뜻, 대칭 여부, 고립 노드 F, D의 친구 찾기)에 답한다.<span class="tg-where">[관찰·정리]의 칸들</span></li>
+<li><span class="tg-stage">일반화</span>[일반화 초안 씨앗] 칸에, 두 방식이 같은 정보를 담았는지 확인하는 방법을 쓴다.<span class="tg-where">[일반화 초안 씨앗]의 칸</span><span class="tg-done">모든 칸이 찼다.</span></li>
+</ol>
+</div>
 <div class="concept"><b class="h">약속 · 용어</b>
 <ul>
 <li><b>노드</b>: 관계를 맺는 대상(사람, 페이지, 역). <b>간선</b>: 두 노드를 잇는 관계 한 개. 노드와 간선을 모은 것이 <b>그래프</b>이다.</li>
@@ -294,6 +313,15 @@ print(sum(squares(4)))              # 14</code></pre></div>
 <section id="A3" class="sheet">
 <h2>A3 · 방향이 있는 관계와 8주차 트리 다시 보기 (W, T4)<small>1차시 · 12분 · 개인</small></h2>
 <p class="meta"><span>산출물: W 두 표현, 대칭 여부 메모, T4 간선·노드 수 표</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>방향이 있는 관계(W)와 8주차 트리(T4)를 같은 방식으로 적으면 G1과 무엇이 달라지는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">적용</span>(가) 웹페이지 링크 W의 4&times;4 표(16칸)와 노드별 이웃 목록 4줄을 쓴다.<span class="tg-where">[(가) 웹페이지 링크 W]의 표와 목록</span></li>
+<li><span class="tg-stage">관찰</span>내가 쓴 W 표가 대칭인지, 0→1과 1→0이 같은 간선인지, 노드 2로 들어오는 링크 수를 표와 목록에서 각각 어떻게 찾는지 쓴다.<span class="tg-where">[(가)]의 관찰 칸들</span></li>
+<li><span class="tg-stage">비교</span>(나) T4를 그래프로 보고 노드 수·간선 수·모두 연결 여부·사이클 여부를 G1과 T4 두 열에 쓴다.<span class="tg-where">[(나) 8주차 균형 BST T4를 그래프로]의 비교표</span></li>
+<li><span class="tg-stage">설명</span>G1과 T4가 같은 종류의 그림인지, T4에 간선 (1,3)을 더 그으면 달라지는 것이 무엇인지 쓴다.<span class="tg-where">[(나)]의 마지막 두 칸</span><span class="tg-done">모든 칸이 찼다.</span></li>
+</ol>
+</div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 방향 간선, 연결, 사이클을 다루는 방법</span>
 <ul>
 <li>방향 간선 a→b는 a에서 b로 가는 간선이다. 표에서는 행이 출발, 열이 도착이다. 목록에서는 출발 노드의 목록에 도착 노드를 적는다.</li>
@@ -349,6 +377,16 @@ print(sum(squares(4)))              # 14</code></pre></div>
 <section id="A4" class="sheet">
 <h2>A4 · 두 표현의 비용 비교표 (COST)<small>1차시 · 16분 · 개인</small></h2>
 <p class="meta"><span>산출물: 비교표 + 가설 메모</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>그래프의 크기와 밀도가 달라지면 두 표현(인접 행렬·인접 리스트)이 드는 비용은 어떻게 달라지는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">적용</span>그래프 ① G1은 손으로 세어 비교표(간선 확인, 이웃 모두 훑기, 저장)를 채운다. 확인한 수는 A9와 같은 규칙으로 센다.<span class="tg-where">[그래프 ① G1] 표 6칸</span></li>
+<li><span class="tg-stage">적용</span>그래프 ② SPARSE와 ③ DENSE는 주어진 노드·간선 수로 계산해 같은 표를 채운다.<span class="tg-where">[그래프 ② SPARSE], [그래프 ③ DENSE] 표</span></li>
+<li><span class="tg-stage">설명</span>[밀도와 식 찾기]에서 밀도를 구하고, 인접 행렬 칸 수·인접 리스트 원소 수·한 노드의 평균 이웃 수를 N, E로 쓴다.<span class="tg-where">[밀도와 식 찾기] 칸들</span></li>
+<li><span class="tg-stage">일반화</span>세 그래프의 비교표를 보고 가설을 2~3줄 쓴다. 3번째 줄은 선택이다.<span class="tg-where">[가설 메모] 칸 1~3</span></li>
+<li><span class="tg-stage">비교</span>내 가설이 틀리는 상황을 찾고, 반 친구 20명의 관계에는 어느 표현을 쓸지 쓴다.<span class="tg-where">[가설 메모]의 반증 시도 칸</span><span class="tg-done">비교표와 가설 칸이 모두 찼다.</span></li>
+</ol>
+</div>
 <div class="concept"><b class="h">약속 · 세는 방법</b>
 <ul>
 <li>질의 ① <b>u–v 간선이 있나</b>: 확인한 칸 또는 원소의 수. 목록에서는 u의 이웃 목록을 앞에서부터 하나씩 보며 v를 찾으면 멈추고, 없으면 목록 전체를 본다.</li>
@@ -392,8 +430,8 @@ print(sum(squares(4)))              # 14</code></pre></div>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A4.hyp1" placeholder="1~2문장 + 근거 값" data-label="A4 가설 1">간선이 적은 희소 그래프(SPARSE)는 리스트가 3,000원소로 행렬 1,000,000칸보다 훨씬 적게 저장하므로 리스트가 유리하다.</textarea></div>
 <div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A4.hyp2" placeholder="1~2문장 + 근거 값" data-label="A4 가설 2">한 노드의 이웃을 모두 찾는 질의는 SPARSE에서 행렬 1000칸, 리스트 평균 3원소여서 리스트가 빠르다.</textarea></div>
 <div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A4.hyp3" placeholder="(선택) 1~2문장 + 근거 값" data-label="A4 가설 3">모든 쌍이 연결된 DENSE는 저장량이 10,000 대 9,900으로 비슷하고 간선 확인은 행렬이 1칸이라, 간선 확인이 잦으면 행렬이 낫다.</textarea></div>
-<p>4. (선택) <b>반증 시도</b>: 위 가설 중 하나를 골라, 그 가설이 틀리는 상황(노드 수·간선 수·자주 하는 질의)을 하나 만들어 쓴다. 반 친구 30명의 관계라면 어느 표현을 쓰겠는가? &ldquo;작으니 아무거나&rdquo;라는 주장에 어떻게 답하겠는가?</p>
-<div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A4.hyp4" placeholder="(선택) 상황 1문장, 표현 1문장, 답변 1문장" data-label="A4 반증 시도: 가설이 틀리는 상황과 반 친구 30명의 관계에 쓸 표현">반 친구 30명처럼 노드가 적으면 저장량 차이가 작아 어느 쪽이든 된다. 그러나 두 사람이 친구인지를 반복해서 묻는다면 행렬이 낫다. 작으니 아무거나라는 주장에는 질의 종류와 반복 횟수를 근거로 답한다.</textarea></div>
+<p>4. (선택) <b>반증 시도</b>: 위 가설 중 하나를 골라, 그 가설이 틀리는 상황(노드 수·간선 수·자주 하는 질의)을 하나 만들어 쓴다. 반 친구 20명의 관계라면 어느 표현을 쓰겠는가? &ldquo;작으니 아무거나&rdquo;라는 주장에 어떻게 답하겠는가?</p>
+<div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A4.hyp4" placeholder="(선택) 상황 1문장, 표현 1문장, 답변 1문장" data-label="A4 반증 시도: 가설이 틀리는 상황과 반 친구 20명의 관계에 쓸 표현">반 친구 20명처럼 노드가 적으면 저장량 차이가 작아 어느 쪽이든 된다. 그러나 두 사람이 친구인지를 반복해서 묻는다면 행렬이 낫다. 작으니 아무거나라는 주장에는 질의 종류와 반복 횟수를 근거로 답한다.</textarea></div>
 <p class="hint">먼저 위 칸에 자기 말로 쓴 뒤 아래 상자를 연다.</p>
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 비교표 값과 식</summary>
 <table style="width:calc(100% - 28px)"><tr><th>그래프</th><th>질의</th><th>인접 행렬</th><th>인접 리스트</th></tr>
@@ -414,6 +452,14 @@ print(sum(squares(4)))              # 14</code></pre></div>
 <section id="A5" class="sheet">
 <h2>A5 · 1차시 정리와 exit ticket<small>1차시 · 2분 · 개인</small></h2>
 <p class="meta"><span>산출물: exit ticket</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>1차시에서 내가 확실히 알게 된 것과 아직 헷갈리는 것은 무엇인가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">적용</span>G1 인접 행렬에서 값이 1인 칸 수를 쓰고, 그 수가 간선 수의 몇 배인지와 이유를 쓴다. A2에서 세어 둔 값을 쓴다.<span class="tg-where">[exit ticket]의 두 칸</span></li>
+<li><span class="tg-stage">점검</span>점검 항목(뜻을 말할 수 있다, G1과 W를 두 방식으로 적었다, 비교표를 채웠다)에 해당하면 체크한다.<span class="tg-where">[점검] 체크 칸 3개</span></li>
+<li><span class="tg-stage">설명</span>가장 헷갈린 점을 한 문장으로 쓴다.<span class="tg-where">[가장 헷갈린 점] 칸</span><span class="tg-done">모든 칸이 찼다.</span></li>
+</ol>
+</div>
 <p><b>exit ticket</b> 노드 6개의 무방향 그래프(G1)의 인접 행렬에서 값 1이 적힌 칸은 모두 몇 칸인가? (숫자만 쓴다) <input type="text" class="in" data-key="A5.ticket" placeholder="숫자만" data-label="A5 exit ticket G1 인접 행렬에서 값 1인 칸 수" autocomplete="off" style="width:6em;display:inline-block" value="10"></p>
 <p>이 값은 간선 수(5)의 몇 배인가? 그 이유를 한 문장으로 쓴다.</p>
 <p class="how">쓰는 법: 형식은 &ldquo;○배이다. 이유: …&rdquo;이다.</p>

@@ -143,17 +143,37 @@ table.fill td.in-cell{padding:3px;height:auto}
 <li><code class="i">NameError</code>는 아직 정의하지 않은 이름을 쓴 것이다. <code class="i">AssertionError</code>는 아직 틀린 곳이 있다는 뜻이고, <code class="i">NotImplementedError</code>는 채울 곳이 남았다는 뜻이다. 한 번 실행이 15초를 넘으면 멈추고 환경이 초기화된다.</li>
 <li>이 파일은 A8 시작 때(A7에서 도구를 확인한 뒤) 사용한다. A8의 코드 C1~C5는 <b>아래 &ldquo;함정 실행칸&rdquo;에서 한 개씩 따로</b> 실행한다. 한 개를 실행한 뒤 칸을 모두 지우고 다음 C를 [예시 코드]에서 추가한다. 실행하기 전에 활동지 <a class="xlink" href="student_workbook_part2.html#A8">2부 A8</a>의 &ldquo;예측&rdquo; 칸을 먼저 채우고, 실행한 값을 &ldquo;실제&rdquo; 칸에 쓴다. 이 파일에는 출력 값이 적혀 있지 않다.</li>
 <li>오류가 나는 코드가 있을 수 있다. 오류 이름과 메시지를 그대로 읽어 활동지에 쓴다.</li>
+<li>자체 테스트(A8 준비 확인, A9)가 실패하면 마지막 줄에 <code class="i">AssertionError: ... 테스트 실패</code>가 나오고, 그 위에 <code class="i">FAIL</code> 줄이 한 줄에 하나씩 찍힌다. A9의 <code class="i">FAIL</code> 줄은 <b><code class="i">내 결과 X, 기대 Y</code></b> 형식이며 <b>X가 내 함수가 돌려준 값, Y가 확인한 수의 정의로 계산한 값</b>이다. A8 준비 확인의 <code class="i">AssertionError</code> 문장은 값을 보여 주지 않으므로 <code class="i">print(dict(g))</code>로 내 g를 찍어 활동지의 G1 손 목록과 비교한다.</li>
 <li>편집기에 쓴 내용은 [저장(JSON)] 때 함께 제출된다.</li>
 </ol>
 </section>
 <section id="A8" class="sheet">
 <h2>A8 · 함정 탐색: 예측 후 실행<small>14분 · 개인</small></h2>
-<p>먼저 A7에서 만든 방식으로 G1을 새로 만드는 함수 <code class="i">make_g1</code>을 완성한다. 아래 C1~C5는 모두 <code class="i">make_g1()</code> 뒤에 붙여 실행한다.</p><div class="learn-box"><span class="lb-title">학습 내용 · 함정 코드를 실행하는 방법과 코드에 나오는 말</span>
+<p>먼저 A7에서 만든 방식으로 G1을 새로 만드는 함수 <code class="i">make_g1</code>을 완성한다. 아래 C1~C5는 모두 <code class="i">make_g1()</code> 뒤에 붙여 실행한다.</p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span><code class="i">defaultdict(list)</code>로 만든 g에서 &ldquo;없는 키&rdquo;를 건드리는 코드들은 g를 각각 어떻게 바꾸거나 바꾸지 않는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">적용</span>A7에서 쓴 방식으로 <code class="i">make_g1()</code>을 완성한다. [예시 코드]에서 공통 코드와 골격을 [편집기에 추가]하고 <code class="i">raise</code> 줄을 지운 뒤 내 코드를 쓰고, [준비 확인]을 추가해 실행한다.<span class="tg-where">[내 코드 · A8 (make_g1 작성)] 편집기</span><span class="tg-done"><code class="i">A8 준비 통과</code>가 출력된다.</span></li>
+<li><span class="tg-stage">예측</span>코드를 실행하기 <b>전에</b> C1~C4(선택 C5)가 각각 무엇을 출력할지(오류가 날지), <code class="i">len(g)</code>가 어떻게 되는지 쓴다.<span class="tg-where">활동지 <a class="xlink" href="student_workbook_part2.html#A8">2부 A8</a>의 &lsquo;예측(실행 전)&rsquo; 칸</span><span class="tg-done">C1~C4의 예측 칸이 모두 찼다.</span></li>
+<li><span class="tg-stage">관찰</span>C1을 [예시 코드]에서 [함정 실행칸 · A8] 편집기에 추가해 실행하고, 나온 값을 그대로 옮긴다. 오류가 나면 맨 아래 줄의 오류 이름과 메시지를 옮긴다.<span class="tg-where">[함정 실행칸 · A8] 편집기 &rarr; 활동지 2부 A8의 &lsquo;실제(실행 결과)&rsquo; 칸</span><span class="tg-done">C1의 실제 칸이 찼다.</span></li>
+<li><span class="tg-stage">관찰</span>함정 실행칸의 내용을 모두 지우고 C2, C3, C4, (C5)를 같은 방식으로 한 개씩 실행한다. C마다 새 <code class="i">g = make_g1()</code>로 시작하므로 앞 코드의 영향은 없다.<span class="tg-where">같은 [함정 실행칸 · A8] 편집기 &rarr; 활동지 2부 A8의 실제 칸</span></li>
+<li><span class="tg-stage">설명</span>코드마다(예측이 맞았어도) 그런 결과가 나는 원인을 한 줄로 쓴다. 마지막 칸에는 비슷한 일을 하는 코드(예: 이웃을 묻는 함수, 모든 노드를 도는 코드)를 떠올려 한 줄 쓴다(선택).<span class="tg-where">활동지 2부 A8의 &lsquo;원인 한 줄&rsquo;·&lsquo;어디서 흔히 만나는가&rsquo; 칸</span></li>
+</ol>
+<p class="tg-why"><span class="tg-k">왜 편집기가 둘인가</span>첫 칸 [내 코드 · A8]은 <code class="i">make_g1</code>을 만들어 두는 곳이고, 둘째 칸 [함정 실행칸]은 C를 한 개씩 바꿔 넣고 돌리는 곳이다. 같은 쪽의 편집기는 환경을 공유하므로 둘째 칸에서 <code class="i">make_g1</code>을 그대로 쓴다.</p>
+<div class="tg-contract"><span class="tg-k">만들 것</span><code class="i">make_g1()</code>
 <ul>
-<li>순서: ① make_g1을 완성하고 &ldquo;준비 확인&rdquo;을 통과시킨다. 힌트는 A7에서 g와 gw를 만든 방식을 함수 안에 넣고 <code class="i">return g</code>를 하는 것이다. A7을 끝내지 못해 make_g1을 쓸 수 없다면 1부 A7의 상자(defaultdict(list))와 시도 코드를 다시 읽고, 그래도 막히면 A9 공통 코드의 참조 <code class="i">make_g1</code>을 [예시 코드]에서 편집기에 추가해 C1~C5를 먼저 실행한다 ② 활동지 2부 A8의 예측 칸에 코드별 출력과 len(g)의 변화를 먼저 쓴다 ③ C1을 [예시 코드]에서 [편집기에 추가]해 실행하고 나온 값을 실제 칸에 그대로 옮긴다 ④ 칸을 지우고 C2, C3, C4, (C5)를 같은 방식으로 한다. 오류가 나면 맨 아래 줄의 오류 이름과 메시지를 옮긴다.</li>
+<li>받는 값: 없다(인자 없이 부른다).</li>
+<li>돌려주는 값: G1(무방향)의 이웃 목록을 담은 <code class="i">defaultdict(list)</code>이다. 부를 때마다 새로 만들어 돌려준다.</li>
+<li>쓰는 모습: <code class="i">g = make_g1()</code></li>
+</ul></div>
+<details class="tg-hint"><summary>막히면 · 힌트 1 (적용)</summary><p>1부 A7에서 g를 만든 반복문과 도구를 함수 안으로 옮기고 마지막에 g를 돌려준다. [준비 확인]이 &ldquo;defaultdict(list)여야 한다&rdquo;이면 g를 만드는 줄을 본다.</p></details>
+<details class="tg-hint"><summary>막히면 · 힌트 2 (관찰)</summary><p>C를 실행했는데 <code class="i">make_g1</code>이 정의되지 않았다는 <code class="i">NameError</code>가 나면 첫 칸을 먼저 실행하지 않은 것이다. 그래도 막히면 A9 공통 코드의 참조 <code class="i">make_g1</code>을 [예시 코드]에서 추가해 C1~C5를 먼저 실행한다.</p></details>
+<details class="tg-hint"><summary>막히면 · 힌트 3 (설명)</summary><p>원인이 안 떠오르면 각 C에서 g의 값을 <b>읽는</b> 줄과 <b>묻기만 하는</b> 줄(<code class="i">in</code>, <code class="i">get</code>)을 구별해 표시하고, 그 줄 앞뒤로 <code class="i">len(g)</code>를 찍어 비교한다.</p></details>
+</div>
+<div class="learn-box"><span class="lb-title">학습 내용 · 함정 코드를 실행하는 방법과 코드에 나오는 말</span>
+<ul>
 <li><code class="i">len(g)</code>는 g의 키 개수이다. <code class="i">k in g</code>는 키 k가 있는지 True/False로 알려 준다. <code class="i">g.get(k, 기본값)</code>은 키가 있으면 그 값을, 없으면 기본값을 돌려준다. <code class="i">for u in g:</code>는 g의 키를 하나씩 꺼내 반복한다.</li>
 <li>C1~C5는 각각 새 g에서 따로 실행한다.</li>
-<li>&ldquo;어디서 흔히 만나는가&rdquo; 칸에는 그 코드와 비슷한 일을 하는 코드(예: 이웃을 묻는 함수, 모든 노드를 도는 코드)를 떠올려 한 줄로 쓴다.</li>
 </ul>
 </div>
 <h3>공통 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A8-1" data-for="A8.setup.mycode">from collections import defaultdict  # 표준 라이브러리에서 defaultdict를 가져온다
@@ -199,10 +219,28 @@ print(a is b)  # a와 b가 같은 객체인지 출력한다</code></pre></div>
 </section>
 <section id="A9" class="sheet">
 <h2>A9 · 두 표현의 연산 카운터 실측<small>11분 · 개인</small></h2>
-<p>A4에서 손으로 센 값을 코드로 확인한다. 코드를 돌리기 전에 활동지의 &ldquo;손으로 센 값&rdquo; 칸을 먼저 채운다. 함수는 결과와 함께 <b>확인한 칸/원소 수</b>를 돌려준다. 4개 함수 중 세 개는 완성되어 있고, <b>has_edge_list_count</b>는 함수 머리와 반환 형식만 주어지므로 본문을 직접 쓴다. G1 질의 4개를 실행해 나온 값을 활동지 <a class="xlink" href="student_workbook_part2.html#A9">2부 A9</a>의 실측 표에 옮겨 쓰고, 손 값과 다르면 어디서 틀렸는지 한 줄 쓴다.</p><div class="learn-box"><span class="lb-title">학습 내용 · 확인한 수를 세는 규칙과 쓰는 순서</span>
+<p>A4에서 손으로 센 값을 코드로 확인한다. 함수는 결과와 함께 <b>확인한 칸/원소 수</b>를 돌려준다. 4개 함수 중 세 개는 완성되어 있고, <b>has_edge_list_count</b>는 함수 머리와 반환 형식만 주어지므로 본문을 직접 쓴다.</p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>같은 질의(간선이 있는가, 이웃은 누구인가)에서 인접 행렬과 인접 리스트는 확인하는 칸·원소 수가 어떻게 다른가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>코드를 돌리기 전에 활동지 실측 표의 &lsquo;손으로 센 값&rsquo; 칸을 숫자로 채운다. &lsquo;리스트 E–A 확인&rsquo;의 값도 먼저 적는다.<span class="tg-where">활동지 <a class="xlink" href="student_workbook_part2.html#A9">2부 A9</a>의 &lsquo;손으로 센 값&rsquo; 칸</span></li>
+<li><span class="tg-stage">시도</span>[예시 코드]에서 공통 코드와 골격을 차례로 [편집기에 추가]하고, 골격의 <code class="i">has_edge_list_count</code> 본문을 쓴다(<code class="i">raise</code> 줄은 지운다). 나머지 세 함수는 완성되어 있으니 읽기만 한다.<span class="tg-where">[내 코드 · A9 (has_edge_list_count를 쓴 카운터 함수 4개)] 편집기</span><span class="tg-done"><code class="i">print(has_edge_list_count(g, "A", "B"))</code>로 튜플이 찍힌다.</span></li>
+<li><span class="tg-stage">도구 확인</span>[실측 실행과 자체 테스트]를 같은 편집기 맨 아래에 [편집기에 추가]하고 실행한다.<span class="tg-where">같은 [내 코드 · A9 …] 편집기</span><span class="tg-done">&lsquo;간선 확인 A-E …&rsquo; 4줄과 &lsquo;D의 이웃 …&rsquo; 1줄이 나오고 <code class="i">A9 테스트 통과</code>가 출력된다.</span></li>
+<li><span class="tg-stage">비교</span>출력된 값을 활동지 표의 &lsquo;코드 값&rsquo; 칸에 그대로 옮기고(예: (True, 3)), 손으로 센 값과 다르면 어느 쪽이 틀렸는지 한 줄 쓴다. 같으면 &ldquo;어긋남 없음&rdquo;이라고 쓴다.<span class="tg-where">활동지 2부 A9의 &lsquo;코드 값&rsquo;·&lsquo;어긋났다면 어디서 틀렸나&rsquo; 칸</span></li>
+</ol>
+<div class="tg-contract"><span class="tg-k">만들 것</span><code class="i">has_edge_list_count(g, u, v)</code>
+<ul>
+<li>받는 값: <code class="i">g</code>는 노드 이름마다 이웃 목록을 담은 dict, <code class="i">u</code>, <code class="i">v</code>는 노드 이름이다.</li>
+<li>돌려주는 값: <code class="i">(결과, 확인한 원소 수)</code> 튜플이다. 결과는 u의 이웃 목록에 v가 있으면 <code class="i">True</code>, 없으면 <code class="i">False</code>이다.</li>
+<li>쓰는 모습: <code class="i">has_edge_list_count(g, "A", "E")</code></li>
+</ul></div>
+<details class="tg-hint"><summary>막히면 · 힌트 1 (시도)</summary><p>골격 주석의 막히면 줄처럼 <code class="i">for w in g.get(u, []):</code>로 u의 이웃을 하나씩 꺼내며 시작한다. 센 수를 담을 변수는 반복문 <b>앞에서</b> 0으로 둔다.</p></details>
+<details class="tg-hint"><summary>막히면 · 힌트 2 (시도, 더 구체적으로)</summary><p>센 수를 담을 변수를 언제 0으로 두고 언제 늘려야 하는지, 값을 찾았을 때와 끝까지 못 찾았을 때 돌려주는 튜플의 첫 값이 각각 무엇이어야 하는지 위 &lsquo;돌려주는 값&rsquo;에서 확인한다. 질의 (A, B)처럼 작은 예를 손으로 세어 코드의 출력과 비교한다.</p></details>
+<details class="tg-hint"><summary>막히면 · 힌트 3 (자체 테스트가 실패할 때)</summary><p>실패 줄은 <code class="i">FAIL 함수이름(질의): 내 결과 ..., 기대 ...</code> 형식이다. &lsquo;내 결과&rsquo;는 내 함수가 돌려준 값, &lsquo;기대&rsquo;는 확인한 수의 정의대로 계산한 값이다. 두 값의 <b>어느 자리</b>(결과인지 센 수인지)가 다른지 먼저 보고, 해당 질의의 이웃 목록을 <code class="i">print(g["A"])</code>처럼 찍어 직접 세어 본다.</p></details>
+</div>
+<div class="learn-box"><span class="lb-title">학습 내용 · 확인한 수를 세는 규칙과 쓰는 순서</span>
 <ul>
 <li>&ldquo;확인한 수&rdquo;는 A4와 같은 규칙이다. 이웃 목록을 앞에서부터 하나씩 보며 원소 하나를 볼 때마다 1을 센다. 찾으면 그 자리에서 멈추고, 못 찾으면 목록 끝까지 본다. 예를 들어 어떤 노드의 목록이 [A, D]일 때 D를 찾으면 A를 보고(1) D를 보고(2) 멈추므로 확인한 수는 2이다.</li>
-<li><code class="i">has_edge_list_count</code>를 쓰는 순서: ① 센 수 <code class="i">checked</code>를 0으로 시작한다 ② u의 이웃을 하나씩 꺼내며 <code class="i">checked</code>를 1 늘린다 ③ 꺼낸 이웃이 v이면 <code class="i">(True, checked)</code>를 돌려준다 ④ 반복이 끝났으면 <code class="i">(False, checked)</code>를 돌려준다.</li>
 <li>함수가 돌려주는 <code class="i">(결과, 확인한 수)</code>에서 두 번째 값이 활동지 &ldquo;코드 값&rdquo; 칸에 옮길 값이다. 손 표와 다르면 어느 쪽을 잘못 셌는지 찾는다.</li>
 </ul>
 </div>
@@ -281,17 +319,23 @@ for a in NODES:
         # row.index(b)는 b가 있는 위치(0부터)이다. 앞에서부터 센 수는 위치+1이다.
         cnt = row.index(b) + 1 if truth else len(row)
         # 내 함수의 (결과, 센 수)가 기준과 같은지 비교한다. 다르면 이유를 기록한다.
-        if has_edge_matrix_count(m, MAP[a], MAP[b]) != (truth, 1):
-            fails.append("has_edge_matrix_count(%s,%s)" % (a, b))
-        if has_edge_list_count(g, a, b) != (truth, cnt):
-            fails.append("has_edge_list_count(%s,%s)" % (a, b))
+        mine = has_edge_matrix_count(m, MAP[a], MAP[b])  # 내 함수가 돌려준 값
+        if mine != (truth, 1):
+            fails.append("has_edge_matrix_count(%s,%s): 내 결과 %s, 기대 %s" % (a, b, mine, (truth, 1)))
+        mine = has_edge_list_count(g, a, b)  # 내 함수가 돌려준 값
+        if mine != (truth, cnt):
+            fails.append("has_edge_list_count(%s,%s): 내 결과 %s, 기대 %s" % (a, b, mine, (truth, cnt)))
 for a in NODES:
     row = g.get(a, [])
     # 이웃 질의는 모든 노드에 대해 결과 목록과 센 수를 비교한다.
-    if neighbors_matrix_count(m, MAP[a]) != ([x for x in NODES if x in row], len(NODES)):
-        fails.append("neighbors_matrix_count(%s)" % a)
-    if neighbors_list_count(g, a) != (list(row), len(row)):
-        fails.append("neighbors_list_count(%s)" % a)
+    mine = neighbors_matrix_count(m, MAP[a])  # 내 함수가 돌려준 값
+    want = ([x for x in NODES if x in row], len(NODES))  # 기대하는 값
+    if mine != want:
+        fails.append("neighbors_matrix_count(%s): 내 결과 %s, 기대 %s" % (a, mine, want))
+    mine = neighbors_list_count(g, a)  # 내 함수가 돌려준 값
+    want = (list(row), len(row))  # 기대하는 값
+    if mine != want:
+        fails.append("neighbors_list_count(%s): 내 결과 %s, 기대 %s" % (a, mine, want))
 # 함수가 g를 바꾸지 않았는지 확인한다.
 if len(g) != size:
     fails.append("함수가 g의 크기를 바꾸었다")
@@ -302,13 +346,14 @@ for a in g2:
         row = g2[a]
         truth = b in row
         cnt = row.index(b) + 1 if truth else len(row)
-        if has_edge_list_count(g2, a, b) != (truth, cnt):
-            fails.append("has_edge_list_count(긴 이름 %s,%s)" % (a, b))
+        mine = has_edge_list_count(g2, a, b)  # 내 함수가 돌려준 값
+        if mine != (truth, cnt):
+            fails.append("has_edge_list_count(긴 이름 %s,%s): 내 결과 %s, 기대 %s" % (a, b, mine, (truth, cnt)))
 # 실패 이유는 앞의 8개까지만 출력한다.
 for f in fails[:8]:
     print("FAIL", f)
 # 실패가 하나라도 있으면 AssertionError로 멈춘다.
-assert not fails, "A9 테스트 실패: %d건 (예: %s)" % (len(fails), fails[:3])
+assert not fails, "A9 테스트 실패: %d건 (위 FAIL 줄을 읽는다)" % len(fails)
 print("A9 테스트 통과")</code></pre></div><div class="note">테스트는 내 값이 &ldquo;간선 확인에서 확인한 수의 정의&rdquo;에 맞는지 계산식으로 비교한다. 손 표와 값이 다르면 손 표와 코드 중 어느 쪽이 틀렸는지 한 줄로 적는다.</div>
 <p class="hint">먼저 위 편집기에서 자체 테스트를 통과시키고 활동지 2부 A9의 표를 쓴 뒤 아래 상자를 연다.</p>
 <details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 참조 코드와 실측 값</summary>

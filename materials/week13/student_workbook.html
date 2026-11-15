@@ -183,6 +183,14 @@ print(t)                       # [0, 1, 3, 6, 10]</code></pre></div>
 <section id="A1" class="sheet">
 <h2>A1 · 몇 번 계산할까, 어떻게 고를까<small>1차시 · 5분 · 개인</small></h2>
 <p class="meta"><span>산출물: 호출 횟수 어림(자릿수)과 이유, 거스름돈 직원의 규칙 메모</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>계산이 필요한 세 사례를 처음 만났을 때 나는 어떤 규칙·방식·어림을 갖고 있는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>사례 가(거스름돈), 나(계단 8칸), 다(fib(30))를 차례로 읽는다.<span class="tg-where">이 활동 위쪽 세 사례</span></li>
+<li><span class="tg-stage">예측</span>사례 가는 직원의 규칙, 사례 나는 내가 세는 방식, 사례 다는 호출 횟수의 자릿수 어림과 이유를 쓴다. 정답을 맞히는 활동이 아니므로 모르면 모르는 까닭을 쓴다.<span class="tg-where">&lsquo;관찰·정리&rsquo;의 사례 가, 나, 다 칸</span><span class="tg-done">세 사례 칸이 채워져 있다(쓴 예상은 지우지 않는다).</span></li>
+<li><span class="tg-stage">시도</span>fib(5)를 정의 그대로 손으로 풀어 fib(3)이 몇 번 불리는지 세고, 11주차 visited가 하던 일을 한 문장으로 쓴다.<span class="tg-where">&lsquo;관찰·정리&rsquo;의 마지막 두 칸</span><span class="tg-done">숫자 하나와 한 줄 이유, visited 문장이 있다.</span></li>
+</ol>
+</div>
 <p>지난주(12주차) 정렬·이진 탐색, 그 전주(11주차) BFS의 &ldquo;이미 본 칸은 다시 보지 않는다(visited)&rdquo;를 떠올리며 아래 세 사례를 읽는다.</p>
 <div class="grid"><div class="card"><b class="h">사례 가 · 편의점 거스름돈</b><p>계산대 직원이 거스름돈을 동전으로 내준다. 직원은 어떤 순서로 동전을 고르는가?</p></div><div class="card"><b class="h">사례 나 · 계단 8칸</b><p>계단을 한 번에 1칸 또는 2칸씩 올라 8칸을 오르는 방법은 모두 몇 가지일까? 내 방식을 메모한다.</p></div><div class="card"><b class="h">사례 다 · fib(30)</b><p>피보나치 수 <code class="i">fib(n) = fib(n&minus;1) + fib(n&minus;2)</code>를 정의 그대로 재귀로 계산한다. <code class="i">fib(30)</code>을 구하려면 함수가 몇 번 불릴까?</p></div></div>
 <div class="note"><b>오늘의 질문</b> 같은 계산을 되풀이하고 있지는 않은가? 되풀이를 없애면 일이 얼마나 줄어들까? (이 수업의 핵심질문 원문은 A6에서 다시 제시한다.)</div>
@@ -218,6 +226,15 @@ print(t)                       # [0, 1, 3, 6, 10]</code></pre></div>
 <section id="A2" class="sheet">
 <h2>A2 · fib(6) 호출 트리 그리기<small>1차시 · 12분 · 개인</small></h2>
 <p class="meta"><span>산출물: 호출 트리, n별 호출 횟수 표, 전체 호출 수와 서로 다른 입력의 수</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>fib(6)을 정의 그대로 계산하면 어떤 호출이 몇 번 일어나고, 같은 입력이 반복해서 불리는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>왼쪽 가지(fib(n−1))를 먼저 부르는 순서로 fib(6)의 호출 트리를 그린다. 불린 호출을 한 줄에 하나씩, 부른 쪽보다 두 칸 들여써 끝까지 쓴다.<span class="tg-where">&lsquo;fib(6) 호출 트리&rsquo; 칸</span><span class="tg-done">&lsquo;…&rsquo;나 &lsquo;생략&rsquo; 없이 모든 호출이 한 줄씩 쓰여 있다.</span></li>
+<li><span class="tg-stage">관찰</span>트리에서 fib(n)이 불린 횟수를 n = 0~6별로 세어 쓰고, 값 줄과 합계를 채운다. 서로 다른 입력의 수와 호출 수를 센다.<span class="tg-where">&lsquo;n별 호출 횟수 표&rsquo;와 &lsquo;세기&rsquo; 칸</span><span class="tg-done">표의 모든 칸과 &lsquo;세기&rsquo; 두 칸이 숫자로 채워져 있다.</span></li>
+<li><span class="tg-stage">설명</span>&lsquo;관찰·정리&rsquo; 질문 1~3에 숫자를 넣어 답한다.<span class="tg-where">&lsquo;관찰·정리&rsquo; 1~3</span></li>
+<li><span class="tg-stage">시도</span>같은 계산을 줄이는 규칙을 두 줄로 직접 설계한다(무엇을 적어 두는가, 언제 쓰는가).<span class="tg-where">&lsquo;관찰·정리&rsquo; 4</span><span class="tg-done">두 줄이 쓰여 있다.</span></li>
+</ol>
+</div>
 <div class="concept"><b class="h">약속 · 계산 규칙</b>
 <p><code class="i">fib(n) = fib(n&minus;1) + fib(n&minus;2)</code>, 기저 <code class="i">fib(0) = 0</code>, <code class="i">fib(1) = 1</code>. 호출 순서는 <code class="i">fib(n&minus;1)</code>을 먼저 부르는 왼쪽 가지 우선이다. 한 번 불리면 <b>호출 1회</b>로 센다. 왼쪽 가지(<code class="i">fib(5)</code>)를 먼저 그리고 오른쪽 가지(<code class="i">fib(4)</code>)를 그린 뒤 합산한다.</p></div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 호출 트리를 그리고 세는 방법</span>
@@ -285,6 +302,15 @@ print(t)                       # [0, 1, 3, 6, 10]</code></pre></div>
 <section id="A3" class="sheet">
 <h2>A3 · 계산한 값을 적어 두면<small>1차시 · 6분 · 개인</small></h2>
 <p class="meta"><span>산출물: 메모 규칙 호출 순서표(C/H 표시), 호출 수와 계산 수</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>계산한 값을 적어 두었다가 쓰면 fib(6)의 호출 순서와 횟수는 어떻게 달라지는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">적용</span>메모 규칙으로 fib(6)을 호출 순서대로 한 줄에 하나씩 쓰고, 실제로 계산했으면 C, 메모에서 바로 답했으면 H를 고른다. H인 호출 아래 가지는 더 부르지 않는다.<span class="tg-where">&lsquo;순서·불린 호출·C/H&rsquo; 표</span><span class="tg-done">불린 호출마다 C 또는 H가 하나씩 골라져 있다.</span></li>
+<li><span class="tg-stage">관찰</span>표를 보고 호출, 실제 계산(C), 메모로 바로 답한 호출(H)의 수를 센다.<span class="tg-where">&lsquo;세기&rsquo; 칸 3개</span><span class="tg-done">세 칸이 숫자로 채워져 있다.</span></li>
+<li><span class="tg-stage">비교</span>&lsquo;관찰·정리&rsquo; 질문 1~3에 답한다. 2번은 A2의 호출 수와 지금의 호출 수를 모두 숫자로 쓴다.<span class="tg-where">&lsquo;관찰·정리&rsquo; 1~3</span></li>
+<li><span class="tg-stage">예측</span>12주차 병합 정렬의 호출 트리에 같은 구간이 두 번 나타났는지, 이 메모 규칙이 도움이 될지 판단한다. 결론은 나중에 정한다.<span class="tg-where">&lsquo;관찰·정리&rsquo; 4</span><span class="tg-done">①②③이 순서대로 쓰여 있다.</span></li>
+</ol>
+</div>
 <div class="concept"><b class="h">교실 표준 규칙 · 메모 규칙(A2에서 내가 쓴 규칙과 비교한다)</b>
 <p>A2와 같은 <code class="i">fib(6)</code>을 다시 호출한다. 다만 <b>계산한 값은 메모에 적고, 이미 메모에 있으면 계산하지 않고 바로 쓴다</b>. 호출 순서는 왼쪽 가지 우선이다. 호출이 불릴 때마다 한 줄에 한 호출씩 적고, 실제로 계산했으면 <b>C</b>, 메모에서 바로 답했으면 <b>H</b>를 고른다. 호출이 끝난 가지 아래는 더 부르지 않는다. <code class="i">fib(0)</code>, <code class="i">fib(1)</code>도 처음 불릴 때는 메모에 없으므로 C로 센다(값을 적어 두고 돌려주는 일도 계산 1회로 본다). 칸이 남으면 비워 둔다.</p></div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 메모 규칙으로 호출 순서 적는 보기와 용어</span>
@@ -319,6 +345,15 @@ print(t)                       # [0, 1, 3, 6, 10]</code></pre></div>
 <section id="A4" class="sheet">
 <h2>A4 · 가장 큰 동전부터 내면 늘 가장 적을까<small>1차시 · 8분 · 개인</small></h2>
 <p class="meta"><span>산출물: [1, 3, 4] Greedy 개수 표(1~8), 6원의 더 나은 조합, 한국 동전 1260원 결과, 원인 후보 2개</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>가장 큰 동전부터 내는 규칙은 어떤 금액에서든 가장 적은 개수로 만드는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>동전 [1, 3, 4]로 1~8원을 규칙대로 만들어 Greedy 조합과 개수를 쓴다.<span class="tg-where">&lsquo;동전 [1, 3, 4]&rsquo; 표</span><span class="tg-done">8줄의 조합·개수가 채워져 있다.</span></li>
+<li><span class="tg-stage">시도</span>각 금액마다 더 적은 개수의 조합이 있는지 직접 만들어 보고, 찾으면 조합과 개수를, 없으면 &ldquo;없다&rdquo;를 고른다. 6원은 아래 질문 1에서 따로 설명한다.<span class="tg-where">같은 표의 &lsquo;더 적은 개수의 조합&rsquo; 칸, 질문 1</span><span class="tg-done">8줄 모두 있다/없다가 골라져 있다.</span></li>
+<li><span class="tg-stage">관찰</span>한국 동전 [1, 10, 50, 100, 500]으로 1260원을 같은 규칙으로 만들고 더 좋은 방법을 찾아본다. 못 찾은 것이 &ldquo;없다&rdquo;는 뜻인지 내 생각을 쓴다.<span class="tg-where">&lsquo;한국 동전 · 1260원&rsquo; 칸과 질문 2</span></li>
+<li><span class="tg-stage">설명</span>두 결과가 다른 까닭의 원인 후보를 2가지(결론이 아니라 후보) 쓰고, 그중 하나로 맞을 것 같은 체계와 틀릴 것 같은 체계를 써 본다.<span class="tg-where">&lsquo;원인 후보&rsquo; 1·2, 질문 3</span><span class="tg-done">후보 2개와 체계 2개가 쓰여 있다.</span></li>
+</ol>
+</div>
 <div class="concept"><b class="h">약속 · Greedy 규칙</b>
 <p>남은 금액 이하인 <b>가장 큰 동전</b>을 계속 낸다. 남은 금액이 0이 되면 멈춘다. 동전은 얼마든지 쓸 수 있다. 개수는 낸 동전의 수이다.</p></div>
 <div class="learn-box"><span class="lb-title">학습 내용 · Greedy 규칙의 보기와 더 나은 조합 찾는 법</span>
@@ -353,6 +388,15 @@ print(t)                       # [0, 1, 3, 6, 10]</code></pre></div>
 <section id="A5" class="sheet">
 <h2>A5 · 작은 금액부터 표 채우기<small>1차시 · 10분 · 개인</small></h2>
 <p class="meta"><span>산출물: dp 표(0~8)와 선택 동전, Greedy 표와의 차이 칸, (선택) [5, 7] 표</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>작은 금액부터 표를 채우면 각 금액의 최소 동전 개수를 어떻게 정할 수 있는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">시도</span>표를 채우기 전에 dp[6]을 만들 때 마지막으로 낸 동전이 4, 3, 1일 때 앞에 만들어 둔 금액을 구하고, dp[6]을 정하는 방법을 내 말로 쓴다.<span class="tg-where">위 질문 아래의 &lsquo;규칙&rsquo; 칸</span><span class="tg-done">세 금액과 방법 설명이 쓰여 있다.</span></li>
+<li><span class="tg-stage">적용</span>0~8원의 후보값을 쓰고(c가 a보다 크면 -), 가장 작은 값을 dp[a]에, 그 값을 준 동전을 &lsquo;선택 동전&rsquo;에 쓴다.<span class="tg-where">dp 표(금액 a 줄마다 후보 칸·dp[a]·선택 동전)</span><span class="tg-done">모든 금액 줄이 채워져 있다.</span></li>
+<li><span class="tg-stage">비교</span>A4의 Greedy 개수와 dp[a]를 견주어 다른 금액에 표시한다.<span class="tg-where">&lsquo;Greedy 개수와 비교&rsquo; 표</span><span class="tg-done">다른 금액에 표시가 되어 있다(없으면 비워 둔다).</span></li>
+<li><span class="tg-stage">설명</span>&lsquo;관찰·정리&rsquo; 질문 1~2에 답한다. (선택) 동전 [5, 7] 표를 채운다.<span class="tg-where">&lsquo;관찰·정리&rsquo; 1~2</span></li>
+</ol>
+</div>
 <div class="concept"><b class="h">약속 · DP 규칙</b>
 <p><code class="i">dp[a]</code> = a원을 만드는 <b>최소 동전 개수</b>. <code class="i">dp[0] = 0</code>. 표는 0원부터 위에서 아래로 채운다. 동전은 [1, 3, 4]이다. <code class="i">dp[a]</code>를 정하는 방법은 표를 채우기 전에 아래 칸에 내 말로 먼저 쓴다.</p></div>
 <div class="learn-box"><span class="lb-title">학습 내용 · dp 규칙의 보기</span>
@@ -399,6 +443,15 @@ dp[3] = min(2, 2) = 2</pre>
 <section id="A6" class="sheet">
 <h2>A6 · 사실 정리와 이름 붙이기<small>1차시 · 9분 · 전체→개인</small></h2>
 <p class="meta"><span>산출물: 사실 정리표, 용어 연결, exit ticket</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>오늘 한 활동에는 어떤 이름이 붙고, 내가 센 숫자로 오늘의 핵심질문에 어떻게 답하겠는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">관찰</span>A2~A5에서 내가 쓴 표에서 값 여섯 개를 찾아 옮긴다.<span class="tg-where">&lsquo;① 사실 정리&rsquo; 표</span><span class="tg-done">여섯 칸이 숫자로 채워져 있다.</span></li>
+<li><span class="tg-stage">적용</span>다섯 가지 이름(메모이제이션·타뷸레이션·동적 계획법·탐욕 알고리즘·반례)이 오늘 한 활동 중 무엇에 붙는지 활동 번호와 함께 내 말로 쓴다.<span class="tg-where">&lsquo;② 이름 붙이기&rsquo; 표 다섯 칸</span><span class="tg-done">다섯 칸에 활동 번호(A○)가 들어 있다.</span></li>
+<li><span class="tg-stage">설명</span>핵심질문에 A2·A3에서 센 호출 수 두 개를 넣어 한 문장으로 답한다.<span class="tg-where">&lsquo;핵심&rsquo; 칸</span><span class="tg-done">숫자 두 개가 들어간 한 문장이 있다.</span></li>
+<li><span class="tg-stage">적용</span>exit ticket: 오늘 표에 없는 fib(7)과 9원을 규칙으로 직접 구해 쓴다.<span class="tg-where">&lsquo;③ exit ticket&rsquo; 1·2</span><span class="tg-done">숫자 칸이 모두 채워져 있다.</span></li>
+</ol>
+</div>
 <h3>① 사실 정리(내 A2~A5 표에서 찾아 쓴다)</h3>
 <p class="hint"><b>쓰는 법</b> 여섯 칸 모두 <b>숫자만</b> 쓴다. 호출 수는 불린 총 횟수, 서로 다른 입력의 수는 n의 종류 수, 계산 수는 C의 수, Greedy·dp 값은 동전 개수이다. 내 A2~A5 표에서 찾아 옮긴다.</p><div class="scroll"><table class="fill"><tr><th style="width:60%">항목</th><th>값</th></tr><tr><td class="lab">fib(6) 순수 재귀 호출 수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r1.c1" placeholder="숫자" data-label="A6 사실 정리 fib(6) 순수 재귀 호출 수 값" autocomplete="off" value="25"></td></tr><tr><td class="lab">fib(6)에서 서로 다른 입력의 수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r2.c1" placeholder="숫자" data-label="A6 사실 정리 fib(6)에서 서로 다른 입력의 수 값" autocomplete="off" value="7"></td></tr><tr><td class="lab">메모 규칙의 호출 수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r3.c1" placeholder="숫자" data-label="A6 사실 정리 메모 규칙의 호출 수 값" autocomplete="off" value="11"></td></tr><tr><td class="lab">메모 규칙의 실제 계산 수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r4.c1" placeholder="숫자" data-label="A6 사실 정리 메모 규칙의 실제 계산 수 값" autocomplete="off" value="7"></td></tr><tr><td class="lab">[1, 3, 4] 6원의 Greedy 개수</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r5.c1" placeholder="숫자" data-label="A6 사실 정리 [1, 3, 4] 6원의 Greedy 개수 값" autocomplete="off" value="3"></td></tr><tr><td class="lab">[1, 3, 4] 6원의 최소 개수(dp)</td><td class="in-cell"><input type="text" class="in" data-key="A6.facts.r6.c1" placeholder="숫자" data-label="A6 사실 정리 [1, 3, 4] 6원의 최소 개수(dp) 값" autocomplete="off" value="2"></td></tr></table></div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 오늘 쓰는 다섯 가지 이름</span>

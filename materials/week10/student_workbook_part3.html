@@ -141,6 +141,15 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A10" class="sheet">
 <h2>A10 · 이웃 반환 함수 두 가지: 예측-실제 표<small>3차시 · 16분 · 개인</small></h2>
 <p class="meta"><span>산출물: 예측-실제 표, 완성된 (나) 코드</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>이웃을 리스트로 돌려주는 함수와 하나씩 내주는 함수는 실행 중에 어떻게 다르게 행동하는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>실습 코드 3부 A10의 [예측 후 실행] 코드를 실행하기 <b>전에</b> 각 <code class="i">print</code> 줄의 출력을 쓴다.<span class="tg-where">표의 &lsquo;예측&rsquo; 칸</span><span class="tg-done">예측 칸이 모두 찼다.</span></li>
+<li><span class="tg-stage">관찰</span>코드를 실행하고 출력을 줄 순서대로 옮긴다. 오류가 나면 오류 이름을 쓴다.<span class="tg-where">표의 &lsquo;실제&rsquo; 칸</span></li>
+<li><span class="tg-stage">설명</span>[정리 질문]에서 표의 어느 줄을 근거로 삼았는지 밝히며 답한다. g에 없는 노드를 물을 때 neighbors가 어떻게 동작해야 하는지 아이디어도 쓴다.<span class="tg-where">[정리 질문]의 칸들</span></li>
+<li><span class="tg-stage">비교</span>호출하는 쪽 코드가 (가)와 (나)에서 같은지 다른지, 어느 쪽이 더 나은 상황이 있는지 쓴다.<span class="tg-where">[정리 질문]의 마지막 두 칸</span><span class="tg-done">표와 정리 질문이 모두 찼다.</span></li>
+</ol>
+</div>
 <p>실습 코드 3부 A10의 예측용 코드를 <b>실행하기 전에</b> 예측 칸을 먼저 쓴다. 한 줄씩 무엇이 출력될지 쓴다. 오류가 나면 오류 이름을 쓴다. 그 다음 실행해 실제 칸을 쓴다. 칸에는 출력되는 값을 그대로 쓴다(숫자는 숫자만, 리스트는 대괄호까지). 10번 줄은 값 두 개를 공백으로 구분해 쓴다(예: 0 False). 출력이 없는 줄이면 &ldquo;출력 없음&rdquo;이라고 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:46%">줄</th><th>예측</th><th>실제</th></tr><tr><td class="lab">1. type(it).__name__ 의 출력</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r1.c1" placeholder="출력 그대로" data-label="A10 type(it).__name__ 의 출력 · 예측">generator</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r1.c2" placeholder="출력 그대로" data-label="A10 type(it).__name__ 의 출력 · 실제">generator</textarea></td></tr><tr><td class="lab">2. next(it) 첫 번째 값</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r2.c1" placeholder="출력 그대로" data-label="A10 next(it) 첫 번째 값 · 예측">B</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r2.c2" placeholder="출력 그대로" data-label="A10 next(it) 첫 번째 값 · 실제">B</textarea></td></tr><tr><td class="lab">3. next(it) 두 번째 값</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r3.c1" placeholder="출력 그대로" data-label="A10 next(it) 두 번째 값 · 예측">C</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r3.c2" placeholder="출력 그대로" data-label="A10 next(it) 두 번째 값 · 실제">C</textarea></td></tr><tr><td class="lab">4. next(it) 세 번째 값</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r4.c1" placeholder="출력 그대로" data-label="A10 next(it) 세 번째 값 · 예측">E</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r4.c2" placeholder="출력 그대로" data-label="A10 next(it) 세 번째 값 · 실제">E</textarea></td></tr><tr><td class="lab">5. next(it) 네 번째 호출</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r5.c1" placeholder="출력 그대로" data-label="A10 next(it) 네 번째 호출 · 예측">StopIteration</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r5.c2" placeholder="출력 그대로" data-label="A10 next(it) 네 번째 호출 · 실제">StopIteration</textarea></td></tr><tr><td class="lab">6. print(list(it), list(it)) 의 출력</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r6.c1" placeholder="출력 그대로" data-label="A10 print(list(it), list(it)) 의 출력 · 예측">['B', 'C', 'E'] []</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r6.c2" placeholder="출력 그대로" data-label="A10 print(list(it), list(it)) 의 출력 · 실제">['B', 'C', 'E'] []</textarea></td></tr><tr><td class="lab">7. neighbors_list(g, "D") 의 출력</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r7.c1" placeholder="출력 그대로" data-label="A10 neighbors_list(g, &quot;D&quot;) 의 출력 · 예측">['B', 'C', 'E']</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r7.c2" placeholder="출력 그대로" data-label="A10 neighbors_list(g, &quot;D&quot;) 의 출력 · 실제">['B', 'C', 'E']</textarea></td></tr><tr><td class="lab">8. 함수를 호출하기 전 len(g)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r8.c1" placeholder="출력 그대로" data-label="A10 함수를 호출하기 전 len(g) · 예측">5</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r8.c2" placeholder="출력 그대로" data-label="A10 함수를 호출하기 전 len(g) · 실제">5</textarea></td></tr><tr><td class="lab">9. it = neighbors_gen(g, "Q") 를 호출한 직후 len(g)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r9.c1" placeholder="출력 그대로" data-label="A10 it = neighbors_gen(g, &quot;Q&quot;) 를 호출한 직후 len(g) · 예측">5</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r9.c2" placeholder="출력 그대로" data-label="A10 it = neighbors_gen(g, &quot;Q&quot;) 를 호출한 직후 len(g) · 실제">5</textarea></td></tr><tr><td class="lab">10. list(it)로 끝까지 꺼낸 뒤 len(g)와 "Q" in g</td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r10.c1" placeholder="출력 그대로" data-label="A10 list(it)로 끝까지 꺼낸 뒤 len(g)와 &quot;Q&quot; in g · 예측">6 True</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A10.pred.r10.c2" placeholder="출력 그대로" data-label="A10 list(it)로 끝까지 꺼낸 뒤 len(g)와 &quot;Q&quot; in g · 실제">6 True</textarea></td></tr></table></div>
 <h3>정리 질문</h3>
 <p>1. <code class="i">print(list(it), list(it))</code>에서 두 번째 <code class="i">list(it)</code>가 빈 리스트였다. 왜 그런가?</p>
@@ -182,6 +191,14 @@ def neighbors_safe(g, u):      # g를 바꾸지 않는 형태
 <section id="A11" class="sheet">
 <h2>A11 · 일반화 초안 카드<small>3차시 · 3분 · 개인</small></h2>
 <p class="meta"><span>산출물: 일반화 초안 카드 (개인 메모, 교사는 공개하지 않는다)</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>오늘 A1~A10에서 발견한 것을 사례 이름 없이 &ldquo;개념 + 개념 + 관계&rdquo; 한 문장으로 쓰면 무엇인가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">일반화</span>주제 4개(모델링, 표현 선택, defaultdict, 제네레이터) 중 오늘 내 생각이 가장 크게 바뀐 하나를 고른다.<span class="tg-where">[고른 주제] 칸</span></li>
+<li><span class="tg-stage">일반화</span>사례 이름(G1, W) 대신 개념어를 써서 문장 한 개를 쓴다.<span class="tg-where">[내 일반화 초안 문장] 칸</span></li>
+<li><span class="tg-stage">전이</span>이 문장이 G1에만 해당하는지 다른 그래프에도 통하는지 먼저 고르고 이유를 한 문장 쓴다.<span class="tg-where">[이 문장은 G1 그래프에만 해당하는가] 칸</span><span class="tg-done">세 칸이 모두 찼다.</span></li>
+</ol>
+</div>
 <p>A1~A10에서 발견한 것을 &ldquo;<b>개념 + 개념 + 관계</b>&rdquo; 형태의 문장 한 개로 쓴다. 주제 4개 중 오늘 내 생각이 가장 크게 바뀐 주제를 하나 골라, 그 주제에서 바뀐 점을 쓴다.</p>
 <div class="learn-box"><span class="lb-title">학습 내용 · 일반화 문장 쓰는 방법</span>
 <ul>
@@ -201,12 +218,20 @@ def neighbors_safe(g, u):      # g를 바꾸지 않는 형태
 <section id="A12" class="sheet">
 <h2>A12 · 일반화 문장 정제 시트<small>3차시 · 10분 · 개인</small></h2>
 <p class="meta"><span>산출물: 정제한 일반화 문장, 수정 이력</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내 일반화 초안에서 사례 이름과 한정을 지워도 문장이 성립하는가? 정제한 문장은 다른 사례에도 통하는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">일반화</span>A11의 내 초안을 읽고 사례 이름(G1, W, T4)을 개념어로 바꿔 문장 한 개로 정제한다. 주제별 행에 문장과 수정 이력(&ldquo;무엇을 무엇으로 바꿨다&rdquo;)을 쓴다. 시간 안에 정제한 행만 완성해도 된다.<span class="tg-where">[1단계 · 내 초안 정제] 표</span></li>
+<li><span class="tg-stage">점검</span>[2단계] 점검 항목 세 개에 체크하고, 도로망·SNS·도서관 대출 기록에도 내 문장이 성립하는지 쓴다.<span class="tg-where">[2단계 · 정제 점검] 칸들</span></li>
+<li><span class="tg-stage">비교</span>[1·2단계]를 쓴 뒤 정제 문장 상자를 열어 내 문장과 같은 점·다른 점을 쓰고, 내 문장에서 고칠 점을 쓴다.<span class="tg-where">[3단계 · 정제 문장과 대조] 세 칸</span><span class="tg-done">세 칸이 모두 찼다.</span></li>
+</ol>
+</div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 정제 순서(10분)와 점검 질문</span>
 <ul>
 <li>순서: A11의 내 초안을 다시 읽고 점검한다(4분) &rarr; 문장으로 정제한다(2분) &rarr; 아래 상자의 문장과 대조한다(4분).</li>
 <li>정제 방법: ① 사례 이름(G1, W, T4)을 개념어로 바꾼다 ② &ldquo;개념 + 개념 + 관계&rdquo; 형태인지 본다 ③ &ldquo;친구 그래프 G1만&rdquo; 같은 한정을 지울 수 있는지 시험한다 ④ 도로망, SNS, 도서관 대출 기록에도 성립하는지 따져 본다.</li>
 <li>점검 질문: 문장에서 &ldquo;G1만&rdquo;을 지울 수 있는가? 문장에서 숫자나 노드 이름이 꼭 필요한가? 트리에 관한 문장에 &ldquo;사이클&rdquo;이라는 말을 넣어도 되는가?</li>
-<li>시간이 남으면 스스로 생각해 본다. 반 친구 30명의 관계라면 어느 표현을 쓰겠는가? defaultdict는 &ldquo;예외 없는 편리한 도구&rdquo;인가 &ldquo;숨은 부작용이 있는 도구&rdquo;인가? 이웃을 리스트로 돌려주는 것이 더 단순한데 제네레이터가 항상 이득인가? 입장과 근거를 한 줄로 쓴다.</li>
+<li>시간이 남으면 스스로 생각해 본다. 반 친구 20명의 관계라면 어느 표현을 쓰겠는가? defaultdict는 &ldquo;예외 없는 편리한 도구&rdquo;인가 &ldquo;숨은 부작용이 있는 도구&rdquo;인가? 이웃을 리스트로 돌려주는 것이 더 단순한데 제네레이터가 항상 이득인가? 입장과 근거를 한 줄로 쓴다.</li>
 </ul>
 </div>
 <h3>1단계 · 내 초안 정제</h3>
@@ -236,6 +261,15 @@ def neighbors_safe(g, u):      # g를 바꾸지 않는 형태
 <section id="A13" class="sheet">
 <h2>A13 · 과제 점검표와 전이(SUB)<small>3차시 · 11분 · 개인</small></h2>
 <p class="meta"><span>산출물: 과제 점검, SUB 분석 메모</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내가 쓴 build_graph와 neighbors는 새 입력에서도 요구사항을 지키는가? 지하철 노선도에도 같은 도구가 통하는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">도구 확인</span>실습 코드 3부 A13의 [점검 테스트]와 접힌 추가 점검을 실행한 결과로 점검 항목에 체크한다.<span class="tg-where">[(가) 과제 마무리 점검] 체크 칸들</span><span class="tg-done">&ldquo;A13 점검 통과&rdquo;가 출력됐다.</span></li>
+<li><span class="tg-stage">설명</span>통과하지 못한 항목이 있으면 &ldquo;항목 번호: 원인&rdquo;으로 쓰고, 없으면 &ldquo;없음&rdquo;이라고 쓴다.<span class="tg-where">[통과하지 못한 항목] 칸</span></li>
+<li><span class="tg-stage">예측</span>(나) SUB의 노드 수·간선 수와 환승역을 코드를 쓰기 전에 손으로 쓴다. 채점하지 않는다.<span class="tg-where">[(나) 전이] 표의 앞 두 칸</span></li>
+<li><span class="tg-stage">비교</span>실습 코드의 SUB 보조 코드 출력과 비교해 표를 고치고, 트리인지와 SUB+에서 바뀌는 것을 쓴다.<span class="tg-where">[(나) 전이] 표의 나머지 칸</span><span class="tg-done">체크 칸과 표가 모두 찼다.</span></li>
+</ol>
+</div>
 <h3>(가) 과제 마무리 점검</h3>
 <p><label class="ck"><input type="checkbox" data-key="A13.chk1" data-label="A13 점검: 내 build_graph와 neighbors가 점검 테스트를 모두 통과했다" checked> 내 build_graph와 neighbors가 점검 테스트를 모두 통과했다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk2" data-label="A13 점검: 무방향 간선이 양쪽에 모두 들어간다" checked> 무방향 간선이 양쪽에 모두 들어간다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk3" data-label="A13 점검: 방향 그래프에서는 한쪽만 들어간다" checked> 방향 그래프에서는 한쪽만 들어간다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk4" data-label="A13 점검: 빈 간선 목록에서 오류가 나지 않는다" checked> 빈 간선 목록에서 오류가 나지 않는다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk5" data-label="A13 추가 점검(접힌 블록)을 통과했다" checked> A13 추가 점검(접힌 블록)을 통과했다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk6" data-label="A13 점검: neighbors가 과제 안내(실습 코드 3부)의 요건을 모두 지켰다" checked> neighbors가 과제 안내(실습 코드 3부)의 요건을 모두 지켰다</label><br><label class="ck"><input type="checkbox" data-key="A13.chk7" data-label="A13 점검: 코드를 고치지 않고 새 입력에서도 통과했다" checked> 코드를 고치지 않고 새 입력에서도 통과했다</label><br></p>
 <p>통과하지 못한 항목이 있다면 어느 항목이고 원인은 무엇인가?</p>
@@ -253,6 +287,13 @@ def neighbors_safe(g, u):      # g를 바꾸지 않는 형태
 <section id="A15" class="sheet">
 <h2>A15 · 오개념 점검과 11주차 예고<small>3차시 · 4분 · 개인</small></h2>
 <p class="meta"><span>산출물: 11주차 예고 한 문장</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>오늘 만든 구조 위에서 모든 노드를 돌려면 어떻게 해야 할까?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">점검</span>학습 상자의 오개념 점검 4가지를 읽고, 내가 놓친 것이 있는지 떠올린다.<span class="tg-where">이 활동의 학습 상자(칸 없음)</span></li>
+<li><span class="tg-stage">일반화</span>11주차 예고 질문에 한 문장으로 쓴다. 떠오르지 않으면 &ldquo;모르겠다&rdquo;와 이유를 쓴다.<span class="tg-where">칸 1</span><span class="tg-done">칸 1이 찼다.</span></li>
+</ol>
+</div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 오개념 점검</span>
 <ul>
 <li>오개념 점검 4가지: 방향이 있어도 표가 대칭일 것이라고 가정했는가? <code class="i">[[0]*n]*n</code>처럼 같은 리스트를 여러 번 참조했는가? 읽기만 했는데 키가 늘어나는 경우를 놓쳤는가? 제네레이터를 두 번 써 보았는가?</li>

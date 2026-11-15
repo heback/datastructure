@@ -292,3 +292,27 @@ a.xlink[href^="student_workbook"]:hover{background:var(--gold-ink);border-color:
   a.card{padding:16px 18px}
 }
 }
+
+/* ---------- 활동 안내 카드(.task-guide): 활동마다 '질문 → 단계(쓰는 곳·완료 신호) → 만들 것 → 막히면' ---------- */
+.task-guide{border:1px solid var(--gold-line);border-left:4px solid var(--gold);border-radius:var(--radius-md);padding:10px 14px;margin:12px 0 18px;background:#fffaf0}
+.task-guide .tg-k{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--gold-ink,#86621a);margin-right:8px}
+.task-guide .tg-q{margin:2px 0 8px;font-weight:600}
+.task-guide ol.tg-steps{margin:4px 0 6px;padding-left:1.6em}
+.task-guide ol.tg-steps>li{margin:6px 0}
+.task-guide .tg-stage{display:inline-block;font-size:12px;font-weight:700;padding:0 7px;border:1px solid currentColor;border-radius:999px;margin-right:6px;color:var(--accent,#1f4f78)}
+.task-guide .tg-where,.task-guide .tg-done{display:block;font-size:13.5px;color:var(--dim,#5a6372)}
+.task-guide .tg-where::before{content:"✎ 쓰는 곳 · ";font-weight:600}
+.task-guide .tg-done::before{content:"✓ 다 했으면 · ";font-weight:600;color:var(--ok,#1d6a47)}
+.task-guide .tg-contract{margin:8px 0 4px;padding:8px 12px;border:1px dashed var(--line,#dcd5c6);border-radius:var(--radius-sm,6px);background:#fff}
+.task-guide .tg-contract ul{margin:4px 0 0;padding-left:1.3em}
+.task-guide details.tg-hint{margin:6px 0 0}
+.task-guide details.tg-hint>summary{cursor:pointer;font-size:13.5px;font-weight:600;color:var(--accent,#1f4f78)}
+.task-guide details.tg-hint>:not(summary){margin:4px 0 4px 1.2em;font-size:14.5px}
+@media screen{
+  .task-guide{box-shadow:var(--shadow-card)}
+}
+@media print{
+  .task-guide{background:none;box-shadow:none;break-inside:avoid}
+  .task-guide details.tg-hint{display:none}
+}
+.task-guide .tg-why{margin:6px 0;font-size:14.5px}

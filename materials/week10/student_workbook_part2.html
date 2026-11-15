@@ -141,6 +141,14 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A6" class="sheet">
 <h2>A6 · 행렬 구축 결과 확인<small>2차시 · 12분 · 개인</small></h2>
 <p class="meta"><span>산출물: 손 표와의 일치 확인</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>코드로 만든 행렬은 내가 손으로 만든 표와 같은가? 다르다면 어느 쪽이 틀렸는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">도구 확인</span>실습 코드 1부 A6에서 [자체 테스트]를 통과시킨 행렬을 <code class="i">for row in m: print(row)</code>로 한 줄씩 찍는다.<span class="tg-where">실습 코드 1부 A6의 편집기</span><span class="tg-done">&ldquo;A6 테스트 통과&rdquo;와 6줄의 행렬이 보인다.</span></li>
+<li><span class="tg-stage">비교</span>찍은 행렬을 1차시 A2에서 손으로 만든 표와 칸마다 대조하고, 같은지 다른지 고른다.<span class="tg-where">칸 1(같다 / 다르다 / 아직 완성하지 못했다 중 선택)</span></li>
+<li><span class="tg-stage">설명</span>다르다면 어느 칸이 왜 다른지, 손 표와 코드 중 어느 쪽이 틀렸는지 쓴다.<span class="tg-where">칸 2</span><span class="tg-done">칸 1을 골랐다.</span></li>
+</ol>
+</div>
 <p>실습 코드 1부(<a class="xlink" href="student_code_lab.html#A6">A6</a>)에서 완성한 <code class="i">make_matrix</code>, <code class="i">add_edge</code>로 만든 G1 행렬을 1차시 A2에서 손으로 만든 표와 비교한다.</p>
 <p>1. 내 코드의 행렬은 손 표와 같은가? <span class="rg" data-key="A6.same" data-type="radio" data-label="A6 내 행렬은 손 표와 같은가"><label><input type="radio" name="r_A6_same" value="같다" checked> 같다</label><label><input type="radio" name="r_A6_same" value="다르다"> 다르다</label><label><input type="radio" name="r_A6_same" value="아직 완성하지 못했다"> 아직 완성하지 못했다</label></span></p>
 <p>2. 다르다면 어느 칸이 왜 다른가? 손 표와 코드 중 어느 쪽이 틀렸는지 쓴다.</p>
@@ -175,6 +183,16 @@ def add_edge(m, u, v):
 <section id="A7" class="sheet">
 <h2>A7 · 일반 dict로 만든 인접 리스트의 오류와 해결 아이디어<small>2차시 · 13분 · 개인</small></h2>
 <p class="meta"><span>산출물: 오류 원인 한 줄, 동작하는 구축 코드, F 누락 메모</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>일반 dict로 인접 리스트를 만들면 어디서 왜 막히고, 그 막힘은 어떤 방법으로 풀 수 있는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>실습 코드 1부 A7의 시도 코드를 실행하기 전에 무슨 일이 일어날지 한 줄 예측한다.<span class="tg-where">입력 칸 없음(공책이나 활동지 여백)</span></li>
+<li><span class="tg-stage">관찰</span>(가) 시도 코드를 실행해 오류가 난 줄, 오류 이름과 메시지, 원인을 쓴다.<span class="tg-where">[(가) 일반 dict로 시도했을 때] 표</span></li>
+<li><span class="tg-stage">시도</span>(나) 이 오류를 없앨 방법을 한 칸에 하나씩 최대한 많이 쓴다. 1·2번은 필수이다.<span class="tg-where">[(나) 해결 아이디어 떠올리기]의 칸 1~3</span></li>
+<li><span class="tg-stage">도구 확인</span>(다) 실습 코드 1부 A7의 상자에서 확인한 도구의 이름과 일반 dict와의 차이를 쓰고, 다시 만든 G1·W가 손 목록과 같은지 체크한다.<span class="tg-where">[(다)]의 칸들</span></li>
+<li><span class="tg-stage">관찰</span>(라) 고립 노드 F, 한쪽만 추가했을 때 D의 이웃, 노드 이름이 리스트·튜플일 때를 직접 시험해 쓴다.<span class="tg-where">[(라) 관찰]의 칸 4~7</span><span class="tg-done">모든 칸이 찼다.</span></li>
+</ol>
+</div>
 <h3>(가) 일반 dict로 시도했을 때</h3>
 <p>실습 코드 1부 A7의 시도 코드를 실행한 결과를 쓴다. 오류가 난 줄에는 그 줄의 코드를 그대로 옮겨 쓰고, 오류 이름과 메시지는 화면에 나온 그대로(예: ZeroDivisionError: division by zero 형식) 쓴다. 원인은 한 문장으로 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:34%">항목</th><th>내가 쓴 것</th></tr><tr><td class="lab">오류가 난 줄(어느 줄의 어느 부분인가)</td><td class="in-cell"><input type="text" class="in" data-key="A7.err.line" placeholder="줄의 코드를 그대로" data-label="A7 오류가 난 줄" autocomplete="off" value="g[u].append(v) 줄(첫 번째 반복의 g[u] 부분)"></td></tr><tr><td class="lab">오류 이름과 메시지</td><td class="in-cell"><input type="text" class="in" data-key="A7.err.name" placeholder="오류 이름: 메시지" data-label="A7 오류 이름과 메시지" autocomplete="off" value="KeyError: 'A'"></td></tr><tr><td class="lab">원인 한 줄</td><td class="in-cell"><input type="text" class="in" data-key="A7.err.cause" placeholder="한 문장" data-label="A7 KeyError 원인 한 줄" autocomplete="off" value="g가 빈 dict여서 A 키가 아직 없는데 g[u]로 읽으려 했다. 없는 키를 읽으면 KeyError가 난다."></td></tr></table></div>
 <h3>(나) 해결 아이디어 떠올리기</h3>
@@ -208,6 +226,15 @@ def add_edge(m, u, v):
 <section id="A8" class="sheet">
 <h2>A8 · 함정 코드 예측-실제 표<small>2차시 · 14분 · 개인</small></h2>
 <p class="meta"><span>산출물: 예측-실제 표, 함정별 원인 한 줄</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>없는 키를 건드리는 코드는 g를 바꾸는가? 내 예측은 어느 코드에서 실제와 갈라지는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>실습 코드 2부의 C1~C4(선택 C5)를 실행하기 <b>전에</b> 각 코드의 출력과 <code class="i">len(g)</code>의 변화를 쓴다.<span class="tg-where">표의 &lsquo;예측(실행 전)&rsquo; 칸</span><span class="tg-done">예측 칸이 모두 찼다.</span></li>
+<li><span class="tg-stage">관찰</span>C를 한 개씩 실행하고 나온 값(오류면 오류 이름)을 그대로 옮긴다.<span class="tg-where">표의 &lsquo;실제(실행 결과)&rsquo; 칸</span></li>
+<li><span class="tg-stage">설명</span>코드마다 그런 결과가 나는 원인을 한 줄 쓴다. 예측이 맞았어도 쓴다. 마지막 칸은 선택이다.<span class="tg-where">표의 &lsquo;원인 한 줄&rsquo;·&lsquo;어디서 흔히 만나는가&rsquo; 칸</span></li>
+<li><span class="tg-stage">일반화</span>[정리 질문] 1~4에 답한다.<span class="tg-where">[정리 질문]의 칸 1~4</span><span class="tg-done">표와 정리 질문이 모두 찼다.</span></li>
+</ol>
+</div>
 <p>실습 코드 2부의 C1~C5를 <b>실행하기 전에 예측 칸을 먼저</b> 채운다. 무엇이 출력될지(오류가 날지)와 <code class="i">len(g)</code>가 어떻게 되는지를 쓴다. 그 다음 실행해 실제 값을 쓰고, 예측과 달랐다면 원인을 한 줄로 쓴다. 마지막 칸에는 &ldquo;이런 일을 실제 코드 어디에서 만날 수 있는지&rdquo; 한 줄을 쓴다(선택, 쓰지 않으면 비워 둔다). 예측·실제 칸에는 출력될 값을 그대로 쓰고(오류가 나면 오류 이름), <code class="i">len(g)</code>의 값도 함께 쓴다. 원인 칸에는 이 코드가 그런 결과를 내는 이유를 한 줄로 쓴다(예측이 맞았어도 쓴다).</p><div class="scroll"><table class="fill"><tr><th style="width:70px">코드</th><th style="width:23%">예측(실행 전)</th><th style="width:23%">실제(실행 결과)</th><th style="width:23%">원인 한 줄</th><th>어디서 흔히 만나는가(선택)</th></tr><tr><td class="lab">C1</td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r1.c1" placeholder="출력 값 그대로" data-label="A8 C1 · 예측(실행 전)">5, 6 []</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r1.c2" placeholder="출력 값 그대로" data-label="A8 C1 · 실제(실행 결과)">5, 6 []</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r1.c3" placeholder="이유 한 줄" data-label="A8 C1 · 원인 한 줄">defaultdict는 없는 키를 읽기만 해도 그 키를 만들어 넣는다(읽기가 키를 만든다).</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r1.c4" placeholder="(선택) 한 줄" data-label="A8 C1 · 어디서 흔히 만나는가">이웃을 묻는 함수, 방문 코드에서 없는 노드를 확인할 때</textarea></td></tr><tr><td class="lab">C2</td><td class="in-cell"><textarea class="in" rows="3" data-key="A8.pred.r2.c1" placeholder="출력 값 그대로" data-label="A8 C2 · 예측(실행 전)">False
 []
 5</textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A8.pred.r2.c2" placeholder="출력 값 그대로" data-label="A8 C2 · 실제(실행 결과)">False
@@ -242,6 +269,15 @@ def add_edge(m, u, v):
 <section id="A9" class="sheet">
 <h2>A9 · 연산 카운터 실측 vs 손 표<small>2차시 · 11분 · 개인</small></h2>
 <p class="meta"><span>산출물: 실측 표 vs 손 표, 수정 메모</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>같은 질의에서 인접 행렬과 인접 리스트가 확인하는 수는 왜 다른가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>코드를 돌리기 전에 질의별로 손으로 센 값을 숫자로 쓴다. &lsquo;리스트 E–A 확인&rsquo;도 먼저 쓴다.<span class="tg-where">표의 &lsquo;손으로 센 값&rsquo; 칸</span></li>
+<li><span class="tg-stage">관찰</span>실습 코드 2부 A9를 실행한 출력을 그대로 옮긴다(예: (True, 3)).<span class="tg-where">표의 &lsquo;코드 값&rsquo; 칸</span></li>
+<li><span class="tg-stage">비교</span>손으로 센 값과 코드 값이 다르면 어느 쪽이 어디서 틀렸는지 쓴다. 같으면 &ldquo;어긋남 없음&rdquo;이라고 쓴다.<span class="tg-where">표의 &lsquo;어긋났다면 어디서 틀렸나&rsquo; 칸</span></li>
+<li><span class="tg-stage">설명</span>리스트에서 확인하는 수가 무엇에 달려 있는지, 행렬의 확인 칸 수는 어떤지 아래 질문 1~3에 쓴다.<span class="tg-where">질문 1~3의 칸</span><span class="tg-done">표와 질문 칸이 모두 찼다.</span></li>
+</ol>
+</div>
 <p>먼저 질의를 손으로 센 값을 쓰고(A4의 값과 같은 방법), 실습 코드 2부 A9의 실행 결과를 &ldquo;코드 값&rdquo;에 옮겨 쓴다. 코드를 돌리기 전에 &ldquo;리스트 E–A 확인&rdquo;의 확인한 수도 예측해 &ldquo;손으로 센 값&rdquo; 칸에 먼저 적는다. 다르면 어느 쪽이 틀렸는지 찾아 적는다. 손으로 센 값 칸에는 숫자만 쓴다. 코드 값 칸에는 코드가 출력한 값을 그대로 옮겨 쓴다(예: (True, 3)).</p><div class="scroll"><table class="fill"><tr><th style="width:34%">질의</th><th style="width:17%">손으로 센 값</th><th style="width:17%">코드 값</th><th>어긋났다면 어디서 틀렸나(어긋나지 않으면 &ldquo;어긋남 없음&rdquo;)</th></tr><tr><td class="lab">리스트 A–E 확인</td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.ae.c1" placeholder="숫자만" data-label="A9 리스트 A–E 확인 · 손으로 센 값">2</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.ae.c2" placeholder="출력 그대로" data-label="A9 리스트 A–E 확인 · 코드 값">(False, 2)</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.ae.c3" placeholder="어긋남 없음, 또는 틀린 곳" data-label="A9 리스트 A–E 확인 · 어긋났다면 어디서 틀렸나">어긋남 없음</textarea></td></tr><tr><td class="lab">리스트 D–E 확인</td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.de.c1" placeholder="숫자만" data-label="A9 리스트 D–E 확인 · 손으로 센 값">3</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.de.c2" placeholder="출력 그대로" data-label="A9 리스트 D–E 확인 · 코드 값">(True, 3)</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.de.c3" placeholder="어긋남 없음, 또는 틀린 곳" data-label="A9 리스트 D–E 확인 · 어긋났다면 어디서 틀렸나">어긋남 없음</textarea></td></tr><tr><td class="lab">리스트 A–B 확인</td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.ab.c1" placeholder="숫자만" data-label="A9 리스트 A–B 확인 · 손으로 센 값">1</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.ab.c2" placeholder="출력 그대로" data-label="A9 리스트 A–B 확인 · 코드 값">(True, 1)</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.ab.c3" placeholder="어긋남 없음, 또는 틀린 곳" data-label="A9 리스트 A–B 확인 · 어긋났다면 어디서 틀렸나">어긋남 없음</textarea></td></tr><tr><td class="lab">리스트 E–A 확인</td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.ea.c1" placeholder="숫자만" data-label="A9 리스트 E–A 확인 · 손으로 센 값">1</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.ea.c2" placeholder="출력 그대로" data-label="A9 리스트 E–A 확인 · 코드 값">(False, 1)</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.ea.c3" placeholder="어긋남 없음, 또는 틀린 곳" data-label="A9 리스트 E–A 확인 · 어긋났다면 어디서 틀렸나">어긋남 없음</textarea></td></tr><tr><td class="lab">행렬 A–E 확인</td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.mat.ae.c1" placeholder="숫자만" data-label="A9 행렬 A–E 확인 · 손으로 센 값">1</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.mat.ae.c2" placeholder="출력 그대로" data-label="A9 행렬 A–E 확인 · 코드 값">(False, 1)</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.mat.ae.c3" placeholder="어긋남 없음, 또는 틀린 곳" data-label="A9 행렬 A–E 확인 · 어긋났다면 어디서 틀렸나">어긋남 없음</textarea></td></tr><tr><td class="lab">행렬로 D의 이웃 모두(훑은 칸)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.mat.nd.c1" placeholder="숫자만" data-label="A9 행렬로 D의 이웃 모두(훑은 칸) · 손으로 센 값">6</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.mat.nd.c2" placeholder="출력 그대로" data-label="A9 행렬로 D의 이웃 모두(훑은 칸) · 코드 값">(['B', 'C', 'E'], 6)</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.mat.nd.c3" placeholder="어긋남 없음, 또는 틀린 곳" data-label="A9 행렬로 D의 이웃 모두(훑은 칸) · 어긋났다면 어디서 틀렸나">어긋남 없음</textarea></td></tr><tr><td class="lab">리스트로 D의 이웃 모두(훑은 원소)</td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.nd.c1" placeholder="숫자만" data-label="A9 리스트로 D의 이웃 모두(훑은 원소) · 손으로 센 값">3</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.nd.c2" placeholder="출력 그대로" data-label="A9 리스트로 D의 이웃 모두(훑은 원소) · 코드 값">(['B', 'C', 'E'], 3)</textarea></td><td class="in-cell"><textarea class="in" rows="1" data-key="A9.list.nd.c3" placeholder="어긋남 없음, 또는 틀린 곳" data-label="A9 리스트로 D의 이웃 모두(훑은 원소) · 어긋났다면 어디서 틀렸나">어긋남 없음</textarea></td></tr></table></div>
 <p>1. (선택) A–E 확인에서 리스트는 왜 그 횟수만큼 비교하는가?</p>
 <div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A9.q1" placeholder="(선택) 한 문장" data-label="A9 A–E 확인에 리스트는 왜 그 횟수만큼 비교하는가">A의 이웃 목록 B, C 두 원소 중 E가 없어서 목록을 처음부터 끝까지 모두 확인하기 때문이다.</textarea></div>

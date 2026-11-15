@@ -141,6 +141,16 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A6" class="sheet">
 <h2>A6 · 손 추적과 코드 출력 대조<small>2차시 · 15분 · 개인</small></h2>
 <p class="meta"><span>산출물: 손 추적과의 일치 확인, 시작 노드 F 예측-실제</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내 코드가 낸 방문 순서는 손으로 구한 순서와 같은가? 다르다면 어디에서 처음 달라지는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">적용</span>실습 코드 <a class="xlink" href="student_code_lab.html#A6">1부 A6</a>에서 두 함수를 완성하고 G1, 시작 A로 실행한다. 출력된 리스트를 대괄호까지 그대로 표에 옮긴다.<span class="tg-where">‘코드가 낸 방문 순서’ 칸</span><span class="tg-done">두 줄이 채워졌다.</span></li>
+<li><span class="tg-stage">비교</span>bfs_order는 A2 큐 규칙, dfs_order는 A3 재귀의 방문 순서와 비교해 “같다”, “다르다”, “아직 완성하지 못했다” 중 하나를 고른다.<span class="tg-where">표의 ‘손 추적과 같은가’ 선택</span><span class="tg-done">두 줄 모두 하나를 골랐다.</span></li>
+<li><span class="tg-stage">예측</span>시작 노드를 F로 바꾸면 두 함수가 무엇을 돌려줄지 <b>실행하기 전에</b> 쓰고, 실행해 실제 값을 쓴다.<span class="tg-where">‘시작 노드를 F로 바꾸면’의 예측·실제 칸</span><span class="tg-done">예측 칸과 실제 칸이 모두 채워졌다.</span></li>
+<li><span class="tg-stage">설명</span>1~3번 질문(처음 달라지는 자리, F의 결과, 내 코드의 방문 기록 시점)에 답한다. 4~5번은 선택이다.<span class="tg-where">1~3번 칸</span><span class="tg-done">3칸이 채워졌다.</span></li>
+<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
+</ol>
+</div>
 <div class="learn-box"><span class="lb-title">학습 내용 · A6 기록 방법</span>
 <ol>
 <li>실습 코드 1부 A6에서 빈칸을 채우고 <code class="i">bfs_order(g, "A")</code>와 <code class="i">dfs_order(g, "A", set(), [])</code>를 실행한다.</li>
@@ -178,6 +188,15 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A7" class="sheet">
 <h2>A7 · 미로 MAZE 결과 기록<small>2차시 · 13분 · 개인</small></h2>
 <p class="meta"><span>산출물: MAZE 거리, 도달 불가 미로 결과, 질문 답</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>격자 미로에서 S에서 E까지의 걸음 수와 이웃 목록은 코드가 어떤 규칙으로 내는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>위 MAZE 그림에서 S에서 E까지 걸음 수를 눈으로 세어 <b>실행하기 전에</b> ‘예측’ 칸에 쓴다. 닿을 수 없는 미로와 시작=도착의 값도 먼저 예측한다.<span class="tg-where">표의 ‘예측(실행 전)’ 칸 3개</span><span class="tg-done">예측 칸 3개가 채워졌다.</span></li>
+<li><span class="tg-stage">관찰</span>실습 코드 <a class="xlink" href="student_code_lab.html#A7">1부 A7</a>의 함수로 [실행 틀]을 실행하고 나온 값을 ‘내 코드의 값’ 칸에 출력된 모양 그대로 쓴다(숫자는 숫자만, 목록은 목록 그대로). 설명은 쓰지 않는다.<span class="tg-where">‘내 코드의 값’ 칸 5개</span><span class="tg-done">칸 5개가 채워졌다.</span></li>
+<li><span class="tg-stage">설명</span>1~5번 질문에 답한다. 예측과 달랐다면 그 까닭이 어느 질문의 답과 이어지는지 찾는다.<span class="tg-where">1~5번 칸</span><span class="tg-done">5칸이 채워졌다.</span></li>
+<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
+</ol>
+</div>
 <p>실습 코드 1부(<a class="xlink" href="student_code_lab.html#A7">A7</a>)의 함수를 실행해 얻은 값을 쓴다. <b>실행하기 전에</b> 예측 칸에 먼저 쓴다. MAZE의 S&rarr;E 걸음 수는 아래 MAZE 그림을 눈으로 세어 쓴다. 이웃 목록 두 줄은 예측 없이 실행 값만 쓴다. 거리는 칸에서 칸으로 한 번 움직일 때 1씩 세는 걸음 수이며 시작 칸은 0이다. 값 칸에는 코드가 낸 값을 그대로 쓰고(숫자는 숫자만, 목록은 출력된 모양 그대로) 설명은 쓰지 않는다.</p>
 <p>MAZE는 행 5개, 열 7개이고 <code class="i">MAZE[행][열]</code>로 칸을 읽는다. 시작 S는 (0, 0), 도착 E는 (4, 6)이며 <code class="i">#</code>은 벽, <code class="i">.</code>은 길이다.</p>
 <pre class="diagram">S..#...
@@ -214,6 +233,16 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A8" class="sheet">
 <h2>A8 · 함정 코드 예측-실제 표<small>2차시 · 13분 · 개인</small></h2>
 <p class="meta"><span>산출물: 예측-실제 표, 함정별 원인 한 줄</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>같은 BFS·DFS 코드가 어떤 선택과 어떤 입력에서 중복·느림·오류를 만드는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>T1-a~T3(선택 T4) 코드를 읽고 <b>실행하기 전에</b> ‘예측(실행 전)’ 칸을 쓴다.<span class="tg-where">표의 ‘예측(실행 전)’ 칸</span><span class="tg-done">실행 전에 예측 칸이 채워졌다.</span></li>
+<li><span class="tg-stage">관찰</span>실습 코드 <a class="xlink" href="student_code_lab_part2.html#A8">2부 A8</a>의 T 편집기에서 실행한 값이나 오류 이름을 ‘실제(실행 결과)’ 칸에 쓴다.<span class="tg-where">표의 ‘실제(실행 결과)’ 칸</span><span class="tg-done">T마다 실제 칸이 채워졌다.</span></li>
+<li><span class="tg-stage">설명</span>예측과 달랐으면 ‘원인 한 줄’을 쓰고(같았으면 “같음”), 마지막 선택 칸에는 이런 일을 실제 코드 어디서 만날지 쓴다.<span class="tg-where">표의 ‘원인 한 줄’, ‘어디서 흔히 만나는가’ 칸</span><span class="tg-done">T마다 원인 칸이 채워졌다.</span></li>
+<li><span class="tg-stage">비교</span>정리 질문 1~4번에 답한다. 근거는 표의 값이다.<span class="tg-where">정리 질문 1~4번 칸</span><span class="tg-done">4칸이 채워졌다.</span></li>
+<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
+</ol>
+</div>
 <p>실습 코드 2부의 T1~T3(선택 T4)를 <b>실행하기 전에 예측 칸을 먼저</b> 채운다. T1-a는 출력된 순서, T1-b는 두 모드의 (넣은 횟수, 최대 큐 길이), T2는 n이 10배가 될 때의 시간 배수, T3는 두 너비의 결과, T4는 세 줄의 출력을 쓴다. 실행한 뒤 실제 칸을 쓰고, 예측과 달랐다면 원인을 한 줄로 쓴다. 마지막 칸(선택)에는 &ldquo;이런 일을 실제 코드 어디에서 만날 수 있는지&rdquo; 한 줄을 쓴다.</p><p class="hint"><b>쓰는 법</b> 예측·실제 칸은 아래 모양으로 쓴다. T1-a는 출력된 리스트(예: [X, Y]), T1-b는 두 방식(넣을 때 표시 / 꺼낼 때 표시) 각각 (넣은 횟수, 최대 큐 길이)처럼 숫자 두 개, T2는 &ldquo;list ○배, deque △배&rdquo;처럼 숫자 배수, T3는 너비 500과 1500 각각 &ldquo;정상&rdquo; 또는 오류 이름, T4는 세 줄의 출력을 / 로 구분해 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:70px">코드</th><th style="width:23%">예측(실행 전)</th><th style="width:23%">실제(실행 결과)</th><th style="width:23%">원인 한 줄(예측과 달랐을 때만 쓴다. 같았으면 &ldquo;같음&rdquo;)</th><th>어디서 흔히 만나는가(선택)</th></tr><tr><td class="lab">T1-a</td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r1.c1" data-label="A8 T1-a · 예측(실행 전)">['A', 'B', 'C', 'D', 'E'] (중복 없음)</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r1.c2" data-label="A8 T1-a · 실제(실행 결과)">['A', 'B', 'C', 'D', 'D', 'E', 'E'] (D, E가 두 번)</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r1.c3" data-label="A8 T1-a · 원인 한 줄">꺼낸 뒤 이미 방문했는지 검사하지 않고 꺼낼 때에야 visited에 넣어 같은 노드가 큐에 여러 번 들어간다.</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r1.c4" data-label="A8 T1-a · 어디서 흔히 만나는가">A2에서 큐에 D가 두 번 들어간 장면, 방문 표시를 늦춘 탐색</textarea></td></tr><tr><td class="lab">T1-b</td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r2.c1" data-label="A8 T1-b · 예측(실행 전)">두 모드 모두 (16, 4)로 같다</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r2.c2" data-label="A8 T1-b · 실제(실행 결과)">enqueue (16, 4)
 dequeue (25, 7)</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r2.c3" data-label="A8 T1-b · 원인 한 줄">넣을 때 표시하면 칸이 한 번만 들어가 16/4, 꺼낼 때 표시하면 같은 칸이 여러 번 들어가 25/7이다.</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r2.c4" data-label="A8 T1-b · 어디서 흔히 만나는가">격자·그래프 탐색의 방문 표시 위치</textarea></td></tr><tr><td class="lab">T2</td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r3.c1" data-label="A8 T2 · 예측(실행 전)">list도 deque도 약 10배</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r3.c2" data-label="A8 T2 · 실제(실행 결과)">list 약 140배, deque 약 10배(환경마다 다르다)</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r3.c3" data-label="A8 T2 · 원인 한 줄">pop(0)은 나머지 원소를 모두 당겨 한 번에 O(N)이고, deque.popleft()는 O(1)이다.</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r3.c4" data-label="A8 T2 · 어디서 흔히 만나는가">큐를 list로 흉내 낼 때</textarea></td></tr><tr><td class="lab">T3</td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r4.c1" data-label="A8 T3 · 예측(실행 전)">두 너비 모두 정상 완료</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r4.c2" data-label="A8 T3 · 실제(실행 결과)">500은 방문한 칸 500, 1500은 RecursionError: maximum recursion depth exceeded</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r4.c3" data-label="A8 T3 · 원인 한 줄">재귀 깊이는 한 갈래의 길이이고 기본 한계 1000을 1500이 넘는다.</textarea></td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r4.c4" data-label="A8 T3 · 어디서 흔히 만나는가">긴 입력의 재귀 DFS(연결 요소, 미로)</textarea></td></tr><tr><td class="lab">T4(선택)</td><td class="in-cell"><textarea class="in" rows="2" data-key="A8.pred.r5.c1" data-label="A8 T4(선택) · 예측(실행 전)">['A', 'B', 'D', 'C', 'E']가 세 줄 모두 같게 나온다</textarea></td><td class="in-cell"><textarea class="in" rows="3" data-key="A8.pred.r5.c2" data-label="A8 T4(선택) · 실제(실행 결과)">['A', 'B', 'D', 'C', 'E']
 ['A']
@@ -245,6 +274,15 @@ dequeue (25, 7)</textarea></td><td class="in-cell"><textarea class="in" rows="2"
 <section id="A9" class="sheet">
 <h2>A9 · DIRS 순서를 바꿔 DFS와 BFS 비교<small>2차시 · 9분 · 개인</small></h2>
 <p class="meta"><span>산출물: DIRS별 DFS/BFS 길이 표, 가설 확인 메모</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>방향 순서를 바꾸면 DFS가 처음 찾은 길과 BFS의 최단 거리는 각각 어떻게 달라지는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>실행하기 전에 24가지 순서 중 DFS 길이가 BFS 거리와 같아지는 순서가 몇 가지일지 숫자로 쓴다.<span class="tg-where">‘예측’ 칸</span><span class="tg-done">숫자 하나가 적혔다.</span></li>
+<li><span class="tg-stage">관찰</span>실습 코드 <a class="xlink" href="student_code_lab_part2.html#A9">2부 A9</a>의 실행 틀을 한 번 실행하고, 출력에서 같은 순서 2개와 다른 순서 2개를 골라 표 4줄에 옮긴다(없으면 “없음”).<span class="tg-where">DIRS 순서 표 4줄</span><span class="tg-done">4줄이 채워졌다(길이 칸에는 숫자만).</span></li>
+<li><span class="tg-stage">설명</span>1~3번 질문에 표의 값으로 답한다. 3번에서는 A4 가설을 확인 / 수정 / 반박 중 하나로 고른다. 4번은 선택이다.<span class="tg-where">1~3번 칸</span><span class="tg-done">3칸이 채워졌다.</span></li>
+<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
+</ol>
+</div>
 <p>실습 코드 2부 A9의 실행 틀을 한 번 실행하면 방향 순서 24가지(우·하·좌·상의 모든 나열)의 결과가 한꺼번에 출력된다. 방향 순서는 <code class="i">우하좌상</code>처럼 첫 글자 순서로 쓴다.</p><p class="qtext">실행하기 전에: 24가지 순서 중 DFS가 처음 찾은 길의 간선 수가 BFS 최단 거리와 같아지는 순서는 몇 가지일 것 같은가? 숫자를 쓴다.</p>
 <div class="ans-row"><span class="n">예측</span><input type="text" class="in" data-key="A9.pred.count" placeholder="숫자만(0~24)" data-label="A9 실행 전 예측 DFS 길이가 BFS 최단 거리와 같아지는 순서는 몇 가지인가" autocomplete="off" style="width:8em;display:inline-block" value="12"></div>
 <p>출력에서 DFS 길이가 BFS 최단 거리와 같은 순서 2개를 1·2번 줄에, 다른 순서 2개를 3·4번 줄에 옮겨 쓴다(해당하는 순서가 없으면 &ldquo;없음&rdquo;이라고 쓴다). 표 4줄만 쓰면 되고, 24가지를 모두 옮기지 않는다. 길이 칸에는 숫자만 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:52px">번호</th><th style="width:44%">DIRS 순서(옮겨 쓴 것)</th><th>DFS 길이</th><th>BFS 길이</th></tr><tr><td class="lab">1</td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r1.c1" placeholder="우하좌상 모양" data-label="A9 DIRS 실험 1 · 내가 정한 방향 순서" autocomplete="off" value="하 우 좌 상"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r1.c2" placeholder="숫자만" data-label="A9 DIRS 실험 1 · DFS가 처음 찾은 길의 간선 수" autocomplete="off" value="10"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r1.c3" placeholder="숫자만" data-label="A9 DIRS 실험 1 · BFS 최단 거리" autocomplete="off" value="10"></td></tr><tr><td class="lab">2</td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r2.c1" placeholder="우하좌상 모양" data-label="A9 DIRS 실험 2 · 내가 정한 방향 순서" autocomplete="off" value="하 우 상 좌"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r2.c2" placeholder="숫자만" data-label="A9 DIRS 실험 2 · DFS가 처음 찾은 길의 간선 수" autocomplete="off" value="10"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r2.c3" placeholder="숫자만" data-label="A9 DIRS 실험 2 · BFS 최단 거리" autocomplete="off" value="10"></td></tr><tr><td class="lab">3</td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r3.c1" placeholder="우하좌상 모양" data-label="A9 DIRS 실험 3 · 내가 정한 방향 순서" autocomplete="off" value="우 하 좌 상"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r3.c2" placeholder="숫자만" data-label="A9 DIRS 실험 3 · DFS가 처음 찾은 길의 간선 수" autocomplete="off" value="14"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r3.c3" placeholder="숫자만" data-label="A9 DIRS 실험 3 · BFS 최단 거리" autocomplete="off" value="10"></td></tr><tr><td class="lab">4</td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r4.c1" placeholder="우하좌상 모양" data-label="A9 DIRS 실험 4 · 내가 정한 방향 순서" autocomplete="off" value="좌 우 하 상"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r4.c2" placeholder="숫자만" data-label="A9 DIRS 실험 4 · DFS가 처음 찾은 길의 간선 수" autocomplete="off" value="14"></td><td class="in-cell"><input type="text" class="in" data-key="A9.dirs.r4.c3" placeholder="숫자만" data-label="A9 DIRS 실험 4 · BFS 최단 거리" autocomplete="off" value="10"></td></tr></table></div>

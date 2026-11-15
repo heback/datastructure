@@ -141,6 +141,15 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A11" class="sheet">
 <h2>A11 · 정렬 코드의 비교 횟수 예측과 측정<small>3차시 · 12분 · 개인</small></h2>
 <p class="meta"><span>산출물: 예측-실제 표(비교 횟수), RecursionError 관찰</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>병합 정렬과 첫 원소 피벗 퀵 정렬은 입력의 순서에 따라 비교 횟수가 어떻게 달라지는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>표의 [병합 예측], [퀵 예측]을 입력마다 쓴다. 마지막 입력(정렬된 2000개)의 결과도 예측한다.</li>
+<li><span class="tg-stage">관찰</span>실습 코드 4부 A11을 실행해 [실제] 칸에 쓴다. 숫자 대신 오류 이름이 나오면 그대로 쓴다.</li>
+<li><span class="tg-stage">비교</span>ARR8의 코드로 센 횟수를 쓰고 A4에서 손으로 구한 값과 같은지 고른다.</li>
+<li><span class="tg-stage">설명</span>관찰·정리 1~3번(4~5번은 선택)에 쓴다.</li>
+</ol>
+</div>
 <p>실습 코드 4부 A11의 두 정렬 코드로 비교 횟수를 잰다. 방식 가는 병합 정렬, 방식 나(첫 원소 피벗)는 퀵 정렬이다. 마지막 입력에서 나온 것이 숫자가 아니면 그대로 쓴다.</p><p class="hint"><b>쓰는 법</b> 칸마다 숫자만 쓴다(비교 1회는 코드가 센 비교 한 번이다). 예측은 실행하기 전에, 실제는 코드가 센 값을 쓴다. 예측이 틀려도 고치지 않는다. 숫자 대신 오류가 나오면 오류 이름을 그대로 쓴다. 코드를 실행하지 못한 칸은 &ldquo;모름&rdquo;이라고 쓴다.</p>
 <div class="scroll"><table class="fill"><tr><th style="width:22%">입력</th><th style="width:19%">병합 예측</th><th style="width:19%">병합 실제</th><th style="width:19%">퀵 예측</th><th>퀵 실제</th></tr><tr><td class="lab">섞은 200개</td><td class="in-cell"><input type="text" class="in" data-key="A11.s200.c1" data-label="A11 섞은 200개 병합 예측" autocomplete="off" value="1000쯤"></td><td class="in-cell"><input type="text" class="in" data-key="A11.s200.c2" data-label="A11 섞은 200개 병합 실제" autocomplete="off" value="1280"></td><td class="in-cell"><input type="text" class="in" data-key="A11.s200.c3" data-label="A11 섞은 200개 퀵 예측" autocomplete="off" value="1500쯤"></td><td class="in-cell"><input type="text" class="in" data-key="A11.s200.c4" data-label="A11 섞은 200개 퀵 실제" autocomplete="off" value="1562"></td></tr><tr><td class="lab">섞은 500개</td><td class="in-cell"><input type="text" class="in" data-key="A11.s500.c1" data-label="A11 섞은 500개 병합 예측" autocomplete="off" value="3000쯤"></td><td class="in-cell"><input type="text" class="in" data-key="A11.s500.c2" data-label="A11 섞은 500개 병합 실제" autocomplete="off" value="3851"></td><td class="in-cell"><input type="text" class="in" data-key="A11.s500.c3" data-label="A11 섞은 500개 퀵 예측" autocomplete="off" value="4000쯤"></td><td class="in-cell"><input type="text" class="in" data-key="A11.s500.c4" data-label="A11 섞은 500개 퀵 실제" autocomplete="off" value="4856"></td></tr><tr><td class="lab">섞은 1000개</td><td class="in-cell"><input type="text" class="in" data-key="A11.s1000.c1" data-label="A11 섞은 1000개 병합 예측" autocomplete="off" value="7000쯤"></td><td class="in-cell"><input type="text" class="in" data-key="A11.s1000.c2" data-label="A11 섞은 1000개 병합 실제" autocomplete="off" value="8715"></td><td class="in-cell"><input type="text" class="in" data-key="A11.s1000.c3" data-label="A11 섞은 1000개 퀵 예측" autocomplete="off" value="10000쯤"></td><td class="in-cell"><input type="text" class="in" data-key="A11.s1000.c4" data-label="A11 섞은 1000개 퀵 실제" autocomplete="off" value="12430"></td></tr><tr><td class="lab">정렬된 200개</td><td class="in-cell"><input type="text" class="in" data-key="A11.o200.c1" data-label="A11 정렬된 200개 병합 예측" autocomplete="off" value="700쯤"></td><td class="in-cell"><input type="text" class="in" data-key="A11.o200.c2" data-label="A11 정렬된 200개 병합 실제" autocomplete="off" value="732"></td><td class="in-cell"><input type="text" class="in" data-key="A11.o200.c3" data-label="A11 정렬된 200개 퀵 예측" autocomplete="off" value="1500쯤"></td><td class="in-cell"><input type="text" class="in" data-key="A11.o200.c4" data-label="A11 정렬된 200개 퀵 실제" autocomplete="off" value="19900"></td></tr><tr><td class="lab">정렬된 500개</td><td class="in-cell"><input type="text" class="in" data-key="A11.o500.c1" data-label="A11 정렬된 500개 병합 예측" autocomplete="off" value="2000쯤"></td><td class="in-cell"><input type="text" class="in" data-key="A11.o500.c2" data-label="A11 정렬된 500개 병합 실제" autocomplete="off" value="2216"></td><td class="in-cell"><input type="text" class="in" data-key="A11.o500.c3" data-label="A11 정렬된 500개 퀵 예측" autocomplete="off" value="4000쯤"></td><td class="in-cell"><input type="text" class="in" data-key="A11.o500.c4" data-label="A11 정렬된 500개 퀵 실제" autocomplete="off" value="124750"></td></tr><tr><td class="lab">정렬된 2000개</td><td class="in-cell"><input type="text" class="in" data-key="A11.o2000.c1" data-label="A11 정렬된 2000개 병합 예측" autocomplete="off" value="10000쯤"></td><td class="in-cell"><input type="text" class="in" data-key="A11.o2000.c2" data-label="A11 정렬된 2000개 병합 실제" autocomplete="off" value="10864"></td><td class="in-cell"><input type="text" class="in" data-key="A11.o2000.c3" data-label="A11 정렬된 2000개 퀵 예측" autocomplete="off" value="오류가 날 것 같다"></td><td class="in-cell"><input type="text" class="in" data-key="A11.o2000.c4" data-label="A11 정렬된 2000개 퀵 실제" autocomplete="off" value="RecursionError"></td></tr></table></div>
 <div class="ans-row"><span class="n">ARR8</span><span>코드로 센 비교 횟수 병합 </span><input type="text" class="in" data-key="A11.arr8.merge" placeholder="숫자" data-label="A11 ARR8 코드의 병합 비교 횟수" autocomplete="off" style="width:6em;display:inline-block" value="17"><span> 퀵 </span><input type="text" class="in" data-key="A11.arr8.quick" placeholder="숫자" data-label="A11 ARR8 코드의 퀵 비교 횟수" autocomplete="off" style="width:6em;display:inline-block" value="18"><span> A4에서 손으로 구한 값과 같은가 </span><span class="rg" data-key="A11.arr8.same" data-type="radio" data-label="A11 ARR8 코드와 A4에서 손으로 구한 값이 같은가"><label><input type="radio" name="r_A11_arr8_same" value="같다" checked> 같다</label><label><input type="radio" name="r_A11_arr8_same" value="다르다"> 다르다</label></span></div>
@@ -170,6 +179,13 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A12" class="sheet">
 <h2>A12 · 일반화 초안 카드 (개인 메모)<small>3차시 · 3분 · 개인</small></h2>
 <p class="meta"><span>산출물: 일반화 초안 1문장 · 개인 메모이며 공개하지 않는다</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>이번 주 활동에서 내 생각이 가장 크게 바뀐 곳을 &ldquo;개념 + 개념 + 관계&rdquo;의 한 문장으로 쓰면 무엇인가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">일반화</span>주제 네 가지 가운데 내 생각이 가장 크게 바뀐 하나를 골라 초안 한 문장을 쓴다.</li>
+<li><span class="tg-stage">설명</span>문장에서 &lsquo;SORTED&rsquo;나 &lsquo;사전&rsquo; 같은 한 예시의 이름을 지워도 말이 되는지 확인하고, 지워도 되면 다시 쓴다.</li>
+</ol>
+</div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 일반화 문장 쓰는 법</span>
 <ul>
 <li>틀: <b>개념 ____ 와(과) 개념 ____ 는 ____ 한 관계가 있다.</b> 사실 하나(&ldquo;SORTED에서 23을 찾았다&rdquo;)가 아니라, 다른 문제에도 통하는 말로 쓴다.</li>
@@ -187,9 +203,17 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A13" class="sheet">
 <h2>A13 · 일반화 정리와 구별 기준표<small>3차시 · 12분 · 개인</small></h2>
 <p class="meta"><span>산출물: 일반화 문장, 구별 기준표, 입장 카드, 수정 이력</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내 일반화 문장은 새 상황에서도 성립하는가? 정렬하고 이진 탐색을 쓰는 것이 이득이 아닌 때는 언제인가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">일반화</span>A12 초안을 다시 읽고 겹치는 개념과 빠진 조건을 찾아 G1~G3 칸(G4는 선택)에 문장으로 다듬는다.</li>
+<li><span class="tg-stage">적용</span>구별 기준표에 내가 만든 새 상황을 쓰고 이진 탐색·bisect를 쓸 수 있는지 판단한다.</li>
+<li><span class="tg-stage">비교</span>입장 카드 1·2 중 한 장을 골라 내 입장과 근거를 쓴다.</li>
+<li><span class="tg-stage">비교</span>먼저 쓴 뒤 초록색 확인 상자의 정제 문장과 대조해 수정 이력에 고친 곳을 쓴다.</li>
+</ol>
+</div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 활동 순서, 기준표와 입장 카드 쓰는 법</span>
 <ul>
-<li>순서: ① A12 초안을 다시 읽고, 겹치는 개념과 빠진 조건을 찾아 G1~G4 칸에 문장으로 다듬는다. ② 구별 기준표를 채운다. ③ 입장 카드 한 장을 쓴다. ④ 아래 초록색 확인 상자의 정제 문장과 대조해 수정 이력을 쓴다.</li>
 <li>다듬을 때 던질 질문: &ldquo;문장에서 &lsquo;정렬된 숫자 배열&rsquo;이라는 말을 지울 수 있는가? 질의가 1번뿐이면 쓰겠는가? 값이 여럿이거나 없으면? 정렬되어 있지 않으면?&rdquo;</li>
 <li>기준표의 판단: <b>가능</b>은 전제를 이미 만족할 때, <b>불가</b>는 전제가 깨져 있을 때, <b>조건부</b>는 추가 조치나 조건이 필요할 때이다. 상황은 내가 새로 만든다. 근거는 정렬 전제, 질의 횟수, 경계 정의 가운데 하나를 들어 쓴다.</li>
 <li>입장 카드: 입장(동의·반대·조건부)을 고르고, 이유와 반례 상황 한 줄을 쓴다.</li>
@@ -225,6 +249,16 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A14" class="sheet">
 <h2>A14 · 과제 마무리 점검표와 전이 기록<small>3차시 · 14분 · 개인</small></h2>
 <p class="meta"><span>산출물: 점검 결과, 밧줄 자르기 기록</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내 과제 코드는 새 입력에서도 통하는가? 범위를 줄이는 생각은 정렬된 배열이 없는 밧줄 문제에도 쓰이는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">도구 확인</span>실습 코드 4부 A14 점검 결과를 점검표에 표시하고, 고친 곳이 있으면 쓴다.</li>
+<li><span class="tg-stage">예측</span>밧줄 L = 5, 10, 20의 조각 수를 손으로 구한다. (선택) L을 키우면 &ldquo;9개 이상&rdquo;의 참·거짓이 어떤 순서로 늘어설지 쓴다.</li>
+<li><span class="tg-stage">관찰</span>밧줄 코드의 결과(가장 긴 L, count_pieces 호출 횟수)를 쓴다.</li>
+<li><span class="tg-stage">설명</span>관찰·정리 1~3번(4번은 선택)에 쓴다.</li>
+<li><span class="tg-stage">비교</span>먼저 쓴 뒤 초록색 확인 상자를 연다.</li>
+</ol>
+</div>
 <p>실습 코드 4부 A14 점검을 실행한 결과를 표시한다.</p>
 <p><label class="ck"><input type="checkbox" data-key="A14.chk.eq" data-label="A14 점검: count_equal이 점검을 통과했다" checked> count_equal 점검을 통과했다</label><label class="ck"><input type="checkbox" data-key="A14.chk.rg" data-label="A14 점검: count_in_range가 점검을 통과했다" checked> count_in_range 점검을 통과했다</label><label class="ck"><input type="checkbox" data-key="A14.chk.cl" data-label="A14 점검: closest_value가 점검을 통과했다" checked> closest_value 점검을 통과했다(실행하지 못했으면 비워 둔다)</label><label class="ck"><input type="checkbox" data-key="A14.chk.nofix" data-label="A14 점검: 코드를 고치지 않고 새 입력에서 통과했다" checked> 코드를 고치지 않고 새 입력에서 통과했다</label></p>
 <p>점검에서 실패했거나 고쳐야 했던 곳이 있다면 어느 함수의 어느 부분이었는지, 어떻게 고쳤는지 쓴다. 없었다면 &ldquo;없었다&rdquo;라고 쓴다.</p><p class="hint"><b>쓰는 법</b> 있으면 &ldquo;함수 이름, 고친 부분, 고친 방법&rdquo;을 한두 문장으로 쓴다. 없으면 &ldquo;없었다&rdquo;만 쓴다.</p>
@@ -262,6 +296,14 @@ k = 9                        # 필요한 조각 수
 <section id="A16" class="sheet">
 <h2>A16 · 오개념 점검과 다음 주<small>3차시 · 3분 · 개인</small></h2>
 <p class="meta"><span>산출물: 오개념 점검 판단과 이유, 14주차 도구 목록</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내가 가진 오개념은 무엇이며, 14주차에 쓸 수 있는 도구는 무엇인가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">설명</span>오개념 점검 표의 말마다 맞다·틀리다·조건에 따라 다르다를 고르고 이유를 쓴다.</li>
+<li><span class="tg-stage">비교</span>먼저 쓴 뒤 초록색 확인 상자를 열어 견준다.</li>
+<li><span class="tg-stage">과제 착수</span>14주차에서 쓸 수 있는 도구를 지금까지 배운 것에서 골라 목록으로 쓴다.</li>
+</ol>
+</div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 오개념 점검 쓰는 법</span>
 <ul>
 <li>오개념 점검: &ldquo;맞다 / 틀리다 / 조건에 따라 다르다&rdquo; 중 하나를 고르고, 이유에는 활동에서 직접 본 값(T1 결과, A11 표 등)을 근거로 쓴다.</li>

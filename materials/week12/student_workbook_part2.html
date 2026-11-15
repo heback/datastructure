@@ -141,6 +141,16 @@ table.fill td.in-cell{padding:3px;height:auto}
 <section id="A7" class="sheet">
 <h2>A7 · lower_bound와 upper_bound 직접 만들기: 예측 메모<small>2차시 · 14분 · 개인</small></h2>
 <p class="meta"><span>산출물: DUP 예측-실제 메모, 코드를 만들며 든 생각</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>처음으로 x 이상이 나오는 자리를 찾는 코드는 후보 범위를 어떤 조건으로 줄여야 하는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>표의 x마다 lower bound와 upper bound를 눈으로 보고 [예측] 두 칸에 쓴다.</li>
+<li><span class="tg-stage">설명</span>[코드를 쓰기 전에] 칸에 (가)(나)(다)를 쓴다. 이 칸은 실습 코드 1부 A7에서 코드를 쓰기 전에 채운다.</li>
+<li><span class="tg-stage">시도</span>실습 코드 1부 A7에서 두 함수를 만들어 점검을 통과시킨다.</li>
+<li><span class="tg-stage">관찰</span>실행한 실제 값을 [실제] 두 칸에 쓰고, 관찰·정리 1~4번에 쓴다.</li>
+<li><span class="tg-stage">비교</span>먼저 쓴 뒤 초록색 확인 상자를 연다.</li>
+</ol>
+</div>
 <div class="concept"><b class="h">약속 · 표기</b><p>후보 범위 [lo, hi)는 인덱스 lo는 포함하고 hi는 포함하지 않는 반열린 구간이다(처음에는 lo = 0, hi = len(a)). lower bound는 처음으로 x 이상이 나오는 자리, upper bound는 처음으로 x 초과가 나오는 자리이며 둘 다 인덱스이다. 구간 개수를 말할 때의 구간 [lo, hi]는 양끝을 포함한다(코드의 슬라이스 표기와 헷갈리지 않는다).</p></div>
 <pre class="diagram">DUP = [1, 3, 3, 3, 5, 7, 7, 9, 12, 12, 12, 12, 15]
 인덱스  0  1  2  3  4  5  6  7  8   9  10  11  12</pre>
@@ -176,6 +186,15 @@ upper_bound: (0,13,6,7) lo=7 → (7,13,10,12) lo=11 → (11,13,12,15) hi=12 → 
 <section id="A8" class="sheet">
 <h2>A8 · 모듈 bisect와 내 함수 비교하기<small>2차시 · 12분 · 개인</small></h2>
 <p class="meta"><span>산출물: 예측-실제 표, A7 대조 결과</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내가 만든 두 함수는 bisect 모듈과 같은 값을 돌려주는가? x가 없을 때는 어떤가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>표의 x마다 bisect_left와 bisect_right를 예측해 쓴다.</li>
+<li><span class="tg-stage">관찰</span>실습 코드 2부 A8을 실행해 실제 값을 쓰고, right − left는 직접 계산해 쓴다.</li>
+<li><span class="tg-stage">비교</span>A7 두 함수와 값이 모두 같았는지 [대조]를 고른다.</li>
+<li><span class="tg-stage">설명</span>관찰·정리 1~4번에 쓴다.</li>
+</ol>
+</div>
 <pre class="diagram">DUP = [1, 3, 3, 3, 5, 7, 7, 9, 12, 12, 12, 12, 15]
 인덱스  0  1  2  3  4  5  6  7  8   9  10  11  12</pre>
 <p>파이썬의 <code class="i">bisect</code> 모듈이 주는 <code class="i">bisect_left</code>, <code class="i">bisect_right</code>를 DUP에서 실행한다. 예측을 먼저 적고, 실행한 값을 적은 뒤, 마지막 열 <b>right&minus;left</b>는 실제 값에서 직접 계산해 적는다.</p><p class="hint"><b>쓰는 법</b> 다섯 칸 모두 숫자만 쓴다. left·right는 인덱스(0부터)이다. right &minus; left는 예측 칸이 아니라 <b>실제</b> left·right로 직접 빼서 쓴다. x가 DUP에 없어도 값을 쓴다(비우지 않는다).</p>
@@ -203,10 +222,19 @@ upper_bound: (0,13,6,7) lo=7 → (7,13,10,12) lo=11 → (11,13,12,15) hi=12 → 
 <section id="A9" class="sheet">
 <h2>A9 · 구간 개수 세기<small>2차시 · 12분 · 개인</small></h2>
 <p class="meta"><span>산출물: 예측-실제 표, lo&gt;hi 처리, 틀린 식의 반례 1개</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>구간 [lo, hi]의 개수를 경계 두 개로 구하려면 어느 경계를 써야 하며, 같은 경계를 두 번 쓰면 어디서 틀리는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>표의 구간마다 개수를 눈으로 세어 [예측 개수]에 쓴다.</li>
+<li><span class="tg-stage">관찰</span>실습 코드 2부 A9에서 ⑧⑨를 채우고 ⑪은 pass로 둔 채 실행해 [실제 개수]를 쓴다. [7, 3]을 실행해 [처음] 값을 쓴 뒤 ⑪을 채워 다시 실행하고 [고친 뒤] 값을 쓴다.</li>
+<li><span class="tg-stage">비교</span>&lsquo;틀린 식의 반례 찾기&rsquo;에서 틀리는 구간 하나를 찾고 빠진 원소를 쓴다.</li>
+<li><span class="tg-stage">설명</span>관찰·정리 1~2번에 쓴다.</li>
+<li><span class="tg-stage">과제 착수</span>closest_value를 위한 생각 칸에 코드 없이 생각을 쓴다.</li>
+</ol>
+</div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 활동 방법과 낱말</span>
 <ul>
 <li><b>구간 [lo, hi]</b>는 값이 lo 이상 hi 이하인 원소를 뜻한다. lo와 hi는 값이고 인덱스가 아니며, hi도 포함한다. 인덱스에서 hi를 포함하지 않는 후보 범위 [lo, hi)와 다르다.</li>
-<li>순서: ① 표의 예측을 눈으로 세어 쓴다. ② 코드 2부에서 ⑧⑨를 채우고 ⑪은 pass로 둔 채 실행해 실제 값을 쓴다. ③ [7, 3]을 실행하고 값을 쓴 뒤 ⑪을 채워 다시 실행한다. ④ 아래 &lsquo;틀린 식의 반례 찾기&rsquo;의 식을 코드로 써서 반례를 찾는다.</li>
 <li>생각의 실마리: bisect_left(DUP, x)는 처음 x 이상 자리, bisect_right(DUP, x)는 처음 x 초과 자리이다. 이 두 자리의 차 right − left는 무엇을 세어 주는가? [4, 12]에서 12는 몇 개인가? 그 12까지 세려면 어디까지 세어야 하는가?</li>
 </ul>
 </div>
@@ -253,6 +281,15 @@ upper_bound: (0,13,6,7) lo=7 → (7,13,10,12) lo=11 → (11,13,12,15) hi=12 → 
 <section id="A10" class="sheet">
 <h2>A10 · 함정 탐색: 예측하고 실행하기<small>2차시 · 12분 · 개인</small></h2>
 <p class="meta"><span>산출물: 예측-실제 표, 함정별 원인 한 줄</span></p>
+<div class="task-guide">
+<p class="tg-q"><span class="tg-k">이 활동의 질문</span>정렬되지 않았거나 경계를 잘못 쓴 코드는 어떤 방식으로 틀리는가? 오류 메시지가 나는가?</p>
+<ol class="tg-steps">
+<li><span class="tg-stage">예측</span>실습 코드 3부 T1~T3(필수), T4(선택)를 실행하기 전에 [예측] 칸에 쓴다.</li>
+<li><span class="tg-stage">관찰</span>실행한 뒤 [실제] 칸에 쓰고, T2는 시간 비교 칸도 채운다.</li>
+<li><span class="tg-stage">설명</span>함정마다 원인 한 줄을 쓰고, 관찰·정리 1~4번에 쓴다.</li>
+<li><span class="tg-stage">비교</span>먼저 쓴 뒤 초록색 확인 상자를 연다.</li>
+</ol>
+</div>
 <div class="learn-box"><span class="lb-title">학습 내용 · 예측·실제 표를 쓰는 법과 시간 비율 읽기</span>
 <ul>
 <li>예측 칸에는 &ldquo;오류가 나는가(어떤 오류인가), 나지 않으면 값이 무엇인가&rdquo;를 문장으로 쓴다. 실제 칸에는 출력 그대로 쓴다. 틀린 예측을 고치지 않는다.</li>
