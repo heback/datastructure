@@ -242,6 +242,17 @@ function openExamples(ed){
 
 /* ---------- 코드 편집기 ---------- */
 var D=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,"value");
+/* data-id 로 코드 원문을 찾는다. 여러 개는 빈칸으로 구분하고 빈 줄 하나로 이어 붙인다.
+   원문은 <script type="text/plain" data-id> 또는 <pre><code data-id> 어디에 있어도 된다. */
+function srcText(ids){
+  var out=[];
+  String(ids||"").split(/\s+/).forEach(function(id){
+    if(!id)return;
+    var el=document.querySelector('[data-id="'+id+'"]');
+    if(el)out.push(el.textContent.replace(/^\n+/,"").replace(/\s+$/,""));
+  });
+  return out.length?out.join("\n\n")+"\n":"";
+}
 function buildEditor(ta){
   var label=ta.closest("label"),title="";
   var host=label||ta;
@@ -256,10 +267,19 @@ function buildEditor(ta){
   var bPrev=mk("앞 쪽 코드 불러오기");bPrev.title="같은 주차의 다른 쪽에서 성공적으로 실행한 코드를 이 쪽의 파이썬 환경에 먼저 실행해 둔다";
   var bRst=mk("실행 환경 초기화");bRst.title="앞에서 실행한 정의(함수·변수)를 모두 지운다";
   var edId=ta.getAttribute("data-key")||("ed"+q("textarea.code").indexOf(ta));
+  /* 시작 코드: 편집기가 비어 있으면 이 코드로 채운다. 손대지 않은 동안에는 값이 빈 것으로 읽혀 저장·제출에 들어가지 않는다 */
+  var starter=ta.hasAttribute("data-starter")?srcText(ta.getAttribute("data-starter")):"";
+  /* data-starter-save: 실행만 해 보는 편집기. 손대지 않아도 시작 코드가 그대로 저장·제출된다 */
+  var keepStarter=ta.hasAttribute("data-starter-save");
+  var checkSrc=ta.hasAttribute("data-check")?srcText(ta.getAttribute("data-check")):"";
+  var bChk=null,bInit=null;
   bar.appendChild(ttl);
-  if(!ta.hasAttribute("data-noex"))bar.appendChild(bEx);
-  if(!ta.hasAttribute("data-noprev"))bar.appendChild(bPrev);
-  bar.appendChild(bRun);bar.appendChild(bRst);
+  if(!ta.hasAttribute("data-noex")&&!starter)bar.appendChild(bEx);
+  if(!ta.hasAttribute("data-noprev")&&!(starter&&!ta.hasAttribute("data-prev")))bar.appendChild(bPrev);
+  bar.appendChild(bRun);
+  if(checkSrc){bChk=mk("✔ 점검");bChk.classList.add("run","chk");bChk.title="내 코드를 실행한 뒤 점검 코드로 확인한다";bar.appendChild(bChk);}
+  if(starter){bInit=mk("처음 코드로");bInit.title="편집기를 처음 주어진 코드로 되돌린다";bar.appendChild(bInit);}
+  bar.appendChild(bRst);
   var area=document.createElement("div");area.className="ck-area";
   var hl=document.createElement("pre");hl.className="ck-hl";hl.setAttribute("aria-hidden","true");
   var hc=document.createElement("code");hl.appendChild(hc);
@@ -282,7 +302,11 @@ function buildEditor(ta){
     if(n!==gutN){var t=[];for(var i=1;i<=n;i++)t.push(i);gut.textContent=t.join("\n");gutN=n;}
   }
   function sync(){hl.scrollTop=ta.scrollTop;hl.scrollLeft=ta.scrollLeft;gut.scrollTop=ta.scrollTop;}
-  Object.defineProperty(ta,"value",{get:function(){return D.get.call(ta);},set:function(v){D.set.call(ta,v);render();},configurable:true});
+  function raw(){return D.get.call(ta);}
+  Object.defineProperty(ta,"value",{
+    get:function(){var v=raw();return (starter&&!keepStarter&&v===starter)?"":v;},
+    set:function(v){D.set.call(ta,(starter&&(v==null||v===""))?starter:v);render();},configurable:true});
+  if(starter&&raw()==="")D.set.call(ta,starter);
   ta.addEventListener("input",render);
   ta.addEventListener("scroll",sync);
   render();
@@ -290,9 +314,9 @@ function buildEditor(ta){
 
   /* Tab: 4칸 들여쓰기, Shift+Tab: 내어쓰기. 여러 줄을 고르면 고른 줄 전체에 적용한다(Esc 후 Tab으로 다음 칸 이동) */
   function put(text){
-    var before=ta.value,a=ta.selectionStart,b=ta.selectionEnd;
+    var before=raw(),a=ta.selectionStart,b=ta.selectionEnd;
     try{document.execCommand("insertText",false,text);}catch(_){}
-    if(ta.value===before)ta.setRangeText(text,a,b,"end");
+    if(raw()===before)ta.setRangeText(text,a,b,"end");
   }
   function tabKey(e){
     var v=ta.value,s=ta.selectionStart,en=ta.selectionEnd;
@@ -354,8 +378,8 @@ function buildEditor(ta){
   bRst.addEventListener("click",function(){
     resetWorker();clearPageRuns();op.textContent="";out.hidden=false;ol.textContent="실행 환경을 초기화했다. 다음 실행부터 새 환경에서 시작한다.";op.className="";op.textContent="";
   });
-  bRun.addEventListener("click",function(){
-    var code=ta.value;
+  function go(tail){
+    var code=raw();
     if(!code.trim()){out.hidden=false;ol.textContent="실행";op.className="err";op.textContent="코드가 비어 있다.";return;}
     out.hidden=false;op.className="";op.textContent="";
     var ui={
@@ -363,7 +387,7 @@ function buildEditor(ta){
       partial:function(t){op.textContent=t;},
       finish:function(kind,text,extra){
         busyAll(false);
-        if(kind==="ok"){ol.textContent="실행 완료";op.className="ok";op.textContent=text||"(출력 없음. 테스트가 모두 통과했다면 print 결과가 없을 수 있다.)";}
+        if(kind==="ok"){ol.textContent=tail?"점검 완료":"실행 완료";op.className="ok";op.textContent=text||"(출력 없음. 결과를 보려면 print를 쓴다.)";}
         else if(kind==="timeout"){ol.textContent="시간 초과";op.className="err";op.textContent=(text||"")+"\n"+(TIMEOUT_MS/1000)+"초 안에 끝나지 않아 멈췄다. 무한 반복이나 종료 조건(기저 조건) 누락이 없는지 확인한다. 실행 환경은 초기화되었다. 다음 실행 때 이 쪽에서 성공했던 코드를 다시 실행해 복원한다.";autoRestore=true;}
         else{ol.textContent="오류";op.className="err";op.textContent=(text?text+"\n":"")+extra;}
       }
@@ -378,7 +402,13 @@ function buildEditor(ta){
       fin(kind,text,extra);
       if(kind==="ok"&&wasRestore){op.textContent=(op.textContent?op.textContent+"\n":"")+"(시간 초과로 지워진 환경을 이 쪽에서 성공했던 코드로 복원한 뒤 실행했다.)";}
     };
-    runCode(code,ui,pre);
+    runCode(tail?code+"\n\n"+tail:code,ui,pre);
+  }
+  bRun.addEventListener("click",function(){go("");});
+  if(bChk)bChk.addEventListener("click",function(){go(checkSrc);});
+  if(bInit)bInit.addEventListener("click",function(){
+    if(raw()!==starter&&!window.confirm("편집기에 쓴 내용을 지우고 처음 주어진 코드로 되돌릴까?"))return;
+    ed.set("");
   });
   return ed;
 }

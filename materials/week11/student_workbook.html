@@ -125,6 +125,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <link rel="stylesheet" href="../assets/topnav.css">
 <link rel="stylesheet" href="../assets/theme.css">
 <link rel="stylesheet" href="../assets/sheettabs.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script src="../assets/lesson.js" defer></script>
 <script src="../assets/topnav.js" defer></script>
 <link rel="stylesheet" href="../assets/chatkit.css">
 <script src="../assets/chatkit.js" defer></script>
@@ -134,7 +136,7 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; workbook.week(11)  # 학생용 · 탐구 활동지 A1~A5</div>
   <h1>11주차 탐구 활동지 1부 — 이웃으로 계속 나아가며 돌아보기 (A1~A5)</h1>
-  <p class="lead">핵심질문: 미로에서 출구를 찾거나 특정 구역이 얼마나 연결되어 있는지 확인할 때, 어떤 순서로 탐색하는 것이 정답일까? 각 활동에서 <b>관찰 → 정리 → 일반화 초안</b> 순서로 직접 기록한다. 확인할 내용은 활동을 마친 뒤 여는 초록색 상자에만 있다. 빈칸은 스스로 채운다.</p><p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
+  <p class="lead">손으로 따라 하며 이웃을 돌아보는 순서 규칙을 찾아 본다. 1차시(A1~A5)에 쓴다. 확인 상자는 활동 끝에 닫혀 있으니 쓴 뒤에 연다.</p><p class="meta"><span>제출하지 않고 스스로 학습하는 활동지이다. 쓴 내용은 이 브라우저에 자동으로 보관된다.</span></p>
 </header>
 <nav><a href="#theory">이론</a><a href="#A1">A1</a><a href="#A2">A2</a><a href="#A3">A3</a><a href="#A4">A4</a><a href="#A5">A5</a><a href="index.html">목록</a></nav>
 
@@ -182,48 +184,55 @@ for dr, dc in DIRS:
 <p class="hint"><b>참고</b> 위 예는 읽기용이다. 이웃을 도는 순서 규칙은 코드에 없다. 그 규칙은 활동에서 직접 만든다.</p>
 </div>
 </section>
-<section id="A1" class="sheet">
+<section id="A1" class="sheet lesson">
 <h2>A1 · 이웃으로 계속 나아가기: 어느 이웃부터 갈까<small>1차시 · 7분 · 개인</small></h2>
-<p class="meta"><span>산출물: 순서 규칙 1가지 메모와 약점</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>미로·소문·위성지도 세 문제를 모두 풀려면, 지금 있는 곳에서 다음에 어디를 볼지 어떤 규칙으로 정해야 하는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">관찰</span>세 사례(미로·소문·위성지도)를 읽고 10주차의 <code class="i">neighbors</code>를 떠올린다.<span class="tg-done">세 사례에서 “이웃으로 계속 나아간다”는 공통점을 말할 수 있다.</span></li>
-<li><span class="tg-stage">시도</span>1~3번 칸에 갈림길에서의 선택, 이미 지나온 곳을 또 가면 생기는 일, 소문의 “몇 단계”가 센 것을 쓴다.<span class="tg-where">1~3번 칸</span><span class="tg-done">칸 3개가 채워졌다.</span></li>
-<li><span class="tg-stage">설명</span>4번에 세 사례를 모두 풀 수 있는 “다음에 어디를 볼지” 규칙을, 5번에 그 규칙의 약점을 쓴다. 쓴 뒤 4번을 다시 읽고 5번의 약점이 그 규칙에서 정말 생기는지 따진다.<span class="tg-where">4번·5번 칸</span><span class="tg-done">두 칸이 채워졌다(BFS·DFS 이름은 몰라도 된다).</span></li>
-<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
-</ol>
+<p class="lead">미로에서 출구를 찾고, 소문이 몇 단계에 닿는지 세고, 위성지도에서 땅 덩어리를 센다. 셋 모두 이웃으로 계속 나아가는 문제이다.</p>
+<div class="step">
+<h3>작은 미로 보기</h3>
+<p>입구에서 출구까지 가는 길을 찾는다. 길이 셋 이상 만나는 곳이 갈림길이다.</p>
+<pre class="fig">입구 ─ P ─ Q ─ 출구
+       │
+       R  (막힌 길)</pre>
+<div class="quiz" data-answer="2">
+<p class="q">그림에서 갈림길은 어디일까?</p>
+<div class="opts"><button type="button" data-hint="입구에는 길이 하나뿐이다.">입구</button><button type="button">P</button><button type="button" data-hint="Q에는 몇 개의 길이 만나는지 세어 보자.">Q</button></div>
+<p class="why">P에는 입구, Q, R 세 길이 만난다.</p>
 </div>
-<p>세 사례 모두 &ldquo;이웃으로 계속 나아가기&rdquo;가 들어 있다. 10주차에서 만든 그래프와 <code class="i">neighbors</code>를 떠올려 본다. 이 구조 위에서 모든 노드를 어떤 순서로 돌 수 있을까?</p>
-<div class="grid">
-<div class="card"><b class="h">사례 가 · 미로</b><p>미로에서 입구부터 출구까지 가는 길을 찾는다. 갈림길을 만나면 한쪽을 골라야 한다.</p></div>
-<div class="card"><b class="h">사례 나 · 소문</b><p>소문이 친구에게서 친구에게 퍼진다. 소문이 &ldquo;몇 단계 만에&rdquo; 닿는지 알고 싶다.</p></div>
-<div class="card"><b class="h">사례 다 · 위성지도</b><p>위성지도에서 땅이 이어진 덩어리가 모두 몇 개인지 세고 싶다.</p></div>
 </div>
-<div class="note"><b>오늘의 질문</b> 미로에서 출구를 찾거나 특정 구역이 얼마나 연결되어 있는지 확인할 때, 어떤 순서로 탐색하는 것이 정답일까?</div>
-<div class="learn-box"><span class="lb-title">학습 내용 · 오늘의 목표와 이 활동에서 할 일</span>
-<ul>
-<li><b>성취기준 [12자구04-01]</b>: 문제의 목적(최단 거리 보장 또는 연결 요소 추적)에 따라 BFS와 DFS를 구별하여 2차원 공간 탐색 문제에 적용한다. 이름은 몰라도 된다. 규칙의 내용은 오늘 활동에서 직접 만든다. 1차시는 손으로 탐색해 비교하고, 2차시는 코드·미로·함정, 3차시는 섬의 개수·일반화·전이를 한다.</li>
-<li><b>떠올릴 것</b>: 그래프는 노드(점)와 간선(점을 잇는 선)이고, 간선으로 바로 이어진 노드가 이웃이다(10주차 <code class="i">neighbors(g, u)</code>). 스택은 가장 나중에 넣은 것을 먼저 꺼내고, 큐는 가장 먼저 넣은 것을 먼저 꺼낸다(5주차).</li>
-<li><b>하는 방법</b>: 세 사례를 읽고 1~3번은 혼자 쓴다. 4번에는 세 사례를 모두 풀 수 있도록 &ldquo;지금 있는 곳에서 다음에 어디를 볼지 정하는 방법&rdquo;을 규칙으로 쓰고, 5번에는 그 규칙을 따를 때 곤란해지는 상황을 쓴다. 4번에 쓴 규칙을 다시 읽고 5번의 약점이 그 규칙에서 정말 생기는지 스스로 따져 본다. BFS·DFS 같은 이름이나 스택·큐라는 말이 없어도 된다.</li>
-</ul></div>
-<h3>관찰·정리</h3>
-<p>미로에서 갈림길을 만나면 어느 쪽으로 갈 것인가? 막히면 어떻게 하겠는가?</p>
-<p class="hint"><b>쓰는 법</b> 2문장. 첫 문장은 갈림길에서 어느 쪽을 고르는 기준, 둘째 문장은 막혔을 때 하는 행동이다.</p>
-<div class="ans-row"><span class="n">1</span><textarea class="in" rows="3" data-key="A1.fork" data-label="A1 갈림길에서 어느 쪽으로 가고 막히면 어떻게 하는가">갈림길에서는 한쪽을 골라 끝까지 가 보고, 막히면 갈림길로 되돌아와 다른 쪽으로 간다. 막히면 가장 가까운 갈림길로 돌아간다.</textarea></div>
-<p>이미 지나온 곳을 또 가면 무슨 일이 생기는가?</p>
-<p class="hint"><b>쓰는 법</b> 1~2문장. 같은 곳을 또 갔을 때 생기는 결과를 쓴다.</p>
-<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A1.again" data-label="A1 이미 지나온 곳을 또 가면 생기는 일">이미 지나온 곳을 또 가면 같은 곳을 빙빙 돌아 끝나지 않거나 시간을 낭비한다. 그래서 가 본 곳을 적어 둔다.</textarea></div>
-<p>소문이 &ldquo;몇 단계&rdquo;라는 말은 무엇을 센 것인가?</p>
-<p class="hint"><b>쓰는 법</b> 1문장. 소문에서 &ldquo;1단계&rdquo;가 늘어난다는 것이 어떤 일 하나가 늘어난다는 뜻인지 쓴다.</p>
-<div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A1.steps" data-label="A1 몇 단계는 무엇을 센 것인가">소문이 전해진 횟수, 즉 시작한 사람에서 그 사람까지 지나는 친구 관계(간선)의 수를 센 것이다.</textarea></div>
-<p>4번에는 세 사례를 모두 풀 수 있는 &ldquo;이웃을 돌아보는 순서 규칙&rdquo; 1가지를, 5번에는 그 규칙의 약점을 내 말로 쓴다.</p>
-<p class="hint"><b>쓰는 법</b> 4번: 2~3문장. &ldquo;지금 있는 곳에서 다음에 어디를 볼지&rdquo; 정하는 방법을 쓴다. BFS·DFS 같은 이름은 쓰지 않아도 된다.</p>
-<div class="ans-row"><span class="n">4</span><textarea class="in" rows="3" data-key="A1.rule" data-label="A1 내 순서 규칙 1가지">가까운 이웃부터 한 칸씩 넓혀 가며 보고, 이미 본 곳은 다시 가지 않는다.</textarea></div>
-<p class="hint"><b>쓰는 법</b> 5번: 1~2문장. 4번 규칙을 따를 때 곤란해지는 상황을 쓴다. 떠오르지 않으면 &ldquo;아직 못 찾음&rdquo;이라고 쓴다.</p>
-<div class="ans-row"><span class="n">5</span><textarea class="in" rows="2" data-key="A1.weak" data-label="A1 내 규칙의 약점">갈림길이 많으면 기억할 곳이 많아지고, 한 길로 끝까지 가는 방식은 처음 닿은 길이 가장 짧은지 알 수 없다.</textarea></div>
-<p>먼저 위 1~5번 칸에 내 말로 쓴 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 세 사례의 공통점과 말뜻</summary>
+<div class="step">
+<h3>갈림길에서 고르기</h3>
+<p>P에서 R로 들어갔다가 막다른 길이었다고 하자. 내 말로 써 보자.</p>
+<p class="qtext">갈림길에서 어느 쪽으로 가고, 막히면 어떻게 하겠는가?</p>
+<div class="ans-row"><textarea placeholder="예: 먼저 갈 쪽을 고르는 기준, 막혔을 때 하는 일" class="in" rows="3" data-key="A1.fork" data-label="A1 갈림길에서 어느 쪽으로 가고 막히면 어떻게 하는가">갈림길에서는 한쪽을 골라 끝까지 가 보고, 막히면 갈림길로 되돌아와 다른 쪽으로 간다. 막히면 가장 가까운 갈림길로 돌아간다.</textarea></div>
+</div>
+<div class="step">
+<h3>지나온 곳을 또 가면</h3>
+<p>X, Y, Z 세 사람이 서로 모두 친구이다. 소문이 X에서 Y, Y에서 Z로 갔다.</p>
+<div class="quiz" data-answer="1">
+<p class="q">가 본 곳을 적어 두지 않고 Z에서 다시 X로 가고, Y로 가고… 계속 가면 어떻게 될까?</p>
+<div class="opts"><button type="button">끝나는 때를 알 수 없이 계속 돈다</button><button type="button" data-hint="Z의 이웃에는 아직 X, Y가 있다. 다시 갈 수 있는가?">Z에서 저절로 멈춘다</button><button type="button" data-hint="같은 사람에게 또 전하는 것이다. 새로 알게 된 사람이 늘었는가?">소문이 더 빨리 퍼진다</button></div>
+<p class="why">같은 곳을 또 가기 때문에 끝나는 때를 알 수 없다.</p>
+</div>
+</div>
+<div class="step">
+<h3>소문은 몇 단계</h3>
+<p>소문이 A에서 B로, B에서 C로 퍼졌다. 시작한 A는 0단계이다.</p>
+<div class="quiz" data-answer="2">
+<p class="q">C에게 소문은 몇 단계 만에 닿았을까?</p>
+<div class="opts"><button type="button" data-hint="A에서 B까지만 센 값이다.">1단계</button><button type="button">2단계</button><button type="button" data-hint="A는 0단계로 센다. 전해진 횟수를 다시 세어 보자.">3단계</button></div>
+<p class="why">A-B, B-C로 두 번 전해졌다. 단계는 지나온 친구 관계(간선)의 수이다.</p>
+</div>
+</div>
+<div class="step">
+<h3>내 방법 한 문장 쓰기</h3>
+<p>앞의 작은 미로에서, 지금 있는 곳에서 다음에 어디를 볼지 정하는 내 방법을 한 문장으로 쓴다. BFS·DFS 같은 이름은 몰라도 된다.</p>
+<p class="qtext">미로에서 다음에 어디를 볼지 정하는 내 방법</p>
+<div class="ans-row"><textarea placeholder="예: 한 문장" class="in" rows="3" data-key="A1.rule" data-label="A1 내 순서 규칙 1가지">가까운 이웃부터 한 칸씩 넓혀 가며 보고, 이미 본 곳은 다시 가지 않는다.</textarea></div>
+<p class="qtext">(선택) 이 방법이 곤란해질 것 같은 곳</p>
+<div class="ans-row"><textarea placeholder="예: 떠오르지 않으면 비워 둔다" class="in" rows="2" data-key="A1.weak" data-label="A1 내 규칙의 약점">갈림길이 많으면 기억할 곳이 많아지고, 한 길로 끝까지 가는 방식은 처음 닿은 길이 가장 짧은지 알 수 없다.</textarea></div>
+</div>
+<p class="wrapup"><b>여기까지</b> 미로에서 내 방법을 한 문장으로 썼다. A2에서 두 가지 규칙을 손으로 따라 가며 확인한다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · 세 사례의 공통점과 말뜻</summary>
 <ul>
 <li>세 사례는 모두 &ldquo;지금 있는 곳에서 이웃으로 한 걸음씩 나아가는&rdquo; 문제이다. 갈림길에서 어느 이웃을 먼저 볼지 정하는 규칙이 필요하다.</li>
 <li>&ldquo;몇 단계&rdquo;는 소문이 전해진 횟수, 곧 시작한 사람에서 그 사람까지 지나는 친구 관계(간선)의 수이다.</li>
@@ -231,72 +240,73 @@ for dr, dc in DIRS:
 <li>어느 이웃부터 가느냐에 따라 지나는 길과 순서가 달라진다. 이 차이를 A2부터 손으로 따라가며 확인한다.</li>
 </ul></details>
 </section>
-<section id="A2" class="sheet">
+<section id="A2" class="sheet lesson">
 <h2>A2 · 컨테이너 두 가지로 손 탐색하기<small>1차시 · 14분 · 개인</small></h2>
-<p class="meta"><span>산출물: 두 방문 순서, 단계별 컨테이너 상태표</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>같은 그래프에서 컨테이너에서 꺼내는 자리를 바꾸면(맨 위 / 맨 앞) 방문 순서는 어떻게 달라지는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">도구 확인</span>위 ‘약속’ 상자의 손 규칙 4단계와 [학습 내용]의 작은 예(그래프 X)를 먼저 읽는다.<span class="tg-done">컨테이너에 넣기·꺼내기·방문 기록의 차이를 말할 수 있다.</span></li>
-<li><span class="tg-stage">적용</span>(가) 스택 규칙으로 G1을 시작 A에서 따라 가며 단계마다 꺼낸 노드와 컨테이너 내용을 적고, 방문 순서를 쓴다.<span class="tg-where">(가) 표와 ‘방문 순서’ 칸</span><span class="tg-done">일찍 끝나면 남는 단계는 비우고, 방문 순서 칸이 채워졌다.</span></li>
-<li><span class="tg-stage">적용</span>(나) 큐 규칙으로 같은 방식으로 표를 채운다.<span class="tg-where">(나) 표와 ‘방문 순서’ 칸</span><span class="tg-done">방문 순서 칸이 채워졌다.</span></li>
-<li><span class="tg-stage">비교</span>두 방문 순서를 나란히 놓고 1~4번 질문에 답한다. 답의 근거는 표의 단계 번호와 컨테이너 내용이다.<span class="tg-where">1~4번 칸</span><span class="tg-done">4칸이 채워졌다.</span></li>
-<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
-</ol>
+<p class="lead">컨테이너에서 꺼내는 자리만 바꾸면 방문 순서가 달라질까? 작은 그래프 X로 규칙을 보고, G1에서 두 번 따라 해 보자.</p>
+<div class="step">
+<h3>작은 그래프 X 보기</h3>
+<p>컨테이너는 앞으로 볼 노드를 담아 두는 곳이다. 스택은 맨 위(오른쪽 끝)에서, 큐는 맨 앞(왼쪽 끝)에서 꺼낸다. 시작 노드를 넣고 &lsquo;꺼낸다 → 방문한다 → 안 가 본 이웃을 목록 순서로 넣는다&rsquo;를 컨테이너가 빌 때까지 되풀이하며, 방문한 차례가 방문 순서이다.</p>
+<pre class="fig">X: [Y, Z]   Y: [X]   Z: [X]       스택 규칙, 시작 X
+
+시작        컨테이너 [X]
+단계 1      꺼냄 X (방문)  → 컨테이너 [Y, Z]
+단계 2      꺼냄 Z (방문)  → 컨테이너 [Y]
+단계 3      꺼냄 Y (방문)  → 컨테이너 [ ]
+방문 순서   X, Z, Y</pre>
+<div class="quiz" data-answer="1">
+<p class="q">같은 X에서 큐 규칙이면 단계 1 다음에 꺼내는 노드는?</p>
+<div class="opts"><button type="button">Y</button><button type="button" data-hint="큐는 맨 앞(왼쪽 끝)에서 꺼낸다. [Y, Z]의 왼쪽 끝은?">Z</button></div>
+<p class="why">큐는 맨 앞의 Y를 꺼낸다. 스택은 맨 위의 Z를 꺼냈다.</p>
 </div>
-<div class="concept"><b class="h">약속 · 용어와 규칙</b>
-<ul>
-<li><b>컨테이너</b>: 앞으로 볼 노드를 담아 두는 곳이다. <b>스택</b>은 맨 위(그림에서 오른쪽 끝)에서 꺼내고, <b>큐</b>는 맨 앞(그림에서 왼쪽 끝)에서 꺼낸다. 큐에 넣는 쪽은 뒤(오른쪽)이다.</li>
-<li><b>방문</b>: 컨테이너에서 꺼내 처리한 때이다. 방문 순서는 이 처리 순서이다(컨테이너에 들어간 순서가 아니다).</li>
-<li><b>방문 기록</b>: 이미 방문한 노드를 적어 두는 곳이다.</li>
-</ul>
-<p><b>손으로 탐색하는 규칙</b> (스택 규칙과 큐 규칙을 각각 따라 한다)</p>
-<ol>
-<li>시작 노드를 컨테이너에 넣는다.</li>
-<li>컨테이너에서 하나 꺼낸다. 이미 방문한 노드이면 버리고 다시 꺼낸다.</li>
-<li>방문 기록에 쓰고, 그 노드의 이웃 중 아직 방문하지 않은 것을 목록 순서대로 컨테이너에 넣는다(스택은 위에, 큐는 뒤에).</li>
-<li>컨테이너가 빌 때까지 반복한다.</li>
-</ol></div>
-<div class="learn-box"><span class="lb-title">학습 내용 · 손 규칙 작은 예와 표 쓰는 법</span>
-<p>작은 그래프 X: 간선 <code class="i">(X,Y) (X,Z)</code>, 이웃 목록 <code class="i">X: [Y, Z]  Y: [X]  Z: [X]</code>. 시작 X에서 <b>스택 규칙</b>을 따르면 다음처럼 쓴다(스택은 오른쪽 끝이 맨 위).</p>
-<pre class="diagram">  ┌── Y            시작 상태: 컨테이너 [X], 방문 기록 비어 있음
-X ┤
-  └── Z            단계 1  꺼냄 X (방문)  → 컨테이너 [Y, Z]   (Y, Z를 목록 순서로 위에 넣음)
-                   단계 2  꺼냄 Z (방문)  → 컨테이너 [Y]      (이웃 X는 방문했으므로 넣지 않음)
-X: [Y, Z]          단계 3  꺼냄 Y (방문)  → 컨테이너 [ ]      (비었으므로 끝)
-Y: [X]  Z: [X]     방문 순서: X, Z, Y</pre>
-<ul>
-<li>용어: <b>이웃 순서</b>는 인접 리스트 목록의 순서이다. <b>방문</b>은 컨테이너에서 꺼내 처리한 때이고, <b>방문 기록</b>은 방문한 노드를 적어 두는 곳이다.</li>
-<li>이웃을 넣을지는 <b>방문 기록만 보고</b> 정한다. 이미 컨테이너 안에 있어도 아직 방문하지 않았으면 넣는다.</li>
-<li>이미 방문한 노드를 꺼냈으면 결과 칸에 &ldquo;이미 방문, 버림&rdquo;이라고 쓰고 이웃은 넣지 않는다.</li>
-<li>(가) 스택 규칙과 (나) 큐 규칙의 표를 차례로 직접 쓰고, 끝나면 칸이 비었거나 꺼내는 쪽이 뒤바뀐 곳이 없는지 스스로 검토한다.</li>
-</ul></div>
-<p><b>G1 · 친구 관계</b>(10주차와 같음): 노드 A~F, 간선 <code class="i">(A,B) (A,C) (B,D) (C,D) (D,E)</code>. 이웃 순서는 아래 목록 순서이다. 노드 F는 아무와도 이어져 있지 않다.</p>
-<pre class="diagram">   A ─ B
-   │   │
-   C ─ D ─ E        F
+<div class="quiz" data-accept="X,Y,Z" data-hint="Y를 방문한 뒤 컨테이너에 무엇이 남는지 따라 가 보자.">
+<p class="q">큐 규칙으로 X를 돌면 방문 순서는?</p>
+<div class="ans"><input type="text" aria-label="큐 규칙 방문 순서" placeholder="예: X, …"><button type="button">확인</button></div>
+<p class="why">X, Y, Z이다. 스택 규칙의 X, Z, Y와 둘째 노드가 다르다.</p>
+</div>
+</div>
+<div class="step">
+<h3>스택 규칙으로 G1 돌기</h3>
+<p>G1은 노드 A~F, 간선 <code class="i">(A,B) (A,C) (B,D) (C,D) (D,E)</code>이다. F는 외톨이이다. 시작 상태는 컨테이너 [A], 방문 기록 비어 있음이다. 표는 6단계까지이고, 일찍 끝나면 남는 칸은 비운다.</p>
+<pre class="fig">A ─ B
+│   │
+C ─ D ─ E        F
 
 A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre>
-<p>시작 상태는 컨테이너 <code class="i">[A]</code>, 방문 기록 비어 있음이다. 시작 노드 A에서 두 규칙을 각각 따라 한 단계마다 꺼낸 노드와 컨테이너 내용을 적는다(칸은 6단계까지 있다. 더 일찍 끝나면 남는 칸은 비운다).</p>
-<h3>(가) 스택 규칙: 맨 위(오른쪽)에서 꺼낸다</h3><p class="hint"><b>쓰는 법</b> 꺼낸 노드와 결과 칸에는 &ldquo;노드 이름 + (방문)&rdquo; 또는 &ldquo;노드 이름 + (이미 방문, 버림)&rdquo;으로 쓴다(예: X (방문)). 컨테이너 칸에는 대괄호 안에 왼쪽부터 오른쪽으로 쓰고(예: [Y, Z]) 빈 컨테이너는 [ ]로 쓴다. 일찍 끝나서 남는 단계 칸은 비워 둔다.</p><div class="scroll"><table class="fill"><tr><th style="width:52px">단계</th><th style="width:46%">꺼낸 노드와 결과(방문 / 이미 방문해 버림)</th><th>꺼내고 넣은 직후 컨테이너 내용</th></tr><tr><td class="lab" style="width:3em;text-align:center">1</td><td class="in-cell"><input type="text" class="in" data-key="A2.stack.r1.c1" data-label="A2 스택 규칙 1단계 꺼낸 노드와 결과" autocomplete="off" value="A (방문)"></td><td class="in-cell"><input type="text" class="in" data-key="A2.stack.r1.c2" data-label="A2 스택 규칙 1단계 컨테이너 내용" autocomplete="off" value="[B, C]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">2</td><td class="in-cell"><input type="text" class="in" data-key="A2.stack.r2.c1" data-label="A2 스택 규칙 2단계 꺼낸 노드와 결과" autocomplete="off" value="C (방문)"></td><td class="in-cell"><input type="text" class="in" data-key="A2.stack.r2.c2" data-label="A2 스택 규칙 2단계 컨테이너 내용" autocomplete="off" value="[B, D]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">3</td><td class="in-cell"><input type="text" class="in" data-key="A2.stack.r3.c1" data-label="A2 스택 규칙 3단계 꺼낸 노드와 결과" autocomplete="off" value="D (방문)"></td><td class="in-cell"><input type="text" class="in" data-key="A2.stack.r3.c2" data-label="A2 스택 규칙 3단계 컨테이너 내용" autocomplete="off" value="[B, B, E]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">4</td><td class="in-cell"><input type="text" class="in" data-key="A2.stack.r4.c1" data-label="A2 스택 규칙 4단계 꺼낸 노드와 결과" autocomplete="off" value="E (방문)"></td><td class="in-cell"><input type="text" class="in" data-key="A2.stack.r4.c2" data-label="A2 스택 규칙 4단계 컨테이너 내용" autocomplete="off" value="[B, B]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">5</td><td class="in-cell"><input type="text" class="in" data-key="A2.stack.r5.c1" data-label="A2 스택 규칙 5단계 꺼낸 노드와 결과" autocomplete="off" value="B (방문)"></td><td class="in-cell"><input type="text" class="in" data-key="A2.stack.r5.c2" data-label="A2 스택 규칙 5단계 컨테이너 내용" autocomplete="off" value="[B]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">6</td><td class="in-cell"><input type="text" class="in" data-key="A2.stack.r6.c1" data-label="A2 스택 규칙 6단계 꺼낸 노드와 결과" autocomplete="off" value="B (이미 방문, 버림)"></td><td class="in-cell"><input type="text" class="in" data-key="A2.stack.r6.c2" data-label="A2 스택 규칙 6단계 컨테이너 내용" autocomplete="off" value="[ ]"></td></tr></table></div>
+<p class="tip">이웃을 넣을지는 방문 기록만 보고 정하며, 컨테이너 안에 이미 있어도 방문 전이면 넣는다. 손으로 할 때 헷갈리지 않게 한 단순한 규칙이고, 코드는 다르게 할 수도 있다(2차시).</p>
+<p class="tip">이미 방문한 노드를 꺼냈으면 &lsquo;노드 (이미 방문, 버림)&rsquo;이라 쓰고 이웃은 넣지 않는다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:52px">단계</th><th style="width:46%">꺼낸 노드와 결과(방문 / 이미 방문해 버림)</th><th>꺼내고 넣은 직후 컨테이너 내용</th></tr><tr><td class="lab" style="width:3em;text-align:center">1</td><td class="in-cell"><input type="text" class="in" placeholder="예: X (방문)" data-key="A2.stack.r1.c1" data-label="A2 스택 규칙 1단계 꺼낸 노드와 결과" autocomplete="off" value="A (방문)"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [Y, Z]" data-key="A2.stack.r1.c2" data-label="A2 스택 규칙 1단계 컨테이너 내용" autocomplete="off" value="[B, C]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">2</td><td class="in-cell"><input type="text" class="in" placeholder="예: X (방문)" data-key="A2.stack.r2.c1" data-label="A2 스택 규칙 2단계 꺼낸 노드와 결과" autocomplete="off" value="C (방문)"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [Y, Z]" data-key="A2.stack.r2.c2" data-label="A2 스택 규칙 2단계 컨테이너 내용" autocomplete="off" value="[B, D]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">3</td><td class="in-cell"><input type="text" class="in" placeholder="예: X (방문)" data-key="A2.stack.r3.c1" data-label="A2 스택 규칙 3단계 꺼낸 노드와 결과" autocomplete="off" value="D (방문)"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [Y, Z]" data-key="A2.stack.r3.c2" data-label="A2 스택 규칙 3단계 컨테이너 내용" autocomplete="off" value="[B, B, E]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">4</td><td class="in-cell"><input type="text" class="in" placeholder="예: X (방문)" data-key="A2.stack.r4.c1" data-label="A2 스택 규칙 4단계 꺼낸 노드와 결과" autocomplete="off" value="E (방문)"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [Y, Z]" data-key="A2.stack.r4.c2" data-label="A2 스택 규칙 4단계 컨테이너 내용" autocomplete="off" value="[B, B]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">5</td><td class="in-cell"><input type="text" class="in" placeholder="예: X (방문)" data-key="A2.stack.r5.c1" data-label="A2 스택 규칙 5단계 꺼낸 노드와 결과" autocomplete="off" value="B (방문)"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [Y, Z]" data-key="A2.stack.r5.c2" data-label="A2 스택 규칙 5단계 컨테이너 내용" autocomplete="off" value="[B]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">6</td><td class="in-cell"><input type="text" class="in" placeholder="예: X (방문)" data-key="A2.stack.r6.c1" data-label="A2 스택 규칙 6단계 꺼낸 노드와 결과" autocomplete="off" value="B (이미 방문, 버림)"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [Y, Z]" data-key="A2.stack.r6.c2" data-label="A2 스택 규칙 6단계 컨테이너 내용" autocomplete="off" value="[ ]"></td></tr></table></div>
 <div class="ans-row"><span class="n">방문 순서</span><input type="text" class="in" data-key="A2.stack.order" placeholder="노드 이름만 쉼표로(예: X, Z, Y)" data-label="A2 스택 규칙의 방문 순서" autocomplete="off" value="A, C, D, E, B"></div>
-<h3>(나) 큐 규칙: 맨 앞(왼쪽)에서 꺼낸다</h3><p class="hint"><b>쓰는 법</b> 꺼낸 노드와 결과 칸에는 &ldquo;노드 이름 + (방문)&rdquo; 또는 &ldquo;노드 이름 + (이미 방문, 버림)&rdquo;으로 쓴다(예: X (방문)). 컨테이너 칸에는 대괄호 안에 왼쪽부터 오른쪽으로 쓰고(예: [Y, Z]) 빈 컨테이너는 [ ]로 쓴다. 일찍 끝나서 남는 단계 칸은 비워 둔다.</p><div class="scroll"><table class="fill"><tr><th style="width:52px">단계</th><th style="width:46%">꺼낸 노드와 결과(방문 / 이미 방문해 버림)</th><th>꺼내고 넣은 직후 컨테이너 내용</th></tr><tr><td class="lab" style="width:3em;text-align:center">1</td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r1.c1" data-label="A2 큐 규칙 1단계 꺼낸 노드와 결과" autocomplete="off" value="A (방문)"></td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r1.c2" data-label="A2 큐 규칙 1단계 컨테이너 내용" autocomplete="off" value="[B, C]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">2</td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r2.c1" data-label="A2 큐 규칙 2단계 꺼낸 노드와 결과" autocomplete="off" value="B (방문)"></td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r2.c2" data-label="A2 큐 규칙 2단계 컨테이너 내용" autocomplete="off" value="[C, D]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">3</td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r3.c1" data-label="A2 큐 규칙 3단계 꺼낸 노드와 결과" autocomplete="off" value="C (방문)"></td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r3.c2" data-label="A2 큐 규칙 3단계 컨테이너 내용" autocomplete="off" value="[D, D]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">4</td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r4.c1" data-label="A2 큐 규칙 4단계 꺼낸 노드와 결과" autocomplete="off" value="D (방문)"></td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r4.c2" data-label="A2 큐 규칙 4단계 컨테이너 내용" autocomplete="off" value="[D, E]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">5</td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r5.c1" data-label="A2 큐 규칙 5단계 꺼낸 노드와 결과" autocomplete="off" value="D (이미 방문, 버림)"></td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r5.c2" data-label="A2 큐 규칙 5단계 컨테이너 내용" autocomplete="off" value="[E]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">6</td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r6.c1" data-label="A2 큐 규칙 6단계 꺼낸 노드와 결과" autocomplete="off" value="E (방문)"></td><td class="in-cell"><input type="text" class="in" data-key="A2.queue.r6.c2" data-label="A2 큐 규칙 6단계 컨테이너 내용" autocomplete="off" value="[ ]"></td></tr></table></div>
+</div>
+<div class="step">
+<h3>큐 규칙으로 G1 돌기</h3>
+<p>이번에는 맨 앞(왼쪽)에서 꺼낸다. 나머지는 같다. 같은 G1, 시작 A로 표를 채워 보자.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:52px">단계</th><th style="width:46%">꺼낸 노드와 결과(방문 / 이미 방문해 버림)</th><th>꺼내고 넣은 직후 컨테이너 내용</th></tr><tr><td class="lab" style="width:3em;text-align:center">1</td><td class="in-cell"><input type="text" class="in" placeholder="예: X (방문)" data-key="A2.queue.r1.c1" data-label="A2 큐 규칙 1단계 꺼낸 노드와 결과" autocomplete="off" value="A (방문)"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [Y, Z]" data-key="A2.queue.r1.c2" data-label="A2 큐 규칙 1단계 컨테이너 내용" autocomplete="off" value="[B, C]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">2</td><td class="in-cell"><input type="text" class="in" placeholder="예: X (방문)" data-key="A2.queue.r2.c1" data-label="A2 큐 규칙 2단계 꺼낸 노드와 결과" autocomplete="off" value="B (방문)"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [Y, Z]" data-key="A2.queue.r2.c2" data-label="A2 큐 규칙 2단계 컨테이너 내용" autocomplete="off" value="[C, D]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">3</td><td class="in-cell"><input type="text" class="in" placeholder="예: X (방문)" data-key="A2.queue.r3.c1" data-label="A2 큐 규칙 3단계 꺼낸 노드와 결과" autocomplete="off" value="C (방문)"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [Y, Z]" data-key="A2.queue.r3.c2" data-label="A2 큐 규칙 3단계 컨테이너 내용" autocomplete="off" value="[D, D]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">4</td><td class="in-cell"><input type="text" class="in" placeholder="예: X (방문)" data-key="A2.queue.r4.c1" data-label="A2 큐 규칙 4단계 꺼낸 노드와 결과" autocomplete="off" value="D (방문)"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [Y, Z]" data-key="A2.queue.r4.c2" data-label="A2 큐 규칙 4단계 컨테이너 내용" autocomplete="off" value="[D, E]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">5</td><td class="in-cell"><input type="text" class="in" placeholder="예: X (방문)" data-key="A2.queue.r5.c1" data-label="A2 큐 규칙 5단계 꺼낸 노드와 결과" autocomplete="off" value="D (이미 방문, 버림)"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [Y, Z]" data-key="A2.queue.r5.c2" data-label="A2 큐 규칙 5단계 컨테이너 내용" autocomplete="off" value="[E]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">6</td><td class="in-cell"><input type="text" class="in" placeholder="예: X (방문)" data-key="A2.queue.r6.c1" data-label="A2 큐 규칙 6단계 꺼낸 노드와 결과" autocomplete="off" value="E (방문)"></td><td class="in-cell"><input type="text" class="in" placeholder="예: [Y, Z]" data-key="A2.queue.r6.c2" data-label="A2 큐 규칙 6단계 컨테이너 내용" autocomplete="off" value="[ ]"></td></tr></table></div>
 <div class="ans-row"><span class="n">방문 순서</span><input type="text" class="in" data-key="A2.queue.order" placeholder="노드 이름만 쉼표로(예: X, Z, Y)" data-label="A2 큐 규칙의 방문 순서" autocomplete="off" value="A, B, C, D, E"></div>
-<h3>관찰·정리</h3>
-<p class="qtext">1. 꺼냈는데 이미 방문한 노드를 버리는 까닭은 무엇인가? 버리지 않으면 표의 어느 단계에서 어떤 일이 생기는지 쓴다.</p>
-<p class="hint"><b>쓰는 법</b> 2문장 이내. 까닭 1문장과, 버리지 않을 때 생기는 일을 표의 단계 번호와 함께 1문장으로 쓴다.</p>
-<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A2.q1" data-label="A2 꺼냈는데 이미 방문한 노드는 왜 버리는가">같은 노드가 컨테이너에 중복으로 들어갈 수 있으므로 꺼낼 때 걸러야 같은 노드를 두 번 처리하지 않는다. 버리지 않으면 스택 5~6단계에서 B가, 큐 5단계에서 D가 두 번 방문된다.</textarea></div>
-<p class="qtext">2. 스택 규칙에서 D 다음에 B가 아니라 E가 방문된 까닭을 컨테이너 내용을 근거로 쓴다.</p>
-<p class="hint"><b>쓰는 법</b> 1~2문장. 표의 단계 번호와 그때의 컨테이너 내용을 근거로 쓴다.</p>
-<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A2.q2" data-label="A2 스택에서 D 다음에 B가 아니라 E가 나온 이유">스택은 마지막에 넣은 것을 먼저 꺼낸다. D를 방문할 때 아직 안 본 이웃 B, E를 목록 순서대로 넣어 컨테이너가 [B, B, E]가 되고 맨 위가 E이므로 B가 아니라 E가 나온다.</textarea></div>
-<p class="qtext">3. 두 규칙의 1~4단계에서 같은 부분과 다른 부분을 각각 쓴다. 다른 부분이 두 방문 순서를 어떻게 달라지게 했는지 순서 값으로 보여 준다.</p>
-<p class="hint"><b>쓰는 법</b> 3문장 이내. ① 같은 부분 ② 다른 부분 ③ 그 다른 부분 때문에 달라진 방문 순서의 값(예: 둘째로 방문된 노드가 스택은 ○, 큐는 △)을 차례로 쓴다.</p>
-<div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A2.q3" data-label="A2 두 규칙에서 틀의 어디가 같고 어디가 다른가">같은 곳: 시작 노드를 넣고, 꺼낸 노드를 방문 기록에 쓰고, 안 본 이웃을 목록 순서로 넣고, 빌 때까지 반복한다. 다른 곳: 꺼내는 쪽(스택은 맨 위, 큐는 맨 앞)뿐이다. 그 차이로 스택은 A, C, D, E, B, 큐는 A, B, C, D, E가 되었다.</textarea></div>
-<p class="qtext">4. 노드 F가 한 번도 방문되지 않은 까닭은 무엇인가? F가 방문되려면 입력의 무엇이 달라져야 하는가?</p>
-<p class="hint"><b>쓰는 법</b> 2문장. ① F가 방문되지 않은 까닭 ② F가 방문되려면 입력에서 무엇이 달라져야 하는지를 쓴다.</p>
-<div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A2.q4" data-label="A2 F는 왜 한 번도 방문되지 않는가">F는 간선이 없어 A에서 이웃을 따라가도 닿지 않기 때문이다. F가 방문되려면 F와 다른 노드를 잇는 간선이 입력에 있어야 한다.</textarea></div>
-<p>먼저 위 (가)(나) 표와 1~4번 칸에 내 말로 쓴 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 두 규칙의 완성 표와 확인 포인트</summary>
+<div class="quiz" data-answer="1">
+<p class="q">큐 5단계에서 이미 방문한 D를 버리지 않고 방문하면 어떻게 될까?</p>
+<div class="opts"><button type="button">D가 방문 순서에 두 번 들어간다</button><button type="button" data-hint="D의 이웃 B, C가 이미 방문한 노드인지, D가 기록에 몇 번 적히는지 보자.">아무 일도 없다</button><button type="button" data-hint="5단계 뒤에 E가 아직 큐에 있다.">큐가 바로 비어 끝난다</button></div>
+<p class="why">같은 노드를 두 번 처리하게 된다. 그래서 꺼낸 뒤 방문 기록을 확인해 버린다.</p>
+</div>
+</div>
+<div class="step">
+<h3>F는 왜 빠졌을까</h3>
+<p>두 표의 방문 순서에 F는 없다.</p>
+<div class="quiz" data-answer="1">
+<p class="q">F가 방문되지 않은 까닭은?</p>
+<div class="opts"><button type="button">A에서 이웃을 따라가도 F에 닿는 간선이 없다</button><button type="button" data-hint="F는 거리가 먼 것이 아니라 이어진 길이 없다.">F가 A에서 가장 멀다</button><button type="button" data-hint="컨테이너는 끝까지 비지 않을 만큼 충분했다. 길이 있는지를 보자.">컨테이너가 작아서 못 담았다</button></div>
+<p class="why">F에는 간선이 없다. 시작 노드에서 이웃을 따라 닿는 노드만 방문된다.</p>
+</div>
+</div>
+<div class="step">
+<h3>두 규칙 견주기</h3>
+<p>두 표를 나란히 놓고 답해 보자. 근거는 표의 단계 번호와 컨테이너 내용이다.</p>
+<p class="qtext">스택 규칙에서 D 다음에 B가 아니라 E가 방문된 까닭은?</p>
+<div class="ans-row"><textarea placeholder="예: 3단계 컨테이너 내용을 근거로 1~2문장" class="in" rows="2" data-key="A2.q2" data-label="A2 스택에서 D 다음에 B가 아니라 E가 나온 이유">스택은 마지막에 넣은 것을 먼저 꺼낸다. D를 방문할 때 아직 안 본 이웃 B, E를 목록 순서대로 넣어 컨테이너가 [B, B, E]가 되고 맨 위가 E이므로 B가 아니라 E가 나온다.</textarea></div>
+<p class="qtext">두 규칙의 같은 부분과 다른 부분은? 다른 부분이 방문 순서를 어떻게 바꿨는가?</p>
+<div class="ans-row"><textarea placeholder="예: 같은 곳 / 다른 곳 / 달라진 순서 값" class="in" rows="3" data-key="A2.q3" data-label="A2 두 규칙에서 틀의 어디가 같고 어디가 다른가">같은 곳: 시작 노드를 넣고, 꺼낸 노드를 방문 기록에 쓰고, 안 본 이웃을 목록 순서로 넣고, 빌 때까지 반복한다. 다른 곳: 꺼내는 쪽(스택은 맨 위, 큐는 맨 앞)뿐이다. 그 차이로 스택은 A, C, D, E, B, 큐는 A, B, C, D, E가 되었다.</textarea></div>
+</div>
+<p class="wrapup"><b>여기까지</b> 두 규칙으로 G1을 돌아 방문 순서 두 개를 얻었다. A3에서는 재귀로 같은 일을 해 본다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · 두 규칙의 완성 표와 확인 포인트</summary>
 <table><tr><th>단계</th><th>스택: 꺼낸 노드 → 컨테이너</th><th>큐: 꺼낸 노드 → 컨테이너</th></tr>
 <tr><td>1</td><td>A (방문) → [B, C]</td><td>A (방문) → [B, C]</td></tr>
 <tr><td>2</td><td>C (방문) → [B, D]</td><td>B (방문) → [C, D]</td></tr>
@@ -312,131 +322,163 @@ A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre>
 <li>F는 어느 노드와도 간선이 없어 A에서 이웃을 따라가도 닿지 않는다. 시작 노드에서 닿는 노드만 방문된다. F가 방문되려면 F와 이어진 간선이 있어야 한다.</li>
 </ul></details>
 </section>
-<section id="A3" class="sheet">
+<section id="A3" class="sheet lesson">
 <h2>A3 · 재귀로 돌아보기: 호출이 쌓이는 모습<small>1차시 · 13분 · 개인</small></h2>
-<p class="meta"><span>산출물: 재귀 호출 추적표, Call Stack 그림, 두 순서 비교 메모</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>재귀 함수가 호출을 쌓았다 풀며 돌아보는 순서는 A2의 스택 규칙과 어떻게 같고 다른가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">도구 확인</span>의사코드와 [학습 내용]의 enter·exit 작은 예를 읽는다. Call Stack은 호출이 쌓이고 끝나면 사라지는 곳이다.<span class="tg-done">enter와 exit가 각각 언제인지 말할 수 있다.</span></li>
-<li><span class="tg-stage">적용</span>G1을 시작 A에서 재귀로 따라 가며 추적표 10줄을 채우고 방문 순서를 쓴다.<span class="tg-where">추적표와 ‘방문 순서’ 칸</span><span class="tg-done">10줄과 방문 순서 칸이 채워졌다.</span></li>
-<li><span class="tg-stage">관찰</span>Call Stack이 가장 깊을 때의 모습을 “dfs(노드)”를 한 줄씩 쓴 글자 그림으로 그린다.<span class="tg-where">‘그림’ 칸</span><span class="tg-done">맨 위 호출이 첫 줄, 처음 호출이 마지막 줄이다.</span></li>
-<li><span class="tg-stage">비교</span>A2 스택 규칙과 비교하는 1~4번 질문에 답한다.<span class="tg-where">1~4번 칸</span><span class="tg-done">4칸이 채워졌다.</span></li>
-<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
-</ol>
+<p class="lead">재귀 함수도 노드를 깊이 따라 들어간다. 호출이 쌓이는 모습을 작은 그래프 P에서 먼저 보자.</p>
+<div class="step">
+<h3>호출이 쌓이는 모습</h3>
+<p>함수가 시작되는 때를 enter, 끝나 돌아오는 때를 exit라 한다. 호출은 Call Stack에 쌓이고, 끝나면 맨 위부터 사라진다. 이 스택은 파이썬이 호출마다 자동으로 관리한다. Call Stack 칸은 아래에서 위로 [P, Q]처럼 쓴다.</p>
+<pre class="fig">P: [Q]   Q: [P, R]   R: [Q]     dfs(P)를 따라 간 모습
+
+순서  사건      Call Stack(아래부터)
+ 1   enter P   [P]
+ 2   enter Q   [P, Q]
+ 3   enter R   [P, Q, R]
+ 4   exit R    [P, Q]
+ 5   exit Q    [P]
+ 6   exit P    [ ]</pre>
+<div class="quiz" data-answer="1">
+<p class="q">순서 5에서 exit Q를 한 직후, Call Stack의 맨 위는?</p>
+<div class="opts"><button type="button">dfs(P)</button><button type="button" data-hint="Q는 막 끝나서 사라졌다.">dfs(Q)</button><button type="button" data-hint="R은 순서 4에서 이미 끝났다.">dfs(R)</button></div>
+<p class="why">Q가 끝나 사라지면 아래에 있던 P가 맨 위가 된다.</p>
 </div>
-<p>같은 G1(노드 A~F, 간선 <code class="i">(A,B) (A,C) (B,D) (C,D) (D,E)</code>)에서 시작 A로, 재귀 함수로 돌아본다. 방문 기록 <code class="i">visited</code>와 방문 순서 <code class="i">order</code>는 바깥에서 새로 만들어 인자로 전달한다.</p>
-<pre class="diagram">   A ─ B
-   │   │
-   C ─ D ─ E        F
+<div class="quiz" data-answer="2">
+<p class="q">이 Call Stack은 누가 만들어 주는가?</p>
+<div class="opts"><button type="button" data-hint="P 예의 의사코드에는 스택을 만드는 줄이 없다.">내가 코드로 직접 만든다</button><button type="button">파이썬이 호출마다 자동으로 만든다</button></div>
+<p class="why">재귀 호출이 있으면 파이썬이 알아서 쌓고 치운다.</p>
+</div>
+</div>
+<div class="step">
+<h3>G1을 재귀로 따라 가기</h3>
+<p>시작 A에서 아래 의사코드를 따라 간다. 표는 10줄이 모두 필요하며, 사건과 Call Stack 두 가지만 쓴다.</p>
+<pre class="fig">A ─ B
+│   │
+C ─ D ─ E        F
 
 A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre>
-<pre class="diagram">def dfs(u):          # 의사코드
+<pre class="fig">def dfs(u):          # 의사코드
     visited에 u 추가, order에 u 기록
     for 이웃 v in (u의 이웃 목록 순서):
         if v가 visited에 없으면:
             dfs(v)</pre>
-<div class="learn-box"><span class="lb-title">학습 내용 · enter·exit 추적 방법과 작은 예</span>
-<ul>
-<li><b>enter</b>는 함수 호출이 시작될 때, <b>exit</b>는 그 호출이 끝나 돌아올 때이다. 호출이 시작되면 Call Stack 맨 위에 그 호출이 쌓이고, 끝나면 맨 위가 사라진다. 깊이는 맨 처음 호출을 0으로 하고 호출 안에서 부른 호출마다 1씩 늘어난다.</li>
-<li>Call Stack 칸은 아래부터 위로 <code class="i">[A, B]</code>처럼 쓴다. <b>exit 줄은 그 호출이 끝나 사라진 직후의 모습</b>으로 쓴다(직전 모습으로 쓰려면 표 전체를 한 가지로 통일한다). 깊이는 끝난 호출의 깊이를 쓴다.</li>
-<li>의사코드는 이웃 목록을 앞에서부터 보다가 방문하지 않은 이웃을 만나면 그 자리에서 바로 호출한다. 호출이 끝나면 돌아와 목록의 다음 이웃을 이어서 본다. G1의 이웃 목록은 위 그림 아래에 적은 그대로이다.</li>
-</ul>
-<p>작은 그래프 P(P: [Q], Q: [P, R], R: [Q])에서 dfs(P)를 추적한 예이다.</p>
-<pre class="diagram">순서  사건      Call Stack    깊이        그림(가장 깊을 때, 아래가 처음 호출)
- 1   enter P   [P]          0           dfs(R)   ← 맨 위
- 2   enter Q   [P, Q]       1           dfs(Q)
- 3   enter R   [P, Q, R]    2           dfs(P)   ← 맨 아래
- 4   exit R    [P, Q]       2
- 5   exit Q    [P]          1
- 6   exit P    [ ]          0</pre></div>
-<p><b>Call Stack</b>은 재귀 호출이 쌓이고, 함수가 끝나 돌아오면 사라지는 곳이다. 호출이 시작될 때(enter)와 끝날 때(exit)를 순서대로 적는다.</p><p class="hint"><b>쓰는 법</b> 사건 칸은 &ldquo;enter P&rdquo;, &ldquo;exit P&rdquo;처럼, Call Stack 칸은 [P, Q]처럼 아래부터 위로 쓴다. 깊이 칸에는 기호나 글자 없이 숫자 하나만 쓴다(맨 처음 호출이 0). 10줄이 모두 필요하다.</p><div class="scroll"><table class="fill"><tr><th style="width:52px">순서</th><th style="width:28%">사건(enter 또는 exit와 노드)</th><th>그때 Call Stack 내용(아래부터 위로)</th><th style="width:20%">깊이(맨 처음 호출은 0)</th></tr><tr><td class="lab" style="width:3em;text-align:center">1</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r1.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 1 사건" autocomplete="off" value="enter A"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r1.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 1 Call Stack 내용" autocomplete="off" value="[A]"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r1.c3" placeholder="숫자만" data-label="A3 추적 1 깊이" autocomplete="off" value="0"></td></tr><tr><td class="lab" style="width:3em;text-align:center">2</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r2.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 2 사건" autocomplete="off" value="enter B"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r2.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 2 Call Stack 내용" autocomplete="off" value="[A, B]"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r2.c3" placeholder="숫자만" data-label="A3 추적 2 깊이" autocomplete="off" value="1"></td></tr><tr><td class="lab" style="width:3em;text-align:center">3</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r3.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 3 사건" autocomplete="off" value="enter D"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r3.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 3 Call Stack 내용" autocomplete="off" value="[A, B, D]"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r3.c3" placeholder="숫자만" data-label="A3 추적 3 깊이" autocomplete="off" value="2"></td></tr><tr><td class="lab" style="width:3em;text-align:center">4</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r4.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 4 사건" autocomplete="off" value="enter C"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r4.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 4 Call Stack 내용" autocomplete="off" value="[A, B, D, C]"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r4.c3" placeholder="숫자만" data-label="A3 추적 4 깊이" autocomplete="off" value="3"></td></tr><tr><td class="lab" style="width:3em;text-align:center">5</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r5.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 5 사건" autocomplete="off" value="exit C"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r5.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 5 Call Stack 내용" autocomplete="off" value="[A, B, D]"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r5.c3" placeholder="숫자만" data-label="A3 추적 5 깊이" autocomplete="off" value="3"></td></tr><tr><td class="lab" style="width:3em;text-align:center">6</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r6.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 6 사건" autocomplete="off" value="enter E"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r6.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 6 Call Stack 내용" autocomplete="off" value="[A, B, D, E]"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r6.c3" placeholder="숫자만" data-label="A3 추적 6 깊이" autocomplete="off" value="3"></td></tr><tr><td class="lab" style="width:3em;text-align:center">7</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r7.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 7 사건" autocomplete="off" value="exit E"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r7.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 7 Call Stack 내용" autocomplete="off" value="[A, B, D]"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r7.c3" placeholder="숫자만" data-label="A3 추적 7 깊이" autocomplete="off" value="3"></td></tr><tr><td class="lab" style="width:3em;text-align:center">8</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r8.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 8 사건" autocomplete="off" value="exit D"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r8.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 8 Call Stack 내용" autocomplete="off" value="[A, B]"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r8.c3" placeholder="숫자만" data-label="A3 추적 8 깊이" autocomplete="off" value="2"></td></tr><tr><td class="lab" style="width:3em;text-align:center">9</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r9.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 9 사건" autocomplete="off" value="exit B"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r9.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 9 Call Stack 내용" autocomplete="off" value="[A]"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r9.c3" placeholder="숫자만" data-label="A3 추적 9 깊이" autocomplete="off" value="1"></td></tr><tr><td class="lab" style="width:3em;text-align:center">10</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r10.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 10 사건" autocomplete="off" value="exit A"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r10.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 10 Call Stack 내용" autocomplete="off" value="[ ]"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r10.c3" placeholder="숫자만" data-label="A3 추적 10 깊이" autocomplete="off" value="0"></td></tr></table></div>
+<p class="tip">이웃 목록을 앞에서부터 보다가 방문하지 않은 이웃을 만나면 그 자리에서 바로 호출한다. 호출이 끝나면 돌아와 다음 이웃을 이어서 본다.</p>
+<p class="tip">exit 줄은 그 호출이 끝나 사라진 직후의 Call Stack으로 쓴다. 표의 처음 두 줄은 <code class="i">enter A [A]</code>, <code class="i">enter B [A, B]</code>처럼 쓴다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:52px">순서</th><th style="width:28%">사건(enter 또는 exit와 노드)</th><th>그때 Call Stack 내용(아래부터 위로)</th></tr><tr><td class="lab" style="width:3em;text-align:center">1</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r1.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 1 사건" autocomplete="off" value="enter A"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r1.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 1 Call Stack 내용" autocomplete="off" value="[A]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">2</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r2.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 2 사건" autocomplete="off" value="enter B"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r2.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 2 Call Stack 내용" autocomplete="off" value="[A, B]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">3</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r3.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 3 사건" autocomplete="off" value="enter D"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r3.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 3 Call Stack 내용" autocomplete="off" value="[A, B, D]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">4</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r4.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 4 사건" autocomplete="off" value="enter C"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r4.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 4 Call Stack 내용" autocomplete="off" value="[A, B, D, C]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">5</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r5.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 5 사건" autocomplete="off" value="exit C"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r5.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 5 Call Stack 내용" autocomplete="off" value="[A, B, D]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">6</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r6.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 6 사건" autocomplete="off" value="enter E"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r6.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 6 Call Stack 내용" autocomplete="off" value="[A, B, D, E]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">7</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r7.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 7 사건" autocomplete="off" value="exit E"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r7.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 7 Call Stack 내용" autocomplete="off" value="[A, B, D]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">8</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r8.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 8 사건" autocomplete="off" value="exit D"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r8.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 8 Call Stack 내용" autocomplete="off" value="[A, B]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">9</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r9.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 9 사건" autocomplete="off" value="exit B"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r9.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 9 Call Stack 내용" autocomplete="off" value="[A]"></td></tr><tr><td class="lab" style="width:3em;text-align:center">10</td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r10.c1" placeholder="enter 또는 exit + 노드" data-label="A3 추적 10 사건" autocomplete="off" value="exit A"></td><td class="in-cell"><input type="text" class="in" data-key="A3.rec.r10.c2" placeholder="[ ] 안에 아래부터" data-label="A3 추적 10 Call Stack 내용" autocomplete="off" value="[ ]"></td></tr></table></div>
 <div class="ans-row"><span class="n">방문 순서</span><input type="text" class="in" data-key="A3.order" placeholder="노드 이름만 쉼표로(예: P, Q, R)" data-label="A3 재귀로 돌았을 때 방문 순서" autocomplete="off" value="A, B, D, C, E"></div>
-<p>Call Stack이 가장 깊을 때의 모습을 아래 칸에 글자로 그린다(맨 아래가 처음 호출).</p>
-<p class="hint"><b>쓰는 법</b> 한 줄에 호출 하나씩 &ldquo;dfs(노드)&rdquo; 모양으로 쓴다. 맨 위에 쌓인 호출이 첫 줄, 처음 호출이 마지막 줄이다(위 학습 내용 상자의 예와 같은 방식).</p>
-<div class="ans-row"><span class="n">그림</span><textarea class="in draw" rows="6" data-key="A3.stackdraw" data-label="A3 가장 깊을 때 Call Stack 그림" spellcheck="false">dfs(C)
-dfs(D)
-dfs(B)
-dfs(A)   &lt;- 맨 아래가 처음 호출</textarea></div>
-<h3>A2 스택 규칙과 비교</h3>
-<p class="qtext">1. A2의 스택 규칙에서는 우리가 컨테이너를 그려 넣었다. 재귀 함수에서 호출이 쌓이고 돌아오면 사라지는 곳은 그 컨테이너와 어떤 점이 같은가? 그곳을 우리가 코드로 만든 적이 있는가?</p>
-<p class="hint"><b>쓰는 법</b> 2문장. ① 컨테이너와 같은 점 1가지 ② 우리가 코드로 만든 적이 있는지(있다/없다)와 그 까닭을 쓴다.</p>
-<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A3.q1" data-label="A3 스택은 어디에 있는가 우리가 만든 적이 있는가">호출이 쌓이고 끝나면 사라지고 맨 위부터 처리한다는 점이 A2의 스택과 같다. 이 스택은 파이썬이 재귀 호출마다 자동으로 만들어 주며 우리가 코드로 만든 적은 없다.</textarea></div>
-<p class="qtext">2. Call Stack이 가장 깊을 때 쌓여 있는 호출들은 G1의 어느 경로 위에 있다는 뜻인가? 그 경로를 노드 이름으로 쓴다.</p>
-<p class="hint"><b>쓰는 법</b> 노드 이름을 화살표로 이어 쓴 경로 1개(예: P → Q → R 모양)와 한 문장 설명을 쓴다.</p>
-<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A3.q2" data-label="A3 가장 깊을 때 쌓인 호출은 지금 어느 경로 위에 있다는 뜻인가">시작 A에서 B, D, C로 이어진 경로(A-B-D-C) 위에 있다는 뜻이다.</textarea></div>
-<p class="qtext">3. A2 스택 규칙의 방문 순서와 A3 재귀의 방문 순서를 비교한다. 같은지 다른지 쓰고, 다르다면 그 까닭을 컨테이너와 Call Stack의 동작으로 설명한다.</p>
-<p class="hint"><b>쓰는 법</b> 2~3문장. 먼저 &ldquo;같다&rdquo; 또는 &ldquo;다르다&rdquo;를 쓰고, 다르면 처음 달라지는 자리와 그 까닭을 쓴다.</p>
-<div class="ans-row"><span class="n">3</span><textarea class="in" rows="3" data-key="A3.q3" data-label="A3 A2 스택 규칙의 순서와 재귀의 순서를 비교해 다른 점과 이유">다르다. A2 스택 규칙은 A, C, D, E, B이고 재귀는 A, B, D, C, E이다. 재귀는 목록의 첫 이웃으로 바로 들어가지만, 스택 규칙은 이웃을 모두 넣은 뒤 마지막에 넣은 이웃부터 꺼내 둘째 방문 노드가 C 대 B로 갈린다.</textarea></div>
-<p class="qtext">4. 8주차 트리 순회에는 visited가 없었는데 그래프 순회에는 필요하다. 트리와 그래프의 구조 차이를 들어 까닭을 쓴다.</p>
-<p class="hint"><b>쓰는 법</b> 2문장. ① 트리와 그래프의 구조 차이 ② visited가 없을 때 그래프에서 생기는 일을 쓴다.</p>
-<div class="ans-row"><span class="n">4</span><textarea class="in" rows="2" data-key="A3.q4" data-label="A3 8주차 트리 순회에는 visited가 없었는데 그래프에는 왜 필요한가">트리에는 돌아오는 길(사이클)이 없지만 G1에는 A-B-D-C-A로 돌아오는 길이 있어서, visited가 없으면 같은 곳을 계속 돌게 된다.</textarea></div>
-<p>먼저 위 추적표와 1~4번 칸에 내 말로 쓴 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 재귀 추적 완성표와 두 순서 비교</summary>
-<pre class="diagram">순서  사건      Call Stack(아래부터)   깊이
- 1   enter A   [A]                  0
- 2   enter B   [A, B]               1
- 3   enter D   [A, B, D]            2
- 4   enter C   [A, B, D, C]         3
- 5   exit C    [A, B, D]            3
- 6   enter E   [A, B, D, E]         3
- 7   exit E    [A, B, D]            3
- 8   exit D    [A, B]               2
- 9   exit B    [A]                  1
-10   exit A    [ ]                  0       방문 순서: A, B, D, C, E</pre>
+</div>
+<div class="step">
+<h3>가장 깊을 때 보기</h3>
+<p>표에서 Call Stack이 가장 길어진 줄을 찾아 보자.</p>
+<div class="quiz" data-accept="4" data-hint="[A, B, D, C]처럼 가장 긴 줄의 호출 수를 세어 보자.">
+<p class="q">Call Stack에 쌓인 호출이 가장 많을 때는 몇 개일까?</p>
+<div class="ans"><input type="text" aria-label="호출 수" placeholder="숫자"><button type="button">확인</button></div>
+<p class="why">[A, B, D, C]일 때 4개이다.</p>
+</div>
+<div class="quiz" data-accept="A-B-D-C|C-D-B-A" data-hint="가장 긴 줄의 호출을 아래부터 차례로 이어 보자.">
+<p class="q">그 호출들은 G1의 어느 경로 위에 있을까?</p>
+<div class="ans"><input type="text" aria-label="경로" placeholder="예: A-B-…"><button type="button">확인</button></div>
+<p class="why">A에서 B, D, C로 이어진 길이다. 호출 하나하나가 시작 A에서 지금 노드까지 지나온 길이다.</p>
+</div>
+</div>
+<div class="step">
+<h3>스택 규칙과 견주기</h3>
+<p>A2의 스택 규칙 방문 순서(A, C, D, E, B)와 비교해 보자.</p>
+<p class="qtext">재귀의 방문 순서는 A2 스택 규칙과 같은가, 다른가? 다르면 처음 달라지는 자리와 까닭은?</p>
+<div class="ans-row"><textarea placeholder="예: 같다/다르다 + 처음 달라지는 자리와 까닭" class="in" rows="3" data-key="A3.q3" data-label="A3 A2 스택 규칙의 순서와 재귀의 순서를 비교해 다른 점과 이유">다르다. A2 스택 규칙은 A, C, D, E, B이고 재귀는 A, B, D, C, E이다. 재귀는 목록의 첫 이웃으로 바로 들어가지만, 스택 규칙은 이웃을 모두 넣은 뒤 마지막에 넣은 이웃부터 꺼내 둘째 방문 노드가 C 대 B로 갈린다.</textarea></div>
+<p class="qtext">8주차 트리 순회는 visited 없이도 끝났다. 그래프 순회에 visited가 필요한 까닭을 트리와 그래프의 구조 차이로 쓴다. (사이클: 돌아서 제자리로 오는 길)</p>
+<div class="ans-row"><textarea placeholder="예: 구조 차이 + visited가 없을 때 생기는 일" class="in" rows="2" data-key="A3.q4" data-label="A3 8주차 트리 순회에는 visited가 없었는데 그래프에는 왜 필요한가">트리에는 돌아오는 길(사이클)이 없지만 G1에는 A-B-D-C-A로 돌아오는 길이 있어서, visited가 없으면 같은 곳을 계속 돌게 된다.</textarea></div>
+</div>
+<p class="wrapup"><b>여기까지</b> 재귀로 G1을 돌아 Call Stack이 쌓이는 모습을 보았다. A4에서는 세 방식을 한 그래프에서 비교한다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · 재귀 추적 완성표와 두 순서 비교</summary>
+<pre class="diagram">순서  사건      Call Stack(아래부터)
+ 1   enter A   [A]
+ 2   enter B   [A, B]
+ 3   enter D   [A, B, D]
+ 4   enter C   [A, B, D, C]
+ 5   exit C    [A, B, D]
+ 6   enter E   [A, B, D, E]
+ 7   exit E    [A, B, D]
+ 8   exit D    [A, B]
+ 9   exit B    [A]
+10   exit A    [ ]       방문 순서: A, B, D, C, E</pre>
 <ul>
-<li>가장 깊을 때는 호출 4개(맨 아래부터 dfs(A), dfs(B), dfs(D), dfs(C))가 쌓인다. 곧 A에서 B, D, C로 이어진 경로 위에 있다는 뜻이다.</li>
+<li>가장 깊을 때는 호출 4개([A, B, D, C])가 쌓인다. 곧 A에서 B, D, C로 이어진 경로 위에 있다는 뜻이다.</li>
 <li>호출을 쌓는 곳은 파이썬이 재귀 호출마다 자동으로 만드는 스택이다. 우리가 코드로 만든 적은 없다.</li>
 <li>스택 규칙의 순서는 A, C, D, E, B이고 재귀는 A, B, D, C, E이다. 처음 갈라지는 자리는 둘째 노드이다. 스택 규칙은 A의 이웃 B, C를 모두 넣고 마지막에 넣은 C를 먼저 꺼내지만, 재귀는 A의 목록에서 앞의 B를 바로 호출한다.</li>
 <li>트리에는 되돌아오는 길(사이클)이 없지만 G1에는 A-B-D-C-A처럼 돌아오는 길이 있어, visited가 없으면 같은 곳을 계속 돈다.</li>
 </ul></details>
 </section>
-<section id="A4" class="sheet">
+<section id="A4" class="sheet lesson">
 <h2>A4 · 두 갈래 길 그래프 H에서 세 방식 비교<small>1차시 · 14분 · 개인</small></h2>
-<p class="meta"><span>산출물: H 비교표, 순서 바꾼 재실험 결과, 가설 메모</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>시작과 목표가 같아도 이웃 순서와 꺼내는 규칙을 바꾸면 처음 닿는 경로와 걸음 수는 어떻게 변하는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">적용</span>그래프 H에서 큐 규칙, 스택 규칙, 재귀 세 방식으로 시작 S에서 목표 T까지 손으로 돌려 비교표를 채운다.<span class="tg-where">H 비교표 (큐·스택·재귀)</span><span class="tg-done">세 줄에 빈 칸이 없다.</span></li>
-<li><span class="tg-stage">시도</span>이웃 순서를 바꾼 재실험 표를 채운다. 바꾸기 전에 결과가 달라질지 생각한다.<span class="tg-where">순서를 바꾼 재실험 표</span><span class="tg-done">표의 칸이 채워졌다.</span></li>
-<li><span class="tg-stage">설명</span>1~2번 질문에 표의 값과 컨테이너 내용을 근거로 답한다.<span class="tg-where">1~2번 칸</span><span class="tg-done">2칸이 채워졌다.</span></li>
-<li><span class="tg-stage">일반화</span>표를 보고 “무엇이 흔들리고 무엇이 안 흔들리는가”를 근거 값과 함께 가설 메모 3줄로 쓴다(A9에서 확인한다).<span class="tg-where">가설 메모 1~3번 칸</span><span class="tg-done">3줄이 채워졌다.</span></li>
-<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
-</ol>
+<p class="lead">시작과 목표가 같아도 규칙과 이웃 순서에 따라 처음 닿는 길이 달라질까? 작은 그래프 W부터 보자.</p>
+<div class="step">
+<h3>작은 그래프 W 보기</h3>
+<p>W는 노드 3개이고 S의 이웃 목록은 [A, B]이다. 세 방식으로 S에서 돌면 방문 순서는 이렇다.</p>
+<pre class="fig">A ─ S ─ B        S: [A, B]   A: [S]   B: [S]
+
+큐 규칙   : S, A, B
+스택 규칙 : S, B, A
+재귀      : S, ?, ?</pre>
+<div class="quiz" data-answer="1">
+<p class="q">재귀는 S 다음에 어느 노드를 방문할까?</p>
+<div class="opts"><button type="button">A</button><button type="button" data-hint="재귀는 이웃 목록을 앞에서부터 본다. 목록의 첫 이웃은?">B</button></div>
+<p class="why">재귀는 목록의 첫 이웃 A로 바로 들어간다. 스택 규칙은 A, B를 모두 넣고 마지막에 넣은 B를 먼저 꺼냈다.</p>
 </div>
-<p><b>H</b>: 노드 6개, 간선 6개(무방향) <code class="i">(S,A) (S,B) (A,C) (C,D) (D,T) (B,T)</code>. 시작 S, 목표 T. 이웃 순서는 목록 순서이다.</p>
-<pre class="diagram">        ┌─ A ── C ── D ─┐
+</div>
+<div class="step">
+<h3>경로 되짚기 보기</h3>
+<p>큐 규칙으로 돌며 노드를 넣을 때마다 &lsquo;누가 넣었는지&rsquo;를 적어 둔다. 목표에 닿으면 그 기록을 거꾸로 따라 S까지 가면 경로가 된다.</p>
+<pre class="fig">    A ─ T        S: [A, B]   A: [S, T]
+   /             B: [S]      T: [A]
+ S
+   \
+    B
+
+넣은 기록   A ← S,  B ← S,  T ← A
+T에서 거꾸로   T ← A ← S   →   경로 S-A-T (간선 2개)</pre>
+<div class="quiz" data-accept="2" data-hint="S-A-T는 노드 3개, 간선은 노드 수보다 하나 적다.">
+<p class="q">이 경로 S-A-T의 간선 수는?</p>
+<div class="ans"><input type="text" aria-label="간선 수" placeholder="숫자"><button type="button">확인</button></div>
+<p class="why">노드가 3개이므로 간선은 2개이다.</p>
+</div>
+</div>
+
+<div class="step">
+<h3>H에서 세 방식 돌리기</h3>
+<p><b>H</b>는 노드 6개, 간선 6개(무방향) <code class="i">(S,A) (S,B) (A,C) (C,D) (D,T) (B,T)</code>이다. 시작 S, 목표 T이고 이웃 순서는 목록 순서이다. 큐 규칙, 스택 규칙, 재귀로 돌려 표를 채우자.</p>
+<pre class="fig">        ┌─ A ── C ── D ─┐
    S ───┤                T
         └─ B ───────────┘
 
 S: [A, B]   A: [S, C]   B: [S, T]   C: [A, D]   D: [C, T]   T: [D, B]</pre>
-<div class="learn-box"><span class="lb-title">학습 내용 · H 비교표 채우는 방법</span>
-<ul>
-<li>세 방식(큐 규칙, 스택 규칙, 재귀)을 차례로 손으로 돌리고 칸이 빈 곳이 없는지 스스로 확인한다. 시작 노드만 S이고 규칙은 앞에서 쓴 것과 같다. 시작 상태는 S만 컨테이너(또는 호출)에 넣은 상태이다.</li>
-<li>규칙 다시 보기: 컨테이너에서 하나 꺼내 이미 방문한 노드이면 버리고, 아니면 방문 기록에 쓴 뒤 방문하지 않은 이웃을 목록 순서대로 넣는다(큐는 뒤에 넣고 맨 앞에서 꺼내며, 스택은 맨 위에 넣고 맨 위에서 꺼낸다). 재귀는 <code class="i">dfs(u)</code>에서 u를 방문 기록에 쓰고, 이웃 목록을 앞에서부터 보다가 방문하지 않은 이웃 v를 만나면 그 자리에서 <code class="i">dfs(v)</code>를 호출한다.</li>
-<li><b>T에 처음 도착한 경로</b> 구하기: 노드를 컨테이너에 넣을 때마다 &ldquo;누가 넣었는지&rdquo;를 함께 적어 두고, T가 방문되었을 때 그 항목을 넣은 노드를 거꾸로 따라 S까지 간다. 재귀는 그 순간의 Call Stack이 곧 경로이다. 간선 수는 경로의 노드 수에서 1을 뺀 값이다.</li>
-<li>재실험은 S의 목록만 <code class="i">[B, A]</code>로 바꾸고 나머지 목록은 그대로 둔다. 바뀐 목록으로 세 방식을 처음부터 다시 돌린다.</li>
-<li>가설 메모 한 줄의 틀: &ldquo;(바꾼 것)을 바꾸었더니 (방식)의 (값)이 (변했다/그대로였다). 근거: 표의 (칸) (값)&rdquo;.</li>
-</ul></div>
-<p>A2의 두 규칙과 A3의 재귀를 각각 손으로 돌려 표를 채운다. &ldquo;T에 처음 도착한 경로&rdquo;는 T가 처음 방문된 때의 S에서 T까지의 길(예: S-x-y-T)이고, 간선 수는 그 길의 간선 개수이다.</p><p class="hint"><b>쓰는 법</b> 방문 순서 칸은 노드 이름만 쉼표로(예: P, Q, R), 경로 칸은 노드 이름을 하이픈으로(예: S-x-y-T), 간선 수 칸은 숫자 하나만 쓴다. 표는 큐 규칙, 스택 규칙, 재귀 세 줄이 모두 필요하다.</p><div class="scroll"><table class="fill"><tr><th style="width:16%">방식</th><th style="width:38%">방문 순서</th><th style="width:28%">T에 처음 도착한 경로</th><th>간선 수</th></tr><tr><td class="lab">큐 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.h.queue.c1" placeholder="노드 이름만 쉼표로" data-label="A4 큐 규칙 방문 순서" autocomplete="off" value="S, A, B, C, T, D"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.queue.c2" placeholder="S-…-T 모양" data-label="A4 큐 규칙 T 도착 경로" autocomplete="off" value="S-B-T"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.queue.c3" placeholder="숫자만" data-label="A4 큐 규칙 간선 수" autocomplete="off" value="2"></td></tr><tr><td class="lab">스택 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.h.stack.c1" placeholder="노드 이름만 쉼표로" data-label="A4 스택 규칙 방문 순서" autocomplete="off" value="S, B, T, D, C, A"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.stack.c2" placeholder="S-…-T 모양" data-label="A4 스택 규칙 T 도착 경로" autocomplete="off" value="S-B-T"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.stack.c3" placeholder="숫자만" data-label="A4 스택 규칙 간선 수" autocomplete="off" value="2"></td></tr><tr><td class="lab">재귀(목록 순서)</td><td class="in-cell"><input type="text" class="in" data-key="A4.h.rec.c1" placeholder="노드 이름만 쉼표로" data-label="A4 재귀 방문 순서" autocomplete="off" value="S, A, C, D, T, B"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.rec.c2" placeholder="S-…-T 모양" data-label="A4 재귀 T 도착 경로" autocomplete="off" value="S-A-C-D-T"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.rec.c3" placeholder="숫자만" data-label="A4 재귀 간선 수" autocomplete="off" value="4"></td></tr></table></div>
-<h3>순서를 바꾼 재실험</h3>
-<p>S의 이웃 목록을 <code class="i">[A, B]</code>에서 <code class="i">[B, A]</code>로 바꾼다(나머지 목록은 그대로). 세 방식을 모두 다시 구한다.</p><p class="hint"><b>쓰는 법</b> 경로 칸은 S-…-T 모양으로, 간선 수 칸은 숫자 하나만 쓴다.</p><div class="scroll"><table class="fill"><tr><th style="width:22%">방식</th><th style="width:48%">T에 처음 도착한 경로</th><th>간선 수</th></tr><tr><td class="lab">큐 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.re.queue.c1" placeholder="S-…-T 모양" data-label="A4 재실험 큐 규칙 경로" autocomplete="off" value="S-B-T"></td><td class="in-cell"><input type="text" class="in" data-key="A4.re.queue.c2" placeholder="숫자만" data-label="A4 재실험 큐 규칙 간선 수" autocomplete="off" value="2"></td></tr><tr><td class="lab">스택 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.re.stack.c1" placeholder="S-…-T 모양" data-label="A4 재실험 스택 규칙 경로" autocomplete="off" value="S-A-C-D-T"></td><td class="in-cell"><input type="text" class="in" data-key="A4.re.stack.c2" placeholder="숫자만" data-label="A4 재실험 스택 규칙 간선 수" autocomplete="off" value="4"></td></tr><tr><td class="lab">재귀</td><td class="in-cell"><input type="text" class="in" data-key="A4.re.rec.c1" placeholder="S-…-T 모양" data-label="A4 재실험 재귀 경로" autocomplete="off" value="S-B-T"></td><td class="in-cell"><input type="text" class="in" data-key="A4.re.rec.c2" placeholder="숫자만" data-label="A4 재실험 재귀 간선 수" autocomplete="off" value="2"></td></tr></table></div>
-<p class="qtext">1. 큐 규칙이 T를 방문하기 전에 방문한 노드들(시작 노드 S 포함, T 제외)은 S에서 각각 몇 걸음(간선 수) 떨어져 있는가? 방문한 순서대로 &ldquo;노드(걸음 수)&rdquo;로 쓰고, T의 걸음 수도 함께 쓴다.</p>
-<p class="hint"><b>쓰는 법</b> 방문한 순서대로 &ldquo;노드(걸음 수)&rdquo;를 나열하고(예: P(0), Q(1)), 이어서 한 문장으로 알게 된 점을 쓴다. S의 걸음 수는 0이다.</p>
-<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A4.q1" data-label="A4 큐 규칙이 T에 처음 닿을 때 그 앞에 방문한 노드들은 S에서 몇 걸음 거리인가">큐 규칙이 T를 처음 방문하기 전에 방문한 S, A, B, C는 S에서 각각 0, 1, 1, 2걸음이고 T는 2걸음이다. 걸음 수가 같거나 작은 노드가 먼저 방문되었다.</textarea></div>
-<p class="qtext">2. A2의 스택 규칙과 A3의 재귀는 둘 다 스택을 쓰는데 H에서 처음 도착한 경로가 서로 다를 수 있다. 같은 규칙인데 왜 다를 수 있는지 컨테이너 내용으로 설명한다.</p>
-<p class="hint"><b>쓰는 법</b> 2~3문장. 표의 방문 순서 또는 컨테이너 내용을 근거로 쓴다.</p>
-<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A4.q2" data-label="A4 스택 규칙과 재귀는 둘 다 가장 최근 것부터 꺼내는데 왜 처음 도착한 경로가 다를 수 있는가">스택 규칙은 이웃을 목록 순서대로 넣은 뒤 맨 위(나중에 넣은 B)부터 꺼내 S에서 B 쪽으로 가지만, 재귀는 목록의 첫 이웃 A부터 들어간다. 둘 다 가장 최근 것부터이지만 같은 자리에서 최근의 대상이 달라 처음 도착한 경로가 다를 수 있다.</textarea></div>
-<h3>가설 메모 (3줄)</h3>
-<p>표를 보고 &ldquo;무엇이 흔들리고 무엇이 안 흔들리는가&rdquo;를 근거가 된 표의 값과 함께 쓴다.</p>
-<p class="hint"><b>쓰는 법</b> 1문장. 위 학습 내용 상자의 틀(&ldquo;(바꾼 것)을 바꾸었더니 (방식)의 (값)이 (변했다/그대로였다). 근거: 표의 (칸) (값)&rdquo;)에 맞춘다. 가설 3줄은 서로 다른 내용으로 쓴다.</p>
-<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="A4.hyp1" data-label="A4 가설 1">큐 규칙의 경로 간선 수는 이웃 순서를 바꿔도 2로 같다(표의 큐 행: 2, 2).</textarea></div>
-<p class="hint"><b>쓰는 법</b> 1문장, 같은 틀로 쓴다.</p>
-<div class="ans-row"><span class="n">2</span><textarea class="in" rows="2" data-key="A4.hyp2" data-label="A4 가설 2">재귀의 경로는 이웃 순서에 따라 4에서 2로 바뀌고, 스택 규칙도 2에서 4로 바뀐다.</textarea></div>
-<p class="hint"><b>쓰는 법</b> 1문장, 같은 틀로 쓴다. 더 쓸 가설이 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p>
-<div class="ans-row"><span class="n">3</span><textarea class="in" rows="2" data-key="A4.hyp3" data-label="A4 가설 3">처음 도착한 길이 항상 가장 짧다고는 말할 수 없다(재귀가 S-A-C-D-T로 4간선).</textarea></div>
-<p>먼저 위 표와 가설 메모에 내 말로 쓴 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · H 표의 값과 읽는 법</summary>
+<p class="tip">T에 처음 도착한 경로는 T가 처음 방문된 때의 경로이다. 큐·스택은 위의 되짚기로, 재귀는 그때의 Call Stack을 읽어 S-…-T로 쓴다.</p>
+<p class="tip">간선 수는 경로의 노드 수에서 1을 뺀 값이다.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:16%">방식</th><th style="width:38%">방문 순서</th><th style="width:28%">T에 처음 도착한 경로</th><th>간선 수</th></tr><tr><td class="lab">큐 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.h.queue.c1" placeholder="노드 이름만 쉼표로" data-label="A4 큐 규칙 방문 순서" autocomplete="off" value="S, A, B, C, T, D"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.queue.c2" placeholder="S-…-T 모양" data-label="A4 큐 규칙 T 도착 경로" autocomplete="off" value="S-B-T"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.queue.c3" placeholder="숫자만" data-label="A4 큐 규칙 간선 수" autocomplete="off" value="2"></td></tr><tr><td class="lab">스택 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.h.stack.c1" placeholder="노드 이름만 쉼표로" data-label="A4 스택 규칙 방문 순서" autocomplete="off" value="S, B, T, D, C, A"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.stack.c2" placeholder="S-…-T 모양" data-label="A4 스택 규칙 T 도착 경로" autocomplete="off" value="S-B-T"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.stack.c3" placeholder="숫자만" data-label="A4 스택 규칙 간선 수" autocomplete="off" value="2"></td></tr><tr><td class="lab">재귀(목록 순서)</td><td class="in-cell"><input type="text" class="in" data-key="A4.h.rec.c1" placeholder="노드 이름만 쉼표로" data-label="A4 재귀 방문 순서" autocomplete="off" value="S, A, C, D, T, B"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.rec.c2" placeholder="S-…-T 모양" data-label="A4 재귀 T 도착 경로" autocomplete="off" value="S-A-C-D-T"></td><td class="in-cell"><input type="text" class="in" data-key="A4.h.rec.c3" placeholder="숫자만" data-label="A4 재귀 간선 수" autocomplete="off" value="4"></td></tr></table></div>
+</div>
+<div class="step">
+<h3>큐 규칙의 걸음 수</h3>
+<p>큐 규칙은 S, A, B, C, T, D 순서로 방문했다. T 앞의 C가 S에서 몇 걸음 떨어졌는지 세어 보자.</p>
+<div class="quiz" data-answer="2">
+<p class="q">C는 S에서 간선 몇 개 떨어져 있는가?</p>
+<div class="opts"><button type="button" data-hint="S에서 C로 바로 이어진 간선이 있는가?">1개</button><button type="button">2개</button><button type="button" data-hint="S-A-C로 가면 간선이 몇 개인지 세어 보자.">3개</button></div>
+<p class="why">S-A-C로 간선 2개이다. T도 S-B-T로 2개이다.</p>
+</div>
+</div>
+<div class="step">
+<h3>이웃 순서 바꿔 보기</h3>
+<p>S의 목록만 <code class="i">[B, A]</code>로 바꾸고 나머지는 그대로 둔다. 세 방식을 처음부터 다시 돌리기 전에, 어느 줄이 바뀔지 먼저 생각해 보자.</p>
+<div class="scroll"><table class="fill"><tr><th style="width:22%">방식</th><th style="width:48%">T에 처음 도착한 경로</th><th>간선 수</th></tr><tr><td class="lab">큐 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.re.queue.c1" placeholder="S-…-T 모양" data-label="A4 재실험 큐 규칙 경로" autocomplete="off" value="S-B-T"></td><td class="in-cell"><input type="text" class="in" data-key="A4.re.queue.c2" placeholder="숫자만" data-label="A4 재실험 큐 규칙 간선 수" autocomplete="off" value="2"></td></tr><tr><td class="lab">스택 규칙</td><td class="in-cell"><input type="text" class="in" data-key="A4.re.stack.c1" placeholder="S-…-T 모양" data-label="A4 재실험 스택 규칙 경로" autocomplete="off" value="S-A-C-D-T"></td><td class="in-cell"><input type="text" class="in" data-key="A4.re.stack.c2" placeholder="숫자만" data-label="A4 재실험 스택 규칙 간선 수" autocomplete="off" value="4"></td></tr><tr><td class="lab">재귀</td><td class="in-cell"><input type="text" class="in" data-key="A4.re.rec.c1" placeholder="S-…-T 모양" data-label="A4 재실험 재귀 경로" autocomplete="off" value="S-B-T"></td><td class="in-cell"><input type="text" class="in" data-key="A4.re.rec.c2" placeholder="숫자만" data-label="A4 재실험 재귀 간선 수" autocomplete="off" value="2"></td></tr></table></div>
+</div>
+<div class="step">
+<h3>가설 메모 쓰기</h3>
+<p>두 표를 보고 &lsquo;무엇이 흔들리고 무엇이 안 흔들리는가&rsquo;에 대한 가설(아직 확인하지 않은 내 생각)을 세 줄로 쓴다. 세 줄은 서로 다른 내용으로 쓴다.</p>
+<p class="tip">틀: &ldquo;(바꾼 것)을 바꾸었더니 (방식)의 (값)이 (변했다/그대로였다). 근거: 표의 (칸) (값)&rdquo;. 더 쓸 가설이 없으면 &lsquo;없음&rsquo;이라고 쓴다.</p>
+<div class="ans-row"><textarea placeholder="예: 이웃 순서를 바꾸었더니 …의 …이 …. 근거: 표의 …" class="in" rows="2" data-key="A4.hyp1" data-label="A4 가설 1">큐 규칙의 경로 간선 수는 이웃 순서를 바꿔도 2로 같다(표의 큐 행: 2, 2).</textarea></div>
+<div class="ans-row"><textarea placeholder="예: 같은 틀로 한 문장" class="in" rows="2" data-key="A4.hyp2" data-label="A4 가설 2">재귀의 경로는 이웃 순서에 따라 4에서 2로 바뀌고, 스택 규칙도 2에서 4로 바뀐다.</textarea></div>
+<div class="ans-row"><textarea placeholder="예: 같은 틀로 한 문장(없으면 &lsquo;없음&rsquo;)" class="in" rows="2" data-key="A4.hyp3" data-label="A4 가설 3">처음 도착한 길이 항상 가장 짧다고는 말할 수 없다(재귀가 S-A-C-D-T로 4간선).</textarea></div>
+</div>
+<p class="wrapup"><b>여기까지</b> H에서 세 방식을 비교하고 가설 메모 세 줄을 썼다. 이 가설은 A9에서 확인한다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · H 표의 값과 읽는 법</summary>
 <table><tr><th>방식</th><th>방문 순서</th><th>처음 도착한 경로(간선 수)</th><th>S 목록 [B, A]일 때</th></tr>
 <tr><td>큐 규칙</td><td>S A B C T D</td><td>S-B-T (2)</td><td>S-B-T (2)</td></tr>
 <tr><td>스택 규칙</td><td>S B T D C A</td><td>S-B-T (2)</td><td>S-A-C-D-T (4)</td></tr>
@@ -447,36 +489,36 @@ S: [A, B]   A: [S, C]   B: [S, T]   C: [A, D]   D: [C, T]   T: [D, B]</pre>
 <li>스택 규칙과 재귀는 둘 다 &ldquo;가장 최근 것부터&rdquo;이지만 S에서 스택은 이웃 A, B를 모두 넣고 마지막에 넣은 B를 꺼내고, 재귀는 목록의 첫 이웃 A로 바로 들어간다. 그래서 같은 목록에서 서로 반대쪽을 먼저 간다.</li>
 </ul></details>
 </section>
-<section id="A5" class="sheet">
+<section id="A5" class="sheet lesson">
 <h2>A5 · 1차시 정리와 exit ticket<small>1차시 · 2분 · 개인</small></h2>
-<p class="meta"><span>산출물: exit ticket</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>오늘 붙인 이름(너비 우선·깊이 우선)과 두 규칙의 차이를 새 시작 노드에서도 쓸 수 있는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">적용</span>G1에서 시작 노드를 D로 바꾸고 큐 규칙을 처음부터 손으로 따라 한 뒤, A가 몇 번째로 방문되는지 숫자 하나로 쓴다(D가 1번째).<span class="tg-where">exit ticket 칸</span><span class="tg-done">숫자 하나가 적혔다.</span></li>
-<li><span class="tg-stage">설명</span>이번 시간에 한 일 세 가지를 점검하고, 가장 헷갈린 점 한 가지를 쓴다.<span class="tg-where">점검 칸 3개와 ‘오늘 가장 헷갈린 점’ 칸</span><span class="tg-done">점검 칸과 헷갈린 점 칸이 채워졌다.</span></li>
-<li><span class="tg-stage">도구 확인</span>먼저 칸에 쓴 뒤 아래 ‘활동을 마친 뒤 열어 확인한다’ 상자를 열어 내 답과 비교한다.</li>
-</ol>
+<p class="lead">1차시를 마무리하며 오늘 쓴 규칙에 이름을 붙이고, 새 시작 노드에서 한 번 더 따라 해 보자.</p>
+<div class="step">
+<h3>이름 붙이기</h3>
+<p>오늘부터 큐 규칙을 <b>너비 우선 탐색(BFS)</b>, 스택 규칙과 재귀 규칙을 <b>깊이 우선 탐색(DFS)</b>이라고 부른다. 이름일 뿐 어느 쪽이 더 좋다는 뜻은 아니다.</p>
+<div class="quiz" data-answer="1">
+<p class="q">A2에서 큐 규칙으로 돌아 얻은 방문 순서는 어느 탐색의 것일까?</p>
+<div class="opts"><button type="button">BFS</button><button type="button" data-hint="큐 규칙은 어느 이름이었는지 위 문장을 다시 읽어 보자.">DFS</button></div>
+<p class="why">큐 규칙이 BFS이다. 스택 규칙과 재귀는 DFS이다.</p>
 </div>
-<div class="concept"><b class="h">이름 붙이기</b><p>오늘부터 큐 규칙을 <b>너비 우선 탐색(BFS)</b>, 스택 규칙과 재귀 규칙을 <b>깊이 우선 탐색(DFS)</b>이라고 부른다. 이름만 붙인 것이며 어느 쪽이 더 좋다는 뜻은 아니다.</p></div>
-<div class="learn-box"><span class="lb-title">학습 내용 · 1차시 용어 정리와 exit ticket 푸는 법</span>
-<ul>
-<li><b>컨테이너</b>(스택·큐), <b>방문</b>(꺼내 처리한 때), <b>방문 기록</b>, <b>이웃 순서</b>(목록 순서), <b>Call Stack</b>(재귀 호출이 쌓이는 스택), <b>BFS</b>(큐 규칙), <b>DFS</b>(스택 규칙과 재귀)는 오늘 쓴 말이다.</li>
-<li>exit ticket은 G1에서 시작 노드를 D로 바꿔 큐 규칙을 처음부터 손으로 따라 한다. 큐 규칙은 시작 노드를 큐에 넣고, 맨 앞에서 하나 꺼내 이미 방문한 노드이면 버리고 아니면 방문 기록에 쓴 뒤 방문하지 않은 이웃을 목록 순서대로 큐 뒤에 넣으며, 큐가 빌 때까지 반복한다. 방문 순서는 꺼내 처리한 순서이며, 버려진 줄은 세지 않는다.</li>
-<li>G1은 노드 A~F, 간선 <code class="i">(A,B) (A,C) (B,D) (C,D) (D,E)</code>이다.<pre class="diagram">   A ─ B
-   │   │
-   C ─ D ─ E        F
+</div>
+<div class="step">
+<h3>새 시작 노드로 따라 하기</h3>
+<p>G1에서 시작 노드를 D로 바꿔 큐 규칙(BFS)을 처음부터 따라 해 보자. 시작 D가 1번째일 때 A는 몇 번째로 방문될까?</p>
+<pre class="fig">A ─ B
+│   │
+C ─ D ─ E        F
 
-A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre></li>
-</ul></div>
-<p><b>exit ticket</b> G1에서 시작 D로 큐 규칙(BFS)을 따를 때, A는 몇 번째로 방문되는가? (시작 노드 D를 1번째로 센다. 숫자 하나만 쓴다.) <input type="text" class="in" placeholder="숫자" data-key="A5.ticket" data-label="A5 exit ticket 시작 D에서 A는 몇 번째로 방문되는가" autocomplete="off" style="width:6em;display:inline-block" value="5"></p>
-<p>이번 시간에 한 일을 점검한다.</p>
-<p><label class="ck"><input type="checkbox" data-key="A5.chk1" data-label="A5 점검: 두 규칙으로 G1을 손으로 탐색했다" checked> 두 규칙으로 G1을 손으로 탐색했다</label><label class="ck"><input type="checkbox" data-key="A5.chk2" data-label="A5 점검: 재귀 호출 추적표를 채웠다" checked> 재귀 호출 추적표를 채웠다</label><label class="ck"><input type="checkbox" data-key="A5.chk3" data-label="A5 점검: H 비교표와 재실험을 채웠다" checked> H 비교표와 재실험을 채웠다</label></p>
-<p class="qtext">오늘 가장 헷갈린 점 한 가지를 쓴다.</p>
-<p class="hint"><b>쓰는 법</b> 1~2문장. 헷갈린 활동 번호(예: A3)와 내용을 쓴다. 없으면 &ldquo;없음&rdquo;이라고 쓴다.</p>
-<div class="ans-row"><span class="n">?</span><textarea class="in" rows="2" data-key="A5.muddy" data-label="A5 가장 헷갈린 점">스택 규칙에서 D 다음에 왜 E가 나오는지, 재귀의 순서와 어디서 달라지는지 헷갈린다.</textarea></div>
-<p>먼저 exit ticket 칸에 답을 쓴 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · exit ticket 확인</summary>
+A: [B, C]   B: [A, D]   C: [A, D]   D: [B, C, E]   E: [D]</pre>
+<p class="tip">버려진 줄은 방문 순서에 세지 않는다.</p>
+<p><input type="text" class="in" placeholder="숫자" data-key="A5.ticket" data-label="A5 exit ticket 시작 D에서 A는 몇 번째로 방문되는가" autocomplete="off" style="width:6em;display:inline-block" value="5"></p>
+</div>
+<div class="step">
+<h3>헷갈린 점 쓰기</h3>
+<p>오늘 가장 헷갈린 점을 활동 번호와 함께 한두 문장으로 쓴다. 없으면 &lsquo;없음&rsquo;이라고 쓴다.</p>
+<div class="ans-row"><textarea placeholder="예: A3, 재귀의 exit 줄이 헷갈린다" class="in" rows="2" data-key="A5.muddy" data-label="A5 가장 헷갈린 점">스택 규칙에서 D 다음에 왜 E가 나오는지, 재귀의 순서와 어디서 달라지는지 헷갈린다.</textarea></div>
+</div>
+<p class="wrapup"><b>여기까지</b> 1차시 활동을 마쳤다. 2차시에는 이 규칙을 코드로 만든다.</p>
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · exit ticket 확인</summary>
 <p>시작 D에서 큐 규칙의 방문 순서는 D, B, C, E, A이므로 A는 <b>5번째</b>이다. D를 방문하며 B, C, E를 넣고, B를 방문하며 A를 넣고, C를 방문하며 A를 한 번 더 넣는다. A는 큐에 두 번 들어가지만 방문은 처음 꺼낸 때 한 번이고, 버려진 줄은 순서에 세지 않는다.</p></details>
 </section>
 </div>

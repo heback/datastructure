@@ -122,6 +122,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <link rel="stylesheet" href="../assets/topnav.css">
 <link rel="stylesheet" href="../assets/theme.css">
 <link rel="stylesheet" href="../assets/sheettabs.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script src="../assets/lesson.js" defer></script>
 <script src="../assets/topnav.js" defer></script>
 <link rel="stylesheet" href="../assets/chatkit.css">
 <script src="../assets/chatkit.js" defer></script>
@@ -131,53 +133,85 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; lab.week(11)  # 학생용 · 실습 코드 3부 (A10 시작 때 배포)</div>
   <h1>11주차 실습 코드 3부 — 섬의 개수, 과제 점검</h1>
-  <p class="lead">A10과 A13에 사용한다. A10은 먼저 손으로 센 개수를 활동지에 예측으로 쓴다. A13 블록은 A13 활동에서 펼친다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+  <p class="lead">A10과 A13에 사용한다. A10은 먼저 손으로 센 개수를 활동지에 쓰고 시작한다. A13 블록은 A13 활동에서 펼친다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
 </header>
 <nav><a href="#how">#사용법</a><a href="#A10">#A10</a><a href="#A13">#A13</a><a href="#assign">#과제서술</a><a href="#ai">#AI활용</a><a href="index.html">목록</a></nav>
 
 <section id="how">
 <h2>사용법<small>#how</small></h2>
-<ol>
-<li>이 페이지의 파이썬 환경은 1부·2부와 따로이므로 앞 쪽에서 쓴 코드가 저절로 넘어오지 않는다. 1부 A7 편집기에서 &lsquo;제공 코드&rsquo;와 내 <code class="i">grid_neighbors</code>, <code class="i">shortest_path_len</code>을 [&#9654; 실행]해 성공시켜 둔 뒤, 이 페이지의 아무 편집기에서나 [앞 쪽 코드 불러오기]를 누른다. 그러면 <code class="i">deque</code>, <code class="i">DIRS</code>, <code class="i">MAZE</code>, <code class="i">START</code>, <code class="i">GOAL</code>, 내 <code class="i">grid_neighbors</code>와 <code class="i">shortest_path_len</code>이 이 페이지의 환경에 들어온다. 불러오기가 &ldquo;불러올 코드가 없다&rdquo;고 하거나 실패하면 A10의 &lsquo;준비 코드&rsquo;를 먼저 실행하고(준비 코드에는 <code class="i">grid_neighbors</code> 참조 코드가 들어 있다), A13에서는 1부의 &lsquo;제공 코드(입력)&rsquo;(MAZE, START, GOAL)와 내 <code class="i">shortest_path_len</code>도 1부에서 복사해 붙여 넣는다.</li>
-<li><b>점검이 실패할 때 읽는 법</b>: 실행 결과의 <code class="i">FAIL</code> 줄이 어긋난 곳을 한 줄씩 알려 준다(예: <code class="i">FAIL 격자 3: 섬의 개수가 다르다</code>는 점검 격자 목록의 3번(0부터 센다) 격자에서 내 count_islands의 값이 기준과 다르다는 뜻이다. A13의 <code class="i">FAIL 6: …</code>은 점검 항목 6번이다). 마지막 <code class="i">AssertionError</code> 줄은 FAIL 줄을 모아 멈췄다는 신호이다. 이 점검은 <code class="i">A != B</code>처럼 두 값을 나란히 보여 주지 않으므로 내 결과는 직접 찍어 본다. FAIL 줄에 나온 입력으로 <code class="i">print(내 함수(입력))</code>을 실행해 손으로 구한 값과 대조한다.</li>
-<li>같은 페이지의 편집기들은 환경을 공유한다. A10 편집기에서 실행한 <code class="i">count_islands</code>와 <code class="i">explore</code>는 A13 점검에서 그대로 쓴다. <code class="i">NameError</code>는 아직 정의하지 않은 이름을 썼다는 뜻이다.</li>
-<li>A10에서는 먼저 활동지 <a class="xlink" href="student_workbook_part3.html#A10">3부 A10</a>의 예측 칸에 섬의 개수를 손으로 세어 쓰고, 그 뒤 코드를 완성해 실행한 값을 실제 칸에 쓴다. 코드는 [예시 코드]에서 [편집기에 추가]로 이어 붙이고 [&#9654; 실행](Ctrl 또는 &#8984;+Enter)으로 확인한다.</li>
-<li>실행은 15초를 넘기면 멈추고 환경이 초기화된다. 다음 실행 때 이 페이지에서 성공했던 코드가 자동으로 복원된다. 편집기의 내용은 [저장(JSON)]에 함께 들어간다.</li>
-<li>아래쪽 A13 블록은 접혀 있다. <b>A13 활동에서</b> 펼친다.</li>
-</ol>
-</section>
-<section id="A10" class="sheet">
-<h2>A10 · 섬의 개수<small>12분 · 개인</small></h2>
-<p>격자는 문자열 리스트이고 ‘1’이 땅, ‘0’이 바다이다.</p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>길이 이어진 칸이 하나의 덩어리인 격자에서, 탐색 틀을 모든 칸에 되풀이하면 덩어리의 개수를 셀 수 있는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">예측</span>[학습 내용]의 ISLE 그림에서 섬의 개수를 <b>코드를 쓰기 전에</b> 손으로 세어 쓴다.<span class="tg-where">활동지 <a class="xlink" href="student_workbook_part3.html#A10">3부 A10</a>의 표 첫 줄 예측 칸</span><span class="tg-done">예측 칸에 숫자가 있다.</span></li>
-<li><span class="tg-stage">도구 확인</span>[준비 코드]와 [제공 코드(입력)]를 [예시 코드]에서 [편집기에 추가]해 실행한다. <code class="i">grid_neighbors</code>, <code class="i">DIRS</code>, <code class="i">ISLE</code>가 이 페이지에 생긴다.<span class="tg-where">[내 코드 · A10 (count_islands, explore 작성)] 편집기</span><span class="tg-done">오류 없이 끝난다(출력은 없다).</span></li>
-<li><span class="tg-stage">적용</span>[골격]을 같은 편집기 맨 아래에 추가하고 ⑮~⑰ 자리를 채워 <code class="i">count_islands</code>와 <code class="i">explore</code>를 완성한다.<span class="tg-where">[내 코드 · A10 (count_islands, explore 작성)] 편집기</span><span class="tg-done">⑮~⑰에 <code class="i">____</code>가 남지 않는다.</span></li>
-<li><span class="tg-stage">관찰</span>[실행 틀]을 추가해 실행하고 개수를 표의 2줄 실제 칸에 쓴다. 1줄의 손으로 센 개수와 같은지 본다.<span class="tg-where">활동지 <a class="xlink" href="student_workbook_part3.html#A10">3부 A10</a>의 표 1~2줄</span><span class="tg-done">2줄의 예측·실제 칸이 채워졌다.</span></li>
-<li><span class="tg-stage">시도</span>⑰의 꺼내는 줄을 <code class="i">popleft()</code>에서 <code class="i">pop()</code>으로 바꾸기 <b>전에</b> 개수가 달라질지 3줄 예측 칸에 쓰고, 바꿔 실행해 실제 칸에 쓴다. 끝나면 원래대로 되돌린다. (선택) 4줄은 [(선택) 8방향 실험]으로 같은 방식으로 한다.<span class="tg-where">활동지 <a class="xlink" href="student_workbook_part3.html#A10">3부 A10</a>의 표 3~4줄</span><span class="tg-done">3줄의 예측·실제 칸이 채워졌다.</span></li>
-<li><span class="tg-stage">도구 확인</span>[자체 점검]을 편집기 맨 아래에 추가해 실행한다. 실패하면 FAIL 줄을 읽고 고친다(읽는 법은 위 [사용법]).<span class="tg-where">[내 코드 · A10 (count_islands, explore 작성)] 편집기</span><span class="tg-done"><code class="i">A10 점검 통과</code>가 출력된다.</span></li>
-<li><span class="tg-stage">설명</span>정리 질문 1~5번에 답한다.<span class="tg-where">활동지 <a class="xlink" href="student_workbook_part3.html#A10">3부 A10</a>의 질문 칸</span><span class="tg-done">5칸이 채워졌다.</span></li>
-</ol>
-<p class="tg-why"><span class="tg-k">왜 이 활동을 하는가</span>A7의 큐 틀을 ‘한 칸에서 이어진 칸 모두 표시하기’로 쓰고, 그것을 모든 칸에 되풀이하면 어떤 문제가 풀리는지 본다.</p>
-<div class="tg-contract"><span class="tg-k">만들 것</span><code class="i">count_islands(grid)</code>, <code class="i">explore(grid, r, c, seen)</code><ul><li>받는 값: <code class="i">grid</code>는 문자열 리스트(<code class="i">"1"</code>이 땅, <code class="i">"0"</code>이 바다). explore는 시작 칸 <code class="i">(r, c)</code>와 이미 센 칸을 모은 <code class="i">seen</code>도 받는다.</li><li>돌려주는 값: count_islands는 섬의 개수(정수). explore는 돌려주는 값이 없고 이어진 땅 칸을 <code class="i">seen</code>에 넣는다.</li><li>쓰는 모습: <code class="i">count_islands(ISLE)</code></li></ul></div>
-<details class="tg-hint"><summary>막히면 · 힌트 1 (적용)</summary><p>⑮은 두 조건을 모두 만족해야 한다. 칸이 땅인가, 이미 어떤 섬으로 센 칸이 아닌가? <code class="i">seen</code>에 어떤 모양의 값이 들어 있는지 explore 안의 <code class="i">seen.add</code> 줄에서 찾는다.</p></details>
-<details class="tg-hint"><summary>막히면 · 힌트 2 (도구 확인)</summary><p>점검이 실패하면 FAIL 줄의 ‘격자 k’를 점검 코드의 격자 목록에서 찾아(0부터 센다) 그 격자로 <code class="i">print(count_islands(그 격자))</code>를 실행해 손으로 센 값과 대조한다.</p></details>
-</div><div class="learn-box"><span class="lb-title">학습 내용 · ISLE 읽는 법과 빈칸 ⑮~⑰ 길잡이</span>
-<pre class="diagram">     열 0 1 2 3 4 5 6       섬은 &lsquo;1&rsquo;(땅) 칸이 상하좌우로 이어진 덩어리이다(이웃은 grid_neighbors와 같은 4방향).
-행 0     1 1 0 0 0 1 0       6행 &times; 7열이다. 손으로 셀 때는 땅 칸 하나를 골라 상하좌우로 이어진 땅 칸에
-행 1     1 1 0 0 0 1 1       같은 표시를 하고, 표시 안 된 땅 칸이 남아 있으면 새 섬으로 센다.
-행 2     0 0 1 0 0 0 0
-행 3     0 0 0 1 1 0 0
-행 4     1 0 0 0 1 0 0
-행 5     1 0 0 0 0 0 1</pre>
 <ul>
-<li><b>count_islands</b>는 격자의 모든 칸을 차례로 훑는다. ⑮ 땅이면서 아직 어떤 섬에도 세지 않은(seen에 없는) 칸을 만나면 섬을 하나 센다. ⑯ 그 칸에서 explore를 불러 그 섬의 모든 칸을 seen에 표시한다.</li>
-<li><b>explore</b>는 A7의 큐 틀(시작 칸을 큐에 넣고 표시한다, 큐가 빌 때까지 앞에서 한 칸을 꺼내 그 칸의 이웃 중 아직 표시하지 않은 칸을 표시하고 뒤에 넣는다)과 같은 모양이다. todo는 앞으로 볼 칸을 담는 deque이고 시작 칸은 이미 seen에 넣었다. ⑰은 todo에서 한 칸을 꺼내는 줄이다. ⑰을 <code class="i">popleft()</code>와 <code class="i">pop()</code> 두 가지로 써서 결과를 비교한다.</li>
-<li>(선택) 8방향 실험은 DIRS에 대각선 네 방향을 더해 이웃의 뜻을 바꾼다. 실험이 끝나면 4방향으로 되돌린다.</li>
-</ul></div>
-<h3>준비 코드</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A10-0"># A10 준비 코드: 1부 코드가 불러와지지 않았을 때 먼저 실행한다(이미 있어도 다시 실행해도 된다).
+<li>편집기에는 필요한 코드가 미리 들어 있다. <code class="i">____15____</code> 같은 자리를 채우고 [&#9654; 실행]을 누른다.</li>
+<li>[&#10004; 점검]은 내 코드가 맞는지 확인해 준다. [처음 코드로]는 편집기를 처음 상태로 되돌린다.</li>
+<li>편집기에 쓴 내용은 자동으로 보관된다. 다 했으면 위의 [저장(JSON)]으로 제출 파일을 만든다.</li>
+</ul>
+<details class="more"><summary>단축키와 오류가 날 때</summary>
+<ul>
+<li>Ctrl(&#8984;)+Enter는 실행, Tab은 들여쓰기, Shift+Tab은 내어쓰기이다.</li>
+<li>이 쪽의 파이썬 환경은 1부·2부와 따로이다. 1부에서 실행한 코드가 필요하면 A13의 [앞 쪽 코드 불러오기]를 쓴다.</li>
+<li>점검이 실패하면 <code class="i">FAIL</code> 줄을 읽는다. 어느 입력에서 어긋났는지 적혀 있다. 맨 아래 <code class="i">AssertionError</code>는 FAIL 줄을 모아 멈췄다는 신호이다.</li>
+<li>실행이 15초를 넘기면 멈추고 환경이 초기화된다. 다음 실행 때 이 쪽에서 성공했던 코드가 복원된다.</li>
+</ul>
+</details>
+</section>
+<section id="A10" class="sheet lesson">
+<h2>A10 · 섬의 개수<small>12분 · 개인</small></h2>
+<p class="lead">A7에서 만든 큐 틀로 격자의 이어진 땅을 한꺼번에 칠할 수 있다. 칠한 덩어리를 세어 섬의 개수를 구해 보자.</p>
+
+<div class="step">
+<h3>섬 하나 칠해 보기</h3>
+<p>땅(<code class="i">1</code>)이 상하좌우로 이어진 덩어리를 섬이라 한다. 2행 3열 격자에서 왼쪽 위 땅 칸부터 이어진 땅을 모두 칠해 보자.</p>
+<pre class="fig">처음          (0, 0)에서 칠한 뒤
+
+1 1 0         ● ● 0
+0 0 1         0 0 1</pre>
+<div class="quiz" data-answer="2">
+<p class="q">칠하고 나서도 칠하지 않은 땅이 하나 남았다. 이 격자의 섬은 모두 몇 개일까?</p>
+<div class="opts"><button type="button" data-hint="칠한 덩어리 하나만 센 것이다. 남은 땅도 따로 한 덩어리이다.">1개</button><button type="button">2개</button><button type="button" data-hint="땅 칸은 셋이지만, 이어진 칸은 한 덩어리로 센다.">3개</button></div>
+<p class="why">(0, 0)과 (0, 1)이 한 섬이고 (1, 2)가 다른 섬이다. 칠하지 않은 땅이 남아 있으면 새 섬이 있다는 뜻이다.</p>
+</div>
+</div>
+
+<div class="step">
+<h3>ISLE를 손으로 세기</h3>
+<p>이제 6행 7열 격자 ISLE이다. 코드를 쓰기 전에 섬이 몇 개인지 손으로 세어 보자.</p>
+<pre class="fig">1100010
+1100011
+0010000
+0001100
+1000100
+1000001</pre>
+<p>센 값은 활동지 <a class="xlink" href="student_workbook_part3.html#A10">3부 A10</a> 표의 1줄 &lsquo;예측&rsquo; 칸에 쓴다.</p>
+<p class="tip">대각선으로만 닿은 칸은 이어진 것이 아니다. 상하좌우만 본다.</p>
+</div>
+
+<div class="step">
+<h3>칠하는 코드 돌려 보기</h3>
+<p>손으로 한 칠하기를 큐로 하면 아래와 같다. [&#9654; 실행]하면 칠한 칸이 <code class="i">*</code>로 나온다.</p>
+<script type="text/plain" data-id="A10-p1">
+from collections import deque
+G = [list("110"), list("001")]      # '1' 땅, '0' 바다, '*' 칠한 칸
+todo = deque([(0, 0)]); G[0][0] = "*"   # 시작 칸을 칠하고 출발한다
+while todo:
+    r, c = todo.popleft()           # 맨 앞에서 한 칸을 꺼낸다
+    for nr, nc in [(r, c + 1), (r + 1, c), (r, c - 1), (r - 1, c)]:   # 우 하 좌 상
+        if 0 <= nr < 2 and 0 <= nc < 3 and G[nr][nc] == "1":
+            G[nr][nc] = "*"; todo.append((nr, nc))   # 칠하고 뒤에 넣는다
+print(G)
+</script>
+<div class="mycode"><textarea class="in code" rows="9" data-type="code" data-starter="A10-p1" data-label="연습 · 섬 하나 칠하기" spellcheck="false"></textarea></div>
+<p>시작 칸 <code class="i">(0, 0)</code>을 <code class="i">(1, 2)</code>로 바꿔 다시 실행해 보자. 시작 칸은 3행 한 줄에 두 번 있다.</p>
+<div class="quiz" data-answer="1">
+<p class="q">시작 칸을 <code class="i">(1, 2)</code>로 바꾸면 <code class="i">*</code>로 칠해지는 칸은?</p>
+<div class="opts"><button type="button">(1, 2) 하나</button><button type="button" data-hint="(0, 0)과 (0, 1)은 (1, 2)와 이어져 있지 않다.">(0, 0)과 (0, 1)</button><button type="button" data-hint="세 칸 모두는 칠해지지 않는다. (1, 2)는 어느 땅과 이어져 있는가?">세 땅 칸 모두</button></div>
+<p class="why">(1, 2)는 이어진 땅이 없는 섬이다. 시작 칸이 속한 섬 하나만 칠해진다.</p>
+</div>
+</div>
+
+<div class="step">
+<h3>두 함수 완성하기</h3>
+<p>칠하기를 함수로 만든 것이 <code class="i">explore</code>이고, 격자를 훑으며 섬을 세는 것이 <code class="i">count_islands</code>이다. 빈칸은 세 개이다. <code class="i">____17____</code>(explore에서 큐의 맨 앞을 꺼내는 줄)부터 채우고, <code class="i">____16____</code>, <code class="i">____15____</code> 순으로 채운다.</p>
+<script type="text/plain" data-id="A10-0">
+# 준비 코드: 큐 도구, 방향 목록, 이웃을 내주는 함수(1부 A7의 grid_neighbors와 같은 모양)
 # deque: 양쪽 끝에서 넣고 꺼내기 쉬운 큐
 from collections import deque
 # 1부에서 쓴 값과 같은 방향 목록(우 하 좌 상)
@@ -186,14 +220,20 @@ DIRS = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 def grid_neighbors(grid, r, c, passable):
     for dr, dc in DIRS:
         nr, nc = r + dr, c + dc
-        if 0 &lt;= nr &lt; len(grid) and 0 &lt;= nc &lt; len(grid[0]) and grid[nr][nc] in passable:
-            yield (nr, nc)</code></pre></div><h3>제공 코드(입력)</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A10-1"># 격자: 한 줄이 한 문자열이다. ISLE[행][열]로 한 칸을 읽는다.
+        if 0 <= nr < len(grid) and 0 <= nc < len(grid[0]) and grid[nr][nc] in passable:
+            yield (nr, nc)
+</script>
+<script type="text/plain" data-id="A10-1">
+# 격자: 한 줄이 한 문자열이다. ISLE[행][열]로 한 칸을 읽는다.
 ISLE = ["1100010",
         "1100011",
         "0010000",
         "0001100",
         "1000100",
-        "1000001"]                            # '1' 땅, '0' 바다 (행 6, 열 7)</code></pre></div><h3>골격</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A10-2"># 섬의 개수를 세어 돌려주는 함수. 격자의 모든 칸을 차례로 훑는다.
+        "1000001"]                            # '1' 땅, '0' 바다 (행 6, 열 7)
+</script>
+<script type="text/plain" data-id="A10-2">
+# 섬의 개수를 세어 돌려주는 함수. 격자의 모든 칸을 차례로 훑는다.
 def count_islands(grid):
     if not grid:  # 격자가 비어 있으면
         return 0
@@ -217,13 +257,13 @@ def explore(grid, r, c, seen):
         for n in grid_neighbors(grid, cr, cc, "1"):
             if n not in seen:  # 아직 표시하지 않은 칸이면
                 seen.add(n)  # 표시하고
-                todo.append(n)  # todo에 넣는다</code></pre></div><div class="mycode"><label>내 코드 · A10 (count_islands, explore 작성)</label><textarea class="in code" rows="20" data-type="code" data-key="A10.mycode" data-label="A10 (count_islands, explore 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><h3>실행 틀</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-3"># 실행 예(출력 값은 적혀 있지 않다)
-print(count_islands(ISLE))</code></pre></div><h3>(선택) 8방향 실험</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A10-4"># (선택) 8방향 실험 · grid_neighbors가 읽는 전역 DIRS를 바꾼다. 실험이 끝나면 되돌려 둔다.
-# 기본 4방향에 대각선 4방향을 더한 목록
-DIRS8 = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
-DIRS = DIRS8  # 전역 DIRS를 8방향으로 바꾼다
-print(count_islands(ISLE))  # 같은 함수를 바뀐 방향으로 실행한다
-DIRS = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # 원래 4방향으로 되돌린다</code></pre></div><h3>자체 점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A10-5"># A10 점검: 기대 개수는 적혀 있지 않다. 이웃 칸을 맞대 가며 번호를 합치는 다른 계산으로 구한 개수와 비교한다.
+                todo.append(n)  # todo에 넣는다
+</script>
+<script type="text/plain" data-id="A10-run">
+print(count_islands(ISLE))
+</script>
+<script type="text/plain" data-id="A10-5">
+# A10 점검: 기대 개수는 적혀 있지 않다. 이웃 칸을 맞대 가며 번호를 합치는 다른 계산으로 구한 개수와 비교한다.
 # 기준값: 땅 칸마다 번호표를 붙이고, 맞닿은 칸끼리 작은 번호로 통일한다.
 # 끝나면 서로 다른 번호의 개수가 섬의 개수이다.
 def ref_islands(grid):
@@ -236,7 +276,7 @@ def ref_islands(grid):
         for cell in cells + cells[::-1]:  # [::-1]은 뒤집은 리스트. 앞뒤로 훑는다
             for dr, dc in ((0, 1), (1, 0), (0, -1), (-1, 0)):
                 nb = (cell[0] + dr, cell[1] + dc)
-                if nb in lab and lab[nb] &lt; lab[cell]:
+                if nb in lab and lab[nb] < lab[cell]:
                     lab[cell] = lab[nb]
                     changed = True
     # set은 중복을 없앤다. 서로 다른 번호의 수 = 섬의 수
@@ -248,7 +288,7 @@ def limited(real, limit, what):
     cnt = [0]  # 리스트에 담아야 안쪽 함수가 값을 바꿀 수 있다
     def wrapped(*a):  # *a: 인자를 몇 개든 그대로 받는다
         cnt[0] += 1
-        if cnt[0] &gt; limit:
+        if cnt[0] > limit:
             raise RuntimeError(what + "를 너무 많이 불렀다(끝나지 않는 반복이 의심된다)")
         return real(*a)  # 원래 함수를 그대로 실행한다
     return wrapped
@@ -276,38 +316,92 @@ for f in fails:
     print("FAIL", f)
 # 실패가 하나라도 있으면 AssertionError로 멈춘다. FAIL 줄을 읽고 고친다.
 assert not fails, "A10 점검 실패: %s" % fails
-print("A10 점검 통과")</code></pre></div>
-<p>먼저 빈칸을 채워 점검을 통과해 본 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A10 빈칸 정답과 결과 값</summary>
-<ul>
-<li>⑮ <code class="i">grid[r][c] == "1" and (r, c) not in seen</code> ⑯ <code class="i">explore(grid, r, c, seen)</code> ⑰ <code class="i">todo.popleft()</code> (실험: <code class="i">todo.pop()</code>)</li>
-<li>값: count_islands(ISLE)는 6이고 섬 크기는 스캔 순서로 4, 3, 1, 3, 2, 1이다. 꺼내는 줄을 pop()으로 바꿔도 6이다. (선택) 8방향이면 4이고 크기는 8, 3, 2, 1이다. 값의 해석은 활동지 3부 A10의 확인 상자에 있다.</li>
-</ul></details>
-</section>
-<section id="A13" class="sheet">
-<h2>A13 · 과제 마무리 점검과 전이<small>12분 · 개인</small></h2>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내가 만든 세 함수는 고치지 않고도 새 입력에서 통과하는가? 새 문제도 ‘상태와 이웃’으로 바꾸면 같은 틀로 풀 수 있는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">도구 확인</span>[앞 쪽 코드 불러오기]로 1부의 코드를 불러오고, A10 편집기를 실행해 <code class="i">ISLE</code>와 <code class="i">count_islands</code>를 정의한다(위 [사용법] 1번).<span class="tg-where">A10의 [내 코드 · A10 (count_islands, explore 작성)] 편집기</span><span class="tg-done">오류 없이 끝난다.</span></li>
-<li><span class="tg-stage">적용</span>아래 [A13 블록]을 펼친다. [A13 점검 실행] 편집기에 [예시 코드]의 점검을 [편집기에 추가]해 실행한다. 코드는 고치지 않고 통과하는지 본다.<span class="tg-where">[A13 점검 실행] 편집기</span><span class="tg-done"><code class="i">A13 점검 통과</code>가 출력된다.</span></li>
-<li><span class="tg-stage">설명</span>통과하지 못한 항목 번호(FAIL 줄 앞의 번호)와 원인, 모두 통과했으면 고친 곳을 쓴다.<span class="tg-where">활동지 <a class="xlink" href="student_workbook_part3.html#A13">3부 A13</a>의 (가) 칸</span><span class="tg-done">칸에 번호와 원인(또는 “없음”)이 적혔다.</span></li>
-<li><span class="tg-stage">적용</span>코드 없이 물통 퍼즐의 상태·이웃 상태·시작과 목표·BFS와 DFS 중 고를 것을 네 가지로 쓴다.<span class="tg-where">활동지 <a class="xlink" href="student_workbook_part3.html#A13">3부 A13</a>의 (나) 상태 정의 카드</span><span class="tg-done">네 가지가 모두 적혔다.</span></li>
-<li><span class="tg-stage">적용</span>(선택, 집에서) 같은 틀로 <code class="i">num_bfs</code>를 만든다.<span class="tg-where">[내 코드 · A13 NUM (num_bfs 작성)] 편집기</span><span class="tg-done"><code class="i">NUM 점검 통과</code>가 출력된다.</span></li>
-</ol>
-<div class="tg-contract"><span class="tg-k">만들 것</span><code class="i">num_bfs(start, goal)</code> (선택)<ul><li>받는 값: 시작 수와 목표 수(수는 100 이하이고 이웃은 제공된 <code class="i">next_states</code>가 내준다)</li><li>돌려주는 값: 가장 적은 연산 횟수. 닿을 수 없으면 <code class="i">-1</code>(점검 입력에 그런 쌍이 있다)</li><li>쓰는 모습: <code class="i">num_bfs(3, 14)</code></li></ul></div>
-<details class="tg-hint"><summary>막히면 · 힌트 1 (적용)</summary><p>점검의 FAIL 줄 앞 번호는 아래 [학습 내용]의 항목 번호이다. 그 번호의 입력으로 내 함수를 직접 호출해 print로 찍어 본다.</p></details>
+print("A10 점검 통과")
+</script>
+<div class="mycode"><textarea class="in code" rows="34" data-type="code" data-key="A10.mycode" data-starter="A10-0 A10-1 A10-2 A10-run" data-check="A10-5" data-label="A10 (count_islands, explore 작성) 내 코드" spellcheck="false"></textarea></div>
+<p class="tip">빈칸이 남아 있으면 <code class="i">NameError: name '____15____' is not defined</code>가 나온다. 그 번호의 자리를 아직 안 채웠다는 뜻이다. <code class="i">seen</code>은 칠한 칸을 모은 집합이고 (행, 열) 쌍이 들어 있다.</p>
+<p>채운 뒤 나온 개수는 활동지 표의 2줄 &lsquo;실제&rsquo; 칸에 쓴다.</p>
 </div>
-<details><summary>A13 블록 (A10까지 마친 뒤 A13에서 펼친다)</summary>
-<div class="warn"><b>과제 요건</b><ul><li><code class="i">grid_neighbors</code>는 <code class="i">yield</code>를 쓰는 제네레이터여야 한다(리스트 반환 불가).</li><li><code class="i">shortest_path_len</code>의 제출본은 큐를 쓰는 너비 우선 탐색이어야 한다. 검증용 비교 코드를 직접 쓰는 것은 허용된다.</li><li>입력 격자를 바꾸지 않아야 하고, 같은 입력으로 두 번 호출해도 같은 값이어야 한다(<code class="i">seen=set()</code> 같은 기본 인자를 쓰지 않는다).</li><li>1&times;1500 같은 큰 입력에서도 <code class="i">RecursionError</code> 없이 끝나야 한다.</li></ul></div><div class="learn-box"><span class="lb-title">학습 내용 · A13 점검 항목 1~9가 보는 것</span>
-<table><tr><th>항목</th><th>점검하는 함수와 입력</th><th>보는 것</th></tr>
-<tr><td>1~2</td><td>grid_neighbors, MAZE의 칸 몇 곳</td><td>제네레이터(yield)인지, 경계 검사, 우하좌상 순서, 벽 제외</td></tr>
-<tr><td>3~5</td><td>shortest_path_len</td><td>MAZE 최단 거리, 도달 불가, 시작=도착</td></tr>
-<tr><td>6~7</td><td>count_islands</td><td>ISLE의 섬 개수, 경계 사례(빈 격자, 모두 바다, 모두 땅, 대각선만 맞닿은 격자)</td></tr>
-<tr><td>8</td><td>count_islands 두 번 호출</td><td>두 번 불러도 같은 값인지, 입력 격자가 그대로인지, 기본 인자가 없는지</td></tr>
-<tr><td>9</td><td>1&times;1500 입력</td><td>큰 입력에서 RecursionError 없이 끝나는지</td></tr></table>
-<p>FAIL 줄 앞의 번호가 이 항목 번호이다. 실패하면 그 번호의 입력에서 내 함수가 낸 값을 직접 출력해 점검이 계산한 값과 비교해 본다. 점검은 코드를 고치지 않고 통과해야 한다.</p></div>
-<h3>(가) 과제 마무리 점검 (8분)</h3><p>점검은 세 함수(<code class="i">grid_neighbors</code>, <code class="i">shortest_path_len</code>, <code class="i">count_islands</code>)와 입력(<code class="i">MAZE</code>, <code class="i">START</code>, <code class="i">GOAL</code>, <code class="i">ISLE</code>, <code class="i">DIRS</code>)이 이 페이지의 환경에 있어야 돌아간다. 세 함수를 ‘과제 서술 입력’의 최종 코드 칸에 모았다면 그 칸을 먼저 실행해도 된다. 기대 값은 적혀 있지 않고 점검이 입력에서 계산한다.</p><div class="mycode"><label>A13 점검 실행<textarea class="in code" rows="14" data-run-only spellcheck="false"></textarea></label></div><h3>점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-1" data-for="A13.run"># A13 점검: 기대 값은 적혀 있지 않다. 계산으로 구한 값과 비교한다. 코드를 고치지 않고 통과해야 한다.
+
+<div class="step">
+<h3>점검하기</h3>
+<p>[&#10004; 점검]을 누르면 격자 열 개로 확인한다. <code class="i">A10 점검 통과</code>가 나오면 완성이다.</p>
+<p class="tip"><code class="i">FAIL 격자 3: …</code>은 점검 격자의 3번(0부터 센다)에서 개수가 다르다는 뜻이다. 그 격자로 <code class="i">print(count_islands(…))</code>를 찍어 손으로 센 값과 비교한다.</p>
+<details class="more"><summary>점검에 쓰는 격자 보기</summary>
+<pre class="fig">ISLE
+[]
+["000"]
+["111"]
+["101", "010", "101"]
+["1"]
+["0"]
+["11011", "10001", "00100", "11011"]
+["1010101", "0101010", "1010101"]
+["111", "101", "111"]</pre>
+</details>
+</div>
+
+<div class="step">
+<h3>바꿔 보고 돌아보기</h3>
+<p><code class="i">todo.popleft()</code>를 <code class="i">todo.pop()</code>으로 바꾸면 개수가 달라질까? 바꾸기 전에 활동지 표의 3줄 &lsquo;예측&rsquo; 칸에 쓰고, 바꿔 실행해 &lsquo;실제&rsquo; 칸에 쓴다.</p>
+<p class="tip">실험이 끝나면 <code class="i">popleft()</code>로 되돌려 놓는다.</p>
+<p>정리 질문은 활동지 <a class="xlink" href="student_workbook_part3.html#A10">3부 A10</a>에 있다.</p>
+<details class="more"><summary>(선택) 대각선까지 이웃으로 보기</summary>
+<p>방향 목록에 대각선 네 방향을 더해 실행한다. 결과는 활동지 표의 4줄에 쓴다.</p>
+<script type="text/plain" data-id="A10-4">
+# (선택) 8방향 실험 · grid_neighbors가 읽는 전역 DIRS를 바꾼다. 실험이 끝나면 되돌려 둔다.
+# 기본 4방향에 대각선 4방향을 더한 목록
+DIRS8 = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+DIRS = DIRS8  # 전역 DIRS를 8방향으로 바꾼다
+print(count_islands(ISLE))  # 같은 함수를 바뀐 방향으로 실행한다
+DIRS = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # 원래 4방향으로 되돌린다
+</script>
+<div class="mycode"><textarea class="in code" rows="9" data-type="code" data-starter="A10-4" data-label="연습 · 8방향 실험" spellcheck="false"></textarea></div>
+<p class="tip">도중에 멈췄다면 [실행 환경 초기화]를 누르고 처음부터 다시 실행한다.</p>
+</details>
+<details class="more"><summary>끝까지 막혔다면 · 빈칸 답과 결과 값</summary>
+<p>⑮ <code class="i">grid[r][c] == "1" and (r, c) not in seen</code> ⑯ <code class="i">explore(grid, r, c, seen)</code> ⑰ <code class="i">todo.popleft()</code> (실험: <code class="i">todo.pop()</code>)</p>
+<p><code class="i">count_islands(ISLE)</code>는 6이고 섬 크기는 스캔 순서로 4, 3, 1, 3, 2, 1이다. <code class="i">pop()</code>으로 바꿔도 6이다. (선택) 8방향이면 4이고 크기는 8, 3, 2, 1이다. 값의 해석은 활동지 3부 A10의 확인 상자에 있다.</p>
+</details>
+</div>
+<p class="wrapup"><b>여기까지</b> 섬을 세는 함수 두 개가 생겼다. 활동지 3부 A10의 정리 질문으로 이어 가자.</p>
+</section>
+<section id="A13" class="sheet lesson">
+<h2>A13 · 과제 마무리 점검과 전이<small>12분 · 개인</small></h2>
+<p class="lead">만든 함수를 한곳에 모아 새 입력에서도 통과하는지 확인하자.</p>
+<details class="more"><summary>A13 블록 (A10까지 마친 뒤 A13에서 펼친다)</summary>
+
+<div class="step">
+<h3>과제 코드 모으기</h3>
+<p><b>무엇을</b> 점검이 부르는 세 함수 <code class="i">grid_neighbors</code>, <code class="i">shortest_path_len</code>, <code class="i">count_islands</code>이다. <code class="i">count_islands</code>가 쓰는 <code class="i">explore</code>도 함께 붙인다.</p>
+<p><b>어디에</b> 이 쪽 맨 아래 <a href="#assign">과제 서술 입력</a>의 [최종 코드] 칸이다.</p>
+<p><b>어떻게</b> 1부 A7과 3부 A10의 내 코드에서 복사해 그 칸에 직접 붙여 넣고 [&#9654; 실행]한다. 제출도 이 칸의 내용이 [저장(JSON)]에 들어간다.</p>
+<p class="tip">[앞 쪽 코드 불러오기]는 실행 환경에만 코드를 불러온다. 편집기 칸은 채워 주지 않으므로 붙여 넣기를 대신하지 못한다.</p>
+</div>
+
+<div class="step">
+<h3>점검 실행하기</h3>
+<p>점검에 쓸 입력(<code class="i">MAZE</code>, <code class="i">START</code>, <code class="i">GOAL</code>, <code class="i">ISLE</code>, <code class="i">DIRS</code>)이 편집기에 들어 있다. 고치지 말고 [&#10004; 점검]을 누른다.</p>
+<script type="text/plain" data-id="A13-0">
+from collections import deque
+
+# 점검에 쓰는 입력이다. 고치지 않는다.
+DIRS = [(0, 1), (1, 0), (0, -1), (-1, 0)]   # 우 하 좌 상
+MAZE = ["S..#...",
+        ".#.#.#.",
+        ".#...#.",
+        ".#####.",
+        "......E"]                            # '#' 벽, '.' 길, 'S' 시작, 'E' 도착
+START, GOAL = (0, 0), (4, 6)                  # (행, 열)
+ISLE = ["1100010",
+        "1100011",
+        "0010000",
+        "0001100",
+        "1000100",
+        "1000001"]                            # '1' 땅, '0' 바다
+</script>
+<script type="text/plain" data-id="A13-1">
+# A13 점검: 기대 값은 적혀 있지 않다. 계산으로 구한 값과 비교한다. 코드를 고치지 않고 통과해야 한다.
 import inspect  # 제네레이터인지 검사하는 도구
 
 # 기준값 1: 모든 칸을 훑어 (r, c)와 상하좌우로 맞닿은 통과 가능 칸을 모은다.
@@ -326,7 +420,7 @@ def ref_dist(grid, start):
         for cell in list(d):  # 훑는 중 d가 바뀌므로 복사해서 쓴다
             for n in ref_adj(grid, cell[0], cell[1], ".SE"):
                 # 아직 모르는 칸은 아주 큰 값(10 ** 9)으로 본다
-                if d[cell] + 1 &lt; d.get(n, 10 ** 9):
+                if d[cell] + 1 < d.get(n, 10 ** 9):
                     d[n] = d[cell] + 1
                     changed = True
     return d
@@ -343,7 +437,7 @@ def ref_islands(grid):
         for cell in cells + cells[::-1]:  # [::-1]은 뒤집은 리스트. 앞뒤로 훑는다
             for dr, dc in ((0, 1), (1, 0), (0, -1), (-1, 0)):
                 nb = (cell[0] + dr, cell[1] + dc)
-                if nb in lab and lab[nb] &lt; lab[cell]:
+                if nb in lab and lab[nb] < lab[cell]:
                     lab[cell] = lab[nb]
                     changed = True
     # set은 중복을 없앤다. 서로 다른 번호의 수 = 섬의 수
@@ -393,27 +487,72 @@ for f in fails:
     print("FAIL", f)
 # 실패가 하나라도 있으면 AssertionError로 멈춘다. FAIL 줄을 읽고 고친다.
 assert not fails, "A13 점검 실패: %s" % fails
-print("A13 점검 통과")</code></pre></div>
-<p>먼저 점검 코드를 실행해 본 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · A13 점검 항목의 기대 값</summary>
-<table><tr><th>항목</th><th>입력</th><th>기대</th></tr>
-<tr><td>1</td><td>grid_neighbors(MAZE,0,0,".SE")가 제네레이터인가, 리스트로 바꾸면</td><td>True, [(0,1),(1,0)]</td></tr>
-<tr><td>2</td><td>list(grid_neighbors(MAZE,2,2,".SE"))</td><td>[(2,3),(1,2)]</td></tr>
-<tr><td>3</td><td>shortest_path_len(MAZE,(0,0),(4,6))</td><td>10</td></tr>
-<tr><td>4</td><td>shortest_path_len(["S#E"],(0,0),(0,2))</td><td>-1</td></tr>
-<tr><td>5</td><td>shortest_path_len(MAZE,(0,0),(0,0))</td><td>0</td></tr>
-<tr><td>6</td><td>count_islands(ISLE)</td><td>6</td></tr>
-<tr><td>7</td><td>count_islands([]), ["000"], ["111"], ["101","010","101"]</td><td>0, 0, 1, 5 (대각선은 연결 아님)</td></tr>
-<tr><td>8</td><td>count_islands(ISLE)를 두 번 호출, 호출 전후 ISLE 비교</td><td>두 값 모두 6, ISLE는 그대로</td></tr>
-<tr><td>9</td><td>count_islands(["1"*1500])</td><td>1 (RecursionError 없이)</td></tr></table>
-<p>8번에서 두 번째 값이 달라졌다면 이전 호출의 기록(기본 인자 seen=set() 등)이 남은 것이다. 9번에서 RecursionError가 났다면 A8 T3와 같은 함정이므로 재귀 대신 직접 만든 스택이나 큐로 바꾼다.</p></details>
-<h3>(나, 선택 &middot; 집에서) 코드 전이: 숫자 변환 퍼즐 (채점하지 않는다)</h3><p class="hint">수업 시간(A13)의 전이는 활동지 3부의 물통 퍼즐(상태 정의 카드)이다. 이 코드 전이는 선택 연습이다.</p><p>3에서 시작해 &ldquo;+1&rdquo; 또는 &ldquo;&times;2&rdquo;만 써서 14를 만드는 가장 적은 연산 횟수를 구한다. 그래프는 메모리에 없고 <code class="i">next_states</code>가 이웃을 내준다. 같은 틀로 <code class="i">num_bfs(start, goal)</code>을 작성한다. 활동지 <a class="xlink" href="student_workbook_part3.html#A13">3부 A13</a>의 질문에 답한다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A13-2" data-for="A13.num.mycode"># 전이 연습 NUM(채점하지 않는다) · 시작 상태: 탐색마다 새 거리 딕셔너리와 큐를 만든다.
+print("A13 점검 통과")
+</script>
+<div class="mycode"><textarea class="in code" rows="16" data-type="code" data-starter="A13-0" data-prev data-check="A13-1" data-label="A13 점검 실행" spellcheck="false"></textarea></div>
+<p class="tip">함수가 없다는 <code class="i">NameError</code>가 나오면 앞 걸음의 [&#9654; 실행]을 먼저 한다.</p>
+</div>
+
+<div class="step">
+<h3>점검 결과 읽기</h3>
+<p><code class="i">A13 점검 통과</code>가 나오면 된다. <code class="i">FAIL 6: …</code>은 점검 항목 6번이 어긋났다는 뜻이다.</p>
+<table>
+<tr><th>항목</th><th>보는 함수</th></tr>
+<tr><td>1~2</td><td>grid_neighbors</td></tr>
+<tr><td>3~5</td><td>shortest_path_len</td></tr>
+<tr><td>6~9</td><td>count_islands</td></tr>
+</table>
+<div class="quiz" data-answer="2">
+<p class="q"><code class="i">FAIL 4: …</code>가 나왔다. 먼저 살필 함수는?</p>
+<div class="opts"><button type="button" data-hint="항목 1~2가 grid_neighbors이다. 4번은 어느 범위인가?">grid_neighbors</button><button type="button">shortest_path_len</button><button type="button" data-hint="count_islands는 항목 6번부터이다.">count_islands</button></div>
+<p class="why">항목 3~5가 shortest_path_len이다. 4번은 닿을 수 없는 경우를 본다.</p>
+</div>
+<p>통과하지 못한 번호와 원인은 활동지 <a class="xlink" href="student_workbook_part3.html#A13">3부 A13</a>의 (가)에 쓴다.</p>
+<details class="more"><summary>과제 요건 네 가지</summary>
+<ul>
+<li><code class="i">grid_neighbors</code>는 <code class="i">yield</code>를 쓰는 제네레이터여야 한다(리스트 반환 불가).</li>
+<li><code class="i">shortest_path_len</code>의 제출본은 큐를 쓰는 너비 우선 탐색이어야 한다. 검증용 비교 코드를 직접 쓰는 것은 허용된다.</li>
+<li>입력 격자를 바꾸지 않고, 같은 입력으로 두 번 불러도 같은 값이어야 한다(<code class="i">seen=set()</code> 같은 기본 인자를 쓰지 않는다).</li>
+<li>1&times;1500 같은 큰 입력에서도 <code class="i">RecursionError</code> 없이 끝나야 한다.</li>
+</ul>
+</details>
+</div>
+
+<div class="step">
+<h3>상태를 두 수로 적기</h3>
+<p>3L짜리 통 하나와 5L짜리 통 하나가 있다. 물의 양을 <code class="i">(a, b)</code>로 적는다. <code class="i">a</code>는 3L 통, <code class="i">b</code>는 5L 통의 물이다. 처음은 둘 다 빈 <code class="i">(0, 0)</code>이고, 한 번 움직여 <code class="i">(3, 0)</code>이나 <code class="i">(0, 5)</code>로 갈 수 있다(통 하나를 가득 채운다).</p>
+<div class="quiz" data-answer="1">
+<p class="q"><code class="i">(0, 5)</code>에서 5L 통의 물을 3L 통에 붓는다. 3L 통이 가득 찰 때까지 붓는다면 상태는?</p>
+<div class="opts"><button type="button">(3, 2)</button><button type="button" data-hint="3L 통에는 3L까지만 들어간다. 5L 통에는 얼마가 남는가?">(0, 2)</button><button type="button" data-hint="5L 통에서 3L를 덜어 냈는데 그대로일 수는 없다.">(3, 5)</button></div>
+<p class="why">3L를 옮기면 5L 통에 2L가 남는다. 이렇게 한 번 움직여 갈 수 있는 상태가 이웃 상태이다.</p>
+</div>
+<p>이제 활동지 <a class="xlink" href="student_workbook_part3.html#A13">3부 A13</a>의 (나) 카드에 상태, 이웃 상태의 예, 시작과 목표, BFS와 DFS 중 고를 것을 코드 없이 쓴다.</p>
+</div>
+
+<div class="step">
+<h3>(선택 · 집에서) 숫자 변환 퍼즐</h3>
+<p>3에서 시작해 &ldquo;+1&rdquo; 또는 &ldquo;&times;2&rdquo;만 써서 14를 만드는 가장 적은 연산 횟수를 구한다. 이웃은 <code class="i">next_states</code>가 내준다. 채점하지 않는다.</p>
+<script type="text/plain" data-id="A13-2">
+from collections import deque
+
+# 전이 연습 NUM(채점하지 않는다) · 시작 상태: 탐색마다 새 거리 딕셔너리와 큐를 만든다.
 # 3에서 시작해 "+1" 또는 "x2"만 써서 14를 만드는 가장 적은 연산 횟수를 같은 틀로 찾는다. 수는 100 이하이다.
 def next_states(n):                  # 제네레이터(제공). 상태 n에서 한 걸음에 갈 수 있는 수
-    if n + 1 &lt;= 100:  # 범위(100 이하) 안이면
+    if n + 1 <= 100:  # 범위(100 이하) 안이면
         yield n + 1  # +1 한 수를 내준다
-    if n * 2 &lt;= 100:
-        yield n * 2  # x2 한 수를 내준다</code></pre></div><div class="mycode"><label>내 코드 · A13 NUM (num_bfs 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A13.num.mycode" data-label="A13 NUM (num_bfs 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다. [예시 코드]에서 코드를 편집기에 추가해 완성하고 [▶ 실행]으로 확인한다. 이 편집기의 내용이 그대로 저장된다.</p></div><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A13-3" data-for="A13.num.mycode"># NUM 점검: 기대 값은 적혀 있지 않다. 연산 횟수를 줄여 갈 수 있으면 계속 줄이는 다른 계산과 비교한다.
+    if n * 2 <= 100:
+        yield n * 2  # x2 한 수를 내준다
+</script>
+<script type="text/plain" data-id="A13-numskel">
+def num_bfs(start, goal):
+    # A7의 shortest_path_len과 같은 틀로 쓴다. 이웃은 next_states(n)이 내준다.
+    pass
+</script>
+<script type="text/plain" data-id="A13-numrun">
+print(num_bfs(3, 14))
+</script>
+<script type="text/plain" data-id="A13-3">
+# NUM 점검: 기대 값은 적혀 있지 않다. 연산 횟수를 줄여 갈 수 있으면 계속 줄이는 다른 계산과 비교한다.
 # globals(): 지금 정의된 이름 목록. num_bfs를 안 만들었으면 여기서 멈춘다.
 assert "num_bfs" in globals(), "먼저 num_bfs(start, goal)를 작성한다(최소 연산 횟수를 돌려준다)"
 # 기준값: 더 적은 횟수가 나오는 동안 되풀이해 start에서 각 수까지의 최소 연산 횟수를 구한다.
@@ -424,7 +563,7 @@ def ref_ops(start, goal):
         changed = False
         for n in list(d):
             for m in next_states(n):
-                if d[n] + 1 &lt; d.get(m, 10 ** 9):
+                if d[n] + 1 < d.get(m, 10 ** 9):
                     d[m] = d[n] + 1
                     changed = True
     return d.get(goal, -1)  # 닿을 수 없으면 -1
@@ -432,35 +571,74 @@ def ref_ops(start, goal):
 # (시작, 목표) 쌍마다 내 함수와 기준 값이 다르면 bad에 모은다
 bad = [(a, b) for a, b in ((3, 14), (1, 10), (5, 5), (2, 100), (50, 49)) if num_bfs(a, b) != ref_ops(a, b)]
 for a, b in bad:
-    print("FAIL", a, "-&gt;", b)
+    print("FAIL", a, "->", b)
 # 다르게 나온 쌍이 있으면 AssertionError로 멈춘다.
 assert not bad, "NUM 점검 실패: %s" % bad
-print("NUM 점검 통과")</code></pre></div>
+print("NUM 점검 통과")
+</script>
+<div class="mycode"><textarea class="in code" rows="18" data-type="code" data-key="A13.num.mycode" data-starter="A13-2 A13-numskel A13-numrun" data-check="A13-3" data-label="A13 NUM (num_bfs 작성) 내 코드" spellcheck="false"></textarea></div>
+<p class="tip"><code class="i">num_bfs</code>를 다 쓰기 전에는 <code class="i">None</code>이 출력된다. 결과는 활동지 3부 A13의 (선택) 표에 쓴다.</p>
+</div>
+
+<details class="more"><summary>활동을 마친 뒤 열어 확인한다 · A13 점검 항목의 기대 값</summary>
+<table><tr><th>항목</th><th>입력</th><th>기대</th></tr>
+<tr><td>1</td><td>grid_neighbors(MAZE,0,0,".SE")가 제네레이터인가, 리스트로 바꾸면</td><td>True, [(0,1),(1,0)]</td></tr>
+<tr><td>2</td><td>list(grid_neighbors(MAZE,2,2,".SE"))</td><td>[(2,3),(1,2)]</td></tr>
+<tr><td>3</td><td>shortest_path_len(MAZE,(0,0),(4,6))</td><td>10</td></tr>
+<tr><td>4</td><td>shortest_path_len(["S#E"],(0,0),(0,2))</td><td>-1</td></tr>
+<tr><td>5</td><td>shortest_path_len(MAZE,(0,0),(0,0))</td><td>0</td></tr>
+<tr><td>6</td><td>count_islands(ISLE)</td><td>6</td></tr>
+<tr><td>7</td><td>count_islands([]), ["000"], ["111"], ["101","010","101"]</td><td>0, 0, 1, 5 (대각선은 연결 아님)</td></tr>
+<tr><td>8</td><td>count_islands(ISLE)를 두 번 호출, 호출 전후 ISLE 비교</td><td>두 값 모두 6, ISLE는 그대로</td></tr>
+<tr><td>9</td><td>count_islands(["1"*1500])</td><td>1 (RecursionError 없이)</td></tr></table>
+<p>8번에서 두 번째 값이 달라졌다면 이전 호출의 기록(기본 인자 seen=set() 등)이 남은 것이다. 9번에서 RecursionError가 났다면 A8 T3와 같은 함정이므로 재귀 대신 직접 만든 스택이나 큐로 바꾼다.</p>
+</details>
+<p class="wrapup"><b>여기까지</b> 세 함수의 점검과 새 문제의 상태 정의를 마쳤다. 제출할 코드와 설명은 아래 과제 서술 입력에 모은다.</p>
 </details>
 </section>
-<section id="assign" class="sheet">
+<section id="assign" class="sheet lesson">
 <h2>과제 서술 입력<small>실습 과제 · 주간 과제 제출 때 함께 낸다</small></h2>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>이 세 칸에는 무엇을 쓰고, 수업 활동과 어떤 관계인가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">과제 착수</span>1부 A7의 <code class="i">grid_neighbors</code>, <code class="i">shortest_path_len</code>과 3부 A10의 <code class="i">count_islands</code>(부르는 <code class="i">explore</code> 포함)를 <b>수업에서 만든 코드를 복사해</b> 한곳에 모은다. 새로 짜는 것이 아니며, 미완 부분은 여기서 이어서 쓴다.<span class="tg-where">[최종 코드 · 세 함수와 구현 계획 주석을 한곳에 모은다]</span><span class="tg-done">[▶ 실행]이 오류 없이 끝난다.</span></li>
-<li><span class="tg-stage">적용</span>같은 환경에서 A13 점검을 실행해 통과하는지 본다.<span class="tg-where">A13의 [A13 점검 실행] 편집기</span><span class="tg-done"><code class="i">A13 점검 통과</code>가 출력된다.</span></li>
-<li><span class="tg-stage">설명</span>구현 계획을 한 줄로 쓰고, 같은 문장을 최종 코드의 맨 첫 줄 주석(<code class="i">#</code>)으로도 쓴다. 시간·공간 복잡도와 그 근거는 내 말로 서술한다.<span class="tg-where">[구현 계획 한 줄] 칸과 [구현한 함수의 시간·공간 복잡도와 그 근거 (직접 서술)] 칸</span><span class="tg-done">두 칸이 채워졌고 최종 코드 첫 줄이 주석이다.</span></li>
-</ol>
-<div class="tg-contract"><span class="tg-k">제출 전 확인 3가지</span><ul><li>최종 코드 칸에 세 함수(와 explore)가 모두 있다.</li><li>맨 첫 줄이 구현 계획 주석이고, 같은 문장이 [구현 계획 한 줄] 칸에 있다.</li><li>복잡도 칸에 시간·공간 복잡도와 근거를 직접 썼다.</li></ul></div>
+<p class="lead">수업에서 만든 코드와 설명을 한곳에 모아 내는 곳이다. 칸이 세 개 있고, 모두 [저장(JSON)]에 들어간다.</p>
+
+<div class="step">
+<h3>최종 코드 모으기</h3>
+<p>세 함수를 이 칸에 붙여 넣는 방법은 A13 첫 걸음에 있다. 붙인 뒤 맨 첫 줄에 구현 계획을 주석(<code class="i">#</code>)으로 쓴다.</p>
+<div class="mycode"><textarea class="in code" rows="24" data-type="code" data-noex data-key="assign.final" data-label="실습 과제 최종 코드(grid_neighbors, shortest_path_len, count_islands)" spellcheck="false"></textarea></div>
 </div>
-<p>4단계 채점기준은 <a href="rubric.html">rubric.html</a>을 본다. 이 페이지의 모든 칸은 [저장(JSON)]에 들어가며 별도 <code class="i">.py</code> 파일은 내지 않는다.</p><div class="mycode"><label>최종 코드 &middot; 세 함수와 구현 계획 주석을 한곳에 모은다<textarea class="in code" rows="24" data-type="code" data-noex data-key="assign.final" data-label="실습 과제 최종 코드(grid_neighbors, shortest_path_len, count_islands)" spellcheck="false"></textarea></label></div><div class="mycode"><label>구현 계획 한 줄<textarea class="in" rows="2" data-key="assign.plan" data-label="실습 과제 구현 계획 한 줄"></textarea></label></div><div class="mycode"><label>구현한 함수의 시간·공간 복잡도와 그 근거 (직접 서술)<textarea class="in l" rows="5" data-key="assign.complexity" data-label="실습 과제 시간·공간 복잡도와 그 근거"></textarea></label></div>
+
+<div class="step">
+<h3>구현 계획 한 줄</h3>
+<p>최종 코드 첫 줄 주석과 같은 문장을 쓴다. 어떤 탐색으로, 무엇에 기록하며 푸는지를 한 줄로 쓴다.</p>
+<div class="mycode"><textarea class="in" rows="2" data-key="assign.plan" data-label="실습 과제 구현 계획 한 줄" aria-label="구현 계획 한 줄"></textarea></div>
+</div>
+
+<div class="step">
+<h3>큐에 몇 번 넣나 세어 보기</h3>
+<p>2행 3열이 모두 땅(<code class="i">"111"</code>, <code class="i">"111"</code>)인 격자에서 (0, 0)부터 탐색한다. 방문한 칸은 <code class="i">seen</code>에 적어 두고, 적힌 칸은 다시 큐에 넣지 않는다.</p>
+<div class="quiz" data-answer="1">
+<p class="q">칸 (1, 1)은 큐에 모두 몇 번 들어갈까?</p>
+<div class="opts"><button type="button">한 번</button><button type="button" data-hint="(1, 1)에는 이웃이 여러 칸이다. 그런데 한 번 적은 칸을 또 넣는가?">이웃 칸 수만큼 여러 번</button><button type="button" data-hint="(1, 1)도 이어진 땅이므로 언젠가는 큐에 들어간다.">한 번도 안 들어간다</button></div>
+<p class="why">처음 만났을 때 <code class="i">seen</code>에 적고 넣으므로 칸마다 한 번이다.</p>
+</div>
+</div>
+
+<div class="step">
+<h3>복잡도와 근거</h3>
+<p>방금 센 것을 떠올려 내 구현의 시간 복잡도(칸이 늘 때 일이 얼마나 느는가)와 공간 복잡도를 쓴다. 공간 복잡도는 탐색하는 동안 따로 기억해 두는 것(큐, 방문 표시)의 크기이다. 그렇게 되는 까닭도 내 말로 쓴다.</p>
+<div class="mycode"><textarea class="in l" rows="5" data-key="assign.complexity" data-label="실습 과제 시간·공간 복잡도와 그 근거" aria-label="시간·공간 복잡도와 근거 (직접 서술)"></textarea></div>
+</div>
+<p class="wrapup"><b>제출 전에</b> 세 칸이 모두 채워졌는지 본다. 4단계 채점기준은 <a href="rubric.html">rubric.html</a>에서 확인한다(A13에서 공개). 별도 <code class="i">.py</code> 파일은 내지 않는다.</p>
 </section>
 <section id="ai" class="sheet">
 <h2>AI 활용 3단계 · 이 과제에 맞춘 예<small>허용 · 조건부 허용 · 금지</small></h2>
-<p>기준은 &ldquo;AI에게 무엇을 시켰는가&rdquo;이다. 개념·문법·오류 원인을 묻는 것은 허용이고, 과제 요구사항이나 완성된 구현 자체를 입력해 결과물(코드·글)을 받아 제출하는 것은 금지이다.</p>
+<p>기준은 &ldquo;AI에게 무엇을 시켰는가&rdquo;이다. 개념·문법·오류 원인을 묻는 것은 허용이다. 과제 요구사항이나 완성된 구현을 입력해 결과물(코드·글)을 받아 제출하는 것은 금지이다.</p>
 <div class="grid">
-<div class="card" style="--c:#1d7a4f"><b class="h">허용</b><ul><li>&ldquo;BFS와 DFS는 어떤 자료구조를 쓰는지 개념 설명해 줘&rdquo;, &ldquo;deque는 list와 뭐가 달라?&rdquo; 같은 개념·문법 질의</li><li>&ldquo;NameError: name is not defined가 무슨 뜻이야?&rdquo;, &ldquo;IndexError: string index out of range가 왜 나오는지 해설&rdquo; 같은 오류 메시지 해설</li><li>&ldquo;격자 탐색에서 4방향 이동은 보통 어떻게 표현해?&rdquo; 같은 용어·설계 배경 설명(코드는 받지 않음)</li><li>내 코드 결과가 점검 테스트와 다를 때 원인 <b>힌트</b>만 요청</li><li>용어 번역&middot;개념 요약, 수업 자료 복습 질문</li></ul></div>
-<div class="card" style="--c:#8a6d1f"><b class="h">조건부 허용</b><ul><li>완성한 구현의 엣지 케이스 브레인스토밍(시작=도착, 도달 불가, 한 칸짜리 격자, 모두 바다/모두 땅, 빈 격자)</li><li>내가 쓴 코드의 부작용과 반복 사용 시 동작을 검토해 달라는 요청(수정은 직접 한다)</li><li>내가 쓴 구현의 시간&middot;공간 복잡도 검토 요청(예: &ldquo;이 구현이 칸 수에 비례하는 O(N)이 맞는지 검토해 줘&rdquo;). 복잡도는 내가 먼저 쓴 뒤 검토만 받는다</li><li>내 코드의 개선 아이디어 제안 요청(제안만 참고하고 코드는 직접 다시 작성)</li></ul></div>
-<div class="card" style="--c:#b3401f"><b class="h">금지 — 적발 시 계획서의 위반 처리방안 적용</b><ul><li>과제 문장(&ldquo;격자 미로의 S&rarr;E 최단 거리를 구하고 섬의 개수를 세는 함수를 작성하라&rdquo;)을 그대로 입력해 전체 코드 생성</li><li>AI가 쓴 <code class="i">shortest_path_len</code>/<code class="i">count_islands</code>를 그대로, 또는 변수명만 바꿔 제출</li><li>어느 목적에 BFS·DFS 중 무엇을 쓸지, 방문 기록을 어떻게 할지 등 설계 판단을 AI가 대신 내림</li><li>복잡도 분석이나 구현 계획을 AI에게 대신 세우게 하여 제출</li></ul></div>
+<div class="card" style="--c:#1d7a4f"><b class="h">허용</b><ul><li>&ldquo;BFS와 DFS는 어떤 자료구조를 쓰는지 설명해 줘&rdquo;, &ldquo;deque는 list와 뭐가 달라?&rdquo; 같은 개념·문법 질의</li><li>&ldquo;NameError가 무슨 뜻이야?&rdquo;, &ldquo;IndexError가 왜 나오는지 해설해 줘&rdquo; 같은 오류 메시지 해설</li><li>&ldquo;격자 탐색에서 4방향 이동은 보통 어떻게 표현해?&rdquo; 같은 용어·설계 배경 설명(코드는 받지 않음)</li><li>내 코드 결과가 점검과 다를 때 원인 <b>힌트</b>만 요청</li><li>용어 번역·개념 요약, 수업 자료 복습 질문</li></ul></div>
+<div class="card" style="--c:#8a6d1f"><b class="h">조건부 허용</b><ul><li>완성한 구현의 엣지 케이스 브레인스토밍(시작=도착, 도달 불가, 한 칸짜리 격자, 모두 바다/모두 땅, 빈 격자)</li><li>내 코드의 부작용과 반복 사용 시 동작 검토 요청(수정은 직접 한다)</li><li>내 구현의 시간·공간 복잡도 검토 요청. 복잡도는 내가 먼저 쓴 뒤 검토만 받는다</li><li>개선 아이디어 제안 요청(제안만 참고하고 코드는 직접 다시 작성)</li></ul></div>
+<div class="card" style="--c:#b3401f"><b class="h">금지 — 적발 시 계획서의 위반 처리방안 적용</b><ul><li>과제 문장(&ldquo;격자 미로의 S&rarr;E 최단 거리를 구하고 섬의 개수를 세는 함수를 작성하라&rdquo;)을 그대로 입력해 전체 코드 생성</li><li>AI가 쓴 <code class="i">shortest_path_len</code>/<code class="i">count_islands</code>를 그대로, 또는 변수명만 바꿔 제출</li><li>BFS·DFS 중 무엇을 쓸지, 방문 기록을 어떻게 할지 등 설계 판단을 AI가 대신 내림</li><li>복잡도 분석이나 구현 계획을 AI에게 대신 세우게 하여 제출</li></ul></div>
 </div>
-<div class="note"><b>수업 운영 규칙</b>(금지 목록과 별개) 수업 중 A6~A10·A13~A14는 AI 도움 없이 수행한다. A14 형성평가는 AI를 쓰지 않는 시험 상황으로 운영하며, 위 위반 처리(감점 등)는 형성평가에 적용하지 않는다. 주간 과제를 제출할 때 위 3단계가 적용된다.</div>
-<div class="note"><b>AI 도우미</b>(화면 오른쪽 아래 [AI 도우미]) 위 &lsquo;허용&rsquo; 범위인 개념·문법 설명, 오류 원인, 힌트만 해 주고 과제 코드와 활동지 답은 알려 주지 않는다. 학교 계정으로 로그인해야 하며, 내가 한 질문과 AI의 답은 교사가 볼 수 있게 기록된다. 수업 중 AI 도움 없이 하는 활동에서는 교사가 꺼 두므로 쓰지 않는다.</div>
+<div class="note"><b>수업 운영 규칙</b> 수업 중 A6~A10·A13~A14는 AI 도움 없이 수행한다. A14 형성평가는 AI를 쓰지 않는 시험 상황이며 위 위반 처리(감점 등)는 적용하지 않는다. 주간 과제를 제출할 때 위 3단계가 적용된다.</div>
+<div class="note"><b>AI 도우미</b>(화면 오른쪽 아래) 위 &lsquo;허용&rsquo; 범위인 개념·문법 설명, 오류 원인, 힌트만 해 주고 과제 코드와 활동지 답은 알려 주지 않는다. 학교 계정으로 로그인해야 하며, 질문과 답은 교사가 볼 수 있게 기록된다. AI 도움 없이 하는 활동에서는 교사가 꺼 두므로 쓰지 않는다.</div>
 </section>
 </div>
 <script id="week11-submit">

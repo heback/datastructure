@@ -1,0 +1,60 @@
+/* lesson.css — '걸음' 구성 활동지(section.lesson) 공용 스타일. theme.css 뒤에 불러온다.
+   한 활동 = 짧은 이끎말(.lead) + 걸음(.step) 여러 개. 걸음마다 할 일은 하나.
+   보기(사례) → 확인(.quiz) → 작은 코드 → 완성 코드 순으로 놓고, 주의 사항은 필요한 걸음 안에 .tip 으로 둔다. */
+.lesson{counter-reset:step}
+.lesson>.lead{font-size:17px;line-height:1.7;margin:6px 0 18px;color:var(--ink,#1a2332)}
+.lesson .step{margin:0 0 26px;padding:0 0 0 46px;position:relative}
+.lesson .step>h3{margin:0 0 8px;font-size:17px;line-height:1.5;border:0;padding:4px 0 0;background:none;color:var(--ink,#1a2332)}
+.lesson .step>h3::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--accent,#1f4f78);color:#fff;font:700 15px/1 var(--font-sans,sans-serif)}
+.lesson .step>h3 small{font-weight:500;font-size:13px;color:var(--dim,#5a6372);margin-left:8px}
+.lesson .step::after{content:"";position:absolute;left:15.5px;top:38px;bottom:-20px;width:1px;background:var(--line,#dcd5c6)}
+.lesson .step:last-of-type::after{display:none}
+.lesson .step p{margin:6px 0}
+.lesson .step>p,.lesson .step>ul,.lesson .step>ol{max-width:44em}
+.lesson .step pre.fig{font:14px/1.5 var(--font-mono,monospace);background:#fff;border:1px solid var(--line,#dcd5c6);border-radius:8px;padding:12px 16px;margin:10px 0;overflow:auto;color:var(--ink,#1a2332)}
+.lesson .step figure{margin:10px 0}
+.lesson .step figure svg{max-width:100%;height:auto;display:block}
+.lesson .step figcaption{font-size:13px;color:var(--dim,#5a6372);margin-top:4px}
+
+/* 잠깐: 그 걸음에서 꼭 필요한 주의 한두 문장 */
+.lesson .tip{margin:10px 0;padding:8px 14px 8px 12px;border-left:3px solid var(--gold,#d4ae55);background:var(--gold-soft,#f6ecd6);border-radius:0 8px 8px 0;font-size:15px;max-width:44em}
+.lesson .tip::before{content:"잠깐 ";font-weight:700;color:var(--gold-ink,#86621a)}
+
+/* 확인 질문: 누르면 바로 맞는지 알려 준다(저장·제출에 들어가지 않는다) */
+.quiz{margin:10px 0 14px;padding:12px 16px;border:1px solid var(--accent-line,#b9cde0);border-radius:10px;background:var(--accent-soft,#e8eff5);max-width:44em}
+.quiz .q{margin:0 0 8px;font-weight:600;border:0;background:none;padding:0;box-shadow:none;border-radius:0}
+.quiz .opts{display:flex;flex-wrap:wrap;gap:8px}
+.quiz .opts button{font:inherit;font-size:15px;padding:6px 14px;border:1px solid var(--line-control,#8c8372);border-radius:8px;background:#fff;color:var(--ink,#1a2332);cursor:pointer;text-align:left}
+.quiz .opts button:hover{border-color:var(--accent,#1f4f78)}
+.quiz .opts button:focus-visible{outline:2px solid var(--accent,#1f4f78);outline-offset:2px}
+.quiz .opts button.ok{background:var(--ok-soft,#e6f1ea);border-color:var(--ok,#1d6a47);color:var(--ok,#1d6a47);font-weight:700}
+.quiz .opts button.no{background:var(--bad-soft,#f8e7e0);border-color:var(--bad,#a03a1c);color:var(--bad,#a03a1c)}
+.quiz .opts button.pick{background:var(--gold-soft,#f6ecd6);border-color:var(--gold-ink,#86621a);font-weight:700}
+.quiz .ans{display:flex;gap:8px;flex-wrap:wrap;align-items:center;border:0;background:none;padding:0;margin:0;box-shadow:none;border-radius:0}
+.quiz .ans input{font:15px var(--font-mono,monospace);padding:6px 10px;border:1px solid var(--line-control,#8c8372);border-radius:8px;min-width:12em;flex:1 1 12em;max-width:26em;background:#fff}
+.quiz .ans button{font:inherit;font-size:14px;font-weight:600;padding:6px 14px;border:1px solid var(--accent,#1f4f78);border-radius:8px;background:var(--accent,#1f4f78);color:#fff;cursor:pointer}
+.quiz .fb{margin:8px 0 0;font-size:15px}
+.quiz .fb.ok{color:var(--ok,#1d6a47)}
+.quiz .fb.no{color:var(--bad,#a03a1c)}
+.quiz .why{display:none}
+.quiz.solved .why{display:block;margin:6px 0 0;font-size:15px}
+
+/* 더 알아보기·힌트: 닫아 두는 보조 설명 */
+.lesson details.more{margin:8px 0;max-width:44em}
+.lesson details.more>summary{cursor:pointer;font-size:14.5px;font-weight:600;color:var(--accent,#1f4f78)}
+.lesson details.more>:not(summary){margin-left:1.1em}
+.lesson .wrapup{margin:4px 0 0 46px;padding:10px 14px;border:1px dashed var(--line,#dcd5c6);border-radius:8px;font-size:15px;max-width:44em}
+.lesson .wrapup b{color:var(--accent,#1f4f78)}
+
+@media (max-width:640px){
+  .lesson .step{padding-left:0}
+  .lesson .step>h3{padding-left:42px;min-height:32px}
+  .lesson .step::after{display:none}
+  .lesson .wrapup{margin-left:0}
+}
+@media print{
+  .lesson .step::after{display:none}
+  .lesson .step>h3::before{background:none;color:#000;border:1px solid #000}
+  .quiz{background:none}
+  .quiz .ans button{display:none}
+}
