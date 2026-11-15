@@ -122,6 +122,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <link rel="stylesheet" href="../assets/topnav.css">
 <link rel="stylesheet" href="../assets/theme.css">
 <link rel="stylesheet" href="../assets/sheettabs.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script src="../assets/lesson.js" defer></script>
 <script src="../assets/topnav.js" defer></script>
 <link rel="stylesheet" href="../assets/chatkit.css">
 <script src="../assets/chatkit.js" defer></script>
@@ -131,43 +133,55 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; lab.week(12)  # 학생용 · 실습 코드 2부(A8·A9)</div>
   <h1>12주차 실습 코드 2부 — 모듈 bisect와 구간 개수</h1>
-  <p class="lead">A8 시작(A7 완료 후)에 사용한다. A7에서 만든 <code class="i">lower_bound</code>, <code class="i">upper_bound</code>는 다른 쪽(student_code_lab)에 있으므로, 그 쪽에서 실행해 성공시킨 뒤 이 쪽에서 [앞 쪽 코드 불러오기]를 눌러 이어서 쓴다. 정답과 결과 값은 이 파일에 없다. 값은 직접 실행해 활동지 2부에 적는다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+  <p class="lead">bisect 모듈과 내 함수를 견주고, 두 경계로 개수를 세는 함수를 만든다. A7을 마친 뒤(A8~A9)에 쓴다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
 </header>
 <nav><a href="#how">#사용법</a><a href="#A8">#A8</a><a href="#A9">#A9</a><a href="#note">#과제</a><a href="index.html">목록</a></nav>
 <section id="how">
 <h2>사용법<small>#how</small></h2>
-<ol>
-<li>코드는 각 활동의 &ldquo;내 코드&rdquo; 칸(편집기)에 쓰고 [▶ 실행](또는 Ctrl/⌘+Enter)으로 확인한다. 골격과 예시는 [예시 코드] 단추에서 [복사]하거나 [편집기에 추가]로 가져온다(편집기의 맨 아래에 이어 붙는다).</li>
-<li>같은 쪽(페이지)의 편집기들은 파이썬 환경을 공유하므로, 앞에서 실행한 함수와 변수를 뒤 편집기에서 쓴다.</li>
-<li>다른 쪽 코드가 필요하면 앞 쪽의 편집기에서 실행해 성공시킨 뒤, 이 쪽에서 [앞 쪽 코드 불러오기]를 누른다. 이 단추는 이 브라우저에서 앞 쪽에 성공한 실행 기록(8시간 안)을 쓰며, 파이썬 환경에만 정의를 가져오고 편집기 칸에는 코드를 넣지 않는다. 기록이 없다는 안내가 나오면 앞 쪽 편집기의 코드를 복사해 이 쪽 편집기 맨 위에 붙여 넣고 실행한다.</li>
-<li><code class="i">NameError</code>는 아직 정의하지 않은 이름을 쓴 것이다. 앞 코드를 실행했는지, [앞 쪽 코드 불러오기]를 눌렀는지 확인한다.</li>
-<li>점검이 실패하면 <code class="i">AssertionError</code>가 나오고, 마지막 줄이 메시지이다. 이 쪽의 메시지는 &ldquo;내 결과 A, 비교 대상 B&rdquo;를 이 순서로 보여 준다. <b>A는 내 함수가 돌려준 값, B는 bisect 또는 하나씩 센 값</b>이다. 메시지에 나온 x(또는 리스트, lo, hi)를 그대로 넣어 <code class="i">print(count_equal(DUP, 3))</code>처럼 내 결과를 직접 찍어 보면 어떤 입력에서 틀렸는지 확인된다.</li>
-<li>실행은 15초를 넘기면 멈추고 환경이 초기화된다. 무한 반복이 없는지 확인한다.</li>
-<li>편집기에 쓴 코드는 [저장(JSON)] 때 함께 저장·제출된다. 파이썬 파일(.py)은 따로 만들지 않는다.</li>
-</ol>
-</section>
-<section id="A8" class="sheet">
-<h2>A8 · bisect_left와 bisect_right를 예측하고 실행하기<small>12분 · 개인</small></h2>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내가 만든 lower_bound·upper_bound는 파이썬 표준 모듈 bisect와 같은 값을 돌려주는가? 다르다면 어떤 입력에서인가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">예측</span>활동지 2부 A8 표에서 x마다 bisect_left와 bisect_right의 값을 예측해 쓴다.<span class="tg-where">활동지 <a class="xlink" href="student_workbook_part2.html#A8">2부 A8</a> 표 [예측 left], [예측 right]</span><span class="tg-done">예측 칸이 모두 채워졌다. 비어 있으면 [예시 코드]의 [예측 후 실행]은 실행하지 않는다.</span></li>
-<li><span class="tg-stage">관찰</span>[예시 코드]의 [예측 후 실행]을 편집기에 추가해 [▶ 실행]한다. 나온 값을 표의 [실제 left], [실제 right]에 쓰고, [right − left]는 직접 계산해 쓴다.<span class="tg-where">[내 코드 · A8 (bisect 호출 실험 메모 또는 추가 실험)] 편집기, 활동지 2부 A8 표</span><span class="tg-done">x마다 한 줄씩 출력이 나오고 표의 실제 칸이 채워졌다.</span></li>
-<li><span class="tg-stage">도구 확인</span>A7 쪽(student_code_lab)의 [내 코드 · A7 …] 편집기에서 두 함수를 실행해 성공시킨 뒤, 이 쪽에서 [앞 쪽 코드 불러오기]를 누른다. 정의가 이 쪽 환경에만 들어오고 편집기 칸에는 코드가 들어오지 않는다.<span class="tg-done">불러오기가 성공했다는 안내가 나온다. &ldquo;불러올 코드가 없다&rdquo;가 나오면 A7 쪽 코드를 복사해 이 편집기 맨 위에 붙여 넣고 실행한다.</span></li>
-<li><span class="tg-stage">비교</span>[예시 코드]의 [A7 대조]를 같은 편집기 맨 아래에 추가해 실행한다. 내 두 함수와 bisect의 값을 x마다 견준다.<span class="tg-where">같은 편집기</span><span class="tg-done"><code class="i">A8 대조 통과</code>가 출력된다.</span></li>
-<li><span class="tg-stage">설명</span>활동지 2부 A8의 [대조] 항목을 고르고, 예측과 다른 칸이 있으면 첫 질문 칸에 이유를 쓴다.<span class="tg-where">활동지 2부 A8 [대조], 관찰·정리 1번</span></li>
-</ol>
-<p class="tg-why"><span class="tg-k">편집기가 하나인 이유</span>이 활동은 새 함수를 만들지 않고 A7의 함수와 모듈을 견주는 실험이다. 2~4단계의 코드는 모두 이 한 편집기에 이어 붙여 실행한다.</p>
-<details class="tg-hint"><summary>막히면 · 힌트 1 (도구 확인)</summary><p><code class="i">NameError: name 'lower_bound' is not defined</code>가 나오면 이 쪽에서 [앞 쪽 코드 불러오기]를 눌렀는지, A7 쪽에서 먼저 실행에 성공했는지 본다.</p></details>
-<details class="tg-hint"><summary>막히면 · 힌트 2 (비교가 실패할 때)</summary><p>메시지 첫 줄의 x에서 내 값과 bisect 값 중 어느 쪽이 다른지 본다. 같은 x로 A7의 lower_bound 손 추적을 해 보고, 같은 값이 여러 개 있는 곳에서 갈리는지 살핀다.</p></details>
-</div>
-<div class="learn-box"><span class="lb-title">학습 내용 · bisect 모듈과 A7 정의의 대응</span>
 <ul>
-<li>표준 모듈 <code class="i">bisect</code>의 <code class="i">bisect_left(a, x)</code>는 A7의 lower bound(처음 x 이상 자리), <code class="i">bisect_right(a, x)</code>는 upper bound(처음 x 초과 자리)를 돌려주는 함수이다. 둘 다 정렬된 리스트 a와 값 x를 받아 인덱스를 돌려주고 a를 바꾸지 않는다.</li>
+<li>편집기에는 필요한 코드가 미리 들어 있다. <code class="i">____8____</code> 같은 자리를 채우고 [&#9654; 실행]을 누른다.</li>
+<li>[&#10004; 점검]은 내 코드가 맞는지 확인해 준다. [처음 코드로]는 편집기를 처음 상태로 되돌린다.</li>
+<li>편집기에 쓴 내용은 자동으로 보관된다. 다 했으면 위의 [저장(JSON)]으로 제출 파일을 만든다.</li>
 </ul>
+<details class="more"><summary>단축키와 오류가 날 때</summary>
+<ul>
+<li>Ctrl(&#8984;)+Enter는 실행, Tab은 들여쓰기, Shift+Tab은 내어쓰기이다.</li>
+<li>같은 쪽의 편집기들은 파이썬 환경을 함께 쓴다. 다른 쪽의 코드는 [앞 쪽 코드 불러오기]로 이 쪽 환경에 가져온다(편집기 칸은 채워지지 않는다).</li>
+<li><code class="i">NameError</code>는 아직 정의하지 않은 이름을 썼다는 뜻이다. 앞 코드를 실행했는지 확인한다.</li>
+<li>점검이 실패하면 <code class="i">AssertionError</code>와 함께 메시지가 나온다. 마지막 줄의 &ldquo;내 결과 A, 비교 대상 B&rdquo;에서 A가 내 값이다. 그 입력으로 내 함수를 <code class="i">print</code>해 보자.</li>
+<li>실행이 15초를 넘기면 멈춘다. 끝나지 않는 반복이 있는지 확인한다.</li>
+</ul>
+</details>
+</section>
+<section id="A8" class="sheet lesson">
+<h2>A8 · bisect_left와 bisect_right를 예측하고 실행하기<small>12분 · 개인</small></h2>
+<p class="lead">A7에서 만든 두 함수는 파이썬의 bisect 모듈과 같은 값을 낼까? 예측하고, 실행하고, 맞춰 보자.</p>
+
+<div class="step">
+<h3>bisect 한 번 불러 보기</h3>
+<p><code class="i">bisect</code>는 정렬된 리스트에서 이진 탐색을 해 주는 파이썬 기본 모듈이다. A7의 작은 리스트 B에서 x = 4로 두 함수를 불러 보자.</p>
+<script type="text/plain" data-id="A8-p1">
+# bisect: 파이썬이 기본으로 주는 이진 탐색 도구 모듈
+from bisect import bisect_left, bisect_right
+
+B = [2, 4, 4, 6, 9]
+print(bisect_left(B, 4), bisect_right(B, 4))
+</script>
+<div class="mycode"><textarea class="in code" rows="7" data-type="code" data-starter="A8-p1" data-label="연습 · bisect 불러 보기" spellcheck="false"></textarea></div>
+<div class="quiz" data-answer="1">
+<p class="q">A7에서 B의 x = 4는 lower bound가 1, upper bound가 3이었다. 출력 1 3과 견주면, bisect_left는 어느 쪽과 같은 값일까?</p>
+<div class="opts"><button type="button">lower bound</button><button type="button" data-hint="출력의 첫째 값이 bisect_left의 값이다. 그 값은 1이다.">upper bound</button></div>
+<p class="why">bisect_left가 1이고 bisect_right가 3이다. 출력을 보면 left는 lower bound, right는 upper bound와 같은 값이다.</p>
 </div>
-<h3>예측 후 실행</h3>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A8-1"># bisect: 파이썬이 기본으로 제공하는 이진 탐색 도구 모듈이다
+</div>
+
+<div class="step">
+<h3>DUP로 예측하고 실행하기</h3>
+<p>DUP에서 x = 3, 7, 12, 4, 0, 20일 때 bisect_left와 bisect_right를 활동지 <a class="xlink" href="student_workbook_part2.html#A8">2부 A8</a>의 예측 칸에 먼저 적자. 그다음 아래 편집기를 실행한다.</p>
+<pre class="fig">idx   0  1  2  3  4  5  6  7  8   9  10  11  12
+DUP   1  3  3  3  5  7  7  9  12  12  12  12  15</pre>
+<script type="text/plain" data-id="A8-1">
+# bisect: 파이썬이 기본으로 제공하는 이진 탐색 도구 모듈이다
 from bisect import bisect_left, bisect_right
 
 DUP = [1, 3, 3, 3, 5, 7, 7, 9, 12, 12, 12, 12, 15]
@@ -176,42 +190,93 @@ xs = [3, 7, 12, 4, 0, 20]  # 찾아 볼 값의 목록
 # 예측을 활동지 표에 먼저 적은 뒤 실행한다. right - left 열은 직접 계산해 활동지에 쓴다.
 # xs의 값을 하나씩 x에 넣어 두 함수를 호출한다
 for x in xs:
-    print("x =", x, " bisect_left:", bisect_left(DUP, x), " bisect_right:", bisect_right(DUP, x))</code></pre></div><div class="mycode"><label>내 코드 · A8 (bisect 호출 실험 메모 또는 추가 실험)</label><textarea class="in code" rows="8" data-type="code" data-key="A8.mycode" data-label="A8 (bisect 호출 실험 메모 또는 추가 실험) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
-<h3>A7 대조</h3>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A8-2"># A7에서 만든 두 함수가 bisect와 같은 값을 내는지 대조한다. (A7 코드를 [앞 쪽 코드 불러오기]로 불러온 뒤 실행한다)
+    print("x =", x, " bisect_left:", bisect_left(DUP, x), " bisect_right:", bisect_right(DUP, x))
+</script>
+<div class="mycode"><textarea class="in code" rows="10" data-type="code" data-starter="A8-1" data-label="연습 · 예측 후 실행" spellcheck="false"></textarea></div>
+<div class="quiz predict">
+<p class="q">DUP에 없는 x = 4에서 bisect_left와 bisect_right는 같을까, 다를까?</p>
+<div class="opts"><button type="button">같다</button><button type="button">다르다</button></div>
+</div>
+</div>
+
+<div class="step">
+<h3>A7 함수 가져오기</h3>
+<p>A7의 두 함수는 다른 쪽(student_code_lab)에 있다. 거기서 두 함수를 실행해 성공시킨 뒤, 아래 편집기에서 [앞 쪽 코드 불러오기]를 누르고 [&#9654; 실행]을 눌러 보자.</p>
+<script type="text/plain" data-id="A8-p0">
+# A7에서 만든 두 함수가 이 쪽에 들어왔는지 확인한다.
+print(lower_bound([2, 4, 4, 6, 9], 4), upper_bound([2, 4, 4, 6, 9], 4))
+</script>
+<div class="mycode"><textarea class="in code" rows="5" data-type="code" data-starter="A8-p0" data-prev data-label="연습 · A7 함수 가져오기 확인" spellcheck="false"></textarea></div>
+<p><code class="i">1 3</code>이 나오면 준비가 끝났다.</p>
+<p class="tip"><code class="i">NameError</code>가 나오면 A7 쪽에서 먼저 실행에 성공했는지 보고, [앞 쪽 코드 불러오기]를 다시 누른다.</p>
+<details class="more"><summary>앞 쪽 코드가 안 불러와질 때</summary>
+<p>A7 쪽 편집기의 두 함수 코드를 복사해, 위 편집기 맨 위에 붙여 넣고 실행한다.</p>
+</details>
+</div>
+
+<div class="step">
+<h3>내 함수와 bisect 견주기</h3>
+<p>아래 편집기에는 bisect 실험 한 줄이 들어 있다. 5를 다른 값으로 바꿔도 된다. [&#9654; 실행]한 뒤 [&#10004; 점검]을 누르면 내 두 함수와 bisect를 여러 x에서 견준다.</p>
+<p><code class="i">A8 대조 통과</code>가 나오면 같은 값이다.</p>
+<script type="text/plain" data-id="A8-0">
+from bisect import bisect_left, bisect_right
+DUP = [1, 3, 3, 3, 5, 7, 7, 9, 12, 12, 12, 12, 15]
+
+# 실험 메모: 값 하나로 두 함수를 불러 본다. 5를 다른 값으로 바꿔도 된다
+print(bisect_left(DUP, 5), bisect_right(DUP, 5))
+</script>
+<script type="text/plain" data-id="A8-2">
+# A7에서 만든 두 함수가 bisect와 같은 값을 내는지 대조한다. (A7 코드를 [앞 쪽 코드 불러오기]로 불러온 뒤 실행한다)
 for x in range(-2, 20):  # x를 -2부터 19까지 바꿔 본다
     # 내 함수와 bisect의 값이 다르면 메시지를 보이며 멈춘다. 메시지의 x가 단서이다
     assert lower_bound(DUP, x) == bisect_left(DUP, x), "x=%d: 내 lower_bound %r, bisect_left %r" % (x, lower_bound(DUP, x), bisect_left(DUP, x))
     assert upper_bound(DUP, x) == bisect_right(DUP, x), "x=%d: 내 upper_bound %r, bisect_right %r" % (x, upper_bound(DUP, x), bisect_right(DUP, x))
 # 위의 assert를 모두 통과해야 실행된다
-print("A8 대조 통과")</code></pre></div>
-</section>
-<section id="A9" class="sheet">
-<h2>A9 · 개수 세는 함수 만들기<small>12분 · 개인</small></h2>
-<p>구간 [lo, hi]는 양끝을 포함하는 닫힌 구간이다. 번호 ⑩은 쓰지 않는다.</p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>구간 [lo, hi]의 원소 개수를 경계 두 개로 구하려면 어느 경계를 써야 하고, 같은 경계를 두 번 쓰면 어디에서 틀리는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">예측</span>활동지 2부 A9 표의 구간마다 DUP에서 개수를 눈으로 세어 예측해 쓴다.<span class="tg-where">활동지 <a class="xlink" href="student_workbook_part2.html#A9">2부 A9</a> 표 [예측 개수]</span><span class="tg-done">예측 칸이 모두 채워졌다.</span></li>
-<li><span class="tg-stage">적용</span>[예시 코드]의 [입력과 골격]을 편집기에 추가하고 ⑧⑨를 채운다. ⑪은 <b>처음에는 <code class="i">pass</code>로 둔다.</b> [▶ 실행]한다.<span class="tg-where">[내 코드 · A9 (count_equal, count_in_range 작성)] 편집기</span><span class="tg-done">오류 없이 실행된다(출력은 없다).</span></li>
-<li><span class="tg-stage">관찰</span>[1단계 예측 후 실행]을 같은 편집기 맨 아래에 추가해 실행하고 실제 개수를 표에 쓴다. 이어서 [2단계 lo > hi 관찰]을 추가해 실행하고, [7, 3]의 처음 값을 [처음] 칸에 쓴다.<span class="tg-where">같은 편집기, 활동지 2부 A9 [실제 개수], [처음]</span><span class="tg-done">구간 5줄과 <code class="i">[7, 3] …</code> 한 줄이 출력된다.</span></li>
-<li><span class="tg-stage">시도</span>이 구간의 올바른 개수가 몇 개여야 하는지 먼저 생각한 뒤 ⑪을 채워 다시 실행하고, 고친 값을 [고친 뒤] 칸에 쓴다.<span class="tg-where">같은 편집기, 활동지 2부 A9 [고친 뒤]</span><span class="tg-done">[처음]과 [고친 뒤] 칸에 값이 있다.</span></li>
-<li><span class="tg-stage">도구 확인</span>[3단계 점검]을 같은 편집기 맨 아래에 추가해 실행한다.<span class="tg-where">같은 편집기</span><span class="tg-done"><code class="i">A9 점검 통과</code>가 출력된다.</span></li>
-<li><span class="tg-stage">비교</span>활동지 2부 A9의 &ldquo;왼쪽 경계 두 개로 만든 식&rdquo; <code class="i">bisect_left(DUP, hi) − bisect_left(DUP, lo)</code>를 <b>두 번째 편집기</b>에 직접 써서 위 구간들에 적용한다. 값이 달라지는 구간을 활동지에 쓴다.<span class="tg-where">[내 코드 · A9 (틀린 식으로 값 구해 보기)] 편집기, 활동지 2부 A9 [틀린 식 값], [올바른 값]</span><span class="tg-done">틀리는 구간 하나를 찾아 활동지에 썼다.</span></li>
-</ol>
-<p class="tg-why"><span class="tg-k">왜 편집기가 두 개인가</span>첫 칸은 실습 과제의 앞 두 함수를 만드는 칸이고(A14로 이어진다), 둘째 칸은 틀린 식을 시험해 보는 실험 칸이다. 같은 쪽의 편집기는 환경을 공유하므로 둘째 칸에서 <code class="i">DUP</code>와 <code class="i">bisect_left</code>를 그대로 쓴다.</p>
-<div class="tg-contract"><span class="tg-k">만들 것</span><code class="i">count_equal(a, x), count_in_range(a, lo, hi)</code>
-<ul>
-<li>받는 값: <code class="i">a</code>는 정렬된 리스트, <code class="i">x</code>는 개수를 셀 값, <code class="i">lo</code>, <code class="i">hi</code>는 <b>값의 범위</b>(리스트의 자리 번호가 아니다)이며 양끝을 포함한다.</li>
-<li>돌려주는 값: 개수(정수)이다. <code class="i">lo &gt; hi</code>일 때의 값은 4단계에서 정한다.</li>
-<li>쓰는 모습: <code class="i">count_equal(DUP, 3)</code>, <code class="i">count_in_range(DUP, 4, 12)</code></li>
-</ul></div>
-<details class="tg-hint"><summary>막히면 · 힌트 1 (예측)</summary><p>구간 [lo, hi]는 값이 lo 이상 hi 이하인 원소를 센다. 자리 번호가 아니라 값으로 센다.</p></details>
-<details class="tg-hint"><summary>막히면 · 힌트 2 (⑧⑨)</summary><p>A7에서 lower_bound와 upper_bound가 각각 어느 쪽 끝을 가리키는지 다시 읽고, A8에서 두 경계의 값 차가 무엇이었는지 활동지 A8 질문 3의 내 답과 견준다.</p></details>
-<details class="tg-hint"><summary>막히면 · 힌트 3 (점검이 실패할 때)</summary><p>메시지의 리스트와 x(또는 lo, hi)를 그대로 넣어 내 결과를 print로 찍고, 그 리스트에서 해당 값을 손으로 센다. 메시지의 앞 값이 내 결과이다.</p></details>
+print("A8 대조 통과")
+</script>
+<div class="mycode"><textarea class="in code" rows="6" data-type="code" data-key="A8.mycode" data-starter="A8-0" data-starter-save data-prev data-check="A8-2" data-label="A8 (bisect 호출 실험 메모 또는 추가 실험) 내 코드" spellcheck="false"></textarea></div>
+<p class="tip">실패하면 메시지의 x에서 내 값과 bisect 값 중 어느 쪽이 다른지 본다. 같은 값이 여러 개 있는 곳에서 갈리는지 살피자.</p>
 </div>
-<h3>입력과 골격</h3>
-<div class="codewrap" data-for="A9.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A9-1"># A8에서 써 본 이진 탐색 도구를 가져온다
+
+<div class="step">
+<h3>돌아보기</h3>
+<div class="quiz" data-accept="3" data-hint="B에서 처음으로 5 이상인 값은 무엇이고 몇 번 칸에 있는가?">
+<p class="q">B = [2, 4, 4, 6, 9]에 없는 값 5의 bisect_left는 몇일까?</p>
+<div class="ans"><input type="text" aria-label="B에서 5의 bisect_left" placeholder="예: 0"><button type="button">확인</button></div>
+<p class="why">처음으로 5 이상인 값은 6이고 3번 칸에 있다.</p>
+</div>
+<p>표의 실제 값과 대조 결과, 예측과 다른 칸의 이유를 활동지 <a class="xlink" href="student_workbook_part2.html#A8">2부 A8</a>에 쓴다.</p>
+</div>
+<p class="wrapup"><b>여기까지</b> 내 두 함수와 bisect의 값을 견주어 보았다. 다음 A9에서는 이 두 경계로 개수를 센다.</p>
+</section>
+<section id="A9" class="sheet lesson">
+<h2>A9 · 개수 세는 함수 만들기<small>12분 · 개인</small></h2>
+<p class="lead">A8에서 같은 값이 여럿일 때 두 경계가 서로 달랐다. 이 두 경계로 개수를 세는 함수를 만들어 보자.</p>
+
+<div class="step">
+<h3>작은 리스트로 개수 세기</h3>
+<p>작은 리스트 B에서 x마다 bisect_left와 bisect_right를 찍어 보자.</p>
+<pre class="fig">idx   0  1  2  3  4
+B     2  4  4  6  9</pre>
+<script type="text/plain" data-id="A9-p1">
+from bisect import bisect_left, bisect_right
+B = [2, 4, 4, 6, 9]
+# x마다 bisect_left와 bisect_right를 찍는다
+for x in (4, 6, 5):
+    print(x, bisect_left(B, x), bisect_right(B, x))
+</script>
+<div class="mycode"><textarea class="in code" rows="7" data-type="code" data-starter="A9-p1" data-label="연습 · 두 경계 찍어 보기" spellcheck="false"></textarea></div>
+<div class="quiz" data-answer="1">
+<p class="q">x = 4에서 두 값은 1과 3이고, B에 4는 두 개 있다. 두 값에서 2를 만드는 계산은 무엇일까?</p>
+<div class="opts"><button type="button">3 &minus; 1</button><button type="button" data-hint="3 + 1은 4이다. B에 4는 몇 개인가?">3 + 1</button><button type="button" data-hint="3 &times; 1은 3이다. B에 4는 몇 개인가?">3 &times; 1</button></div>
+<p class="why">1은 처음 4 이상 자리이고 3은 처음 4 초과 자리이다. 그 사이의 칸이 4이다.</p>
+</div>
+</div>
+
+<div class="step">
+<h3>count_equal 채우기</h3>
+<p>아래 편집기에 입력과 두 함수의 골격이 들어 있다. ⑧을 채워 <code class="i">count_equal</code>을 완성하자. 방금 본 계산을 코드로 옮긴다.</p>
+<script type="text/plain" data-id="A9-1">
 from bisect import bisect_left, bisect_right
 
 # 이 활동에서 쓰는 입력이다(같은 값이 여러 번 나오는 정렬된 리스트)
@@ -223,25 +288,71 @@ def count_equal(a, x):
 
 # lo, hi는 값의 범위이다(리스트의 자리 번호가 아니다)
 def count_in_range(a, lo, hi):          # 닫힌 구간 [lo, hi]의 원소 개수
-    ____11____                          # ⑪ lo &gt; hi일 때의 처리 (A9 후반에 채운다. 처음에는 pass로 둔다)
-    return ____9____                    # ⑨ 닫힌 구간 [lo, hi]의 원소 개수를 구하는 식 전체</code></pre></div><div class="mycode"><label>내 코드 · A9 (count_equal, count_in_range 작성)</label><textarea class="in code" rows="14" data-type="code" data-key="A9.mycode" data-label="A9 (count_equal, count_in_range 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
-<h3>1단계 예측 후 실행</h3>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A9-2">DUP = [1, 3, 3, 3, 5, 7, 7, 9, 12, 12, 12, 12, 15]
+    pass                                # ⑨ lo > hi일 때의 처리. 처음에는 pass로 두고 5걸음에서 바꾼다
+    return ____10____                   # ⑩ 닫힌 구간 [lo, hi]의 원소 개수를 구하는 식 전체
+</script>
+<div class="mycode"><textarea class="in code" rows="16" data-type="code" data-key="A9.mycode" data-starter="A9-1" data-check="A9-4" data-label="A9 (count_equal, count_in_range 작성) 내 코드" spellcheck="false"></textarea></div>
+<p>[&#9654; 실행]한 뒤 아래 연습 편집기도 실행해 보자. 출력은 <code class="i">2 1 0</code>이어야 한다.</p>
+<script type="text/plain" data-id="A9-p2">
+# 위 편집기에서 count_equal을 먼저 실행해 둔다.
+B = [2, 4, 4, 6, 9]
+print(count_equal(B, 4), count_equal(B, 6), count_equal(B, 5))
+</script>
+<div class="mycode"><textarea class="in code" rows="5" data-type="code" data-starter="A9-p2" data-label="연습 · count_equal 시험" spellcheck="false"></textarea></div>
+</div>
+
+<div class="step">
+<h3>닫힌 구간 [lo, hi] 세기</h3>
+<p>구간 [4, 6]은 값이 4 이상 6 이하인 원소를 센다. 양끝 값도 세고, lo와 hi는 칸 번호가 아니라 값이다. B에서 [4, 6]에 든 칸은 인덱스 1, 2, 3이다.</p>
+<pre class="fig">idx   0  1  2  3  4
+B     2  4  4  6  9
+
+x    bisect_left  bisect_right
+4         1            3
+6         3            4</pre>
+<div class="quiz" data-accept="3" data-hint="인덱스 1, 2, 3의 값을 하나씩 읽어 보자.">
+<p class="q">B에서 값이 4 이상 6 이하인 원소는 몇 개일까?</p>
+<div class="ans"><input type="text" aria-label="[4, 6]의 개수" placeholder="예: 0"><button type="button">확인</button></div>
+<p class="why">4, 4, 6으로 3개이다.</p>
+</div>
+<p>⑩에 알맞은 식을 써서 <code class="i">count_in_range</code>를 채우자. 세기를 시작하는 칸(1번)과 끝난 다음 칸(4번)이 위 표의 어느 값인지 찾아 보자.</p>
+</div>
+
+<div class="step">
+<h3>예측하고 실행하기</h3>
+<p>DUP에서 구간 5개의 개수를 눈으로 세어 활동지 <a class="xlink" href="student_workbook_part2.html#A9">2부 A9</a>의 예측 칸에 먼저 쓴다. 그다음 위 편집기를 [&#9654; 실행]해 ⑩을 반영하고, 아래 연습 편집기를 실행해 실제 개수를 확인한다.</p>
+<script type="text/plain" data-id="A9-2">
+DUP = [1, 3, 3, 3, 5, 7, 7, 9, 12, 12, 12, 12, 15]
 # 예측을 활동지에 먼저 적은 뒤 실행한다.
 # (lo, hi) 쌍을 하나씩 꺼내 그 구간의 개수를 출력한다
 for lo, hi in ((4, 12), (3, 7), (8, 11), (0, 100), (13, 14)):
-    print("[%d, %d]" % (lo, hi), count_in_range(DUP, lo, hi))</code></pre></div>
-<h3>2단계 lo &gt; hi 관찰</h3>
-<div class="codewrap" data-for="A9.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A9-3"># lo &gt; hi인 구간을 실행해 본다. 값을 보고 ⑪을 채운 뒤 다시 실행한다.
-print("[7, 3]", count_in_range(DUP, 7, 3))</code></pre></div>
-<h3>3단계 점검</h3>
-<div class="codewrap" data-for="A9.mycode"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A9-4"># A9 점검: 정의대로 하나씩 세는 느린 방법과 내 결과를 비교한다.
+    print("[%d, %d]" % (lo, hi), count_in_range(DUP, lo, hi))
+</script>
+<div class="mycode"><textarea class="in code" rows="6" data-type="code" data-starter="A9-2" data-label="연습 · 구간 5개 실행" spellcheck="false"></textarea></div>
+</div>
+
+<div class="step">
+<h3>lo &gt; hi일 때 고치고 점검하기</h3>
+<p>구간 [7, 3]은 lo가 hi보다 크다. 먼저 지금 코드가 무엇을 돌려주는지 실행해 보자.</p>
+<script type="text/plain" data-id="A9-3">
+# lo > hi인 구간을 실행해 본다. 값을 보고 ⑨를 채운 뒤 다시 실행한다.
+print("[7, 3]", count_in_range(DUP, 7, 3))
+</script>
+<div class="mycode"><textarea class="in code" rows="4" data-type="code" data-starter="A9-3" data-label="연습 · [7, 3] 실행" spellcheck="false"></textarea></div>
+<div class="quiz" data-accept="0" data-hint="7 이상이면서 3 이하인 수가 있을까?">
+<p class="q">구간 [7, 3]에 들어 있는 원소는 몇 개여야 할까?</p>
+<div class="ans"><input type="text" aria-label="[7, 3]의 올바른 개수" placeholder="예: 0"><button type="button">확인</button></div>
+<p class="why">7 이상이면서 3 이하인 수는 없다. 그래서 0개이다.</p>
+</div>
+<p>값을 보고 ⑨의 <code class="i">pass</code>를 알맞은 코드로 바꾸자. 줄을 둘로 나누어 써도 된다. 그다음 [&#10004; 점검]을 눌러 <code class="i">A9 점검 통과</code>가 나오면 완성이다.</p>
+<p class="tip">점검이 실패하면 메시지의 리스트와 값을 그대로 넣어 내 결과를 <code class="i">print</code>하고, 그 리스트에서 직접 세어 견주자.</p><script type="text/plain" data-id="A9-4">
+# A9 점검: 정의대로 하나씩 세는 느린 방법과 내 결과를 비교한다.
 # 처음부터 훑으며 조건에 맞는 원소마다 1을 더해 센다(느리지만 확실한 기준)
 def slow_equal(a, x):
     return sum(1 for v in a if v == x)  # v == x인 원소마다 1을 더한 합
 
 def slow_range(a, lo, hi):
-    return sum(1 for v in a if lo &lt;= v &lt;= hi)  # lo 이상 hi 이하인 원소마다 1을 더한 합
+    return sum(1 for v in a if lo <= v <= hi)  # lo 이상 hi 이하인 원소마다 1을 더한 합
 
 # 여러 리스트(빈 리스트, 원소 1개 포함)로 점검한다
 for a in (DUP, [], [5], [2, 2, 2]):
@@ -252,20 +363,54 @@ for a in (DUP, [], [5], [2, 2, 2]):
         for hi in range(-2, 20, 2):  # 2씩 건너뛰며 hi를 바꾼다
             assert count_in_range(a, lo, hi) == slow_range(a, lo, hi), "count_in_range(%r, %d, %d): 내 결과 %r, 하나씩 센 값 %r" % (a, lo, hi, count_in_range(a, lo, hi), slow_range(a, lo, hi))
 # 위의 assert를 모두 통과해야 실행된다
-print("A9 점검 통과")</code></pre></div>
-<h3>틀린 식의 반례 찾기</h3>
-<div class="mycode"><label>내 코드 · A9 (틀린 식으로 값 구해 보기)</label><textarea class="in code" rows="8" data-type="code" data-key="A9.badcode" data-label="A9 (틀린 식으로 값 구해 보기) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
+print("A9 점검 통과")
+</script>
+</div>
+
+<div class="step">
+<h3>틀린 식 시험하기</h3>
+<p>누군가 구간 개수를 <code class="i">bisect_left(a, hi) &minus; bisect_left(a, lo)</code>로 구했다고 하자. 아래 편집기의 ⑪⑫를 채우고 실행해 보자.</p>
+<p class="tip">채우기 전에 실행하면 <code class="i">NameError: name '____11____' is not defined</code>가 나온다. 정상이다.</p>
+<script type="text/plain" data-id="A9-b1">
+from bisect import bisect_left
+
+DUP = [1, 3, 3, 3, 5, 7, 7, 9, 12, 12, 12, 12, 15]
+
+# 왼쪽 경계(bisect_left)만 두 번 써서 구간 개수를 구하는 식
+def bad(a, lo, hi):
+    return ____11____ - ____12____       # ⑪ hi 쪽 경계  ⑫ lo 쪽 경계
+
+print(bad(DUP, 4, 12))
+</script>
+<div class="mycode"><textarea class="in code" rows="12" data-type="code" data-key="A9.badcode" data-starter="A9-b1" data-label="A9 (틀린 식으로 값 구해 보기) 내 코드" spellcheck="false"></textarea></div>
+<div class="quiz predict">
+<p class="q">[4, 12]에서 이 식의 값은 올바른 개수 8과 같을까?</p>
+<div class="opts"><button type="button">같다</button><button type="button">다르다</button></div>
+</div>
+<p>올바른 개수 8과 같을까? 구간을 바꿔 가며 값이 틀리는 구간을 하나 찾는다.</p>
+</div>
+
+<div class="step">
+<h3>돌아보기</h3>
+<div class="quiz" data-accept="4" data-hint="구간 [12, 12]는 12 이상 12 이하이다. DUP에 12는 몇 개 있는가?">
+<p class="q"><code class="i">count_in_range(DUP, 12, 12)</code>는 몇을 돌려줄까?</p>
+<div class="ans"><input type="text" aria-label="count_in_range(DUP, 12, 12)" placeholder="예: 0"><button type="button">확인</button></div>
+<p class="why">DUP에 12가 네 개 있다. count_equal(DUP, 12)와 같은 값이다.</p>
+</div>
+<p>예측과 실제, [7, 3]의 값, 틀린 식의 반례, 질문을 활동지 <a class="xlink" href="student_workbook_part2.html#A9">2부 A9</a>에 쓴다.</p>
+<details class="more"><summary>끝까지 막혔다면 &middot; 빈칸 답 보기</summary>
+<p>⑧ <code class="i">bisect_right(a, x) - bisect_left(a, x)</code> ⑨ <code class="i">if lo &gt; hi:</code>와 <code class="i">return 0</code> ⑩ <code class="i">bisect_right(a, hi) - bisect_left(a, lo)</code> ⑪ <code class="i">bisect_left(a, hi)</code> ⑫ <code class="i">bisect_left(a, lo)</code></p>
+</details>
+</div>
+<p class="wrapup"><b>여기까지</b> 실습 과제의 앞 두 함수가 생겼다. 이어서 이 함수를 A14에서 어떻게 쓰는지 읽는다.</p>
 </section>
 <section id="note" class="sheet">
 <h2>실습 과제와의 연결<small>A9 이어짐</small></h2>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>A9에서 만든 두 함수는 실습 과제와 어떻게 이어지는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">과제 착수</span>점검을 통과한 두 함수를 이 쪽의 [내 코드 · A9 (count_equal, count_in_range 작성)] 칸에서 실행해 성공시켜 둔다.<span class="tg-done"><code class="i">A9 점검 통과</code>가 출력된 상태이다.</span></li>
-<li><span class="tg-stage">과제 착수</span>A14(student_code_lab_part4)에서 이 칸의 두 함수 코드를 <b>복사해</b> A14 [내 코드] 칸 맨 위에 붙여 이어 쓴다(코드는 자동으로 넘어오지 않는다). <code class="i">closest_value</code>는 A14에서 새로 쓴다.<span class="tg-where">student_code_lab_part4 [내 코드 · A14 (count_equal, count_in_range, closest_value 작성)]</span></li>
-</ol>
-</div>
-<p>두 함수는 실습 과제의 앞 두 함수와 이름·입출력이 같다. AI 활용은 student_code_lab의 3단계 표를 따른다.</p>
+<ul>
+<li>A9의 두 함수는 실습 과제의 앞 두 함수와 이름·입출력이 같다. [&#10004; 점검]을 통과시킨 뒤 A9 편집기를 실행해 성공시켜 둔다.</li>
+<li>A14(student_code_lab_part4)에서 이 편집기의 두 함수 코드를 복사해 A14 [내 코드] 칸에 붙이고, <code class="i">closest_value</code>를 새로 쓴다. 코드는 자동으로 넘어오지 않는다.</li>
+<li>제출 방법과 평가는 student_code_lab의 실습 과제 안내에 있다. AI 활용도 그 파일의 3단계를 따른다.</li>
+</ul>
 </section>
 </div>
 <script id="week12-submit">

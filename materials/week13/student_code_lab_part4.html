@@ -122,6 +122,8 @@ table.fill td.in-cell{padding:3px;height:auto}
 <link rel="stylesheet" href="../assets/topnav.css">
 <link rel="stylesheet" href="../assets/theme.css">
 <link rel="stylesheet" href="../assets/sheettabs.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script src="../assets/lesson.js" defer></script>
 <script src="../assets/topnav.js" defer></script>
 <link rel="stylesheet" href="../assets/chatkit.css">
 <script src="../assets/chatkit.js" defer></script>
@@ -131,70 +133,104 @@ table.fill td.in-cell{padding:3px;height:auto}
 <header>
   <div class="prompt">&gt;&gt;&gt; lab.week(13)  # 학생용 · 실습 코드 4부</div>
   <h1>13주차 실습 코드 4부 — 2차원 DP, 과제 작성 칸, A14 점검</h1>
-  <p class="lead">성취기준 [12자구04-03]. 이 파일은 3차시 시작 때 A11용으로 배포한다. A14 블록은 접힌 상태이며 A14에서 펼친다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
+  <p class="lead">3차시 시작 때 A11용으로 배포한다. A14 블록은 접혀 있으며 A14에서 펼친다.</p><p class="meta"><span>학번·이름은 위쪽 저장 바에 쓴다.</span></p>
 </header>
 <nav><a href="#how">#사용법</a><a href="#A11">#A11</a><a href="#assign">#과제작성</a><a href="#A14">#A14</a><a href="index.html">목록</a></nav>
 <section id="how">
 <h2>사용법<small>#how</small></h2>
-<ol>
-<li>이 쪽의 &lsquo;내 코드&rsquo; 칸은 <b>코드 편집기</b>이다. 코드를 쓰고 <b>[▶ 실행]</b>(또는 Ctrl/⌘+Enter)을 누르면 이 쪽 안에서 바로 파이썬이 실행된다. 파이썬을 설치하거나 <code class="i">.py</code> 파일을 만들 필요가 없다. 처음 한 번은 파이썬을 준비하느라 몇 초 걸린다.</li>
-<li>편집기의 <b>[예시 코드]</b>를 누르면 같은 활동의 코드 블록이 나온다. [복사] 또는 [편집기에 추가]로 가져온다. [편집기에 추가]는 편집기의 맨 아래에 이어 붙인다. 뼈대와 점검은 앞의 제공 코드(A11의 <code class="i">GRID</code>, A14의 <code class="i">MEET</code>)를 쓰므로 제공 코드를 먼저 편집기에 추가한다.</li>
-<li>같은 쪽의 편집기들은 파이썬 환경을 함께 쓴다. 앞 편집기에서 실행한 함수와 변수는 뒤 편집기에서 그대로 쓸 수 있다. 쪽을 새로 열거나 [실행 환경 초기화]를 누르면 정의가 지워지므로 위의 편집기부터 다시 실행한다. 다른 쪽에서 만든 함수가 필요하면 그 쪽의 편집기에서 실행을 성공시킨 뒤, 이 쪽의 <b>[앞 쪽 코드 불러오기]</b>를 누른다. 이 단추는 항상 보이며, 같은 주차의 앞 쪽에서 성공한 실행 기록(이 브라우저에 8시간 보관되고 새 탭에서도 유효하다)이 없으면 안내 문구가 나온다. 그때는 앞 쪽 편집기의 코드를 복사해 이 쪽 편집기 맨 위에 붙여 넣고 실행한다. A14의 점검은 &lsquo;실습 과제 작성 칸&rsquo;과 A11 편집기에서 실행해 둔 함수·<code class="i">GRID</code>를 쓴다.</li>
-<li>한 번의 실행은 <b>15초</b>를 넘기면 멈추고 환경이 초기화된다. 다음 실행 때 이 쪽에서 성공했던 코드가 자동으로 다시 실행되어 복원된다. 무한 반복이나 종료 조건(기저 조건) 누락이 없는지 확인한다.</li>
-<li>골격의 <code class="i">____11____</code> 같은 자리가 채울 곳이다. 이 쪽의 빈칸은 ⑪~⑯이다. 채우지 않고 실행하면 <code class="i">NameError: name '____11____' is not defined</code>가 나오는데, 아직 채울 곳이 남아 있다는 뜻이다. 그 밖의 <code class="i">NameError</code>는 아직 정의(실행)하지 않은 이름을 썼다는 뜻이다.</li>
-<li>정답과 기대 값은 A14 블록 안의 닫힌 &lsquo;점검 기대값&rsquo; 상자에만 있다. 점검은 <b>정의대로 구한 값과 내 결과를 비교</b>한다. 점검이 실패하면 <code class="i">AssertionError</code>와 함께 어느 입력에서 틀렸는지 나온다. 값은 내가 실행해서 확인하고 활동지에 쓴다.</li>
-<li><b>자체 테스트가 실패하면</b> A11의 메시지는 <code class="i">○에서 grid_paths=○ 인데 직접 세면 ○이다</code> 꼴이며 첫 ○는 어느 격자인지, <b>앞의 값이 내 함수의 결과</b>, 뒤의 값이 점검 코드가 직접 센 값이다. A14의 점검은 <code class="i">AssertionError</code> 대신 결과를 한 줄씩 출력하므로 &lsquo;점검 기대값&rsquo; 상자와 번호별로 견준다. 확인할 때는 그 입력으로 <code class="i">print</code>해 내 결과를 찍어 본다.</li>
-<li>편집기에 둔 코드는 위쪽 [저장(JSON)]에 함께 담겨 제출된다. 따로 <code class="i">.py</code> 파일을 내지 않는다.</li>
-</ol>
-</section>
-<section id="A11" class="sheet">
-<h2>A11 · 격자 경로 수를 DP로 설계하고 구현하기<small>10분 · 개인</small></h2>
-<p class="meta"><span>산출물: ⑪ ~ ⑭ 완성 코드, GRID dp 표와 경로 수 예측-실제 표(활동지 3부 A11 칸)</span></p>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>격자 경로 수를 DP 표로 세려면 상태 정의·전이·초기값·계산 순서를 각각 어떻게 정해야 하는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">시도</span>코드를 보기 전에 학습 내용 상자의 그림과 4칸 질문을 읽고, 설계 4칸(상태 정의·전이·초기값·계산 순서)을 말로 쓴다.<span class="tg-where">활동지 <a class="xlink" href="student_workbook_part3.html#A11">3부 A11</a> &lsquo;설계 4칸&rsquo; 표</span><span class="tg-done">설계 4칸이 모두 채워져 있다.</span></li>
-<li><span class="tg-stage">예측</span>GRID(4행 5열)의 dp 표 20칸과 경로 수를 실행 전에 예측한다.<span class="tg-where">활동지 3부 A11 &lsquo;예측&rsquo; 표와 경로 수 예측 칸</span><span class="tg-done">예측 표 20칸과 경로 수 예측이 채워져 있다.</span></li>
-<li><span class="tg-stage">적용</span>[내 코드 · A11 (grid_paths 작성)] 편집기에 A11-1(GRID)과 A11-2(뼈대)를 이 순서로 추가하고 ⑪~⑭를 채워 [▶ 실행]한다.<span class="tg-where">[내 코드 · A11 (grid_paths 작성)] 편집기</span><span class="tg-done">NameError 없이 실행이 끝난다.</span></li>
-<li><span class="tg-stage">도구 확인</span>A11-3(점검)을 맨 아래에 추가해 실행한다.<span class="tg-where">같은 편집기</span><span class="tg-done"><code class="i">A11 점검 통과</code>가 출력된다.</span></li>
-<li><span class="tg-stage">관찰</span>A11-4를 추가해 실행하고 경로 수를 &lsquo;실제&rsquo; 칸에 쓴다. dp 표를 보려면 A11-4 주석대로 grid_paths의 return 바로 앞에 두 줄을 임시로 넣고 확인한 뒤 지운다.<span class="tg-where">활동지 3부 A11 실제 칸</span><span class="tg-done">숫자 하나(경로 수)가 출력된다.</span></li>
-<li><span class="tg-stage">설명</span>예측 표와 실제 표를 견주고 활동지 3부 A11의 질문 1~4에 답한다.<span class="tg-where">활동지 3부 A11 질문 1~4</span><span class="tg-done">질문 4개에 답이 쓰여 있다.</span></li>
-</ol>
-<div class="tg-contract"><span class="tg-k">만들 것 · 4단계</span><code class="i">grid_paths(grid)</code>
 <ul>
-<li>받는 값: <code class="i">grid</code>는 0(통행)과 1(막힘)로 이루어진 R × C 이차원 리스트이다.</li>
-<li>돌려주는 값: 좌상단에서 우하단까지 오른쪽·아래로만 가는 경로의 수(정수)이다. 시작이나 도착이 막혀 있으면 <code class="i">0</code>이다.</li>
-<li>쓰는 모습: <code class="i">grid_paths(GRID)</code></li>
-</ul></div>
-<details class="tg-hint"><summary>막히면 · 힌트 1 (시도 · 설계)</summary><p>1차원 동전 표에서 dp[a]가 어느 칸을 읽었는지 떠올린다. 칸 (r, c)에 닿는 마지막 한 걸음은 어느 방향에서 오는가? 막힌 칸은 닿을 수 있는가?</p></details>
-<details class="tg-hint"><summary>막히면 · 힌트 2 (적용 · ⑪)</summary><p>dp는 R개의 행으로 이루어지고 각 행은 C칸이다. 행마다 새 리스트여야 하는 까닭은 A10의 T3에서 본 것과 같다.</p></details>
-<details class="tg-hint"><summary>막히면 · 힌트 3 (점검이 실패할 때)</summary><p>메시지 <code class="i">○에서 grid_paths=○ 인데 직접 세면 ○이다</code>에서 첫 ○는 격자 이름, 앞의 값이 내 결과, 뒤의 값이 점검 코드가 직접 센 값이다. 아주 작은 격자(&lsquo;대각 막힘&rsquo;, &lsquo;시작 막힘&rsquo;)부터 <code class="i">print(grid_paths(…))</code>로 찍어 본다.</p></details>
-</div>
-<p>11주차 격자 탐색에서 칸을 따라 움직이던 감각을 떠올린다. 이번에는 <b>오른쪽과 아래쪽으로만</b> 움직여 좌상단에서 우하단까지 가는 경로가 모두 몇 가지인지 센다(0 = 통행, 1 = 막힘). 코드를 보기 전에 활동지 3부 A11의 설계 4칸(상태 정의·전이·초기값·계산 순서)을 <b>먼저 말로 쓴다</b>.</p>
-<div class="learn-box"><span class="lb-title">학습 내용 · 격자 경로 설계의 그림과 4칸 질문</span>
-<p>GRID는 4행 5열이다(<code class="i">.</code> = 통행 0, <code class="i">■</code> = 막힘 1). 오른쪽·아래로만 움직여 좌상단 (0, 0)에서 우하단 (3, 4)까지 간다. 11주차 격자 탐색의 &ldquo;오른쪽·아래&rdquo; 이동 감각과 같다.</p>
-<pre class="diagram">      c0 c1 c2 c3 c4
-r0 시작 .  .  .  .  .
-r1     .  ■  .  ■  .
-r2     .  .  .  .  .
-r3     ■  .  ■  .  . 도착</pre>
-<p>작은 보기(2×2, 모두 통행): 오른쪽→아래, 아래→오른쪽의 2가지 경로가 있다. 설계 4칸은 코드를 보기 전에 활동지 3부에 말로 쓴다. 쓸 때 던질 질문은 다음과 같다.</p>
-<ul>
-<li><b>상태 정의</b> 표의 한 칸 dp[r][c]는 무엇을 센 값이라고 한 문장으로 쓸 수 있는가?</li>
-<li><b>전이</b> 칸 (r, c)에 닿는 마지막 한 걸음은 어느 칸에서 오는가? 막힌 칸이면?</li>
-<li><b>초기값</b> 따로 정해 주어야 하는 칸이 있는가? 시작이 막혀 있으면?</li>
-<li><b>계산 순서</b> 한 칸을 계산할 때 읽는 칸이 이미 채워져 있으려면 어떤 순서로 채워야 하는가? 1차원 동전 표 dp[a]는 dp[a−c]를 읽으므로 작은 금액부터 채웠다. 그 순서 규칙과 비교한다.</li>
+<li>편집기에는 필요한 코드가 미리 들어 있다. <code class="i">____11____</code> 같은 자리를 채우고 [&#9654; 실행]을 누른다.</li>
+<li>[&#10004; 점검]은 내 코드가 맞는지 확인해 준다. [처음 코드로]는 편집기를 처음 상태로 되돌린다.</li>
+<li>편집기에 쓴 내용은 자동으로 보관된다. 다 했으면 위의 [저장(JSON)]으로 제출 파일을 만든다.</li>
 </ul>
+<details class="more"><summary>단축키와 오류가 날 때</summary>
+<ul>
+<li>Ctrl(&#8984;)+Enter는 실행, Tab은 들여쓰기, Shift+Tab은 내어쓰기이다.</li>
+<li>같은 쪽의 편집기는 파이썬 환경을 함께 쓴다. 쪽을 새로 열면 정의가 지워지므로 위의 편집기부터 다시 실행한다.</li>
+<li><code class="i">NameError: name '____11____' is not defined</code>는 그 번호의 자리가 아직 비어 있다는 뜻이다. 그 밖의 <code class="i">NameError</code>는 아직 실행하지 않은 이름을 썼다는 뜻이다.</li>
+<li>점검이 실패하면 <code class="i">AssertionError</code>와 함께 어느 입력에서 틀렸는지 나온다.</li>
+<li>실행이 15초를 넘기면 멈추고 환경이 초기화된다. 다음 실행 때 이 쪽에서 성공했던 코드가 복원된다.</li>
+</ul>
+</details>
+</section>
+<section id="A11" class="sheet lesson">
+<h2>A11 · 격자 경로 수를 DP로 세기<small>10분 · 개인</small></h2>
+<p class="lead">11주차에는 격자에서 길을 찾았다. 이번에는 오른쪽과 아래로만 움직여 도착하는 길이 모두 몇 가지인지 세어 보자.</p>
+
+<div class="step">
+<h3>작은 격자에서 길 세기</h3>
+<p>격자의 <code class="i">.</code>는 지나갈 수 있는 칸이고 <code class="i">#</code>은 막힌 칸이다. 왼쪽 위 S에서 오른쪽 아래 E까지 오른쪽이나 아래로만 한 칸씩 간다. 2&times;2 격자에는 길이 두 가지이다.</p>
+<pre class="fig">S .      길 1: S &rarr; 오른쪽 &rarr; 아래 &rarr; E
+. E      길 2: S &rarr; 아래 &rarr; 오른쪽 &rarr; E</pre>
+<pre class="fig">     열 0 1 2
+행 0     S . .
+행 1     . # .
+행 2     . . E</pre>
+<div class="quiz" data-answer="2">
+<p class="q">가운데 칸이 막힌 3&times;3 격자에서 S에서 E까지 길은 몇 가지일까?</p>
+<div class="opts"><button type="button" data-hint="길이 하나뿐일까? 위쪽 줄로 돌아가는 길과 왼쪽 줄로 돌아가는 길을 따로 세어 보자.">1가지</button><button type="button">2가지</button><button type="button" data-hint="길은 모두 오른쪽 2번, 아래 2번으로 이루어진다. 그중 가운데 칸 (1, 1)을 지나는 길은 쓸 수 없다.">3가지</button><button type="button" data-hint="막히지 않은 3&times;3이라면 6가지이다. 가운데 칸을 지나는 길은 쓸 수 없다.">4가지</button></div>
+<p class="why">위쪽 줄과 오른쪽 줄을 따라 가는 길, 왼쪽 줄과 아래쪽 줄을 따라 가는 길이다.</p>
 </div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A11-1"># A11 입력 (0 = 통행, 1 = 막힘). 이동은 오른쪽과 아래쪽만 한다.
+</div>
+
+<div class="step">
+<h3>칸마다 길의 수 적기</h3>
+<p>같은 격자를 표로 세어 보자. 칸마다 &lsquo;S에서 그 칸까지 오는 길의 수&rsquo;를 적는다. S 칸은 1, 막힌 칸은 0이다.</p>
+<pre class="fig">     열 0 1 2
+행 0     1 1 1
+행 1     1 0 1
+행 2     1 ? 2</pre>
+<div class="quiz" data-accept="1" data-hint="(2, 1)에 닿는 마지막 한 걸음은 위 칸 (1, 1)이나 왼쪽 칸 (2, 0)에서 온다. 두 칸의 값을 보자.">
+<p class="q">?에 들어갈 값은 얼마일까?</p>
+<div class="ans"><input type="text" aria-label="물음표 칸의 값" placeholder="숫자"><button type="button">확인</button></div>
+<p class="why">위 칸 (1, 1)은 0이고 왼쪽 칸 (2, 0)은 1이다. 그래서 (2, 1)까지 오는 길은 1가지이다.</p>
+</div>
+</div>
+
+<div class="step">
+<h3>GRID 예측하기</h3>
+<p>이제 4행 5열 <code class="i">GRID</code>이다. 코드를 보기 전에 활동지 <a class="xlink" href="student_workbook_part3.html#A11">3부 A11</a>에서 설계 네 가지를 말로 쓰고, 칸마다 길의 수를 예측해 보자. 다 썼으면 다음 걸음으로 가자.</p>
+<pre class="fig">     열 0 1 2 3 4
+행 0     S . . . .
+행 1     . # . # .
+행 2     . . . . .
+행 3     # . # . E</pre>
+</div>
+
+<div class="step">
+<h3>행마다 새 리스트 만들기</h3>
+<p>표는 리스트의 리스트로 만든다. 행 하나는 칸 C개짜리 리스트이고, 행이 R개 필요하다. 행은 모두 서로 다른 리스트여야 한다. A10의 T3에서 본 일이다.</p>
+<script type="text/plain" data-id="A11-p1">
+R, C = 2, 3                        # 2행 3열 표를 만든다
+dp = [____ for _ in range(R)]      # 빈칸에 행 하나(칸 C개, 모두 0)를 만드는 식을 쓴다
+dp[0][0] = 1                       # 맨 왼쪽 위 칸에만 1을 쓴다
+print(dp)
+</script>
+<div class="mycode"><textarea class="in code" rows="6" data-type="code" data-starter="A11-p1" data-label="연습 · 표 만들기" spellcheck="false"></textarea></div>
+<p>빈칸 <code class="i">____</code>를 채우고 [&#9654; 실행]을 눌러 보자. 채우기 전의 <code class="i">NameError</code>는 정상이다.</p>
+<div class="quiz" data-accept="[0, 0, 0]|000" data-hint="둘째 행도 [1, 0, 0]이면 두 행이 같은 리스트이다. 행마다 새로 만들어지는가?">
+<p class="q">출력에서 둘째 행 <code class="i">dp[1]</code>은 무엇인가?</p>
+<div class="ans"><input type="text" aria-label="둘째 행" placeholder="예: [1, 1, 1]"><button type="button">확인</button></div>
+<p class="why">1을 쓴 곳은 첫 행뿐이다. 행마다 새 리스트이기 때문이다.</p>
+</div>
+</div>
+
+<div class="step">
+<h3>표 만들기, 막힌 칸(⑪⑫)</h3>
+<p>아래 편집기에 <code class="i">GRID</code>와 <code class="i">grid_paths</code>의 뼈대가 들어 있다. ⑪에는 방금 연습한 식을, ⑫에는 막힌 칸의 값을 쓰고 [&#9654; 실행]을 누르자. ⑬⑭는 아직 <code class="i">pass</code>이므로 0이 나온다.</p>
+<p class="tip"><code class="i">NameError: name '____12____' is not defined</code>가 나오면 ⑫가 비어 있다는 뜻이다.</p>
+<script type="text/plain" data-id="A11-1">
+# A11 입력 (0 = 통행, 1 = 막힘). 이동은 오른쪽과 아래쪽만 한다.
 # 2차원 리스트: GRID[행][열]로 칸을 가리킨다(4행 5열).
 GRID = [
     [0, 0, 0, 0, 0],
     [0, 1, 0, 1, 0],
     [0, 0, 0, 0, 0],
     [1, 0, 1, 0, 0],
-]</code></pre></div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A11-2">def grid_paths(grid):               # grid: 0과 1로 된 2차원 리스트
+]
+</script>
+<script type="text/plain" data-id="A11-2">
+def grid_paths(grid):               # grid: 0과 1로 된 2차원 리스트
     R, C = len(grid), len(grid[0])  # 행 수, 열 수
     dp = [____11____ for _ in range(R)]       # ⑪ 한 행
     if grid[0][0] == 1:             # 출발 칸이 막혔으면
@@ -205,13 +241,14 @@ GRID = [
             if grid[r][c] == 1:     # 막힌 칸이면
                 ____12____                    # ⑫ 막힌 칸은 지나갈 수 없다
                 continue            # 아래 코드를 건너뛰고 다음 칸으로
-            if r &gt; 0:               # 위 칸이 격자 안에 있을 때만
-                dp[r][c] += ____13____        # ⑬ 위 칸에서 오는 경로
-            if c &gt; 0:               # 왼쪽 칸이 격자 안에 있을 때만
-                dp[r][c] += ____14____        # ⑭ 왼쪽 칸에서 오는 경로
-    return dp[R - 1][C - 1]         # 맨 오른쪽 아래 칸의 값</code></pre></div>
-<div class="mycode"><label>내 코드 · A11 (grid_paths 작성)</label><textarea class="in code" rows="22" data-type="code" data-key="A11.mycode" data-label="A11 (grid_paths 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
-<h3>점검</h3><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A11-3"># A11 점검: 가능한 길을 직접 모두 따라가 세는 방법과 내 결과를 비교한다.
+            if r > 0:               # 위 칸이 격자 안에 있을 때만
+                pass                          # ⑬ 위 칸에서 오는 경로. pass를 지우고 쓴다
+            if c > 0:               # 왼쪽 칸이 격자 안에 있을 때만
+                pass                          # ⑭ 왼쪽 칸에서 오는 경로. pass를 지우고 쓴다
+    return dp[R - 1][C - 1]         # 맨 오른쪽 아래 칸의 값
+</script>
+<script type="text/plain" data-id="A11-3">
+# A11 점검: 가능한 길을 직접 모두 따라가 세는 방법과 내 결과를 비교한다.
 def count_by_walking(grid, r=0, c=0):  # 칸 (r, c)에서 출발해 길을 모두 따라간다(재귀)
     R, C = len(grid), len(grid[0])
     if grid[r][c] == 1:                # 막힌 칸이면 길이 없다
@@ -219,9 +256,9 @@ def count_by_walking(grid, r=0, c=0):  # 칸 (r, c)에서 출발해 길을 모�
     if r == R - 1 and c == C - 1:      # 도착 칸에 닿으면 길 1개 완성
         return 1
     total = 0
-    if r + 1 &lt; R:                      # 아래로 갈 수 있으면
+    if r + 1 < R:                      # 아래로 갈 수 있으면
         total += count_by_walking(grid, r + 1, c)
-    if c + 1 &lt; C:                      # 오른쪽으로 갈 수 있으면
+    if c + 1 < C:                      # 오른쪽으로 갈 수 있으면
         total += count_by_walking(grid, r, c + 1)
     return total
 
@@ -235,72 +272,91 @@ for name, g in CASES:                  # 쌍을 풀어 name, g에 담는다
     # 실패하면 내 grid_paths가 직접 센 값과 다르다는 뜻이다.
     # name이 어느 격자에서 틀렸는지 알려 준다.
     assert got == want, "%s에서 grid_paths=%r 인데 직접 세면 %r이다" % (name, got, want)
-print("A11 점검 통과")</code></pre></div>
-<h3>예측 후 실행</h3><p>GRID의 dp 표와 경로 수를 활동지 3부에 먼저 <b>예측</b>하고 실행한다.</p><div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="demo" data-id="A11-4"># 예측을 활동지에 먼저 적은 뒤 실행한다. dp 표를 보려면 grid_paths의 return 바로 앞에
+print("A11 점검 통과")
+</script>
+<script type="text/plain" data-id="A11-4">
+# 예측을 활동지에 먼저 적은 뒤 실행한다. dp 표를 보려면 grid_paths의 return 바로 앞에
 # for row in dp: print(row) 두 줄을 임시로 넣고, 확인한 뒤 지운다.
-print(grid_paths(GRID))  # GRID의 경로 수를 출력한다</code></pre></div>
+print(grid_paths(GRID))  # GRID의 경로 수를 출력한다
+</script>
+<div class="mycode"><textarea class="in code" rows="26" data-type="code" data-key="A11.mycode" data-starter="A11-1 A11-2 A11-4" data-check="A11-3" data-label="A11 (grid_paths 작성) 내 코드" spellcheck="false"></textarea></div>
+</div>
+
+<div class="step">
+<h3>두 칸 더하기(⑬⑭)</h3>
+<p>칸 (r, c)에 닿는 마지막 한 걸음은 위 칸이나 왼쪽 칸에서 온다. ⑬과 ⑭의 <code class="i">pass</code>를 지우고 각각 그 칸의 값을 더하는 줄을 쓰자. 다 썼으면 위 편집기의 [&#10004; 점검]을 누른다. <code class="i">A11 점검 통과</code>가 나오면 완성이다.</p>
+<p class="tip">점검이 실패하면 <code class="i">○에서 grid_paths=○ 인데 직접 세면 ○이다</code>가 나온다. 앞의 값이 내 결과이고, 뒤의 값이 점검 코드가 직접 센 값이다.</p>
+</div>
+
+<div class="step">
+<h3>돌아보며 확인하기</h3>
+<div class="quiz" data-answer="1">
+<p class="q">시작 칸 S가 막혀 있는 격자에서 <code class="i">grid_paths</code>는 얼마를 돌려줄까?</p>
+<div class="opts"><button type="button">0</button><button type="button" data-hint="출발할 수 없는 격자에도 길이 있을까? 뼈대 앞부분의 if를 보자.">1</button><button type="button" data-hint="뼈대 앞부분에서 출발 칸이 막혔을 때 어떻게 하는지 보자.">-1</button></div>
+<p class="why">출발 칸이 막혀 있으면 길이 없으므로 0이다.</p>
+</div>
+<p>실행 결과의 숫자는 GRID의 경로 수이다. 예측과 견주어 활동지 3부 A11의 &lsquo;경로 수 실제&rsquo; 칸에 쓰자.</p>
+</div>
+<p class="wrapup"><b>여기까지</b> 2차원 표로 경로 수를 세는 함수가 생겼다. 다음은 과제로 낼 코드와 서술을 아래 작성 칸에 모으는 일이다.</p>
 </section>
-<section id="assign" class="sheet">
+<section id="assign" class="sheet lesson">
 <h2>실습 과제 작성 칸<small>A8 착수 · A14 마무리</small></h2>
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>실습 과제의 코드와 서술은 이 칸의 어디에 쓰고, A8·A11·A14와는 어떻게 이어지는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">과제 착수</span>세 함수는 A8·A11에서 만든 코드를 바탕으로 직접 쓴다. 다른 쪽(student_code_lab_part2.html)의 코드는 그 편집기에서 복사해 이 칸에 붙여 넣은 뒤 과제 이름과 요건에 맞게 고친다. [앞 쪽 코드 불러오기]는 함수를 실행 환경에 올려 둘 뿐 편집기 칸을 채우지 않으므로 과제 코드에는 쓰지 않는다. 이 칸의 [예시 코드]에는 코드가 나오지 않는다. 코드 맨 앞에 구현 계획 한 줄(상태 정의와 목표 비용)을 주석으로 쓴다.<span class="tg-where">[내 코드 · 과제 min_coins], [내 코드 · 과제 grid_paths], [내 코드 · 과제 greedy_counterexample]</span><span class="tg-done">세 칸에 각각 함수와 첫 줄 주석이 있다.</span></li>
-<li><span class="tg-stage">적용</span>세 칸을 위에서부터 차례로 [▶ 실행]해 정의해 둔다. A14의 점검 코드가 이 세 함수를 불러 쓴다.<span class="tg-where">위 세 편집기</span><span class="tg-done">NameError 없이 실행이 끝난다(출력은 없어도 된다).</span></li>
-<li><span class="tg-stage">설명</span>서술 3칸을 쓴다. 1번 내가 설계한 동전 체계, 2번 반례 증명(금액·두 조합·개수), 3번 min_coins의 상태 정의·전이·초기값이다. 복잡도 서술은 A14에서 활동지 3부에 쓴다.<span class="tg-where">아래 서술 3칸(1·2·3)</span><span class="tg-done">3칸이 모두 채워져 있다.</span></li>
-<li><span class="tg-stage">도구 확인</span>제출 전 확인 3가지: ① 세 함수가 각각 실행되고 A14 점검 출력이 &lsquo;점검 기대값&rsquo;과 같다. ② 세 함수가 입력 리스트를 바꾸지 않는다. ③ 코드 3칸과 서술 3칸이 모두 채워졌다. 이 쪽 위의 저장 바에서 [저장(JSON)]한다.<span class="tg-where">이 쪽 위쪽 저장 바</span><span class="tg-done">세 가지를 모두 확인했다.</span></li>
-</ol>
-<div class="tg-contract"><span class="tg-k">만들 것 · 함수 3개</span><code class="i">min_coins(coins, amount)</code>, <code class="i">grid_paths(grid)</code>, <code class="i">greedy_counterexample(coins)</code>
-<ul>
-<li>받는 값: min_coins의 coins는 정렬 가정이 없고 1이 없을 수 있다. greedy_counterexample의 coins는 오름차순이고 1을 포함한다.</li>
-<li>돌려주는 값: 최소 동전 개수(만들 수 없으면 <code class="i">-1</code>, amount가 0이면 <code class="i">0</code>), 경로 수, 반례가 되는 가장 작은 금액(없으면 <code class="i">None</code>)이다.</li>
-<li>쓰는 모습: <code class="i">min_coins([1, 3, 4], 6)</code>, <code class="i">grid_paths(GRID)</code>, <code class="i">greedy_counterexample([1, 3, 4])</code></li>
-</ul></div>
+<p class="lead">과제로 낼 코드와 서술을 모으는 곳이다. 칸은 모두 6개이고 [저장(JSON)]에 들어간다.</p>
+
+<div class="step">
+<h3>무엇을 만드는가</h3>
+<p>A8과 A11에서 만든 코드를 바탕으로 함수 세 개를 만든다.</p>
+<div class="scroll"><table>
+<tr><th>함수</th><th>받는 값</th><th>돌려주는 값</th></tr>
+<tr><td><code class="i">min_coins(coins, amount)</code></td><td>정렬 가정 없음, 1이 없을 수 있다</td><td>최소 동전 개수. 만들 수 없으면 <code class="i">-1</code>, amount가 0이면 <code class="i">0</code></td></tr>
+<tr><td><code class="i">grid_paths(grid)</code></td><td>0(통행)과 1(막힘)로 된 R&times;C 리스트</td><td>경로 수. 시작이나 도착이 막혀 있으면 <code class="i">0</code></td></tr>
+<tr><td><code class="i">greedy_counterexample(coins)</code></td><td>오름차순이고 1을 포함한 동전 목록</td><td>큰 동전부터 쓴 개수가 최소 개수와 다른 가장 작은 금액. 없으면 <code class="i">None</code>(금액은 1 ~ 2&times;가장 큰 동전만 본다)</td></tr>
+</table></div>
 </div>
-<div class="mycode"><label>내 코드 · 과제 min_coins</label><textarea class="in code" rows="16" data-type="code" data-key="assign.min_coins" data-label="과제 min_coins 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
-<div class="mycode"><label>내 코드 · 과제 grid_paths</label><textarea class="in code" rows="18" data-type="code" data-key="assign.grid_paths" data-label="과제 grid_paths 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
-<div class="mycode"><label>내 코드 · 과제 greedy_counterexample</label><textarea class="in code" rows="16" data-type="code" data-key="assign.greedy_counterexample" data-label="과제 greedy_counterexample 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
-<h3>서술(3~5문장)</h3><p>내가 설계한 동전 체계 1개에 대해 금액·두 조합·개수로 반례를 증명하고, <code class="i">min_coins</code>의 상태 정의·전이·초기값을 내 말로 적는다. 상태 정의·전이는 A14에서 표기로 다듬어 활동지 3부 A14 서술 칸(<code class="i">A14.essay.state</code>)에 다시 쓰며, 채점은 다듬은 쪽을 기준으로 한다. 복잡도 서술은 활동지 3부 A14 서술 칸에 쓴다.</p>
-<div class="ans-row"><span class="n">1</span><textarea class="in" rows="1" data-key="assign.essay.system" data-label="과제 서술: 내가 설계한 동전 체계"></textarea></div>
-<div class="ans-row"><span class="n">2</span><textarea class="in" rows="4" data-key="assign.essay.proof" data-label="과제 서술: 반례 증명(금액, 두 조합, 개수)"></textarea></div>
-<div class="ans-row"><span class="n">3</span><textarea class="in" rows="5" data-key="assign.essay.dp" data-label="과제 서술: min_coins의 상태 정의·전이·초기값"></textarea></div>
+
+<div class="step">
+<h3>코드 칸 세 개</h3>
+<p>칸마다 함수 하나를 쓰고, 맨 위에 구현 계획을 주석 한 줄로 쓴다. 상태 정의와 복잡도(시간·공간과 그 근거)를 내 말로 적는 줄이다. 형식만 보이면 <code class="i"># 구현 계획: dp[a]는 ~이고, ~번 반복하므로 시간 O( ), 공간 O( )</code>처럼 쓴다. 제출 코드는 다른 쪽 편집기에서 복사해 이 칸에 직접 붙여 넣는다. [앞 쪽 코드 불러오기]는 실행 환경에만 올리고 이 칸을 채우지 않는다.</p>
+<p>&#9312; 1차원 표로 금액마다 최소 동전 개수를 구하는 함수이다.</p>
+<div class="mycode"><textarea class="in code" rows="16" data-type="code" data-noex data-key="assign.min_coins" data-label="과제 min_coins 내 코드" spellcheck="false"></textarea></div>
+<p>&#9313; 2차원 표로 경로 수를 세는 함수이다. A11의 코드를 가져와 고친다.</p>
+<div class="mycode"><textarea class="in code" rows="18" data-type="code" data-noex data-key="assign.grid_paths" data-label="과제 grid_paths 내 코드" spellcheck="false"></textarea></div>
+<p>&#9314; 큰 동전부터 쓴 개수와 표로 구한 최소 개수를 견주어 반례가 되는 금액을 찾는 함수이다.</p>
+<div class="mycode"><textarea class="in code" rows="16" data-type="code" data-noex data-key="assign.greedy_counterexample" data-label="과제 greedy_counterexample 내 코드" spellcheck="false"></textarea></div>
+<p class="tip">세 칸을 위에서부터 차례로 [&#9654; 실행]해 정의해 둔다. A14의 점검 코드가 이 세 함수를 부른다.</p>
+</div>
+
+<div class="step">
+<h3>서술 세 칸 쓰기</h3>
+<p>코드가 아닌 글을 칸마다 1~5문장으로 쓴다. 복잡도와 그 근거는 여기가 아니라 위 각 코드 칸의 첫 줄 구현 계획 주석에 함께 쓴다. 1번의 동전 체계와 2번의 반례는 서로 이어진다.</p>
+<div class="ans-row"><span class="n">1</span><textarea class="in" rows="2" data-key="assign.essay.system" data-label="과제 서술: 내가 설계한 동전 체계" placeholder="내가 정한 동전 체계와 그렇게 정한 까닭"></textarea></div>
+<div class="ans-row"><span class="n">2</span><textarea class="in" rows="4" data-key="assign.essay.proof" data-label="과제 서술: 반례 증명(금액, 두 조합, 개수)" placeholder="금액 ○원: 큰 동전부터 쓰면 ○개(조합), 최적은 ○개(조합)"></textarea></div>
+<div class="ans-row"><span class="n">3</span><textarea class="in" rows="5" data-key="assign.essay.dp" data-label="과제 서술: min_coins의 상태 정의·전이·초기값" placeholder="dp[a]는 ~이다. 전이는 ~이다. 초기값은 ~이다."></textarea></div>
+<p class="tip">활동지 3부 A14는 다듬어 보는 연습장이고 제출하지 않는다. 제출되는 것은 이 쪽의 6칸이다.</p>
+</div>
+
+<div class="step">
+<h3>내는 곳과 평가</h3>
+<p>제출은 이 쪽 위의 저장 바에서 [저장(JSON)]을 눌러 나온 파일 하나이다. 활동지는 내지 않는다. 제출 전에 세 가지를 확인한다.</p>
+<ol>
+<li>세 함수가 각각 실행되고 A14 점검 출력이 기대값과 같다.</li>
+<li>세 함수가 입력 리스트를 바꾸지 않는다.</li>
+<li>코드 3칸과 서술 3칸이 모두 채워져 있다.</li>
+</ol>
+<p>평가는 100점이다. 요구사항 구현 정확성 50, 복잡도 분석 타당성 30, 코드 품질 20이다. 4단계 기준은 <a href="rubric.html">rubric.html</a>에서 본다(A13 직후 공개).</p>
+</div>
 </section>
-<section id="A14" class="sheet">
+<section id="A14" class="sheet lesson">
 <h2>A14 · 과제 마무리 점검과 회의 선택<small>12분 · 개인</small></h2>
-<p class="meta"><span>산출물: TEST 점검표(활동지 3부 A14 칸), ⑮ ⑯ 완성 코드와 후보 규칙 반증 기록</span></p>
-<details><summary>A14에서 펼친다(과제 점검 입력, 요건 안내, 회의 선택)</summary><div class="gate">
-<div class="task-guide">
-<p class="tg-q"><span class="tg-k">이 활동의 질문</span>내 과제 함수 세 개는 점검 입력의 기대값과 맞는가? 그리고 &lsquo;지금의 최선을 고르는 규칙&rsquo; 후보 중 어느 것이 모든 경우를 따진 최댓값과 어긋나는가?</p>
-<ol class="tg-steps">
-<li><span class="tg-stage">도구 확인</span>[내 코드 · 과제 min_coins], [내 코드 · 과제 grid_paths], [내 코드 · 과제 greedy_counterexample] 세 편집기를 위에서부터 [▶ 실행]해 함수를 정의한다. A11 편집기에서 GRID가 정의되어 있어야 한다(A11-1을 실행했는지 확인).<span class="tg-where">[내 코드 · 과제 …] 세 편집기, [내 코드 · A11 (grid_paths 작성)] 편집기</span><span class="tg-done">NameError 없이 실행이 끝난다(출력은 없어도 된다).</span></li>
-<li><span class="tg-stage">관찰</span>[점검 실행 · A14] 편집기에 [예시 코드]의 A14-1을 추가해 [▶ 실행]한다.<span class="tg-where">[점검 실행 · A14 (과제 함수 불러 실행)] 편집기</span><span class="tg-done">min_coins 9줄, grid_paths 8줄, greedy_counterexample 11줄이 출력된다.</span></li>
-<li><span class="tg-stage">비교</span>출력의 번호별 결과를 닫힌 &lsquo;점검 기대값&rsquo; 상자(출력을 얻은 뒤에 연다)와 견주어 통과한 번호에 표시한다. 다른 번호는 상태·전이·초기값 중 어디가 문제인지 한 줄 쓴다.<span class="tg-where">활동지 <a class="xlink" href="student_workbook_part3.html#A14">3부 A14</a> &lsquo;(가) 과제 점검표&rsquo; 3개 표</span><span class="tg-done">틀린 번호마다 원인 한 줄이 있다(모두 통과했으면 표시만 한다).</span></li>
-<li><span class="tg-stage">설명</span>과제 서술의 상태 정의·전이를 표기로 다듬고 min_coins의 시간·공간 복잡도를 반복문 구조에 근거해 한 줄 쓴다.<span class="tg-where">활동지 3부 A14 &lsquo;서술 다듬기&rsquo; 칸</span><span class="tg-done">서술 칸 1·2번이 채워져 있다.</span></li>
-<li><span class="tg-stage">시도</span>(나) 회의 선택: [내 코드 · A14 (max_meetings 작성)] 편집기에 (나)의 [제공 코드](MEET)와 [뼈대]를 추가한다. ⑮를 후보 규칙 ①②③에 맞게 차례로 바꿔 규칙마다 실행한다.<span class="tg-where">[내 코드 · A14 (max_meetings 작성)] 편집기</span><span class="tg-done">규칙 세 개를 각각 실행해 보았다.</span></li>
-<li><span class="tg-stage">비교</span>[테스트](A14-4)를 맨 아래에 추가해 실행하고 두 숫자를 견준다. 달랐던 규칙, 달랐다면 어느 회의 때문인지를 활동지에 쓴다.<span class="tg-where">활동지 3부 A14 &lsquo;(나) 회의 선택&rsquo; 표와 질문</span><span class="tg-done"><code class="i">내 규칙의 선택 수: ○  모든 경우를 따진 최댓값: ○</code> 한 줄이 규칙마다 출력된다.</span></li>
-</ol>
-<p class="tg-why"><span class="tg-k">왜 코드 칸이 둘로 나뉘는가</span>(가)는 [실습 과제 작성 칸]에 쓴 세 함수를 불러 [점검 실행] 칸에서 실행하고, (나)는 별도의 [내 코드 · A14] 칸에서 회의 선택 함수를 새로 쓴다. 두 부분은 함수가 다르므로 칸을 섞지 않는다.</p>
-<div class="tg-contract"><span class="tg-k">만들 것 · (나)</span><code class="i">max_meetings(meets)</code>
-<ul>
-<li>받는 값: <code class="i">meets</code>는 (시작, 끝) 튜플의 리스트이다. 회의는 [시작, 끝) 반열린이다.</li>
-<li>돌려주는 값: 겹치지 않게 고른 회의의 수(정수)이다.</li>
-<li>쓰는 모습: <code class="i">max_meetings(MEET)</code></li>
-</ul></div>
-<details class="tg-hint"><summary>막히면 · 힌트 1 (도구 확인)</summary><p>점검 출력에 <code class="i">NameError</code>가 나오면 [실습 과제 작성 칸]의 세 편집기 중 하나를 아직 실행하지 않은 것이다. 위에서부터 다시 실행한다. &lsquo;시간 초과&rsquo;가 나면 min_coins나 grid_paths가 큰 입력에서 너무 오래 도는 것이다.</p></details>
-<details class="tg-hint"><summary>막히면 · 힌트 2 (비교 · 번호 읽기)</summary><p>grid_paths는 1~6번이 작은 입력이고, 7·8번은 줄 이름(12x12, 200x200)으로 구별한다. 출력 끝에 &ldquo;(입력이 바뀌었다)&rdquo;가 붙은 줄은 그 함수가 입력 리스트를 바꾼 것이다.</p></details>
-<details class="tg-hint"><summary>막히면 · 힌트 3 ((나) · ⑮⑯)</summary><p>⑮는 sorted의 key 함수가 돌려주는 값이다. 규칙 ①②③마다 학습 내용 상자에 쓰인 식을 하나씩 넣는다. ⑯은 새 회의의 시작과 last_end를 견주는 조건이다. 회의가 [시작, 끝) 반열린이라는 점이 &lsquo;같을 때&rsquo;를 어떻게 처리해야 하는지 알려 준다.</p></details>
-</div>
-<h3>(가) 과제 요건과 점검 입력</h3><ul><li><code class="i">min_coins</code>는 <code class="i">amount</code>가 커도(예: 20000) <code class="i">RecursionError</code> 없이 끝나야 한다. 표를 반복문으로 채우는 방식으로 쓴다.</li><li>세 함수는 입력 리스트를 <b>바꾸지 않는다</b>. 정렬이 필요하면 복사본을 정렬한다.</li><li>과제 서술에는 <code class="i">min_coins</code>와 <code class="i">grid_paths</code>의 시간·공간 복잡도를 반복문 구조에 근거해 한 줄씩 쓴다(활동지 3부 A14 서술 칸).</li><li>아래 점검 코드는 &lsquo;실습 과제 작성 칸&rsquo;에서 실행해 둔 세 함수를 불러 결과를 출력한다. 기대값은 아래 &lsquo;점검 기대값&rsquo; 상자에 있으며, 점검 코드를 실행해 출력을 얻은 뒤 연다. 틀린 입력은 활동지 3부 점검표에 번호로 표시한다(통과하지 못한 번호만 표시해도 된다). </li></ul>
-<div class="learn-box"><span class="lb-title">학습 내용 · 점검 출력 읽는 법과 요건 확인</span>
-<ul>
-<li>점검 코드는 각 입력마다 <code class="i">min_coins 1 -&gt; 2</code>처럼 <b>함수 이름, 입력 번호, 결과</b>를 한 줄씩 출력한다. 번호는 &lsquo;점검 기대값&rsquo; 상자 표의 순서와 같다. grid_paths는 1~6번이 작은 입력이고, 7번과 8번은 줄 이름으로 구별한다. <code class="i">grid_paths(12x12)</code> 줄(번호는 1로 나온다)이 표의 7번, <code class="i">grid_paths(200x200) % 1000003</code> 줄(번호는 1로 나온다, 큰 값이라 1000003으로 나눈 나머지)이 표의 8번이다.</li>
-<li><b>입력 불변</b> 출력 끝에 &ldquo;(입력이 바뀌었다)&rdquo;가 붙은 줄이 있으면 그 함수가 호출 뒤 입력 리스트를 바꾼 것이다. 코드가 입력 coins를 바꾸는지, 별칭 버그는 없는지 스스로 묻는다.</li>
-<li><b>큰 입력</b> 출력에 &ldquo;RecursionError&rdquo;가 보이면 amount가 클 때 재귀가 한도를 넘은 것이다. A10의 T4(메모 재귀 fib_memo_t4(3000, {}))에서 본 RecursionError, 즉 재귀가 파이썬의 깊이 한도를 넘는 문제와 같은 일이 amount = 20000에서 왜 생기는지, 표를 채우는 순서를 바꾸면 어떻게 되는지 생각해 본다.</li>
-<li><b>복잡도 서술</b> 반복문 구조를 세어 쓴다. 보기: 앞의 fib_tab은 i가 2부터 n까지 한 번씩 돌고 칸마다 앞 두 칸만 읽으므로 반복이 n − 1번이라 시간은 n에 비례(O(n))하고, 표가 n + 1칸이라 공간도 O(n)이다. min_coins와 grid_paths는 바깥·안쪽 반복이 각각 몇 번인지 변수(amount, 동전 수, R, C)로 써서 한 줄씩 쓴다.</li>
-<li>틀린 줄이 있으면 상태, 전이, 초기값 중 어디가 문제인지 원인을 한 줄 쓴다.</li>
-</ul>
-</div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-1" data-for="A14.check"># A14 점검 입력. 기대값은 아래 '점검 기대값' 상자에 있다. 출력을 얻은 뒤 상자를 열어 견준다.
+<p class="lead">과제 함수 세 개를 점검 입력으로 확인한다. 그리고 회의를 고르는 규칙 세 개를 하나씩 시험해 보자.</p>
+<details class="more"><summary>A14에서 펼친다 · 과제 점검 입력, 요건 안내, 회의 선택</summary>
+
+<div class="step">
+<h3>과제 점검 실행하기</h3>
+<p>[실습 과제 작성 칸]의 세 편집기를 위에서부터 [&#9654; 실행]해 함수를 정의해 둔다. <code class="i">GRID</code>는 A11 편집기에서 실행해 둔 것을 쓴다. 그다음 아래 편집기를 실행하면 점검 결과가 한 줄씩 나온다.</p>
+<p class="tip">점검에는 요건 두 가지가 들어 있다. min_coins는 amount가 20000이어도 <code class="i">RecursionError</code> 없이 끝나야 하고, 세 함수는 입력 리스트를 바꾸지 않아야 한다.</p>
+<script type="text/plain" data-id="A14-1">
+# A14 점검 입력. 기대값은 아래 '점검 기대값' 상자에 있다. 출력을 얻은 뒤 상자를 열어 견준다.
 # 아래 세 함수는 위의 '실습 과제 작성 칸'에서 이미 실행한 것(min_coins, grid_paths, greedy_counterexample)을 쓴다.
 # GRID는 A11 편집기에서 정의한 것을 쓴다.
 # 입력 목록: (동전 목록, 금액) 쌍.
@@ -324,46 +380,124 @@ def run(label, f, arg_list, show=lambda r: r):
         except RecursionError:
             result = "RecursionError"
         same = all(a == b for a, b in zip(args, copy))  # 함수가 입력을 바꾸지 않았는지 확인
-        print(label, i, "-&gt;", result, "" if same else "  (입력이 바뀌었다)")
+        print(label, i, "->", result, "" if same else "  (입력이 바뀌었다)")
 
 # 내 함수들을 실행해 출력한다. '점검 기대값' 상자의 값과 견준다.
 run("min_coins", min_coins, TEST_MIN)
 run("grid_paths", grid_paths, [(g,) for g in TEST_GRID[:6]])
 run("grid_paths(12x12)", grid_paths, [(TEST_GRID[6],)])
 run("grid_paths(200x200) % 1000003", grid_paths, [(TEST_GRID[7],)], show=lambda r: r % 1000003)
-run("greedy_counterexample", greedy_counterexample, [(c,) for c in TEST_CE])</code></pre></div>
-<div class="mycode"><label>점검 실행 · A14 (과제 함수 불러 실행)</label><textarea class="in code" rows="12" data-type="code" data-key="A14.check" data-label="A14 점검 실행(과제 함수 불러 실행)" spellcheck="false"></textarea><p class="hint noprint">제출 필수는 아니다. [예시 코드]의 A14-1을 추가해 실행한다.</p></div>
-<p>먼저 점검 코드를 실행해 출력을 얻은 뒤 아래 상자를 연다.</p>
-<details class="learn-box after"><summary>활동을 마친 뒤 열어 확인한다 · 점검 기대값</summary>
+run("greedy_counterexample", greedy_counterexample, [(c,) for c in TEST_CE])
+</script>
+<div class="mycode"><textarea class="in code" rows="35" data-type="code" data-key="A14.check" data-starter="A14-1" data-starter-save data-label="A14 점검 실행(과제 함수 불러 실행)" spellcheck="false"></textarea></div>
+<p>min_coins 9줄, grid_paths 8줄, greedy_counterexample 11줄이 나오면 된다.</p>
+<div class="quiz" data-answer="1">
+<p class="q">출력에 <code class="i">min_coins 7 -&gt; 3   (입력이 바뀌었다)</code>가 나왔다. 무슨 뜻일까?</p>
+<div class="opts"><button type="button">min_coins가 coins 리스트를 바꿨다</button><button type="button" data-hint="결과 3은 기대값 표와 따로 견준다. 이 표시는 호출 앞뒤의 입력을 비교한 것이다.">결과 3이 틀렸다</button><button type="button" data-hint="RecursionError가 나면 결과 자리에 그 이름이 찍힌다.">재귀가 너무 깊었다</button></div>
+<p class="why">7번 입력 [7, 3, 1]이 호출 뒤에 달라졌다는 뜻이다. 정렬이 필요하면 <code class="i">sorted()</code>로 복사본을 만든다.</p>
+</div>
+<details class="more"><summary>출력을 얻은 뒤 연다 · 점검 기대값</summary>
+
 <p><b>min_coins</b></p><div class="scroll"><table><tr><th>번호</th><th>입력</th><th>기대값</th></tr><tr><td>1</td><td>([1, 3, 4], 6)</td><td>2</td></tr><tr><td>2</td><td>([1, 3, 4], 0)</td><td>0</td></tr><tr><td>3</td><td>([5, 7], 3)</td><td>-1</td></tr><tr><td>4</td><td>([2], 7)</td><td>-1</td></tr><tr><td>5</td><td>([1, 5, 10, 20, 25], 40)</td><td>2</td></tr><tr><td>6</td><td>([1, 4, 6], 9)</td><td>3</td></tr><tr><td>7</td><td>([7, 3, 1], 11) 정렬 안 된 입력</td><td>3 (호출 뒤 coins는 [7, 3, 1] 그대로)</td></tr><tr><td>8</td><td>([1, 7, 13, 29, 101], 20000) 큰 입력</td><td>200 (RecursionError 없이 종료)</td></tr><tr><td>9</td><td>([1, 5, 12, 24, 60], 30000)</td><td>500</td></tr></table></div>
 <p><b>grid_paths</b></p><div class="scroll"><table><tr><th>번호</th><th>입력</th><th>기대값</th></tr><tr><td>1</td><td>[[0, 0, 0], [0, 0, 0]]</td><td>3</td></tr><tr><td>2</td><td>[[1]] (시작이 막힘)</td><td>0</td></tr><tr><td>3</td><td>[[0]]</td><td>1</td></tr><tr><td>4</td><td>[[0, 1], [1, 0]]</td><td>0</td></tr><tr><td>5</td><td>[[0, 0], [0, 1]] (도착이 막힘)</td><td>0</td></tr><tr><td>6</td><td>GRID (A11 입력)</td><td>5</td></tr><tr><td>7</td><td>12×12 전부 0</td><td>705432</td></tr><tr><td>8</td><td>200×200, (r*7 + c*13) % 11 == 0이면 막힘((0, 0), (199, 199) 제외)</td><td>결과 % 1000003 = 343125 (결과는 101자리 정수)</td></tr></table></div>
 <p><b>greedy_counterexample</b> (검사 범위는 1 ~ 2×가장 큰 동전이고 반례가 없으면 None)</p><div class="scroll"><table><tr><th>번호</th><th>입력</th><th>기대값</th></tr><tr><td>1</td><td>[1, 3, 4]</td><td>6</td></tr><tr><td>2</td><td>[1, 4, 6]</td><td>8</td></tr><tr><td>3</td><td>[1, 5, 10, 20, 25]</td><td>40</td></tr><tr><td>4</td><td>[1, 5, 6, 9]</td><td>11</td></tr><tr><td>5</td><td>[1, 3, 4, 10]</td><td>6</td></tr><tr><td>6</td><td>[1, 7, 10]</td><td>14</td></tr><tr><td>7</td><td>[1, 5, 12]</td><td>15</td></tr><tr><td>8</td><td>[1, 5, 25]</td><td>None</td></tr><tr><td>9</td><td>[1, 10, 50, 100, 500]</td><td>None</td></tr><tr><td>10</td><td>[1, 5, 10, 25]</td><td>None</td></tr><tr><td>11</td><td>[1]</td><td>None</td></tr></table></div>
-<p>다른 줄이 있으면 점검표의 그 번호에 원인을 쓴다. grid_paths의 2·5번은 시작이나 도착이 막힌 경우이고, min_coins의 3·4번은 만들 수 없는 금액이다. 이런 경계 경우를 놓치면 틀리기 쉽다. 기대값이 None인 체계는 &ldquo;검사 범위까지 반례가 없다&rdquo;는 뜻이다. 검사 범위는 증명 없이 범위만 준 값이며, A9에서 limit이 작으면 반례를 놓쳤던 경험의 연장이다.</p>
+<p>기대값이 <code class="i">None</code>인 체계는 검사 범위까지 반례가 없다는 뜻이다. 범위만 정한 값이라 증명은 아니다.</p>
+
 </details>
-<h3>(나) 회의 선택 · 후보 규칙 반증</h3><p>한 회의실에서 겹치지 않게 가장 많은 회의를 고른다. 회의는 [시작, 끝)이다. 회의 고르는 규칙 후보는 ① 시작이 빠른 순, ② 짧은 회의 순, ③ 끝이 빠른 순이다. 세 후보 규칙마다 정렬 기준 ⑮를 바꿔 MEET에서 선택 수를 구한다. 모든 경우를 따진 최댓값과 다르면 그 입력이 그 규칙의 반례이다. 같으면 &ldquo;같다&rdquo;고 쓰고, 그래도 증명은 아닌 까닭을 쓴다. 같았던 규칙마다 틀리게 만드는 회의 목록을 하나 만들어 보고, 만들지 못하면 만들지 못했다고 쓴다. 만들지 못했다는 것이 그 규칙이 늘 맞다는 증명은 아니다.</p>
-<div class="learn-box"><span class="lb-title">학습 내용 · 회의 선택 문제와 ⑮ ⑯ 읽는 법</span>
-<p>회의는 [시작, 끝) 반열린이라 한 회의의 끝 시각에 다른 회의가 시작해도 겹치지 않고 이어서 쓸 수 있다.</p>
-<svg viewBox="0 0 520 243" width="520" role="img" aria-label="회의 11개의 시작과 끝 시각" style="max-width:100%;height:auto;background:#fff;border:1px solid #cbd5e0;border-radius:6px"><line x1="70" y1="6" x2="70" y2="219" stroke="#e2e8f0"/><text x="70" y="235" font-size="11" text-anchor="middle" fill="#4a5568">0</text><line x1="122" y1="6" x2="122" y2="219" stroke="#e2e8f0"/><text x="122" y="235" font-size="11" text-anchor="middle" fill="#4a5568">2</text><line x1="174" y1="6" x2="174" y2="219" stroke="#e2e8f0"/><text x="174" y="235" font-size="11" text-anchor="middle" fill="#4a5568">4</text><line x1="226" y1="6" x2="226" y2="219" stroke="#e2e8f0"/><text x="226" y="235" font-size="11" text-anchor="middle" fill="#4a5568">6</text><line x1="278" y1="6" x2="278" y2="219" stroke="#e2e8f0"/><text x="278" y="235" font-size="11" text-anchor="middle" fill="#4a5568">8</text><line x1="330" y1="6" x2="330" y2="219" stroke="#e2e8f0"/><text x="330" y="235" font-size="11" text-anchor="middle" fill="#4a5568">10</text><line x1="382" y1="6" x2="382" y2="219" stroke="#e2e8f0"/><text x="382" y="235" font-size="11" text-anchor="middle" fill="#4a5568">12</text><line x1="434" y1="6" x2="434" y2="219" stroke="#e2e8f0"/><text x="434" y="235" font-size="11" text-anchor="middle" fill="#4a5568">14</text><line x1="486" y1="6" x2="486" y2="219" stroke="#e2e8f0"/><text x="486" y="235" font-size="11" text-anchor="middle" fill="#4a5568">16</text><text x="4" y="20" font-size="11" fill="#1a202c">(1, 4)</text><rect x="96" y="10" width="78" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="39" font-size="11" fill="#1a202c">(3, 5)</text><rect x="148" y="29" width="52" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="58" font-size="11" fill="#1a202c">(0, 6)</text><rect x="70" y="48" width="156" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="77" font-size="11" fill="#1a202c">(5, 7)</text><rect x="200" y="67" width="52" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="96" font-size="11" fill="#1a202c">(3, 9)</text><rect x="148" y="86" width="156" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="115" font-size="11" fill="#1a202c">(5, 9)</text><rect x="200" y="105" width="104" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="134" font-size="11" fill="#1a202c">(6, 10)</text><rect x="226" y="124" width="104" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="153" font-size="11" fill="#1a202c">(8, 11)</text><rect x="278" y="143" width="78" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="172" font-size="11" fill="#1a202c">(8, 12)</text><rect x="278" y="162" width="104" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="191" font-size="11" fill="#1a202c">(2, 14)</text><rect x="122" y="181" width="312" height="12" fill="#bee3f8" stroke="#2b6cb0"/><text x="4" y="210" font-size="11" fill="#1a202c">(12, 16)</text><rect x="382" y="200" width="104" height="12" fill="#bee3f8" stroke="#2b6cb0"/></svg>
-<ul>
-<li>회의는 튜플 (s, e)이고 <code class="i">m[0]</code>은 시작 시각, <code class="i">m[1]</code>은 끝 시각이다. <code class="i">sorted(meets, key=...)</code>는 key 값이 작은 회의부터 늘어놓는다. ⑮에 무엇을 넣느냐가 &ldquo;어떤 순서로 보며 고를 것인가&rdquo;라는 규칙이다.</li>
-<li>⑯은 새 회의를 고를 수 있는지의 조건이다. 새 회의의 시작과 마지막으로 고른 회의의 끝(<code class="i">last_end</code>)을 견주어 겹치는지 판단한다.</li>
-<li>후보 규칙은 ① 시작이 빠른 순(m[0]), ② 짧은 회의 순(m[1] − m[0]), ③ 끝이 빠른 순(m[1])이다. 규칙마다 ⑮를 바꿔 실행하고, 점검 코드의 모든 경우를 따진 최댓값과 견준다.</li>
-<li>규칙의 결과가 최댓값과 다르면 어느 회의 때문에 달라졌는지 찾는다. 같으면 &ldquo;같다&rdquo;고 쓰고, 그것이 증명이 아닌 까닭도 쓴다.</li>
-</ul>
+<p>번호별로 견주어 통과한 번호는 활동지 <a class="xlink" href="student_workbook_part3.html#A14">3부 A14</a>에 표시한다. 다른 번호가 있으면 상태·전이·초기값 중 어디가 문제인지 따져 코드를 고친다.</p>
 </div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="given" data-id="A14-2" data-for="A14.mycode"># A14 회의 입력: (시작, 끝). [시작, 끝) 반열린이라 끝과 시작이 같으면 이어서 쓸 수 있다.
+
+<div class="step">
+<h3>반복 횟수 세어 보기</h3>
+<p>복잡도를 쓰려면 반복이 몇 번 도는지 세어야 한다. 먼저 한 겹 반복을 세어 보자.</p>
+<script type="text/plain" data-id="A14-p1">
+for n in (10, 20, 40):
+    count = 0
+    for i in range(2, n + 1):      # fib_tab처럼 2부터 n까지 한 번씩 돈다
+        count += 1
+    print(n, count)
+</script>
+<div class="mycode"><textarea class="in code" rows="8" data-type="code" data-starter="A14-p1" data-label="연습 · 반복 세기(한 겹)" spellcheck="false"></textarea></div>
+<div class="quiz predict">
+<p class="q">n이 10, 20, 40으로 두 배씩 커지면 count는 어떻게 변할까?</p>
+<div class="opts"><button type="button">거의 두 배씩 커진다</button><button type="button">네 배씩 커진다</button><button type="button">변하지 않는다</button></div>
+</div>
+<p>[&#9654; 실행]해서 확인해 보자.</p>
+</div>
+
+<div class="step">
+<h3>두 겹 반복과 내 코드</h3>
+<p>이번에는 반복문 안에 반복문이 있는 경우이다.</p>
+<script type="text/plain" data-id="A14-p2">
+for R, C in ((3, 4), (6, 8)):
+    count = 0
+    for r in range(R):
+        for c in range(C):
+            count += 1
+    print(R, C, count)
+</script>
+<div class="mycode"><textarea class="in code" rows="9" data-type="code" data-starter="A14-p2" data-label="연습 · 반복 세기(두 겹)" spellcheck="false"></textarea></div>
+<div class="quiz predict">
+<p class="q">R과 C를 모두 두 배로 하면 count는 몇 배가 될까?</p>
+<div class="opts"><button type="button">2배</button><button type="button">4배</button><button type="button">8배</button></div>
+</div>
+<p>실행해서 확인한 뒤, 내 <code class="i">min_coins</code>와 <code class="i">grid_paths</code>의 반복문을 눈으로 따라가자. 안쪽 줄이 몇 번 실행되는지 amount, 동전 수, R, C로 말해 보고, 그 말을 활동지 3부 A14 연습장에 써 본 뒤 각 과제 코드 칸 첫 줄 주석에 옮긴다.</p>
+</div>
+
+<div class="step">
+<h3>작은 회의 고르기</h3>
+<p>회의실 하나에서 겹치지 않게 가장 많은 회의를 고른다. 회의는 (시작, 끝)이고, 한 회의가 끝나는 시각에 다음 회의가 시작해도 겹치지 않는다.</p>
+<pre class="fig">t       1 2 3 4 5
+(1,3)   |---|
+(2,4)     |---|
+(3,5)       |---|</pre>
+<div class="quiz" data-answer="2">
+<p class="q">세 회의 중 겹치지 않게 최대 몇 개를 고를 수 있을까?</p>
+<div class="opts"><button type="button" data-hint="(1, 3)과 (3, 5)는 3에서 끝나고 시작하므로 겹치지 않는다.">1개</button><button type="button">2개</button><button type="button" data-hint="(1, 3)과 (2, 4)는 시각 2~3에서 겹친다.">3개</button></div>
+<p class="why">(1, 3)과 (3, 5)는 이어서 쓸 수 있다. 가운데 (2, 4)는 둘 다와 겹친다.</p>
+</div>
+</div>
+
+<div class="step">
+<h3>정렬 기준 바꿔 보기</h3>
+<p>고르는 규칙은 &lsquo;어떤 순서로 보는가&rsquo;로 정한다. <code class="i">sorted(목록, key=...)</code>는 key 값이 작은 회의부터 늘어놓고, <code class="i">lambda m: m[0]</code>은 회의 m의 시작 시각을 key로 쓴다는 뜻이다.</p>
+<script type="text/plain" data-id="A14-p3">
+small = [(3, 5), (1, 6), (2, 4)]                    # (시작, 끝) 회의 세 개
+print(sorted(small, key=lambda m: m[0]))           # 시작 시각이 빠른 순
+print(sorted(small, key=lambda m: m[1]))           # 끝 시각이 빠른 순
+# 한 줄 더: 짧은 회의 순(끝 - 시작)으로 늘어놓아 보자
+print(sorted(small, key=lambda m: ____))
+</script>
+<div class="mycode"><textarea class="in code" rows="8" data-type="code" data-starter="A14-p3" data-label="연습 · 정렬 기준 바꿔 보기" spellcheck="false"></textarea></div>
+<div class="quiz predict">
+<p class="q">끝 시각이 빠른 순(<code class="i">m[1]</code>)으로 늘어놓으면 맨 앞에 오는 회의는 무엇일까?</p>
+<div class="opts"><button type="button">(1, 6)</button><button type="button">(2, 4)</button><button type="button">(3, 5)</button></div>
+</div>
+<p>실행해서 확인하고, 마지막 줄의 <code class="i">____</code>에는 짧은 회의 순을 만드는 식을 쓴다.</p>
+<p class="tip">앞 두 줄의 결과가 나온 뒤 <code class="i">NameError: name '____' is not defined</code>가 나오면 정상이다. 마지막 줄을 채우면 사라진다.</p>
+</div>
+
+<div class="step">
+<h3>⑮⑯ 채우고 실행하기</h3>
+<p>아래 편집기에 회의 11개 <code class="i">MEET</code>와 <code class="i">max_meetings</code> 뼈대가 들어 있다. ⑮에는 첫 규칙 &#9312; 시작이 빠른 순(<code class="i">m[0]</code>)을 넣고, ⑯에는 새 회의가 앞에서 고른 회의와 겹치지 않는 조건을 쓰자. 실행하면 내 규칙의 선택 수와 모든 경우를 따진 최댓값이 나온다.</p>
+<p class="tip">회의는 [시작, 끝)이므로 끝과 시작이 같을 때를 어떻게 다룰지 정해야 한다. 채우기 전의 <code class="i">NameError: name '____15____' is not defined</code>는 정상이다.</p>
+<script type="text/plain" data-id="A14-2">
+# A14 회의 입력: (시작, 끝). [시작, 끝) 반열린이라 끝과 시작이 같으면 이어서 쓸 수 있다.
 # (시작, 끝) 튜플의 리스트
 MEET = [(1, 4), (3, 5), (0, 6), (5, 7), (3, 9), (5, 9),
-        (6, 10), (8, 11), (8, 12), (2, 14), (12, 16)]</code></pre></div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="skeleton" data-id="A14-3" data-for="A14.mycode">def max_meetings(meets):     # meets: (시작, 끝) 튜플 목록
+        (6, 10), (8, 11), (8, 12), (2, 14), (12, 16)]
+</script>
+<script type="text/plain" data-id="A14-3">
+def max_meetings(meets):     # meets: (시작, 끝) 튜플 목록
     count, last_end = 0, -1  # 고른 회의 수, 마지막으로 고른 회의의 끝
     for s, e in sorted(meets, key=lambda m: ____15____):   # ⑮ 정렬 기준
         if ____16____:                                       # ⑯ 앞 선택과 겹치지 않는가
             count += 1       # 회의를 하나 고른다
             last_end = e     # 마지막으로 고른 회의의 끝을 갱신
-    return count</code></pre></div>
-<div class="mycode"><label>내 코드 · A14 (max_meetings 작성)</label><textarea class="in code" rows="12" data-type="code" data-key="A14.mycode" data-label="A14 (max_meetings 작성) 내 코드" spellcheck="false"></textarea><p class="hint noprint">Tab 키는 4칸 들여쓰기(여러 줄을 고르면 그 줄 전체), Shift+Tab은 내어쓰기이고 Ctrl(⌘)+Enter는 실행이다. 다음 칸으로 이동하려면 Esc를 누른 뒤 Tab을 누른다.</p></div>
-<div class="codewrap"><button class="copy" type="button">복사</button><pre><code class="language-python" data-role="test" data-id="A14-4" data-for="A14.mycode"># 점검: 모든 부분집합을 직접 따져 본 최댓값과 견준다.
+    return count
+</script>
+<script type="text/plain" data-id="A14-4">
+# 점검: 모든 부분집합을 직접 따져 본 최댓값과 견준다.
 from itertools import combinations
 
 # 큰 개수부터 줄여 가며, 서로 겹치지 않는 조합이 처음 나오면 그 개수가 최댓값이다.
@@ -372,13 +506,22 @@ def best_by_all_subsets(meets):
     for k in range(len(meets), 0, -1):
         for pick in combinations(meets, k):  # meets에서 k개를 고르는 모든 조합
             # 모든 쌍이 서로 겹치지 않는가
-            if all(a[1] &lt;= b[0] or b[1] &lt;= a[0] for a, b in combinations(pick, 2)):
+            if all(a[1] <= b[0] or b[1] <= a[0] for a, b in combinations(pick, 2)):
                 return k
     return best
 
 print("내 규칙의 선택 수:", max_meetings(MEET), " 모든 경우를 따진 최댓값:", best_by_all_subsets(MEET))
-# ⑮를 맡은 후보 규칙에 맞게 바꿔 다시 실행해 선택 수를 견준다.</code></pre></div>
-</div></details>
+# ⑮를 맡은 후보 규칙에 맞게 바꿔 다시 실행해 선택 수를 견준다.
+</script>
+<div class="mycode"><textarea class="in code" rows="28" data-type="code" data-key="A14.mycode" data-starter="A14-2 A14-3 A14-4" data-label="A14 (max_meetings 작성) 내 코드" spellcheck="false"></textarea></div>
+</div>
+
+<div class="step">
+<h3>규칙 세 개 견주기</h3>
+<p>⑮를 &#9313; 짧은 회의 순(<code class="i">m[1] - m[0]</code>)과 &#9314; 끝이 빠른 순(<code class="i">m[1]</code>)으로 바꿔 가며 다시 실행하자. 규칙마다 두 숫자가 같은지 본다. 같아도 증명은 아니다. 결과는 활동지 3부 A14의 (나) 표에 쓴다.</p>
+</div>
+<p class="wrapup"><b>여기까지</b> 과제 함수를 점검하고 회의 고르기 규칙 세 개를 시험했다. 다음 A15는 형성평가이다.</p>
+</details>
 </section>
 </div>
 <script id="week13-submit">
