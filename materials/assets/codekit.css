@@ -1,4 +1,6 @@
 /* codekit.css — 학생용 학습지 공용: 흰 배경 코드 블록, 신택스 하이라이팅, 코드 편집기, 예시 코드 팝업 */
+/* 합자 끄기: -> != <= == 등을 친 글자 그대로 보인다(JetBrains Mono의 화살표·부등호 합자 방지) */
+pre,code,kbd,samp,textarea,input,.ck-hl,.ck-ac{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
 :root{--tk-kw:#cf222e;--tk-str:#0a3069;--tk-cm:#6e7781;--tk-num:#0550ae;--tk-fn:#8250df;--tk-bi:#953800;--tk-cn:#0550ae;--tk-dec:#8250df}
 pre:not(.diagram){background:#fff;color:#1f2328;border:1px solid #cfd6e2}
 .tk-kw{color:var(--tk-kw)}.tk-str{color:var(--tk-str)}.tk-cm{color:var(--tk-cm);font-style:italic}

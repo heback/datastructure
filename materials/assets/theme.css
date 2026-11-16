@@ -323,3 +323,5 @@ a.xlink[href^="student_workbook"]:hover{background:var(--gold-ink);border-color:
   .ck-ac li b{color:var(--accent)}
   .ck-ac li.on{background:var(--accent-soft)}
 }
+/* 합자 끄기: 코드 글꼴에서 -> != <= 등을 친 글자 그대로 보인다 */
+pre,code,kbd,samp,textarea,input{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
