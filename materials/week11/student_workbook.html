@@ -530,7 +530,7 @@ var FILE_KEY="workbook";
 var FILES={workbook:"student_workbook.html",code_lab:"student_code_lab.html",workbook_part2:"student_workbook_part2.html",code_lab_part2:"student_code_lab_part2.html",code_lab_part3:"student_code_lab_part3.html",workbook_part3:"student_workbook_part3.html",formative:"formative_check.html"};
 var FILE=FILES[FILE_KEY], STORE="week11:"+FILE, SCHEMA="week11-student-v1";
 var bar,idIn,nameIn,msg,autoEl,saveBtn,clearBtn,confirmBox,busy=false,timer=null;
-var draftBtn,loadBtn,fileIn,yesBtn,confirmTxt,pending=null,baseline="";
+var loadBtn,fileIn,yesBtn,confirmTxt,pending=null,baseline="";
 
 function q(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
 function kind(el){
@@ -607,7 +607,7 @@ function onSave(){
   setTimeout(function(){busy=false;saveBtn.disabled=false;},1200);
 }
 
-/* 이어 쓰기: 임시 저장 파일 내려받기 / 저장한 파일 불러오기 */
+/* 이어 쓰기: 저장한 파일 불러오기 */
 function snap(){return JSON.stringify(collect().map(function(a){return a.value;}));}
 function isDirty(){return snap()!==baseline;}
 function ask(text,fn){
@@ -616,15 +616,6 @@ function ask(text,fn){
 }
 function closeAsk(){
   pending=null;confirmBox.hidden=true;clearBtn.disabled=false;loadBtn.disabled=false;
-}
-function onDraft(){
-  if(busy)return;
-  busy=true;draftBtn.disabled=true;
-  try{
-    var n=download(true),s=studentInfo();
-    say("임시 저장했다: "+n+" (제출 파일이 아니다. 이어 쓸 때 [불러오기]로 이 파일을 고른다."+((s.id&&s.name)?"":" 학번과 이름을 쓰면 파일 이름에 들어간다.")+")","ok");
-  }catch(e){say("임시 저장하지 못했다. 브라우저를 바꾸어 다시 시도한다.","err");}
-  setTimeout(function(){busy=false;draftBtn.disabled=false;},1200);
 }
 function applyLoaded(j){
   if(!j||typeof j!=="object"||Array.isArray(j))return {err:"저장 파일 형식이 아니다."};
@@ -666,20 +657,20 @@ function onFileChosen(){
     try{res=applyLoaded(JSON.parse(String(r.result)));}
     catch(e){res={err:"JSON 파일을 읽지 못했다. 이 활동지에서 저장한 파일이 맞는지 확인한다."};}
     if(res.err){say(res.err+" (입력란은 바뀌지 않았다.)","err");}
-    else{say("불러왔다: "+f.name+" ("+res.n+"칸"+(res.at?", 저장 시각 "+res.at.slice(0,16).replace("T"," "):"")+"). 이어서 쓴다."+(res.draft?"":" (제출용 파일을 불러왔다.)"),"ok");}
+    else{say("불러왔다: "+f.name+" ("+res.n+"칸"+(res.at?", 저장 시각 "+res.at.slice(0,16).replace("T"," "):"")+"). 이어서 쓴다."+(res.draft?" (예전 임시 저장 파일이다. 다 쓴 뒤 [저장(JSON)]으로 다시 저장해 낸다.)":""),"ok");}
     fileIn.value="";
   };
   r.readAsText(f,"utf-8");
 }
 
-/* 임시 보관 (localStorage, 모두 try/catch) */
+/* 자동 보관 (localStorage, 모두 try/catch) */
 function stash(){
   try{
     var vals={};collect().forEach(function(a){vals[a.key]=a.value;});
     localStorage.setItem(STORE,JSON.stringify({student:studentInfo(),values:vals,at:Date.now()}));
     var d=new Date();
-    autoEl.textContent="임시 저장됨 "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
-  }catch(e){autoEl.textContent="임시 저장 사용 불가(저장(JSON)은 가능)";}
+    autoEl.textContent="자동 보관됨 "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
+  }catch(e){autoEl.textContent="자동 보관 사용 불가([저장(JSON)]은 가능)";}
 }
 function schedule(){clearTimeout(timer);timer=setTimeout(stash,300);}
 function setValue(el,v){
@@ -696,7 +687,7 @@ function restore(){
     var any=false;
     q("[data-key]").forEach(function(el){var key=el.getAttribute("data-key");if(s.values&&Object.prototype.hasOwnProperty.call(s.values,key)){setValue(el,s.values[key]);any=true;}});
     autosizeAll();
-    if(any||(s.student&&(s.student.id||s.student.name)))autoEl.textContent="이전 임시 저장을 불러왔다";
+    if(any||(s.student&&(s.student.id||s.student.name)))autoEl.textContent="이 브라우저에 자동 보관된 내용을 불러왔다";
   }catch(e){}
 }
 function resetAll(){
@@ -710,7 +701,7 @@ function doClear(){
   resetAll();
   closeAsk();
   autoEl.textContent="";
-  say("이 브라우저의 자동 보관을 지우고 입력란을 비웠다. (내려받은 임시 저장 파일은 그대로다.)","ok");
+  say("이 브라우저의 자동 보관을 지우고 입력란을 비웠다. (내려받은 JSON 파일은 그대로다.)","ok");
 }
 
 /* 입력란 보조 */
@@ -743,26 +734,24 @@ function buildBar(){
    +'<label for="sb-id">학번 <input type="text" id="sb-id" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
    +'<label for="sb-name">이름 <input type="text" id="sb-name" autocomplete="off" aria-required="true" aria-invalid="false"></label>'
    +'<button type="button" id="sb-save">저장(JSON)</button>'
-   +'<button type="button" id="sb-draft" class="sec" title="다 못 쓴 내용을 파일로 보관한다. 제출 파일이 아니다.">임시 저장</button>'
-   +'<button type="button" id="sb-load" class="sec" title="임시 저장한 파일을 불러와 이어 쓴다.">불러오기</button>'
+   +'<button type="button" id="sb-load" class="sec" title="[저장(JSON)]으로 만든 파일을 불러와 이어 쓴다.">불러오기</button>'
    +'<input type="file" id="sb-file" accept=".json,application/json" hidden aria-label="저장한 JSON 파일 선택">'
    +'<button type="button" id="sb-clear" class="sec">자동 보관 지우기</button>'
    +'<button type="button" id="sb-submit" title="제출 사이트를 새 창으로 연다. 먼저 [저장(JSON)]으로 파일을 만든 뒤 그 파일을 올린다.">제출</button>'
    +'<span class="sb-auto" id="sb-auto"></span></div>'
    +'<div class="sb-confirm" id="sb-confirm" hidden><span id="sb-ctext"></span>'
    +'<button type="button" id="sb-yes">확인</button><button type="button" id="sb-no" class="sec">취소</button></div>'
-   +'<div class="sb-msg" id="sb-msg" role="status" aria-live="polite">다 쓰면 학번과 이름을 쓰고 [저장(JSON)]을 눌러 제출 파일 한 개를 만든다. 시간이 모자라면 [임시 저장]으로 파일을 보관하고, 다음에 [불러오기]로 이어 쓴다.</div></div>';
+   +'<div class="sb-msg" id="sb-msg" role="status" aria-live="polite">다 쓰면 학번과 이름을 쓰고 [저장(JSON)]을 눌러 제출 파일 한 개를 만든다. 다 못 썼으면 [저장(JSON)]으로 저장해 두고, 다음에 [불러오기]로 그 파일을 열어 이어 쓴다.</div></div>';
   document.body.insertBefore(bar,document.body.firstChild);
   var pid=document.createElement("div");pid.id="printid";pid.setAttribute("aria-hidden","true");
   document.body.insertBefore(pid,bar.nextSibling);
   idIn=bar.querySelector("#sb-id");nameIn=bar.querySelector("#sb-name");msg=bar.querySelector("#sb-msg");
   autoEl=bar.querySelector("#sb-auto");saveBtn=bar.querySelector("#sb-save");clearBtn=bar.querySelector("#sb-clear");confirmBox=bar.querySelector("#sb-confirm");
-  draftBtn=bar.querySelector("#sb-draft");loadBtn=bar.querySelector("#sb-load");fileIn=bar.querySelector("#sb-file");yesBtn=bar.querySelector("#sb-yes");confirmTxt=bar.querySelector("#sb-ctext");
+  loadBtn=bar.querySelector("#sb-load");fileIn=bar.querySelector("#sb-file");yesBtn=bar.querySelector("#sb-yes");confirmTxt=bar.querySelector("#sb-ctext");
   saveBtn.addEventListener("click",onSave);
-  draftBtn.addEventListener("click",onDraft);
   loadBtn.addEventListener("click",onLoadClick);
   fileIn.addEventListener("change",onFileChosen);
-  clearBtn.addEventListener("click",function(){yesBtn.textContent="지우기";ask("이 브라우저의 자동 보관을 지우고 입력란을 모두 비운다. 임시 저장 파일이나 JSON으로 저장하지 않은 내용은 되찾을 수 없다.",doClear);bar.querySelector("#sb-no").focus();});
+  clearBtn.addEventListener("click",function(){yesBtn.textContent="지우기";ask("이 브라우저의 자동 보관을 지우고 입력란을 모두 비운다. [저장(JSON)]으로 저장하지 않은 내용은 되찾을 수 없다.",doClear);bar.querySelector("#sb-no").focus();});
   bar.querySelector("#sb-no").addEventListener("click",function(){closeAsk();loadBtn.focus();});
   yesBtn.addEventListener("click",function(){var f=pending;if(f)f();});
 }
