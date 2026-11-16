@@ -316,3 +316,10 @@ a.xlink[href^="student_workbook"]:hover{background:var(--gold-ink);border-color:
   .task-guide details.tg-hint{display:none}
 }
 .task-guide .tg-why{margin:6px 0;font-size:14.5px}
+/* 코드 편집기: 들여쓰기 안내선·자동 완성 목록(2026-11-16) */
+@media screen{
+  .ck-ed{--ck-guide:#ddd5c3}
+  .ck-ac{background:var(--panel);border:1px solid var(--line-control);border-radius:8px;font-family:var(--font-mono);font-size:13px;box-shadow:0 10px 28px -8px rgba(26,35,50,.3)}
+  .ck-ac li b{color:var(--accent)}
+  .ck-ac li.on{background:var(--accent-soft)}
+}

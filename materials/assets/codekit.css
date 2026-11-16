@@ -24,6 +24,19 @@ pre:not(.diagram){background:#fff;color:#1f2328;border:1px solid #cfd6e2}
 .ck-ed .ck-area>pre.ck-hl{overflow:hidden;pointer-events:none;color:#1f2328;background:#fff;padding-bottom:28px;min-width:0}
 .ck-ed .ck-area>textarea.ck-ta{background:transparent!important;color:transparent!important;caret-color:#16233b;overflow:auto;resize:vertical;width:100%;min-width:0;position:relative;z-index:1}
 .ck-ed .ck-area>textarea.ck-ta::selection{background:rgba(53,114,165,.28);color:transparent}
+/* 들여쓰기 표시: 공백 4칸마다 세로 안내선(글자 폭에 영향 없음), 탭 문자는 주황 바탕 */
+.ck-ig{box-shadow:inset 1px 0 0 var(--ck-guide,#c9d1dc)}
+.ck-tab{background:rgba(207,120,34,.18);box-shadow:inset 1px 0 0 #cf7822}
+/* 자동 완성 목록 */
+.ck-ac{position:fixed;z-index:180;margin:0;padding:4px;list-style:none;min-width:180px;max-width:360px;max-height:216px;overflow:auto;background:#fff;border:1px solid #9aa7bd;border-radius:6px;box-shadow:0 8px 24px rgba(16,24,40,.18);font:12.5px/1.5 "JetBrains Mono","D2Coding",Consolas,monospace;color:#1f2328}
+.ck-ac[hidden]{display:none}
+.ck-ac li{display:flex;align-items:baseline;gap:10px;padding:2px 8px;border-radius:4px;cursor:pointer;white-space:nowrap}
+.ck-ac li b{font-weight:700;color:#0550ae}
+.ck-ac li small{margin-left:auto;font:11px "IBM Plex Sans KR",sans-serif;color:#6e7781}
+.ck-ac li.on{background:#dbe9f7}
+.ck-ac li:hover{background:#eef4fa}
+.ck-ac li.foot{cursor:default;font:11px "IBM Plex Sans KR",sans-serif;color:#6e7781;border-top:1px solid #e1e5ec;border-radius:0;margin-top:3px;padding-top:4px;position:sticky;bottom:-4px;background:inherit}
+.ck-ac li.foot:hover{background:inherit}
 .ck-out{border-top:1px solid #cfd6e2;background:#fff}
 .ck-out[hidden]{display:none}
 .ck-out .ck-ol{font:600 11px "JetBrains Mono",monospace;color:#5b6b85;padding:4px 10px 0}
@@ -44,6 +57,8 @@ pre:not(.diagram){background:#fff;color:#1f2328;border:1px solid #cfd6e2}
 .ck-dlg .ck-item pre{margin:0;max-height:46vh;overflow:auto}
 .ck-dlg .ck-hint{font-size:12px;color:#5b6b85;margin-top:8px}
 @media print{
+  .ck-ac{display:none!important}
+  .ck-ig,.ck-tab{box-shadow:none!important;background:none!important}
   .ck-bar,.ck-out,.ck-modal,.ck-area::before,.ck-gut{display:none!important}
   .ck-ed{border:none}
   pre:not(.diagram){background:#fff!important;color:#111!important;border:1px solid #bbb!important;white-space:pre-wrap;word-break:break-all}

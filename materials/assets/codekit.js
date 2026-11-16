@@ -253,6 +253,170 @@ function srcText(ids){
   });
   return out.length?out.join("\n\n")+"\n":"";
 }
+/* ---------- 들여쓰기 표시: 줄 앞 공백 4칸마다 세로 안내선, 탭 문자는 색으로 표시(글자 폭은 그대로) ---------- */
+function indentMarks(html){
+  return html.split("\n").map(function(L){
+    return L.replace(/^(?: {4})+/,function(m){return m.replace(/ {4}/g,'<span class="ck-ig">    </span>');})
+            .replace(/\t/g,'<span class="ck-tab">\t</span>');
+  }).join("\n");
+}
+
+/* ---------- 자동 완성: 파이썬 키워드·내장 함수·형식 힌트·표준 모듈 이름·이 코드에 나온 이름 ---------- */
+var AC_KW="False None True and as assert async await break class continue def del elif else except finally for from global if import in is lambda nonlocal not or pass raise return try while with yield".split(" ");
+var AC_BI=("abs all any bin bool bytes callable chr dict dir divmod enumerate filter float format frozenset getattr hasattr hash hex id input int isinstance issubclass iter len list map max min next object oct open ord pow print range repr reversed round set setattr slice sorted str sum super tuple type zip "+
+  "Exception ValueError TypeError IndexError KeyError AssertionError NotImplementedError StopIteration RuntimeError ZeroDivisionError RecursionError AttributeError NameError").split(" ");
+var AC_TYPE="int float str bool bytes None list dict set tuple frozenset object Any Optional Union Callable Iterable Iterator Generator Sequence Mapping Deque DefaultDict Literal TypeVar List Dict Set Tuple".split(" ");
+var AC_MOD={heapq:"heappush heappop heapify heapreplace heappushpop nlargest nsmallest merge",
+  bisect:"bisect_left bisect_right bisect insort insort_left insort_right",
+  collections:"deque defaultdict Counter OrderedDict namedtuple",
+  math:"inf pi e sqrt isqrt floor ceil log log2 log10 gcd lcm comb perm factorial fsum",
+  itertools:"permutations combinations product accumulate chain count cycle islice pairwise groupby",
+  functools:"lru_cache cache reduce partial cmp_to_key",
+  typing:"Any Optional Union Callable Iterable Iterator Generator Sequence Mapping Deque DefaultDict Literal TypeVar List Dict Set Tuple",
+  random:"randint random choice choices shuffle sample seed",
+  sys:"setrecursionlimit getrecursionlimit maxsize stdin stdout",
+  time:"time perf_counter sleep",
+  inspect:"isgeneratorfunction isfunction signature getsource"};
+var AC_METH=[];(function(){var s={};("append extend insert remove pop clear index count sort reverse copy get keys values items setdefault update popitem "+
+  "add discard union intersection difference issubset split join strip lstrip rstrip lower upper replace startswith endswith find format isdigit isalpha "+
+  "appendleft popleft extendleft rotate most_common").split(" ").forEach(function(w){if(!s[w]){s[w]=1;AC_METH.push(w);}});})();
+var AC_KWSET={};AC_KW.forEach(function(w){AC_KWSET[w]=1;});
+var AC_KIND={kw:"키워드",bi:"내장",ty:"형식",mod:"모듈",me:"메서드",my:"이 코드"};
+var acMeasure=null;
+function makeAutoComplete(ta,put){
+  var box=null,list=[],sel=0,word="",open=false,lastPos=-1,moved=false,quiet=false;
+  function raw(){return Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,"value").get.call(ta);}
+  /* 캐럿이 주석·문자열 안이면 완성하지 않는다 */
+  function inCodeText(text,pos){
+    var before=text.slice(0,pos);
+    if(((before.match(/"""/g)||[]).length%2)||((before.match(/'''/g)||[]).length%2))return false;
+    var line=before.slice(before.lastIndexOf("\n")+1),q="",i,c;
+    for(i=0;i<line.length;i++){c=line.charAt(i);
+      if(q){if(c==="\\"){i++;continue;}if(c===q)q="";}
+      else if(c==='"'||c==="'")q=c;
+      else if(c==="#")return false;}
+    return !q;
+  }
+  function namesInCode(text,skipAt){
+    var seen={},out=[],re=/[A-Za-z_]\w*/g,m;
+    while((m=re.exec(text))){var w=m[0];
+      if(m.index<=skipAt&&skipAt<=m.index+w.length)continue; /* 지금 쓰고 있는 낱말 자신은 뺀다 */
+      if(w.length<2||AC_KWSET[w]||seen[w])continue;
+      if(m.index>0&&text.charAt(m.index-1)===".")continue;
+      seen[w]=1;out.push(w);}
+    return out;
+  }
+  function candidates(text,pos,force){
+    if(!inCodeText(text,pos))return null;
+    var line=text.slice(text.lastIndexOf("\n",pos-1)+1,pos);
+    var wm=/[A-Za-z_]\w*$/.exec(line);word=wm?wm[0]:"";
+    var pre=line.slice(0,line.length-word.length),items=[],seen={},hint=false;
+    function add(ws,kind,lab){ws.forEach(function(w){if(!seen[w]&&w.toLowerCase().indexOf(word.toLowerCase())===0){seen[w]=1;items.push({w:w,k:kind,l:lab});}});}
+    var dot=/([A-Za-z_]\w*)?\.$/.exec(pre);
+    if(dot){
+      var own=dot[1]||"";
+      if(!own&&/\d\.$/.test(pre))return null; /* 3. 같은 수 */
+      if(AC_MOD[own])add(AC_MOD[own].split(" "),"mod",own);
+      else{
+        var attrs=[],re=new RegExp((own?own.replace(/\W/g,""):"[A-Za-z_]\\w*")+"\\.([A-Za-z_]\\w*)","g"),m;
+        while((m=re.exec(text))){if(!(m.index+m[0].length===pos))attrs.push(m[1]);}
+        add(attrs,"my");if(own!=="self")add(AC_METH,"me");
+      }
+    }else{
+      if(!force&&word.length<2)return null;
+      hint=/->\s*[\w\[\], .|]*$/.test(pre)||
+        (/^\s*def\b/.test(line)&&/[(,]\s*[A-Za-z_]\w*\s*:\s*[\w\[\], .|]*$/.test(pre))||
+        (/^\s*([A-Za-z_][\w.]*)\s*:\s*[\w\[\], .|]*$/.test(pre)&&!AC_KWSET[/^\s*([A-Za-z_]\w*)/.exec(pre)[1]]);
+      if(/^\s*(?:from|import)\s+[\w.]*$/.test(pre))add(Object.keys(AC_MOD),"mod");
+      if(hint)add(AC_TYPE,"ty");
+      add(namesInCode(text,pos),"my");
+      Object.keys(AC_MOD).forEach(function(md){if(new RegExp("from\\s+"+md+"\\s+import\\b").test(text))add(AC_MOD[md].split(" "),"mod",md);});
+      add(Object.keys(AC_MOD).filter(function(md){return new RegExp("^\\s*import\\s+.*\\b"+md+"\\b","m").test(text);}),"mod");
+      add(AC_KW,"kw");add(AC_BI,"bi");
+    }
+    /* 다 쓴 낱말과 같은 것 → 대소문자까지 맞는 것 → 나머지(같은 묶음 안에서는 넣은 순서) */
+    items.forEach(function(x,i){x.i=i;});
+    items.sort(function(a,b){function r(x){return (x.w===word?0:4)+(hint&&x.k==="ty"?0:2)+(x.w.indexOf(word)===0?0:1);}return r(a)-r(b)||a.i-b.i;});
+    if(!items.length)return null;
+    if(items.length===1&&items[0].w===word)return null;
+    return items.slice(0,40);
+  }
+  function ensureBox(){
+    if(box)return;
+    box=document.createElement("ul");box.className="ck-ac";box.setAttribute("role","listbox");box.hidden=true;
+    box.addEventListener("mousedown",function(e){var li=e.target.closest("li");if(!li||!li.hasAttribute("data-i")){e.preventDefault();return;}e.preventDefault();sel=+li.getAttribute("data-i");accept();});
+    document.body.appendChild(box);
+  }
+  function caretXY(text,pos){
+    var cs=getComputedStyle(ta),r=ta.getBoundingClientRect();
+    var ls=text.lastIndexOf("\n",pos-1)+1,row=text.slice(0,ls).split("\n").length-1;
+    var prefix=text.slice(ls,pos-word.length).replace(/\t/g,"    ");
+    if(!acMeasure)acMeasure=document.createElement("canvas").getContext("2d");
+    acMeasure.font=cs.fontStyle+" "+cs.fontWeight+" "+cs.fontSize+" "+cs.fontFamily;
+    var lh=parseFloat(cs.lineHeight)||20;
+    return {x:r.left+parseFloat(cs.paddingLeft)+acMeasure.measureText(prefix).width-ta.scrollLeft,
+            y:r.top+parseFloat(cs.paddingTop)+row*lh-ta.scrollTop,lh:lh};
+  }
+  function draw(){
+    var h="";list.forEach(function(it,i){
+      h+='<li role="option" data-i="'+i+'"'+(i===sel?' class="on" aria-selected="true"':'')+'><span><b>'+esc(it.w.slice(0,word.length))+'</b>'+esc(it.w.slice(word.length))+'</span><small>'+esc(it.l||AC_KIND[it.k])+'</small></li>';});
+    box.innerHTML=h+'<li class="foot" aria-hidden="true">Tab 넣기 · ↑↓ 고른 뒤 Enter · Esc 닫기</li>';
+    var on=box.querySelector("li.on");if(on){var t=on.offsetTop,b=t+on.offsetHeight;if(t<box.scrollTop)box.scrollTop=t;else if(b>box.scrollTop+box.clientHeight)box.scrollTop=b-box.clientHeight;}
+  }
+  function show(force){
+    var text=raw(),pos=ta.selectionStart;
+    if(pos!==ta.selectionEnd){close();return;}
+    var c=candidates(text,pos,force);
+    if(!c){close();return;}
+    ensureBox();list=c;sel=0;moved=false;open=true;lastPos=pos;box.hidden=false;draw();place();
+  }
+  /* 목록 위치: 캐럿 바로 아래(아래가 모자라면 위). 화면을 굴려도 따라간다 */
+  function place(){
+    if(!open)return;
+    var p=caretXY(raw(),ta.selectionStart),bh=box.offsetHeight,bw=box.offsetWidth,r=ta.getBoundingClientRect();
+    if(p.y+p.lh<r.top||p.y>r.bottom){box.style.visibility="hidden";return;}
+    box.style.visibility="";
+    var top=p.y+p.lh+2;if(top+bh>window.innerHeight-4&&p.y-bh-2>0)top=p.y-bh-2;
+    box.style.left=Math.max(4,Math.min(p.x-4,window.innerWidth-bw-4))+"px";box.style.top=top+"px";
+  }
+  function close(){if(box)box.hidden=true;open=false;list=[];}
+  function accept(){
+    var it=list[sel];if(!it){close();return;}
+    var pos=ta.selectionStart;close();
+    quiet=true;
+    try{if(it.w!==word){ta.setSelectionRange(pos-word.length,pos);put(it.w);}}finally{quiet=false;}
+    ta.dispatchEvent(new Event("input",{bubbles:true}));
+  }
+  ta.addEventListener("input",function(e){
+    var t=e.inputType||"";
+    if(quiet)return;
+    if(!t){if(open)close();return;}             /* 프로그램이 바꾼 값(Tab·붙여넣기·완성)에는 열지 않는다 */
+    if(e.isComposing||t==="insertCompositionText"){close();return;}
+    if(t==="insertText"&&e.data&&/[A-Za-z_\d.]/.test(e.data))show(false);
+    else if(open&&/^delete/.test(t))show(false);
+    else close();
+  });
+  ta.addEventListener("blur",function(){setTimeout(close,0);});
+  ta.addEventListener("mousedown",close);
+  ta.addEventListener("scroll",place);
+  window.addEventListener("resize",place);
+  window.addEventListener("scroll",function(e){if(open&&e.target!==box)place();},true);
+  return {onKey:function(e){
+    if(e.isComposing)return false;
+    if(e.key===" "&&e.ctrlKey&&!e.metaKey&&!e.altKey){e.preventDefault();show(true);return true;}
+    if(!open)return false;
+    if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();moved=true;sel=(sel+(e.key==="ArrowDown"?1:list.length-1))%list.length;draw();return true;}
+    if(e.key==="Escape"){e.preventDefault();e.stopPropagation();close();return true;}
+    if(e.key==="Tab"&&!e.shiftKey&&!e.ctrlKey&&!e.metaKey&&!e.altKey){e.preventDefault();e.stopPropagation();accept();return true;}
+    if(e.key==="Enter"&&!e.shiftKey&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+      /* 화살표로 고르지 않았거나 다 쓴 낱말이면 Enter는 그대로 줄 바꿈(새 이름을 쓰다 엉뚱한 이름으로 바뀌지 않게) */
+      if(!moved||(list[sel]&&list[sel].w===word)){close();return false;}
+      e.preventDefault();accept();return true;}
+    if(e.key==="ArrowLeft"||e.key==="ArrowRight"||e.key==="Home"||e.key==="End"||e.key==="PageUp"||e.key==="PageDown")close();
+    return false;
+  },close:close};
+}
+
 function buildEditor(ta){
   var label=ta.closest("label"),title="";
   var host=label||ta;
@@ -297,7 +461,7 @@ function buildEditor(ta){
   function mk(t){var b=document.createElement("button");b.type="button";b.className="ck-btn";b.textContent=t;return b;}
   var gutN=0;
   function render(){
-    var v=D.get.call(ta);hc.innerHTML=highlight(v)+"\n";
+    var v=D.get.call(ta);hc.innerHTML=indentMarks(highlight(v))+"\n";
     var n=v.split("\n").length;
     if(n!==gutN){var t=[];for(var i=1;i<=n;i++)t.push(i);gut.textContent=t.join("\n");gutN=n;}
   }
@@ -340,12 +504,43 @@ function buildEditor(ta){
     ta.dispatchEvent(new Event("input",{bubbles:true}));
   }
 
+  /* 자동 완성(파이썬 키워드·내장 함수·형식 힌트·이 코드의 이름) */
+  var ac=makeAutoComplete(ta,put);
+
+  /* 한글 조합 중에 누른 Tab·Shift+Tab: 조합이 끝난 뒤 들여쓰기·내어쓰기를 한다(칸 이동으로 새지 않게) */
+  var pendTab=null;
+  ta.addEventListener("compositionend",function(){
+    if(pendTab===null)return;var sh=pendTab;pendTab=null;
+    setTimeout(function(){tabKey({shiftKey:sh,preventDefault:function(){}});},0);
+  });
+  /* 붙여 넣은 탭 문자는 공백 4칸으로 바꾼다(탭·공백이 섞이면 파이썬이 TabError를 낸다) */
+  ta.addEventListener("paste",function(e){
+    var t=e.clipboardData&&e.clipboardData.getData("text/plain");
+    if(!t||t.indexOf("\t")<0)return;
+    e.preventDefault();put(t.replace(/\t/g,"    "));ta.dispatchEvent(new Event("input",{bubbles:true}));
+  });
+
   /* Enter: 앞줄 들여쓰기 유지(콜론으로 끝나면 4칸 추가) */
   ta.addEventListener("keydown",function(e){
+    if(ac.onKey(e))return;
     if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();bRun.click();return;}
-    if(e.key==="Tab"&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.isComposing){
+    if((e.key==="Tab"||e.code==="Tab")&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
       if(ta._esc)return; /* Esc를 누른 직후의 Tab은 다음 칸으로 이동(각 페이지의 codeKeys가 처리) */
-      e.stopPropagation();tabKey(e);return;
+      e.stopPropagation();
+      if(e.isComposing||e.keyCode===229){e.preventDefault();pendTab=e.shiftKey;return;}
+      tabKey(e);return;
+    }
+    /* Backspace: 줄 앞 공백 안에서는 들여쓰기 한 단계(4칸 경계)까지 지운다 */
+    if(e.key==="Backspace"&&!e.shiftKey&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.isComposing){
+      var bv=raw(),bs=ta.selectionStart;
+      if(bs!==ta.selectionEnd||bs===0)return;
+      var bl=bv.slice(bv.lastIndexOf("\n",bs-1)+1,bs);
+      if(!bl.length||/[^ ]/.test(bl))return;
+      var n=bl.length%4||4;if(n<2)return;
+      e.preventDefault();ta.setSelectionRange(bs-n,bs);
+      var bb=raw();try{document.execCommand("delete");}catch(_){}
+      if(raw()===bb)ta.setRangeText("",bs-n,bs,"end");
+      ta.dispatchEvent(new Event("input",{bubbles:true}));return;
     }
     if(e.key!=="Enter"||e.shiftKey||e.altKey||e.isComposing)return;
     var v=ta.value,s=ta.selectionStart;
