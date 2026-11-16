@@ -27,6 +27,9 @@ pre:not(.diagram){background:#fff;color:#1f2328;border:1px solid #cfd6e2}
 .ck-ed .ck-area>textarea.ck-ta{background:transparent!important;color:transparent!important;caret-color:#16233b;overflow:auto;resize:vertical;width:100%;min-width:0;position:relative;z-index:1}
 .ck-ed .ck-area>textarea.ck-ta::selection{background:rgba(53,114,165,.28);color:transparent}
 /* 들여쓰기 표시: 공백 4칸마다 세로 안내선(글자 폭에 영향 없음), 탭 문자는 주황 바탕 */
+/* 주석 가리기: 주석 자리에 옅은 #… 만 보인다 */
+.ck-ed.ck-nocm .ck-hl .tk-cmh{color:#b3bac6!important;font-style:normal}
+.ck-btn.cm[aria-pressed=true]{background:#eef4fa;border-color:#3572a5;color:#1f4f78}
 .ck-ig{box-shadow:inset 1px 0 0 var(--ck-guide,#c9d1dc)}
 .ck-tab{background:rgba(207,120,34,.18);box-shadow:inset 1px 0 0 #cf7822}
 /* 자동 완성 목록 */

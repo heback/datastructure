@@ -417,6 +417,12 @@ function makeAutoComplete(ta,put){
   },close:close};
 }
 
+var CM_KEY="ck-hide-comments";
+function cmPref(v){
+  try{if(v===undefined)return localStorage.getItem(CM_KEY)==="1";localStorage.setItem(CM_KEY,v?"1":"0");}catch(_){}
+  return false;
+}
+
 function buildEditor(ta){
   var label=ta.closest("label"),title="";
   var host=label||ta;
@@ -443,6 +449,13 @@ function buildEditor(ta){
   bar.appendChild(bRun);
   if(checkSrc){bChk=mk("✔ 점검");bChk.classList.add("run","chk");bChk.title="내 코드를 실행한 뒤 점검 코드로 확인한다";bar.appendChild(bChk);}
   if(starter){bInit=mk("처음 코드로");bInit.title="편집기를 처음 주어진 코드로 되돌린다";bar.appendChild(bInit);}
+  /* 주석 가리기: 화면에서만 주석 글자를 감춘다(편집기 내용·저장·실행은 그대로). 마지막 선택을 이 브라우저에 기억한다 */
+  var bCm=mk("주석 가리기");bCm.classList.add("cm");bCm.setAttribute("aria-pressed","false");
+  bCm.title="코드의 # 주석을 화면에서 가리거나 다시 보인다. 코드 내용은 바뀌지 않는다";
+  function setCm(hide){box.classList.toggle("ck-nocm",hide);bCm.textContent=hide?"주석 보이기":"주석 가리기";bCm.setAttribute("aria-pressed",hide?"true":"false");if(hc)render();}
+  setCm(cmPref());
+  bCm.addEventListener("click",function(){var h=!box.classList.contains("ck-nocm");setCm(h);cmPref(h);});
+  bar.appendChild(bCm);
   bar.appendChild(bRst);
   var area=document.createElement("div");area.className="ck-area";
   var hl=document.createElement("pre");hl.className="ck-hl";hl.setAttribute("aria-hidden","true");
@@ -461,7 +474,10 @@ function buildEditor(ta){
   function mk(t){var b=document.createElement("button");b.type="button";b.className="ck-btn";b.textContent=t;return b;}
   var gutN=0;
   function render(){
-    var v=D.get.call(ta);hc.innerHTML=indentMarks(highlight(v))+"\n";
+    var v=D.get.call(ta),h=highlight(v);
+    /* 주석을 가렸으면 그 자리에 옅은 #… 만 남긴다(주석은 줄 끝까지라 뒤 글자 위치는 그대로) */
+    if(box.classList.contains("ck-nocm"))h=h.replace(/<span class="tk-cm">[^<]*<\/span>/g,'<span class="tk-cm tk-cmh">#…</span>');
+    hc.innerHTML=indentMarks(h)+"\n";
     var n=v.split("\n").length;
     if(n!==gutN){var t=[];for(var i=1;i<=n;i++)t.push(i);gut.textContent=t.join("\n");gutN=n;}
   }
