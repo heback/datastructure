@@ -32,6 +32,17 @@
       else pre.push(k);
     });
     if (!hasStep) pagesNodes.push(plain);
+    /* 코드 편집기가 없는 쪽이 이어지면 한 쪽으로 합쳐 글이 빈 화면 없이 이어 흐르게 한다 */
+    function hasCode(nodes) {
+      return nodes.some(function (nd) { return nd.matches('textarea[data-type="code"]') || nd.querySelector('textarea[data-type="code"]'); });
+    }
+    var merged = [];
+    pagesNodes.forEach(function (nodes) {
+      var last = merged[merged.length - 1];
+      if (last && !hasCode(last) && !hasCode(nodes)) merged[merged.length - 1] = last.concat(nodes);
+      else merged.push(nodes);
+    });
+    pagesNodes = merged;
     var stage = document.createElement("div");
     stage.className = "bk-stage";
     sec.appendChild(stage);
