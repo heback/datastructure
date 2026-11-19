@@ -73,6 +73,8 @@ summary{cursor:pointer;font-weight:600}
 <script src="../assets/codekit.js" defer></script>
 <link rel="stylesheet" href="../assets/topnav.css">
 <link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="../assets/sheettabs.css">
+<link rel="stylesheet" href="../assets/sheetpage.css">
 <script src="../assets/topnav.js" defer></script>
 </head>
 <body>
@@ -127,5 +129,6 @@ summary{cursor:pointer;font-weight:600}
 <script>
 document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){var c=b.parentElement.querySelector('pre');try{navigator.clipboard.writeText(c.textContent);b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}catch(e){}})});
 </script>
+<script src="../assets/sheettabs.js"></script>
 </body>
 </html>

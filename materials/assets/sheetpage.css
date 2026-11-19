@@ -1,0 +1,12 @@
+/* sheetpage.css — 루브릭·형성평가(섹션 탭만 쓰는 페이지): 큰 머리를 줄여 본문이 첫 화면에 오게 한다.
+   sheettabs.css 뒤에 불러온다. 인쇄·좁은 화면은 기존 모양이다. */
+@media screen and (min-width:900px) {
+  .st-on .wrap{max-width:1200px;padding-bottom:24px}
+  .st-on .wrap>header{padding:8px 0 8px;margin-bottom:8px}
+  .st-on .wrap>header .prompt{display:none}
+  .st-on .wrap>header h1{font-size:21px;line-height:1.35}
+  .st-on .wrap>header .lead{margin-top:4px;font-size:13.5px;line-height:1.5}
+  .st-on .wrap>header .meta{margin-top:4px}
+  .st-on .wrap>nav{margin-bottom:10px}
+  .st-on .wrap>section{margin-bottom:12px}
+}
