@@ -1,0 +1,57 @@
+/* book.css — 교재 쪽 넘김 레이아웃(화면 폭 900px 이상, 인쇄 제외).
+   - 한 화면 = 한 쪽. 스크롤 없이 방향키(← →)로 쪽을 넘긴다.
+   - 글은 왼쪽 단(코드 편집기가 없는 쪽은 2단), 코드 편집기는 오른쪽 단에 고정한다.
+   - book.js 가 html 에 .bk-on 을 붙였을 때만 적용된다. sheettabs.css 뒤에 불러온다. */
+@media screen and (min-width:900px) {
+  .bk-on,.bk-on body{height:100%;overflow:hidden}
+  .bk-on body{display:flex;flex-direction:column;height:100vh;height:100dvh}
+  .bk-on body>*{flex:none}
+  .bk-on body>.wrap{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;max-width:none;width:100%;margin:0;padding:0 28px 0;box-sizing:border-box}
+
+  /* 머리: 제목만 한 줄로 */
+  .bk-on .wrap>header{padding:0;margin:0;border:0;background:none;box-shadow:none;display:flex;align-items:baseline;gap:14px;flex:none}
+  .bk-on .wrap>header .prompt,.bk-on .wrap>header .lead,.bk-on .wrap>header .meta,.bk-on .wrap>header .logo{display:none}
+  .bk-on .wrap>header h1{font-size:17px;line-height:1.3;margin:8px 0 2px;padding:0;border:0}
+  .bk-on .wrap>nav{flex:none;position:static;margin:0 -28px 6px;padding:6px 28px}
+
+  /* 활동(section): 제목 + 쪽 무대 */
+  .bk-on .wrap>section.st-active{display:flex;flex-direction:column;flex:1 1 auto;min-height:0;margin:0;padding:0;border:0;background:none;box-shadow:none}
+  .bk-on .wrap>section>h2{flex:none;font-size:18px;line-height:1.35;margin:4px 0 6px;padding:0}
+  .bk-on .wrap>section .st-pager{display:none}
+  .bk-stage{position:relative;flex:1 1 auto;min-height:0}
+  .bk-page{display:none;position:absolute;inset:0;gap:0 36px;grid-template-columns:minmax(0,1fr)}
+  .bk-page.bk-cur{display:grid}
+  .bk-page.hased{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+
+  /* 왼쪽(글) 단: 단 나누기로 쪽을 만들고 가로로 한 쪽씩 민다 */
+  .bk-clip{position:relative;overflow:hidden;min-width:0;min-height:0}
+  .bk-cols{height:100%;column-gap:48px;column-fill:auto;column-count:2;will-change:transform;transition:transform .18s ease}
+  .bk-page.hased .bk-cols{column-count:1}
+  .bk-cols>*{max-width:100%;box-sizing:border-box}
+  .bk-cols .step,.bk-cols .quiz,.bk-cols .tip,.bk-cols figure,.bk-cols pre,.bk-cols details,.bk-cols .learn-box,.bk-cols .card,.bk-cols table,.bk-cols h3{break-inside:avoid}
+  .bk-cols h3{break-after:avoid}
+  .bk-cols .step>p,.bk-cols .step>ul,.bk-cols .step>ol,.bk-cols .quiz,.bk-cols .tip,.bk-cols details.more,.bk-cols .wrapup{max-width:none}
+  .bk-on .lesson .step{padding-left:46px;margin-bottom:18px}
+  .bk-on .lesson .step::after{display:none}
+  .bk-on .lesson .step>h3::before{counter-increment:none;content:attr(data-n)}
+  .bk-cols svg{max-height:calc(100vh - 330px);width:auto;max-width:100%}
+  .bk-cols textarea,.bk-cols input[type=text]{max-width:100%;box-sizing:border-box}
+
+  /* 오른쪽(코드) 단: 쪽을 넘겨도 그대로 고정 */
+  .bk-r{display:none;overflow:auto;min-width:0;min-height:0;padding:0 0 76px 20px;border-left:1px solid var(--line,#dcd5c6)}
+  .bk-page.hased .bk-r{display:block}
+  .bk-r>.mycode,.bk-r>.ck-ed,.bk-r>label{margin-top:0}
+  .bk-r .ck-ed{margin:0 0 14px}
+
+  /* 아래 쪽 넘김 막대 */
+  #bk-bar{flex:none;display:flex;align-items:center;gap:14px;padding:8px 0 10px;border-top:1px solid var(--line,#dcd5c6);font:600 14px "IBM Plex Sans KR",sans-serif;color:var(--dim,#5a6372)}
+  #bk-bar button{font:inherit;padding:6px 18px;border:1px solid var(--accent,#1f4f78);border-radius:8px;background:var(--accent,#1f4f78);color:#fff;cursor:pointer}
+  #bk-bar button:disabled{opacity:.35;cursor:default}
+  #bk-bar button:focus-visible{outline:3px solid #ffd166;outline-offset:2px}
+  #bk-bar .bk-st{flex:1;text-align:center;color:var(--ink,#1a2332)}
+  #bk-bar .bk-key{font-weight:500;font-size:12.5px}
+  #bk-bar kbd{font:600 12px "JetBrains Mono",monospace;border:1px solid var(--line-control,#8c8372);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:#fff}
+}
+@media print {
+  #bk-bar{display:none!important}
+}
