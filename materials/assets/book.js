@@ -15,6 +15,8 @@
   var nav = wrap.querySelector(":scope>nav");
   if (!secs.length) return;
   var GAP = 48;
+  /* 코드 편집기가 되는 입력란(실행 전용 칸 data-run-only 포함) */
+  var CODE_SEL = 'textarea[data-type="code"],textarea[data-run-only]';
 
   /* ---------- 쪽 만들기 ---------- */
   var S = secs.map(function (sec) {
@@ -34,7 +36,7 @@
     if (!hasStep) pagesNodes.push(plain);
     /* 코드 편집기가 없는 쪽이 이어지면 한 쪽으로 합쳐 글이 빈 화면 없이 이어 흐르게 한다 */
     function hasCode(nodes) {
-      return nodes.some(function (nd) { return nd.matches('textarea[data-type="code"]') || nd.querySelector('textarea[data-type="code"]'); });
+      return nodes.some(function (nd) { return nd.matches(CODE_SEL) || nd.querySelector(CODE_SEL); });
     }
     var merged = [];
     pagesNodes.forEach(function (nodes) {
@@ -63,7 +65,7 @@
         cols.appendChild(nd);
       });
       /* 코드 편집기(.mycode, 없으면 label·textarea 자체)를 오른쪽 단으로 옮긴다 */
-      [].slice.call(cols.querySelectorAll('textarea[data-type="code"]')).forEach(function (ta) {
+      [].slice.call(cols.querySelectorAll(CODE_SEL)).forEach(function (ta) {
         var host = ta.closest(".mycode") || ta.closest("label") || ta;
         if (host && host.parentNode && cols.contains(host)) r.appendChild(host);
       });
@@ -113,7 +115,8 @@
     if (pendingEnd) { st.sub = pg.n - 1; pendingEnd = false; }
     if (st.sub > pg.n - 1) st.sub = pg.n - 1;
     if (st.sub < 0) st.sub = 0;
-    pg.cols.style.transform = "translateX(" + (-st.sub * (pg.W + GAP)) + "px)";
+    /* transform 대신 scrollLeft: 아주 넓은 합성 레이어를 만들지 않는다 */
+    pg.clip.scrollLeft = st.sub * (pg.W + GAP);
     var P = S[st.s].pages.length;
     var txt = "";
     if (P > 1) txt += "쪽 " + (st.p + 1) + " / " + P;
