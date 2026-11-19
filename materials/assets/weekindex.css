@@ -1,0 +1,32 @@
+/* weekindex.css — 주차 목차(weekN/index.html): 넓은 화면(폭 1000px 이상)에서 한 화면에 다 보이게 3단으로 배치한다.
+   위: 제목 / 가운데·오른쪽: 학습활동 자료 카드(2열) / 왼쪽: 오늘의 질문 / 아래: 사용법(13주차)·제출 방법·실습 과제.
+   theme.css 뒤에 불러온다. 내용이 한 화면보다 길면 평소처럼 스크롤되고, 좁은 화면·인쇄는 기존 모양이다. */
+@media screen and (min-width:1000px) {
+  .wrap{max-width:1500px;padding:0 24px 8px;display:grid;grid-template-columns:minmax(0,4.2fr) minmax(0,4.6fr) minmax(0,4.6fr);column-gap:16px;align-items:start}
+  .wrap>.nav,.wrap>header{grid-column:1 / -1}
+  .wrap>header{padding:4px 0 4px;margin-bottom:8px}
+  .wrap>header .prompt{display:none}
+  .wrap>header h1{font-size:21px}
+  .wrap>header .lead{margin-top:2px;font-size:13px;line-height:1.4}
+
+  /* 섹션 자리: 기본은 왼쪽 아래, 첫 섹션(질문)은 왼쪽 위, 마지막 둘(제출·과제)은 가운데·오른쪽 아래 */
+  .wrap>section{grid-column:1;grid-row:3;margin:0 0 8px;padding:9px 14px;font-size:13px}
+  .wrap>section:first-of-type{grid-row:2}
+  .wrap>section:first-of-type:nth-last-of-type(4){grid-row:2 / span 2}
+  .wrap>section:nth-last-of-type(2){grid-column:2;grid-row:3}
+  .wrap>section:nth-last-of-type(1){grid-column:3;grid-row:3}
+  .wrap>section:has(.cardgrid){grid-column:2 / 4;grid-row:2}
+  .wrap>section>h2{font-size:15px;margin-bottom:5px;padding-bottom:4px}
+  .wrap>section p,.wrap>section li{line-height:1.4}
+  .wrap>section p{margin:4px 0}
+  .wrap>section ul,.wrap>section ol{margin:4px 0 4px 18px}
+  .wrap>section .q{padding:6px 11px;margin:4px 0}
+  .wrap>section .note,.wrap>section .warn{padding:6px 11px;margin:5px 0;font-size:12.5px;line-height:1.45}
+
+  /* 자료 카드: 이름과 사용 시점을 한 줄에, 설명은 그 아래 */
+  .cardgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 8px}
+  .wrap a.card{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:8px;align-items:center;margin:0;padding:5px 11px}
+  .wrap a.card b{grid-column:1;grid-row:1;font-size:13px;overflow-wrap:anywhere}
+  .wrap a.card em{grid-column:2;grid-row:1;margin:0;align-self:center;white-space:nowrap;font-size:10.5px}
+  .wrap a.card span{grid-column:1 / -1;grid-row:2;font-size:12px;line-height:1.4}
+}
