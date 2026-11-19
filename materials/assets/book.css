@@ -39,7 +39,9 @@
   .bk-cols{height:100%;column-gap:48px;column-fill:auto;column-count:2;will-change:transform;transition:transform .18s ease}
   .bk-page.hased .bk-cols{column-count:1}
   .bk-cols>*{max-width:100%;box-sizing:border-box}
-  .bk-cols .quiz,.bk-cols .tip,.bk-cols figure,.bk-cols pre,.bk-cols details,.bk-cols .learn-box,.bk-cols .card,.bk-cols table,.bk-cols h3{break-inside:avoid}
+  .bk-cols .quiz,.bk-cols .tip,.bk-cols figure,.bk-cols pre,.bk-cols h3{break-inside:avoid}
+  /* overflow:hidden 인 상자는 단 사이로 나뉘지 못하고 잘리므로 풀어 준다(긴 이론 상자 등) */
+  .bk-cols>*,.bk-cols .learn-box,.bk-cols .step{overflow:visible}
   .bk-cols h3{break-after:avoid}
   .bk-cols .step>p,.bk-cols .step>ul,.bk-cols .step>ol,.bk-cols .quiz,.bk-cols .tip,.bk-cols details.more,.bk-cols .wrapup{max-width:none}
   .bk-on .lesson .step{padding-left:46px;margin-bottom:18px}
