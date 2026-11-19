@@ -1,0 +1,14 @@
+/* topindex.css — 전체 목차(materials/index.html): 넓은 화면(폭 900px 이상)에서 주차 카드 6개를 3×2로 펼쳐 한 화면에 맞춘다.
+   theme.css 뒤에 불러온다. 좁은 화면·인쇄는 기존 모양이다. */
+@media screen and (min-width:900px) {
+  .wrap{max-width:1240px;padding:0 28px 12px}
+  .wrap>header{padding:14px 0 12px;margin-bottom:14px}
+  .wrap>header .prompt{display:none}
+  .wrap>header h1{font-size:26px}
+  .wrap>section{padding:16px 20px;margin:0}
+  .cardgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .wrap a.card{display:flex;flex-direction:column;justify-content:center;gap:6px;min-height:clamp(120px,22vh,200px);margin:0;padding:16px 20px}
+  .wrap a.card b{font-size:clamp(16px,1.5vw,19px);line-height:1.4}
+  .wrap a.card span{font-size:14px}
+  .wrap a.card em{align-self:flex-start;margin-top:auto}
+}
