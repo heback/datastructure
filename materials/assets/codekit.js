@@ -498,6 +498,12 @@ function buildEditor(ta){
     try{document.execCommand("insertText",false,text);}catch(_){}
     if(raw()===before)ta.setRangeText(text,a,b,"end");
   }
+  function inComment(v,pos){
+    var ln=v.slice(v.lastIndexOf("\n",pos-1)+1,pos),q="";
+    for(var i=0;i<ln.length;i++){var c=ln.charAt(i);
+      if(q){if(c==="\\")i++;else if(c===q)q="";}else if(c==='"'||c==="'")q=c;else if(c==="#")return true;}
+    return false;
+  }
   function tabKey(e){
     var v=ta.value,s=ta.selectionStart,en=ta.selectionEnd;
     var multi=v.slice(s,en).indexOf("\n")>=0;
@@ -544,6 +550,8 @@ function buildEditor(ta){
       if(ta._esc)return; /* Esc를 누른 직후의 Tab은 다음 칸으로 이동(각 페이지의 codeKeys가 처리) */
       e.stopPropagation();
       if(e.isComposing||e.keyCode===229){e.preventDefault();pendTab=e.shiftKey;return;}
+      /* 주석 안(여러 줄 선택이 아닐 때)에서는 들여쓰기를 하지 않고 브라우저 기본대로 다음 칸으로 이동한다 */
+      if(ta.value.slice(ta.selectionStart,ta.selectionEnd).indexOf("\n")<0&&inComment(ta.value,ta.selectionStart))return;
       tabKey(e);return;
     }
     /* 괄호·따옴표 자동 닫기: ( [ { " ' 를 열면 짝을 함께 넣고 커서를 그 사이에 둔다 */
