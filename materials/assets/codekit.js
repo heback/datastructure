@@ -555,7 +555,13 @@ function buildEditor(ta){
         ta.setSelectionRange(cur,cur);
         ta.dispatchEvent(new Event("input",{bubbles:true}));
       };
-      if(PAIR[e.key]){
+      /* 현재 줄에서 커서 앞에 문자열 밖의 #이 있으면 주석 안이다 */
+      var cmt=false;(function(){var ln=pv.slice(pv.lastIndexOf("\n",ps-1)+1,ps),q="";
+        for(var i=0;i<ln.length;i++){var c=ln.charAt(i);
+          if(q){if(c==="\\")i++;else if(c===q)q="";}
+          else if(c==='"'||c==="'")q=c;else if(c==="#"){cmt=true;break;}}})();
+      if(cmt&&(PAIR[e.key]||QUOTE[e.key])&&ps===pe){}
+      else if(PAIR[e.key]){
         if(ps!==pe){e.preventDefault();ins(e.key+pv.slice(ps,pe)+PAIR[e.key],ps+1);ta.setSelectionRange(ps+1,pe+1);return;}
         if(!nx||/[\s)\]}.,:;]/.test(nx)){e.preventDefault();ins(e.key+PAIR[e.key],ps+1);return;}
       } else if(QUOTE[e.key]){
