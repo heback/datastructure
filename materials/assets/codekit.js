@@ -591,8 +591,13 @@ function buildEditor(ta){
     var ls=v.lastIndexOf("\n",s-1)+1,line=v.slice(ls,s);
     var ind=/^[ ]*/.exec(line)[0];
     if(/:\s*$/.test(line.replace(/#.*$/,"")))ind+="    ";
+    var oc=v.charAt(s-1),cc=v.charAt(ta.selectionEnd),base=ind;
+    var brk=s===ta.selectionEnd&&({"(":")","[":"]","{":"}"})[oc]===cc;   /* 빈 괄호 쌍 사이에서 Enter */
+    if(brk||(s===ta.selectionEnd&&/[(\[{]$/.test(line)&&!/:\s*$/.test(line)))ind=(brk?base:ind)+"    ";
     e.preventDefault();
-    if(!document.execCommand("insertText",false,"\n"+ind)){ta.setRangeText("\n"+ind,s,ta.selectionEnd,"end");}
+    var txt="\n"+ind+(brk?"\n"+base:"");
+    if(!document.execCommand("insertText",false,txt)){ta.setRangeText(txt,s,ta.selectionEnd,"end");}
+    if(brk){var cp=s+1+ind.length;ta.setSelectionRange(cp,cp);}
     ta.dispatchEvent(new Event("input",{bubbles:true}));
   });
 
