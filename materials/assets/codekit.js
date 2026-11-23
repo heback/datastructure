@@ -546,9 +546,9 @@ function buildEditor(ta){
       if(e.isComposing||e.keyCode===229){e.preventDefault();pendTab=e.shiftKey;return;}
       tabKey(e);return;
     }
-    /* 괄호 자동 닫기: ( [ { 를 열면 짝을 함께 넣고 커서를 그 사이에 둔다 */
+    /* 괄호·따옴표 자동 닫기: ( [ { " ' 를 열면 짝을 함께 넣고 커서를 그 사이에 둔다 */
     if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.isComposing&&e.keyCode!==229){
-      var PAIR={"(":")","[":"]","{":"}"},CLOSE=")]}";
+      var PAIR={"(":")","[":"]","{":"}"},CLOSE=")]}",QUOTE={'"':1,"'":1};
       var pv=ta.value,ps=ta.selectionStart,pe=ta.selectionEnd,nx=pv.charAt(pe);
       var ins=function(txt,cur){
         if(!document.execCommand("insertText",false,txt))ta.setRangeText(txt,ps,pe,"end");
@@ -558,12 +558,20 @@ function buildEditor(ta){
       if(PAIR[e.key]){
         if(ps!==pe){e.preventDefault();ins(e.key+pv.slice(ps,pe)+PAIR[e.key],ps+1);ta.setSelectionRange(ps+1,pe+1);return;}
         if(!nx||/[\s)\]}.,:;]/.test(nx)){e.preventDefault();ins(e.key+PAIR[e.key],ps+1);return;}
+      } else if(QUOTE[e.key]){
+        var pc=pv.charAt(ps-1);
+        if(ps!==pe){e.preventDefault();ins(e.key+pv.slice(ps,pe)+e.key,ps+1);ta.setSelectionRange(ps+1,pe+1);return;}
+        if(nx===e.key){e.preventDefault();ta.setSelectionRange(ps+1,ps+1);return;}   /* 이미 있는 닫는 따옴표는 건너뛴다 */
+        /* 단어 뒤의 ' (it's)나 세 겹 따옴표(\"\"\")의 셋째 글자에서는 짝을 넣지 않는다. f"…"처럼 문자열 접두어 뒤는 넣는다 */
+        var pre=/[A-Za-z0-9_]/.test(pc)&&!(/^[rbfuRBFU]{1,2}$/.test(pv.slice(0,ps).match(/[A-Za-z0-9_]*$/)[0]));
+        var tri=pc===e.key&&pv.charAt(ps-2)===e.key;
+        if(!pre&&!tri&&(!nx||/[\s)\]}.,:;]/.test(nx))){e.preventDefault();ins(e.key+e.key,ps+1);return;}
       } else if(CLOSE.indexOf(e.key)>=0&&ps===pe&&nx===e.key){
         e.preventDefault();ta.setSelectionRange(ps+1,ps+1);return;   /* 이미 있는 닫는 괄호는 건너뛴다 */
-      } else if(e.key==="Backspace"&&ps===pe&&ps>0&&PAIR[pv.charAt(ps-1)]===nx&&nx){
+      } else if(e.key==="Backspace"&&ps===pe&&ps>0&&(PAIR[pv.charAt(ps-1)]===nx||(QUOTE[nx]&&pv.charAt(ps-1)===nx&&pv.charAt(ps-2)!==nx))&&nx){
         e.preventDefault();ta.setSelectionRange(ps-1,ps+1);
         if(!document.execCommand("delete"))ta.setRangeText("",ps-1,ps+1,"end");
-        ta.dispatchEvent(new Event("input",{bubbles:true}));return;   /* 빈 괄호 쌍은 함께 지운다 */
+        ta.dispatchEvent(new Event("input",{bubbles:true}));return;   /* 빈 괄호·따옴표 쌍은 함께 지운다 */
       }
     }
     /* Backspace: 줄 앞 공백 안에서는 들여쓰기 한 단계(4칸 경계)까지 지운다 */
