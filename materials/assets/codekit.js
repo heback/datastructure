@@ -574,7 +574,7 @@ function buildEditor(ta){
         if(!pre&&!tri&&(!nx||/[\s)\]}.,:;]/.test(nx))){e.preventDefault();ins(e.key+e.key,ps+1);return;}
       } else if(!cmt&&CLOSE.indexOf(e.key)>=0&&ps===pe&&nx===e.key){
         e.preventDefault();ta.setSelectionRange(ps+1,ps+1);return;   /* 이미 있는 닫는 괄호는 건너뛴다 */
-      } else if(e.key==="Backspace"&&ps===pe&&ps>0&&(PAIR[pv.charAt(ps-1)]===nx||(QUOTE[nx]&&pv.charAt(ps-1)===nx&&pv.charAt(ps-2)!==nx))&&nx){
+      } else if(!cmt&&e.key==="Backspace"&&ps===pe&&ps>0&&(PAIR[pv.charAt(ps-1)]===nx||(QUOTE[nx]&&pv.charAt(ps-1)===nx&&pv.charAt(ps-2)!==nx))&&nx){
         e.preventDefault();ta.setSelectionRange(ps-1,ps+1);
         if(!document.execCommand("delete"))ta.setRangeText("",ps-1,ps+1,"end");
         ta.dispatchEvent(new Event("input",{bubbles:true}));return;   /* 빈 괄호·따옴표 쌍은 함께 지운다 */
