@@ -598,8 +598,10 @@ function buildEditor(ta){
     var ind=/^[ ]*/.exec(line)[0];
     if(/:\s*$/.test(line.replace(/#.*$/,"")))ind+="    ";
     var oc=v.charAt(s-1),cc=v.charAt(ta.selectionEnd),base=ind;
-    var brk=s===ta.selectionEnd&&({"(":")","[":"]","{":"}"})[oc]===cc;   /* 빈 괄호 쌍 사이에서 Enter */
-    if(brk||(s===ta.selectionEnd&&/[(\[{]$/.test(line)&&!/:\s*$/.test(line)))ind=(brk?base:ind)+"    ";
+    var ecm=false;(function(){var q="";for(var i=0;i<line.length;i++){var c=line.charAt(i);
+      if(q){if(c==="\\")i++;else if(c===q)q="";}else if(c==='"'||c==="'")q=c;else if(c==="#"){ecm=true;break;}}})();   /* 주석 안이면 괄호 들여쓰기를 하지 않는다 */
+    var brk=!ecm&&s===ta.selectionEnd&&({"(":")","[":"]","{":"}"})[oc]===cc;   /* 빈 괄호 쌍 사이에서 Enter */
+    if(brk||(!ecm&&s===ta.selectionEnd&&/[(\[{]$/.test(line)&&!/:\s*$/.test(line)))ind=(brk?base:ind)+"    ";
     e.preventDefault();
     var txt="\n"+ind+(brk?"\n"+base:"");
     if(!document.execCommand("insertText",false,txt)){ta.setRangeText(txt,s,ta.selectionEnd,"end");}
