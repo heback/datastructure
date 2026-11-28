@@ -9,3 +9,6 @@ materials/*/teacher_*.html
 CLAUDE.md
 /index.html
 teacher_tools/
+textbook/
+_workspace_textbook/
+_workspace_textbook_prev/
